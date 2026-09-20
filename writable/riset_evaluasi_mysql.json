@@ -1,0 +1,425 @@
+{
+    "meta": {
+        "framework": "CodeIgniter 4.7.4",
+        "database": "MySQL 8.0 Spatial",
+        "function": "ST_Distance_Sphere",
+        "timestamp": "2026-09-20T06:22:16+00:00",
+        "total_test": 40
+    },
+    "metrics": {
+        "sir_accuracy": 100,
+        "category_accuracy": 82.5,
+        "spatial_precision": 97.5,
+        "grounding_fidelity": 100,
+        "entity_fabrication_rate": 0,
+        "honest_rejection_rate": 100
+    },
+    "latencies_ms": {
+        "mean_intent": 0.05,
+        "mean_sql": 0.55,
+        "mean_nlg": 0.02,
+        "mean_total": 0.63
+    },
+    "cases": [
+        {
+            "id": 1,
+            "grup": "Kategori - Pantai Eksplisit",
+            "prompt": "Rekomendasikan pantai yang bagus di Padang",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 3.61,
+            "sql_ms": 3.047
+        },
+        {
+            "id": 2,
+            "grup": "Kategori - Pantai Implisit",
+            "prompt": "Mau main pasir dan lihat ombak laut di Padang",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.38,
+            "sql_ms": 0.323
+        },
+        {
+            "id": 3,
+            "grup": "Kategori - Pantai Terdekat",
+            "prompt": "Pantai yang paling dekat dari lokasi saya",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 1.04,
+            "sql_ms": 0.981
+        },
+        {
+            "id": 4,
+            "grup": "Kategori - Pantai Kata Kunci",
+            "prompt": "Pantai pasir putih yang pemandangannya indah",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.43,
+            "sql_ms": 0.388
+        },
+        {
+            "id": 5,
+            "grup": "Kategori - Pantai Ramah Anak",
+            "prompt": "Pantai yang ombaknya tenang dan cocok untuk anak-anak",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.71,
+            "sql_ms": 0.666
+        },
+        {
+            "id": 6,
+            "grup": "Kategori - Pulau Snorkeling",
+            "prompt": "Pulau di Padang yang bagus untuk snorkeling dan diving",
+            "category": "Pulau",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 0.57,
+            "sql_ms": 0.491
+        },
+        {
+            "id": 7,
+            "grup": "Kategori - Pulau Resort",
+            "prompt": "Rekomendasikan pulau resort terbaik dengan vila di Padang",
+            "category": "Pulau",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 1.45,
+            "sql_ms": 1.407
+        },
+        {
+            "id": 8,
+            "grup": "Kategori - Pulau Karang",
+            "prompt": "Pulau karang kecil yang lautnya jernih",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.31,
+            "sql_ms": 0.27
+        },
+        {
+            "id": 9,
+            "grup": "Kategori - Alam Air Terjun",
+            "prompt": "Wisata air terjun alami di Padang yang sejuk",
+            "category": "Alam",
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.37,
+            "sql_ms": 0.268
+        },
+        {
+            "id": 10,
+            "grup": "Kategori - Alam Pemandangan Bukit",
+            "prompt": "Spot sunset pemandangan kota Padang dari atas bukit",
+            "category": "Alam",
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.3,
+            "sql_ms": 0.257
+        },
+        {
+            "id": 11,
+            "grup": "Kategori - Alam Hutan Lindung",
+            "prompt": "Taman konservasi hutan atau kebun raya di Padang",
+            "category": "Alam",
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.68,
+            "sql_ms": 0.635
+        },
+        {
+            "id": 12,
+            "grup": "Kategori - Alam Bukit Santai",
+            "prompt": "Bukit santai dengan pemandangan laut yang cocok untuk keluarga",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.4,
+            "sql_ms": 0.348
+        },
+        {
+            "id": 13,
+            "grup": "Kategori - Museum Budaya",
+            "prompt": "Museum budaya Minangkabau di Kota Padang",
+            "category": "Museum",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 0.47,
+            "sql_ms": 0.402
+        },
+        {
+            "id": 14,
+            "grup": "Kategori - Museum Rumah Gadang",
+            "prompt": "Museum arsitektur rumah gadang dan artefak sejarah",
+            "category": "Museum",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 0.37,
+            "sql_ms": 0.331
+        },
+        {
+            "id": 15,
+            "grup": "Kategori - Museum Kolonial",
+            "prompt": "Museum peninggalan kolonial atau kota tua di Padang",
+            "category": "Museum",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 1.41,
+            "sql_ms": 1.371
+        },
+        {
+            "id": 16,
+            "grup": "Kategori - Sejarah Landmark",
+            "prompt": "Jembatan Siti Nurbaya buka jam berapa dan ada apa saja?",
+            "category": "Sejarah",
+            "places_count": 1,
+            "grounded": true,
+            "total_ms": 0.38,
+            "sql_ms": 0.302
+        },
+        {
+            "id": 17,
+            "grup": "Kategori - Sejarah Religi",
+            "prompt": "Masjid bersejarah tertua peninggalan abad ke-19 di Padang",
+            "category": "Museum",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 0.29,
+            "sql_ms": 0.254
+        },
+        {
+            "id": 18,
+            "grup": "Kategori - Sejarah Monumen",
+            "prompt": "Tugu peringatan bersejarah di Padang",
+            "category": "Museum",
+            "places_count": 3,
+            "grounded": true,
+            "total_ms": 0.33,
+            "sql_ms": 0.296
+        },
+        {
+            "id": 19,
+            "grup": "Kategori - Kuliner Rendang",
+            "prompt": "Tempat makan rendang khas Padang yang paling terkenal",
+            "category": "Kuliner",
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.36,
+            "sql_ms": 0.263
+        },
+        {
+            "id": 20,
+            "grup": "Kategori - Kuliner Soto",
+            "prompt": "Warung soto padang kuah kaldu sapi gurih",
+            "category": "Kuliner",
+            "places_count": 1,
+            "grounded": true,
+            "total_ms": 1.64,
+            "sql_ms": 1.596
+        },
+        {
+            "id": 21,
+            "grup": "Kategori - Kuliner Mie",
+            "prompt": "Tempat makan mie kocok kaldu sapi di Padang",
+            "category": "Kuliner",
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.35,
+            "sql_ms": 0.297
+        },
+        {
+            "id": 22,
+            "grup": "Kategori - Kuliner Oleh-oleh",
+            "prompt": "Pasar atau pusat beli oleh-oleh khas Padang",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 0.55,
+            "sql_ms": 0.491
+        },
+        {
+            "id": 23,
+            "grup": "Filter - Tiket Gratis",
+            "prompt": "Wisata gratis di Padang tanpa bayar tiket masuk",
+            "category": null,
+            "places_count": 9,
+            "grounded": true,
+            "total_ms": 0.42,
+            "sql_ms": 0.348
+        },
+        {
+            "id": 24,
+            "grup": "Filter - Batas Harga",
+            "prompt": "Tempat wisata yang harga tiketnya di bawah 10000 rupiah",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 0.42,
+            "sql_ms": 0.338
+        },
+        {
+            "id": 25,
+            "grup": "Filter - Buka 24 Jam",
+            "prompt": "Tempat makan atau restoran yang buka 24 jam di Padang",
+            "category": "Kuliner",
+            "places_count": 1,
+            "grounded": true,
+            "total_ms": 0.36,
+            "sql_ms": 0.318
+        },
+        {
+            "id": 26,
+            "grup": "Filter - Jam Sekarang",
+            "prompt": "Wisata apa saja yang buka sekarang jam segini?",
+            "category": null,
+            "places_count": 8,
+            "grounded": true,
+            "total_ms": 0.45,
+            "sql_ms": 0.387
+        },
+        {
+            "id": 27,
+            "grup": "Filter - Urutan Termurah",
+            "prompt": "Wisata pantai termurah atau paling hemat di Padang",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.5,
+            "sql_ms": 0.321
+        },
+        {
+            "id": 28,
+            "grup": "Filter - Urutan Terbaik",
+            "prompt": "Tempat wisata dengan rating terbaik dan paling direkomendasikan",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 1.58,
+            "sql_ms": 1.508
+        },
+        {
+            "id": 29,
+            "grup": "Spasial - Wilayah Bungus",
+            "prompt": "Pantai di daerah Bungus Teluk Kabung",
+            "category": "Pantai",
+            "places_count": 1,
+            "grounded": true,
+            "total_ms": 0.32,
+            "sql_ms": 0.272
+        },
+        {
+            "id": 30,
+            "grup": "Spasial - Wilayah Padang Barat",
+            "prompt": "Tempat makan dan nongkrong di Padang Barat",
+            "category": "Kuliner",
+            "places_count": 2,
+            "grounded": true,
+            "total_ms": 0.37,
+            "sql_ms": 0.321
+        },
+        {
+            "id": 31,
+            "grup": "Spasial - Wilayah Padang Selatan",
+            "prompt": "Wisata di kecamatan Padang Selatan",
+            "category": null,
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.46,
+            "sql_ms": 0.403
+        },
+        {
+            "id": 32,
+            "grup": "Entitas - Pantai Malin Kundang",
+            "prompt": "Pantai Malin Kundang",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.38,
+            "sql_ms": 0.332
+        },
+        {
+            "id": 33,
+            "grup": "Entitas - Batu Malin Kundang",
+            "prompt": "Batu Malin Kundang lokasinya di mana dan berapa tiketnya?",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 0.57,
+            "sql_ms": 0.507
+        },
+        {
+            "id": 34,
+            "grup": "Entitas - Hutan Bung Hatta",
+            "prompt": "Taman Hutan Bung Hatta buka sampai jam berapa?",
+            "category": "Alam",
+            "places_count": 4,
+            "grounded": true,
+            "total_ms": 0.87,
+            "sql_ms": 0.781
+        },
+        {
+            "id": 35,
+            "grup": "Spasial - User di Luar Padang",
+            "prompt": "Rekomendasi wisata pantai terbaik untuk liburan saya",
+            "category": "Pantai",
+            "places_count": 5,
+            "grounded": true,
+            "total_ms": 0.45,
+            "sql_ms": 0.357
+        },
+        {
+            "id": 36,
+            "grup": "Multi-turn - Rujukan Entitas",
+            "prompt": "Berapa harga tiket yang pertama?",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 0.59,
+            "sql_ms": 0.382
+        },
+        {
+            "id": 37,
+            "grup": "Chit-chat - Sapaan",
+            "prompt": "Halo selamat pagi min",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 0.43,
+            "sql_ms": 0.335
+        },
+        {
+            "id": 38,
+            "grup": "Chit-chat - Terima Kasih",
+            "prompt": "Terima kasih banyak atas infonya ya!",
+            "category": null,
+            "places_count": 10,
+            "grounded": true,
+            "total_ms": 0.48,
+            "sql_ms": 0.412
+        },
+        {
+            "id": 39,
+            "grup": "Out-of-Scope - Wisata Salju",
+            "prompt": "Rekomendasi tempat main salju dan ski es di Padang",
+            "category": null,
+            "places_count": 0,
+            "grounded": true,
+            "total_ms": 0.01,
+            "sql_ms": 0
+        },
+        {
+            "id": 40,
+            "grup": "Out-of-Scope - Candi Hindu",
+            "prompt": "Wisata candi peninggalan kerajaan Hindu di Kota Padang",
+            "category": null,
+            "places_count": 0,
+            "grounded": true,
+            "total_ms": 0.01,
+            "sql_ms": 0
+        }
+    ]
+}

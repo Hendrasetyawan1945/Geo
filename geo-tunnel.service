@@ -1,0 +1,16 @@
+[Unit]
+Description=Geo CodeIgniter Cloudflare Tunnel
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/local/bin/cloudflared tunnel run --token eyJhIjoiMDkzYmZlZWVhZjE3OTY0ZGRkYmU5NDUyNmY2MmIyMTUiLCJ0IjoiZWM2ZmE1ZmUtODA1OS00YTVlLTgzMjEtNTZlZDQwZmRjOTU2IiwicyI6IlpHVXpPREV5T1dFdFl6WmtOeTAwWmpGaExUa3paV1F0TlRGaE5ERTNZelZtWlRreCJ9
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=geo-tunnel
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="gradClient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="gradStage" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0fdfa"/>
+    </linearGradient>
+    <linearGradient id="gradExternal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0d9488"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 20px; fill: #0f172a; }
+    .subtitle { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 13px; fill: #64748b; }
+    .box-title { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 14px; fill: #0f766e; }
+    .box-desc { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 11px; fill: #334155; }
+    .ext-title { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 13px; fill: #92400e; }
+    .ext-desc { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 11px; fill: #78350f; }
+    .tag { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 10px; fill: #ffffff; }
+    .flow-label { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 10.5px; fill: #0d9488; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1100" height="700" fill="#ffffff" rx="16"/>
+  <rect x="2" y="2" width="1096" height="696" fill="none" stroke="#e2e8f0" stroke-width="2" rx="14"/>
+
+  <!-- Main Title Bar -->
+  <rect x="30" y="24" width="1040" height="52" rx="10" fill="url(#gradHeader)" filter="url(#shadow)"/>
+  <text x="50" y="56" fill="#ffffff" font-family="'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="18px" letter-spacing="0.2px">ARSIKTUR SISTEM WEB GIS PERCAKAPAN 5-LAPIS (STRICT SQL GROUNDING)</text>
+  <text x="960" y="56" fill="#ccfbf1" font-family="'Segoe UI', system-ui, sans-serif" font-weight="600" font-size="12px">Kota Padang</text>
+
+  <!-- 1. USER CLIENT CONTAINER (TOP) -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="96" width="1000" height="88" rx="12" fill="url(#gradClient)" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="65" y="108" width="80" height="20" rx="6" fill="#0284c7"/>
+    <text x="73" y="122" class="tag">SISI KLIEN</text>
+    <text x="155" y="123" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15px" fill="#0f172a">Antarmuka Pengguna Browser &amp; Perangkat Seluler (Web GIS Client)</text>
+
+    <!-- Client components sub-boxes -->
+    <rect x="65" y="136" width="460" height="36" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="80" y="158" font-family="'Segoe UI', system-ui, sans-serif" font-weight="600" font-size="12px" fill="#0369a1">🗺️ Peta Interaktif Leaflet.js (Tile OpenStreetMap + Pin 22 POI)</text>
+
+    <rect x="545" y="136" width="490" height="36" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="560" y="158" font-family="'Segoe UI', system-ui, sans-serif" font-weight="600" font-size="12px" fill="#0f766e">💬 Panel Percakapan AI (Speech-to-Text + Quick Prompt Chips)</text>
+  </g>
+
+  <!-- Flow Arrow Client to Backend -->
+  <line x1="550" y1="184" x2="550" y2="225" stroke="#0d9488" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="440" y="196" width="220" height="20" rx="5" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="450" y="210" class="flow-label">HTTP POST (Teks Chat + Koordinat GPS)</text>
+
+  <!-- 2. BACKEND APPLICATION CONTAINER (CENTER) -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="230" width="700" height="435" rx="14" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <rect x="68" y="242" width="90" height="22" rx="6" fill="#0f766e"/>
+    <text x="76" y="257" class="tag">SISI PELADEN</text>
+    <text x="170" y="258" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="15px" fill="#0f172a">Aplikasi Backend (CodeIgniter 4 / PHP 8.2)</text>
+
+    <!-- Stage 1 Box -->
+    <rect x="75" y="278" width="650" height="58" rx="10" fill="url(#gradStage)" stroke="#99f6e4" stroke-width="1.2"/>
+    <circle cx="100" cy="307" r="14" fill="#0d9488"/>
+    <text x="96" y="312" fill="#fff" font-family="sans-serif" font-weight="800" font-size="12px">1</text>
+    <text x="125" y="299" class="box-title">Lapis 1: Ekstraksi Intensi (Intent Parser)</text>
+    <text x="125" y="319" class="box-desc">Mengurai percakapan bebas menjadi parameter filter terstruktur (Kategori, Radius, Harga, Jam Buka) [JSON]</text>
+
+    <!-- Stage 2 Box -->
+    <rect x="75" y="352" width="650" height="58" rx="10" fill="url(#gradStage)" stroke="#99f6e4" stroke-width="1.2"/>
+    <circle cx="100" cy="381" r="14" fill="#0d9488"/>
+    <text x="96" y="386" fill="#fff" font-family="sans-serif" font-weight="800" font-size="12px">2</text>
+    <text x="125" y="373" class="box-title">Lapis 2: Eksekusi Kueri Spasial SQL (Spatial SQL Engine)</text>
+    <text x="125" y="393" class="box-desc">Kalkulasi jarak spasial ST_Distance_Sphere in-database + penyaringan deterministik 22 POI (MySQL 8.0)</text>
+
+    <!-- Stage 3 Box -->
+    <rect x="75" y="426" width="650" height="58" rx="10" fill="url(#gradStage)" stroke="#99f6e4" stroke-width="1.2"/>
+    <circle cx="100" cy="455" r="14" fill="#0d9488"/>
+    <text x="96" y="460" fill="#fff" font-family="sans-serif" font-weight="800" font-size="12px">3</text>
+    <text x="125" y="447" class="box-title">Lapis 3: Pengayaan Rute Navigasi &amp; Konteks Cuaca</text>
+    <text x="125" y="467" class="box-desc">Penarikan geometri rute jalan raya (OSRM) + estimasi durasi berkendara + status operasional POI</text>
+
+    <!-- Stage 4 Box -->
+    <rect x="75" y="500" width="650" height="58" rx="10" fill="url(#gradStage)" stroke="#99f6e4" stroke-width="1.2"/>
+    <circle cx="100" cy="529" r="14" fill="#0d9488"/>
+    <text x="96" y="534" fill="#fff" font-family="sans-serif" font-weight="800" font-size="12px">4</text>
+    <text x="125" y="521" class="box-title">Lapis 4: Sintesis Teks Alami Berpagar Ketat (Strict Grounded NLG)</text>
+    <text x="125" y="541" class="box-desc">LLM merangkai narasi rekomendasi HANYA dari data SQL yang ditemukan (Jaminan Zero Hallucination)</text>
+
+    <!-- Stage 5 Box -->
+    <rect x="75" y="574" width="650" height="58" rx="10" fill="url(#gradStage)" stroke="#99f6e4" stroke-width="1.2"/>
+    <circle cx="100" cy="603" r="14" fill="#0d9488"/>
+    <text x="96" y="608" fill="#fff" font-family="sans-serif" font-weight="800" font-size="12px">5</text>
+    <text x="125" y="595" class="box-title">Lapis 5: Penyiapan Payload Respon &amp; Sinkronisasi Klien</text>
+    <text x="125" y="615" class="box-desc">Penyusunan paket JSON lengkap: pesan narasi, kartu wisata, status cuaca, dan geometri polyline peta</text>
+
+    <!-- Inter-stage Connecting Arrows -->
+    <line x1="400" y1="336" x2="400" y2="350" stroke="#0d9488" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="400" y1="410" x2="400" y2="424" stroke="#0d9488" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="400" y1="484" x2="400" y2="498" stroke="#0d9488" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="400" y1="558" x2="400" y2="572" stroke="#0d9488" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- 3. EXTERNAL SERVICES / DATA ENGINES (RIGHT COLUMN) -->
+  <g filter="url(#shadow)">
+    <!-- External LLM API (for Stage 1 & 4) -->
+    <rect x="785" y="270" width="265" height="95" rx="12" fill="url(#gradExternal)" stroke="#d97706" stroke-width="1.5"/>
+    <text x="805" y="295" class="ext-title">🤖 Model Bahasa LLM</text>
+    <text x="805" y="315" class="ext-desc">• Intent Extraction JSON (T=0)</text>
+    <text x="805" y="332" class="ext-desc">• Grounded NLG Synthesizer</text>
+    <text x="805" y="350" class="ext-desc" font-weight="700">• DeepSeek / Gemini API</text>
+
+    <!-- Database MySQL 8.0 (for Stage 2) -->
+    <rect x="785" y="385" width="265" height="105" rx="12" fill="url(#gradExternal)" stroke="#d97706" stroke-width="1.5"/>
+    <text x="805" y="410" class="ext-title">🗄️ Basis Data Relasional</text>
+    <text x="805" y="430" class="ext-desc">• MySQL 8.0 (geo_db)</text>
+    <text x="805" y="447" class="ext-desc">• 22 Destinasi Terkurasi (6 Kategori)</text>
+    <text x="805" y="464" class="ext-desc">• ST_Distance_Sphere (WGS84)</text>
+    <text x="805" y="481" class="ext-desc">• Riwayat Percakapan (Audit Log)</text>
+
+    <!-- OSRM Routing Engine (for Stage 3) -->
+    <rect x="785" y="510" width="265" height="85" rx="12" fill="url(#gradExternal)" stroke="#d97706" stroke-width="1.5"/>
+    <text x="805" y="535" class="ext-title">🛣️ Mesin Perutean OSRM</text>
+    <text x="805" y="555" class="ext-desc">• Open Source Routing Machine</text>
+    <text x="805" y="572" class="ext-desc">• Data Jalan Raya OpenStreetMap</text>
+    <text x="805" y="589" class="ext-desc">• Jalur Polyline &amp; Durasi Tempuh</text>
+  </g>
+
+  <!-- Connectors from Backend to External Services -->
+  <!-- Stage 1 <-> LLM -->
+  <line x1="725" y1="305" x2="780" y2="305" stroke="#d97706" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowAmber)"/>
+  <!-- Stage 2 <-> PostgreSQL -->
+  <line x1="725" y1="385" x2="780" y2="420" stroke="#d97706" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowAmber)"/>
+  <!-- Stage 3 <-> OSRM -->
+  <line x1="725" y1="465" x2="780" y2="535" stroke="#d97706" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowAmber)"/>
+  <!-- Stage 4 <-> LLM -->
+  <path d="M 725 525 L 755 525 L 755 335 L 780 335" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowAmber)"/>
+
+  <!-- Return Flow Arrow (Stage 5 to Client) -->
+  <path d="M 200 632 L 200 660 L 30 660 L 30 140 L 45 140" fill="none" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="18" y="380" width="24" height="120" rx="4" fill="#e0f2fe"/>
+  <text x="25" y="440" font-family="'Segoe UI', sans-serif" font-size="10px" font-weight="700" fill="#0369a1" transform="rotate(-90 25 440)">Sinkronisasi Respon (JSON + GeoJSON)</text>
+
+</svg>

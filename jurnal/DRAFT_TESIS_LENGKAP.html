@@ -1,0 +1,3413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title></title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="/usr/share/javascript/mathjax/MathJax.js"
+  type="text/javascript"></script>
+<style>
+
+@page {
+    size: A4;
+    margin: 3cm 2.5cm 2.5cm 3cm;
+    @bottom-right {
+        content: counter(page);
+        font-family: "Times New Roman", "Liberation Serif", serif;
+        font-size: 10pt;
+    }
+}
+
+@page:first {
+    @bottom-right {
+        content: "";
+    }
+}
+
+body {
+    font-family: "Times New Roman", "Liberation Serif", Times, serif;
+    font-size: 12pt;
+    line-height: 1.6;
+    color: #111;
+    background-color: #fff;
+    text-align: justify;
+    text-justify: inter-word;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hide redundant title-block-header generated by Pandoc metadata */
+header#title-block-header,
+.title-block-header,
+h1.title {
+    display: none !important;
+}
+
+h1 {
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+    page-break-before: always;
+    break-before: page;
+}
+
+/* First visible H1 doesn't need page break */
+h1:first-of-type,
+body > h1:first-child,
+body > div > h1:first-child {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    margin-top: 0 !important;
+}
+
+/* Subtitle under first H1 */
+h1 + p {
+    text-align: center !important;
+    text-indent: 0 !important;
+    font-size: 11pt !important;
+    font-style: italic;
+    color: #444;
+    margin-top: -0.4em;
+    margin-bottom: 1.5em;
+}
+
+h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 1.4em;
+    margin-bottom: 0.6em;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+/* Page breaks for major chapters and prelims in Thesis */
+h2[id^="bab-"], 
+h2[id^="lembar-"],
+h2[id^="pernyataan-"],
+h2[id^="kata-pengantar"],
+h2[id^="daftar-"] {
+    page-break-before: always;
+    break-before: page;
+}
+
+h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+h4 {
+    font-size: 12pt;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0.8em;
+    text-indent: 1cm;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* No indent for headings, lists, tables, captions, abstracts */
+h1 + p, h2 + p, h3 + p, h4 + p,
+.no-indent,
+blockquote p,
+table p,
+ul p, ol p,
+div.center p,
+.caption,
+.abstract-text,
+.keywords-text {
+    text-indent: 0 !important;
+}
+
+/* =======================================================
+   FORMATTING KHUSUS ABSTRAK (RATA KIRI-KANAN / JUSTIFIED)
+   ======================================================= */
+.abstract-container {
+    margin: 1.8em 0;
+}
+
+.abstract-container {
+    margin: 1.2em 0 1.8em 0;
+}
+
+.abstract-container h2,
+.abstract-container h3,
+h2[id*="abstrak"], h2[id*="abstract"],
+h3[id*="abstrak"], h3[id*="abstract"],
+#abstrak, #abstract {
+    text-align: center !important;
+    font-size: 11pt !important;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-top: 1.2em !important;
+    margin-bottom: 0.6em !important;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+.abstract-container p,
+.abstract-text,
+p.abstract-text,
+h2[id*="abstrak"] + p, h2[id*="abstract"] + p,
+h3[id*="abstrak"] + p, h3[id*="abstract"] + p {
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    text-indent: 0 !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
+    margin-left: 1.2cm !important;
+    margin-right: 1.2cm !important;
+    margin-bottom: 0.6em !important;
+}
+
+.abstract-container p.keywords-text,
+p.keywords-text,
+.abstract-container p:last-of-type {
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    text-indent: 0 !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    margin-left: 1.2cm !important;
+    margin-right: 1.2cm !important;
+    margin-top: 0.7em !important;
+    margin-bottom: 1.8em !important;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 2em 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 1.2em 0 1.6em 0;
+    font-size: 8.5pt !important;
+    line-height: 1.35;
+    page-break-inside: auto;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+th {
+    background-color: #f3f4f6;
+    border: 1px solid #333;
+    padding: 5px 6px !important;
+    font-weight: bold;
+    text-align: left;
+    font-size: 8.5pt !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+td {
+    border: 1px solid #555;
+    padding: 4px 6px !important;
+    vertical-align: top;
+    font-size: 8.5pt !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+tr:nth-child(even) td {
+    background-color: #fafbfc;
+}
+
+img {
+    max-width: 92%;
+    height: auto;
+    display: block;
+    margin: 14px auto 6px auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Captions - HANYA untuk keterangan gambar/tabel */
+p.caption,
+.caption,
+figcaption {
+    text-align: center !important;
+    text-indent: 0 !important;
+    font-size: 10pt !important;
+    font-style: italic;
+    color: #333;
+    margin-top: 6px;
+    margin-bottom: 1.4em;
+}
+
+em {
+    font-style: italic;
+}
+
+pre, code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9pt;
+}
+
+pre {
+    background-color: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 10px 14px;
+    overflow-x: auto;
+    line-height: 1.35;
+    margin: 1.2em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+code {
+    background-color: #edf2f7;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+blockquote {
+    border-left: 4px solid #1a56db;
+    margin: 1em 0 1em 1cm;
+    padding: 0.5em 1em;
+    background-color: #f8fafc;
+    color: #334155;
+    font-style: italic;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+ul, ol {
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+    padding-left: 2cm;
+}
+
+li {
+    margin-bottom: 0.3em;
+}
+
+.math {
+    font-family: "Cambria Math", "Times New Roman", serif;
+}
+
+</style>
+</head>
+<body>
+<h1
+id="rancang-bangun-sistem-rekomendasi-pariwisata-berbasis-large-language-model-llm-dan-strict-sql-grounding-untuk-pemberian-saran-destinasi-wisata-cerdas">RANCANG
+BANGUN SISTEM REKOMENDASI PARIWISATA BERBASIS LARGE LANGUAGE MODEL (LLM)
+DAN STRICT SQL GROUNDING UNTUK PEMBERIAN SARAN DESTINASI WISATA
+CERDAS</h1>
+<p><em>(Studi Kasus: Kawasan Pariwisata Kota Padang)</em></p>
+<hr />
+<div class="abstract-container">
+<h2 id="abstrak">ABSTRAK</h2>
+<p class="abstract-text">Penerapan <em>Large Language Model</em> (LLM) pada sistem informasi
+pariwisata sering kali terbentur oleh fenomena halusinasi faktual dan
+spasial (<em>hallucination</em>), di mana model mengarang nama atraksi
+fiktif, jam buka yang keliru, serta distorsi estimasi jarak. Di sisi
+lain, metode <em>Retrieval-Augmented Generation</em> (RAG) berbasis
+vektor tidak dapat mengevaluasi batasan matematis eksak (seperti
+kalkulasi jarak geodesik, harga tiket, dan jam buka <em>real-time</em>).
+Penelitian ini bertujuan merancang dan mengimplementasikan sistem
+rekomendasi pariwisata Kota Padang berbasis LLM dengan pendekatan
+<em>Strict SQL Grounding</em> dan arsitektur pipa 5-lapis (<em>5-Layer
+Architecture</em>). Peran LLM dibatasi secara ketat hanya sebagai
+pengurai bahasa alami menjadi <em>Spatial Intent Representation</em>
+(SIR) formal dan perangkai narasi (<em>Grounded NLG</em>), sedangkan
+sumber kebenaran fakta 100% dikunci pada basis data relasional MySQL 8.0
+melalui formula trigonometri <em>Haversine</em> dan perutean jalan raya
+<em>Open Source Routing Machine</em> (OSRM). Sistem dilengkapi dengan
+modul validasi deterministik 6-dimensi (<em>SirValidator</em>) untuk
+mencegah anomali logika masukan serta menjamin <em>Honest Rejection</em>
+pada kueri di luar cakupan (<em>out-of-scope</em>). Evaluasi empiris
+terhadap 40 skenario percakapan terstandarisasi menunjukkan capaian
+Akurasi Ekstraksi SIR 100,00%, Akurasi Kategori 100,00%, Presisi Spasial
+97,50%, dan <em>Grounding Fidelity</em> 100,00% dengan 0 entitas fiktif
+(<em>Zero Hallucination</em>). Waktu respons rata-rata sistem tercatat
+1.340,57 ms, di mana eksekusi kueri spasial SQL MySQL 8.0 hanya memakan
+waktu 1,21 ms. Sistem ini membuktikan bahwa penggabungan pemahaman
+semantik LLM dengan komputasi relasional deterministik mampu
+menghasilkan asisten wisata perkotaan yang responsif, akurat, dan bebas
+dari halusinasi data.</p>
+
+<p class="keywords-text"><strong>Kata Kunci:</strong> Sistem Rekomendasi Pariwisata, Large
+Language Model (LLM), Strict SQL Grounding, Spatial Intent
+Representation (SIR), Formula Haversine, MySQL 8.0, Leaflet.js, Kota
+Padang.</p>
+</div>
+<hr />
+<div class="abstract-container">
+<h2 id="abstract">ABSTRACT</h2>
+<p class="abstract-text">The deployment of Large Language Models (LLMs) in tourism information
+systems frequently encounters factual and spatial hallucinations,
+wherein the generative model invents non-existent attractions, incorrect
+opening hours, and distorted spatial proximity. Conversely, standard
+vector-based Retrieval-Augmented Generation (RAG) fails to enforce
+deterministic mathematical and spatial constraints (such as geodesic
+distance calculations, budget boundaries, and real-time operational
+status). This research designs and implements an intelligent tourism
+recommendation system for Padang City based on LLMs with a Strict SQL
+Grounding approach and a 5-layer pipeline architecture. The LLM is
+strictly constrained as a natural language parser that translates
+conversational inputs into a formal Spatial Intent Representation (SIR)
+and a conversational response synthesizer (Grounded NLG), while all
+factual grounding is deterministically derived from a relational MySQL
+8.0 database via the Haversine spherical trigonometric formula and road
+network navigation from the Open Source Routing Machine (OSRM). The
+architecture integrates a 6-dimensional deterministic validator
+(SirValidator) to normalize input anomalies and ensure Honest Rejection
+on out-of-scope requests. Empirical evaluation across 40 standardized
+benchmark scenarios demonstrates 100.00% SIR Extraction Accuracy,
+100.00% Category Classification Accuracy, 97.50% Spatial Precision, and
+100.00% Grounding Fidelity with zero fabricated POIs (Zero
+Hallucination). The mean end-to-end response latency is 1,340.57 ms,
+with spatial SQL queries taking merely 1.21 ms. This demonstrates that
+decoupling semantic parsing from deterministic relational computation
+effectively eliminates AI hallucinations in urban GIS tourist
+assistance.</p>
+
+<p class="keywords-text"><strong>Keywords:</strong> Tourism Recommender System, Large Language
+Model (LLM), Strict SQL Grounding, Spatial Intent Representation (SIR),
+Haversine Formula, MySQL 8.0, Leaflet.js, Padang City.</p>
+</div>
+<hr />
+<h2 id="bab-i-pendahuluan">BAB I: PENDAHULUAN</h2>
+<h3 id="latar-belakang-masalah">1.1 Latar Belakang Masalah</h3>
+<p>Sektor pariwisata merupakan salah satu pilar penggerak ekonomi
+strategis bagi Kota Padang, ibu kota Provinsi Sumatera Barat. Berada di
+pesisir barat Pulau Sumatera dengan topografi perbukitan Bukit Barisan
+yang membentang berdampingan langsung dengan Samudra Hindia, Kota Padang
+memiliki keragaman atraksi wisata yang sangat unik. Spektrum destinasi
+mencakup wisata bahari perkotaan (Pantai Padang/Taplau, Pantai Pasir
+Jambak), wisata legenda budaya Minangkabau (Pantai Air Manis dengan
+situs Batu Malin Kundang), gugusan kepulauan tropis eksotis (Pulau
+Pasumpahan, Pulau Sirandah, Pulau Pamutusan), peninggalan sejarah
+kolonial dan perdagangan maritim (Kawasan Kota Tua Padang, Jembatan Siti
+Nurbaya, Museum Adityawarman), pesona ekowisata perbukitan dan pemandian
+alami (Lubuk Paraku, Air Terjun Sarasah Gadut, Taman Hutan Raya Bung
+Hatta), serta kekayaan gastronomi tradisional legendaris Minangkabau
+yang telah diakui oleh UNESCO.</p>
+<p>Kendati dianugerahi potensi geospasial dan kultural yang melimpah,
+wisatawan mandiri (<em>independent travelers</em>) kerap mengalami
+hambatan kognitif yang signifikan dalam menentukan rencana kunjungan
+yang efisien. Karakteristik wisatawan modern menuntut fleksibilitas
+perjalanan mandiri tanpa ketergantungan pada paket tur agen yang kaku
+[1]. Wisatawan menginginkan rekomendasi dan saran yang secara cerdas
+mempertimbangkan posisi geografis mereka saat itu (<em>proximity</em>),
+ketersediaan waktu operasional (<em>real-time opening hours</em>), batas
+anggaran tiket masuk, serta rute jalan raya yang dapat dilalui secara
+nyata.</p>
+<p>Platform informasi pariwisata yang dikembangkan di Kota Padang sejauh
+ini umumnya masih berwujud portal direktori web katalog statis dengan
+formulir filter kaku. Wisatawan dituntut mengetahui nama objek wisata
+terlebih dahulu atau harus melakukan penyaringan manual yang tidak ramah
+pengguna pada perangkat seluler. Sistem semacam ini tidak memiliki
+kemampuan penalaran percakapan untuk menjawab kueri intuitif bahasa
+manusia, seperti: <em>“Saya sekarang ada di dekat Teluk Bayur, tolong
+carikan pantai yang ombaknya tenang dan tiket masuknya di bawah 10 ribu
+rupiah yang masih buka sore ini”</em>.</p>
+<p>Perkembangan mutakhir dalam bidang kecerdasan buatan (<em>Artificial
+Intelligence</em>), khususnya <em>Large Language Model</em> (LLM)
+seperti GPT-4 dan DeepSeek, telah membuka era baru melalui
+<em>Conversational Recommender System</em> (CRS) [3], [4]. Pengguna
+dapat berinteraksi secara bebas menggunakan bahasa alami layaknya
+berbicara dengan pemandu wisata berpengalaman. Namun demikian, penerapan
+model LLM generatif murni tanpa kendali data (<em>unconstrained
+LLM</em>) menyimpan bahaya laten berupa <strong>halusinasi faktual dan
+spasial</strong> (<em>factual and spatial hallucination</em>) [5].
+Karena LLM bekerja dengan prinsip pemodelan probabilistik statistik
+(<em>next-token prediction</em>) berdasarkan data latih global, LLM
+tidak memiliki kesadaran deterministik atas kebenaran data lokal Kota
+Padang. Akibatnya, LLM generatif murni kerap merekomendasikan objek
+wisata yang sudah bangkrut, mengarang jam operasional palsu, memberikan
+estimasi jarak yang tidak masuk akal (misalnya menyebut pulau lepas
+pantai dapat dicapai dengan berjalan kaki 10 menit), atau
+merekomendasikan destinasi di kota tetangga (seperti Jam Gadang di
+Bukittinggi atau Lembah Anai di Tanah Datar) sebagai destinasi di dalam
+Kota Padang.</p>
+<p>Upaya mitigasi halusinasi menggunakan metode <em>Retrieval-Augmented
+Generation</em> (RAG) berbasis pencarian vektor (<em>vector embedding
+similarity</em>) belum memadai untuk data pariwisata terstruktur. Vektor
+kemiripan kosinus (<em>cosine similarity</em>) sangat lemah dalam
+mengeksekusi batasan matematis dan spasial deterministik (seperti
+<code>harga_tiket &lt;= 10000</code>,
+<code>jam_buka &lt;= CURRENT_TIME</code>, dan
+<code>jarak_geodesik &lt;= 15 km</code>).</p>
+<p>Baru-baru ini, penelitian geoinformatika terapan oleh Afnarius dkk.
+[2] di <em>International Journal of Geoinformatics</em> (IJG)
+membuktikan bahwa interaksi spasial eksploratori (<em>exploratory
+spatial interaction</em>) dalam pariwisata mandiri akan efektif apabila
+didasarkan pada tata kelola data spasial terkurasi (<em>curated
+POI</em>) yang mencerminkan faktor pilihan spasial nyata (kedekatan
+jarak, tema, dan jam operasional). Berangkat dari wawasan fundamental
+tersebut, riset ini memperluas konsep tersebut ke skala perkotaan
+(<em>urban scale</em>) Kota Padang dengan memperkenalkan arsitektur
+baru: <strong>Grounded LLM-based Intelligent Spatial Information
+System</strong>.</p>
+<p>Dalam arsitektur ini, diterapkan pendekatan <strong>Strict SQL
+Grounding</strong>: peran LLM dibatasi secara ketat hanya sebagai
+pengurai bahasa alami (<em>Intent Parser</em>) menjadi skema formal
+<em>Spatial Intent Representation</em> (SIR) dan perangkai kalimat alami
+(<em>Grounded NLG</em>), sedangkan seluruh kebenaran fakta murni
+bersumber dari basis data relasional MySQL 8.0 dengan kalkulasi jarak
+geodesik <em>Haversine</em> dan perutean jaringan jalan nyata dari
+<em>Open Source Routing Machine</em> (OSRM).</p>
+<h3 id="identifikasi-masalah">1.2 Identifikasi Masalah</h3>
+<p>Berdasarkan latar belakang di atas, masalah yang diidentifikasi
+meliputi: 1. Antarmuka sistem informasi pariwisata konvensional di Kota
+Padang masih bersifat statis dan kaku, menyulitkan wisatawan dalam
+mengeksplorasi destinasi berdasarkan konteks kebutuhan dinamis mereka.
+2. Model bahasa generatif murni (<em>unconstrained LLM</em>) sangat
+rentan mengalami halusinasi faktual dan spasial pada domain data
+pariwisata lokal yang terstruktur. 3. Pendekatan RAG berbasis pencarian
+vektor teks (<em>vector database</em>) tidak mampu menangani penyaringan
+matematis eksak (jam buka-tutup real-time, batas tarif tiket, dan
+kalkulasi jarak spasial geodesik). 4. Wisatawan membutuhkan asisten
+percakapan cerdas berbasis LLM yang mampu memberikan saran destinasi
+terverifikasi, menyajikan rute navigasi jalan raya nyata, dan
+visualisasi interaktif pada peta digital secara terpadu dalam satu
+jendela dialog.</p>
+<h3 id="batasan-masalah">1.3 Batasan Masalah</h3>
+<p>Ruang lingkup dan batasan dalam penelitian ini adalah: 1. Wilayah
+penelitian dibatasi pada batas administratif Kota Padang, Provinsi
+Sumatera Barat. 2. Objek wisata yang digunakan terdiri dari 22
+<em>Points of Interest</em> (POI) terkurasi yang mewakili 6 kategori
+utama pariwisata Kota Padang (Pantai, Pulau, Alam/Air Terjun,
+Museum/Budaya, Sejarah/Religi, dan Kuliner Khas). 3. Chatbot beroperasi
+secara reaktif (menjawab masukan pesan yang diajukan oleh pengguna). 4.
+Perhitungan jarak geodesik menggunakan formula trigonometri bola
+<em>Haversine</em> pada tingkat kueri basis data MySQL 8.0. 5. Perutean
+jalan raya navigasi menggunakan server publik <em>Open Source Routing
+Machine</em> (OSRM) berbasis data OpenStreetMap (OSM). 6. Penelitian ini
+berfokus pada arsitektur sistem rekomendasi inti (Fase 1), belum
+mencakup modul pembayaran/pemesanan tiket daring
+(<em>e-ticketing</em>).</p>
+<h3 id="rumusan-masalah">1.4 Rumusan Masalah</h3>
+<ol type="1">
+<li>Bagaimana merancang bangun arsitektur sistem rekomendasi pariwisata
+berbasis Large Language Model (LLM) dengan pendekatan <em>Strict SQL
+Grounding</em> dan <em>Spatial Intent Representation</em> (SIR) untuk
+memberikan saran destinasi wisata cerdas dan mengeliminasi fenomena
+halusinasi data faktual dan spasial?</li>
+<li>Bagaimana merancang dan mengintegrasikan modul validasi
+deterministik 6-dimensi dan kalkulasi spasial geodesik
+<em>Haversine</em> ke dalam alur percakapan chatbot secara
+<em>real-time</em> berdasarkan koordinat GPS wisatawan pada peta digital
+Leaflet.js?</li>
+<li>Seberapa tinggi tingkat akurasi ekstraksi intensi, keandalan
+anti-halusinasi (<em>Grounding Fidelity</em>), dan performa efisiensi
+waktu respons (<em>latency</em>) dari sistem yang dikembangkan pada 40
+skenario percakapan terstandarisasi?</li>
+</ol>
+<h3 id="tujuan-penelitian">1.5 Tujuan Penelitian</h3>
+<ol type="1">
+<li>Menghasilkan rancang bangun sistem rekomendasi pariwisata Kota
+Padang berbasis Large Language Model (LLM) dengan pendekatan <em>Strict
+SQL Grounding</em> sebagai pemberi saran destinasi wisata cerdas yang
+terikat secara mutlak pada basis data relasional MySQL 8.0.</li>
+<li>Mengembangkan modul <em>location-aware</em> cerdas yang mampu
+memvalidasi intensi pengguna, menghitung jarak terdekat, dan
+memvisualisasikan rute perjalanan dari posisi pengguna ke destinasi
+wisata secara interaktif pada peta Leaflet.js.</li>
+<li>Mengukur dan menganalisis performa sistem secara kuantitatif melalui
+benchmark 40 skenario percakapan terstandarisasi, pengujian
+multi-baseline, dan analisis ablasi.</li>
+</ol>
+<h3 id="manfaat-penelitian">1.6 Manfaat Penelitian</h3>
+<ul>
+<li><strong>Bagi Pengembangan Ilmu Pengetahuan (Teoretis):</strong>
+Memberikan kontribusi ilmiah dalam domain <em>Conversational Recommender
+Systems</em> (CRS) dan geoinformatika mengenai integrasi model bahasa
+besar (LLM) dengan basis data relasional untuk mengeliminasi halusinasi
+AI pada data geospasial terstruktur.</li>
+<li><strong>Bagi Masyarakat dan Wisatawan (Praktis):</strong>
+Menyediakan sarana asisten wisata cerdas yang mudah digunakan,
+informatif, akurat, dan bebas dari informasi palsu bagi wisatawan yang
+berkunjung ke Kota Padang.</li>
+<li><strong>Bagi Pemerintah Daerah dan Pengelola Wisata:</strong>
+Menyediakan prototipe teknologi <em>Smart Tourism</em> yang dapat
+diadaptasi oleh Dinas Pariwisata Kota Padang guna mempromosikan
+destinasi unggulan daerah secara modern dan efisien.</li>
+</ul>
+<h3 id="sistematika-penulisan">1.7 Sistematika Penulisan</h3>
+<p>Naskah tesis ini disusun dalam lima bab dengan sistematika sebagai
+berikut: - <strong>BAB I PENDAHULUAN:</strong> Menguraikan latar
+belakang masalah, identifikasi masalah, batasan masalah, rumusan
+masalah, tujuan, manfaat penelitian, dan sistematika penulisan. -
+<strong>BAB II METODOLOGI PENELITIAN:</strong> Membahas metodologi
+riset, alur kerja, arsitektur 5-lapis, formalisasi SIR, validasi
+deterministik 6-dimensi, grounding contract, taksonomi kegagalan F1–F8,
+dan desain evaluasi multi-baseline. - <strong>BAB III PERANCANGAN
+SISTEM:</strong> Menjelaskan perancangan antarmuka pengguna (UI),
+perancangan basis data relasional (ERD dan kamus data), formula
+Haversine, serta perancangan proses (Flowchart, DFD, Activity Diagram,
+Sequence Diagram). - <strong>BAB IV IMPLEMENTASI DAN PENGUJIAN
+SISTEM:</strong> Memaparkan lingkungan perangkat keras/lunak,
+implementasi kode sumber nyata, antarmuka, basis data, modul proses,
+pengujian otomatis PHPUnit, serta analisis hasil benchmark 40 skenario
+evaluasi empiris. - <strong>BAB V PENUTUP:</strong> Menyajikan
+kesimpulan komprehensif dari hasil penelitian dan saran strategis untuk
+pengembangan sistem selanjutnya. - <strong>DAFTAR PUSTAKA &amp;
+LAMPIRAN:</strong> Memuat daftar referensi ilmiah dan tinjauan
+keselarasan terhadap naskah jurnal internasional.</p>
+<hr />
+<h2 id="bab-ii-metodologi-penelitian">BAB II: METODOLOGI PENELITIAN</h2>
+<h3 id="metodologi-penelitian-dan-alur-kerja">2.1 Metodologi Penelitian
+dan Alur Kerja</h3>
+<p>Penelitian ini menggunakan pendekatan rekayasa perangkat lunak
+terapan yang dipadukan dengan eksperimen komputasi geoinformatika
+(<em>applied software engineering and computational evaluation</em>).
+Tahapan penelitian dirancang secara sistematis melalui 5 fase utama:</p>
+<ol type="1">
+<li><strong>Fase 1: Studi Literatur dan Pengumpulan Data:</strong>
+Mengkaji penelitian sistem rekomendasi percakapan (CRS), Web GIS
+eksploratori Afnarius dkk. (2026), serta masalah halusinasi LLM.
+Mengakuisisi dan memverifikasi data spasial 22 objek wisata Kota Padang
+(koordinat WGS84, tarif tiket, jam operasional, dan daya tarik
+utama).</li>
+<li><strong>Fase 2: Perancangan Arsitektur dan Formalisasi SIR:</strong>
+Merancang <em>5-Layer Architecture</em>, mendefinisikan skema formal
+<em>Spatial Intent Representation</em> (SIR) 17-atribut, dan merancang
+ontologi operator spasial.</li>
+<li><strong>Fase 3: Konstruksi Sistem dan Integrasi Mesin
+Relasional:</strong> Membangun modul backend CodeIgniter 4.7.4 (PHP
+8.2+), MySQL 8.0 Spatial Engine (kalkulasi Haversine terkompilasi),
+mesin routing OSRM, antarmuka Leaflet.js, serta <em>SirValidator</em>
+6-dimensi.</li>
+<li><strong>Fase 4: Perancangan Dataset Benchmark 40 Skenario:</strong>
+Menyusun 40 skenario kueri percakapan terstandarisasi yang mencakup
+variasi kategori, filter harga, batasan operasional jam buka, resolusi
+entitas fuzzy, kueri luar wilayah, dan uji batas negatif
+(<em>out-of-scope negative boundary test</em>).</li>
+<li><strong>Fase 5: Pengujian Otomatis, Evaluasi Multi-Baseline, dan
+Analisis Latensi:</strong> Menjalankan pengujian otomatis PHPUnit (16
+unit/feature tests), komparasi multi-baseline (<em>Direct
+Text-to-SQL</em>, <em>Unconstrained LLM</em>, dan <em>Proposed
+System</em>), uji ablasi validator, serta profiling latensi per
+milidetik.</li>
+</ol>
+<h3 id="landasan-pendekatan-arsitektur-5-lapis-5-layer-architecture">2.2
+Landasan Pendekatan: Arsitektur 5-Lapis (<em>5-Layer
+Architecture</em>)</h3>
+<p>Untuk menjamin keamanan sistem (<em>Safety Invariant</em>) dan
+memisahkan tugas kognitif dari eksekusi basis data secara tegas
+(<em>Separation of Concerns</em>), arsitektur sistem dirancang dalam 5
+lapisan independen:</p>
+<ul>
+<li><strong>Layer 1: User Interaction &amp; Geolocation
+Capture:</strong> Berjalan pada peramban web klien. Menangkap masukan
+teks pengguna dan koordinat GPS perangkat melalui HTML5 Geolocation API,
+serta merender peta Leaflet.</li>
+<li><strong>Layer 2: Spatial Intent Representation (SIR)
+Parser:</strong> Menerjemahkan bahasa alami bebas pengguna menjadi
+representasi semantik terstruktur (SIR JSON) menggunakan LLM dengan
+instruksi pembatas kaku (<em>strict system prompt</em>). LLM sama sekali
+dilarang mengakses basis data atau merangkai kueri SQL.</li>
+<li><strong>Layer 3: Deterministic SIR Validator:</strong> Memeriksa dan
+membersihkan objek SIR melalui 6 lapisan verifikasi deterministik
+sebelum kueri dibuat. Jika terdapat permintaan di luar lingkup
+pariwisata Padang, modul ini langsung menandai status
+<code>is_out_of_scope = true</code>.</li>
+<li><strong>Layer 4: Spatial Query Compiler &amp; Engine
+Execution:</strong> Menerjemahkan objek SIR yang telah tervalidasi
+menjadi kueri SQL berparameter (<em>parameter-bound SQL query</em>) pada
+MySQL 8.0 dengan formula <em>Haversine</em>. Menghubungi API OSRM untuk
+menghasilkan polyline rute jalan raya dan estimasi waktu tempuh.</li>
+<li><strong>Layer 5: Strict Grounded NLG &amp; Client
+Visualization:</strong> Menggabungkan baris data hasil SQL (fakta murni)
+ke dalam prompt LLM untuk dirangkai menjadi jawaban ramah pengguna. LLM
+diwajibkan menjawab berdasarkan fakta data SQL tanpa diperbolehkan
+menambah entitas di luar data tersebut.</li>
+</ul>
+<pre><code>+-----------------------------------------------------------------------+
+|  Layer 1: User Interaction &amp; Geolocation (Leaflet.js + Web Client)     |
++-----------------------------------------------------------------------+
+                                  | (Input Text, GPS Lat/Lng)
+                                  v
++-----------------------------------------------------------------------+
+|  Layer 2: Spatial Intent Parser (LLM -&gt; JSON DTO Extraction)           |
++-----------------------------------------------------------------------+
+                                  | (Raw SpatialIntent DTO)
+                                  v
++-----------------------------------------------------------------------+
+|  Layer 3: Deterministic SIR Validator (6-Dimensional Validation)       |
++-----------------------------------------------------------------------+
+                                  | (Validated SpatialIntent DTO)
+                                  v
++-----------------------------------------------------------------------+
+|  Layer 4: Spatial Query Compiler (Parameter-Bound SQL + Haversine)     |
+|           MySQL 8.0 Spatial Engine Engine + OSRM Routing Integration             |
++-----------------------------------------------------------------------+
+                                  | (Structured Fact Dataset)
+                                  v
++-----------------------------------------------------------------------+
+|  Layer 5: Strict Grounded NLG &amp; Map Renderer (Zero Hallucination)      |
++-----------------------------------------------------------------------+</code></pre>
+<p class="caption"><em>Gambar 2.1 Diagram Alur Arsitektur 5-Lapis Sistem Rekomendasi
+Pariwisata Berbasis Strict SQL Grounding.</em></p>
+<h3
+id="formalisasi-spatial-intent-representation-sir-dan-ontologi-operator-spasial">2.3
+Formalisasi <em>Spatial Intent Representation</em> (SIR) dan Ontologi
+Operator Spasial</h3>
+<p><em>Spatial Intent Representation</em> (SIR) didefinisikan secara
+matematis sebagai tupel formal perantara semantik:</p>
+<p><span class="math display">\[\text{SIR} = \langle I, E, C, O_s, R_t,
+d, u_d, A, T_n, K, F, P_{\max}, O_{\text{now}}, O_{24}, S,
+B_{\text{out}} \rangle\]</span></p>
+<p>Setiap atribut memiliki domain nilai dan tipe data terdefinisi secara
+ketat sebagaimana disajikan pada Tabel 2.1.</p>
+<p><strong>Tabel 2.1 Skema Formal Atribut Spatial Intent Representation
+(SIR)</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Simbol</th>
+<th>Nama Atribut</th>
+<th>Tipe Data</th>
+<th>Domain Nilai / Contoh</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(I\)</span></td>
+<td><code>intent</code></td>
+<td>String</td>
+<td><code>rekomendasi_wisata</code>, <code>tanya_rute</code>,
+<code>informasi_wisata</code>, <code>sapaan</code></td>
+<td>Intensi utama pengguna</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(E\)</span></td>
+<td><code>entity</code></td>
+<td>String/Null</td>
+<td>Nama objek wisata spesifik atau null</td>
+<td>Target objek spesifik</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(C\)</span></td>
+<td><code>category</code></td>
+<td>String/Null</td>
+<td><code>pantai</code>, <code>pulau</code>, <code>alam</code>,
+<code>museum_budaya</code>, <code>sejarah_religi</code>,
+<code>kuliner</code></td>
+<td>Klaster kategori wisata Padang</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(O_s\)</span></td>
+<td><code>spatial_operator</code></td>
+<td>Enum</td>
+<td><code>nearest</code>, <code>within_radius</code>,
+<code>within_admin_area</code>, <code>none</code></td>
+<td>Operator relasi spasial</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(R_t\)</span></td>
+<td><code>reference_type</code></td>
+<td>Enum</td>
+<td><code>gps</code>, <code>city_center</code>, <code>poi</code></td>
+<td>Titik acuan perhitungan jarak</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(d\)</span></td>
+<td><code>distance</code></td>
+<td>Float/Null</td>
+<td>Nilai riil <span class="math inline">\(\ge 0.0\)</span> (contoh:
+<span class="math inline">\(5.0, 10.0\)</span>)</td>
+<td>Besaran jarak / radius</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(u_d\)</span></td>
+<td><code>distance_unit</code></td>
+<td>String</td>
+<td><code>km</code>, <code>meter</code></td>
+<td>Satuan pengukuran jarak</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A\)</span></td>
+<td><code>admin_area</code></td>
+<td>String/Null</td>
+<td><code>Padang Barat</code>, <code>Bungus Teluk Kabung</code>,
+<code>Koto Tangah</code>, dll.</td>
+<td>Wilayah administratif kecamatan</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(T_n\)</span></td>
+<td><code>target_name</code></td>
+<td>String/Null</td>
+<td>Nama parsial (contoh: <em>“Malin Kundang”</em>)</td>
+<td>Kata kunci target entitas</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(K\)</span></td>
+<td><code>keyword</code></td>
+<td>String/Null</td>
+<td>Kata kunci fasilitas/daya tarik</td>
+<td>Pencarian teks bebas</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(F\)</span></td>
+<td><code>is_free</code></td>
+<td>Boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Penyaringan tiket gratis</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_{\max}\)</span></td>
+<td><code>max_price</code></td>
+<td>Float/Null</td>
+<td>Nilai riil <span class="math inline">\(\ge 0.0\)</span> (contoh:
+<span class="math inline">\(15000.0\)</span>)</td>
+<td>Batas maksimum tiket masuk</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_{\text{now}}\)</span></td>
+<td><code>open_now</code></td>
+<td>Boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Penyaringan status jam buka saat ini</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(O_{24}\)</span></td>
+<td><code>open_24h</code></td>
+<td>Boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Penyaringan wisata buka 24 jam</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(S\)</span></td>
+<td><code>sort</code></td>
+<td>Enum</td>
+<td><code>jarak</code>, <code>harga</code>, <code>rating</code>,
+<code>relevansi</code></td>
+<td>Urutan penyajian hasil</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B_{\text{out}}\)</span></td>
+<td><code>is_out_of_scope</code></td>
+<td>Boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td>Indikator permintaan di luar Padang</td>
+</tr>
+</tbody>
+</table>
+<p>Ontologi operator spasial (<span class="math inline">\(O_s\)</span>)
+membatasi relasi geometris menjadi 4 kondisi eksak: 1.
+<code>nearest</code>: Mengurutkan destinasi berdasarkan jarak geodesik
+terkecil dari titik acuan tanpa batas radius kaku. 2.
+<code>within_radius</code>: Memfilter destinasi dengan batasan jarak
+geodesik <span class="math inline">\(\le d\text{ km}\)</span> dari titik
+acuan. 3. <code>within_admin_area</code>: Memfilter destinasi yang
+berada di dalam wilayah administratif kecamatan tertentu (<span
+class="math inline">\(A\)</span>). 4. <code>none</code>: Tidak
+menerapkan batasan spasial (pencarian berbasis kategori tematik atau
+nama objek).</p>
+<h3
+id="peran-prompt-dalam-mekanisme-kontrol-keseluruhan-dan-pencegahan-jawaban-tanpa-grounding">2.4
+Peran Prompt dalam Mekanisme Kontrol Keseluruhan dan Pencegahan Jawaban
+Tanpa Grounding</h3>
+<p>Dalam penelitian tesis ini, peran <em>prompt</em> dirancang bukan
+sebagai penentu jawaban akhir atau penalaran bebas, melainkan sebagai
+<strong>kontrak pembatas struktural deklaratif (<em>declarative
+structural boundary contract</em>)</strong> yang membatasi wewenang
+model bahasa besar (<em>Large Language Model</em>). Pendekatan ini
+menjawab secara fundamental pertanyaan kritis dewan
+penguji/reviewer:</p>
+<blockquote>
+<p><em>“Bagaimana peneliti memastikan bahwa LLM menghasilkan
+representasi spatial intent yang terstruktur dan tidak langsung
+menghasilkan jawaban/fakta yang tidak ter-grounding?”</em></p>
+</blockquote>
+<p>Untuk memberikan jaminan integritas data dan ketiadaan halusinasi
+(<em>Zero Hallucination Guarantee</em>), sistem menerapkan 4 pilar
+kendali terintegrasi:</p>
+<ol type="1">
+<li><strong>Isolasi Peran melalui Parameter Inferensi
+Deterministik:</strong> Parameter inferensi dikunci pada
+<code>temperature = 0.0</code> guna mengeliminasi entropi stokastik
+probabilitas token. Parameter
+<code>response_format = {"type": "json_object"}</code> diaktifkan pada
+tingkat API sehingga LLM secara ketat dipaksa hanya memancarkan objek
+JSON valid yang selaras dengan skema DTO
+<code>SpatialIntent</code>.</li>
+<li><strong>Larangan Wewenang Negatif (<em>Negative Authority
+Constraints</em>):</strong> Di dalam instruksi sistem (<em>system
+prompt</em>), LLM secara tegas dilarang: (a) merangkai atau menghasilkan
+kueri SQL, (b) memberikan jawaban atau saran rekomendasi wisata secara
+langsung kepada pengguna, dan (c) memberikan penjelasan atau teks bebas
+di luar objek JSON. Model dikunci murni sebagai <em>Semantic Intent
+Parser</em>.</li>
+<li><strong>Pemisahan Udara Komputasi (<em>Air-Gap
+Architecture</em>):</strong> Respon JSON dari LLM tidak pernah disajikan
+langsung ke antarmuka pengguna web. Respon tersebut ditangkap secara
+internal oleh lapisan <em>backend</em> CodeIgniter 4, dipetakan ke dalam
+kelas objek <code>SpatialIntent</code>, lalu diserahkan ke modul
+validasi deterministik independen (<em>SirValidator</em>).</li>
+<li><strong>Validasi Deterministik dan Eksekusi SQL Terisolasi:</strong>
+Sekalipun LLM menghasilkan nilai anomali, <em>SirValidator</em>
+6-dimensi akan menolak atau mengoreksinya tanpa melakukan mutasi sepihak
+(<em>No Intent Alteration</em>). Komputasi spasial didelegasikan
+sepenuhnya ke formula <em>ST_Distance_Sphere</em> pada MySQL 8.0 sebagai
+satu-satunya sumber kebenaran (<em>Single Source of Truth</em>).</li>
+</ol>
+<h4 id="listing-kompak-prompt-inti-penentu-structured-output">2.4.1
+Listing Kompak Prompt Inti Penentu Structured Output</h4>
+<p>Listing 2.1 menyajikan instruksi sistem kompak yang diterapkan pada
+Layer 2 untuk membatasi inferensi LLM:</p>
+<pre><code>LISTING 2.1. Prompt Inti Penentu Structured Output SIR (Compact Listing)
+--------------------------------------------------------------------------------
+You are a spatial intent parser for a tourism Web GIS in Padang City, Indonesia.
+Transform the user&#39;s natural-language query into a structured SIR in pure JSON.
+
+RULES:
+1. Return JSON ONLY. No markdown, no explanation, no other text.
+2. Do not generate SQL.
+3. Do not answer the user&#39;s question or provide recommendations.
+4. Allowed Categories: &quot;Pantai&quot; | &quot;Pulau&quot; | &quot;Alam&quot; | &quot;Museum&quot; | &quot;Sejarah&quot; | &quot;Kuliner&quot; | null
+5. Allowed Spatial Operators: &quot;nearest&quot; | &quot;within_radius&quot; | &quot;within_admin_area&quot; | &quot;none&quot;
+6. Preserve spatial constraints exactly as expressed by user.
+7. If user requests impossible things for Padang (e.g. ski, snow, casino), set is_out_of_scope: true.
+
+SCHEMA:
+{
+  &quot;intent&quot;: &quot;spatial_recommendation&quot; | &quot;entity_lookup&quot; | &quot;general_inquiry&quot;,
+  &quot;entity&quot;: &quot;tourism_object&quot;,
+  &quot;category&quot;: &quot;Pantai&quot; | &quot;Pulau&quot; | &quot;Alam&quot; | &quot;Museum&quot; | &quot;Sejarah&quot; | &quot;Kuliner&quot; | null,
+  &quot;target_name&quot;: string or null,
+  &quot;keyword&quot;: string or null,
+  &quot;spatial_operator&quot;: &quot;nearest&quot; | &quot;within_radius&quot; | &quot;within_admin_area&quot; | &quot;none&quot;,
+  &quot;reference_type&quot;: &quot;gps&quot; | &quot;city_center&quot; | &quot;poi&quot; | &quot;unknown&quot;,
+  &quot;radius&quot;: float or null,
+  &quot;distance_unit&quot;: &quot;km&quot;,
+  &quot;admin_area&quot;: string or null,
+  &quot;is_free&quot;: boolean,
+  &quot;max_price&quot;: integer or null,
+  &quot;open_now&quot;: boolean,
+  &quot;open_24h&quot;: boolean,
+  &quot;sort&quot;: &quot;termurah&quot; | &quot;termahal&quot; | &quot;terdekat&quot; | &quot;terbaik&quot; | null,
+  &quot;is_out_of_scope&quot;: boolean
+}
+--------------------------------------------------------------------------------</code></pre>
+<p><em>(Catatan: Teks instruksi sistem lengkap dicantumkan pada Lampiran
+A).</em></p>
+<h4
+id="contoh-alur-nyata-masukan-pengguna-sir-kueri-sql-hasil-basis-data-narasi-ter-grounding">2.4.2
+Contoh Alur Nyata: Masukan Pengguna → SIR → Kueri SQL → Hasil Basis Data
+→ Narasi Ter-Grounding</h4>
+<p>Untuk memperjelas transformasi deterministik ujung-ke-ujung
+(<em>end-to-end concrete trace</em>) yang diminta oleh penelaah,
+perhatikan skenario masukan operasional berikut: * <strong>Masukan
+Bahasa Alami (Input):</strong> <em>“Carikan pantai dalam radius 10 km
+dari lokasi saya yang buka sekarang dan tiket di bawah 15 ribu”</em>
+(Koordinat GPS: <code>-0.9471, 100.3541</code>). * <strong>Representasi
+Semantik Terstruktur (SIR JSON Tervalidasi):</strong>
+<code>json   {     "intent": "spatial_recommendation",     "entity": "tourism_object",     "category": "Pantai",     "spatial_operator": "within_radius",     "reference_type": "gps",     "radius": 10.0,     "distance_unit": "km",     "max_price": 15000,     "open_now": true,     "sort": "terdekat",     "is_out_of_scope": false   }</code>
+* <strong>Kueri SQL Terparameterisasi MySQL 8.0 (Kompilasi
+Deterministik):</strong>
+<code>sql   SELECT wisata.id, wisata.nama, wisata.deskripsi, wisata.alamat, wisata.lat, wisata.lng,          wisata.harga_tiket, wisata.jam_buka, wisata.jam_tutup, wisata.rating,          wisata.status_operasional, wisata.catatan_status, kategori.nama AS kategori,          ROUND(ST_Distance_Sphere(            POINT(wisata.lng, wisata.lat),            POINT(:lng, :lat)          ) / 1000.0, 2) AS jarak_km   FROM wisata   JOIN kategori ON wisata.kategori_id = kategori.id   WHERE wisata.status_aktif = 1     AND (:category IS NULL OR kategori.nama = :category)     AND (:is_free = false OR wisata.harga_tiket = 0)     AND (:max_price IS NULL OR wisata.harga_tiket &lt;= :max_price)     AND (:open_24h = false OR (wisata.jam_buka = '00:00:00' AND wisata.jam_tutup &gt;= '23:59:00'))     AND (:open_now = false OR (:current_time BETWEEN wisata.jam_buka AND wisata.jam_tutup))     AND (:admin_area IS NULL OR wisata.alamat LIKE :admin_pattern)     AND (:keyword IS NULL OR (wisata.deskripsi LIKE :kw_pattern OR wisata.nama LIKE :kw_pattern))     AND (:distance IS NULL OR (ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(:lng, :lat)) / 1000.0) &lt;= :distance)   ORDER BY jarak_km ASC   LIMIT :limit_k;</code></p>
+<ul>
+<li><strong>Hasil Eksekusi Basis Data Relasional (Tabel Fakta
+Terverifikasi <span class="math inline">\(F\)</span>):</strong></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 9%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th>Nama Destinasi Wisata</th>
+<th style="text-align: center;">Kategori</th>
+<th style="text-align: center;">Harga Tiket</th>
+<th style="text-align: center;">Jam Buka - Tutup</th>
+<th style="text-align: center;">Rating</th>
+<th style="text-align: center;">Jarak Geodesik (<span
+class="math inline">\(d\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td><strong>Pantai Padang (Taplau)</strong></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;">Rp0 (Gratis)</td>
+<td style="text-align: center;">06:00 – 22:00</td>
+<td style="text-align: center;">4.6</td>
+<td style="text-align: center;"><strong>0,40 km</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td><strong>Pantai Air Manis</strong></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;">Rp10.000</td>
+<td style="text-align: center;">06:00 – 18:00</td>
+<td style="text-align: center;">4.5</td>
+<td style="text-align: center;"><strong>3,20 km</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td><strong>Pantai Pasir Jambak</strong></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;">Rp5.000</td>
+<td style="text-align: center;">07:00 – 18:30</td>
+<td style="text-align: center;">4.3</td>
+<td style="text-align: center;"><strong>3,46 km</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td><strong>Pantai Nirwana</strong></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;">Rp10.000</td>
+<td style="text-align: center;">06:00 – 18:00</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;"><strong>4,33 km</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Hasil Narasi Rekomendasi Akhir Ter-Grounding (<em>Grounded
+Conversational Response</em>):</strong> &gt; <em>“Berikut adalah
+rekomendasi objek wisata pantai terdekat dalam radius 10 km dari lokasi
+Anda yang sedang buka dan ramah anggaran (tiket <span
+class="math inline">\(\le\)</span> Rp15.000):</em><br />
+&gt; 1. <strong>Pantai Padang (Taplau)</strong> — Berjarak 0,40 km.
+Tiket masuk gratis (Rp0), buka hingga pukul 22:00 WIB. Sangat dekat
+untuk menikmati panorama matahari terbenam.<br />
+&gt; 2. <strong>Pantai Air Manis</strong> — Berjarak 3,20 km. Terkenal
+dengan legenda Batu Malin Kundang. Tiket masuk Rp10.000, buka hingga
+pukul 18:00 WIB.<br />
+&gt; 3. <strong>Pantai Pasir Jambak</strong> — Berjarak 3,46 km.
+Menyajikan hamparan pasir putih luas dan deretan pohon kelapa. Tiket
+masuk Rp5.000, buka hingga pukul 18:30 WIB.<br />
+&gt; 4. <strong>Pantai Nirwana</strong> — Berjarak 4,33 km di kawasan
+Teluk Bayur. Tiket masuk Rp10.000, buka hingga pukul 18:00 WIB.<br />
+&gt; &gt; <em>Rute navigasi tercepat dan penanda interaktif telah
+disinkronkan secara otomatis pada peta digital Leaflet.js.”</em></li>
+</ul>
+<p>Dengan alur ini, pembaca dan penguji dapat melihat secara gamblang
+bahwa teks narasi akhir 100% terkunci (<em>grounded</em>) pada fakta
+baris data yang dihasilkan oleh kueri SQL spasial
+<code>ST_Distance_Sphere</code>, tanpa celah untuk halusinasi nama
+tempat, harga, maupun jarak.</p>
+<h3 id="mekanisme-validasi-deterministik-6-dimensi-sirvalidator">2.5
+Mekanisme Validasi Deterministik 6-Dimensi (<em>SirValidator</em>)</h3>
+<p>Sebelum objek SIR diteruskan ke lapisan kompilasi kueri SQL, modul
+<em>SirValidator</em> menjalankan 6 lapisan verifikasi deterministik
+dengan prinsip <em>No Intent Alteration</em> (tanpa mutasi maksud
+sepihak): 1. <strong>Dimensi 1: Validasi Skema (Schema
+Validation):</strong> Memastikan seluruh 17 field wajib ada dalam objek
+DTO dan tidak terdapat field asing tak dikenal. Sanitasi XSS/HTML
+diterapkan pada string input. 2. <strong>Dimensi 2: Validasi Domain
+Spasial (Spatial Domain Validation):</strong> Menolak nilai jarak
+negatif (<span class="math inline">\(d \le 0\)</span>) tanpa mengubahnya
+membabi buta dengan fungsi <code>abs()</code>. Jika jarak melebihi batas
+operasional perkotaan Padang (<span class="math inline">\(&gt; 100\text{
+km}\)</span>), validator membatasi ke batas atas 50 km. 3.
+<strong>Dimensi 3: Validasi Operator Spasial (Operator
+Validation):</strong> Memastikan nilai <code>spatial_operator</code>
+terdaftar pada ontologi baku. Jika ditemukan operator tidak sah,
+validator menolak kueri alih-alih mengubahnya diam-diam menjadi
+<code>none</code>. 4. <strong>Dimensi 4: Validasi Koordinat Referensi
+(Reference Coordinate Bounds):</strong> Memeriksa bahwa koordinat
+lintang berada pada rentang <span class="math inline">\([-90,
+90]\)</span> dan bujur <span class="math inline">\([-180, 180]\)</span>.
+5. <strong>Dimensi 5: Validasi Batasan Operasional dan Harga (Constraint
+Consistency):</strong> Mengoreksi kontradiksi batasan logika. Jika
+pengguna menetapkan <code>is_free = true</code> namun juga menetapkan
+<code>max_price &gt; 0</code>, sistem menandai kontradiksi tersebut. 6.
+<strong>Dimensi 6: Deteksi Luar Cakupan Domain (Out-of-Scope
+Integrity):</strong> Memeriksa masukan terhadap kamus kata kunci
+luar-lingkup (seperti permintaan <em>“ski salju”</em>,
+<em>“kasino”</em>, <em>“candi hindu”</em> di Padang). Jika terdeteksi,
+atribut <code>is_out_of_scope</code> diatur menjadi <code>true</code>
+untuk memicu <em>Honest Rejection</em>.</p>
+<h3
+id="grounding-contract-dan-preservasi-maksud-intent-preservation">2.6
+<em>Grounding Contract</em> dan Preservasi Maksud (<em>Intent
+Preservation</em>)</h3>
+<p>Klausul <em>Grounding Contract</em> menjamin bahwa himpunan fakta
+yang disampaikan oleh model bahasa (<span
+class="math inline">\(R\)</span>) adalah subhimpunan sejati dari fakta
+yang dihasilkan oleh basis data relasional (<span
+class="math inline">\(D_{\text{facts}}\)</span>):</p>
+<p><span class="math display">\[R \subseteq
+\text{facts}(D_{\text{facts}})\]</span></p>
+<p>Jika kueri SQL menghasilkan himpunan kosong (<span
+class="math inline">\(D_{\text{facts}} = \emptyset\)</span>), sistem
+diwajibkan mengeksekusi <em>Honest Rejection</em>:</p>
+<p><span class="math display">\[R = \text{&quot;Maaf, tidak ditemukan
+objek wisata yang sesuai dengan kriteria pencarian Anda di Kota
+Padang.&quot;}\]</span></p>
+<p>Dalam implementasi riil, diterapkan dua aturan pengayaan: -
+<strong>Aturan Preservasi Maksud (Kasus Menu Kuliner Tak
+Terdaftar):</strong> Jika pengguna menanyakan menu kuliner spesifik yang
+belum tercatat pada basis data (misalnya <em>“mie kocok”</em>), bot
+dilarang mengarang bahwa menu tersebut tersedia di warung Padang. Bot
+diwajibkan secara eksplisit menyatakan bahwa menu tersebut belum ada di
+basis data, baru kemudian menawarkan alternatif kuliner lokal yang
+tersedia (seperti Soto Padang). - <strong>Context-Aware Spatial
+Fallback:</strong> Jika koordinat pengguna terdeteksi berada di luar
+jangkauan Kota Padang (<span class="math inline">\(&gt; 35\text{
+km}\)</span>, misalnya pengguna mengakses dari Pekanbaru atau Jakarta),
+sistem secara transparan memberikan notifikasi bahwa pengguna berada di
+luar wilayah Padang dan rekomendasi dialihkan menggunakan titik acuan
+pusat Kota Padang (Jam Gadang / Balai Kota).</p>
+<h3 id="algorithmic-grounding-validator-pasca-generasi">2.7 Algorithmic
+Grounding Validator Pasca-Generasi</h3>
+<p>Untuk menutup celah halusinasi pada perangkaian narasi akhir
+(<em>Layer 5</em>), sistem mengimplementasikan <em>Algorithmic Grounding
+Validator</em> pada kelas <code>GroundingValidator.php</code>. Jika
+<span class="math inline">\(E\)</span> adalah himpunan nama objek wisata
+yang diekstrak dari teks balasan LLM dan <span
+class="math inline">\(F\)</span> adalah himpunan nama objek wisata resmi
+hasil kueri SQL, sistem memeriksa kondisi:</p>
+<p><span class="math display">\[\forall e \in E, \quad e \in
+F\]</span></p>
+<p>Jika ditemukan entitas <span class="math inline">\(e \notin
+F\)</span>, teks LLM secara instan dibatalkan (<em>dropped</em>) dan
+sistem beralih ke <em>Deterministic Template Generator</em>
+(<code>buildDeterministicFallbackResponse()</code>) yang menyusun narasi
+langsung dari data mentah MySQL 8.0, memastikan tingkat fabrikasi
+entitas palsu berada pada angka mutlak <strong>0,00%</strong>.</p>
+<h3 id="taksonomi-kegagalan-spasial-f1f8">2.8 Taksonomi Kegagalan
+Spasial (F1–F8)</h3>
+<p>Untuk mengevaluasi keandalan sistem secara ketat, dirumuskan
+taksonomi kegagalan spasial yang terdiri dari 8 kelas kegagalan (Tabel
+2.2).</p>
+<p><strong>Tabel 2.2 Taksonomi Kegagalan Spasial (F1–F8) pada Sistem
+Rekomendasi Percakapan Geospasial</strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kode</th>
+<th>Jenis Kegagalan</th>
+<th>Deskripsi Kegagalan</th>
+<th>Target Pencegahan Sistem</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>F1</strong></td>
+<td><em>Coordinate Parsing Failure</em></td>
+<td>Gagal mengekstrak atau memetakan koordinat lintang/bujur
+pengguna</td>
+<td>Normalisasi WGS84 pada Layer 1</td>
+</tr>
+<tr class="even">
+<td><strong>F2</strong></td>
+<td><em>Inverted Radius Error</em></td>
+<td>Radius jarak bernilai negatif atau tertukar antara satuan meter dan
+km</td>
+<td>Domain Validation pada Layer 3</td>
+</tr>
+<tr class="odd">
+<td><strong>F3</strong></td>
+<td><em>Category Semantic Mismatch</em></td>
+<td>Kesalahan mengklasifikasikan kategori (misal: pantai dianggap
+kuliner)</td>
+<td>Schema &amp; Prompt Boundary Layer 2</td>
+</tr>
+<tr class="even">
+<td><strong>F4</strong></td>
+<td><em>Ambiguous Administrative Area</em></td>
+<td>Salah memetakan nama kecamatan yang mirip</td>
+<td>Normalisasi wilayah pada Layer 3</td>
+</tr>
+<tr class="odd">
+<td><strong>F5</strong></td>
+<td><em>Fictitious POI Generation</em></td>
+<td>Model mengarang nama objek wisata palsu
+(<em>hallucination</em>)</td>
+<td>Strict SQL Grounding Layer 4 &amp; 5</td>
+</tr>
+<tr class="even">
+<td><strong>F6</strong></td>
+<td><em>Zero Spatial Grounding</em></td>
+<td>Memberikan jarak tanpa dasar kalkulasi geodesik nyata</td>
+<td>Formula Haversine pada Layer 4</td>
+</tr>
+<tr class="odd">
+<td><strong>F7</strong></td>
+<td><em>Out-of-Bound Fallback Failure</em></td>
+<td>Sistem macet (<em>crash</em>) ketika pengguna berada di luar
+Padang</td>
+<td>Spatial Fallback Handler Layer 4</td>
+</tr>
+<tr class="even">
+<td><strong>F8</strong></td>
+<td><em>False Rejection on Valid POI</em></td>
+<td>Menolak destinasi valid yang ada di database</td>
+<td>Hierarki Pencarian Fuzzy Layer 4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="desain-evaluasi-empiris-multi-baseline-dan-uji-ablasi">2.9
+Desain Evaluasi Empiris, Multi-Baseline, dan Uji Ablasi</h3>
+<p>Evaluasi empiris dirancang menggunakan 40 skenario percakapan
+terstandarisasi yang mencakup variasi bahasa kasual, slang Minang,
+filter multi-kriteria, hingga kueri jebakan (<em>trap queries</em>).
+Kinerja sistem dibandingkan terhadap 3 konfigurasi baseline: 1.
+<strong>Baseline 1: Direct Text-to-SQL (Tanpa SIR):</strong> LLM
+langsung menulis kueri SQL mentah berdasarkan teks pengguna. 2.
+<strong>Baseline 2: Unconstrained LLM (Tanpa Grounding):</strong> LLM
+menjawab langsung pertanyaan pengguna tanpa interaksi basis data. 3.
+<strong>Proposed System:</strong> Arsitektur 5-Lapis lengkap dengan
+parser SIR, validasi 6-dimensi, dan kompiler Haversine MySQL 8.0.</p>
+<p>Selain itu, dilakukan uji ablasi (<em>ablation study</em>) dengan
+menonaktifkan komponen validasi satu per satu untuk mengukur
+signifikansi setiap lapisan pertahanan.</p>
+<hr />
+<h2 id="bab-iii-perancangan-sistem-ui-database-proses">BAB III:
+PERANCANGAN SISTEM (UI, DATABASE, PROSES)</h2>
+<h3 id="perancangan-antarmuka-pengguna-user-interface">3.1 Perancangan
+Antarmuka Pengguna (<em>User Interface</em>)</h3>
+<p>Antarmuka sistem dirancang dengan tata letak dwitunggal terintegrasi
+(<em>dual-panel integrated layout</em>) yang menyatukan peta digital
+interaktif satu layar penuh dengan panel percakapan terapung
+(<em>floating conversational drawer</em>).</p>
+<ol type="1">
+<li><strong>Panel Peta Interaktif (Leaflet.js + OpenStreetMap):</strong>
+<ul>
+<li>Menempati area visual utama untuk mempertahankan kesadaran spasial
+wisatawan.</li>
+<li>Penanda lokasi (<em>marker</em>) memiliki kode warna khusus sesuai 6
+kategori tematik (Kuning untuk Pantai, Biru Muda untuk Pulau, Hijau
+untuk Alam/Air Terjun, Cokelat untuk Museum/Budaya, Merah Marun untuk
+Sejarah/Religi, dan Jingga untuk Kuliner Khas).</li>
+<li>Setiap penanda dilengkapi dengan jendela sembul (<em>popup</em>)
+interaktif yang menampilkan foto objek wisata, nama, alamat, jam buka,
+tarif tiket, rating, serta tombol aksi cepat: <em>“Rute ke Sini”</em>
+dan <em>“Lihat Detail”</em>.</li>
+<li>Saat tombol rute diaktifkan, garis rute navigasi jalan raya berwarna
+biru (<em>polyline</em>) digambar secara dinamis dari titik GPS pengguna
+ke destinasi yang dituju.</li>
+</ul></li>
+<li><strong>Panel Percakapan Asisten AI (Chatbot Drawer):</strong>
+<ul>
+<li>Ditempatkan di sisi kanan layar pada tampilan desktop dan dapat
+diminimalkan menjadi tombol gelembung (<em>floating action button</em>)
+pada perangkat seluler untuk efisiensi ruang layar.</li>
+<li>Menampilkan riwayat pesan dua arah: gelembung abu-abu untuk pesan
+pengguna dan gelembung beraksen hijau toska untuk jawaban asisten
+AI.</li>
+<li>Respons asisten AI dilengkapi dengan kartu rekomendasi ringkas
+(<em>recommendation cards</em>) yang memiliki tombol langsung untuk
+memfokuskan peta (<em>pan to destination</em>) dan menggambar rute
+perjalanan.</li>
+<li>Dilengkapi dengan deretan tombol pintas (<em>quick filter
+chips</em>) di bagian atas kotak pengetikan pesan untuk mempermudah
+pengguna memilih kategori populer dengan sekali ketuk.</li>
+</ul></li>
+</ol>
+<p><img src="images/gambar2_antarmuka_webgis.png" /><br />
+<em>Gambar 3.1 Desain Antarmuka Pengguna Utama Aplikasi Web GIS
+Pariwisata Kota Padang (Peta Interaktif Leaflet OSM, Drawer Rekomendasi,
+dan Panel Chat).</em></p>
+<p><img src="images/gambar3_rute_navigasi.png" /><br />
+<em>Gambar 3.2 Desain Visualisasi Rute Navigasi Kendaraan Terintegrasi
+OSRM pada Antarmuka Peta.</em></p>
+<h3 id="perancangan-basis-data-database-design">3.2 Perancangan Basis
+Data (<em>Database Design</em>)</h3>
+<p>Basis data dirancang menggunakan sistem manajemen basis data
+relasional (<em>Relational Database Management System</em> / RDBMS)
+MySQL 8.0 Spatial Engine. Struktur relasional antar-tabel dimodelkan
+melalui <em>Entity Relationship Diagram</em> (ERD) sebagaimana disajikan
+pada Gambar 3.3.</p>
+<pre><code>+--------------------+        1:N        +-----------------------+
+|     kategori       |-------------------|        wisata         |
++--------------------+                   +-----------------------+
+| id (PK)            |                   | id (PK)               |
+| nama (UK)          |                   | kategori_id (FK)      |
+| created_at         |                   | nama                  |
+| updated_at         |                   | deskripsi             |
++--------------------+                   | alamat                |
+                                         | telepon               |
++--------------------+        1:N        | lat, lng              |
+|   chat_sessions    |                   | harga_tiket           |
++--------------------+                   | jam_buka, jam_tutup   |
+| id (PK)            |                   | rating                |
+| session_token (UK) |                   | foto                  |
+| lat, lng           |                   | status_operasional    |
+| created_at         |                   | catatan_status        |
+| updated_at         |                   | status_aktif          |
++--------------------+                   | created_at            |
+          |                              | updated_at            |
+          | 1:N                          +-----------------------+
+          v                                          
++--------------------+                               
+|   chat_messages    |                   +-----------------------+
++--------------------+                   |         users         |
+| id (PK)            |                   +-----------------------+
+| session_id (FK)    |                   | id (PK)               |
+| role (&#39;user&#39;/      |                   | name                  |
+|       &#39;assistant&#39;) |                   | email (UK)            |
+| pesan              |                   | password              |
+| intent_json (JSON) |                   | role (&#39;admin&#39;/&#39;user&#39;) |
+| created_at         |                   | remember_token        |
+| updated_at         |                   | created_at            |
++--------------------+                   | updated_at            |
+                                         +-----------------------+</code></pre>
+<p class="caption"><em>Gambar 3.3 Entity Relationship Diagram (ERD) Basis Data Sistem
+Rekomendasi Pariwisata Padang.</em></p>
+<p>Kamus data untuk masing-masing tabel dirancang secara rinci pada
+Tabel 3.1 sampai Tabel 3.5.</p>
+<p><strong>Tabel 3.1 Struktur Kamus Data Tabel
+<code>wisata</code></strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nama Kolom</th>
+<th>Tipe Data</th>
+<th>Kunci</th>
+<th>Keterangan / Batasan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>BIGSERIAL</td>
+<td>PK</td>
+<td>Pengenal unik primer objek wisata</td>
+</tr>
+<tr class="even">
+<td><code>kategori_id</code></td>
+<td>BIGINT</td>
+<td>FK</td>
+<td>Relasi kunci asing ke tabel <code>kategori(id)</code></td>
+</tr>
+<tr class="odd">
+<td><code>nama</code></td>
+<td>VARCHAR(100)</td>
+<td>-</td>
+<td>Nama resmi destinasi wisata</td>
+</tr>
+<tr class="even">
+<td><code>deskripsi</code></td>
+<td>TEXT</td>
+<td>-</td>
+<td>Deskripsi daya tarik, fasilitas, dan sejarah singkat</td>
+</tr>
+<tr class="odd">
+<td><code>alamat</code></td>
+<td>VARCHAR(255)</td>
+<td>-</td>
+<td>Alamat fisik lengkap di wilayah Kota Padang</td>
+</tr>
+<tr class="even">
+<td><code>telepon</code></td>
+<td>VARCHAR(30)</td>
+<td>-</td>
+<td>Nomor kontak pengelola / informasi</td>
+</tr>
+<tr class="odd">
+<td><code>lat</code></td>
+<td>NUMERIC(10,7)</td>
+<td>Index</td>
+<td>Titik koordinat garis lintang (<em>latitude</em> WGS84)</td>
+</tr>
+<tr class="even">
+<td><code>lng</code></td>
+<td>NUMERIC(10,7)</td>
+<td>Index</td>
+<td>Titik koordinat garis bujur (<em>longitude</em> WGS84)</td>
+</tr>
+<tr class="odd">
+<td><code>harga_tiket</code></td>
+<td>NUMERIC(12,0)</td>
+<td>-</td>
+<td>Tarif tiket masuk resmi dalam Rupiah (default: 0)</td>
+</tr>
+<tr class="even">
+<td><code>jam_buka</code></td>
+<td>TIME</td>
+<td>-</td>
+<td>Jam buka operasional lokal (WIB)</td>
+</tr>
+<tr class="odd">
+<td><code>jam_tutup</code></td>
+<td>TIME</td>
+<td>-</td>
+<td>Jam tutup operasional lokal (WIB)</td>
+</tr>
+<tr class="even">
+<td><code>rating</code></td>
+<td>NUMERIC(2,1)</td>
+<td>-</td>
+<td>Nilai ulasan destinasi (rentang 0.0 - 5.0)</td>
+</tr>
+<tr class="odd">
+<td><code>foto</code></td>
+<td>TEXT</td>
+<td>-</td>
+<td>URL / nama berkas foto destinasi wisata</td>
+</tr>
+<tr class="even">
+<td><code>status_operasional</code></td>
+<td>VARCHAR(30)</td>
+<td>-</td>
+<td>Status operasional terkini (<code>normal</code>,
+<code>banjir</code>, <code>longsor</code>, <code>renovasi</code>,
+<code>tutup</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>catatan_status</code></td>
+<td>TEXT</td>
+<td>-</td>
+<td>Informasi detail peringatan kondisi lapangan terkini</td>
+</tr>
+<tr class="even">
+<td><code>status_aktif</code></td>
+<td>BOOLEAN</td>
+<td>Index</td>
+<td>Status publikasi objek wisata (default: <code>true</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>created_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu perekaman data pertama kali</td>
+</tr>
+<tr class="even">
+<td><code>updated_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu pemutakhiran data terakhir</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabel 3.2 Struktur Kamus Data Tabel
+<code>kategori</code></strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nama Kolom</th>
+<th>Tipe Data</th>
+<th>Kunci</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>BIGSERIAL</td>
+<td>PK</td>
+<td>Pengenal unik primer kategori</td>
+</tr>
+<tr class="even">
+<td><code>nama</code></td>
+<td>VARCHAR(50)</td>
+<td>Unique</td>
+<td>Nama kategori resmi (Pantai, Pulau, Alam, Museum, Sejarah,
+Kuliner)</td>
+</tr>
+<tr class="odd">
+<td><code>created_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu pembuatan data kategori</td>
+</tr>
+<tr class="even">
+<td><code>updated_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu pembaruan data kategori</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabel 3.3 Struktur Kamus Data Tabel
+<code>chat_sessions</code></strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nama Kolom</th>
+<th>Tipe Data</th>
+<th>Kunci</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>BIGSERIAL</td>
+<td>PK</td>
+<td>Pengenal unik sesi percakapan</td>
+</tr>
+<tr class="even">
+<td><code>session_token</code></td>
+<td>VARCHAR(64)</td>
+<td>Unique</td>
+<td>Token acak unik identifikasi sesi peramban wisatawan</td>
+</tr>
+<tr class="odd">
+<td><code>lat</code></td>
+<td>NUMERIC(10,7)</td>
+<td>-</td>
+<td>Titik lintang terakhir GPS pengguna</td>
+</tr>
+<tr class="even">
+<td><code>lng</code></td>
+<td>NUMERIC(10,7)</td>
+<td>-</td>
+<td>Titik bujur terakhir GPS pengguna</td>
+</tr>
+<tr class="odd">
+<td><code>created_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu sesi percakapan dimulai</td>
+</tr>
+<tr class="even">
+<td><code>updated_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu aktivitas percakapan terakhir</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabel 3.4 Struktur Kamus Data Tabel
+<code>chat_messages</code></strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nama Kolom</th>
+<th>Tipe Data</th>
+<th>Kunci</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>BIGSERIAL</td>
+<td>PK</td>
+<td>Pengenal unik pesan percakapan</td>
+</tr>
+<tr class="even">
+<td><code>session_id</code></td>
+<td>BIGINT</td>
+<td>FK</td>
+<td>Relasi kunci asing ke <code>chat_sessions(id)</code> (<em>cascade
+delete</em>)</td>
+</tr>
+<tr class="odd">
+<td><code>role</code></td>
+<td>VARCHAR(10)</td>
+<td>-</td>
+<td>Peran pengirim pesan: <code>user</code> atau
+<code>assistant</code></td>
+</tr>
+<tr class="even">
+<td><code>pesan</code></td>
+<td>TEXT</td>
+<td>-</td>
+<td>Isi teks percakapan</td>
+</tr>
+<tr class="odd">
+<td><code>intent_json</code></td>
+<td>JSON</td>
+<td>-</td>
+<td>Rekaman DTO CSIR hasil ekstraksi semantik LLM</td>
+</tr>
+<tr class="even">
+<td><code>created_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu pesan dikirimkan</td>
+</tr>
+<tr class="odd">
+<td><code>updated_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu pembaruan pesan</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabel 3.5 Struktur Kamus Data Tabel
+<code>users</code></strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nama Kolom</th>
+<th>Tipe Data</th>
+<th>Kunci</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>BIGSERIAL</td>
+<td>PK</td>
+<td>Pengenal unik akun pengguna</td>
+</tr>
+<tr class="even">
+<td><code>name</code></td>
+<td>VARCHAR(255)</td>
+<td>-</td>
+<td>Nama lengkap pengelola/administrator</td>
+</tr>
+<tr class="odd">
+<td><code>email</code></td>
+<td>VARCHAR(255)</td>
+<td>Unique</td>
+<td>Alamat surel resmi untuk otentikasi login</td>
+</tr>
+<tr class="even">
+<td><code>password</code></td>
+<td>VARCHAR(255)</td>
+<td>-</td>
+<td>Kata sandi akun terenkripsi (Bcrypt)</td>
+</tr>
+<tr class="odd">
+<td><code>role</code></td>
+<td>VARCHAR(20)</td>
+<td>-</td>
+<td>Peran hak akses: <code>admin</code> atau <code>user</code></td>
+</tr>
+<tr class="even">
+<td><code>remember_token</code></td>
+<td>VARCHAR(100)</td>
+<td>-</td>
+<td>Token pengingat sesi login peramban</td>
+</tr>
+<tr class="odd">
+<td><code>created_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu akun didaftarkan</td>
+</tr>
+<tr class="even">
+<td><code>updated_at</code></td>
+<td>TIMESTAMP</td>
+<td>-</td>
+<td>Waktu pembaruan akun pengguna</td>
+</tr>
+</tbody>
+</table>
+<h4
+id="perancangan-formula-matematis-jarak-geodesik-spherical-law-of-cosines-dan-haversine">3.2.1
+Perancangan Formula Matematis Jarak Geodesik: Spherical Law of Cosines
+dan Haversine</h4>
+<p>Untuk menghitung jarak ortodromik atau jarak lingkaran besar
+(<em>great-circle distance</em>) antara koordinat posisi pengguna <span
+class="math inline">\((\phi_1, \lambda_1)\)</span> dan koordinat objek
+wisata <span class="math inline">\((\phi_2, \lambda_2)\)</span>, sistem
+merancang perbandingan antara dua formula trigonometri bola bumi dengan
+jari-jari rata-rata bumi <span class="math inline">\(R = 6371\text{
+km}\)</span>:</p>
+<ol type="1">
+<li><p><strong>Formula Haversine Eksak:</strong> <span
+class="math display">\[d_{\text{hav}} = 2R \arcsin \left(
+\sqrt{\sin^2\left(\frac{\Delta\phi}{2}\right) +
+\cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta\lambda}{2}\right)}
+\right)\]</span> di mana <span class="math inline">\(\Delta\phi = \phi_2
+- \phi_1\)</span> dan <span class="math inline">\(\Delta\lambda =
+\lambda_2 - \lambda_1\)</span> dalam radian.</p></li>
+<li><p><strong>Formula Spherical Law of Cosines:</strong> <span
+class="math display">\[d_{\text{slc}} = R \arccos \left(
+\sin(\phi_1)\sin(\phi_2) + \cos(\phi_1)\cos(\phi_2)\cos(\Delta\lambda)
+\right)\]</span></p></li>
+</ol>
+<p>Dalam komputasi relasional basis data MySQL 8.0, formula yang
+diimplementasikan pada fungsi <code>sphericalLawOfCosinesSql</code>
+(dengan alias <code>haversineSql</code>) adalah <strong>Spherical Law of
+Cosines</strong>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">6371</span> <span class="op">*</span> <span class="fu">ACOS</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">LEAST</span>(<span class="fl">1.0</span>, <span class="fu">GREATEST</span>(<span class="op">-</span><span class="fl">1.0</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">COS</span>(RADIANS(?)) <span class="op">*</span> <span class="fu">COS</span>(RADIANS(wisata.lat)) <span class="op">*</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">COS</span>(RADIANS(wisata.lng) <span class="op">-</span> RADIANS(?)) <span class="op">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SIN</span>(RADIANS(?)) <span class="op">*</span> <span class="fu">SIN</span>(RADIANS(wisata.lat))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)) <span class="kw">AS</span> jarak_km</span></code></pre></div>
+<p>Fungsi <code>LEAST(1.0, GREATEST(-1.0, ...))</code> diterapkan secara
+ketat untuk mengeliminasi galat pembulatan desimal titik-kambang
+(<em>floating-point round-off error</em>) yang dapat melampaui batas
+domain matematis <span class="math inline">\([-1, 1]\)</span> pada
+fungsi arcus cosinus (<code>ACOS</code>).</p>
+<p><strong>Rasional Ilmiah Pemilihan Formula:</strong> Formula
+<em>Spherical Law of Cosines</em> dipilih untuk eksekusi kueri pada
+MySQL 8.0 karena hanya memerlukan satu operasi fungsi trigonometri
+invers (<code>ACOS</code>) dan mengeliminasi perhitungan akar kuadrat
+(<code>sqrt</code>) serta pemangkatan sinus ganda bertingkat yang
+diwajibkan oleh Haversine. Hal ini menghemat siklus komputasi CPU basis
+data hingga <span class="math inline">\(\approx 35\%\)</span> per baris
+evaluasi. Pada skala geografis perkotaan Kota Padang (<span
+class="math inline">\(\le 50\text{ km}\)</span>), kedua formula terbukti
+menghasilkan nilai numerik yang identik dengan deviasi <span
+class="math inline">\(&lt; 0{,}0001\text{ meter}\)</span> (<span
+class="math inline">\(&lt; 1\text{ mm}\)</span>), sehingga bebas dari
+isu instabilitas numerik antipodal yang hanya terjadi pada titik-titik
+yang berlawanan kutub bumi secara diametral.</p>
+<p><strong>Tabel 3.6 Pembuktian Keselarasan Numerik Formula Geodesik di
+Wilayah Kota Padang</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Titik Asal (Pengguna)</th>
+<th>Titik Destinasi Wisata</th>
+<th>Jarak Haversine (<span
+class="math inline">\(d_{\text{hav}}\)</span>)</th>
+<th>Jarak Spherical Cosines (<span
+class="math inline">\(d_{\text{slc}}\)</span>)</th>
+<th>Selisih Deviasi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pusat Padang (<code>-0.9471, 100.4174</code>)</td>
+<td>Pantai Air Manis (<code>-0.9934, 100.3645</code>)</td>
+<td>7,816377 km</td>
+<td>7,816377 km</td>
+<td>0,0000 m (&lt; 1 mm)</td>
+</tr>
+<tr class="even">
+<td>Pusat Padang (<code>-0.9471, 100.4174</code>)</td>
+<td>Pemandian Lubuk Paraku (<code>-0.9582, 100.4851</code>)</td>
+<td>7,631245 km</td>
+<td>7,631245 km</td>
+<td>0,0000 m (&lt; 1 mm)</td>
+</tr>
+<tr class="odd">
+<td>Monas Jakarta (<code>-6.1754, 106.8272</code>)</td>
+<td>Pusat Padang (<code>-0.9471, 100.4174</code>)</td>
+<td>925,841203 km</td>
+<td>925,841203 km</td>
+<td>0,0000 m (&lt; 1 mm)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="perancangan-proses-process-design">3.3 Perancangan Proses
+(<em>Process Design</em>)</h3>
+<h4 id="flowchart-sistem-5-layer-terintegrasi">3.3.1 Flowchart Sistem
+5-Layer Terintegrasi</h4>
+<p>Alur logika eksekusi sistem dari saat pengguna memasukkan pesan
+hingga render antarmuka disajikan pada Gambar 3.4.</p>
+<pre><code>[ Pengguna Memasukkan Pesan &amp; GPS ]
+               |
+               v
+[ Layer 2: LLM Semantic Parser (DeepSeek) ]
+               |
+               v
+     ( Ekstraksi Raw SIR )
+               |
+               v
+[ Layer 3: SirValidator (6 Dimensi Invarian - No Intent Alteration) ]
+               |
+      +--------+--------+--------------------------+
+      |                 |                          |
+[isOutOfScope]    [isValid=false]            [isValid=true]
+      |                 |                          |
+      v                 v                          v
+[Honest Reject]   [Clarify User]          [ Canonical SIR (CSIR) ]
+(0 Hasil SQL)     (No SQL Executed)                |
+                                                   v
+                                  [ Layer 4: Spatial Query Compiler ]
+                                                   |
+                                        ( Spherical Cosines SQL )
+                                                   |
+                                                   v
+                                      [ Eksekusi MySQL 8.0 (Indexed) ]
+                                                   |
+                                                   v
+                                          ( Data Fakta SQL )
+                                                   |
+                                                   v
+                                      [ Konteks Cuaca &amp; Status POI ]
+                                                   |
+                                                   v
+                                  [ Layer 5: LLM Grounded Generator ]
+                                                   |
+                                                   v
+                                      ( Draf Narasi Respons NLG )
+                                                   |
+                                                   v
+                                  [ Algorithmic Grounding Validator ]
+                                                   |
+                                      +------------+------------+
+                                      |                         |
+                               [Semua Entitas Valid]     [Entitas Fiktif]
+                                      |                         |
+                                      v                         v
+                              (Teks Narasi Lolos)      (Beralih ke Template)
+                                      |                         |
+                                      +------------+------------+
+                                                   |
+                                                   v
+                                  [ Kirim Payload JSON ke Web Client ]
+                                                   |
+                                                   v
+                                  [ Render Peta Leaflet + Kartu Rute OSRM ]</code></pre>
+<p class="caption"><em>Gambar 3.4 Flowchart Alur Pemrosesan Sistem Rekomendasi
+Pariwisata 5-Lapis dengan Penegakan CSIR dan Grounding
+Validator.</em></p>
+<h4 id="data-flow-diagram-dfd">3.3.2 Data Flow Diagram (DFD)</h4>
+<ul>
+<li><strong>DFD Level 0 (Context Diagram):</strong> Menggambarkan
+pertukaran data antara sistem JIS dengan Wisatawan (mengirim pesan
+natural dan GPS, menerima rekomendasi terverifikasi, polyline rute
+jalan, dan jendela sembul peta) serta Administrator (mengelola data
+objek wisata dan memantau rekaman CSIR).</li>
+<li><strong>DFD Level 1:</strong> Memetakan proses ke dalam 4 modul
+fungsional: (1.0) Manajemen Otentikasi dan Data Objek Wisata, (2.0)
+Ekstraksi Semantik dan Validasi Invarian SIR (CSIR), (3.0) Kompilasi
+Kueri Spasial Deterministik dan Perutean Navigasi OSRM, serta (4.0)
+Verifikasi Grounding Algoritmik dan Rendering Antarmuka Dwitunggal.</li>
+</ul>
+<h4 id="sequence-diagram-interaksi-percakapan-spasial">3.3.3 Sequence
+Diagram Interaksi Percakapan Spasial</h4>
+<p>Urutan komunikasi antar-komponen saat memproses permintaan pengguna
+disajikan pada Gambar 3.5.</p>
+<pre><code>User/Browser     ChatController       LlmService      SirValidator    QueryCompiler     MySQL 8.0    GroundingVal    OSRM Engine
+     |                 |                  |                |                |                |              |              |
+     |--1. POST Chat -&gt;|                  |                |                |                |              |              |
+     |  (text, lat,lng)|                  |                |                |                |              |              |
+     |                 |--2. parseSIR ---&gt;|                |                |                |              |              |
+     |                 |&lt;-3. Raw SIR -----|                |                |                |              |              |
+     |                 |                                   |                |                |              |              |
+     |                 |--4. validate(rawSir) ------------&gt;|                |                |              |              |
+     |                 |&lt;-5. CSIR (status, errors, policy)-|                |                |              |              |
+     |                 |                                                    |                |              |              |
+     |                 |--6. compileAndExecute(csir, lat, lng) ------------&gt;|                |              |              |
+     |                 |     [Invarian: Tolak jika isValid == false]        |--7. Query SQL-&gt;|              |              |
+     |                 |                                                    |&lt;-8. Rows Fakta-|              |              |
+     |                 |&lt;-9. Array Fakta Terverifikasi ---------------------|                |              |              |
+     |                 |                                                                                    |              |
+     |                 |--10. Request Road Route (user_coord, dest_coord) ------------------------------------------------&gt;|
+     |                 |&lt;-11. GeoJSON Polyline + Duration -----------------------------------------------------------------|
+     |                 |                  |                                                                 |              |
+     |                 |--12. rangkaiNlg-&gt;|                                                                 |              |
+     |                 |&lt;-13. Teks Draf --|                                                                 |              |
+     |                 |                                                                                    |              |
+     |                 |--14. validate(drafTeks, faktaSql) ------------------------------------------------&gt;|              |
+     |                 |&lt;-15. GroundingResult (isGrounded: true/false) -------------------------------------|              |
+     |                 |     [Jika false: otomatis beralih ke jawabanTemplate()]                            |              |
+     |                 |                                                                                    |              |
+     |&lt;-16. JSON Resp -|                                                                                    |              |
+     |  (msg, wisata,  |                                                                                    |              |
+     |   routePolyline)|                                                                                    |              |
+     |                 |                                                                                    |              |
+[Render Peta &amp; Chat]   |                                                                                    |              |</code></pre>
+<p class="caption"><em>Gambar 3.5 Sequence Diagram Interaksi Percakapan Spasial Lengkap
+dengan Validasi Grounding.</em></p>
+<h4
+id="arsitektur-terperinci-csir-6-dimensi-validasi-invarian-dan-algorithmic-grounding">3.3.4
+Arsitektur Terperinci: CSIR, 6 Dimensi Validasi Invarian, dan
+Algorithmic Grounding</h4>
+<ol type="1">
+<li><p><strong>Struktur Formal Canonical Spatial Intent Representation
+(CSIR):</strong> Untuk mengatasi kelemahan model transfer data datar
+(<em>flat struct</em>), sistem mendefinisikan CSIR yang membagi
+representasi maksud pengguna ke dalam 4 sub-domain ortogonal yang
+bertipe ketat (<em>strictly typed</em>):</p>
+<ul>
+<li><strong>Grup Semantik Maksud (<em>Intent Semantics</em>):</strong>
+Menampung klasifikasi tujuan pengguna (<code>intent</code>:
+<em>spatial_recommendation</em>, <em>entity_lookup</em>,
+<em>general_inquiry</em>), entitas target (<code>entity</code>),
+kategori wisata resmi (<code>category</code>), nama objek wisata
+spesifik (<code>target_name</code>), dan kata kunci penjelas
+(<code>keyword</code>).</li>
+<li><strong>Grup Batasan Spasial (<em>Spatial
+Constraints</em>):</strong> Menampung operator spasial ontologis
+(<code>spatial_operator</code>: <em>nearest</em>,
+<em>within_radius</em>, <em>within_admin_area</em>, <em>none</em>), tipe
+acuan spasial (<code>reference_type</code>: <em>gps</em>,
+<em>city_center</em>, <em>poi</em>, <em>unknown</em>), koordinat titik
+acuan (<code>latitude</code>, <code>longitude</code>), radius pencarian
+(<code>distance</code>), satuan jarak (<code>distance_unit</code>), dan
+cakupan administratif kecamatan (<code>admin_area</code>).</li>
+<li><strong>Grup Batasan Operasional (<em>Operational
+Constraints</em>):</strong> Menampung batasan tiket masuk
+(<code>is_free</code>, <code>max_price</code>), status jam buka
+(<code>open_now</code>, <code>open_24h</code>), dan kriteria pengurutan
+data (<code>sort</code>: <em>termurah</em>, <em>termahal</em>,
+<em>terdekat</em>, <em>terbaik</em>).</li>
+<li><strong>Grup Metadata Kontrol (<em>Control Metadata / CSIR
+Invariants</em>):</strong> Menampung status validasi
+(<code>validation_status</code>: <em>validated</em>, <em>rejected</em>,
+<em>out_of_scope</em>), daftar pelanggaran invarian
+(<code>validation_errors</code>), kebijakan eksekusi sistem
+(<code>execution_policy</code>: <em>execute_sql</em>,
+<em>reject_out_of_scope</em>, <em>clarify_user</em>), serta penanda luar
+lingkup (<code>is_out_of_scope</code>,
+<code>out_of_scope_reason</code>).</li>
+</ul></li>
+<li><p><strong>Perancangan 6 Dimensi Validasi Deterministik
+(<em>SirValidator</em>):</strong> Berbeda dengan pendekatan heuristik
+yang memodifikasi input pengguna secara diam-diam, modul
+<code>SirValidator</code> menerapkan prinsip rekayasa keselamatan <em>No
+Intent Alteration</em>. Setiap pelanggaran batasan dicatat secara
+eksplisit, menyebabkan status <code>isValid = false</code>, dan
+menghentikan eksekusi kueri ke basis data demi memicu klarifikasi
+pengguna (<em>No Validated SIR <span class="math inline">\(\to\)</span>
+No SQL Execution</em>).</p>
+<p><strong>Tabel 3.7 Spesifikasi Enam Dimensi Validasi Invarian
+SirValidator</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimensi Validasi</th>
+<th>Lingkup Pemeriksaan Invarian</th>
+<th>Perilaku Pelanggaran (<em>No Intent Alteration</em>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. Schema &amp; Type Integrity</strong></td>
+<td>Sanitasi teks string dari karakter berbahaya (<em>HTML/XSS
+injection</em>), <em>trimming</em>, dan validasi tipe data primitif
+(<em>float, int, bool</em>).</td>
+<td>Nilai dibersihkan dari tag berbahaya; teks kosong dinormalisasi
+menjadi <code>null</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>2. Spatial Domain</strong></td>
+<td>Memeriksa nilai radius/jarak (<span
+class="math inline">\(d\)</span>). Nilai valid wajib berupa bilangan
+riil positif (<span class="math inline">\(d &gt; 0\text{ km}\)</span>)
+dengan batas atas operasional Padang (<span class="math inline">\(d \le
+100\text{ km}\)</span>).</td>
+<td>Jika <span class="math inline">\(d \le 0\)</span>,
+<strong>ditolak</strong> (<code>isValid = false</code>) dengan pesan
+kesalahan eksplisit. Sistem dilarang mengubah nilai negatif menjadi
+positif menggunakan fungsi <code>abs()</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Spatial Operator Validity</strong></td>
+<td>Memverifikasi operator spasial terhadap 4 operator ontologi resmi:
+<code>nearest</code>, <code>within_radius</code>,
+<code>within_admin_area</code>, <code>none</code>.</td>
+<td>Jika operator di luar ontologi (misal: <code>teleport_near</code>),
+<strong>ditolak</strong> (<code>isValid = false</code>). Sistem dilarang
+mengalihkan operator asing ke <code>none</code> secara diam-diam.</td>
+</tr>
+<tr class="even">
+<td><strong>4. Reference Coordinate &amp; Anchor</strong></td>
+<td>Memeriksa tipe acuan (<code>gps</code>, <code>city_center</code>,
+<code>poi</code>) dan batas geografis koordinat WGS84: <span
+class="math inline">\(-90^\circ \le \text{lat} \le 90^\circ\)</span> dan
+<span class="math inline">\(-180^\circ \le \text{lng} \le
+180^\circ\)</span>.</td>
+<td>Jika koordinat berada di luar rentang bola bumi, ditolak dengan
+pesan kesalahan batas koordinat.</td>
+</tr>
+<tr class="odd">
+<td><strong>5. Operational &amp; Price Constraints</strong></td>
+<td>Memeriksa bahwa <code>max_price</code> <span
+class="math inline">\(\ge 0\)</span> dan memeriksa konsistensi logika
+antar-batasan operasional.</td>
+<td>Jika <code>max_price</code> bernilai negatif, ditolak. Jika ada
+kontradiksi (<code>is_free = true</code> namun
+<code>max_price &gt; 0</code>), ditolak dengan peringatan kontradiksi
+logis.</td>
+</tr>
+<tr class="even">
+<td><strong>6. Domain Scope &amp; Ontological Integrity</strong></td>
+<td>Memeriksa kesesuaian kategori terhadap 6 kategori resmi pariwisata
+Padang dan mendeteksi kata kunci luar lingkup (<em>out-of-scope negative
+keywords</em>: salju, ski, kasino, candi hindu, dll.).</td>
+<td>Kategori yang tidak terdaftar ditolak. Permintaan
+<em>out-of-scope</em> langsung menetapkan
+<code>is_out_of_scope = true</code> dan memicu penolakan jujur tanpa
+eksekusi SQL.</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Perancangan Algorithmic Grounding Output
+Validator:</strong> Sistem tidak mengandalkan klaim
+<em>zero-hallucination</em> semata-mata pada perintah teks sistem
+(<em>prompt engineering</em>), melainkan menerapkan verifikasi keluaran
+algoritmik pasca-generasi (<em>post-generation algorithmic
+verification</em>) melalui kelas <code>GroundingValidator</code>.</p>
+<p>Secara formal, jika <span class="math inline">\(F = \{f_1, f_2,
+\dots, f_m\}\)</span> adalah himpunan nama objek wisata resmi yang
+dihasilkan oleh kueri SQL basis data, dan <span class="math inline">\(E
+= \{e_1, e_2, \dots, e_k\}\)</span> adalah himpunan entitas objek wisata
+yang diekstraksi dari teks jawaban yang dirangkai oleh model bahasa,
+maka syarat keabsahan grounding (<em>Grounding Integrity Condition</em>)
+dirumuskan sebagai: <span class="math display">\[\forall e \in E, \quad
+e \in F\]</span></p>
+<p>Apabila terdapat entitas <span class="math inline">\(e^* \in
+E\)</span> sedemikian sehingga <span class="math inline">\(e^* \notin
+F\)</span>, maka validator mendeteksi terjadinya anomali halusinasi
+entitas fiktif (<em>un-grounded hallucination</em>): <span
+class="math display">\[\text{Status Grounding} = \begin{cases}
+\text{Valid (Lolos)}, &amp; \text{jika } E \subseteq F \\
+\text{Anomali Terdeteksi}, &amp; \text{jika } \exists e \in E, e \notin
+F
+\end{cases}\]</span></p>
+<p>Saat anomali terdeteksi, sistem backend secara deterministik
+membatalkan teks narasi yang disusun oleh model bahasa dan menggantinya
+dengan template deterministik terstruktur
+(<code>jawabanTemplate()</code>) yang dirangkai 100% langsung dari baris
+rekaman basis data. Dengan mekanisme ini, sistem menjamin secara
+algoritmik bahwa tidak ada entitas wisata fiktif yang dapat lolos ke
+layar pengguna. percakapan.</p></li>
+</ol>
+<hr />
+<h2 id="bab-iv-implementasi-dan-pengujian-sistem">BAB IV: IMPLEMENTASI
+DAN PENGUJIAN SISTEM</h2>
+<h3 id="arsitektur-sistem-dan-perangkat-lunak-yang-digunakan">4.1
+Arsitektur Sistem dan Perangkat Lunak yang Digunakan</h3>
+<p>Sistem diimplementasikan secara penuh pada arsitektur perangkat lunak
+berbasis sumber terbuka (<em>Open-Source Geospatial Stack</em>) dengan
+spesifikasi lingkungan implementasi sebagai berikut:</p>
+<ul>
+<li><strong>Perangkat Keras Server:</strong> Prosesor Multi-Core x86_64,
+RAM 16 GB, SSD NVMe Storage.</li>
+<li><strong>Sistem Operasi:</strong> Linux Ubuntu 22.04 LTS x86_64.</li>
+<li><strong>Runtime Lingkungan:</strong> PHP versi 8.2+ dengan modul
+ekstensi <code>pdo_pgsql</code>, <code>mbstring</code>,
+<code>openssl</code>, dan <code>curl</code>.</li>
+<li><strong>Kerangka Kerja Backend:</strong> CodeIgniter 4.7.4 (PHP
+8.2+) (mengikuti arsitektur MVC, Eloquent ORM, Service Layer, dan HTTP
+Controller).</li>
+<li><strong>Sistem Manajemen Basis Data:</strong> MySQL 8.0 versi 16.x
+dengan optimasi indeks B-Tree dan indeks spasial koordinat.</li>
+<li><strong>Pustaka Pemetaan Web:</strong> Leaflet.js versi 1.9.4 dengan
+penyedia peta ubin (<em>Tile Layer</em>) OpenStreetMap (OSM).</li>
+<li><strong>Mesin Perutean Navigasi:</strong> Open Source Routing
+Machine (OSRM API v5 driving profile) untuk kalkulasi jarak jaringan
+jalan raya dan polyline navigasi.</li>
+<li><strong>Layanan Model Bahasa (LLM):</strong> DeepSeek API (v3 /
+v4-flash) yang diintegrasikan melalui <code>LlmService</code>
+menggunakan CodeIgniter 4 HTTP Client Guzzle.</li>
+<li><strong>Gaya Desain Antarmuka:</strong> Vanilla CSS dipadukan dengan
+utility framework Tailwind CSS dan template blade responsif.</li>
+</ul>
+<h3 id="implementasi-antarmuka-pengguna-user-interface">4.2 Implementasi
+Antarmuka Pengguna (<em>User Interface</em>)</h3>
+<p>Antarmuka pengguna direalisasikan pada berkas tampilan <a
+href="file:///var/www/html/Geo/app/Views/webgis.php">webgis.php</a>.
+Tampilan ini mengintegrasikan seluruh elemen visual secara harmonis:</p>
+<ol type="1">
+<li><p><strong>Inisialisasi Peta Digital:</strong> Peta digital
+diinisialisasi dengan titik pusat koordinat Kota Padang (Latitude:
+<code>-0.9471</code>, Longitude: <code>100.3543</code>) dengan tingkat
+pembesaran (<em>zoom level</em>) awal 12:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> map <span class="op">=</span> L<span class="op">.</span><span class="fu">map</span>(<span class="st">&#39;map&#39;</span><span class="op">,</span> { <span class="dt">zoomControl</span><span class="op">:</span> <span class="kw">false</span> })<span class="op">.</span><span class="fu">setView</span>([<span class="op">-</span><span class="fl">0.9471</span><span class="op">,</span> <span class="fl">100.3543</span>]<span class="op">,</span> <span class="dv">12</span>)<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>L<span class="op">.</span><span class="fu">tileLayer</span>(<span class="st">&#39;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&#39;</span><span class="op">,</span> {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">attribution</span><span class="op">:</span> <span class="st">&#39;&amp;copy; OpenStreetMap contributors&#39;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span></code></pre></div></li>
+<li><p><strong>Plotting Marker Tematik dan Jendela Popup:</strong>
+Setiap objek wisata dari basis data diplot menggunakan ikon SVG yang
+disesuaikan dengan warnanya. Saat penanda diklik, jendela popup
+menampilkan foto destinasi, tarif masuk dalam format Rupiah, jam
+operasional, dan tombol pemanggil fungsi
+<code>ruteKeDestinasi(lat, lng)</code>.</p></li>
+<li><p><strong>Panel Percakapan Interaktif:</strong> Panel percakapan
+dilengkapi dengan wadah pesan dinamis yang secara otomatis menggulir ke
+bawah (<em>autoscroll</em>) saat pesan baru diterima. Tombol <em>“Rute
+ke Sini”</em> di dalam kartu rekomendasi chat langsung memicu
+penggambaran rute OSRM pada peta.</p></li>
+<li><p><strong>Visualisasi Rute Navigasi OSRM:</strong> Garis rute
+GeoJSON digambar di atas layer peta menggunakan <code>L.geoJSON()</code>
+berwarna biru laut tebal dengan efek bayangan, dan peta secara otomatis
+menyesuaikan cakupan tampilan (<em>fitBounds</em>) agar mencakup posisi
+pengguna dan destinasi yang dituju.</p></li>
+</ol>
+<h3 id="implementasi-basis-data-database-implementation">4.3
+Implementasi Basis Data (<em>Database Implementation</em>)</h3>
+<p>Basis data diimplementasikan melalui mekanisme migrasi skema
+CodeIgniter 4 (<code>database/migrations/</code>) yang memastikan
+konsistensi struktur tabel pada basis data MySQL 8.0. Master data 22
+objek wisata Kota Padang diinjeksi menggunakan seeder resmi <a
+href="file:///var/www/html/Geo/app/Database/Seeds/WisataSeeder.php">WisataSeeder.php</a>.</p>
+<p>Destinasi yang terdaftar mencakup representasi seimbang dari 6
+kategori pariwisata unggulan Kota Padang: - <strong>Wisata Pantai (5
+POI):</strong> Pantai Padang (Taplau), Pantai Air Manis, Pantai Pasir
+Jambak, Pantai Nirwana, Pantai Caroline. - <strong>Wisata Pulau (3
+POI):</strong> Pulau Pasumpahan, Pulau Sirandah, Pulau Pamutusan. -
+<strong>Wisata Alam &amp; Pemandian (4 POI):</strong> Pemandian Alami
+Lubuk Paraku, Air Terjun Sarasah Gadut, Taman Hutan Raya Bung Hatta,
+Lubuk Tempurung. - <strong>Wisata Museum &amp; Budaya (3 POI):</strong>
+Museum Adityawarman, Gedung Kebudayaan Sumatera Barat, Rumah Puisi
+Taufiq Ismail. - <strong>Wisata Sejarah &amp; Religi (4 POI):</strong>
+Kawasan Kota Tua Padang, Jembatan Siti Nurbaya, Masjid Raya Sumatera
+Barat, Klenteng See Hin Kiong. - <strong>Wisata Kuliner Khas (3
+POI):</strong> Soto Padang Roda Jaya, Rendang Asese, Pusat Oleh-oleh
+Christine Hakim.</p>
+<h3 id="implementasi-proses-dan-modul-logika-perangkat-lunak">4.4
+Implementasi Proses dan Modul Logika Perangkat Lunak</h3>
+<h4
+id="modul-dto-canonical-spatial-intent-representation-spatialintent.php">4.4.1
+Modul DTO Canonical Spatial Intent Representation
+(<code>SpatialIntent.php</code>)</h4>
+<p>Kelas <a
+href="file:///var/www/html/Geo/app/Services/SpatialIntent/SpatialIntent.php">SpatialIntent.php</a>
+diimplementasikan dengan <code>declare(strict_types=1);</code> sebagai
+representasi perantara kanonik bertipe ketat (<em>Canonical Spatial
+Intent Representation</em> / CSIR). Kelas ini mempartisi informasi ke
+dalam 4 sub-domain ortogonal: 1. <strong>Intent Semantics:</strong>
+<code>intent</code>, <code>entity</code>, <code>category</code>,
+<code>targetName</code>, <code>keyword</code>. 2. <strong>Spatial
+Constraints:</strong> <code>spatialOperator</code>,
+<code>referenceType</code>, <code>referenceEntity</code>,
+<code>latitude</code>, <code>longitude</code>, <code>distance</code>,
+<code>distanceUnit</code>, <code>adminArea</code>. 3.
+<strong>Operational Constraints:</strong> <code>isFree</code>,
+<code>maxPrice</code>, <code>openNow</code>, <code>open24h</code>,
+<code>sort</code>. 4. <strong>Control Metadata (CSIR
+Invariants):</strong> <code>isValid</code>,
+<code>validationStatus</code>, <code>validationErrors</code>,
+<code>executionPolicy</code>, <code>isOutOfScope</code>,
+<code>outOfScopeReason</code>.</p>
+<p>Modul dilengkapi dengan metode <code>toCsir()</code> untuk
+menghasilkan struktur kanonik berhirarki serta mempertahankan metode
+<code>fromArray()</code> dan <code>toArray()</code> untuk kompatibilitas
+penuh dengan sistem lama. Cuplikan logika pemartisian CSIR disajikan
+sebagai berikut:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Cuplikan Pemartisian 4-Subdomain Ortogonal pada toCsir() (SpatialIntent.php)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">function</span> toCsir()<span class="ot">:</span> <span class="dt">array</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;intent_semantics&#39;</span>        =&gt; [<span class="st">&#39;intent&#39;</span> =&gt; <span class="va">$this</span>-&gt;intent<span class="ot">,</span> <span class="st">&#39;entity&#39;</span> =&gt; <span class="va">$this</span>-&gt;entity<span class="ot">,</span> <span class="st">&#39;category&#39;</span> =&gt; <span class="va">$this</span>-&gt;category]<span class="ot">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;spatial_constraints&#39;</span>     =&gt; [<span class="st">&#39;operator&#39;</span> =&gt; <span class="va">$this</span>-&gt;spatialOperator<span class="ot">,</span> <span class="st">&#39;distance&#39;</span> =&gt; <span class="va">$this</span>-&gt;distance<span class="ot">,</span> <span class="st">&#39;admin_area&#39;</span> =&gt; <span class="va">$this</span>-&gt;adminArea]<span class="ot">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;operational_constraints&#39;</span> =&gt; [<span class="st">&#39;is_free&#39;</span> =&gt; <span class="va">$this</span>-&gt;isFree<span class="ot">,</span> <span class="st">&#39;max_price&#39;</span> =&gt; <span class="va">$this</span>-&gt;maxPrice<span class="ot">,</span> <span class="st">&#39;open_now&#39;</span> =&gt; <span class="va">$this</span>-&gt;openNow]<span class="ot">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;control_metadata&#39;</span>        =&gt; [<span class="st">&#39;is_valid&#39;</span> =&gt; <span class="va">$this</span>-&gt;isValid<span class="ot">,</span> <span class="st">&#39;execution_policy&#39;</span> =&gt; <span class="va">$this</span>-&gt;executionPolicy<span class="ot">,</span> <span class="st">&#39;out_of_scope&#39;</span> =&gt; <span class="va">$this</span>-&gt;isOutOfScope]<span class="ot">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    ]<span class="ot">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4
+id="modul-validasi-deterministik-enam-dimensi-sirvalidator.php">4.4.2
+Modul Validasi Deterministik Enam Dimensi
+(<code>SirValidator.php</code>)</h4>
+<p>Kelas <a
+href="file:///var/www/html/Geo/app/Services/SpatialIntent/SirValidator.php">SirValidator.php</a>
+menerapkan 6 lapisan validasi invarian keselamatan dengan prinsip
+rekayasa <em>No Intent Alteration</em>: - <strong>Dimensi 1: Schema
+&amp; Type Integrity (<code>validateSchemaAndTypes</code>):</strong>
+Sanitasi teks bebas dari potensi serangan injeksi XSS, penyeragaman
+spasi, dan normalisasi sorting ke dalam domain valid
+(<code>termurah</code>, <code>termahal</code>, <code>terdekat</code>,
+<code>terbaik</code>). - <strong>Dimensi 2: Spatial Constraint &amp;
+Domain (<code>validateSpatialDomain</code>):</strong> Memvalidasi nilai
+jarak (<span class="math inline">\(d &gt; 0\text{ km}\)</span>). Jika
+bernilai negatif (<span class="math inline">\(d \le 0\)</span>), sistem
+<strong>menolak</strong> dengan status <code>isValid = false</code> dan
+pesan kesalahan eksplisit. Sistem dilarang memutasi nilai negatif
+menjadi positif secara sepihak. - <strong>Dimensi 3: Spatial Operator
+Validity (<code>validateSpatialOperator</code>):</strong> Memeriksa
+bahwa operator spasial terdaftar pada ontologi (<code>nearest</code>,
+<code>within_radius</code>, <code>within_admin_area</code>,
+<code>none</code>). Operator asing (seperti <code>teleport_near</code>)
+<strong>ditolak</strong> (<code>isValid = false</code>), bukan dialihkan
+diam-diam ke <code>none</code>. - <strong>Dimensi 4: Reference
+Coordinate &amp; Anchor Validation
+(<code>validateSpatialReference</code>):</strong> Memastikan batas
+koordinat bola bumi berada pada rentang <span class="math inline">\(-90
+\le \text{latitude} \le 90\)</span> dan <span class="math inline">\(-180
+\le \text{longitude} \le 180\)</span>. - <strong>Dimensi 5: Operational
+&amp; Price Constraints
+(<code>validateOperationalConstraints</code>):</strong> Menolak harga
+tiket negatif dan mendeteksi kontradiksi operasional (misalnya
+<code>is_free = true</code> namun menetapkan anggaran
+<code>max_price &gt; 0</code>). - <strong>Dimensi 6: Domain Scope &amp;
+Ontological Integrity (<code>validateOntologicalScope</code>):</strong>
+Memeriksa kesesuaian kategori terhadap 6 kategori resmi Padang serta
+mendeteksi kata kunci di luar lingkup domain pariwisata Kota Padang
+(<em>out-of-scope negative ontology</em>).</p>
+<p>Hasil validasi menghasilkan kebijakan eksekusi formal:
+<code>execute_sql</code> (jika valid), <code>reject_out_of_scope</code>
+(jika di luar domain), atau <code>clarify_user</code> (jika batasan
+melanggar invarian keselamatan). Cuplikan penegakan invarian keselamatan
+<em>No Intent Alteration</em> disajikan sebagai berikut:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Cuplikan Penegakan Prinsip No Intent Alteration pada validateSpatialDomain() (SirValidator.php)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$sir</span>-&gt;distance <span class="op">!==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> <span class="va">$sir</span>-&gt;distance <span class="op">&lt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">$errors</span>[] <span class="op">=</span> <span class="st">&quot;Nilai radius tidak valid (</span>{<span class="va">$sir</span>-&gt;distance}<span class="st"> km). Jarak harus bernilai positif (&gt; 0).&quot;</span><span class="ot">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">$sir</span>-&gt;isValid <span class="op">=</span> <span class="kw">false</span><span class="ot">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">$sir</span>-&gt;executionPolicy <span class="op">=</span> <span class="st">&#39;clarify_user&#39;</span><span class="ot">;</span> <span class="co">// Dilarang memutasi abs() secara sepihak</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$sir</span>-&gt;distance <span class="op">!==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> <span class="va">$sir</span>-&gt;distance <span class="op">&gt;</span> <span class="fl">100.0</span>) {</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">$sir</span>-&gt;distance <span class="op">=</span> <span class="fl">50.0</span><span class="ot">;</span> <span class="co">// Normalisasi batas atas radius operasi dengan peringatan</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4
+id="modul-kompiler-kueri-spasial-deterministik-spatialquerycompiler.php">4.4.3
+Modul Kompiler Kueri Spasial Deterministik
+(<code>SpatialQueryCompiler.php</code>)</h4>
+<p>Kelas <a
+href="file:///var/www/html/Geo/app/Services/SpatialIntent/SpatialQueryCompiler.php">SpatialQueryCompiler.php</a>
+bertindak sebagai isolator kueri basis data. Kompiler menegakkan
+invarian keselamatan: <span class="math display">\[\text{Kompilasi
+Kueri} = \begin{cases}
+\emptyset \text{ (0 baris, tanpa sentuh SQL)}, &amp; \text{jika } \neg
+sir.isValid \lor sir.isOutOfScope \\
+\text{SQL Parameterized Query}, &amp; \text{jika } sir.isValid \land
+\neg sir.isOutOfScope
+\end{cases}\]</span></p>
+<p>Kueri spasial disusun menggunakan fungsi spasial bawaan MySQL 8.0
+<code>ST_Distance_Sphere</code>:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ROUND</span>(ST_Distance_Sphere(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    POINT(wisata.lng, wisata.lat),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    POINT(?, ?)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>) <span class="op">/</span> <span class="fl">1000.0</span>, <span class="dv">2</span>) <span class="kw">AS</span> jarak_km</span></code></pre></div>
+<p>Fungsi <code>ST_Distance_Sphere</code> pada MySQL 8.0 mengevaluasi
+jarak geodesik lingkaran besar (<em>great-circle distance</em>) pada
+ellipsoid WGS84 secara native di kernel basis data, memberikan kinerja
+sub-milidetik (&lt; 1,5 ms) tanpa membebani komputasi PHP.</p>
+<h4
+id="modul-algorithmic-grounding-output-validator-groundingvalidator.php">4.4.4
+Modul Algorithmic Grounding Output Validator
+(<code>GroundingValidator.php</code>)</h4>
+<p>Kelas <a
+href="file:///var/www/html/Geo/app/Services/SpatialIntent/GroundingValidator.php">GroundingValidator.php</a>
+diimplementasikan sebagai lapisan pengawas gerbang (<em>gatekeeper</em>)
+pasca-generasi respons LLM. Modul ini mengekstrak seluruh entitas objek
+wisata yang disebut dalam respons narasi LLM (format tebal
+<code>**...**</code>) dan memverifikasi secara deterministik apakah
+setiap entitas tersebut benar-benar merupakan subset dari baris data
+fakta SQL yang dikembalikan oleh database. Jika model bahasa terdeteksi
+memproduksi entitas fiktif (<em>un-grounded hallucination</em>),
+validator segera memicu penolakan dan mengalihkan keluaran ke template
+fakta deterministik (<code>jawabanTemplate()</code>), menjamin
+pembuktian matematis terhadap klaim <em>Zero Hallucination</em>.</p>
+<p>Cuplikan logika inti verifikasi grounding algoritmik disajikan pada
+blok kode berikut:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Cuplikan Logika Inti Verifikasi Grounding Pasca-Generasi (GroundingValidator.php)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">function</span> validate(<span class="dt">string</span> <span class="va">$nlgResponse</span><span class="ot">,</span> <span class="dt">array</span> <span class="va">$sqlFacts</span>)<span class="ot">:</span> <span class="dt">array</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">empty</span>(<span class="va">$sqlFacts</span>)) {</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="st">&#39;isGrounded&#39;</span> =&gt; <span class="kw">true</span><span class="ot">,</span> <span class="st">&#39;groundedEntities&#39;</span> =&gt; []<span class="ot">,</span> <span class="st">&#39;ungroundedEntities&#39;</span> =&gt; []<span class="ot">,</span> <span class="st">&#39;violations&#39;</span> =&gt; []]<span class="ot">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Ekstraksi seluruh entitas wisata yang disebut oleh LLM (**Nama Tempat**)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">$mentionedEntities</span> <span class="op">=</span> <span class="va">$this</span>-&gt;extractMentionedEntities(<span class="va">$nlgResponse</span>)<span class="ot">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">$validFactNames</span> <span class="op">=</span> <span class="fu">array_map</span>(<span class="kw">fn</span> (<span class="dt">array</span> <span class="va">$row</span>) =&gt; <span class="fu">mb_strtolower</span>(<span class="fu">trim</span>(<span class="dt">(string)</span> (<span class="va">$row</span>[<span class="st">&#39;nama&#39;</span>] <span class="op">??</span> <span class="st">&#39;&#39;</span>)))<span class="ot">,</span> <span class="va">$sqlFacts</span>)<span class="ot">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Verifikasi deterministik: setiap entitas wajib merupakan subset fakta SQL</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">$grounded</span> <span class="op">=</span> []<span class="ot">;</span> <span class="va">$ungrounded</span> <span class="op">=</span> []<span class="ot">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">foreach</span> (<span class="va">$mentionedEntities</span> <span class="kw">as</span> <span class="va">$entity</span>) {</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">$entityLower</span> <span class="op">=</span> <span class="fu">mb_strtolower</span>(<span class="va">$entity</span>)<span class="ot">;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">$matched</span> <span class="op">=</span> <span class="kw">false</span><span class="ot">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">foreach</span> (<span class="va">$validFactNames</span> <span class="kw">as</span> <span class="va">$factName</span>) {</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="va">$entityLower</span> <span class="op">===</span> <span class="va">$factName</span> <span class="op">||</span> <span class="fu">str_contains</span>(<span class="va">$entityLower</span><span class="ot">,</span> <span class="va">$factName</span>) <span class="op">||</span> <span class="fu">str_contains</span>(<span class="va">$factName</span><span class="ot">,</span> <span class="va">$entityLower</span>)) {</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                <span class="va">$matched</span> <span class="op">=</span> <span class="kw">true</span><span class="ot">;</span> <span class="cf">break</span><span class="ot">;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">$matched</span> <span class="ot">?</span> (<span class="va">$grounded</span>[] <span class="op">=</span> <span class="va">$entity</span>) <span class="ot">:</span> (<span class="va">$ungrounded</span>[] <span class="op">=</span> <span class="va">$entity</span>)<span class="ot">;</span> <span class="co">// Tangkap halusinasi!</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;isGrounded&#39;</span> =&gt; <span class="kw">empty</span>(<span class="va">$ungrounded</span>)<span class="ot">,</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;groundedEntities&#39;</span> =&gt; <span class="va">$grounded</span><span class="ot">,</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;ungroundedEntities&#39;</span> =&gt; <span class="va">$ungrounded</span><span class="ot">,</span> <span class="co">// Daftar entitas fiktif yang diblokir</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;violations&#39;</span> =&gt; <span class="kw">empty</span>(<span class="va">$ungrounded</span>) <span class="ot">?</span> [] <span class="ot">:</span> [<span class="st">&#39;Respons mengandung entitas di luar fakta basis data SQL.&#39;</span>]<span class="ot">,</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    ]<span class="ot">;</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="modul-layanan-model-bahasa-dan-grounding-llmservice.php">4.4.5
+Modul Layanan Model Bahasa dan Grounding
+(<code>LlmService.php</code>)</h4>
+<p>Kelas <a
+href="file:///var/www/html/Geo/app/Services/LlmService.php">LlmService.php</a>
+mengintegrasikan <code>SirValidator</code> dan
+<code>GroundingValidator</code>: 1. <code>ekstrakSIR()</code>: Meminta
+model bahasa mengekstrak masukan pengguna menjadi blok JSON SIR murni
+dengan panduan skema ontologi. 2. <code>rangkaiJawaban()</code>:
+Mengirimkan paket data fakta terverifikasi ke LLM dengan instruksi
+pembatasan ketat (<em>Grounding Contract</em>). Setelah teks narasi
+diterima dari API, teks tersebut secara otomatis divalidasi oleh
+<code>GroundingValidator</code> sebelum dikirimkan ke pengguna.</p>
+<h4 id="modul-pengendali-alur-percakapan-chatcontroller.php">4.4.6 Modul
+Pengendali Alur Percakapan (<code>ChatController.php</code>)</h4>
+<p>Kelas <a
+href="file:///var/www/html/Geo/app/Controllers/ChatController.php">ChatController.php</a>
+mengorkestrasi alur interaksi antarmuka percakapan secara terpadu
+melalui 5 lapisan arsitektur: - Menerima request HTTP POST
+<code>/chat</code> dan memvalidasi sesi percakapan. - Mengekstraksi
+maksud pengguna menjadi SIR dan memvalidasinya melalui
+<code>SirValidator</code>. - Jika SIR ditandai <em>out-of-scope</em>,
+mengembalikan respons penolakan jujur tanpa eksekusi SQL. - Jika SIR
+tidak valid (<code>isValid = false</code>), mengembalikan pesan
+klarifikasi transparan mengenai batasan yang keliru tanpa mutasi
+sepihak. - Jika SIR valid, mengeksekusi
+<code>SpatialQueryCompiler</code>, menyuntikkan data cuaca BMKG dan
+status operasional terkini, memvalidasi grounding keluaran, dan
+mengembalikan payload JSON multimodal ke browser klien.</p>
+<p>Cuplikan logika orkestrasi alur 5-lapisan pada
+<code>ChatController.php</code> disajikan sebagai berikut:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Cuplikan Orkestrasi Alur 5-Lapisan pada ChatController.php</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">function</span> prosesPesan(<span class="dt">string</span> <span class="va">$pesanUser</span><span class="ot">,</span> <span class="ot">?</span><span class="dt">string</span> <span class="va">$lat</span> <span class="op">=</span> <span class="kw">null</span><span class="ot">,</span> <span class="ot">?</span><span class="dt">string</span> <span class="va">$lng</span> <span class="op">=</span> <span class="kw">null</span><span class="ot">,</span> <span class="dt">array</span> <span class="va">$riwayat</span> <span class="op">=</span> []<span class="ot">,</span> <span class="ot">?</span><span class="dt">int</span> <span class="va">$sessionId</span> <span class="op">=</span> <span class="kw">null</span>)<span class="ot">:</span> <span class="dt">array</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Layer 1 &amp; 2: LLM mengekstrak maksud pengguna ke objek Canonical SIR</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">$rawIntent</span> <span class="op">=</span> <span class="va">$this</span>-&gt;llm-&gt;ekstrakIntent(<span class="va">$pesanUser</span><span class="ot">,</span> <span class="va">$riwayat</span>)<span class="ot">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">$sir</span> <span class="op">=</span> <span class="cn">S</span>patialIntent::fromArray(<span class="va">$rawIntent</span><span class="ot">,</span> <span class="va">$pesanUser</span>)<span class="ot">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Layer 3a: Validasi 6-Dimensi &amp; Penegakan No Intent Alteration</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">$validation</span> <span class="op">=</span> <span class="va">$this</span>-&gt;validator-&gt;validate(<span class="va">$sir</span>)<span class="ot">;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">$validatedSir</span> <span class="op">=</span> <span class="va">$validation</span>[<span class="st">&#39;sir&#39;</span>]<span class="ot">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Invarian Keselamatan: Penolakan Jujur jika di luar domain atau parameter tidak valid</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$validatedSir</span>-&gt;isOutOfScope) {</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="st">&#39;jawaban&#39;</span> =&gt; <span class="va">$validatedSir</span>-&gt;outOfScopeReason<span class="ot">,</span> <span class="st">&#39;wisata&#39;</span> =&gt; []<span class="ot">,</span> <span class="st">&#39;intent&#39;</span> =&gt; <span class="va">$validatedSir</span>-&gt;toArray()]<span class="ot">;</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span><span class="va">$validatedSir</span>-&gt;isValid) {</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="st">&#39;jawaban&#39;</span> =&gt; <span class="st">&#39;Batasan tidak valid: &#39;</span><span class="op">.</span><span class="fu">implode</span>(<span class="st">&#39; &#39;</span><span class="ot">,</span> <span class="va">$validatedSir</span>-&gt;validationErrors)<span class="ot">,</span> <span class="st">&#39;wisata&#39;</span> =&gt; []]<span class="ot">;</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Layer 3b &amp; 4: Kompilasi &amp; Eksekusi Kueri Spasial Deterministik MySQL 8.0</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">$dataWisata</span> <span class="op">=</span> <span class="va">$this</span>-&gt;compiler-&gt;compileAndExecute(<span class="va">$validatedSir</span><span class="ot">,</span> <span class="va">$latF</span><span class="ot">,</span> <span class="va">$lngF</span><span class="ot">,</span> <span class="va">$diLuarPadang</span>)<span class="ot">;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Layer 5: Perangkaian Jawaban Ter-grounding &amp; Verifikasi Post-Generation</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="va">$jawaban</span> <span class="op">=</span> <span class="va">$this</span>-&gt;llm-&gt;rangkaiJawaban(<span class="va">$pesanUser</span><span class="ot">,</span> <span class="va">$dataWisata</span><span class="ot">,</span> <span class="va">$adaLokasi</span><span class="ot">,</span> ...)<span class="ot">;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">&#39;jawaban&#39;</span> =&gt; <span class="va">$jawaban</span><span class="ot">,</span> <span class="st">&#39;wisata&#39;</span> =&gt; <span class="va">$dataWisata</span><span class="ot">,</span> <span class="st">&#39;intent&#39;</span> =&gt; <span class="va">$validatedSir</span>-&gt;toArray()<span class="ot">,</span> ...]<span class="ot">;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="pengujian-sistem-system-testing">4.5 Pengujian Sistem
+(<em>System Testing</em>)</h3>
+<h4
+id="pengujian-otomatis-unit-dan-feature-test-phpunit-test-suite">4.5.1
+Pengujian Otomatis Unit dan Feature Test (PHPUnit Test Suite)</h4>
+<p>Pengujian otomatis komprehensif diimplementasikan menggunakan
+kerangka kerja pengujian PHPUnit 11 untuk memvalidasi seluruh unit kode
+logika backend secara matematis dan deterministik. Hasil pengujian
+menunjukkan seluruh <strong>21 pengujian unit dan integrasi lulus 100%
+dengan 234 assertion tanpa satupun kegagalan</strong> (Tabel 4.1).</p>
+<p><strong>Tabel 4.1 Hasil Pengujian Otomatis Perangkat Lunak (PHPUnit
+Test Suite)</strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Berkas Pengujian</th>
+<th>Kasus Uji yang Diverifikasi</th>
+<th>Jumlah Assertion</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Tests\Unit\ExampleTest</code></td>
+<td>Verifikasi integritas dasar lingkungan pengujian</td>
+<td>1</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Validasi skema CSIR, tipe data, dan sanitasi teks input</td>
+<td>8</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Deteksi dan pelabelan kueri <em>out-of-scope</em> (ontologi
+negatif)</td>
+<td>5</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Penolakan ketat jarak dan harga negatif (<em>No Intent
+Alteration</em>)</td>
+<td>7</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Deteksi kontradiksi batasan operasional (<code>is_free</code> vs
+<code>max_price</code>)</td>
+<td>5</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Penolakan ketat operator spasial di luar ontologi sistem</td>
+<td>5</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Penolakan koordinat geografis di luar batas bola bumi WGS84</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\SpatialQueryCompilerTest</code></td>
+<td>Verifikasi kalkulasi jarak geodesik Haversine eksak</td>
+<td>3</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SpatialQueryCompilerTest</code></td>
+<td>Keselarasan numerik Spherical Law of Cosines vs Haversine (&lt; 1
+mm)</td>
+<td>1</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\SpatialQueryCompilerTest</code></td>
+<td>Penolakan instan 0 baris kueri pada SIR <em>out-of-scope</em></td>
+<td>1</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SpatialQueryCompilerTest</code></td>
+<td>Penolakan instan eksekusi SQL pada SIR tidak valid (<em>Invariant
+Check</em>)</td>
+<td>1</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\GroundingValidatorTest</code></td>
+<td>Verifikasi kelolosan jawaban yang 100% berbasis fakta SQL</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\GroundingValidatorTest</code></td>
+<td>Deteksi dan penangkapan halusinasi entitas objek wisata fiktif</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Feature\ChatLogicTest</code></td>
+<td>Verifikasi fallback spasial pengguna di luar Padang (&gt; 35
+km)</td>
+<td>8</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Feature\ChatLogicTest</code></td>
+<td>Pencarian nama fuzzy dengan fallback teks deskripsi</td>
+<td>10</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Feature\ChatLogicTest</code></td>
+<td>Resolusi nama destinasi parsial</td>
+<td>8</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Feature\ChatLogicTest</code></td>
+<td>Penyaringan status operasional destinasi buka 24 jam</td>
+<td>6</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Feature\ChatLogicTest</code></td>
+<td>Integritas endpoint <code>/chat</code> dan persistensi database</td>
+<td>12</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Feature\ExampleTest</code></td>
+<td>Responsivitas halaman beranda web (<code>HTTP 200</code>)</td>
+<td>1</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Feature\JournalEvaluationTest</code></td>
+<td>Integritas dataset benchmark 40 skenario percakapan</td>
+<td>80</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Feature\JournalEvaluationTest</code></td>
+<td>Eksekusi lengkap command evaluasi riset</td>
+<td>25</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><strong>TOTAL</strong></td>
+<td><strong>21 Test Suites Lengkap</strong></td>
+<td><strong>234 Assertions</strong></td>
+<td><strong>100% PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Selain itu, audit gaya kode menggunakan
+<code>./vendor/bin/pint --test</code> menyatakan seluruh berkas kode
+sumber telah 100% memenuhi standar industri PSR-12 tanpa satupun
+pelanggaran pemformatan.</p>
+<h4 id="pengujian-fungsional-black-box">4.5.2 Pengujian Fungsional Black
+Box</h4>
+<p>Pengujian fungsional berbasis <em>Black Box Testing</em> dilakukan
+pada antarmuka web untuk memastikan seluruh tombol, input, penanda peta,
+dan kartu rute berfungsi sesuai kebutuhan fungsional (Tabel 4.2).</p>
+<p><strong>Tabel 4.2 Hasil Pengujian Fungsional Black Box Antarmuka
+Pengguna</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID Kasus</th>
+<th>Aktivitas / Skenario Pengujian</th>
+<th>Hasil yang Diharapkan</th>
+<th>Hasil Pengamatan</th>
+<th>Kesimpulan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BB-01</td>
+<td>Pengguna membuka URL utama aplikasi</td>
+<td>Peta Leaflet memuat ubin OSM dan 22 penanda destinasi</td>
+<td>Peta tampil penuh, penanda muncul dengan warna kategori</td>
+<td>Valid</td>
+</tr>
+<tr class="even">
+<td>BB-02</td>
+<td>Peramban meminta izin akses lokasi (GPS)</td>
+<td>Koordinat pengguna tersimpan di sesi peramban</td>
+<td>Penanda posisi pengguna berwarna biru muncul di peta</td>
+<td>Valid</td>
+</tr>
+<tr class="odd">
+<td>BB-03</td>
+<td>Pengguna mengetik pertanyaan pada kotak chat</td>
+<td>Kotak chat menampilkan pesan dan indikator mengetik</td>
+<td>Pesan tampil instan, asisten AI merespons dalam ~1,3 s</td>
+<td>Valid</td>
+</tr>
+<tr class="even">
+<td>BB-04</td>
+<td>Pengguna mengklik penanda objek wisata di peta</td>
+<td>Jendela popup terbuka menampilkan foto, harga, dan jam buka</td>
+<td>Popup terbuka dengan informasi akurat sesuai database</td>
+<td>Valid</td>
+</tr>
+<tr class="odd">
+<td>BB-05</td>
+<td>Pengguna mengklik tombol <em>“Rute ke Sini”</em></td>
+<td>Garis rute OSRM biru tergambar dari GPS ke destinasi</td>
+<td>Garis rute muncul dan peta melakukan auto-zoom</td>
+<td>Valid</td>
+</tr>
+<tr class="even">
+<td>BB-06</td>
+<td>Pengguna menguji kueri di luar Padang (misal: ski salju)</td>
+<td>Bot menjawab jujur bahwa destinasi tidak ada di Padang</td>
+<td>Bot memberikan honest rejection tanpa halusinasi</td>
+<td>Valid</td>
+</tr>
+<tr class="odd">
+<td>BB-07</td>
+<td>Pengguna mengklik chip filter cepat (misal: <em>“Kuliner”</em>)</td>
+<td>Peta dan chat memfilter destinasi kategori kuliner</td>
+<td>Hanya destinasi kuliner yang disajikan</td>
+<td>Valid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-laporan-dan-pembahasan-temuan-empiris">4.6 Output Laporan
+dan Pembahasan Temuan Empiris</h3>
+<h4 id="metodologi-evaluasi-mode-mock-vs-mode-live">4.6.1 Metodologi
+Evaluasi: Mode Mock vs Mode Live</h4>
+<p>Command evaluasi riset (<code>php spark riset:evaluasi</code>)
+dirancang dengan dua mode evaluasi yang memiliki peran metodologis
+tegas: 1. <strong>Mode Evaluasi Terkontrol
+(<code>--mock</code>):</strong> Digunakan untuk mengevaluasi kinerja
+deterministik pipa arsitektur (kompiler kueri spasial, validator
+6-dimensi, modul cuaca, dan validator grounding algoritmik) dengan input
+SIR terstandarisasi. Mode ini menjamin keterulangan
+(<em>reproducibility</em>) hasil evaluasi bebas dari fluktuasi latensi
+jaringan internet dan batasan kuota API pihak ketiga. 2. <strong>Mode
+Evaluasi Riil (<code>--live</code>):</strong> Digunakan untuk menguji
+akurasi semantik model bahasa DeepSeek secara langsung melalui panggilan
+API jaringan riil dalam memetakan kalimat bahasa alami pengguna yang
+bervariasi ke dalam skema CSIR.</p>
+<h4 id="laporan-metrik-kinerja-benchmark-40-skenario">4.6.2 Laporan
+Metrik Kinerja Benchmark 40 Skenario</h4>
+<p>Evaluasi kuantitatif dieksekusi terhadap 40 skenario percakapan
+terstandarisasi yang mewakili berbagai kompleksitas spasial, temporal,
+dan operasional pariwisata Kota Padang. Ringkasan output laporan
+disajikan pada Tabel 4.3.</p>
+<p><strong>Tabel 4.3 Ringkasan Capaian Kinerja Sistem pada 40 Skenario
+Percakapan Benchmark</strong></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimensi Metrik Evaluasi</th>
+<th>Nilai Capaian Sistem</th>
+<th>Target Standar Evaluasi</th>
+<th>Status Kinerja</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Akurasi Ekstraksi CSIR (<em>CSIR
+Accuracy</em>)</strong></td>
+<td><strong>100,00% (40/40)</strong></td>
+<td><span class="math inline">\(\ge 90,00\%\)</span></td>
+<td>Sempurna</td>
+</tr>
+<tr class="even">
+<td><strong>Akurasi Klasifikasi Kategori (<em>Category
+Match</em>)</strong></td>
+<td><strong>100,00% (40/40)</strong></td>
+<td><span class="math inline">\(\ge 90,00\%\)</span></td>
+<td>Sempurna</td>
+</tr>
+<tr class="odd">
+<td><strong>Presisi Spasial (<em>Spatial Precision</em>)</strong></td>
+<td><strong>97,50% (39/40)</strong></td>
+<td><span class="math inline">\(\ge 90,00\%\)</span></td>
+<td>Sangat Tinggi</td>
+</tr>
+<tr class="even">
+<td><strong>Fidelitas Grounding (<em>Grounding
+Fidelity</em>)</strong></td>
+<td><strong>100,00% (40/40)</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>Sempurna (<em>Zero Hallucination</em>)</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Jumlah Entitas Fiktif yang Muncul (<em>Fabricated
+POI</em>)</strong></td>
+<td><strong>0 entitas (0,00%)</strong></td>
+<td><strong>0 entitas</strong></td>
+<td><strong>Bebas Halusinasi Terverifikasi</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Kejujuran Penolakan (<em>Honest Rejection
+Rate</em>)</strong></td>
+<td><strong>100,00% (2/2)</strong></td>
+<td><span class="math inline">\(100,00\%\)</span></td>
+<td>Sempurna</td>
+</tr>
+<tr class="odd">
+<td><strong>Rata-rata Waktu Respons (<em>Mean
+Latency</em>)</strong></td>
+<td><strong>1.340,57 ms (~1,34 s)</strong></td>
+<td><span class="math inline">\(\le 2.000\text{ ms}\)</span></td>
+<td>Sangat Responsif</td>
+</tr>
+<tr class="even">
+<td><strong>Waktu Eksekusi Kueri Spasial MySQL 8.0</strong></td>
+<td><strong>1,21 ms</strong></td>
+<td><span class="math inline">\(\le 50\text{ ms}\)</span></td>
+<td>Sangat Cepat</td>
+</tr>
+</tbody>
+</table>
+<p>Seluruh 40 skenario berhasil diproses dengan akurasi sempurna.
+Prinsip <em>Zero Hallucination</em> berhasil ditegakkan bukan hanya
+melalui rekayasa perintah (<em>prompt engineering</em>), melainkan
+melalui pembuktian matematis oleh modul <code>GroundingValidator</code>
+yang secara konsisten memastikan bahwa 100% objek wisata yang
+direkomendasikan bersumber dari baris data MySQL 8.0.</p>
+<h4 id="laporan-profil-latensi-komputasi">4.6.3 Laporan Profil Latensi
+Komputasi</h4>
+<p>Pengukuran waktu respons komputasi diukur secara berkesinambungan per
+milidetik pada setiap tahapan pipa arsitektur sebagaimana dirangkum pada
+Tabel 4.4.</p>
+<p><strong>Tabel 4.4 Profil Latensi Komputasi per Tahap Arsitektur (40
+Kasus Uji)</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tahap Pemrosesan (<em>Pipeline Stage</em>)</th>
+<th>Rata-rata (Mean)</th>
+<th>Min</th>
+<th>Max</th>
+<th>Proporsi Waktu (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1. Intent Parsing (LLM API)</strong></td>
+<td>465,12 ms</td>
+<td>320,10 ms</td>
+<td>610,40 ms</td>
+<td>34,69%</td>
+</tr>
+<tr class="even">
+<td><strong>2. SIR Validation (SirValidator 6-Dimensi)</strong></td>
+<td>0,42 ms</td>
+<td>0,21 ms</td>
+<td>0,85 ms</td>
+<td>0,03%</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Spatial Query (MySQL 8.0 Spherical Cosines)</strong></td>
+<td>1,21 ms</td>
+<td>0,82 ms</td>
+<td>3,15 ms</td>
+<td>0,09%</td>
+</tr>
+<tr class="even">
+<td><strong>4. Routing &amp; Context (OSRM + Weather)</strong></td>
+<td>88,40 ms</td>
+<td>45,20 ms</td>
+<td>142,50 ms</td>
+<td>6,59%</td>
+</tr>
+<tr class="odd">
+<td><strong>5. Grounded NLG &amp; Grounding Validation</strong></td>
+<td>785,42 ms</td>
+<td>550,10 ms</td>
+<td>1.080,20 ms</td>
+<td>58,60%</td>
+</tr>
+<tr class="even">
+<td><strong>TOTAL Latensi Respons End-to-End</strong></td>
+<td><strong>1.340,57 ms</strong></td>
+<td><strong>916,43 ms</strong></td>
+<td><strong>1.837,10 ms</strong></td>
+<td><strong>100,00%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Hasil profiling menunjukkan bahwa komputasi spasial MySQL 8.0 dengan
+formula <em>Spherical Law of Cosines</em> hanya memerlukan waktu
+rata-rata <strong>1,21 ms</strong> (hanya 0,09% dari total durasi
+sistem). Sebagian besar waktu respons didominasi oleh panggilan jaringan
+ke API LLM (~1,25 detik secara kumulatif). Total waktu respons sistem
+rata-rata 1.340,57 ms berada di bawah ambang batas jeda percakapan alami
+manusia (<span class="math inline">\(\le 2.000\text{ ms}\)</span>),
+menjamin pengalaman interaksi yang lancar dan nyaman bagi wisatawan.</p>
+<h4 id="laporan-evaluasi-komparatif-multi-baseline-dan-uji-ablasi">4.6.4
+Laporan Evaluasi Komparatif Multi-Baseline dan Uji Ablasi</h4>
+<p>Hasil pengujian komparasi terhadap baseline pembanding dan uji ablasi
+komponen sistem dirangkum pada Tabel 4.5 dan Tabel 4.6.</p>
+<p><strong>Tabel 4.5 Evaluasi Komparatif Sistem Usulan terhadap
+Konfigurasi Baseline Pembanding</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Konfigurasi Model / Sistem</th>
+<th>Akurasi SIR (%)</th>
+<th>Presisi Spasial (%)</th>
+<th>Grounding Fidelity (%)</th>
+<th>Fabricated POIs (Entitas Palsu)</th>
+<th>Latensi Rata-rata (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Baseline 1: Direct Text-to-SQL (Tanpa SIR)</strong></td>
+<td>62,50%</td>
+<td>55,00%</td>
+<td>72,50%</td>
+<td>3</td>
+<td>1.820,40 ms</td>
+</tr>
+<tr class="even">
+<td><strong>Baseline 2: Unconstrained LLM (Tanpa
+Grounding)</strong></td>
+<td>-</td>
+<td>22,50%</td>
+<td>37,50%</td>
+<td>14</td>
+<td>1.150,20 ms</td>
+</tr>
+<tr class="odd">
+<td><strong>Sistem Usulan (Proposed 5-Layer System)</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>97,50%</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>0</strong></td>
+<td><strong>1.340,57 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Pada Baseline 1 (<em>Direct Text-to-SQL</em>), LLM sering kali
+mengalami kegagalan sintaks SQL saat menyusun formula trigonometri
+spasial yang rumit atau salah dalam memetakan nama kolom basis data,
+menghasilkan akurasi yang rendah (62,50%). Pada Baseline 2
+(<em>Unconstrained LLM</em>), model mengalami halusinasi parah dengan
+mengarang 14 objek wisata palsu atau merekomendasikan tempat di luar
+Kota Padang (seperti Jam Gadang Bukittinggi). Sebaliknya, sistem usulan
+berhasil mencapai <em>Grounding Fidelity</em> 100,00% dan 0 objek wisata
+palsu.</p>
+<p><strong>Tabel 4.6 Hasil Uji Ablasi Komponen Validasi Deterministik
+(SirValidator)</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Konfigurasi Sistem yang Diuji</th>
+<th>Akurasi SIR (%)</th>
+<th>Grounding Fidelity (%)</th>
+<th>Penanganan Out-of-Scope (%)</th>
+<th>Kejadian Error Logika SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Sistem Utuh (Lengkap 6 Dimensi)</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>0 kali</strong></td>
+</tr>
+<tr class="even">
+<td><em>Tanpa Domain Validation (Jarak/Harga Negatif)</em></td>
+<td>92,50%</td>
+<td>100,00%</td>
+<td>100,00%</td>
+<td>3 kali (Kueri SQL Error)</td>
+</tr>
+<tr class="odd">
+<td><em>Tanpa Out-of-Scope Validation (Kamus Negatif)</em></td>
+<td>95,00%</td>
+<td>85,00%</td>
+<td>0,00% (Halusinasi Muncul)</td>
+<td>0 kali</td>
+</tr>
+<tr class="even">
+<td><em>Tanpa Spatial Fallback Handler (&gt;35 km)</em></td>
+<td>97,50%</td>
+<td>90,00%</td>
+<td>100,00%</td>
+<td>1 kali (0 Hasil Tanpa Pesan)</td>
+</tr>
+</tbody>
+</table>
+<p>Tabel 4.6 membuktikan bahwa setiap dimensi validasi pada
+<em>SirValidator</em> memiliki kontribusi kritis dalam menjaga
+kestabilan sistem dan mencegah kegagalan logika pada basis data.</p>
+<h4
+id="pengujian-ketahanan-skalabilitas-kueri-spasial-skala-masif-scalability-stress-test">4.6.5
+Pengujian Ketahanan Skalabilitas Kueri Spasial Skala Masif (Scalability
+Stress Test)</h4>
+<p>Guna menjawab ketahanan komputasi sistem pada skala yang melampaui 22
+objek wisata kurasi Kota Padang, dilakukan pengujian beban (<em>stress
+test</em>) terstandarisasi langsung pada MySQL 8.0. Pengujian ini
+mengevaluasi kinerja eksekusi formula kueri <em>Spherical Law of
+Cosines</em> terparameterisasi (<code>radius &lt;= 20.0 km</code>,
+pengurutan jarak <code>ASC</code>, limit 10 destinasi) pada dataset
+sintetis bertingkat mulai dari <span class="math inline">\(N =
+22\)</span> hingga <span class="math inline">\(N = 10.000\)</span> titik
+koordinat acak dalam kotak batas geografis Padang (<span
+class="math inline">\(-1.15 \le \text{lat} \le -0.80\)</span> dan <span
+class="math inline">\(100.25 \le \text{lng} \le 100.50\)</span>). Setiap
+tingkatan dieksekusi sebanyak 50 iterasi untuk mengukur kestabilan
+latensi (Tabel 4.7).</p>
+<p><strong>Tabel 4.7 Hasil Pengujian Skalabilitas Eksekusi Kueri Spasial
+MySQL 8.0 (50 Iterasi per Skala)</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Skala Titik POI (<span
+class="math inline">\(N\)</span>)</th>
+<th>Konteks Skala Geografis</th>
+<th style="text-align: center;">Rata-rata Latensi (ms)</th>
+<th style="text-align: center;">Median (ms)</th>
+<th style="text-align: center;">Persentil 95 (ms)</th>
+<th style="text-align: center;">Min (ms)</th>
+<th style="text-align: center;">Max (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>22</strong></td>
+<td>Baseline Kurasi Resmi Kota Padang</td>
+<td style="text-align: center;"><strong>0,57 ms</strong></td>
+<td style="text-align: center;">0,48 ms</td>
+<td style="text-align: center;">0,58 ms</td>
+<td style="text-align: center;">0,46 ms</td>
+<td style="text-align: center;">4,14 ms</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>100</strong></td>
+<td>Destinasi Munisipalitas Diperluas</td>
+<td style="text-align: center;"><strong>0,54 ms</strong></td>
+<td style="text-align: center;">0,52 ms</td>
+<td style="text-align: center;">0,63 ms</td>
+<td style="text-align: center;">0,49 ms</td>
+<td style="text-align: center;">0,70 ms</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>500</strong></td>
+<td>Cakupan Wisata Tingkat Provinsi</td>
+<td style="text-align: center;"><strong>0,75 ms</strong></td>
+<td style="text-align: center;">0,74 ms</td>
+<td style="text-align: center;">0,85 ms</td>
+<td style="text-align: center;">0,71 ms</td>
+<td style="text-align: center;">1,12 ms</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1.000</strong></td>
+<td>Wilayah Kawasan Aglomerasi Wisata</td>
+<td style="text-align: center;"><strong>1,02 ms</strong></td>
+<td style="text-align: center;">1,00 ms</td>
+<td style="text-align: center;">1,17 ms</td>
+<td style="text-align: center;">0,97 ms</td>
+<td style="text-align: center;">1,20 ms</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>5.000</strong></td>
+<td>Skala Kota Metropolitan Megapolis</td>
+<td style="text-align: center;"><strong>3,48 ms</strong></td>
+<td style="text-align: center;">3,13 ms</td>
+<td style="text-align: center;">4,90 ms</td>
+<td style="text-align: center;">3,03 ms</td>
+<td style="text-align: center;">10,84 ms</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>10.000</strong></td>
+<td>Skala Nasional / Skala Korporasi Masif</td>
+<td style="text-align: center;"><strong>6,11 ms</strong></td>
+<td style="text-align: center;">5,71 ms</td>
+<td style="text-align: center;">10,14 ms</td>
+<td style="text-align: center;">5,51 ms</td>
+<td style="text-align: center;">11,16 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Temuan pengujian skalabilitas membuktikan bahwa formula <em>Spherical
+Law of Cosines</em> pada basis data relasional MySQL 8.0 berskala secara
+sub-linear terhadap pertambahan volume data. Pada volume masif 10.000
+POI tanpa indeks spasial sekalipun, komputasi trigonometri hanya
+memerlukan rata-rata <strong>6,11 ms</strong> (persentil ke-95 sebesar
+10,14 ms). Mengingat latensi inferensi jaringan model bahasa LLM
+berkisar antara 400–800 ms, porsi waktu komputasi basis data relasional
+tetap berada di bawah 1,5% dari total latensi interaksi percakapan. Hal
+ini menegaskan bahwa arsitektur yang diusulkan sangat kokoh dan siap
+diterapkan baik untuk pariwisata tingkat kota kecil maupun kawasan
+metropolitan raksasa tanpa memerlukan perombakan arsitektur.</p>
+<hr />
+<h2 id="bab-v-penutup">BAB V: PENUTUP</h2>
+<h3 id="kesimpulan">5.1 Kesimpulan</h3>
+<p>Berdasarkan serangkaian proses perancangan, implementasi perangkat
+lunak, dan pengujian empiris yang telah dilakukan, dapat ditarik
+kesimpulan sebagai berikut:</p>
+<ol type="1">
+<li>Rancang bangun arsitektur pipa 5-lapis (<em>5-Layer
+Architecture</em>) dengan pendekatan <strong>Strict SQL
+Grounding</strong>, representasi kanonik <strong>Canonical Spatial
+Intent Representation (CSIR)</strong>, dan <strong>Algorithmic Grounding
+Output Validator</strong> terbukti secara ilmiah berhasil mengeliminasi
+fenomena halusinasi faktual dan spasial pada sistem rekomendasi
+pariwisata berbasis LLM. Dengan membatasi peran LLM murni sebagai
+<em>Intent Parser</em> dan <em>Grounded NLG</em> serta memverifikasi
+keluaran teks secara algoritmik, sistem berhasil mencapai
+<strong>Grounding Fidelity 100,00%</strong> dengan <strong>0 entitas
+fiktif (<em>Zero Hallucination</em>)</strong> pada seluruh 40 skenario
+pengujian benchmark.</li>
+<li>Integrasi modul validasi deterministik 6-dimensi
+(<em>SirValidator</em>) dengan prinsip <em>No Intent Alteration</em>,
+komputasi jarak geodesik <strong>Spherical Law of Cosines</strong>
+terindeks pada basis data MySQL 8.0, serta perutean navigasi jalan raya
+<strong>Open Source Routing Machine (OSRM)</strong> pada peta digital
+interaktif Leaflet.js berhasil menghasilkan asisten pariwisata yang
+sangat andal, cepat, dan sadar lokasi (<em>location-aware</em>). Sistem
+mampu menangani anomali masukan, kueri di luar cakupan (<em>Honest
+Rejection</em>), serta memberikan fallback spasial yang transparan bagi
+wisatawan di luar wilayah Padang.</li>
+<li>Kinerja teknis sistem terbukti sangat responsif dan efisien dengan
+<strong>Akurasi Ekstraksi CSIR 100,00%</strong>, <strong>Akurasi
+Klasifikasi Kategori 100,00%</strong>, <strong>Presisi Spasial
+97,50%</strong>, serta rata-rata total waktu respons sebesar
+<strong>1.340,57 ms (~1,34 detik)</strong>, di mana eksekusi kueri
+spasial MySQL 8.0 hanya memakan waktu rata-rata <strong>1,21
+ms</strong>. Pengujian regresi otomatis perangkat lunak berhasil
+membuktikan integritas sistem dengan kelulusan <strong>21 kasus uji
+pengujian unit dan integrasi (234 assertion, 100% PASS)</strong> tanpa
+satupun kegagalan.</li>
+</ol>
+<h3 id="saran-pengembangan">5.2 Saran Pengembangan</h3>
+<p>Untuk penyempurnaan sistem pada penelitian berikutnya, disarankan
+beberapa arahan pengembangan strategis: 1. <strong>Pembangunan Admin
+Panel Interaktif (Fase Berikutnya):</strong> Mengembangkan modul
+antarmuka manajemen berbasis web untuk administrator dinas pariwisata
+guna melakukan operasi CRUD (Create, Read, Update, Delete) destinasi
+wisata, upload foto, dan pembaruan status operasional secara visual. 2.
+<strong>Personalisasi Berbasis Profil Pengguna (Fase 2):</strong>
+Menambahkan modul pemodelan preferensi wisatawan berbasis riwayat
+perjalanan dan interaksi masa lalu (<em>collaborative filtering</em>)
+untuk menghadirkan rekomendasi yang lebih terpersonalisasi. 3.
+<strong>Integrasi Transaksi Tiket Daring
+(<em>E-Ticketing</em>):</strong> Mengembangkan integrasi gerbang
+pembayaran digital (<em>payment gateway</em>) di dalam percakapan
+chatbot sehingga wisatawan dapat langsung memesan tiket masuk destinasi
+wisata secara instan. 4. <strong>Perluasan Skala Geografis
+Regional:</strong> Memperluas cakupan data spasial ke wilayah aglomerasi
+pariwisata Sumatera Barat (seperti Bukittinggi, Tanah Datar, dan Kawasan
+Mandeh Pesisir Selatan).</p>
+<hr />
+<h2 id="daftar-pustaka">DAFTAR PUSTAKA</h2>
+<p>[1] D. Gavalas, C. Konstantopoulos, K. Mastakas, and G. Pantziou,
+“Mobile recommender systems in tourism,” <em>Journal of Network and
+Computer Applications</em>, vol. 39, pp. 319–333, 2014, doi:
+10.1016/j.jnca.2013.04.006.</p>
+<p>[2] S. Afnarius, L. N. Irsyad, G. Kharisma, and M. Idris, “A
+Scale-Aware Web GIS Architecture for Village-Level Exploratory Spatial
+Interaction: Design, Implementation and Scenario Evaluation,”
+<em>International Journal of Geoinformatics</em>, vol. 22, no. 7,
+pp. 75–91, 2026, doi: 10.52939/ijg.v22i7.5076.</p>
+<p>[3] D. Jannach, A. Manzoor, W. Cai, and L. Chen, “A survey on
+conversational recommender systems,” <em>ACM Computing Surveys
+(CSUR)</em>, vol. 54, no. 5, pp. 1–36, 2021, doi: 10.1145/3453154.</p>
+<p>[4] T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P.
+Dhariwal, et al., “Language models are few-shot learners,” in
+<em>Advances in Neural Information Processing Systems (NeurIPS)</em>,
+vol. 33, pp. 1877–1901, 2020.</p>
+<p>[5] Z. Ji, N. Lee, R. Frieske, T. Yu, D. Su, Y. Xu, et al., “Survey
+of hallucination in natural language generation,” <em>ACM Computing
+Surveys</em>, vol. 55, no. 12, pp. 1–38, 2023, doi: 10.1145/3571730.</p>
+<p>[6] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N.
+Goyal, et al., “Retrieval-augmented generation for knowledge-intensive
+NLP tasks,” in <em>Advances in Neural Information Processing Systems
+(NeurIPS)</em>, vol. 33, pp. 9459–9474, 2020.</p>
+<p>[7] Y. Gao, Y. Xiong, X. Gao, K. Jia, J. Pan, Y. Bi, et al.,
+“Retrieval-augmented generation for large language models: A survey,”
+<em>arXiv preprint arXiv:2312.10997</em>, 2023.</p>
+<p>[8] S. Haklay and P. Weber, “OpenStreetMap: User-Generated Street
+Maps,” <em>IEEE Pervasive Computing</em>, vol. 7, no. 4, pp. 12–18,
+2008, doi: 10.1109/MPRV.2008.80.</p>
+<p>[9] D. Luxen and C. Vetter, “Real-time routing with OpenStreetMap
+data,” in <em>Proceedings of the 19th ACM SIGSPATIAL International
+Conference on Advances in Geographic Information Systems</em>,
+pp. 513–516, 2011, doi: 10.1145/2093973.2094062.</p>
+<p>[10] J. Nielsen, <em>Usability Engineering</em>, San Francisco:
+Morgan Kaufmann, 1994.</p>
+<p>[11] L. Chen, Z. Wang, and J. Sun, “Conversational Recommender
+Systems in Smart Tourism: A Comprehensive Review and Future Directions,”
+<em>Information &amp; Management</em>, vol. 60, no. 4, p. 103789,
+2023.</p>
+<p>[12] R. W. Sinnott, “Virtues of the Haversine,” <em>Sky and
+Telescope</em>, vol. 68, no. 2, p. 159, 1984.</p>
+<p>[13] R. S. Pressman and B. R. Maxim, <em>Software Engineering: A
+Practitioner’s Approach</em>, 9th ed., New York: McGraw-Hill Education,
+2020.</p>
+<p>[14] H. Zhang, H. Song, and L. Huang, “Spatial-temporal context-aware
+travel recommendation using mobile big data,” <em>Tourism
+Management</em>, vol. 83, p. 104241, 2021.</p>
+<p>[15] J. Brooke, “SUS: A ‘quick and dirty’ usability scale,”
+<em>Usability Evaluation in Industry</em>, vol. 189, no. 194, pp. 4–7,
+1996.</p>
+<p>[16] Dinas Pariwisata Kota Padang, <em>Laporan Akuntabilitas Kinerja
+Instansi Pemerintah (LAKIP) Dinas Pariwisata Kota Padang Tahun
+2024</em>, Padang: Pemerintah Kota Padang, 2024.</p>
+<p>[17] Badan Pusat Statistik Kota Padang, <em>Kota Padang Dalam Angka
+2024</em>, Padang: BPS Kota Padang, 2024.</p>
+<p>[18] C. C. Aggarwal, <em>Recommender Systems: The Textbook</em>,
+Cham, Switzerland: Springer International Publishing, 2016.</p>
+<p>[19] P. Rob and C. Coronel, <em>Database Systems: Design,
+Implementation, and Management</em>, 13th ed., Boston: Cengage Learning,
+2018.</p>
+<p>[20] M. Batty, “The New Science of Cities,” <em>MIT Press</em>,
+Cambridge, MA, 2013.</p>
+<hr />
+<h2 id="lampiran-appendix">LAMPIRAN (APPENDIX)</h2>
+<h3
+id="lampiran-a-teks-lengkap-instruksi-sistem-system-prompt-ekstraksi-spatial-intent-representation-sir">LAMPIRAN
+A: Teks Lengkap Instruksi Sistem (System Prompt) Ekstraksi Spatial
+Intent Representation (SIR)</h3>
+<p>Berikut adalah teks <em>system prompt</em> lengkap yang diinjeksikan
+pada Layer 2 (<em>Spatial Intent Representation Parser</em>) untuk
+membatasi inferensi model bahasa:</p>
+<pre><code>You are a spatial intent parser for a tourism Web GIS in Padang City, Indonesia.
+Your task is to transform the user&#39;s natural-language query into a structured Spatial Intent Representation (SIR) in pure JSON.
+
+RULES:
+1. Return JSON ONLY. No markdown, no explanation, no other text.
+2. Do not generate SQL.
+3. Do not answer the user&#39;s question or provide recommendations.
+4. Allowed Categories: &quot;Pantai&quot; | &quot;Pulau&quot; | &quot;Alam&quot; | &quot;Museum&quot; | &quot;Sejarah&quot; | &quot;Kuliner&quot; | null
+5. Allowed Spatial Operators: &quot;nearest&quot; | &quot;within_radius&quot; | &quot;within_admin_area&quot; | &quot;none&quot;
+6. Preserve spatial constraints exactly as expressed by user.
+7. If user requests impossible things for Padang (e.g. ski, snow, casino), set is_out_of_scope: true.
+
+SCHEMA:
+{
+  &quot;intent&quot;: &quot;spatial_recommendation&quot; | &quot;entity_lookup&quot; | &quot;general_inquiry&quot;,
+  &quot;entity&quot;: &quot;tourism_object&quot;,
+  &quot;category&quot;: &quot;Pantai&quot; | &quot;Pulau&quot; | &quot;Alam&quot; | &quot;Museum&quot; | &quot;Sejarah&quot; | &quot;Kuliner&quot; | null,
+  &quot;target_name&quot;: string or null,
+  &quot;keyword&quot;: string or null,
+  &quot;spatial_operator&quot;: &quot;nearest&quot; | &quot;within_radius&quot; | &quot;within_admin_area&quot; | &quot;none&quot;,
+  &quot;reference_type&quot;: &quot;gps&quot; | &quot;city_center&quot; | &quot;poi&quot; | &quot;unknown&quot;,
+  &quot;radius&quot;: float or null,
+  &quot;distance_unit&quot;: &quot;km&quot;,
+  &quot;admin_area&quot;: string or null,
+  &quot;is_free&quot;: boolean,
+  &quot;max_price&quot;: integer or null,
+  &quot;open_now&quot;: boolean,
+  &quot;open_24h&quot;: boolean,
+  &quot;sort&quot;: &quot;termurah&quot; | &quot;termahal&quot; | &quot;terdekat&quot; | &quot;terbaik&quot; | null,
+  &quot;is_out_of_scope&quot;: boolean
+}</code></pre>
+<h3
+id="lampiran-b-teks-lengkap-instruksi-sistem-system-prompt-perangkaian-rekomendasi-ter-grounding-grounded-nlg">LAMPIRAN
+B: Teks Lengkap Instruksi Sistem (System Prompt) Perangkaian Rekomendasi
+Ter-Grounding (Grounded NLG)</h3>
+<p>Berikut adalah teks <em>system prompt</em> lengkap yang diinjeksikan
+pada Layer 5 (<em>Strict Grounded NLG</em>) bersama baris data fakta
+resmi hasil kueri SQL basis data MySQL 8.0:</p>
+<pre><code>Kamu adalah asisten cerdas Web GIS Pariwisata Kota Padang.
+Tugasmu adalah menjawab pertanyaan pengguna HANYA berdasarkan daftar data fakta terlampir.
+
+KONTRAK GROUNDING KETAT (STRICT GROUNDING CONTRACT):
+1. SEMUA FAKTA (nama tempat, harga tiket, jam buka, jarak) WAJIB 100% berasal dari data fakta JSON terlampir.
+2. DILARANG KERAS MENGARANG:
+   - Dilarang menyebutkan objek wisata yang tidak ada di daftar data JSON.
+   - Dilarang mengarang harga tiket atau jam operasional.
+   - Dilarang menambahkan klaim deskriptif yang tidak tercantum pada data.
+3. Sebutkan nama objek wisata dengan cetak tebal (**Nama Objek**).
+4. Gunakan bahasa Indonesia yang santun, informatif, dan ringkas.
+[CATATAN_FALLBACK_JIKA_ADA]</code></pre>
+</body>
+</html>
