@@ -28,8 +28,8 @@
   <!-- Banner -->
   <g filter="url(#archShadow)">
     <rect x="25" y="22" width="990" height="64" rx="10" fill="url(#archHeader)"/>
-    <text x="520.0" y="48" text-anchor="middle" class="font-base" font-weight="800" font-size="16px" fill="#ffffff">ARSITEKTUR SISTEM INFORMASI SPASIAL CERDAS 5-LAYER</text>
-    <text x="520.0" y="68" text-anchor="middle" class="font-base" font-weight="500" font-size="12px" fill="#ccfbf1">Dual-Process Cognitive Air-Gap &amp; Deterministic Grounding Firewall (Kota Padang)</text>
+    <text x="520.0" y="48" text-anchor="middle" class="font-base" font-weight="800" font-size="16px" fill="#ffffff">5-LAYER ARCHITECTURE OF INTELLIGENT WEB GIS</text>
+    <text x="520.0" y="68" text-anchor="middle" class="font-base" font-weight="500" font-size="12px" fill="#ccfbf1">Dual-Process Cognitive Air-Gap &amp; Deterministic Grounding Firewall (Padang City)</text>
   </g>
 
   <!-- L1 -->
@@ -38,55 +38,55 @@
     <rect x="66" y="122" width="38" height="24" rx="6" fill="#0284c7"/>
     <text x="85" y="138" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L1</text>
     <text x="114" y="138" class="font-base layer-title">CONVERSATIONAL INTERACTION LAYER (PRESENTATION / CLIENT)</text>
-    <text x="114" y="160" class="font-base layer-sub">Antarmuka Dwitunggal Sinkron: Full-viewport Leaflet.js + Floating AI Chat Drawer</text>
+    <text x="114" y="160" class="font-base layer-sub">Synchronous Dual Interface: Full-viewport Leaflet.js + Floating AI Chat Drawer</text>
     <text x="114" y="180" class="font-base layer-tech">HTML5 Geolocation (GPS) | Leaflet.js OSM | OSRM Routing Engine | Responsive CSS</text>
   </g>
   <line x1="520.0" y1="198" x2="520.0" y2="234" stroke="#0284c7" stroke-width="2" marker-end="url(#archArrow)"/>
-  <rect x="290.25" y="205.0" width="459.5" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="520.0" y="219.0" text-anchor="middle" class="font-base arrow-text">[A] Kueri Bahasa Alami + Konteks Situasional (GPS, Waktu Sirkadian)</text>
+  <rect x="280.5" y="205.0" width="479.0" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="520.0" y="219.0" text-anchor="middle" class="font-base arrow-text">[A] Natural Language Query + Situational Context (GPS, Circadian Time)</text>
   <!-- L2 -->
   <g filter="url(#archShadow)">
     <rect x="50" y="240" width="940" height="88" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.6"/>
     <rect x="66" y="254" width="38" height="24" rx="6" fill="#7c3aed"/>
     <text x="85" y="270" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L2</text>
     <text x="114" y="270" class="font-base layer-title">LLM SEMANTIC INTERPRETATION LAYER (COGNITIVE AIR-GAP)</text>
-    <text x="114" y="292" class="font-base layer-sub">DeepSeek API (temperature: 0.0, response_format: JSON) Terisolasi dari Basis Data</text>
+    <text x="114" y="292" class="font-base layer-sub">DeepSeek API (temperature: 0.0, JSON mode) Isolated from Database Access</text>
     <text x="114" y="312" class="font-base layer-tech">Ekstraksi Slot Semantik Spasial | Ontologi Operator Spasial | Taksonomi Klaster Wisata</text>
   </g>
   <line x1="520.0" y1="330" x2="520.0" y2="366" stroke="#0284c7" stroke-width="2" marker-end="url(#archArrow)"/>
-  <rect x="290.25" y="337.0" width="459.5" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="520.0" y="351.0" text-anchor="middle" class="font-base arrow-text">[B] Objek CSIR Mentah (DTO Canonical Spatial Intent Representation)</text>
+  <rect x="296.75" y="337.0" width="446.5" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="520.0" y="351.0" text-anchor="middle" class="font-base arrow-text">[B] Raw CSIR Object (Canonical Spatial Intent Representation DTO)</text>
   <!-- L3 -->
   <g filter="url(#archShadow)">
     <rect x="50" y="372" width="940" height="88" rx="8" fill="#fffbeb" stroke="#fde68a" stroke-width="1.6"/>
     <rect x="66" y="386" width="38" height="24" rx="6" fill="#d97706"/>
     <text x="85" y="402" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L3</text>
     <text x="114" y="402" class="font-base layer-title">SEMANTIC CONTROL &amp; COMPILATION LAYER (BACKEND: CodeIgniter 4 / PHP 8.2)</text>
-    <text x="114" y="424" class="font-base layer-sub">SIR Validator 6-Dimensi ('No Intent Alteration') &amp; Spatial Query Compiler</text>
+    <text x="114" y="424" class="font-base layer-sub">6-Dimension SIR Validator ('No Intent Alteration') &amp; Spatial Query Compiler</text>
     <text x="114" y="444" class="font-base layer-tech">Kebijakan: direct_execute | clarify_user | reject_out_of_scope | Safety Invariant (!isValid ==&gt; 0 DB Load)</text>
   </g>
   <line x1="520.0" y1="462" x2="520.0" y2="498" stroke="#0284c7" stroke-width="2" marker-end="url(#archArrow)"/>
-  <rect x="296.75" y="469.0" width="446.5" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="520.0" y="483.0" text-anchor="middle" class="font-base arrow-text">[C] Kueri Spasial SQL Terparameterisasi dengan ST_Distance_Sphere</text>
+  <rect x="303.25" y="469.0" width="433.5" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="520.0" y="483.0" text-anchor="middle" class="font-base arrow-text">[C] Validated Parameterized Spatial SQL with ST_Distance_Sphere</text>
   <!-- L4 -->
   <g filter="url(#archShadow)">
     <rect x="50" y="504" width="940" height="88" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.6"/>
     <rect x="66" y="518" width="38" height="24" rx="6" fill="#059669"/>
     <text x="85" y="534" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L4</text>
     <text x="114" y="534" class="font-base layer-title">DETERMINISTIC SPATIAL COMPUTATION LAYER (DATA STORAGE &amp; ENGINE)</text>
-    <text x="114" y="556" class="font-base layer-sub">MySQL 8.0 InnoDB (SRID 4326 POINT) | Komputasi Jarak Geodesik C++ Bawaan</text>
+    <text x="114" y="556" class="font-base layer-sub">MySQL 8.0 InnoDB (SRID 4326 POINT) | Built-in C++ Great-Circle Computation</text>
     <text x="114" y="576" class="font-base layer-tech">ST_Distance_Sphere(POINT, POINT) / 1000.0 | SPATIAL INDEX (geom) | Filter Relasional (open_now, harga)</text>
   </g>
   <line x1="520.0" y1="594" x2="520.0" y2="630" stroke="#0284c7" stroke-width="2" marker-end="url(#archArrow)"/>
-  <rect x="319.5" y="601.0" width="401.0" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
-  <text x="520.0" y="615.0" text-anchor="middle" class="font-base arrow-text">[D] Himpunan Tupel Fakta Tervalidasi F = {t1, t2, ..., tk}</text>
+  <rect x="345.5" y="601.0" width="349.0" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="520.0" y="615.0" text-anchor="middle" class="font-base arrow-text">[D] Verified Fact Tuples Set F = {t1, t2, ..., tk}</text>
   <!-- L5 -->
   <g filter="url(#archShadow)">
     <rect x="50" y="636" width="940" height="88" rx="8" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.6"/>
     <rect x="66" y="650" width="38" height="24" rx="6" fill="#e11d48"/>
     <text x="85" y="666" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L5</text>
     <text x="114" y="666" class="font-base layer-title">GROUNDED RESPONSE &amp; VERIFICATION LAYER (GROUNDING FIREWALL)</text>
-    <text x="114" y="688" class="font-base layer-sub">Algorithmic Grounding Validator: Kontrak Ketat ∀e ∈ Entities(Response), e ∈ F</text>
+    <text x="114" y="688" class="font-base layer-sub">Algorithmic Grounding Validator: Strict Contract ∀e ∈ Entities(Response), e ∈ F</text>
     <text x="114" y="708" class="font-base layer-tech">Substitusi Otomatis Token Halusinasi dengan DTO Faktual | Dual-Payload Dispatcher (GeoJSON + Text)</text>
   </g>
 </svg>

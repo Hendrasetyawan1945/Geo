@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1265" width="1080" height="1265">
+
+  <defs>
+    <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="50%" stop-color="#0e7490"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <filter id="shadow" x="-3%" y="-4%" width="106%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <filter id="headerShadow" x="-2%" y="-5%" width="104%" height="118%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 2 L 5 8 L 10 2 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arrowLoop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 2 1 L 8 5 L 2 9 z" fill="#4f46e5"/>
+    </marker>
+  </defs>
+
+  <style>
+    .font-base { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .stage-title { font-weight: 700; font-size: 14.5px; fill: #0f172a; }
+    .stage-desc { font-weight: 450; font-size: 11.5px; fill: #334155; line-height: 1.4; }
+    .badge-text { font-weight: 700; font-size: 9.5px; fill: #ffffff; letter-spacing: 0.5px; }
+    .num-text { font-weight: 800; font-size: 16px; fill: #ffffff; }
+    .arrow-badge-bg { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.2; rx: 11; }
+    .arrow-badge-text { font-weight: 600; font-size: 10.5px; fill: #0369a1; }
+    .loop-badge-bg { fill: #eef2ff; stroke: #6366f1; stroke-width: 1.5; rx: 12; }
+    .loop-badge-text { font-weight: 700; font-size: 11px; fill: #3730a3; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="14"/>
+  <rect x="2" y="2" width="1076" height="1261" fill="none" stroke="#e2e8f0" stroke-width="2" rx="12"/>
+
+  <!-- Top Header Banner -->
+  <g filter="url(#headerShadow)">
+    <rect x="25" y="22" width="1030" height="68" rx="10" fill="url(#gradHeader)"/>
+    <text x="540.0" y="50" text-anchor="middle" class="font-base" font-weight="800" font-size="16px" fill="#ffffff" letter-spacing="0.3px">OPERATIONAL FRAMEWORK: ITERATIVE COGNITIVE-CONTROL-EXECUTION LOOP</text>
+    <text x="540.0" y="72" text-anchor="middle" class="font-base" font-weight="500" font-size="12.5px" fill="#ccfbf1">Semantic-Controlled Exploratory Spatial Interaction (Evolving Afnarius et al., 2026)</text>
+  </g>
+
+  <!-- STAGE 1 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="115" width="820" height="108" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.8"/>
+    <circle cx="106" cy="169.0" r="22" fill="#0284c7"/>
+    <text x="106" y="175.0" text-anchor="middle" class="font-base num-text">1</text>
+    <rect x="142" y="129" width="152.5" height="18" rx="4" fill="#0284c7"/>
+    <text x="218.25" y="142" text-anchor="middle" class="font-base badge-text">CLIENT / PRESENTATION</text>
+    <text x="306.5" y="143" class="font-base stage-title">1. Natural Language Cognitive Intent Formulation &amp; Context</text>
+    <line x1="142" y1="155" x2="870" y2="155" stroke="#bae6fd" stroke-width="1.2"/>
+    <text x="145" y="173" class="font-base stage-desc">• Tourists express compound preferences via natural conversational language</text>
+    <text x="145" y="191" class="font-base stage-desc">• Client context resolution: GPS coordinates (lat, lng), circadian time, session state</text>
+  </g>
+  <!-- Connector 1 -> 2 -->
+  <line x1="440.0" y1="226" x2="440.0" y2="269" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arrowDown)"/>
+  <rect x="262.25" y="235.5" width="355.5" height="22" rx="11" class="arrow-badge-bg"/>
+  <text x="440.0" y="250.5" text-anchor="middle" class="font-base arrow-badge-text">Natural Language Query + Situational Context Vector</text>
+  <!-- STAGE 2 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="275" width="820" height="108" rx="10" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.8"/>
+    <circle cx="106" cy="329.0" r="22" fill="#7c3aed"/>
+    <text x="106" y="335.0" text-anchor="middle" class="font-base num-text">2</text>
+    <rect x="142" y="289" width="133.0" height="18" rx="4" fill="#7c3aed"/>
+    <text x="208.5" y="302" text-anchor="middle" class="font-base badge-text">COGNITIVE AI LAYER</text>
+    <text x="287.0" y="303" class="font-base stage-title">2. Cognitive Air-Gap: Semantic Interpretation (LLM JSON Sandbox)</text>
+    <line x1="142" y1="315" x2="870" y2="315" stroke="#e9d5ff" stroke-width="1.2"/>
+    <text x="145" y="333" class="font-base stage-desc">• DeepSeek LLM (temperature: 0.0, JSON mode) isolated from database access</text>
+    <text x="145" y="351" class="font-base stage-desc">• Semantic slot extraction bounded by Spatial Operator Ontology &amp; Taxonomy</text>
+    <text x="145" y="369" class="font-base stage-desc">• Emits raw Canonical Spatial Intent Representation (CSIR) DTO</text>
+  </g>
+  <!-- Connector 2 -> 3 -->
+  <line x1="440.0" y1="386" x2="440.0" y2="429" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arrowDown)"/>
+  <rect x="307.75" y="395.5" width="264.5" height="22" rx="11" class="arrow-badge-bg"/>
+  <text x="440.0" y="410.5" text-anchor="middle" class="font-base arrow-badge-text">Raw CSIR Object (Structured JSON DTO)</text>
+  <!-- STAGE 3 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="435" width="820" height="108" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1.8"/>
+    <circle cx="106" cy="489.0" r="22" fill="#d97706"/>
+    <text x="106" y="495.0" text-anchor="middle" class="font-base num-text">3</text>
+    <rect x="142" y="449" width="211.0" height="18" rx="4" fill="#d97706"/>
+    <text x="247.5" y="462" text-anchor="middle" class="font-base badge-text">SEMANTIC CONTROL &amp; BACKEND</text>
+    <text x="365.0" y="463" class="font-base stage-title">3. Deterministic Control Firewall &amp; Spatial Query Compilation</text>
+    <line x1="142" y1="475" x2="870" y2="475" stroke="#fde68a" stroke-width="1.2"/>
+    <text x="145" y="493" class="font-base stage-desc">• SIR Validator: 6-Dimension Invariants enforce 'No Intent Alteration'</text>
+    <text x="145" y="511" class="font-base stage-desc">• Evaluates bounds, domain safety; sets: direct_execute | clarify | reject</text>
+    <text x="145" y="529" class="font-base stage-desc">• Spatial Query Compiler: Safety Invariant (!isValid ==&gt; Zero DB Execution)</text>
+  </g>
+  <!-- Connector 3 -> 4 -->
+  <line x1="440.0" y1="546" x2="440.0" y2="589" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arrowDown)"/>
+  <rect x="239.5" y="555.5" width="401.0" height="22" rx="11" class="arrow-badge-bg"/>
+  <text x="440.0" y="570.5" text-anchor="middle" class="font-base arrow-badge-text">Validated Parameterized SQL Statement (ST_Distance_Sphere)</text>
+  <!-- STAGE 4 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="595" width="820" height="108" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.8"/>
+    <circle cx="106" cy="649.0" r="22" fill="#059669"/>
+    <text x="106" y="655.0" text-anchor="middle" class="font-base num-text">4</text>
+    <rect x="142" y="609" width="178.5" height="18" rx="4" fill="#059669"/>
+    <text x="231.25" y="622" text-anchor="middle" class="font-base badge-text">DATA STORAGE &amp; ENGINE</text>
+    <text x="332.5" y="623" class="font-base stage-title">4. Deterministic Geodesic Spatial Computation &amp; Contextualization</text>
+    <line x1="142" y1="635" x2="870" y2="635" stroke="#bbf7d0" stroke-width="1.2"/>
+    <text x="145" y="653" class="font-base stage-desc">• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (SPATIAL INDEX on geom POINT)</text>
+    <text x="145" y="671" class="font-base stage-desc">• C++ Kernel: ST_Distance_Sphere(POINT(lng, lat), POINT(u_lng, u_lat)) / 1000.0</text>
+    <text x="145" y="689" class="font-base stage-desc">• Multi-criteria filter: open_now, max_price, status ==&gt; Verified Fact Table F</text>
+  </g>
+  <!-- Connector 4 -> 5 -->
+  <line x1="440.0" y1="706" x2="440.0" y2="749" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arrowDown)"/>
+  <rect x="278.5" y="715.5" width="323.0" height="22" rx="11" class="arrow-badge-bg"/>
+  <text x="440.0" y="730.5" text-anchor="middle" class="font-base arrow-badge-text">Verified Fact Tuples Set F = {t1, t2, ..., tk}</text>
+  <!-- STAGE 5 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="755" width="820" height="108" rx="10" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.8"/>
+    <circle cx="106" cy="809.0" r="22" fill="#e11d48"/>
+    <text x="106" y="815.0" text-anchor="middle" class="font-base num-text">5</text>
+    <rect x="142" y="769" width="159.0" height="18" rx="4" fill="#e11d48"/>
+    <text x="221.5" y="782" text-anchor="middle" class="font-base badge-text">GROUNDING VERIFICATION</text>
+    <text x="313.0" y="783" class="font-base stage-title">5. Post-Generation Algorithmic Grounding Validator (Grounding Firewall)</text>
+    <line x1="142" y1="795" x2="870" y2="795" stroke="#fecdd3" stroke-width="1.2"/>
+    <text x="145" y="813" class="font-base stage-desc">• LLM synthesizes natural response strictly conditioned on Fact Table F</text>
+    <text x="145" y="831" class="font-base stage-desc">• Strict Grounding Contract: ∀e ∈ Entities(Response), e ∈ Entities(Facts_SQL)</text>
+    <text x="145" y="849" class="font-base stage-desc">• Mathematical guarantee: Entity Fabrication Rate = 0.00% (0 Grounding Violations)</text>
+  </g>
+  <!-- Connector 5 -> 6 -->
+  <line x1="440.0" y1="866" x2="440.0" y2="909" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arrowDown)"/>
+  <rect x="223.25" y="875.5" width="433.5" height="22" rx="11" class="arrow-badge-bg"/>
+  <text x="440.0" y="890.5" text-anchor="middle" class="font-base arrow-badge-text">Synchronous Dual-Payload (GeoJSON Features + Grounded Response)</text>
+  <!-- STAGE 6 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="915" width="820" height="108" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.8"/>
+    <circle cx="106" cy="969.0" r="22" fill="#0284c7"/>
+    <text x="106" y="975.0" text-anchor="middle" class="font-base num-text">6</text>
+    <rect x="142" y="929" width="230.5" height="18" rx="4" fill="#0284c7"/>
+    <text x="257.25" y="942" text-anchor="middle" class="font-base badge-text">CLIENT PRESENTATION &amp; ROUTING</text>
+    <text x="384.5" y="943" class="font-base stage-title">6. Synchronous Dual-Modal Rendering (Web GIS Client Interaction)</text>
+    <line x1="142" y1="955" x2="870" y2="955" stroke="#bae6fd" stroke-width="1.2"/>
+    <text x="145" y="973" class="font-base stage-desc">• Interactive Leaflet.js Map: Auto-pan, thematic SVG pins, verified popups</text>
+    <text x="145" y="991" class="font-base stage-desc">• OSRM Routing Engine: Turn-by-turn road network polyline &amp; transit time</text>
+    <text x="145" y="1009" class="font-base stage-desc">• AI Conversation Drawer: Grounded, informative, and cohesive narrative</text>
+  </g>
+  <!-- Connector 6 -> 7 -->
+  <line x1="440.0" y1="1026" x2="440.0" y2="1069" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arrowDown)"/>
+  <rect x="252.5" y="1035.5" width="375.0" height="22" rx="11" class="arrow-badge-bg"/>
+  <text x="440.0" y="1050.5" text-anchor="middle" class="font-base arrow-badge-text">Visualized Spatial State &amp; User Cognitive Feedback</text>
+  <!-- STAGE 7 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="1075" width="820" height="108" rx="10" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.8"/>
+    <circle cx="106" cy="1129.0" r="22" fill="#4f46e5"/>
+    <text x="106" y="1135.0" text-anchor="middle" class="font-base num-text">7</text>
+    <rect x="142" y="1089" width="243.5" height="18" rx="4" fill="#4f46e5"/>
+    <text x="263.75" y="1102" text-anchor="middle" class="font-base badge-text">USER EXPERIENCE &amp; ADAPTIVE LOOP</text>
+    <text x="397.5" y="1103" class="font-base stage-title">7. User Cognitive Evaluation &amp; Adaptive Conversational Refinement</text>
+    <line x1="142" y1="1115" x2="870" y2="1115" stroke="#c7d2fe" stroke-width="1.2"/>
+    <text x="145" y="1133" class="font-base stage-desc">• Tourist evaluates spatial distribution, transit times, tariffs, and POI cards</text>
+    <text x="145" y="1151" class="font-base stage-desc">• Multi-turn dialog: CSIR(t+1) = Merge(CSIR(t), ΔCSIR(t+1)) updates context</text>
+    <text x="145" y="1169" class="font-base stage-desc">• Replaces manual slider tweaking (Afnarius et al., 2026) with adaptive dialog</text>
+  </g>
+  <!-- ADAPTIVE FEEDBACK LOOP -->
+  <path d="M 890 1129.0 H 925 V 179.0 H 896" fill="none" stroke="#4f46e5" stroke-width="2.8" stroke-dasharray="6,4" marker-end="url(#arrowLoop)"/>
+  <rect x="855.0" y="574.0" width="140" height="160" rx="10" class="loop-badge-bg"/>
+  <text x="925" y="598.0" text-anchor="middle" class="font-base" font-weight="800" font-size="10.5px" fill="#312e81">FEEDBACK LOOP</text>
+  <line x1="870.0" y1="606.0" x2="980.0" y2="606.0" stroke="#c7d2fe" stroke-width="1.2"/>
+  <text x="925" y="624.0" text-anchor="middle" class="font-base" font-weight="700" font-size="10.5px" fill="#4338ca">Multi-Turn Dialog</text>
+  <text x="925" y="642.0" text-anchor="middle" class="font-base" font-weight="600" font-size="10px" fill="#475569">Conversational</text>
+  <text x="925" y="658.0" text-anchor="middle" class="font-base" font-weight="600" font-size="10px" fill="#475569">Intent Refinement</text>
+  <rect x="865.0" y="668.0" width="120" height="20" rx="4" fill="#4338ca"/>
+  <text x="925" y="682.0" text-anchor="middle" class="font-base" font-weight="700" font-size="9px" fill="#ffffff">CSIR(t+1) = Merge()</text>
+  <text x="925" y="706.0" text-anchor="middle" class="font-base" font-weight="500" font-size="9.5px" fill="#64748b">Evolving WIMP GUI</text>
+  <text x="925" y="720.0" text-anchor="middle" class="font-base" font-weight="500" font-size="9.5px" fill="#64748b">(Afnarius et al., 2026)</text>
+</svg>

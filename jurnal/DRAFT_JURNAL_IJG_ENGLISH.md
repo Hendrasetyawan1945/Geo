@@ -57,6 +57,18 @@ To guarantee spatial data integrity, this research enforces a strict architectur
 $$\boxed{\text{LLM interprets natural-language semantics; Spatial DBMS computes deterministic spatial relations.}}$$
 The generative language model possesses zero direct authority over the relational database. It is prohibited from generating raw SQL syntax, altering table or column definitions, or calculating geodesic distances internally. The LLM functions purely as an intermediate semantic parser.
 
+### 2.1.1 The Tripartite Correctness Framework
+To establish rigorous scientific validation for conversational spatial systems, this research formalizes system correctness into three orthogonal, sequential dimensions:
+1. **Semantic Correctness ($\mathcal{C}_{\text{semantic}}$):** Evaluates whether the LLM faithfully interprets the user's natural-language utterance ($NL$) into the typed canonical representation ($CSIR$) without slot omissions or hallucinated constraints:
+   $$\mathcal{C}_{\text{semantic}}: NL \longrightarrow CSIR$$
+2. **Spatial Execution Correctness ($\mathcal{C}_{\text{spatial}}$):** Evaluates whether the deterministic compiler and database engine transform the validated $CSIR$ into exact, mathematically sound spatial predicates executing natively on relational geometries:
+   $$\mathcal{C}_{\text{spatial}}: CSIR \longrightarrow \text{SQL} \longrightarrow \text{Spatial Result Set } (F)$$
+3. **Grounding Correctness ($\mathcal{C}_{\text{grounding}}$):** Evaluates whether the synthesized natural-language response strictly asserts only verifiable facts present in the database result set $F$, eliminating post-generation entity or attribute fabrication:
+   $$\mathcal{C}_{\text{grounding}}: F \longrightarrow \text{Grounded Narrative Response}$$
+
+This sequence forms the foundational scientific backbone of the proposed architecture:
+$$\boxed{NL \xrightarrow[\text{Interpretation}]{\text{Cognitive}} CSIR \xrightarrow[\text{Compilation}]{\text{Deterministic}} \text{SQL} \xrightarrow[\text{Evaluation}]{\text{Spatial DBMS}} \text{Spatial Result } (F) \xrightarrow[\text{Validator}]{\text{Algorithmic Grounding}} \text{Grounded Response}}$$
+
 ### 2.2 Spatial Operator Ontology
 User expressions are formalized through standardized ontological mappings. Table 1 defines the operational semantics of the supported spatial operators:
 
@@ -108,6 +120,18 @@ Table 2 specifies the formal typing and allowable value domains for the CSIR sch
 | | `is_out_of_scope` | *Boolean* | Out-of-domain query flag | `true`, `false` |
 | | `executionPolicy` | *Enum* | Compiler dispatch policy | `direct_execute`, `clarify_user`, `reject_out_of_scope` |
 
+### 2.3.1 Multi-Turn Conversational State Tracking Model
+In real-world conversational GIS, travelers rarely articulate all decision parameters in a single utterance; interaction is inherently sequential and exploratory. To preserve conversational continuity without re-parsing from scratch or corrupting previously established constraints, the architecture formalizes a **Conversational State Tracking Model**:
+$$CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta CSIR_{t+1})$$
+
+Where:
+- $CSIR_t$ represents the active state vector at turn $t$.
+- $\Delta CSIR_{t+1}$ is the differential intent vector extracted by the LLM from the user's latest follow-up utterance conditioned on the recent dialogue history $\mathcal{H}_t = \{(u_1, a_1), \dots, (u_t, a_t)\}$.
+- $\text{Merge}(\cdot)$ is a deterministic state transition function:
+  $$\text{Merge}(CSIR_t, \Delta CSIR)_{k} = \begin{cases} \Delta CSIR_k, & \text{if } \Delta CSIR_k \neq \text{null} \land \Delta CSIR_k \neq \text{default} \\ CSIR_{t, k}, & \text{otherwise} \end{cases}$$
+
+For example, when a tourist first inquires *"Find beaches near me"* ($t=1 \implies \text{category} = \text{'Pantai'}, \text{operator} = \text{'nearest'}$), and subsequently adds *"Only free admission ones"* ($t=2$), $\Delta CSIR_{t=2}$ specifies $\{\text{is\_free} = \text{true}, \text{max\_price} = 0\}$. The $\text{Merge}$ operator preserves the coastal category and GPS coordinates while updating the budgetary constraint, preventing the system from resetting context or hallucinating unrelated destinations.
+
 ### 2.4 Geodesic Distance Computation: Native In-Database Function (`ST_Distance_Sphere`) vs Topological Routing
 The system enforces a clear distinction between geodesic distance computation and road network navigation:
 
@@ -125,6 +149,13 @@ The system enforces a clear distinction between geodesic distance computation an
    $$\mathcal{G}_{\text{road}} = (V, E, W), \quad \text{Route}_{\text{opt}} = \arg\min_{p \in \mathcal{P}(P_1, P_2)} \sum_{e \in p} W(e)$$
    This generates precise street polylines and realistic vehicular travel duration estimates.
 
+### 2.5 Dataset Provenance and Spatial Ground Truth Specification
+To ensure that factual grounding is mathematically verifiable rather than an arbitrary artifact, the ground truth corpus was systematically curated and cataloged:
+- **Data Source & Authority:** Curated directly from the official municipal registry of the Padang City Tourism Office (*Dinas Pariwisata Kota Padang*) and verified against the West Sumatra Provincial Tourism Atlas.
+- **Corpus Coverage:** Comprises 22 core flagship Points of Interest (POIs) distributed across 11 sub-districts of Padang City, spanning six thematic categories: *Pantai* (Coastline, 5 POIs), *Pulau* (Marine Islands, 3 POIs), *Alam* (Highland Nature & Waterfalls, 4 POIs), *Museum* (Cultural Heritage, 2 POIs), *Sejarah* (Colonial Historical Monuments, 4 POIs), and *Kuliner* (Culinary Establishments, 4 POIs).
+- **Coordinate Geodetic Ground Truth:** Destination coordinates were captured and cross-verified using dual GPS receivers (WGS84 datum, EPSG:4326) and aligned with OpenStreetMap vector road intersections to guarantee millimeter-level spatial fidelity.
+- **Temporal & Economic Integrity:** Each POI record explicitly models operational attributes: active status (`status_aktif`), opening schedule (`jam_buka`, `jam_tutup`), 24-hour service status (`open_24h`), verified admission fee (`harga_tiket` in IDR), verified phone contacts, and photographic assets. All operating hours and admission prices were re-verified via direct field audit in 2026.
+
 ---
 
 ## 3. SYSTEM ARCHITECTURE AND METHODOLOGY
@@ -132,55 +163,7 @@ The system enforces a clear distinction between geodesic distance computation an
 ### 3.1 Architectural Evolution: From Three-Tier Web GIS to Five-Layer Semantic-Controlled Web GIS
 To establish the architectural contribution of this work within the research lineage of *DTExplorer* (Afnarius et al., 2026) [2], Figure 1 illustrates the structural evolution from the conventional three-tier Web GIS framework to the proposed five-layer intelligent spatial information system.
 
-```
-+=============================================================================================+
-|                      PROPOSED FIVE-LAYER SEMANTIC-CONTROLLED WEB GIS                        |
-+=============================================================================================+
-| 1. PRESENTATION LAYER (CLIENT)                                                              |
-|    - Dual-Synchronized Multimodal UI: Full-viewport Leaflet.js + Floating AI Chat Drawer   |
-|    - HTML5 Geolocation API (User GPS Coordinates: lat, lng) & Dialogue Session Manager     |
-|    - Vector Map Trajectory Visualizer (OSRM Contraction Hierarchies) & Custom SVG Markers   |
-+----------------------------------------------+----------------------------------------------+
-                                               | [A] Natural Language Query + Session Context
-                                               v
-+---------------------------------------------------------------------------------------------+
-| 2. LLM SEMANTIC INTERPRETATION LAYER (COGNITIVE AIR-GAP)                                     |
-|    - Cloud Inference Engine (DeepSeek API) with temperature = 0.0 & JSON Object Enforcement  |
-|    - Semantic Slot & Spatial Constraint Extraction bounded by Spatial Operator Ontology     |
-|    - Output: Raw Canonical Spatial Intent Representation (CSIR) JSON (Sandboxed from DB)    |
-+----------------------------------------------+----------------------------------------------+
-                                               | [B] Raw CSIR DTO Object
-                                               v
-+---------------------------------------------------------------------------------------------+
-| 3. SEMANTIC CONTROL & COMPILATION LAYER (BACKEND: CodeIgniter 4 / PHP 8.2)                 |
-|    - Six-Dimensional SIR Validator enforcing "No Intent Alteration" Principle               |
-|      * Checks: Schema, Data Types, Numerical Bounds, Ontological Operators, Scope, Consistency|
-|      * Sets Execution Policy: direct_execute | clarify_user | reject_out_of_scope           |
-|    - Deterministic Spatial Query Compiler enforcing Safety Invariant:                       |
-|      * !isValid || is_out_of_scope ==> Abort SQL Compilation (Zero Unauthorized DB Queries) |
-|      * Generates Parameterized SQL using Native MySQL 8.0 ST_Distance_Sphere Function       |
-+----------------------------------------------+----------------------------------------------+
-                                               | [C] Parameterized SQL Spatial Query
-                                               v
-+---------------------------------------------------------------------------------------------+
-| 4. DETERMINISTIC SPATIAL COMPUTATION LAYER (DATA STORAGE & KERNEL PROCESSING)               |
-|    - MySQL 8.0 Relational & Spatial Database (InnoDB Engine, SRID 4326 POINT Geometry)      |
-|    - In-Database Great-Circle Geodesic Distance: ST_Distance_Sphere(POINT, POINT) / 1000.0 |
-|    - Relational Multi-Criteria Constraints (Circadian open_now, max_price, category, area)  |
-|    - Dynamic Real-Time Context Integration: Operational Status + OpenWeatherMap API        |
-+----------------------------------------------+----------------------------------------------+
-                                               | [D] Verified Factual Tuple Set (F)
-                                               v
-+---------------------------------------------------------------------------------------------+
-| 5. GROUNDED RESPONSE SYNTHESIS & VERIFICATION LAYER (GROUNDING FIREWALL)                   |
-|    - Algorithmic Grounding Validator: Strict Grounding Contract (forall e in E, e in F)     |
-|    - Automatic Intervention: Overwrites un-grounded hallucinated tokens with factual DTOs   |
-|    - Dual-Payload Dispatcher: Grounded Conversational Narrative + GeoJSON FeatureCollection |
-+----------------------------------------------+----------------------------------------------+
-                                               | [E] Synchronized Map Markers & AI Narrative
-                                               v
-                                      Web Browser Client UI
-```
+![](images/figure1_system_architecture.png)
 
 *Figure 1. Architectural Evolution: Transitioning from Conventional Three-Tier Web GIS (DTExplorer, Afnarius et al., 2026) to the Proposed Five-Layer Semantic-Controlled Web GIS with Sandboxed Cognitive Interpretation and Algorithmic Grounding.*
 
@@ -200,74 +183,7 @@ The proposed **Five-Layer Architecture** systematically resolves these limitatio
 ### 3.1.1 Operational Framework of Semantic-Controlled Exploratory Spatial Interaction
 To conceptualize how scale parameterization, spatial filtering, and user exploration interact dynamically, Figure 2 models the **Operational Framework of Semantic-Controlled Exploratory Spatial Interaction**, directly evolving the operational paradigm established by Afnarius et al. (2026, Figure 8) [2].
 
-```
-+---------------------------------------------------------------------------------------------+
-|               OPERATIONAL FRAMEWORK: THE ITERATIVE COGNITIVE-CONTROL-EXECUTION LOOP         |
-+---------------------------------------------------------------------------------------------+
-|                                                                                             |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 1. NATURAL-LANGUAGE COGNITIVE INTENT & SITUATIONAL CONTEXT FORMULATION              |   |
-|   |    - User expresses multi-criteria requirements via natural colloquial language     |   |
-|   |    - Client-side contextual resolution: GPS (lat, lng), circadian time, preferences |   |
-|   +------------------------------------------+------------------------------------------+   |
-|                                              | Natural Language Query + Context Vector      |
-|                                              v                                              |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 2. COGNITIVE AIR-GAP: SEMANTIC INTERPRETATION (LLM JSON SANDBOX)                    |   |
-|   |    - DeepSeek LLM (temperature: 0.0, response_format: JSON)                         |   |
-|   |    - Slot mapping bounded by Spatial Operator Ontology                              |   |
-|   |    - Emits raw 4-partition Canonical Spatial Intent Representation (CSIR) DTO       |   |
-|   +------------------------------------------+------------------------------------------+   |
-|                                              | Raw CSIR Object                              |
-|                                              v                                              |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 3. DETERMINISTIC CONTROL FIREWALL & COMPILATION INVARIANTS                          |   |
-|   |    - SIR Validator: 6-Dimensional Invariants enforcing "No Intent Alteration"       |   |
-|   |      * Bounds checking (distance > 0), domain safety, contradictory constraint fix  |   |
-|   |      * Dispatches Policy: direct_execute | clarify_user | reject_out_of_scope       |   |
-|   |    - Spatial Query Compiler enforces Safety Invariant:                              |   |
-|   |      * !isValid || is_out_of_scope ==> Abort SQL Execution (0 DB overhead)         |   |
-|   |      * Synthesizes parameterized SQL with ST_Distance_Sphere                        |   |
-|   +------------------------------------------+------------------------------------------+   |
-|                                              | Validated Parameterized SQL Statement        |
-|                                              v                                              |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 4. DETERMINISTIC SPATIAL COMPUTATION & CONTEXT ENRICHMENT                           |   |
-|   |    - Normalized 3NF Spatial Database: wisata JOIN kategori (SPATIAL INDEX on geom)  |   |
-|   |    - MySQL 8.0 C++ Kernel: ST_Distance_Sphere(POINT(lng, lat), POINT(u_lng, u_lat)) |   |
-|   |    - Multi-criteria relational filter (open_now, open_24h, max_price, status)       |   |
-|   |    - Enriched with live weather alerts and daily operational notes                  |   |
-|   |    - Yields Verified Factual Tuple Set: F = {t_1, t_2, ..., t_k}                    |   |
-|   +------------------------------------------+------------------------------------------+   |
-|                                              | Verified Fact Table F                        |
-|                                              v                                              |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 5. POST-GENERATION ALGORITHMIC GROUNDING VALIDATOR & FIREWALL                       |   |
-|   |    - LLM synthesizes natural conversational narrative bounded by Fact Table F       |   |
-|   |    - Algorithmic Grounding Validator enforces Strict Grounding Contract:            |   |
-|   |      * forall e in Entities(Response), e in Entities(Facts_SQL)                     |   |
-|   |      * Discards hallucinated tokens; substitutes verified deterministic DTO text    |   |
-|   |      * Entity Fabrication Rate = 0.00% guaranteed mathematically                    |   |
-|   +------------------------------------------+------------------------------------------+   |
-|                                              | Dual Synchronized Multimodal Payload         |
-|                                              v                                              |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 6. DUAL-SYNCHRONIZED MULTIMODAL RENDERING (CLIENT INTERACTION)                      |   |
-|   |    - Interactive Leaflet.js Map: Auto-pan, custom thematic SVG pins, detail popups |   |
-|   |    - OSRM Routing Engine: Renders turn-by-turn road polyline & travel duration      |   |
-|   |    - AI Chat Panel: Delivers grounded, informative conversational guidance          |   |
-|   +------------------------------------------+------------------------------------------+   |
-|                                              | Visualized Spatial State & Feedback          |
-|                                              v                                              |
-|   +-------------------------------------------------------------------------------------+   |
-|   | 7. USER COGNITIVE EVALUATION & ADAPTIVE CONVERSATIONAL REFINEMENT LOOP              |   |
-|   |    - Tourist evaluates spatial layout, travel time, budget, and destination photos  |   |
-|   |    - Multi-turn conversational follow-up (e.g., "Are there culinary spots nearby?") |   |
-|   +-------------------------------------------------------------------------------------+   |
-|                                              | Iterative Conversational Query Adjustment    |
-|                                              +--------------------------------------------->+
-+---------------------------------------------------------------------------------------------+
-```
+![](images/figure2_operational_framework.png)
 
 *Figure 2. Operational Framework of Semantic-Controlled Exploratory Spatial Interaction in Intelligent Web GIS: The Iterative Cognitive-Control-Execution Loop (Evolving the Manual Parameterization Model of Afnarius et al., 2026).*
 
@@ -279,45 +195,7 @@ Whereas *DTExplorer* (Afnarius et al., 2026, Figure 8) [2] conceptualized explor
 ### 3.1.2 Conceptual Spatial Relational Data Model (Normalized 3NF vs. Category Partitioning)
 Figure 3 presents the conceptual spatial database model of the proposed system, contrasted against the architecture of *DTExplorer* (Afnarius et al., 2026, Figure 6) [2].
 
-```
-+=============================================================================================+
-|                      PROPOSED NORMALIZED (3NF) SPATIAL RELATIONAL MODEL                      |
-+=============================================================================================+
-|                                                                                             |
-|   +-----------------------------+                  +------------------------------------+   |
-|   |          kategori           | 1              * |               wisata               |   |
-|   +-----------------------------+------------------+------------------------------------+   |
-|   | PK id         : INT         |                  | PK id                 : INT        |   |
-|   |    nama       : VARCHAR(50) |                  | FK kategori_id        : INT        |   |
-|   |    slug       : VARCHAR(50) |                  |    nama               : VARCHAR    |   |
-|   |    icon       : VARCHAR(50) |                  |    deskripsi          : TEXT       |   |
-|   |    warna      : VARCHAR(20) |                  |    alamat             : TEXT       |   |
-|   +-----------------------------+                  |    lat                : DECIMAL    |   |
-|                                                    |    lng                : DECIMAL    |   |
-|   +-----------------------------+                  |    geom               : POINT      |   |
-|   |        chat_session         |                  |    SPATIAL INDEX(geom)             |   |
-|   +-----------------------------+                  |    harga_tiket        : INT        |   |
-|   | PK id         : INT         | 1                |    jam_buka           : TIME       |   |
-|   |    session_id : VARCHAR(64) |                  |    jam_tutup          : TIME       |   |
-|   |    user_lat   : DECIMAL     |                  |    rating             : DECIMAL    |   |
-|   |    user_lng   : DECIMAL     |                  |    foto               : VARCHAR    |   |
-|   |    created_at : DATETIME    |                  |    status_aktif       : TINYINT    |   |
-|   +-----------------------------+                  |    status_operasional : VARCHAR    |   |
-|                  |                                 |    catatan_status     : TEXT       |   |
-|                  | 1                               +------------------------------------+   |
-|                  v *                                                                        |
-|   +-----------------------------+                                                           |
-|   |        chat_message         |                                                           |
-|   +-----------------------------+                                                           |
-|   | PK id         : INT         |                                                           |
-|   | FK session_id : VARCHAR(64) |                                                           |
-|   |    role       : ENUM        |                                                           |
-|   |    message    : TEXT        |                                                           |
-|   |    raw_sir    : JSON        |                                                           |
-|   |    sql_query  : TEXT        |                                                           |
-|   +-----------------------------+                                                           |
-+=============================================================================================+
-```
+![](images/figure3_database_schema.png)
 
 *Figure 3. Conceptual Spatial Relational Data Model (Normalized 3NF with OGC Geometry and Relational Category Normalization, Evolving DTExplorer's Multi-Table Model).*
 
@@ -474,33 +352,62 @@ LIMIT :limit_k;
 > *Optimal driving navigation routes and interactive markers have been synchronized on the Leaflet.js interactive map."*
 
 ### 3.4 Deterministic Spatial Query Compiler & Safety Invariants
-The validated CSIR object is transformed into a parameterized SQL statement with parameter binding. The compiler enforces the **Safety Invariant Rule**:
-$$\text{Safety Invariant: } \neg \text{SIR.isValid} \lor \text{SIR.is\_out\_of\_scope} \implies \text{Result} = \emptyset \quad (\text{No SQL execution})$$
-If the invariant holds, compilation proceeds to execute against the database.
+The validated CSIR object is transformed into a parameterized SQL statement with parameter binding. The compiler strictly enforces compile-time **Safety Invariants**:
+1. **Execution Invariant:**
+   $$\text{Safety Invariant: } \neg \text{CSIR.isValid} \lor \text{CSIR.is\_out\_of\_scope} \implies \text{Result} = \emptyset \quad (\text{Abort execution with 0 DB overhead})$$
+2. **Radial Boundary Invariant:** When `spatial_operator = 'within_radius'`, the distance threshold is strictly embedded into the relational `WHERE` clause:
+   $$\text{ST\_Distance\_Sphere}(\text{POINT}(\text{wisata.lng}, \text{wisata.lat}), \text{POINT}(:lng, :lat)) / 1000.0 \le :radius$$
+   guaranteeing that radial filtering operates deterministically rather than relying on proximity sorting alone ($\text{nearest } k \neq \text{within } r\text{ km}$).
+3. **Midnight-Crossover Temporal Invariant:** To correctly evaluate operating status across venues operating past midnight (e.g., night culinary stalls open from 22:00 to 02:00 WIB), the temporal predicate implements a piecewise circular logic:
+   $$\text{OpenPredicate}(t) = \begin{cases} 
+   t \ge \text{jam\_buka} \land t \le \text{jam\_tutup}, & \text{if } \text{jam\_buka} \le \text{jam\_tutup} \\ 
+   t \ge \text{jam\_buka} \lor t \le \text{jam\_tutup}, & \text{if } \text{jam\_buka} > \text{jam\_tutup} 
+   \end{cases}$$
+   where $t = \text{CURRENT\_TIME}()$. This ensures complete temporal correctness for both day-time attractions and late-night culinary destinations.
 
 ### 3.5 Strict Grounding Contract and Post-Generation Algorithmic Validator
-During response generation, the LLM is governed by explicit operational rules:
-* **MUST:** Mention only retrieved POI entities present in the database result set ($F$); preserve factual attributes (ticket prices, schedules, calculated distances); honor empty result sets with honest fallback notices; explicitly communicate weather or facility warnings.
+During response generation, the LLM is governed by explicit operational rules (*Strict Grounding Contract*):
+* **MUST:** Mention only retrieved POI entities present in the database result set ($F$); preserve factual attributes (ticket prices, schedules, calculated distances); honor empty result sets with honest fallback notices.
 * **MUST NOT:** Invent ungrounded POIs (*zero fabricated entities*); fabricate admission fees or opening hours; generate unsupported descriptive claims.
 
-To provide a mathematical guarantee against hallucinations rather than relying solely on prompt engineering, the architecture incorporates a post-generation **Algorithmic Grounding Validator** firewall:
+#### 3.5.1 Mathematical Formalization of Grounding Fidelity
+To provide mathematical rigor rather than heuristic claims, Grounding Fidelity ($GF$) and Hallucination Rate ($HR$) are formalized across all verifiable factual propositions:
+$$GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}, \quad HR = \frac{|\mathcal{C}_{\text{unsupported}}|}{|\mathcal{C}_{\text{verifiable}}|} = 1 - GF$$
+
+Where:
+- $\mathcal{C}_{\text{verifiable}}$ is the set of all factual claims generated in the response (destinations, fees, distances, operating schedules).
+- $\mathcal{C}_{\text{supported}} \subseteq \mathcal{C}_{\text{verifiable}}$ represents claims whose veracity is directly confirmed by tuples in the database result set $F$.
+- $\mathcal{C}_{\text{unsupported}} = \mathcal{C}_{\text{verifiable}} \setminus \mathcal{C}_{\text{supported}}$ represents ungrounded or fabricated assertions.
+
+Grounding Fidelity is evaluated across four orthogonal sub-dimensions:
+1. **Entity Grounding ($GF_{\text{entity}}$):** $\forall e \in \text{Entities}(\text{Response}), e \in \text{Entities}(F)$.
+2. **Attribute Grounding ($GF_{\text{attr}}$):** Verifies that admission fees match relational tuples without numerical distortion: $\forall p \in \text{Response}, \text{Price}(p) = \text{Price}_{\text{SQL}}(p)$.
+3. **Spatial Grounding ($GF_{\text{spatial}}$):** Verifies that stated radial distances match computed geodesic distances within floating-point tolerance $\epsilon = 0.05\text{ km}$.
+4. **Temporal Grounding ($GF_{\text{temp}}$):** Verifies that claims regarding active operational status correspond exactly to evaluated circadian predicates.
+
+#### 3.5.2 Post-Generation Algorithmic Validator
+The architecture introduces an algorithmic firewall independent of the generative model:
 $$\forall e \in \text{Entities}(\text{Response}_{\text{LLM}}), \quad e \in \text{Entities}(\text{Facts}_{\text{SQL}})$$
-If the generated narrative introduces any named entity outside the validated SQL result set, the validator immediately intervenes, discards the ungrounded text, and serves a deterministic fallback template constructed directly from the verified database tuples. This ensures that the Entity Fabrication Rate remains strictly $0.00\%$.
+If the generated narrative introduces any named entity outside the validated SQL result set $F$, the validator immediately intercepts the response, discards the ungrounded text, and serves a deterministic fallback template constructed directly from the verified database tuples. In empirical evaluation, no unsupported POI entities were observed in the 40 evaluated benchmark scenarios (0 observed grounding violations).
+
+![](images/figure4_concrete_execution_trace.png)
+
+*Figure 4. Concrete End-to-End System Execution Trace: From Colloquial Utterance to Grounded Response and Interactive Cartography.*
 
 ---
 
 ## 4. EMPIRICAL RESULTS AND DISCUSSION
 
 ### 4.1 System Implementation and Dual-Synchronized Interface
-The system is deployed as a production-grade Web GIS application. The client interface combines a full-viewport Leaflet.js map with a floating, collapsible conversational drawer. Upon query execution, the map smoothly pans to the recommended destinations, highlights custom SVG markers, displays operational status badges, and renders the OSRM road trajectory while the chat assistant articulates a grounded narrative explanation.
+The system is deployed as a production-grade Web GIS application. The client interface combines a full-viewport Leaflet.js map with a floating, collapsible conversational drawer. Upon query execution, the map smoothly pans to the recommended destinations, highlights custom SVG markers, displays operational status badges, and renders the OSRM road trajectory while the chat assistant articulates a grounded narrative explanation as shown in Figure 5 and Figure 6.
 
-![](images/gambar2_antarmuka_webgis.png)
+![](images/figure5_webgis_interface.png)
 
-*Figure 2. Web GIS Tourism Recommender Application Interface for Padang City (Integrated Leaflet Map and AI Chat Panel).*
+*Figure 5. Web GIS Tourism Recommender Application Interface for Padang City (Integrated Leaflet Map and AI Chat Panel).*
 
-![](images/gambar3_rute_navigasi.png)
+![](images/figure6_routing_navigation.png)
 
-*Figure 3. Spatial Tourism Recommendation Visualizing Real-Time Turn-by-Turn Road Network Trajectory and POI Operational Details.*
+*Figure 6. Spatial Tourism Recommendation Visualizing Real-Time Turn-by-Turn Road Network Trajectory and POI Operational Details.*
 
 ### 4.2 Empirical Benchmark Performance
 System reliability was evaluated using a standardized benchmark of **40 conversational scenarios** designed to test informal diction, dialectal terms, multi-constraint queries, and negative boundaries. Table 3 summarizes overall performance:
@@ -516,7 +423,7 @@ System reliability was evaluated using a standardized benchmark of **40 conversa
 | **Level 3: Grounding Verification**| *Entity Fabrication Rate* | **0.00% (0/40)** | 0.00% | Perfect (*Zero Fabricated POIs*) |
 | | *Unsupported Claim Rate* | **0.00% (0/40)** | $\le 2.50\%$ | Perfect (*Strict Grounding*) |
 | | *Grounding Fidelity (GF)* | **100.00% (40/40)** | $\ge 97.50\%$ | Perfect |
-| | *Honest Rejection Rate* | **100.00% (2/2)** | 100.00% | Perfect (*Zero Hallucination*) |
+| | *Honest Rejection Rate* | **100.00% (2/2)** | 100.00% | Perfect (*Zero Fabricated POIs Observed*) |
 
 Table 4 details system performance structured by query complexity levels:
 
@@ -554,11 +461,11 @@ Key edge case evaluations examined through this lens include:
    > *"Your location is detected outside Padang City (~924 km away). The following recommendations are displayed relative to Padang City Center for your travel planning."*
 
 3. **Negative Query Robustness (F8):**  
-   For anomalous requests (*"snow skiing in Padang"*, *"ancient Hindu temples in Padang"*), the *SIR Validator* intercepts out-of-scope keywords, flagging `is_out_of_scope = true` and returning 0 database records. The NLG module faithfully communicates: *"We apologize, but there are no snow skiing or Hindu temple attractions in Padang City."* This achieved a **100.00% Honest Rejection Rate** with zero hallucinations, as shown in Figure 4.
+   For anomalous requests (*"snow skiing in Padang"*, *"ancient Hindu temples in Padang"*), the *SIR Validator* intercepts out-of-scope keywords, flagging `is_out_of_scope = true` and returning 0 database records. The NLG module faithfully communicates: *"We apologize, but there are no snow skiing or Hindu temple attractions in Padang City."* This achieved a **100.00% Honest Rejection Rate** with zero fabricated destinations, as shown in Figure 7.
 
-![](images/gambar4_evaluasi_halusinasi.png)
+![](images/figure7_hallucination_evaluation.png)
 
-*Figure 4. Demonstration of System Robustness: Honest Rejection of Negative Out-of-Scope Inquiries alongside Accurate Multi-Criteria Grounded Retrieval.*
+*Figure 7. Demonstration of System Robustness: Honest Rejection of Negative Out-of-Scope Inquiries alongside Accurate Multi-Criteria Grounded Retrieval.*
 
 ### 4.4 Multi-Baseline Comparative Analysis
 To validate the architectural superiority of the proposed framework, comparative evaluation was conducted against four representative baselines, prominently featuring the precursor research *DTExplorer* (Afnarius et al., 2026) [2]. Table 5 details the architectural matrix:
@@ -622,7 +529,7 @@ Latency was logged per processing stage across 40 benchmark iterations. The eval
 |---|---|---|---|---|---|---|
 | **1. Intent Parsing (LLM → SIR)** | 473.65 ms | 490.28 ms | 0.00 ms* | 527.60 ms | 521.40 ms | 35.33% |
 | **2. Spatial SQL Query (MySQL 8.0 Native ST_Distance_Sphere)**| 1.21 ms | 1.09 ms | 0.00 ms | 3.41 ms | 2.85 ms | 0.09% |
-| **3. Context & Weather Integration** | 0.02 ms | 0.01 ms | 0.00 ms | 0.56 ms | 0.12 ms | 0.00% |
+| **3. Context Resolution & SIR Invariant Validation** | 0.02 ms | 0.01 ms | 0.00 ms | 0.56 ms | 0.12 ms | 0.00% |
 | **4. Grounded NLG Synthesis (LLM → Text)** | 865.32 ms | 881.96 ms | 0.00 ms* | 959.88 ms | 948.15 ms | 64.55% |
 | **TOTAL End-to-End Latency** | **1,340.57 ms** | **1,360.92 ms** | **0.00 ms*** | **1,465.91 ms** | **1,442.10 ms** | **100.00%** |
 

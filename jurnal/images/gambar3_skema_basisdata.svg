@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680">
+
+  <defs>
+    <linearGradient id="erdHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="tblWisataHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="tblKatHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <filter id="erdShadow" x="-3%" y="-4%" width="106%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <style>
+    .font-base { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .tbl-header { font-weight: 700; font-size: 14px; fill: #ffffff; }
+    .tbl-sub { font-weight: 500; font-size: 10.5px; fill: #e2e8f0; }
+    .col-pk { font-weight: 700; font-size: 11.5px; fill: #b91c1c; }
+    .col-fk { font-weight: 700; font-size: 11.5px; fill: #0369a1; }
+    .col-geo { font-weight: 700; font-size: 11.5px; fill: #047857; }
+    .col-name { font-weight: 600; font-size: 11.5px; fill: #1e293b; }
+    .col-type { font-family: "Courier New", monospace; font-size: 11px; fill: #64748b; }
+  </style>
+
+  <rect width="100%" height="100%" fill="#f8fafc" rx="14"/>
+  <rect x="2" y="2" width="996" height="676" fill="none" stroke="#e2e8f0" stroke-width="2" rx="12"/>
+
+  <!-- Header -->
+  <g filter="url(#erdShadow)">
+    <rect x="25" y="22" width="950" height="60" rx="10" fill="url(#erdHeader)"/>
+    <text x="500.0" y="48" text-anchor="middle" class="font-base" font-weight="800" font-size="16px" fill="#ffffff">SKEMA BASIS DATA RELASIONAL &amp; SPASIAL (MySQL 8.0 / SRID 4326)</text>
+    <text x="500.0" y="68" text-anchor="middle" class="font-base" font-weight="500" font-size="12px" fill="#94a3b8">Model Data Objek Wisata, Kategori Tematik, &amp; Metadata Operasional</text>
+  </g>
+
+  <!-- TABLE: kategori (Parent / Reference Table) -->
+  <g filter="url(#erdShadow)">
+    <rect x="50" y="115" width="340" height="230" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="50" y="115" width="340" height="42" rx="8" fill="url(#tblKatHeader)"/>
+    <rect x="50" y="145" width="340" height="12" fill="url(#tblKatHeader)"/>
+    <text x="70" y="136" class="font-base tbl-header">kategori</text>
+    <text x="70" y="150" class="font-base tbl-sub">Tabel Dimensi / Taksonomi Wisata</text>
+
+    <!-- Rows -->
+    <line x1="50" y1="157" x2="390" y2="157" stroke="#e2e8f0"/>
+    <text x="65" y="180" class="font-base col-pk">[PK] id</text> <text x="250" y="180" class="col-type">INT AUTO_INC</text>
+    <line x1="50" y1="195" x2="390" y2="195" stroke="#f1f5f9"/>
+    <text x="65" y="215" class="font-base col-name">nama_kategori</text> <text x="250" y="215" class="col-type">VARCHAR(100)</text>
+    <line x1="50" y1="230" x2="390" y2="230" stroke="#f1f5f9"/>
+    <text x="65" y="250" class="font-base col-name">slug</text> <text x="250" y="250" class="col-type">VARCHAR(100)</text>
+    <line x1="50" y1="265" x2="390" y2="265" stroke="#f1f5f9"/>
+    <text x="65" y="285" class="font-base col-name">deskripsi</text> <text x="250" y="285" class="col-type">TEXT</text>
+    <line x1="50" y1="300" x2="390" y2="300" stroke="#f1f5f9"/>
+    <text x="65" y="320" class="font-base col-name">icon_marker</text> <text x="250" y="320" class="col-type">VARCHAR(50)</text>
+  </g>
+
+  <!-- TABLE: wisata (Main Fact / Spatial Table) -->
+  <g filter="url(#erdShadow)">
+    <rect x="520" y="115" width="430" height="520" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="520" y="115" width="430" height="42" rx="8" fill="url(#tblWisataHeader)"/>
+    <rect x="520" y="145" width="430" height="12" fill="url(#tblWisataHeader)"/>
+    <text x="540" y="136" class="font-base tbl-header">wisata</text>
+    <text x="540" y="150" class="font-base tbl-sub">Tabel Entitas Wisata Spasial (22 Curated POIs Kota Padang)</text>
+
+    <!-- Rows -->
+    <line x1="520" y1="157" x2="950" y2="157" stroke="#e2e8f0"/>
+    <text x="535" y="180" class="font-base col-pk">[PK] id</text> <text x="780" y="180" class="col-type">INT AUTO_INC</text>
+    <line x1="520" y1="195" x2="950" y2="195" stroke="#f1f5f9"/>
+    <text x="535" y="215" class="font-base col-fk">[FK] kategori_id</text> <text x="780" y="215" class="col-type">INT (kategori.id)</text>
+    <line x1="520" y1="230" x2="950" y2="230" stroke="#f1f5f9"/>
+    <text x="535" y="250" class="font-base col-name">nama_wisata</text> <text x="780" y="250" class="col-type">VARCHAR(255)</text>
+    <line x1="520" y1="265" x2="950" y2="265" stroke="#f1f5f9"/>
+    <text x="535" y="285" class="font-base col-geo">[GEO] latitude</text> <text x="780" y="285" class="col-type">DECIMAL(10,8)</text>
+    <line x1="520" y1="300" x2="950" y2="300" stroke="#f1f5f9"/>
+    <text x="535" y="320" class="font-base col-geo">[GEO] longitude</text> <text x="780" y="320" class="col-type">DECIMAL(11,8)</text>
+    <line x1="520" y1="335" x2="950" y2="335" stroke="#f1f5f9"/>
+    <text x="535" y="355" class="font-base col-geo">[SPATIAL] geom</text> <text x="780" y="355" class="col-type">POINT SRID 4326</text>
+    <line x1="520" y1="370" x2="950" y2="370" stroke="#f1f5f9"/>
+    <text x="535" y="390" class="font-base col-name">harga_tiket</text> <text x="780" y="390" class="col-type">INT (Rupiah)</text>
+    <line x1="520" y1="405" x2="950" y2="405" stroke="#f1f5f9"/>
+    <text x="535" y="425" class="font-base col-name">jam_buka / jam_tutup</text> <text x="780" y="425" class="col-type">TIME</text>
+    <line x1="520" y1="440" x2="950" y2="440" stroke="#f1f5f9"/>
+    <text x="535" y="460" class="font-base col-name">hari_buka</text> <text x="780" y="460" class="col-type">VARCHAR(100)</text>
+    <line x1="520" y1="475" x2="950" y2="475" stroke="#f1f5f9"/>
+    <text x="535" y="495" class="font-base col-name">fasilitas</text> <text x="780" y="495" class="col-type">TEXT</text>
+    <line x1="520" y1="510" x2="950" y2="510" stroke="#f1f5f9"/>
+    <text x="535" y="530" class="font-base col-name">foto / gambar</text> <text x="780" y="530" class="col-type">VARCHAR(255)</text>
+    <line x1="520" y1="545" x2="950" y2="545" stroke="#f1f5f9"/>
+    <text x="535" y="565" class="font-base col-name">status_operasional</text> <text x="780" y="565" class="col-type">VARCHAR(50)</text>
+    <line x1="520" y1="580" x2="950" y2="580" stroke="#f1f5f9"/>
+    <text x="535" y="605" class="font-base col-name">deskripsi</text> <text x="780" y="605" class="col-type">LONGTEXT</text>
+  </g>
+
+  <!-- Relationship Connector Line (1 to Many) -->
+  <path d="M 390 180 H 460 V 215 H 520" fill="none" stroke="#0284c7" stroke-width="2.5"/>
+  <circle cx="390" cy="180" r="4" fill="#0284c7"/>
+  <polygon points="520,215 510,210 510,220" fill="#0284c7"/>
+
+  <!-- Relationship Pill Badge -->
+  <rect x="420" y="185" width="60" height="24" rx="6" fill="#0284c7"/>
+  <text x="450" y="201" text-anchor="middle" class="font-base" font-weight="700" font-size="11px" fill="#ffffff">1 : N</text>
+
+  <!-- Spatial Index Callout Box -->
+  <g filter="url(#erdShadow)">
+    <rect x="50" y="380" width="340" height="150" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+    <text x="70" y="410" class="font-base" font-weight="700" font-size="13px" fill="#166534">SPATIAL INDEX &amp; FUNGSI GEODETIK</text>
+    <line x1="70" y1="420" x2="370" y2="420" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="70" y="445" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• SPATIAL INDEX (geom) pada MySQL 8.0</text>
+    <text x="70" y="468" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• ST_Distance_Sphere(geom, POINT(u_lng, u_lat))</text>
+    <text x="70" y="491" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Geodesik WGS84: Jarak Great-Circle Presisi Tinggi</text>
+    <text x="70" y="514" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Filter Multikriteria: status, jam_buka, harga_tiket</text>
+  </g>
+</svg>

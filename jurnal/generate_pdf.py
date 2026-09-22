@@ -400,7 +400,7 @@ def convert_md_to_pdf(md_filename, pdf_filename, is_journal=False):
             html_path
         ]
         try:
-            res_chrome = subprocess.run(cmd_chrome, capture_output=True, text=True, cwd=JURNAL_DIR, timeout=20)
+            res_chrome = subprocess.run(cmd_chrome, capture_output=True, text=True, cwd=JURNAL_DIR, timeout=120)
             if res_chrome.returncode != 0:
                 print(f"[!] Chrome error on {md_filename}: {res_chrome.stderr}")
                 return False
