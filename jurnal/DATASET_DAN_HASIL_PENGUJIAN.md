@@ -89,7 +89,7 @@ Data diambil dari pengujian deterministik `php spark riset:evaluasi` terhadap ba
 |---|---|---|---|---|---|
 | **Ekstraksi Intensi (LLM)** | 485.20 ms | 478.50 ms | 342.10 ms | 628.40 ms | 35.11% |
 | **Kueri SQL (MySQL 8.0 Spatial ST_Distance_Sphere)** | 1.00 ms | 0.65 ms | 0.25 ms | 5.03 ms | 0.08% |
-| **Integrasi Cuaca & Status** | 1.45 ms | 1.20 ms | 0.80 ms | 3.25 ms | 0.10% |
+| **Kebijakan Spasial & Status** | 1.45 ms | 1.20 ms | 0.80 ms | 3.25 ms | 0.10% |
 | **Grounded NLG Response (LLM)** | 892.40 ms | 885.10 ms | 680.20 ms | 1,185.50 ms | 64.58% |
 | **TOTAL Waktu Respons End-to-End** | **1,381.90 ms** | **1,367.20 ms** | **1,024.25 ms** | **1,823.90 ms** | **100.00%** |
 

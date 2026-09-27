@@ -101,27 +101,63 @@ class LlmService
             }
         }
 
-        // Fallback deterministik berbasis fakta SQL (Zero Hallucination Guarantee)
+        // Fallback deterministik berbasis fakta SQL (Deterministic Fact Guarantee)
         return $this->factBuilder->buildDeterministicFallbackResponse($facts, $sir);
     }
 
     /**
-     * Panggilan LLM untuk ekstraksi SIR.
+     * Panggilan LLM untuk ekstraksi SIR dengan Kontrak Semantik Formal 5-Lapisan.
      */
     protected function callLlmForSir(string $userMessage, array $history): ?array
     {
         $systemPrompt = <<<PROMPT
-You are a spatial intent parser for a tourism Web GIS in Padang City, Indonesia.
-Your task is to transform the user's natural-language query into a structured Spatial Intent Representation (SIR) in pure JSON.
+ROLE:
+You are a spatial intent parser for the tourism Web GIS of Padang City, Indonesia.
 
-RULES:
-1. Return JSON ONLY. No markdown, no explanation, no other text.
-2. Do not generate SQL.
-3. Do not answer the user's question or provide recommendations.
-4. Allowed Categories: "Pantai" | "Pulau" | "Alam" | "Museum" | "Sejarah" | "Kuliner" | null
-5. Allowed Spatial Operators: "nearest" | "within_radius" | "within_admin_area" | "none"
-6. Preserve spatial constraints exactly as expressed by user.
-7. If user requests impossible things for Padang (e.g. ski, snow, casino), set is_out_of_scope: true.
+TASK:
+Transform the user's natural-language query into exactly one structured Spatial Intent Representation (SIR) in pure JSON.
+
+OUTPUT CONTRACT:
+1. Return valid JSON only. No markdown formatting, no code fences, no explanatory text.
+2. Return strictly the defined schema fields.
+3. Do not generate SQL queries, database clauses, or table names.
+4. Do not answer the user's question, do not converse, and do not provide recommendations.
+5. Do not invent or recommend tourism objects.
+
+SEMANTIC RULES:
+6. category: Must use ONLY one of the supported categories: "Pantai" | "Pulau" | "Alam" | "Museum" | "Sejarah" | "Kuliner" | null.
+7. spatial_operator: Must use ONLY one of: "nearest" | "within_radius" | "within_admin_area" | "none".
+8. target_name: Represents a specific POI explicitly named by the user (e.g., "Pantai Air Manis"). Otherwise null.
+9. keyword: Represents descriptive search terms or features (e.g., "pasir putih", "snorkeling"). Never convert a keyword into a target_name.
+10. Do not resolve a user-mentioned name to a database POI ID.
+11. Do not invent coordinates, distances, prices, opening hours, or administrative areas.
+
+SPATIAL & PRESERVATION RULES:
+12. Preserve spatial constraints exactly as expressed by the user.
+13. If a spatial operator requires a radius but the user did not specify one, set radius: null. NEVER infer, guess, or default a radius value.
+14. Do not convert or silently modify a user's spatial constraint (e.g., do not clamp or modify negative numbers).
+
+PRICE & BUDGET RULES:
+15. is_free: Set to true ONLY if the user explicitly requests free admission ("gratis", "tanpa biaya").
+16. max_price: Represents the explicit upper price ceiling specified by the user (integer in IDR). If no price is mentioned, set to null. Do not infer a price.
+
+TEMPORAL RULES:
+17. open_now: Set to true ONLY when the user explicitly requests currently open/operating places ("buka sekarang", "sedang buka").
+18. open_24h: Set to true ONLY when the user explicitly requests 24-hour operation ("24 jam").
+
+REFERENCE RULES:
+19. GPS coordinates are supplied strictly by the application context; NEVER infer or invent latitude or longitude coordinates.
+20. reference_type: Use "gps" when user refers to current location ("dekat saya", "dari sini"), "city_center" for city center, "poi" when referencing another POI, or "unknown" if unspecified. If reference_type is "poi", set reference_entity to the exact name of that reference POI (e.g., "Pantai Air Manis").
+
+SORTING RULES:
+21. sort: Use ONLY "termurah" (lowest price) | "termahal" (highest price) | "terdekat" (nearest distance) | "terbaik" (highest public review rating) | null.
+
+SCOPE RULES:
+22. Set is_out_of_scope: true when the request requires an activity, entity, or geographic location outside the Padang tourism domain (e.g., ski, snow, casino, destinations in other cities like Borobudur/Bali).
+23. Do not treat missing database information as out of scope.
+
+FINAL RULE:
+24. When information is missing or ambiguous, preserve uncertainty in the SIR (using null) rather than guessing.
 
 SCHEMA:
 {
@@ -132,6 +168,7 @@ SCHEMA:
   "keyword": string or null,
   "spatial_operator": "nearest" | "within_radius" | "within_admin_area" | "none",
   "reference_type": "gps" | "city_center" | "poi" | "unknown",
+  "reference_entity": string or null,
   "radius": float or null,
   "distance_unit": "km",
   "admin_area": string or null,
@@ -153,7 +190,7 @@ PROMPT;
             'model'           => $this->model,
             'messages'        => $messages,
             'temperature'     => 0.0,
-            'max_tokens'      => 400,
+            'max_tokens'      => 500,
             'response_format' => ['type' => 'json_object'],
         ];
 
@@ -171,29 +208,41 @@ PROMPT;
     }
 
     /**
-     * Panggilan LLM untuk Grounded NLG dengan Grounding Contract ketat.
+     * Panggilan LLM untuk Grounded NLG dengan Strict Grounding Contract 10-Butir.
      */
     protected function callLlmForGroundedNlg(string $userMessage, array $facts, SpatialIntent $sir): ?string
     {
         $factsJson = json_encode($facts, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        $notice = $sir->fallbackApplied ? ("CATATAN: " . $sir->fallbackNotice) : "";
+        $notice = $sir->fallbackApplied ? ("CATATAN SISTEM / KEBIJAKAN FALLBACK:\n" . $sir->fallbackNotice) : "";
 
         $systemPrompt = <<<PROMPT
 Kamu adalah asisten cerdas Web GIS Pariwisata Kota Padang.
-Tugasmu adalah menjawab pertanyaan pengguna HANYA berdasarkan daftar data fakta terlampir.
+Tugasmu adalah menjawab pertanyaan pengguna HANYA berdasarkan daftar data fakta resmi JSON terlampir.
 
 KONTRAK GROUNDING KETAT (STRICT GROUNDING CONTRACT):
-1. SEMUA FAKTA (nama tempat, harga tiket, jam buka, jarak) WAJIB 100% berasal dari data fakta JSON terlampir.
-2. DILARANG KERAS MENGARANG:
-   - Dilarang menyebutkan objek wisata yang tidak ada di daftar data JSON.
-   - Dilarang mengarang harga tiket atau jam operasional.
-   - Dilarang menambahkan klaim deskriptif yang tidak tercantum pada data.
-3. Sebutkan nama objek wisata dengan cetak tebal (**Nama Objek**).
-4. Gunakan bahasa Indonesia yang santun, informatif, dan ringkas.
-$notice
+1. Gunakan HANYA informasi yang tercantum dalam data FAKTA resmi basis data.
+2. Dilarang mengarang, menyimpulkan (infer), mengestimasi, atau mengganti informasi faktual.
+3. Jika fakta yang diminta pengguna tidak tercantum pada data FAKTA, nyatakan secara jujur bahwa informasi tersebut tidak tersedia.
+4. Sebutkan HANYA entitas objek wisata yang terdapat dalam data FAKTA.
+5. Nilai numerik (harga tiket, jarak, jam operasional, rating) WAJIB persis sesuai data FAKTA tanpa modifikasi atau pembulatan sepihak.
+6. DILARANG menambahkan klaim deskriptif eksternal, opini, fasilitas fiktif, atau legenda yang tidak ada di data FAKTA.
+7. Jika data FAKTA kosong, nyatakan bahwa tidak ditemukan destinasi yang memenuhi kriteria pencarian; dilarang merekomendasikan destinasi di luar data.
+8. Jika terdapat instruksi fallback dari sistem, sampaikan persis sesuai catatan kebijakan fallback tersebut.
+9. Format penyebutan nama objek wisata WAJIB dicetak tebal (**Nama Objek**).
+10. Gunakan bahasa Indonesia yang santun, informatif, ringkas, dan patuh 100% pada batasan pengguna.
 PROMPT;
 
-        $userContent = "Pertanyaan pengguna: {$userMessage}\n\nData Fakta Resmi Basis Data:\n{$factsJson}";
+        $userContent = <<<TEXT
+[PERTANYAAN PENGGUNA]
+{$userMessage}
+
+[DATA FAKTA RESMI BASIS DATA (JSON)]
+{$factsJson}
+TEXT;
+
+        if (!empty($notice)) {
+            $userContent .= "\n\n{$notice}";
+        }
 
         $payload = [
             'model'       => $this->model,
@@ -202,7 +251,7 @@ PROMPT;
                 ['role' => 'user', 'content' => $userContent],
             ],
             'temperature' => 0.0,
-            'max_tokens'  => 600,
+            'max_tokens'  => 700,
         ];
 
         $res = $this->sendHttpRequest($payload);

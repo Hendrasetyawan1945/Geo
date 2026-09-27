@@ -98,10 +98,12 @@ class SpatialQueryCompiler
             $params[] = '%' . $sir->adminArea . '%';
         }
 
-        // 5. Filter Tiket Gratis
-        if ($sir->isFree) {
+        // 5. Filter Tiket & Pagu Anggaran
+        if ($sir->isFree && ($sir->maxPrice === null || $sir->maxPrice === 0)) {
+            // Kasus A: Murni tiket gratis (Zero-Cost Invariant)
             $sql .= 'AND wisata.harga_tiket = 0 ';
         } elseif ($sir->maxPrice !== null) {
+            // Kasus B & C: Pagu anggaran maksimum (mencakup tiket gratis Rp 0 s.d. maxPrice)
             $sql .= 'AND wisata.harga_tiket <= ? ';
             $params[] = $sir->maxPrice;
         }
@@ -141,6 +143,9 @@ class SpatialQueryCompiler
             $sql .= 'ORDER BY wisata.harga_tiket DESC ';
         } elseif ($sir->sort === 'terbaik') {
             $sql .= 'ORDER BY wisata.rating DESC ';
+        } elseif ($sir->isFree && $sir->maxPrice !== null && $sir->maxPrice > 0) {
+            // Preferensi tiket gratis didahulukan dalam batas anggaran maksimal ({harga = 0} didahulukan)
+            $sql .= 'ORDER BY (wisata.harga_tiket = 0) DESC, wisata.harga_tiket ASC ';
         } elseif ($hasCoords) {
             $sql .= 'ORDER BY ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(?, ?)) ASC ';
             $params[] = $sir->longitude;

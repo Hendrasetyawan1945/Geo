@@ -53,6 +53,24 @@ class SirValidatorTest extends CIUnitTestCase
     }
 
     /**
+     * Uji Dimensi 2: No Intent Alteration - Radius melebihi batas operasional (> 50 km) harus DITOLAK, bukan di-clamp!
+     */
+    public function testExcessiveRadiusMustBeRejectedWithoutClamping()
+    {
+        $sir = new SpatialIntent(
+            spatialOperator: 'within_radius',
+            radius: 150.0
+        );
+
+        $res = $this->validator->validate($sir);
+
+        $this->assertFalse($res['isValid']);
+        $this->assertSame('rejected', $sir->validationStatus);
+        $this->assertSame('clarify_user', $sir->executionPolicy);
+        $this->assertStringContainsString('melebihi batas operasional Kota Padang', $sir->validationErrors[0]);
+    }
+
+    /**
      * Uji Dimensi 3: Operator tak dikenal harus GAGAL, bukan diam-diam dialihkan ke 'none'!
      */
     public function testUnknownOperatorMustFail()
@@ -84,9 +102,10 @@ class SirValidatorTest extends CIUnitTestCase
     }
 
     /**
-     * Uji Dimensi 5: Kontradiksi aturan operasional (is_free = true tapi max_price > 0).
+     * Uji Dimensi 5: Harmonisasi preferensi anggaran (is_free = true dan max_price > 0 bukan kontradiksi).
+     * Secara relasional {harga = 0} ⊆ {harga <= P}, sehingga kueri harus VALID.
      */
-    public function testContradictionBudgetConstraint()
+    public function testInclusiveBudgetConstraintIsValid()
     {
         $sir = new SpatialIntent(
             isFree: true,
@@ -95,8 +114,24 @@ class SirValidatorTest extends CIUnitTestCase
 
         $res = $this->validator->validate($sir);
 
+        $this->assertTrue($res['isValid']);
+        $this->assertEmpty($res['errors']);
+        $this->assertSame('execute_sql', $res['executionPolicy']);
+    }
+
+    /**
+     * Uji Dimensi 5: Harga maksimum negatif harus ditolak secara tegas.
+     */
+    public function testNegativePriceMustFail()
+    {
+        $sir = new SpatialIntent(
+            maxPrice: -5000
+        );
+
+        $res = $this->validator->validate($sir);
+
         $this->assertFalse($res['isValid']);
-        $this->assertStringContainsString('Kontradiksi batasan anggaran', $sir->validationErrors[0]);
+        $this->assertStringContainsString('tidak boleh bernilai negatif', $sir->validationErrors[0]);
     }
 
     /**

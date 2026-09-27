@@ -221,7 +221,7 @@ def make_flowchart_5layer_svg():
     <rect x="{bx + 14}" y="{by + 10}" width="195" height="18" rx="4" fill="#059669"/>
     <text x="{bx + 111}" y="{by + 23}" text-anchor="middle" class="font-base badge-text">LAYER 4: COMPILER SPASIAL</text>
     <text x="{bx + 218}" y="{by + 24}" class="font-base node-title">Spatial Query Compiler (Deterministik)</text>
-    <text x="{bx + 18}" y="{by + 46}" class="font-base node-desc">• Kompilasi CSIR ke SQL terparameterisasi dengan formula geodesik ST_Distance_Sphere</text>
+    <text x="{bx + 18}" y="{by + 46}" class="font-base node-desc">• Kompilasi CSIR ke SQL terparameterisasi dengan fungsi spasial bawaan ST_Distance_Sphere</text>
     <text x="{bx + 18}" y="{by + 62}" class="font-base node-desc">• Penyusunan klausa filter: radius_km, kategori_id, max_price, status_operasional, jam_buka</text>
   </g>
 ''')
@@ -505,9 +505,9 @@ def make_sequence_diagram_svg():
         (260, 2, 1, "3. Raw SIR DTO (JSON)", "intent, category, radius, price", True, "#64748b", "seqArrowDash"),
         (305, 1, 3, "4. validate(rawSir)", "Uji 6 dimensi invarian No Intent Alteration", False, "#d97706", "seqArrow"),
         (350, 3, 1, "5. Canonical SIR (CSIR)", "Status: validated, Policy: execute_sql", True, "#64748b", "seqArrowDash"),
-        (400, 1, 4, "6. compileAndExecute(csir, lat, lng)", "Kompilasi kueri geodesik ST_Distance_Sphere", False, "#059669", "seqArrowGreen"),
+        (400, 1, 4, "6. compileAndExecute(csir, lat, lng)", "Kompilasi kueri spasial ST_Distance_Sphere", False, "#059669", "seqArrowGreen"),
         (450, 4, 5, "7. SELECT ... ST_Distance_Sphere()", "Eksekusi SPATIAL INDEX R-Tree", False, "#0f766e", "seqArrow"),
-        (500, 5, 4, "8. Rows Data Fakta SQL", "Hasil terurut jarak geodesik (1,21 ms)", True, "#64748b", "seqArrowDash"),
+        (500, 5, 4, "8. Rows Data Fakta SQL", "Hasil terurut jarak lingkaran besar (1,21 ms)", True, "#64748b", "seqArrowDash"),
         (545, 4, 1, "9. Array Tupel Fakta Terverifikasi F", "Single Source of Truth", True, "#64748b", "seqArrowDash"),
         (595, 1, 6, "10. /route/v1/driving (user_coord, dest_coord)", "Kueri jaringan jalan raya turn-by-turn", False, "#0369a1", "seqArrow"),
         (640, 6, 1, "11. GeoJSON Polyline + Jarak & Durasi", "Geometri jalur jalan raya", True, "#64748b", "seqArrowDash"),

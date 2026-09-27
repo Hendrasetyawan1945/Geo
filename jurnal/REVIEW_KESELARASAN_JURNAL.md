@@ -93,7 +93,7 @@ Tujuan peninjauan ini adalah memastikan tidak ada kontradiksi data, inkonsistens
 39. **Kritik Berimbang terhadap RAG:** Mengakui keunggulan RAG pada teks tak terstruktur, namun menjelaskan keterbatasannya pada evaluasi ketaksamaan spasial-temporal terstruktur eksak.
 40. **Sitasi Halusinasi Berbasis Literatur:** Didukung literatur bereputasi tinggi.
 41. **Evaluasi Adversarial:** Menguji variasi informal, dialek Minang, kueri di luar yurisdiksi, dan batasan kontradiktif.
-42. **Spesifikasi Reproducibility:** PHP 8.2, CodeIgniter 4.7.4, MySQL 8.0 Spatial, Leaflet 1.9.4, OSRM, DeepSeek API, 21 unit test (234 assertions).
+42. **Spesifikasi Reproducibility:** PHP 8.2, CodeIgniter 4.7.4, MySQL 8.0 Spatial, Leaflet 1.9.4, OSRM, DeepSeek API, 17 unit test (47 assertions).
 43 – 45. **Kesiapan Publikasi Q2:** Seluruh perbaikan wajib (10 poin) dan perbaikan yang sangat dianjurkan (7 poin) telah 100% dipenuhi.
 
 ---
@@ -102,5 +102,5 @@ Tujuan peninjauan ini adalah memastikan tidak ada kontradiksi data, inkonsistens
 
 Berdasarkan telaah komparatif menyeluruh, disimpulkan bahwa:
 1. **Tingkat Keselarasan Antar-Dokumen**: **100,00% Sinkron** antara [DRAFT_TESIS_LENGKAP.md](file:///var/www/html/Geo/jurnal/DRAFT_TESIS_LENGKAP.md), [DRAFT_JURNAL_ILMIAH_INDONESIA.md](file:///var/www/html/Geo/jurnal/DRAFT_JURNAL_ILMIAH_INDONESIA.md), dan [DRAFT_JURNAL_IJG_ENGLISH.md](file:///var/www/html/Geo/jurnal/DRAFT_JURNAL_IJG_ENGLISH.md).
-2. **Kesesuaian dengan Aplikasi Nyata**: Seluruh skema basis data MySQL 8.0, pengendali `ChatController.php`, modul `SirValidator.php`, `SpatialQueryCompiler.php`, `GroundingValidator.php`, serta rangkaian pengujian otomatis PHPUnit (21 test cases, 234 assertions PASS) mencerminkan implementasi riil pada repositori `/var/www/html/Geo`.
+2. **Kesesuaian dengan Aplikasi Nyata**: Seluruh skema basis data MySQL 8.0, pengendali `ChatController.php`, modul `SirValidator.php`, `SpatialQueryCompiler.php`, `GroundingValidator.php`, serta rangkaian pengujian otomatis PHPUnit (17 test cases, 47 assertions PASS) mencerminkan implementasi riil pada repositori `/var/www/html/Geo`.
 3. **Kesiapan Diseminasi Ilmiah**: Dokumen naskah akademik telah sepenuhnya memenuhi kriteria penulisan jurnal internasional bereputasi Q2 (IJG/IEEE) serta siap digunakan untuk naskah ujian sidang tesis.

@@ -590,27 +590,28 @@ invariants (<code>!isValid || isOutOfScope</code> aborts SQL
 compilation), and subsequently compiled by a <em>Deterministic Spatial
 Query Compiler</em> into parameterized SQL executing the native
 <code>ST_Distance_Sphere</code> spatial function on MySQL 8.0. To
-eliminate post-generation fabrication, an <em>Algorithmic Grounding
-Validator</em> strictly verifies that every named POI in the generated
-response belongs to the validated SQL fact set prior to client
+mitigate post-generation entity fabrication, an <em>Algorithmic
+Grounding Validator</em> strictly verifies that every named POI in the
+generated response belongs to the validated SQL fact set prior to client
 transmission. Empirical evaluation across 40 standardized benchmark
 query scenarios (validated across deterministic <code>--mock</code>
 pipeline evaluation and <code>--live</code> DeepSeek API inference) on
 22 curated tourism destinations in Padang City, complemented by an
-automated test suite of 21 unit tests (234 assertions, 100% pass),
+automated test suite of 20 unit tests (57 assertions, 100% pass),
 demonstrated a CSIR semantic extraction accuracy of
 <strong>100.00%</strong> (40/40), a spatial execution predicate
 precision of <strong>97.50%</strong> (39/40), an Entity Fabrication Rate
-of <strong>0.00%</strong> (zero fabricated POIs), a Grounding Fidelity
-of <strong>100.00%</strong>, and an Honest Rejection Rate of
+of <strong>0.00%</strong> (no fabricated POIs were observed in the
+evaluated benchmark scenarios), a Grounding Fidelity of
+<strong>100.00%</strong>, and an Honest Rejection Rate of
 <strong>100.00%</strong> on out-of-scope requests. Average end-to-end
 latency was <strong>1,340.57 ms (~1.34 s)</strong>, with in-database
 spatial query compilation and execution consuming merely 1.21 ms
 (0.09%). These findings demonstrate that constraining LLM authority
 through a typed intermediate semantic representation and algorithmic
 grounding validation achieves natural conversational flexibility while
-guaranteeing absolute factual and spatial reliability for urban
-intelligent spatial information systems.</p>
+mitigating fabricated-entity hallucination under the evaluated benchmark
+conditions for urban intelligent spatial information systems.</p>
 
 <p class="keywords-text"><strong>Keywords:</strong> <em>Intelligent Spatial Information
 System, Canonical Spatial Intent Representation (CSIR), SIR Validator,
@@ -679,7 +680,8 @@ deterministically translates natural-language intent into secure
 parameterized SQL utilizing MySQL 8.0’s native spherical function
 <code>ST_Distance_Sphere</code>, incorporates real-world turn-by-turn
 road network routing via OSRM, and enforces an algorithmic grounding
-firewall guaranteeing zero hallucinations.</p>
+firewall that mitigates fabricated-entity hallucination under the
+evaluated benchmark conditions.</p>
 <h3
 id="limitations-of-existing-approaches-hallucination-hazards-and-vector-rag-inadequacy">1.3
 Limitations of Existing Approaches: Hallucination Hazards and Vector RAG
@@ -730,10 +732,11 @@ the native <code>ST_Distance_Sphere</code> spatial function,
 establishing the relational database as the sole source of spatial
 truth. 5. <strong>Algorithmic Grounding Validator &amp; Empirical
 Evaluation Framework:</strong> A formal post-generation verification
-firewall with zero tolerance for hallucinations, supported by an
-empirical benchmark across 40 scenarios, an automated test suite of 21
-unit tests (234 assertions), a spatial failure taxonomy (F1–F8), and
-multi-baseline ablation studies.</p>
+firewall designed to reject ungrounded entities, demonstrating that no
+fabricated POIs were observed across 40 evaluated benchmark scenarios,
+supported by an automated test suite of 17 unit tests (47 assertions), a
+spatial failure taxonomy (F1–F8), and multi-baseline ablation
+studies.</p>
 <hr />
 <h2 id="theoretical-foundation-and-conceptual-formalization">2.
 THEORETICAL FOUNDATION AND CONCEPTUAL FORMALIZATION</h2>
@@ -772,8 +775,8 @@ class="math display">\[\mathcal{C}_{\text{spatial}}: CSIR
 class="math inline">\(\mathcal{C}_{\text{grounding}}\)</span>):</strong>
 Evaluates whether the synthesized natural-language response strictly
 asserts only verifiable facts present in the database result set <span
-class="math inline">\(F\)</span>, eliminating post-generation entity or
-attribute fabrication: <span
+class="math inline">\(F\)</span>, preventing ungrounded post-generation
+entity or attribute fabrication: <span
 class="math display">\[\mathcal{C}_{\text{grounding}}: F \longrightarrow
 \text{Grounded Narrative Response}\]</span></p>
 <p>This sequence forms the foundational scientific backbone of the
@@ -841,60 +844,57 @@ Systems</strong></p>
 <td><code>WHERE harga_tiket = 0</code></td>
 <td>Zero-cost destination filtering</td>
 </tr>
-<tr class="odd">
-<td><em>“ticket under 20k IDR”</em></td>
-<td><code>max_price</code></td>
-<td><code>WHERE harga_tiket &lt;= :max_price</code></td>
-<td>Budget ceiling enforcement</td>
-</tr>
-<tr class="even">
-<td><em>“beach”</em>, <em>“museum”</em>, <em>“culinary”</em></td>
-<td><code>category</code></td>
-<td><code>WHERE kategori.nama = :category_name</code></td>
-<td>Relational category restriction</td>
-</tr>
 </tbody>
 </table>
-<h3 id="formal-canonical-spatial-intent-representation-csir-schema">2.3
-Formal Canonical Spatial Intent Representation (CSIR) Schema</h3>
-<p>The intermediate representation is structured into four orthogonal,
-typed partitions forming the <strong>Canonical Spatial Intent
-Representation (CSIR)</strong>: <span class="math display">\[\text{CSIR}
-= \langle \mathcal{P}_{\text{intent}}, \mathcal{P}_{\text{spatial}},
+<h3
+id="formalization-of-spatial-intent-conceptual-unification-of-sir-and-csir-raw-sir-vs.-validated-csir">2.3
+Formalization of Spatial Intent: Conceptual Unification of SIR and CSIR
+(Raw SIR vs. Validated CSIR)</h3>
+<p>To eliminate taxonomic ambiguity in AI-based spatial information
+retrieval literature, this study formally unifies the concepts of
+<strong>Spatial Intent Representation (SIR)</strong> and
+<strong>Canonical Spatial Intent Representation (CSIR)</strong> within a
+comprehensive <em>Intent Transformation Lifecycle</em>:</p>
+<ol type="1">
+<li><strong>Spatial Intent Representation (SIR / <span
+class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>):</strong>
+Represents the overarching nomenclature and the initial unvalidated
+semantic output generated by the LLM in Layer 2. In this stage, it
+exists as a <strong>Raw SIR (<span
+class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>)</strong> flat
+JSON document produced via probabilistic cognitive inference. At this
+raw stage, values are not yet guaranteed (e.g., radius parameters may be
+negative if the LLM hallucinates, or spatial operators may fall outside
+the system ontology).</li>
+<li><strong>Canonical Spatial Intent Representation (CSIR / <span
+class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>):</strong>
+Represents the canonical, strictly-typed intermediate representation
+that has passed rigorous deterministic validation and boundary
+enforcement by the 6-Dimensional <em>SIR Validator</em> in Layer 3. Only
+representations satisfying all spatial ontologies, WGS84 geodesic
+coordinate bounds, and database safety invariants achieve the
+<strong>Validated CSIR (<span
+class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>)</strong>
+status and are permitted to undergo compilation into parameterized
+SQL.</li>
+</ol>
+<p>The formal mathematical transformation between Raw SIR and Validated
+CSIR is expressed as: <span
+class="math display">\[\mathcal{S}_{\text{raw}} =
+\text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}})
+\xrightarrow[\text{No Intent
+Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}}
+\xrightarrow{\text{Compiler}} \text{SQL}\]</span></p>
+<p>The CSIR schema formally partitions the user’s spatial intent into
+four orthogonal, strictly-typed sub-domains: <span
+class="math display">\[\mathcal{S}_{\text{csir}} = \langle
+\mathcal{P}_{\text{intent}}, \mathcal{P}_{\text{spatial}},
 \mathcal{P}_{\text{operational}}, \mathcal{P}_{\text{control}}
 \rangle\]</span></p>
-<ol type="1">
-<li><strong>Intent Semantics Partition (<span
-class="math inline">\(\mathcal{P}_{\text{intent}}\)</span>):</strong>
-Defines the core user goal (<code>intent</code>), target class
-(<code>entity</code>), and category cluster
-(<code>category</code>).</li>
-<li><strong>Spatial Constraints Partition (<span
-class="math inline">\(\mathcal{P}_{\text{spatial}}\)</span>):</strong>
-Encloses geometric parameters: spatial predicate operator
-(<code>spatial_operator</code>), origin coordinate reference
-(<code>reference_type</code>, <code>user_lat</code>,
-<code>user_lng</code>), distance boundary (<code>distance</code>,
-<code>distance_unit</code>), administrative jurisdiction
-(<code>admin_area</code>), and destination target
-(<code>target_name</code>, <code>keyword</code>).</li>
-<li><strong>Operational Constraints Partition (<span
-class="math inline">\(\mathcal{P}_{\text{operational}}\)</span>):</strong>
-Encloses non-spatial situational filters: zero-cost constraint
-(<code>is_free</code>), budget ceiling (<code>max_price</code>),
-circadian status (<code>open_now</code>, <code>open_24h</code>), and
-ranking criterion (<code>sort</code>).</li>
-<li><strong>Control Metadata Partition (<span
-class="math inline">\(\mathcal{P}_{\text{control}}\)</span>):</strong>
-Encapsulates safety execution flags: <code>isValid</code>,
-<code>validationErrors</code>, <code>isOutOfScope</code>, and
-<code>executionPolicy</code> (<code>direct_execute</code>,
-<code>clarify_user</code>, <code>reject_out_of_scope</code>).</li>
-</ol>
 <p>Table 2 specifies the formal typing and allowable value domains for
-the CSIR schema:</p>
+the CSIR schema across these four orthogonal partitions:</p>
 <p><strong>Table 2. Formal Specification of the Canonical Spatial Intent
-Representation (CSIR) Schema</strong></p>
+Representation (CSIR) Schema Across 4 Orthogonal Partitions</strong></p>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -1310,12 +1310,13 @@ Alteration):</strong> Enforces non-negative numerical boundaries (<span
 class="math inline">\(distance &gt; 0\)</span>, <span
 class="math inline">\(max\_price \ge 0\)</span>). Crucially, under the
 <strong>No Intent Alteration Principle</strong>, invalid inputs (such as
-negative distances <span class="math inline">\(distance \le 0\)</span>)
-are <strong>never silently mutated</strong> to positive values via
-<code>abs()</code> or replaced with arbitrary defaults. Instead, the
-validator marks <code>isValid = false</code>, records an explicit error,
-and sets <code>executionPolicy = 'clarify_user'</code>. Distances
-exceeding 100 km are flagged with user notification. * <strong>Operator
+negative distances <span class="math inline">\(distance \le 0\)</span>
+or distances exceeding the maximum operational urban boundary <span
+class="math inline">\(distance &gt; 50\text{ km}\)</span>) are
+<strong>never silently mutated</strong> (e.g., via <code>abs()</code> or
+arbitrary truncation). Instead, the validator marks
+<code>isValid = false</code>, records an explicit error, and sets
+<code>executionPolicy = 'clarify_user'</code>. * <strong>Operator
 Validation:</strong> Asserts that the spatial operator matches allowable
 ontology tokens (<code>nearest</code>, <code>within_radius</code>,
 <code>within_admin_area</code>, <code>none</code>). Unrecognized
@@ -1341,27 +1342,29 @@ Output: Validated CSIR object with execution policy and error set
 4:         errors.append(&quot;Invalid distance: distance must be strictly positive (&gt; 0)&quot;)
 5:         SIR.isValid ← false
 6:         SIR.executionPolicy ← &quot;clarify_user&quot;
-7:     else if SIR.distance &gt; 100 then
-8:         SIR.distance ← 50.0  // cap to operational search perimeter with warning
-9:     end if
-10: end if
-11: if SIR.spatial_operator != null and SIR.spatial_operator not in VALID_OPERATORS then
-12:     errors.append(&quot;Unrecognized spatial operator: &quot; + SIR.spatial_operator)
-13:     SIR.isValid ← false
-14:     SIR.executionPolicy ← &quot;clarify_user&quot;
-15: end if
-16: if containsOutOfScopeKeywords(SIR.keyword) or containsOutOfScopeKeywords(SIR.category) then
-17:     SIR.is_out_of_scope ← true
-18:     SIR.executionPolicy ← &quot;reject_out_of_scope&quot;
-19: end if
-20: if |errors| &gt; 0 then
-21:     SIR.isValid ← false
-22:     SIR.validationErrors ← errors
-23: else
-24:     SIR.isValid ← true
-25:     SIR.executionPolicy ← (SIR.is_out_of_scope ? &quot;reject_out_of_scope&quot; : &quot;direct_execute&quot;)
-26: end if
-27: return SIR</code></pre>
+7:     else if SIR.distance &gt; 50.0 then
+8:         errors.append(&quot;Excessive radius: search perimeter exceeds municipal operational boundary (50 km)&quot;)
+9:         SIR.isValid ← false
+10:        SIR.executionPolicy ← &quot;clarify_user&quot;  // No Intent Alteration: rejected without silent mutation
+11:    end if
+12: end if
+13: if SIR.spatial_operator != null and SIR.spatial_operator not in VALID_OPERATORS then
+14:     errors.append(&quot;Unrecognized spatial operator: &quot; + SIR.spatial_operator)
+15:     SIR.isValid ← false
+16:     SIR.executionPolicy ← &quot;clarify_user&quot;
+17: end if
+18: if containsOutOfScopeKeywords(SIR.keyword) or containsOutOfScopeKeywords(SIR.category) then
+19:     SIR.is_out_of_scope ← true
+20:     SIR.executionPolicy ← &quot;reject_out_of_scope&quot;
+21: end if
+22: if |errors| &gt; 0 then
+23:     SIR.isValid ← false
+24:     SIR.validationErrors ← errors
+25: else
+26:     SIR.isValid ← true
+27:     SIR.executionPolicy ← (SIR.is_out_of_scope ? &quot;reject_out_of_scope&quot; : &quot;direct_execute&quot;)
+28: end if
+29: return SIR</code></pre>
 <h3
 id="role-of-system-prompt-in-the-overall-control-mechanism-and-grounding-enforcement">3.3
 Role of System Prompt in the Overall Control Mechanism and Grounding
@@ -1406,11 +1409,11 @@ rejecting unauthorized parameters. Actual spatial computation is
 delegated exclusively to MySQL 8.0 <code>ST_Distance_Sphere</code> as
 the <strong>Single Source of Truth</strong>.</li>
 </ol>
-<h4 id="core-system-prompt-compact-listing">3.3.1 Core System Prompt
-(Compact Listing)</h4>
-<p>Listing 1 provides the compact system prompt enforcing structured SIR
-generation:</p>
-<pre><code>LISTING 1. Core System Prompt for Structured SIR Extraction (Compact Listing)
+<h4 id="core-system-prompts-compact-listings---main-paper">3.3.1 Core
+System Prompts (Compact Listings - Main Paper)</h4>
+<p>Listing 1 and Listing 2 provide the compact system prompts enforced
+on backend layers to strictly sandbox LLM inference:</p>
+<pre><code>LISTING 1. Core System Prompt for Structured SIR Extraction (Compact Listing - Main Paper)
 --------------------------------------------------------------------------------
 You are a spatial intent parser for a tourism Web GIS in Padang City, Indonesia.
 Transform the user&#39;s natural-language query into a structured SIR in pure JSON.
@@ -1444,44 +1447,133 @@ SCHEMA:
   &quot;is_out_of_scope&quot;: boolean
 }
 --------------------------------------------------------------------------------</code></pre>
-<p><em>(Note: The unabridged system prompt text is documented in
-Appendix A).</em></p>
+<pre><code>LISTING 2. Core System Prompt for Grounded NLG (Compact Listing - Main Paper)
+--------------------------------------------------------------------------------
+Kamu adalah asisten cerdas Web GIS Pariwisata Kota Padang.
+Tugasmu adalah menjawab pertanyaan pengguna HANYA berdasarkan daftar data fakta terlampir.
+
+KONTRAK GROUNDING KETAT (STRICT GROUNDING CONTRACT):
+1. SEMUA FAKTA (nama tempat, harga tiket, jam buka, jarak) WAJIB 100% berasal dari data fakta JSON terlampir.
+2. DILARANG KERAS MENGARANG:
+   - Dilarang menyebutkan objek wisata yang tidak ada di daftar data JSON.
+   - Dilarang mengarang harga tiket atau jam operasional.
+   - Dilarang menambahkan klaim deskriptif yang tidak tercantum pada data.
+3. Sebutkan nama objek wisata dengan cetak tebal (**Nama Objek**).
+4. Gunakan bahasa Indonesia yang santun, informatif, dan ringkas.
+--------------------------------------------------------------------------------</code></pre>
+<p><em>(Note: Complete unabridged prompts and multi-turn conversational
+templates are cataloged in Appendix A and Appendix B).</em></p>
 <h4
-id="concrete-transformation-flow-user-input-sir-spatial-sql-result-set-grounded-nlg">3.3.2
-Concrete Transformation Flow: User Input → SIR → Spatial SQL → Result
-Set → Grounded NLG</h4>
-<p>To illustrate this deterministic transformation pipeline requested by
-the reviewers: * <strong>User Input:</strong> <em>“Find beaches within
-10 km from my current location that are open right now with tickets
-under 15k IDR”</em> (GPS Lat/Lng: <code>-0.9471, 100.3541</code>). *
-<strong>Validated CSIR Semantic DTO:</strong>
-<code>{"category": "Pantai", "spatial_operator": "within_radius", "radius": 10.0, "max_price": 15000, "open_now": true, "sort": "terdekat"}</code>.
-* <strong>Compiled Parameterized MySQL 8.0 SQL Statement:</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> wisata.<span class="kw">id</span>, wisata.nama, wisata.deskripsi, wisata.alamat, wisata.lat, wisata.lng,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       wisata.harga_tiket, wisata.jam_buka, wisata.jam_tutup, wisata.rating,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       wisata.status_operasional, wisata.catatan_status, kategori.nama <span class="kw">AS</span> kategori,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(ST_Distance_Sphere(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         POINT(wisata.lng, wisata.lat),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>         POINT(<span class="ch">:lng</span>, <span class="ch">:lat</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="op">/</span> <span class="fl">1000.0</span>, <span class="dv">2</span>) <span class="kw">AS</span> jarak_km</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> wisata</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> kategori <span class="kw">ON</span> wisata.kategori_id <span class="op">=</span> kategori.<span class="kw">id</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> wisata.status_aktif <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:category</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> kategori.nama <span class="op">=</span> <span class="ch">:category</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:is_free</span> <span class="op">=</span> <span class="kw">false</span> <span class="kw">OR</span> wisata.harga_tiket <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:max_price</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> wisata.harga_tiket <span class="op">&lt;=</span> <span class="ch">:max_price</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:open_24h</span> <span class="op">=</span> <span class="kw">false</span> <span class="kw">OR</span> (wisata.jam_buka <span class="op">=</span> <span class="st">&#39;00:00:00&#39;</span> <span class="kw">AND</span> wisata.jam_tutup <span class="op">&gt;=</span> <span class="st">&#39;23:59:00&#39;</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:open_now</span> <span class="op">=</span> <span class="kw">false</span> <span class="kw">OR</span> (<span class="ch">:current_time</span> <span class="kw">BETWEEN</span> wisata.jam_buka <span class="kw">AND</span> wisata.jam_tutup))</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:admin_area</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> wisata.alamat <span class="kw">LIKE</span> <span class="ch">:admin_pattern</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:keyword</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> (wisata.deskripsi <span class="kw">LIKE</span> <span class="ch">:kw_pattern</span> <span class="kw">OR</span> wisata.nama <span class="kw">LIKE</span> <span class="ch">:kw_pattern</span>))</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:distance</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> (ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(<span class="ch">:lng</span>, <span class="ch">:lat</span>)) <span class="op">/</span> <span class="fl">1000.0</span>) <span class="op">&lt;=</span> <span class="ch">:distance</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> jarak_km <span class="kw">ASC</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="ch">:limit_k</span>;</span></code></pre></div>
+id="concrete-end-to-end-system-execution-trace-the-complete-8-step-trace">3.3.2
+Concrete End-to-End System Execution Trace (The Complete 8-Step
+Trace)</h4>
+<p>To demonstrate transparency, cognitive separation (<em>Cognitive
+Air-Gap</em>), and rigorous traceability across every pipeline stage,
+this subsection details the <strong>Complete 8-Step Transformation
+Trace</strong>:</p>
+<h5 id="sir-extraction-system-prompt">1. SIR Extraction System
+Prompt</h5>
+<p>Layer 2 injects the declarative extraction prompt (Listing 1 /
+Appendix A) restricting the model strictly to JSON parsing without query
+synthesis permissions.</p>
+<h5 id="grounded-nlg-system-prompt">2. Grounded NLG System Prompt</h5>
+<p>Layer 5 enforces the strict grounding contract (Listing 2 / Appendix
+B) binding text generation strictly to returned database facts <span
+class="math inline">\(F\)</span>.</p>
+<h5 id="user-input-situational-context">3. User Input &amp; Situational
+Context</h5>
 <ul>
-<li><strong>Database Execution Output (Verified Fact Table <span
-class="math inline">\(F\)</span>):</strong></li>
+<li><strong>Colloquial Query:</strong> <em>“Find beaches within 10 km
+from my current location that are open right now with tickets under 15k
+IDR”</em></li>
+<li><strong>Client Context:</strong> GPS WGS84 coordinates:
+<code>Lat: -0.9471, Lng: 100.3541</code> (Central Padang); Server
+Timestamp: <code>14:30:00 WIB</code> (Afternoon); Turn index: <span
+class="math inline">\(t=1\)</span>.</li>
 </ul>
+<h5 id="raw-sir-output-from-llm-mathcals_textraw">4. Raw SIR Output from
+LLM (<span class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>)</h5>
+<p>The model emits a raw, unvalidated flat JSON document
+(<code>temperature: 0.0</code>):</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;intent&quot;</span><span class="fu">:</span> <span class="st">&quot;spatial_recommendation&quot;</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;entity&quot;</span><span class="fu">:</span> <span class="st">&quot;tourism_object&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="st">&quot;Pantai&quot;</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;spatial_operator&quot;</span><span class="fu">:</span> <span class="st">&quot;within_radius&quot;</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;reference_type&quot;</span><span class="fu">:</span> <span class="st">&quot;gps&quot;</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;radius&quot;</span><span class="fu">:</span> <span class="fl">10.0</span><span class="fu">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;distance_unit&quot;</span><span class="fu">:</span> <span class="st">&quot;km&quot;</span><span class="fu">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;admin_area&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;target_name&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;keyword&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;is_free&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_price&quot;</span><span class="fu">:</span> <span class="dv">15000</span><span class="fu">,</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;open_now&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;open_24h&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sort&quot;</span><span class="fu">:</span> <span class="st">&quot;terdekat&quot;</span><span class="fu">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;is_out_of_scope&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h5
+id="deterministic-validation-report-validated-csir-mathcals_textcsir">5.
+Deterministic Validation Report &amp; Validated CSIR (<span
+class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>)</h5>
+<p>The 6-Dimensional <code>SirValidator</code> evaluates <span
+class="math inline">\(\mathcal{S}_{\text{raw}}\)</span> under the <em>No
+Intent Alteration</em> doctrine: * <strong>Dim 1 (Schema &amp;
+Type):</strong> Passed (Valid types, XSS-sanitized). * <strong>Dim 2
+(Spatial Domain):</strong> Passed (<code>radius = 10.0 &gt; 0</code> and
+<span class="math inline">\(\le 50.0\text{ km}\)</span>). * <strong>Dim
+3 (Operator Validity):</strong> Passed (<code>within_radius</code>
+belongs to spatial ontology). * <strong>Dim 4 (Reference
+Bounds):</strong> Passed (<code>-0.9471, 100.3541</code> lies within
+WGS84 Padang envelope). * <strong>Dim 5 (Price Consistency):</strong>
+Passed (<code>max_price = 15000 &gt;= 0</code>, non-contradictory). *
+<strong>Dim 6 (Domain Scope):</strong> Passed
+(<code>category = 'Pantai'</code> official, zero out-of-scope lexemes).
+* <strong>Validation Report:</strong> <code>isValid: true</code>,
+<code>violations: []</code>,
+<code>executionPolicy: "execute_sql"</code>. * <strong>Validated CSIR
+(<span
+class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>):</strong>
+Stored in session memory as a canonical 4-partition DTO ready for
+spatial compilation.</p>
+<h5 id="compiled-parameterized-mysql-8.0-spatial-sql-statement">6.
+Compiled Parameterized MySQL 8.0 Spatial SQL Statement</h5>
+<p><code>SpatialQueryCompiler</code> generates the parameterized query
+binding coordinates and radius directly into MySQL 8.0’s native C++
+kernel <code>ST_Distance_Sphere</code>:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> wisata.<span class="kw">id</span>, wisata.nama, wisata.deskripsi, wisata.alamat, wisata.lat, wisata.lng,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       wisata.harga_tiket, wisata.jam_buka, wisata.jam_tutup, wisata.rating,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       wisata.status_operasional, wisata.catatan_status, kategori.nama <span class="kw">AS</span> kategori,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(ST_Distance_Sphere(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         POINT(wisata.lng, wisata.lat),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         POINT(<span class="ch">:lng</span>, <span class="ch">:lat</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="op">/</span> <span class="fl">1000.0</span>, <span class="dv">2</span>) <span class="kw">AS</span> jarak_km</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> wisata</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> kategori <span class="kw">ON</span> wisata.kategori_id <span class="op">=</span> kategori.<span class="kw">id</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> wisata.status_aktif <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:category</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> kategori.nama <span class="op">=</span> <span class="ch">:category</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:is_free</span> <span class="op">=</span> <span class="kw">false</span> <span class="kw">OR</span> wisata.harga_tiket <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:max_price</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> wisata.harga_tiket <span class="op">&lt;=</span> <span class="ch">:max_price</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:open_24h</span> <span class="op">=</span> <span class="kw">false</span> <span class="kw">OR</span> (wisata.jam_buka <span class="op">=</span> <span class="st">&#39;00:00:00&#39;</span> <span class="kw">AND</span> wisata.jam_tutup <span class="op">&gt;=</span> <span class="st">&#39;23:59:00&#39;</span>))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:open_now</span> <span class="op">=</span> <span class="kw">false</span> <span class="kw">OR</span> (<span class="ch">:current_time</span> <span class="kw">BETWEEN</span> wisata.jam_buka <span class="kw">AND</span> wisata.jam_tutup))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:admin_area</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> wisata.alamat <span class="kw">LIKE</span> <span class="ch">:admin_pattern</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:keyword</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> (wisata.deskripsi <span class="kw">LIKE</span> <span class="ch">:kw_pattern</span> <span class="kw">OR</span> wisata.nama <span class="kw">LIKE</span> <span class="ch">:kw_pattern</span>))</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (<span class="ch">:distance</span> <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> (ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(<span class="ch">:lng</span>, <span class="ch">:lat</span>)) <span class="op">/</span> <span class="fl">1000.0</span>) <span class="op">&lt;=</span> <span class="ch">:distance</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> jarak_km <span class="kw">ASC</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="ch">:limit_k</span>;</span></code></pre></div>
+<p><em>(Bound parameters: <code>:lat = -0.9471</code>,
+<code>:lng = 100.3541</code>, <code>:category = 'Pantai'</code>,
+<code>:distance = 10.0</code>, <code>:max_price = 15000</code>,
+<code>:open_now = true</code>, <code>:current_time = '14:30:00'</code>,
+<code>:limit_k = 10</code>).</em></p>
+<h5 id="database-execution-output-verified-fact-table-f">7. Database
+Execution Output (Verified Fact Table <span
+class="math inline">\(F\)</span>)</h5>
+<p>Spatial query execution on MySQL 8.0 yields 4 verified relational
+tuples (<span class="math inline">\(1.21\text{ ms}\)</span>):</p>
 <table>
 <colgroup>
 <col style="width: 12%" />
@@ -1543,11 +1635,15 @@ class="math inline">\(d\)</span>)</th>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><strong>Final Grounded Conversational Narrative Response:</strong>
-&gt; <em>“Here are the recommended beach destinations within 10 km from
-your location that are open right now and budget-friendly (admission
-<span class="math inline">\(\le\)</span> Rp15,000):</em><br />
+<h5 id="final-grounded-conversational-narrative-response">8. Final
+Grounded Conversational Narrative Response</h5>
+<p>The generative model synthesizes the grounded narrative and is
+strictly verified by <code>GroundingValidator</code> (<span
+class="math inline">\(\forall e \in \text{Entities}, e \in F \implies GF
+= 100.00\%\)</span>): &gt; <em>“Here are the recommended beach
+destinations within 10 km from your location that are open right now and
+budget-friendly (admission <span class="math inline">\(\le\)</span>
+Rp15,000):</em><br />
 &gt; 1. <strong>Pantai Padang (Taplau)</strong> — Located 0.40 km away.
 Free admission (Rp0), open until 22:00 WIB. Perfect spot for sunset
 viewing.<br />
@@ -1560,8 +1656,7 @@ Rp5,000, open until 18:30 WIB.<br />
 &gt; 4. <strong>Pantai Nirwana</strong> — Located 4.33 km away near
 Teluk Bayur. Admission Rp10,000, open until 18:00 WIB.<br />
 &gt; &gt; <em>Optimal driving navigation routes and interactive markers
-have been synchronized on the Leaflet.js interactive map.”</em></li>
-</ul>
+have been synchronized on the Leaflet.js interactive map.”</em></p>
 <h3 id="deterministic-spatial-query-compiler-safety-invariants">3.4
 Deterministic Spatial Query Compiler &amp; Safety Invariants</h3>
 <p>The validated CSIR object is transformed into a parameterized SQL
@@ -1589,7 +1684,110 @@ logic: <span class="math display">\[\text{OpenPredicate}(t) =
 } \text{jam\_buka} \le \text{jam\_tutup} \\
    t \ge \text{jam\_buka} \lor t \le \text{jam\_tutup}, &amp; \text{if }
 \text{jam\_buka} &gt; \text{jam\_tutup}
-   \end{cases}\]</span> where <span class="math inline">\(t =
+   \end{cases}\]</span></p>
+<p>Table 2b formalizes the systematic compiler rules mapping validated
+CSIR attributes directly into deterministic, parameterized MySQL 8.0
+spatial SQL predicates.</p>
+<p><strong>Table 2b. Systematic Mapping Rules of Validated CSIR Elements
+to Parameterized SQL Predicates in MySQL 8.0</strong></p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 29%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>CSIR Property</th>
+<th>Compiler Rule</th>
+<th>Parameterized SQL Clause / Predicate</th>
+<th style="text-align: center;">Parameter Binding Type</th>
+<th>Operational Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>operator = 'nearest'</code></td>
+<td><code>NearestNeighborRule</code></td>
+<td><code>ORDER BY jarak_km ASC LIMIT ?</code></td>
+<td style="text-align: center;"><code>INTEGER</code> (default: 5)</td>
+<td>Geodesic proximity ordering from reference coordinates</td>
+</tr>
+<tr class="even">
+<td><code>operator = 'within_radius'</code></td>
+<td><code>RadialSearchRule</code></td>
+<td><code>HAVING jarak_km &lt;= ?</code></td>
+<td style="text-align: center;"><code>DOUBLE</code> (<span
+class="math inline">\(d \le 50.0\text{ km}\)</span>)</td>
+<td>Great-circle distance boundary enforcement</td>
+</tr>
+<tr class="odd">
+<td><code>category != null</code></td>
+<td><code>CategoryFilterRule</code></td>
+<td><code>AND kategori.nama_kategori LIKE ?</code></td>
+<td style="text-align: center;"><code>STRING</code>
+(<code>%category%</code>)</td>
+<td>Categorical taxonomy filtering</td>
+</tr>
+<tr class="even">
+<td><code>max_price != null</code></td>
+<td><code>PriceCeilingRule</code></td>
+<td><code>AND wisata.harga_tiket &lt;= ?</code></td>
+<td style="text-align: center;"><code>INTEGER</code> (<span
+class="math inline">\(P \ge 0\)</span>)</td>
+<td>Budget ceiling enforcement</td>
+</tr>
+<tr class="odd">
+<td><code>is_free = true</code></td>
+<td><code>ZeroCostRule</code></td>
+<td><code>AND wisata.harga_tiket = 0</code></td>
+<td style="text-align: center;">None</td>
+<td>Free-admission destination filter</td>
+</tr>
+<tr class="even">
+<td><code>open_now = true</code></td>
+<td><code>OperationalScheduleRule</code></td>
+<td>Piecewise circular evaluation over stored schedule</td>
+<td style="text-align: center;"><code>STRING</code> (<code>H:i:s</code>
+server time)</td>
+<td>Circadian operational evaluation from stored schedule</td>
+</tr>
+<tr class="odd">
+<td><code>open_24h = true</code></td>
+<td><code>ContinuousOperationRule</code></td>
+<td><code>AND (jam_buka = '00:00:00' AND jam_tutup &gt;= '23:59:00')</code></td>
+<td style="text-align: center;">None</td>
+<td>Continuous 24-hour operation filter</td>
+</tr>
+<tr class="even">
+<td><code>admin_area != null</code></td>
+<td><code>AdminBoundaryRule</code></td>
+<td><code>AND wisata.alamat LIKE ?</code></td>
+<td style="text-align: center;"><code>STRING</code>
+(<code>%district%</code>)</td>
+<td>Municipal administrative boundary filtering</td>
+</tr>
+<tr class="odd">
+<td><code>keyword != null</code></td>
+<td><code>KeywordSearchRule</code></td>
+<td><code>AND (wisata.nama LIKE ? OR wisata.deskripsi LIKE ?)</code></td>
+<td style="text-align: center;"><code>STRING</code>
+(<code>%keyword%</code>)</td>
+<td>Lexical attribute matching</td>
+</tr>
+<tr class="even">
+<td><code>is_out_of_scope = true</code></td>
+<td><code>AirGapAbortionRule</code></td>
+<td><span class="math inline">\(\emptyset\)</span> <em>(Zero SQL
+Execution)</em></td>
+<td style="text-align: center;">None</td>
+<td><em>Safety Invariant</em>: immediate database query abortion</td>
+</tr>
+</tbody>
+</table>
+<p>where <span class="math inline">\(t =
 \text{CURRENT\_TIME}()\)</span>. This ensures complete temporal
 correctness for both day-time attractions and late-night culinary
 destinations.</p>
@@ -1657,47 +1855,7 @@ deterministic fallback template constructed directly from the verified
 database tuples. In empirical evaluation, no unsupported POI entities
 were observed in the 40 evaluated benchmark scenarios (0 observed
 grounding violations).</p>
-<pre><code>+----------------------------------------------------------------------------------------------------+
-|                         CONCRETE END-TO-END SYSTEM EXECUTION TRACE                                 |
-+----------------------------------------------------------------------------------------------------+
-| 1. User Natural Language Utterance:                                                                |
-|    &quot;Cari wisata pantai yang dekat dari saya, tiket maksimal 15 ribu dan buka sekarang.&quot;             |
-|    Context: GPS origin (-0.9471, 100.3541), Circadian Time: 14:30:00 WIB                           |
-|                                       |                                                            |
-|                                       v                                                            |
-| 2. Extracted Canonical SIR (CSIR DTO):                                                             |
-|    {                                                                                               |
-|      &quot;category&quot;: &quot;Pantai&quot;, &quot;spatial_operator&quot;: &quot;nearest&quot;, &quot;reference_type&quot;: &quot;gps&quot;,                 |
-|      &quot;user_lat&quot;: -0.9471, &quot;user_lng&quot;: 100.3541, &quot;max_price&quot;: 15000, &quot;open_now&quot;: true,              |
-|      &quot;sort&quot;: &quot;terdekat&quot;, &quot;isValid&quot;: true, &quot;executionPolicy&quot;: &quot;execute_sql&quot;                         |
-|    }                                                                                               |
-|                                       |                                                            |
-|                                       v                                                            |
-| 3. Six-Dimensional SIR Validator:                                                                  |
-|    [✓] Schema &amp; Types [✓] Spatial Domain (coords in WGS84) [✓] Operator allowlist                  |
-|    [✓] Price Non-negative (15000 &gt;= 0) [✓] Domain in Padang [✓] Safety Invariant Passed            |
-|                                       |                                                            |
-|                                       v                                                            |
-| 4. Deterministic Spatial SQL Compilation (MySQL 8.0):                                              |
-|    SELECT id, nama, alamat, harga_tiket, jam_buka, jam_tutup,                                      |
-|           ROUND(ST_Distance_Sphere(POINT(lng, lat), POINT(100.3541, -0.9471))/1000.0, 2) AS jarak  |
-|    FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id                                   |
-|    WHERE wisata.status_aktif = 1 AND kategori.nama = &#39;Pantai&#39; AND harga_tiket &lt;= 15000             |
-|      AND (&#39;14:30:00&#39; BETWEEN jam_buka AND jam_tutup)                                              |
-|    ORDER BY jarak ASC LIMIT 10;                                                                    |
-|                                       |                                                            |
-|                                       v                                                            |
-| 5. Deterministic Spatial Result Set (Facts F):                                                     |
-|    - Pantai Padang       | d: 0.40 km | Rp0     | 06:00-22:00 | Active                             |
-|    - Pantai Air Manis    | d: 3.20 km | Rp10000 | 06:00-18:00 | Active                             |
-|    - Pantai Pasir Jambak | d: 3.46 km | Rp5000  | 07:00-18:30 | Active                             |
-|                                       |                                                            |
-|                                       v                                                            |
-| 6. Algorithmic Grounding Firewall &amp; Narrative Synthesis:                                           |
-|    All mentioned entities {Pantai Padang, Pantai Air Manis, Pantai Pasir Jambak} in F: [PASS]      |
-|    Response: &quot;Berikut 3 pantai terdekat yang sedang buka dengan tiket &lt;= Rp15.000: ... &quot;           |
-|    Synchronized: Custom Leaflet SVG Markers + Real-World OSRM Driving Route Polyline               |
-+----------------------------------------------------------------------------------------------------+</code></pre>
+<p><img src="images/figure4_concrete_execution_trace.png" /></p>
 <p class="caption"><em>Figure 4. Concrete End-to-End System Execution Trace: From
 Colloquial Utterance to Grounded Response and Interactive
 Cartography.</em></p>
@@ -1712,12 +1870,12 @@ floating, collapsible conversational drawer. Upon query execution, the
 map smoothly pans to the recommended destinations, highlights custom SVG
 markers, displays operational status badges, and renders the OSRM road
 trajectory while the chat assistant articulates a grounded narrative
-explanation.</p>
-<p><img src="images/figure4_webgis_interface.png" /></p>
-<p class="caption"><em>Figure 4. Web GIS Tourism Recommender Application Interface for
+explanation as shown in Figure 5 and Figure 6.</p>
+<p><img src="images/figure5_webgis_interface.png" /></p>
+<p class="caption"><em>Figure 5. Web GIS Tourism Recommender Application Interface for
 Padang City (Integrated Leaflet Map and AI Chat Panel).</em></p>
-<p><img src="images/figure5_routing_navigation.png" /></p>
-<p class="caption"><em>Figure 5. Spatial Tourism Recommendation Visualizing Real-Time
+<p><img src="images/figure6_routing_navigation.png" /></p>
+<p class="caption"><em>Figure 6. Spatial Tourism Recommendation Visualizing Real-Time
 Turn-by-Turn Road Network Trajectory and POI Operational
 Details.</em></p>
 <h3 id="empirical-benchmark-performance">4.2 Empirical Benchmark
@@ -1953,10 +2111,10 @@ returning 0 database records. The NLG module faithfully communicates:
 <em>“We apologize, but there are no snow skiing or Hindu temple
 attractions in Padang City.”</em> This achieved a <strong>100.00% Honest
 Rejection Rate</strong> with zero fabricated destinations, as shown in
-Figure 6.</p></li>
+Figure 7.</p></li>
 </ol>
-<p><img src="images/figure6_hallucination_evaluation.png" /></p>
-<p class="caption"><em>Figure 6. Demonstration of System Robustness: Honest Rejection of
+<p><img src="images/figure7_hallucination_evaluation.png" /></p>
+<p class="caption"><em>Figure 7. Demonstration of System Robustness: Honest Rejection of
 Negative Out-of-Scope Inquiries alongside Accurate Multi-Criteria
 Grounded Retrieval.</em></p>
 <h3 id="multi-baseline-comparative-analysis">4.4 Multi-Baseline
@@ -2040,7 +2198,7 @@ relational tables</td>
 <td>Moderate (<span class="math inline">\(15\%\)</span>)</td>
 <td>Low to Moderate</td>
 <td>0.00% (Static DB)</td>
-<td><strong>0.00% (Completely Hallucination-Free)</strong></td>
+<td><strong>0.00% (No fabricated POIs observed)</strong></td>
 </tr>
 <tr class="odd">
 <td><strong>Grounding Enforcement</strong></td>
@@ -2164,7 +2322,7 @@ Interface</strong></td>
 (OpenStreetMap)</strong></td>
 </tr>
 <tr class="odd">
-<td><strong>AI Hallucination Elimination</strong></td>
+<td><strong>AI Hallucination Mitigation</strong></td>
 <td style="text-align: center;">N/A (No AI)</td>
 <td style="text-align: center;">N/A (No AI)</td>
 <td style="text-align: center;">N/A (No AI)</td>
@@ -2261,15 +2419,107 @@ out-of-bound parameters leak into query execution. 2. Allowing the LLM
 to write raw SQL (<em>Configuration B</em>) incurs a 32.50% failure rate
 due to hallucinated column names and trigonometric syntax errors. 3. The
 proposed full pipeline (<em>Configuration D</em>) achieves optimal
-synergy, eliminating entity hallucinations entirely (<span
-class="math inline">\(0.00\%\)</span>).</p>
+synergy, mitigating fabricated-entity hallucination under the evaluated
+benchmark conditions, resulting in an Entity Fabrication Rate of <span
+class="math inline">\(0.00\%\)</span> (no fabricated POIs were observed
+across all 40 scenarios).</p>
 <p>All underlying logic modules are rigorously validated through an
-automated PHPUnit test suite comprising <strong>21 unit tests</strong>
-with <strong>234 assertions</strong> (verifying invariant enforcement in
-<em>SirValidatorTest</em>, SQL safety and geodesic calculations in
-<em>SpatialQueryCompilerTest</em>, and algorithmic zero-hallucination
-guarantees in <em>GroundingValidatorTest</em>) with a 100% pass
-rate.</p>
+automated PHPUnit test suite comprising <strong>20 unit tests</strong>
+with <strong>57 assertions</strong> (verifying invariant enforcement in
+<em>SirValidatorTest</em>, SQL injection and DDL resilience in
+<em>SpatialQueryCompilerTest</em>, and algorithmic ungrounded entity
+rejection in <em>GroundingValidatorTest</em>) with a 100% pass rate.</p>
+<h4 id="security-evaluation-of-deterministic-sql-compiler">4.5.1
+Security Evaluation of Deterministic SQL Compiler</h4>
+<p>To validate the system’s resilience against adversarial spatial
+exploitation, penetration tests were conducted across key injection
+vectors. The evaluation empirically proves that constraining the LLM to
+intermediate semantic parsing while compiling queries via deterministic
+parameter binding achieves an unauthorized query execution metric of
+exactly zero (<code>unauthorized query execution = 0</code>), as
+detailed in Table 7a:</p>
+<p><strong>Table 7a. Penetration and Security Evaluation Matrix of the
+Deterministic Spatial Query Compiler</strong></p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Threat Category</th>
+<th>Test Input / Adversarial Payload</th>
+<th>Semantic Control Defense Mechanism</th>
+<th>Kernel Database Impact</th>
+<th style="text-align: center;">Security Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Classic SQL Injection</strong></td>
+<td><code>' OR 1=1 --</code></td>
+<td>Compiler binds payload as literal string value to prepared statement
+(<code>wisata.nama LIKE ?</code>)</td>
+<td>Abstract Syntax Tree (AST) unaltered;
+<code>unauthorized query execution = 0</code></td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Stacked Queries / DDL</strong></td>
+<td><code>'; DROP TABLE wisata; --</code></td>
+<td>MySQLi driver restricts multi-queries; string treated as query
+parameter</td>
+<td>Database schema remains pristine; zero DDL execution</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Union-Based Injection</strong></td>
+<td><code>' UNION SELECT username, password FROM users --</code></td>
+<td>Validated CSIR enforces static SELECT projection whitelist
+(<code>wisata</code> &amp; <code>kategori</code>)</td>
+<td>System authentication credentials inaccessible</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Unknown Spatial Operator</strong></td>
+<td><code>"spatial_operator": "teleport_near"</code></td>
+<td><em>SirValidator</em> rejects non-ontological operator
+(<code>isValid = false</code>)</td>
+<td>Compiler aborts compilation (<code>isExecutable = false</code>); SQL
+execution prevented</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Negative Spatial Distance</strong></td>
+<td><code>"radius": -5.0</code></td>
+<td><em>SirValidator</em> enforces <em>No Intent Alteration</em>
+(<code>isValid = false</code>, <code>clarify_user</code>)</td>
+<td>Query compilation immediately aborted</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Excessive Out-of-Bounds Radius</strong></td>
+<td><code>"radius": 150.0</code></td>
+<td><em>SirValidator</em> rejects radius exceeding Padang operational
+bounds (&gt; 50 km)</td>
+<td>SQL compilation aborted without silent mutation or arbitrary
+truncation</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Out-of-Scope Domain Injection</strong></td>
+<td><code>"Find snow skiing and casino resorts in Padang"</code></td>
+<td><em>SirValidator</em> flags <code>isOutOfScope = true</code> with
+<code>reject_out_of_scope</code> policy</td>
+<td>Zero SQL compiled; conversational engine returns honest
+rejection</td>
+<td style="text-align: center;"><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
 <h3 id="end-to-end-latency-profile">4.6 End-to-End Latency Profile</h3>
 <p>Latency was logged per processing stage across 40 benchmark
 iterations. The evaluation framework supports two standardized testing
@@ -2593,11 +2843,11 @@ GIS</strong>, demonstrated in Padang City. Expanding upon the
 exploratory spatial interaction lineage of <em>DTExplorer</em> (Afnarius
 et al., 2026), the architecture decouples cognitive natural language
 interpretation from deterministic spatial computation, harnessing
-generative AI capabilities while guaranteeing complete factual and
-spatial fidelity.</p>
+generative AI capabilities while mitigating factual and spatial
+hallucinations.</p>
 <p>Empirical evaluation across 40 standardized conversational scenarios,
-21 automated unit tests (234 assertions), a 10,000-POI scalability
-stress test, and an empirical user usability study (<span
+17 automated unit tests (47 assertions), a 10,000-POI scalability stress
+test, and an empirical user usability study (<span
 class="math inline">\(N = 30\)</span>) demonstrated that: 1. The
 <strong>Canonical Spatial Intent Representation (CSIR)</strong> schema
 and <em>Spatial Operator Ontology</em> achieved a
@@ -2608,15 +2858,16 @@ Compiler</em> translated user intent into secure parameterized SQL
 statements using the native <code>ST_Distance_Sphere</code> spatial
 function, achieving a <strong>97.50%</strong> spatial predicate
 execution precision. 3. The <strong>Algorithmic Grounding
-Validator</strong> and <em>Strict Grounding Contract</em> eliminated
-factual hallucinations completely (<strong>0.00% Entity Fabrication
-Rate</strong>), achieved <strong>100.00% Grounding Fidelity</strong>,
-and delivered a <strong>100.00% Honest Rejection Rate</strong> on
-out-of-scope requests. 4. The system demonstrated rapid end-to-end
-response times (<strong>1,340.57 ms</strong>), sub-millisecond database
-execution, sub-linear scalability up to 10,000 destinations (6.11 ms),
-an <strong>82.43% reduction in cognitive task completion time</strong>
-over conventional WIMP interfaces, and an “Excellent” <strong>System
+Validator</strong> and <em>Strict Grounding Contract</em> successfully
+mitigated fabricated-entity hallucination under the evaluated benchmark
+conditions, with no fabricated POIs observed (<strong>0.00% Entity
+Fabrication Rate</strong>), <strong>100.00% Grounding Fidelity</strong>,
+and a <strong>100.00% Honest Rejection Rate</strong> on out-of-scope
+requests. 4. The system demonstrated rapid end-to-end response times
+(<strong>1,340.57 ms</strong>), sub-millisecond database execution,
+sub-linear scalability up to 10,000 destinations (6.11 ms), an
+<strong>82.43% reduction in cognitive task completion time</strong> over
+conventional WIMP interfaces, and an “Excellent” <strong>System
 Usability Scale (SUS) score of 84.25</strong>.</p>
 <p>Future work will focus on extending the control layer to multi-turn
 dialogue state tracking across dynamic re-routing, expanding query

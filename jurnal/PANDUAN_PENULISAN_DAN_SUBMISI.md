@@ -58,13 +58,13 @@ pandoc /var/www/html/jurnal/DRAFT_TESIS_LENGKAP.md -o /var/www/html/jurnal/DRAFT
 Berikut adalah poin-poin kunci pembelaan (*defense points*) yang telah diperkuat dalam riset Anda:
 
 ### Q1: *"Mengapa menggunakan pendekatan SQL Grounding, bukan RAG vektor biasa?"*
-> **Jawaban:** RAG berbasis vektor (*vector embeddings*) mengandalkan kemiripan semantik teks (*cosine similarity*), sehingga sangat lemah dalam menangani filter matematis deterministik seperti jam buka operasional real-time, batas harga tiket masuk (contoh: `harga_tiket <= 15000`), dan kalkulasi jarak spasial geodesik. Melalui *Strict SQL Grounding*, LLM hanya menerjemahkan bahasa manusia menjadi parameter JSON, sedangkan query SQL MySQL 8.0 menjamin 100% fakta akurat, konsisten, dan bebas dari halusinasi faktual (*Zero Hallucination*).
+> **Jawaban:** RAG berbasis vektor (*vector embeddings*) mengandalkan kemiripan semantik teks (*cosine similarity*), sehingga sangat lemah dalam menangani filter matematis deterministik seperti jam buka operasional real-time, batas harga tiket masuk (contoh: `harga_tiket <= 15000`), dan kalkulasi jarak spasial bola bumi (*spherical distance*). Melalui *Strict SQL Grounding*, LLM hanya menerjemahkan bahasa manusia menjadi parameter JSON, sedangkan query SQL MySQL 8.0 menjadi sumber fakta relasional deterministik, memitigasi halusinasi entitas fiktif (tidak ditemukan fabricated POI pada skenario benchmark yang dievaluasi).
 
 ### Q2: *"Bagaimana cara sistem membuktikan bahwa tidak ada halusinasi?"*
 > **Jawaban:** Pada tahap evaluasi Bab 4, seluruh entitas tempat pada teks respons chatbot diaudit dan diverifikasi terhadap ID destinasi hasil query SQL. Dari 40 skenario pengujian, tingkat kecocokan grounding mencapai 100% (0 entitas fiktif). Bahkan saat diuji dengan kueri di luar cakupan (*out-of-scope*) seperti *"wisata salju di Padang"*, sistem secara konsisten menjawab jujur bahwa data tidak ditemukan, alih-alih mengarang entitas baru.
 
-### Q3: *"Apakah kalkulasi Haversine di database tidak membebani server?"*
-> **Jawaban:** Pengujian latensi membuktikan bahwa eksekusi query MySQL 8.0 termasuk kalkulasi formula trigonometri Haversine hanya memakan waktu rata-rata **2,85 ms** (hanya 0,21% dari total waktu respons). Waktu total sistem rata-rata adalah **1.381,90 ms (~1,38 detik)**, yang didominasi oleh pemrosesan LLM di cloud dan berada nyaman di bawah standar percakapan manusia (2000 ms).
+### Q3: *"Apakah kalkulasi jarak spasial di basis data tidak membebani server?"*
+> **Jawaban:** Pengujian latensi membuktikan bahwa eksekusi query MySQL 8.0 termasuk evaluasi fungsi spasial bawaan `ST_Distance_Sphere` hanya memakan waktu rata-rata **1,21 ms** (hanya 0,09% dari total waktu respons). Waktu total sistem rata-rata adalah **1.340,57 ms (~1,34 detik)**, yang didominasi oleh pemrosesan LLM di cloud dan berada nyaman di bawah batas latensi percakapan manusia (2000 ms).
 ---
 
 ## 5. Hubungan Khusus dengan Artikel Rujukan IJG (Afnarius et al., 2026)
@@ -84,8 +84,8 @@ Artikel rujukan yang Anda berikan:
 | **Tata Kelola POI** | Klaster POI desa homogen (homestay, atraksi lokal desa) | Web-crawled uncurated (rentan entitas usang/fiktif) | **22 POI terkurasi lintas 6 kategori perkotaan** (Pantai, Pulau, Alam, Sejarah, Kuliner, Hiburan) |
 | **Model Interaksi Pengguna** | Form filter UI tradisional (dropdown kategori & slider radius; friksi kognitif tinggi) | Chat teks murni (*chat-only*, tanpa representasi spasial) | **Dual-Synchronized Conversational Web GIS** (dialog alami bebas + peta Leaflet real-time) |
 | **Kueri Multi-Kriteria** | Kaku (kategori tunggal + radius radial) | Fleksibel bahasa alami namun atribut lepas kendali | **JSON Intent Parsing** (kategori, budget tiket, jam buka, cuaca, slang Minang, fuzzy) |
-| **Pencegahan Halusinasi AI** | Tidak relevan (tanpa LLM) | Rendah; rawan halusinasi spasial dan atribut usang | **Strict SQL Grounding** (Terbukti 100% Zero-Hallucination, 0 entitas fiktif) |
-| **Kalkulasi Jarak & Kedekatan** | Radius Euclidean sederhana di MySQL & Google Maps | Estimasi teks generatif (sering salah matematis) | Formula **Haversine** di MySQL 8.0 (latensi 2,85 ms) |
+| **Pencegahan Halusinasi AI** | Tidak relevan (tanpa LLM) | Rendah; rawan halusinasi spasial dan atribut usang | **Strict SQL Grounding** (Memitigasi halusinasi entitas; 0 entitas fiktif teramati pada benchmark) |
+| **Kalkulasi Jarak & Kedekatan** | Radius Euclidean sederhana di MySQL & Google Maps | Estimasi teks generatif (sering salah matematis) | Fungsi bawaan **`ST_Distance_Sphere`** di MySQL 8.0 (latensi 1,21 ms) |
 | **Perutean Jaringan Jalan** | Tidak ada (hanya titik penanda statis) | Tidak memiliki topologi jalan | **OSRM (Open Source Routing Machine)** navigasi nyata *turn-by-turn* |
 | **Infrastruktur Peta & Lisensi** | Google Maps API (proprietari, butuh API key berbayar & kuota) | Tidak ada kartografi | **OpenStreetMap + Leaflet.js + MySQL 8.0 + OSRM (100% FOSS & Bebas Kuota)** |
 | **Skala Validasi Empiris** | Skenario kualitatif desa (3–5 skenario) | Uji teks subjektif tanpa akurasi spasial formal | **Benchmark Kuantitatif 40 Skenario Terstandarisasi** (Akurasi 100%, Latensi ~1,38 s) |

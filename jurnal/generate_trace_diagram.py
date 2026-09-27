@@ -186,7 +186,7 @@ def make_trace_diagram_svg(lang="id"):
     # STEP 4: SPATIAL QUERY COMPILATION (MYSQL 8.0)
     bx = 50; by = 588; bw = 960; bh = 158
     step4_badge = "4. KOMPILASI KUERI SPASIAL SQL (DETERMINISTIK)" if is_id else "4. DETERMINISTIC SPATIAL SQL COMPILATION"
-    step4_title = "Kueri Geodesik Terparameterisasi (Formula ST_Distance_Sphere)" if is_id else "Parameterized Geodesic Query (ST_Distance_Sphere)"
+    step4_title = "Kueri Spasial Bola Bumi Terparameterisasi (ST_Distance_Sphere)" if is_id else "Parameterized Spherical Spatial Query (ST_Distance_Sphere)"
 
     svg.append(f'''
   <!-- STEP 4 -->

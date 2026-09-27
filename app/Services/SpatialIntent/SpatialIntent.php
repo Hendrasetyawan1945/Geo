@@ -222,4 +222,14 @@ class SpatialIntent
             ],
         ];
     }
+
+    /**
+     * Alias kanonik untuk representasi formal Canonical Spatial Intent Representation (CSIR).
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    public function toCsir(): array
+    {
+        return $this->toCanonicalArray();
+    }
 }

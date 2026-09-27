@@ -139,9 +139,9 @@ class SirValidator
             if ($sir->radius <= 0) {
                 // Menolak radius negatif/nol tanpa mengubah via abs()
                 $errors[] = sprintf('Radius pencarian tidak valid: %.2f km (harus berupa bilangan positif > 0).', $sir->radius);
-            } elseif ($sir->radius > 100.0) {
-                // Jika radius di luar jangkauan wajar perkotaan, normalisasi ke batas maksimum operasional
-                $sir->radius = self::MAX_OPERATIONAL_RADIUS_KM;
+            } elseif ($sir->radius > self::MAX_OPERATIONAL_RADIUS_KM) {
+                // Menolak radius di luar yurisdiksi operasional perkotaan tanpa mutasi sepihak (No Intent Alteration)
+                $errors[] = sprintf('Radius pencarian %.2f km melebihi batas operasional Kota Padang (maksimal %.1f km). Silakan tentukan jarak dalam jangkauan Kota Padang.', $sir->radius, self::MAX_OPERATIONAL_RADIUS_KM);
             }
         }
     }
@@ -184,20 +184,18 @@ class SirValidator
 
     /**
      * Dimensi 5: Operational & Price Constraints.
-     * Validasi batasan harga dan penyelesaian kontradiksi logika.
+     * Validasi batasan harga (non-negatif) dan harmonisasi preferensi anggaran.
+     * Catatan Formal: Kondisi is_free = true dan max_price > 0 BUKAN kontradiksi,
+     * melainkan relasi inklusi himpunan ({harga = 0} ⊆ {harga <= P}).
+     * Sistem memperlakukan kombinasi ini sebagai preferensi gratis dalam pagu anggaran maksimum.
      */
     private function validateOperationalConstraints(SpatialIntent $sir, array &$errors): void
     {
-        if ($sir->maxPrice !== null) {
-            if ($sir->maxPrice < 0) {
-                $errors[] = sprintf('Batas harga maksimum tidak boleh bernilai negatif (diterima: %d).', $sir->maxPrice);
-            }
+        if ($sir->maxPrice !== null && $sir->maxPrice < 0) {
+            $errors[] = sprintf('Batas harga maksimum tidak boleh bernilai negatif (diterima: %d).', $sir->maxPrice);
         }
-
-        // Kontradiksi: meminta tiket gratis namun menetapkan batas harga > 0
-        if ($sir->isFree && $sir->maxPrice !== null && $sir->maxPrice > 0) {
-            $errors[] = sprintf('Kontradiksi batasan anggaran: meminta tiket gratis (is_free = true) namun membatasi harga Rp%s.', number_format($sir->maxPrice, 0, ',', '.'));
-        }
+        // Catatan: is_free = true dengan max_price > 0 adalah valid (inklusif dengan preferensi gratis),
+        // sehingga TIDAK ditolak, melainkan dikompilasi menjadi filter anggaran berurutan prioritas.
     }
 
     /**

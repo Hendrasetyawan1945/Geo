@@ -92,4 +92,77 @@ class SpatialQueryCompilerTest extends CIUnitTestCase
         $this->assertStringContainsString('wisata.nama LIKE ?', $res['sql']);
         $this->assertContains('%' . $maliciousPayload . '%', $res['params']);
     }
+
+    /**
+     * Security Test 2: Injeksi DDL berbahaya (DROP TABLE wisata;).
+     * Memastikan string DDL diperlakukan sebagai literal pencarian teks, bukan pernyataan SQL independen.
+     */
+    public function testArbitraryDdlInjectionIsParameterized()
+    {
+        $maliciousDdl = "'; DROP TABLE wisata; --";
+        $sir = new SpatialIntent(
+            targetName: $maliciousDdl,
+            isValid: true
+        );
+
+        $res = $this->compiler->compile($sir);
+
+        $this->assertTrue($res['isExecutable']);
+        $this->assertStringNotContainsString("DROP TABLE", $res['sql']);
+        $this->assertContains('%' . $maliciousDdl . '%', $res['params']);
+    }
+
+    /**
+     * Security Test 3: Kueri out-of-scope harus menggagalkan kompilasi secara deterministik.
+     */
+    public function testOutOfScopeSirIsRejectedByCompiler()
+    {
+        $sir = new SpatialIntent(
+            isValid: false,
+            isOutOfScope: true
+        );
+
+        $res = $this->compiler->compile($sir);
+
+        $this->assertFalse($res['isExecutable']);
+        $this->assertSame('', $res['sql']);
+        $this->assertEmpty($res['params']);
+    }
+
+    /**
+     * Uji kompilasi tiket murni gratis (Zero-Cost Invariant: WHERE harga_tiket = 0).
+     */
+    public function testStrictFreeBudgetCompilation()
+    {
+        $sir = new SpatialIntent(
+            isFree: true,
+            maxPrice: null,
+            isValid: true
+        );
+
+        $res = $this->compiler->compile($sir);
+
+        $this->assertTrue($res['isExecutable']);
+        $this->assertStringContainsString('wisata.harga_tiket = 0', $res['sql']);
+    }
+
+    /**
+     * Uji kompilasi anggaran inklusif (is_free = true DAN max_price > 0).
+     * Harus mengizinkan tiket <= max_price dan memprioritaskan yang gratis (Rp 0).
+     */
+    public function testInclusiveBudgetCompilation()
+    {
+        $sir = new SpatialIntent(
+            isFree: true,
+            maxPrice: 15000,
+            isValid: true
+        );
+
+        $res = $this->compiler->compile($sir);
+
+        $this->assertTrue($res['isExecutable']);
+        $this->assertStringContainsString('wisata.harga_tiket <= ?', $res['sql']);
+        $this->assertStringContainsString('(wisata.harga_tiket = 0) DESC', $res['sql']);
+        $this->assertContains(15000, $res['params']);
+    }
 }
