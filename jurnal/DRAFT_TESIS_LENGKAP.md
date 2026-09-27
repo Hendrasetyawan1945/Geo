@@ -161,13 +161,13 @@ Guna memastikan konsistensi terminologis dan ketepatan pemodelan, penelitian ini
 Siklus hidup transformasi dinyatakan secara formal sebagai:
 $$\mathcal{S}_{\text{raw}} = \text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}}) \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}$$
 
-Secara matematis, CSIR dimodelkan sebagai tupel formal perantara semantik (*typed intermediate representation*):
+Secara matematis, CSIR dimodelkan sebagai tupel formal perantara semantik (*typed intermediate representation*) yang memiliki tepat 17 atribut:
 
-$$\text{CSIR} = \langle I, E, C, O_s, R_t, d, u_d, A, T_n, K, F, P_{\max}, O_{\text{now}}, O_{24}, S, B_{\text{out}} \rangle$$
+$$\text{CSIR} = \langle I, E, C, O_s, R_t, R_e, d, u_d, A, T_n, K, F, P_{\max}, O_{\text{now}}, O_{24}, S, B_{\text{out}} \rangle$$
 
-Agar berfungsi sebagai *compiler IR* yang kokoh, CSIR dipartisi ke dalam 3 kelompok semantik maksud pengguna dan 1 kelompok metadata kontrol sistem. Skema formal atribut disajikan pada Tabel 2.1.
+Agar berfungsi sebagai *compiler IR* yang kokoh, CSIR dipartisi ke dalam 3 kelompok semantik maksud pengguna dan 1 kelompok metadata kontrol sistem. Skema formal 17 atribut disajikan pada Tabel 2.1.
 
-**Tabel 2.1 Skema Formal Atribut Canonical Spatial Intent Representation (CSIR)**
+**Tabel 2.1 Skema Formal 17 Atribut Canonical Spatial Intent Representation (CSIR)**
 
 | Simbol | Atribut SIR | Tipe Data | Status | Nilai yang Diizinkan | Aturan Batasan (*Constraint*) | Pemetaan Kompiler SQL (*MySQL 8.0*) |
 |---|---|---|:---:|---|---|---|
@@ -175,8 +175,9 @@ Agar berfungsi sebagai *compiler IR* yang kokoh, CSIR dipartisi ke dalam 3 kelom
 | $E$ | `entity` | String | Wajib | `tourism_object` | Target objek semantik | Entitas relasi `wisata` |
 | $C$ | `category` | Enum/Null | Opsional | `Pantai`, `Pulau`, `Alam`, `Museum`, `Sejarah`, `Kuliner`, null | Terdaftar pada ontologi kategori | Klausul `WHERE kategori.nama = ?` |
 | $O_s$ | `spatial_operator` | Enum | Wajib | `nearest`, `within_radius`, `within_admin_area`, `none` | Terdaftar pada ontologi operator | Klausul spasial `WHERE` / `ORDER BY` |
-| $R_t$ | `reference_type` | Enum | Kondisional | `gps`, `city_center`, `poi`, `unknown` | Wajib jika $O_s \ne \text{none}$ | Penentu koordinat titik acuan parameter |
-| $d$ | `distance` | Float/Null | Kondisional | Bilangan riil $> 0.0$ (contoh: 5.0, 10.0) | $d > 0$ dan $d \le 50.0\text{ km}$ (*No Intent Alteration*: penolakan tanpa pemotongan sepihak jika melebihi batas operasional Kota Padang) | `WHERE (ST_Distance_Sphere(...) / 1000.0) <= ?` |
+| $R_t$ | `reference_type` | Enum | Kondisional | `gps`, `city_center`, `poi`, `unknown` | Wajib jika $O_s \ne \text{none}$ | Penentu tipe titik acuan parameter spasial |
+| $R_e$ | `reference_entity` | String/Null | Kondisional | Nama entitas POI rujukan eksplisit | Wajib jika $R_t = \text{poi}$ (contoh: "Pantai Air Manis") | Resolusi koordinat acuan via *Geocoding Lookup* |
+| $d$ | `distance` | Float/Null | Kondisional | Bilangan riil $> 0.0$ (contoh: 5.0, 10.0) | $d > 0$ dan $d \le 50.0\text{ km}$ (*No Intent Alteration*: penolakan tanpa pemotongan sepihak jika melebihi batas operasional) | `WHERE (ST_Distance_Sphere(...) / 1000.0) <= ?` |
 | $u_d$ | `distance_unit` | Enum | Kondisional | `km`, `m` | Normalisasi ke kilometer | Faktor skala pembagi (/ 1000.0) |
 | $A$ | `admin_area` | String/Null | Kondisional | Nama kecamatan di Kota Padang | Wajib jika $O_s = \text{within\_admin\_area}$ | Klausul `WHERE wisata.alamat LIKE ?` |
 | $T_n$ | `target_name` | String/Null | Opsional | Teks nama destinasi spesifik | Sanitasi tag HTML/karakter kontrol | Klausul `WHERE (wisata.nama LIKE ? OR ...)` |
@@ -188,7 +189,14 @@ Agar berfungsi sebagai *compiler IR* yang kokoh, CSIR dipartisi ke dalam 3 kelom
 | $S$ | `sort` | Enum/Null | Opsional | `termurah`, `termahal`, `terdekat`, `terbaik`, null | Normalisasi kata pengurutan | Klausul `ORDER BY` field terparameter |
 | $B_{\text{out}}$ | `is_out_of_scope` | Boolean | Sistem | `true`, `false` | Ditetapkan oleh *SirValidator* | Kebijakan `reject_out_of_scope` (Tanpa SQL) |
 
-Penting dicatat bahwa atribut kontrol sistem ($B_{\text{out}}$, `validation_status`, `execution_policy`) merupakan **metadata kendali sistem (*system decision*)**, bukan maksud semantik mentah pengguna. Pemisahan ini menjamin alur komputasi yang transparan antara ekstraksi semantik kognitif dan eksekusi kueri terisolasi.
+**Asal-Usul (*Provenance*) dan Pemisahan Tanggung Jawab Pembentukan Atribut CSIR:**
+Untuk menjamin prinsip pemisahan tanggung jawab (*separation of responsibilities*) yang ketat, arsitektur membedakan dengan tegas asal-usul sumber data setiap parameter CSIR:
+1. **Berasal dari LLM Layer 2 (Ekstraksi Semantik Probabilistik):** Maksud ($I$), kategori ($C$), operator spasial ($O_s$), tipe rujukan ($R_t$), nama entitas rujukan ($R_e$), radius ($d$), satuan ($u_d$), kecamatan ($A$), nama target ($T_n$), kata kunci ($K$), preferensi gratis ($F$), batas harga ($P_{\max}$), filter jam buka ($O_{\text{now}}, O_{24}$), dan pengurutan ($S$). LLM **DILARANG MENGARANG KOORDINAT LATITUDE/LONGITUDE**.
+2. **Berasal dari Konteks Aplikasi / Browser Pengguna:** Nilai koordinat numerik `latitude` dan `longitude` pengguna saat $R_t = \text{gps}$ diambil secara riil melalui *Browser Geolocation API* (W3C Standard) pada peramban pengguna, bukan diinferensi oleh LLM.
+3. **Berasal dari Deterministik Database Resolver:** Ketika $R_t = \text{poi}$, nilai koordinat titik acuan $(\text{lat}_{\text{ref}}, \text{lng}_{\text{ref}})$ diperoleh melalui *geocoding lookup* langsung dari basis data terhadap nama kanonikal $R_e$ yang terverifikasi.
+4. **Berasal dari Deterministik SIR Validator (Layer 3):** Status validitas (`isValid`), penanda luar lingkup ($B_{\text{out}}$), daftar galat invarian (`validation_errors`), serta kebijakan eksekusi sistem (`execution_policy`).
+
+Pemisahan ini menjamin alur komputasi yang transparan antara ekstraksi semantik kognitif dan eksekusi kueri terisolasi.
 
 Ontologi operator spasial ($O_s$) membatasi relasi geometris ke dalam spesifikasi kontrak formal yang disajikan pada Tabel 2.2.
 
@@ -886,10 +894,21 @@ Guna membuktikan ketahanan arsitektur lapisan kontrol semantik terhadap eksploit
 
 ### 4.6 Output Laporan dan Pembahasan Temuan Empiris
 
-#### 4.6.1 Metodologi Evaluasi: Mode Mock vs Mode Live
-Command evaluasi riset (`php spark riset:evaluasi`) dirancang dengan dua mode evaluasi yang memiliki peran metodologis tegas:
-1. **Mode Evaluasi Riil (`--live`):** Digunakan untuk menguji akurasi semantik model bahasa DeepSeek (v3/v4-flash) secara langsung melalui panggilan API jaringan riil (`temperature = 0.0`) dalam memetakan kalimat bahasa alami pengguna yang bervariasi ke dalam skema formal CSIR. Seluruh capaian akurasi inferensi semantik (100,00%) diperoleh melalui pengujian langsung pada mode live ini.
-2. **Mode Evaluasi Terkontrol (`--mock`):** Digunakan untuk mengevaluasi kinerja deterministik pipa arsitektur internal (kompiler kueri spasial, validator 6-dimensi, dan validator grounding algoritmik) dengan input representasi terstandarisasi. Mode ini menjamin keterulangan (*reproducibility*) pengujian komputasi basis data spasial bebas dari fluktuasi latensi jaringan internet dan variabilitas kuota API pihak ketiga.
+#### 4.6.1 Metodologi Evaluasi: Pemisahan Eksperimen A (LLM Semantic) dan Eksperimen B (Deterministic Pipeline)
+Untuk menjawab tuntutan ketelitian metodologis ilmiah dan menjamin transparansi atribusi capaian kinerja, evaluasi sistem dipisahkan secara tegas ke dalam dua eksperimen komplementer:
+
+1. **Eksperimen A — Evaluasi Ekstraksi Semantik LLM (*LLM Semantic Extraction Evaluation* / `--live`):**
+   - **Tujuan:** Menguji secara riil kemampuan model bahasa (DeepSeek API) dalam memetakan variasi bahasa alami pengguna (termasuk dialek lokal, kueri tersirat, dan variasi informal) menjadi representasi terstruktur *Raw SIR*.
+   - **Alur Pengujian:** $\text{Bahasa Alami (NL)} \to \text{LLM Inference (DeepSeek)} \to \text{Raw SIR}$.
+   - **Parameter Uji:** `temperature = 0.0`, `max_tokens = 500`, format respon JSON terikat kontrak 24-aturan.
+   - **Metrik yang Diukur:** Akurasi Maksud (*Intent Accuracy*), Akurasi Kategori (*Category Accuracy*), Akurasi Operator Spasial (*Spatial Operator Accuracy*), Akurasi Radius (*Radius Accuracy*), Akurasi Batasan Harga (*Price Accuracy*), Akurasi Batasan Temporal (*Temporal Accuracy*), dan *Overall Exact Field Match*.
+   - **Hasil:** LLM berhasil mencapai akurasi ekstraksi 100,00% (40/40) dan akurasi klasifikasi kategori 100,00% (40/40) pada korpus uji.
+
+2. **Eksperimen B — Evaluasi Ketahanan Pipa Deterministik (*Deterministic Pipeline Robustness* / `--mock`):**
+   - **Tujuan:** Menguji keandalan, ketahanan, dan integritas logika internal sistem tanpa bias fluktuasi latensi jaringan internet dan variabilitas pihak ketiga, menggunakan data representasi terstandarisasi (*Gold-Standard SIR*).
+   - **Alur Pengujian:** $\text{Gold SIR} \to \text{SirValidator (6-D)} \to \text{CSIR} \to \text{SpatialQueryCompiler} \to \text{MySQL 8.0} \to \text{GroundingValidator}$.
+   - **Metrik yang Diukur:** Presisi Spasial (*Spatial Precision*: 97,50%), Kepatuhan Invarian Deterministik (100%), *Grounding Fidelity* (100,00% dengan 0 pelanggaran teramati), Kecepatan Komputasi Spasial SQL (1,21 ms), dan *Honest Rejection Rate* (100,00%).
+   - **Signifikansi:** Pemisahan ini membuktikan bahwa capaian 100% *Grounding Fidelity* dan 0 *Fabricated POIs* merupakan bukti ketahanan arsitektur deterministik berlapis, bukan kebetulan probabilistik dari model bahasa.
 
 #### 4.6.2 Laporan Metrik Kinerja Benchmark 40 Skenario
 Evaluasi kuantitatif dieksekusi terhadap 40 skenario percakapan terstandarisasi yang mewakili berbagai kompleksitas spasial, temporal, dan operasional pariwisata Kota Padang. Ringkasan output laporan disajikan pada Tabel 4.4.
