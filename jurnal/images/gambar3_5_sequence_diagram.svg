@@ -126,10 +126,10 @@
   <text x="150.0" y="182" text-anchor="middle" class="font-base msg-note">Kirim kueri bahasa alami + koordinat GPS</text>
 
 
-  <!-- Message: 2. parseSIR(prompt, lat, lng) -->
+  <!-- Message: 2. parseSIR [LLM Call #1] (prompt, lat, lng) -->
   <line x1="220" y1="215" x2="370" y2="215" stroke="#7c3aed" stroke-width="1.6" marker-end="url(#seqArrowPurple)"/>
-  <rect x="194.2" y="197" width="201.60000000000002" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
-  <text x="295.0" y="209" text-anchor="middle" class="font-base msg-text" fill="#7c3aed">2. parseSIR(prompt, lat, lng)</text>
+  <rect x="146.2" y="197" width="297.6" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
+  <text x="295.0" y="209" text-anchor="middle" class="font-base msg-text" fill="#7c3aed">2. parseSIR [LLM Call #1] (prompt, lat, lng)</text>
   <text x="295.0" y="227" text-anchor="middle" class="font-base msg-note">Isolasi sandbox JSON, temp: 0.0</text>
 
 
@@ -158,21 +158,21 @@
   <line x1="220" y1="400" x2="670" y2="400" stroke="#059669" stroke-width="1.6" marker-end="url(#seqArrowGreen)"/>
   <rect x="321.8" y="382" width="246.4" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
   <text x="445.0" y="394" text-anchor="middle" class="font-base msg-text" fill="#059669">6. compileAndExecute(csir, lat, lng)</text>
-  <text x="445.0" y="412" text-anchor="middle" class="font-base msg-note">Kompilasi kueri geodesik ST_Distance_Sphere</text>
+  <text x="445.0" y="412" text-anchor="middle" class="font-base msg-note">Kompilasi kueri spasial ST_Distance_Sphere</text>
 
 
   <!-- Message: 7. SELECT ... ST_Distance_Sphere() -->
   <line x1="670" y1="450" x2="810" y2="450" stroke="#0f766e" stroke-width="1.6" marker-end="url(#seqArrow)"/>
   <rect x="623.2" y="432" width="233.60000000000002" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
   <text x="740.0" y="444" text-anchor="middle" class="font-base msg-text" fill="#0f766e">7. SELECT ... ST_Distance_Sphere()</text>
-  <text x="740.0" y="462" text-anchor="middle" class="font-base msg-note">Eksekusi SPATIAL INDEX R-Tree</text>
+  <text x="740.0" y="462" text-anchor="middle" class="font-base msg-note">Evaluasi Geodesik Native C++ (1,21 ms)</text>
 
 
   <!-- Message: 8. Rows Data Fakta SQL -->
   <line x1="810" y1="500" x2="670" y2="500" stroke="#64748b" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#seqArrowDash)"/>
   <rect x="661.6" y="482" width="156.8" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
   <text x="740.0" y="494" text-anchor="middle" class="font-base msg-text" fill="#64748b">8. Rows Data Fakta SQL</text>
-  <text x="740.0" y="512" text-anchor="middle" class="font-base msg-note">Hasil terurut jarak geodesik (1,21 ms)</text>
+  <text x="740.0" y="512" text-anchor="middle" class="font-base msg-note">Hasil terurut jarak lingkaran besar</text>
 
 
   <!-- Message: 9. Array Tupel Fakta Terverifikasi F -->
@@ -196,10 +196,10 @@
   <text x="580.0" y="652" text-anchor="middle" class="font-base msg-note">Geometri jalur jalan raya</text>
 
 
-  <!-- Message: 12. generateGroundedNlg(fakta_F, query) -->
+  <!-- Message: 12. generateGroundedNlg [LLM Call #2] (fakta_F, query) -->
   <line x1="220" y1="685" x2="370" y2="685" stroke="#7c3aed" stroke-width="1.6" marker-end="url(#seqArrowPurple)"/>
-  <rect x="162.2" y="667" width="265.6" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
-  <text x="295.0" y="679" text-anchor="middle" class="font-base msg-text" fill="#7c3aed">12. generateGroundedNlg(fakta_F, query)</text>
+  <rect x="114.19999999999999" y="667" width="361.6" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
+  <text x="295.0" y="679" text-anchor="middle" class="font-base msg-text" fill="#7c3aed">12. generateGroundedNlg [LLM Call #2] (fakta_F, query)</text>
   <text x="295.0" y="697" text-anchor="middle" class="font-base msg-note">Sintesis draf percakapan terikat fakta</text>
 
 

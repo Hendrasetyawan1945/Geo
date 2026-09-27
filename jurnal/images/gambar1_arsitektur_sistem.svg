@@ -74,8 +74,8 @@
     <rect x="66" y="518" width="38" height="24" rx="6" fill="#059669"/>
     <text x="85" y="534" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L4</text>
     <text x="114" y="534" class="font-base layer-title">DETERMINISTIC SPATIAL COMPUTATION LAYER (DATA STORAGE &amp; ENGINE)</text>
-    <text x="114" y="556" class="font-base layer-sub">MySQL 8.0 InnoDB (SRID 4326 POINT) | Komputasi Jarak Geodesik C++ Bawaan</text>
-    <text x="114" y="576" class="font-base layer-tech">ST_Distance_Sphere(POINT, POINT) / 1000.0 | SPATIAL INDEX (geom) | Filter Relasional (open_now, harga)</text>
+    <text x="114" y="556" class="font-base layer-sub">MySQL 8.0 InnoDB (SRID 4326 POINT) | Komputasi Jarak Bola Bumi C++ Bawaan</text>
+    <text x="114" y="576" class="font-base layer-tech">ST_Distance_Sphere(POINT, POINT) / 1000.0 | Fungsi Geodesik C++ Native | Filter Relasional (open_now, harga)</text>
   </g>
   <line x1="520.0" y1="594" x2="520.0" y2="630" stroke="#0284c7" stroke-width="2" marker-end="url(#archArrow)"/>
   <rect x="319.5" y="601.0" width="401.0" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>

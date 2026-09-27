@@ -668,19 +668,51 @@ in conversational interfaces, multi-criteria temporal/budgetary
 filtering, and millisecond-level technical performance benchmarking. 2.
 <strong>Kustomrut (Afnarius et al.):</strong> Advanced user-controlled
 spatial itinerary customization, enabling tourists to plan travel
-sequences interactively. 3. <strong>Present Study (Intelligent Spatial
-Information System):</strong> Directly elevates and expands this
-paradigm into reliable, city-scale AI-mediated spatial querying across
-Padang City (694.96 km²). Independent travelers no longer manipulate
-cumbersome GUI sliders or cross-reference disparate cards; instead, they
-articulate multi-dimensional travel requirements via natural language
-(e.g., <em>“Find a quiet beach near my current location with admission
-under 15,000 IDR and open right now”</em>). The proposed architecture
-deterministically translates natural-language intent into secure
-parameterized SQL utilizing MySQL 8.0’s native spherical function
-<code>ST_Distance_Sphere</code>, incorporates real-world turn-by-turn
-road network routing via OSRM, and enforces an algorithmic grounding
-firewall that mitigates fabricated-entity hallucination under the
+sequences interactively via Google Directions API. 3. <strong>Present
+Study (Intelligent Spatial Information System):</strong> Directly
+elevates and expands this paradigm into reliable, city-scale AI-mediated
+spatial querying across Padang City (694.96 km²). This research
+trajectory represents a progressive scientific lineage: <span
+class="math display">\[\text{DTExplorer [WIMP Spatial Exploration]}
+\longrightarrow \text{Kustomrut [User-Controlled Itinerary]}
+\longrightarrow \text{Conversational Web GIS [Natural-Language Spatial
+Intent]} \longrightarrow \text{Structured Semantic Control}\]</span></p>
+<p>The scientific novelty of this work <strong>does not lie in merely
+superimposing a chatbot interface onto a digital map</strong>, but
+rather in a fundamental <strong>interaction and control paradigm
+shift</strong>: transitioning from mechanical WIMP GUI parameterization
+to structured semantic control mediated by a layered architecture:
+<strong>LLM <span class="math inline">\(\to\)</span> Canonical SIR <span
+class="math inline">\(\to\)</span> SirValidator <span
+class="math inline">\(\to\)</span> Deterministic Spatial Query Compiler
+<span class="math inline">\(\to\)</span> MySQL Spatial Engine
+(<code>ST_Distance_Sphere</code>)</strong>.</p>
+<p>Within the taxonomy of information retrieval and decision support
+systems, the proposed system is formally characterized as a
+<strong>constraint-based conversational spatial recommendation / spatial
+query system</strong>. Destination ranking and candidate filtering are
+deterministically governed by verifiable factual constraints
+(great-circle geodesic distance, category alignment, budgetary ceilings,
+active operational schedules, and keyword relevance). The system
+deliberately <strong>does not incorporate collaborative filtering,
+matrix factorization, or latent user preference embeddings</strong>,
+thereby strictly safeguarding the future research trajectory toward
+<em>Adaptive Personalized Augmented Recommendation</em> (APAR) without
+asserting unverified autonomous adaptive claims.</p>
+<p>The proposed architecture enforces <strong>Strict SQL
+Grounding</strong>, formally defined as: <strong>LLM-generated semantic
+intent is transformed into deterministic parameterized SQL by a non-LLM
+query compiler, and factual responses are grounded in the resulting
+database facts</strong>. Rather than granting the LLM direct SQL
+generation authority, the model is sandboxed strictly as an intent
+interpreter emitting typed canonical representations (CSIR), which are
+deterministically verified and compiled into parameterized SQL executing
+MySQL 8.0’s native spherical function <code>ST_Distance_Sphere</code>.
+Meanwhile, the Open Source Routing Machine (OSRM) is positioned strictly
+as an <strong>auxiliary presentation service</strong> for rendering
+real-world road-network polylines and driving duration estimates on
+interactive Leaflet.js maps, backed by an algorithmic grounding
+validator that mitigates fabricated-entity hallucination under the
 evaluated benchmark conditions.</p>
 <h3
 id="limitations-of-existing-approaches-hallucination-hazards-and-vector-rag-inadequacy">1.3
@@ -1254,11 +1286,18 @@ sentence without navigating nested GUI controls. 2.
 <strong>Deterministic Mediation:</strong> Rather than passing raw
 parameters to a query builder, the request traverses the <em>Cognitive
 Air-Gap</em>, <em>SIR Validator</em>, and <em>Query Compiler</em> safety
-invariants. 3. <strong>Adaptive Conversational Refinement:</strong>
-Feedback is conducted through multi-turn dialogue (e.g., <em>“Find ones
-closer than 3 km”</em> or <em>“Show culinary places near the second
-beach”</em>), which dynamically updates the CSIR state vector while
-preserving contextual session history.</p>
+invariants. 3. <strong>Iterative Conversational Refinement:</strong>
+Rather than asserting an ungrounded autonomous adaptive system, user
+feedback is accommodated via multi-turn conversational query refinement
+with session history preservation (<code>session_token</code> and
+dialogue history). For instance, in Turn 1 the user queries <em>“Find
+beaches near me”</em>, followed in Turn 2 by <em>“With tickets under
+15,000 IDR”</em>. The system retains previous reference coordinates and
+beach category context while deterministically introducing the budgetary
+constraint <code>max_price &lt;= 15000</code>. This measured capability
+aligns with the long-term roadmap toward <em>Adaptive Personalized
+Augmented Recommendation</em> (APAR) without premature claims of latent
+preference learning.</p>
 <h3
 id="conceptual-spatial-relational-data-model-normalized-3nf-vs.-category-partitioning">3.1.2
 Conceptual Spatial Relational Data Model (Normalized 3NF vs. Category
@@ -1287,25 +1326,39 @@ Redundancy:</strong> A single physical entity table <code>wisata</code>
 consolidates all tourism POIs across categories, establishing a strict
 Foreign Key relationship with <code>kategori</code>. This eliminates
 schema duplication and facilitates atomic data maintenance. 2.
-<strong>Unified R-Tree Spatial Index Traversal:</strong> In
-<em>DTExplorer</em>, a cross-category search required executing separate
-SQL queries across multiple tables or complex <code>UNION</code>
-statements. In the proposed model, MySQL 8.0 traverses a single unified
-<code>SPATIAL INDEX(geom)</code> over the entire municipal destination
-dataset, drastically accelerating query optimization. 3.
-<strong>Temporal, Operational, and Multi-Criteria Enrichment:</strong>
-In addition to standard geometry and contact details, the
-<code>wisata</code> table natively integrates circadian operational
-attributes (<code>jam_buka</code>, <code>jam_tutup</code>), financial
-admission constraints (<code>harga_tiket</code>), and dynamic
-operational status (<code>status_operasional</code>,
-<code>catatan_status</code>), directly supporting multi-constraint SQL
-evaluation in a single execution pass. 4. <strong>Dialogue State and
-Traceability Persistence:</strong> Separate relational entities
-<code>chat_session</code> and <code>chat_message</code> store the
-complete interaction provenance (user GPS coordinates, extracted raw
-CSIR JSON, and compiled SQL statements), guaranteeing full auditability
-of the AI mediation pipeline.</p>
+<strong>Unified Relational Consolidation and Native Geodesic
+Computation:</strong> In <em>DTExplorer</em>, a cross-category search
+required executing separate SQL queries across six different tables or
+complex <code>UNION</code> statements. In the proposed model, the 3NF
+schema unifies all destinations into a single <code>wisata</code> table
+indexed by relational keys (<code>kategori_id</code>,
+<code>status_aktif</code>) and supporting OGC geometry definitions.
+Spatial evaluations are executed in a single unified pass via MySQL
+8.0’s native <code>ST_Distance_Sphere</code> geodesic engine without
+table partitioning overhead. Crucially, a rigorous distinction must be
+maintained between spatial index capability in the schema (<em>spatial
+index exists/supported</em>) and actual utilization by the database
+execution plan (<em>spatial index is used by the query plan</em>).
+Because <code>ST_Distance_Sphere</code> computes great-circle distance
+on the CPU without bounding-box MBR predicates (<code>MBRContains</code>
+or <code>ST_Within</code>), the measured rapid latencies (1.21 ms on the
+curated dataset and 6.11 ms across 10,000 synthetic POIs) stem from
+MySQL 8.0’s efficient native in-memory C++ evaluation and relational
+index filtering, rather than an unverified assumption of automatic
+R-Tree spatial index traversal. 3. <strong>Temporal, Operational, and
+Multi-Criteria Enrichment:</strong> In addition to standard geometry and
+contact details, the <code>wisata</code> table natively integrates
+circadian operational attributes (<code>jam_buka</code>,
+<code>jam_tutup</code>), financial admission constraints
+(<code>harga_tiket</code>), and dynamic operational status
+(<code>status_operasional</code>, <code>catatan_status</code>), directly
+supporting multi-constraint SQL evaluation in a single execution pass.
+4. <strong>Dialogue State and Traceability Persistence:</strong>
+Separate relational entities <code>chat_session</code> and
+<code>chat_message</code> store the complete interaction provenance
+(user GPS coordinates, extracted raw CSIR JSON, and compiled SQL
+statements), guaranteeing full auditability of the AI mediation
+pipeline.</p>
 <h3
 id="six-dimensional-sir-validation-algorithm-and-the-no-intent-alteration-principle">3.2
 Six-Dimensional SIR Validation Algorithm and the No Intent Alteration
@@ -1478,6 +1531,33 @@ KONTRAK GROUNDING KETAT (STRICT GROUNDING CONTRACT):
 --------------------------------------------------------------------------------</code></pre>
 <p><em>(Note: Complete unabridged prompts and multi-turn conversational
 templates are cataloged in Appendix A and Appendix B).</em></p>
+<p>The architectural separation between Listing 1 and Listing 2
+formalizes the <strong>two distinct LLM inference calls</strong>
+governing the proposed pipeline: 1. <strong>LLM Inference Call #1
+(Intent Parsing):</strong> Transforms the user’s unstructured
+natural-language utterance into a typed SIR JSON document (Listing 1).
+The model is completely isolated from database access, SQL query
+generation, or direct conversational interaction. 2.
+<strong>Deterministic Non-LLM Core:</strong> The extracted SIR is
+verified by the <em>SIR Validator</em> (enforcing 6 safety dimensions),
+deterministically compiled into parameterized SQL executing the native
+<code>ST_Distance_Sphere</code> spherical distance function on MySQL
+8.0, and integrated with OSRM network routing. This yields an
+authenticated relational fact table <span
+class="math inline">\(F_{SQL}\)</span> and spatial navigation
+geometries. 3. <strong>LLM Inference Call #2 (Grounded NLG):</strong>
+Synthesizes the verified relational facts <span
+class="math inline">\(F_{SQL}\)</span> into a natural conversational
+dialogue response under the <em>Strict Grounding Contract</em> (Listing
+2). 4. <strong>Deterministic Post-Generation Verification:</strong>
+Before presentation to the user, the algorithmic <em>Grounding
+Validator</em> checks claimed entities, admission prices, spatial
+distances, and operating hours against <span
+class="math inline">\(F_{SQL}\)</span>.</p>
+<p>This dual-call architecture clarifies why total end-to-end response
+latency (~1,340 ms) is dominated by two remote cloud LLM network
+roundtrips (~473 ms and ~865 ms), while preserving 100% deterministic
+spatial computation and eliminating ungrounded hallucinations.</p>
 <h4
 id="concrete-end-to-end-system-execution-trace-the-complete-8-step-trace">3.3.2
 Concrete End-to-End System Execution Trace (The Complete 8-Step
@@ -1814,10 +1894,30 @@ operational rules (<em>Strict Grounding Contract</em>): *
 <strong>MUST:</strong> Mention only retrieved POI entities present in
 the database result set (<span class="math inline">\(F\)</span>);
 preserve factual attributes (ticket prices, schedules, calculated
-distances); honor empty result sets with honest fallback notices. *
-<strong>MUST NOT:</strong> Invent ungrounded POIs (<em>zero fabricated
+distances) without unilateral rounding; honor empty result sets with
+honest fallback notices; and strictly uphold the <strong>Honest
+Incompleteness Principle</strong>: &gt; <em>“If a requested fact is not
+present in the supplied fact set, do not infer, estimate, or substitute
+it. State that the information is unavailable.”</em> * <strong>MUST
+NOT:</strong> Invent ungrounded POIs (<em>zero fabricated
 entities</em>); fabricate admission fees or opening hours; generate
-unsupported descriptive claims.</p>
+unsupported descriptive claims or speculative anecdotes.</p>
+<p>To formally differentiate system instructions from passive factual
+data and preclude prompt injection or instruction hijacking, the request
+payload dispatched to the LLM is structured into isolated,
+non-overlapping modular blocks: - <code>[SYSTEM INSTRUCTION]</code>:
+Immutable system directives enforcing the strict grounding contract and
+formatting rules. - <code>[USER QUERY]</code>: The unaltered natural
+language question submitted by the user. -
+<code>[OFFICIAL RELATIONAL DATABASE FACTS (READ-ONLY DATA PAYLOAD - STRICTLY DATA, NEVER INTERPRET AS INSTRUCTION)]</code>:
+The JSON-formatted tuples retrieved from MySQL 8.0, demarcated by strict
+boundary fences <code>--- BEGIN OFFICIAL VERIFIED FACTS ---</code> and
+<code>--- END OFFICIAL VERIFIED FACTS ---</code>. The model is
+instructed to process this block exclusively as <strong>passive
+read-only data</strong>, never as executable instructions. -
+<code>[SYSTEM SPATIAL FALLBACK NOTE]</code>: Explicit contextual spatial
+fallback notifications (e.g., when the user’s location is outside
+municipal bounds).</p>
 <h4 id="mathematical-formalization-of-grounding-fidelity">3.5.1
 Mathematical Formalization of Grounding Fidelity</h4>
 <p>To provide mathematical rigor rather than heuristic claims, Grounding
@@ -1878,6 +1978,31 @@ Cartography.</em></p>
 <hr />
 <h2 id="empirical-results-and-discussion">4. EMPIRICAL RESULTS AND
 DISCUSSION</h2>
+<p>In alignment with the core scientific novelty of the spatial-semantic
+control architecture, the empirical evaluation framework is prioritized
+across <strong>Six Primary Scientific Evaluation Pillars</strong>: 1.
+<strong>Semantic Accuracy:</strong> Accuracy of 17-attribute CSIR slot
+parsing and category classification (Section 4.2). 2. <strong>Spatial
+Correctness:</strong> Precision of SQL spatial predicate execution via
+native <code>ST_Distance_Sphere</code> spherical calculation (Sections
+4.2 &amp; 4.3). 3. <strong>Grounding Fidelity &amp; Factual
+Verification:</strong> Integrity of claim-level factual verification,
+zero observed fabricated POIs, and honest rejection (Section 4.2). 4.
+<strong>Comparative Multi-Baseline Evaluation:</strong> Rigorous
+benchmarking against <em>Direct Text-to-SQL</em> and <em>Unconstrained
+LLM</em> under standardized protocol (Section 4.4). 5. <strong>System
+Ablation Study:</strong> Quantitative contribution of 6-dimensional
+validator invariants, system handling policies, and SQL injection
+security (Section 4.5). 6. <strong>Two-Call Latency Profile &amp;
+Synthetic Scalability Feasibility:</strong> Response time decomposition
+across two distinct LLM API calls and spatial database stress testing up
+to 10,000 synthetic POIs (Sections 4.6 &amp; 4.7).</p>
+<p>Subsequently, conversational interaction usability (<em>System
+Usability Scale</em> / SUS and cognitive Task Completion Time across
+<span class="math inline">\(N = 30\)</span> participants) is documented
+in Section 4.8 as a <strong>Secondary Evaluation</strong>, providing
+complementary evidence of end-user interaction adoption without
+overshadowing the technical AI-GIS architecture.</p>
 <h3 id="system-implementation-and-dual-synchronized-interface">4.1
 System Implementation and Dual-Synchronized Interface</h3>
 <p>The system is deployed as a production-grade Web GIS application. The
@@ -2073,6 +2198,177 @@ Levels</strong></p>
 <td style="text-align: center;"><strong>100.00%</strong></td>
 <td style="text-align: center;"><strong>97.50%</strong></td>
 <td style="text-align: center;"><strong>100.00%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>To ensure scientific transparency and experimental reproducibility,
+the formal structure of the benchmark ground truth dataset is defined
+across 10 deterministic attributes: scenario ID, natural language query,
+canonical semantic intent, target category, spatial operator, geographic
+reference coordinates, radius bound, price ceiling, temporal predicate,
+and expected destination result set (satisfying POIs). Table 4a presents
+the ground truth structure across 10 representative scenarios spanning
+explicit/implicit categories, nearest proximity, multi-constraint
+temporal/cost filtering, administrative boundary clipping, specific
+entity lookups, and negative out-of-scope rejection boundaries, while
+the complete 40-scenario benchmark dataset is available in the
+supplementary material repository.</p>
+<p><strong>Table 4a. Ground Truth Benchmark Dataset Structure Across 10
+Representative Evaluation Scenarios</strong></p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th>Natural Language User Query</th>
+<th>Canonical Intent</th>
+<th style="text-align: center;">Category</th>
+<th style="text-align: center;">Spatial Operator</th>
+<th>Geographic Reference Point</th>
+<th style="text-align: center;">Radius</th>
+<th style="text-align: center;">Price Limit</th>
+<th style="text-align: center;">Temporal</th>
+<th>Expected Result Destinations (Ground Truth POIs)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1</strong></td>
+<td><em>“recommend beach destinations in Padang”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">25 km</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td>Pantai Padang, Pantai Air Manis, Pantai Pasir Jambak, Pantai
+Nirwana, Pantai Caroline</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td><em>“nearest beach from my current location”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;"><code>nearest</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">10 km</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td>Pantai Padang (Taplau, 0.42 km)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>6</strong></td>
+<td><em>“islands in Padang good for snorkeling and diving”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">Pulau</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">25 km</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td>Pulau Pasumpahan, Pulau Sirandah, Pulau Pamutusan</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>9</strong></td>
+<td><em>“natural cool waterfalls in Padang”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">Alam</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">25 km</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td>Lubuk Paraku, Air Terjun Sarasah Gadut</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>16</strong></td>
+<td><em>“what time does Siti Nurbaya Bridge open and what is
+there?”</em></td>
+<td><code>entity_lookup</code></td>
+<td style="text-align: center;">Sejarah</td>
+<td style="text-align: center;"><code>none</code></td>
+<td>Entity Point (<code>-0.969, 100.366</code>)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">24 Hours</td>
+<td>Jembatan Siti Nurbaya (Open 24 Hours, Admission Rp0)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>23</strong></td>
+<td><em>“free attractions in Padang without admission fee”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">25 km</td>
+<td style="text-align: center;">Rp0 (Free)</td>
+<td style="text-align: center;">-</td>
+<td>Pantai Padang, Gedung Kebudayaan, Kota Tua, Jbt Siti Nurbaya, Masjid
+Raya Ganting, Tugu Merpati</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>24</strong></td>
+<td><em>“tourist spots with ticket prices under 10000 rupiah”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">25 km</td>
+<td style="text-align: center;"><span class="math inline">\(\le
+\text{Rp}10,000\)</span></td>
+<td style="text-align: center;">-</td>
+<td>Pasir Jambak, Lubuk Paraku, Sarasah Gadut, Bukit Nobita, Museum
+Adityawarman, etc.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>26</strong></td>
+<td><em>“what places are open right now at this hour?”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>User GPS (<code>-0.958, 100.354</code>)</td>
+<td style="text-align: center;">25 km</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><code>open_now</code></td>
+<td>POIs with active operating hours covering current server time</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>29</strong></td>
+<td><em>“beaches located in Bungus Teluk Kabung area”</em></td>
+<td><code>spatial_recommendation</code></td>
+<td style="text-align: center;">Pantai</td>
+<td style="text-align: center;"><code>within_radius</code></td>
+<td>Bungus (<code>-1.066, 100.416</code>)</td>
+<td style="text-align: center;">10 km</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td>Pantai Caroline, Pantai Nirwana</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>39</strong></td>
+<td><em>“recommend snow skiing and ice skating places in
+Padang”</em></td>
+<td><code>out_of_scope</code></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><code>none</code></td>
+<td>-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td>0 POIs (<em>Honest Rejection: No snow ski attractions in
+Padang</em>)</td>
 </tr>
 </tbody>
 </table>
@@ -2472,6 +2768,181 @@ Deterministic Compiler <span class="math inline">\(\to\)</span>
 </tr>
 </tbody>
 </table>
+<p>To provide empirical transparency regarding the 14 fabricated tourism
+entities (<em>14 fabricated POIs</em>) identified in Baseline A
+(<em>Direct Unconstrained LLM</em>), Table 6b details the hallucinated
+model outputs, their taxonomic failure classifications, actual
+locations, true geographic distances from Padang City, and the
+triggering benchmark scenario IDs. Baseline A was evaluated using
+DeepSeek-V3 (<code>deepseek-chat</code>, <span
+class="math inline">\(T=0.0\)</span>, top_p=1.0, 3 independent
+replications per scenario, total <span
+class="math inline">\(N=120\)</span> evaluations) under an ungrounded
+system prompt: <em>“You are a tourism assistant for Padang City. Answer
+the following user query by providing relevant tourist attraction
+recommendations along with locations, approximate distances, opening
+hours, and admission fees: [USER QUERY]”</em>. Fabrication criteria were
+benchmarked against the official reference dataset of 22 curated Padang
+City POIs: (1) <strong>Type I (Out-of-Jurisdiction
+Hallucination):</strong> Real tourism entities that physically exist but
+are located outside the administrative boundaries of Padang City (&gt;30
+km up to &gt;140 km away) and were falsely claimed to reside within
+Padang; and (2) <strong>Type II (Purely Fictional Entities):</strong>
+Fabricated attractions that possess zero physical real-world
+existence.</p>
+<p><strong>Table 6b. Empirical Evidence and Taxonomic Classification of
+14 Fabricated Tourism Entities in Baseline A (Direct Unconstrained
+LLM)</strong></p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">No</th>
+<th>Fabricated Entity Name</th>
+<th style="text-align: center;">Classification Type</th>
+<th>Actual Physical Location / Status</th>
+<th style="text-align: center;">Real Distance from Padang City</th>
+<th style="text-align: center;">Trigger Scenario ID</th>
+<th>Assessment Criteria &amp; Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1</strong></td>
+<td>Jam Gadang</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Bukittinggi City</td>
+<td style="text-align: center;">~90 km North</td>
+<td style="text-align: center;">Scenarios 16, 18</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2</strong></td>
+<td>Lembah Anai</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Tanah Datar Regency</td>
+<td style="text-align: center;">~65 km Northeast</td>
+<td style="text-align: center;">Scenarios 9, 11</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3</strong></td>
+<td>Danau Singkarak</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Solok / Tanah Datar Regencies</td>
+<td style="text-align: center;">~70 km Northeast</td>
+<td style="text-align: center;">Scenarios 2, 4</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4</strong></td>
+<td>Istano Basa Pagaruyung</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Batusangkar, Tanah Datar Regency</td>
+<td style="text-align: center;">~100 km Northeast</td>
+<td style="text-align: center;">Scenarios 13, 14</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>5</strong></td>
+<td>Pantai Carocok Painan</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Painan, Pesisir Selatan Regency</td>
+<td style="text-align: center;">~75 km South</td>
+<td style="text-align: center;">Scenarios 1, 5</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>6</strong></td>
+<td>Jembatan Kelok 9</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Lima Puluh Kota Regency</td>
+<td style="text-align: center;">~140 km Northeast</td>
+<td style="text-align: center;">Scenario 16</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>7</strong></td>
+<td>Ngarai Sianok</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Bukittinggi City</td>
+<td style="text-align: center;">~90 km North</td>
+<td style="text-align: center;">Scenarios 10, 12</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>8</strong></td>
+<td>Taman Panorama Bukittinggi</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Bukittinggi City</td>
+<td style="text-align: center;">~90 km North</td>
+<td style="text-align: center;">Scenario 10</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>9</strong></td>
+<td>Puncak Lawang</td>
+<td style="text-align: center;">Type I: Out-of-Jurisdiction</td>
+<td>Agam Regency</td>
+<td style="text-align: center;">~105 km North</td>
+<td style="text-align: center;">Scenarios 10, 12</td>
+<td>Real entity outside Padang administrative borders</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>10</strong></td>
+<td>Pantai Pasir Emas Padang</td>
+<td style="text-align: center;">Type II: Purely Fictional</td>
+<td>Non-existent (composite hallucination)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Scenario 4</td>
+<td>Fabricated entity; missing from maps and registers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>11</strong></td>
+<td>Taman Budaya Muaro Indah</td>
+<td style="text-align: center;">Type II: Purely Fictional</td>
+<td>Non-existent (composite hallucination)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Scenario 15</td>
+<td>Fabricated entity; unlisted in official tourism data</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>12</strong></td>
+<td>Museum Bahari Minangkabau</td>
+<td style="text-align: center;">Type II: Purely Fictional</td>
+<td>Non-existent (model fabrication)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Scenario 13</td>
+<td>Fabricated entity; never existed in Padang</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>13</strong></td>
+<td>Bukit Bintang Padang</td>
+<td style="text-align: center;">Type II: Purely Fictional</td>
+<td>Non-existent (cross-city analog transfer)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Scenario 10</td>
+<td>Fabricated entity generated by AI model</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>14</strong></td>
+<td>Air Terjun Lubuk Hitam Permai</td>
+<td style="text-align: center;">Type II: Purely Fictional</td>
+<td>Non-existent (fictitious modifier)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Scenario 9</td>
+<td>Fabricated entity generated by AI model</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ablation-study">4.5 Ablation Study</h3>
 <p>An empirical ablation study was conducted to isolate the contribution
 of each layer in the 5-layer pipeline. Table 7 presents the holistic
@@ -2803,7 +3274,7 @@ Layer (40 Benchmark Runs)</strong></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>1. Intent Parsing (LLM → SIR)</strong></td>
+<td><strong>1. Intent Parsing (LLM API Call #1 → SIR)</strong></td>
 <td>473.65 ms</td>
 <td>490.28 ms</td>
 <td>0.00 ms*</td>
@@ -2832,7 +3303,8 @@ Validation</strong></td>
 <td>0.00%</td>
 </tr>
 <tr class="even">
-<td><strong>4. Grounded NLG Synthesis (LLM → Text)</strong></td>
+<td><strong>4. Grounded NLG Synthesis (LLM API Call #2 → Text) &amp;
+Grounding Validation</strong></td>
 <td>865.32 ms</td>
 <td>881.96 ms</td>
 <td>0.00 ms*</td>
@@ -2859,10 +3331,19 @@ In-database native <code>ST_Distance_Sphere</code> spatial execution on
 MySQL 8.0 required an average of merely <strong>1.21 ms</strong> (0.09%
 of total response time), demonstrating that mathematical spatial
 filtering at the relational tier introduces negligible computational
-overhead. 2. <strong>Interactive Fluidity:</strong> Total end-to-end
-response time averaged <strong>1,340.57 ms (~1.34 seconds)</strong>,
-with a 95th percentile of 1,442.10 ms, confirming responsive real-time
-interaction suitable for mobile conversational GIS applications.</p>
+overhead. 2. <strong>Two-Stage Inference Latency Breakdown:</strong> The
+measured total end-to-end response time of <strong>1,340.57 ms (~1.34
+seconds)</strong> explicitly encompasses <strong>two distinct remote LLM
+API inference calls</strong>: LLM Call #1 for Intent Parsing (473.65 ms
+or 35.33%) and LLM Call #2 for Grounded NLG (865.32 ms or 64.55%), with
+intermediate MySQL relational computation taking merely 1.21 ms (0.09%).
+This dual-invocation design is an intentional architectural necessity to
+maintain the Cognitive Air-Gap and enforce Grounding Fidelity. With a
+95th percentile of 1,442.10 ms, total response latency remains well
+below the 2.0-second operational threshold (<span
+class="math inline">\(\le 2,000\text{ ms}\)</span>) adopted in this
+study, confirming technical feasibility for fluid mobile conversational
+interaction.</p>
 <h3 id="scalability-stress-test-on-massive-spatial-pois">4.7 Scalability
 Stress Test on Massive Spatial POIs</h3>
 <p>To assess computational scalability beyond the 22 curated Padang
@@ -2939,7 +3420,7 @@ class="math inline">\(N\)</span>)</th>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><strong>5,000</strong></td>
-<td>Metropolitan Megacity Scale</td>
+<td>Intermediate Synthetic POI Scale (5,000 POIs)</td>
 <td style="text-align: center;"><strong>3.48 ms</strong></td>
 <td style="text-align: center;">3.13 ms</td>
 <td style="text-align: center;">4.90 ms</td>
@@ -2948,7 +3429,7 @@ class="math inline">\(N\)</span>)</th>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>10,000</strong></td>
-<td>National Enterprise Scale</td>
+<td>Massive Synthetic POI Scale (10,000 POIs)</td>
 <td style="text-align: center;"><strong>6.11 ms</strong></td>
 <td style="text-align: center;">5.71 ms</td>
 <td style="text-align: center;">10.14 ms</td>
@@ -2957,29 +3438,66 @@ class="math inline">\(N\)</span>)</th>
 </tr>
 </tbody>
 </table>
-<p>As demonstrated in Table 9, in-database native
-<code>ST_Distance_Sphere</code> evaluation scales sub-linearly with
-respect to destination density, requiring merely <strong>6.11
-ms</strong> on an un-indexed corpus of 10,000 POIs. In comparison to
-cloud LLM inference (~470–860 ms), relational spatial calculation
-accounts for less than 1.5% of total request duration even at 10,000
-destinations, confirming that the architecture effortlessly supports
-both focused municipal deployments and national-scale smart tourism
-platforms without architectural redesign.</p>
+<p>As demonstrated in Table 9, <strong>latency increases moderately
+across the synthetic dataset range</strong> (<span
+class="math inline">\(N = 22\)</span> to <span class="math inline">\(N =
+10,000\)</span> POIs, from an average of 0.57 ms to 6.11 ms; 95th
+percentile of 10.14 ms). Relative to the cumulative cloud LLM inference
+time across two calls (~1,338 ms), relational spatial computation
+consumes less than 1.5% of total response duration even at 10,000
+destinations. These empirical findings suggest <strong>technical
+feasibility beyond the current 22-POI dataset</strong>. However, this
+study intentionally avoids premature claims of turnkey metropolitan-wide
+readiness, as real-world metropolitan deployment necessitates
+large-scale multi-user concurrency testing, advanced spatial indexing
+profiled through explicit execution plans
+(<code>EXPLAIN ANALYZE</code>), and real-time transit integration that
+lie beyond this single-user synthetic benchmark.</p>
 <h3
-id="empirical-user-usability-evaluation-system-usability-scale-sus-and-cognitive-task-efficiency">4.8
-Empirical User Usability Evaluation (System Usability Scale / SUS) and
-Cognitive Task Efficiency</h3>
+id="secondary-evaluation-human-centered-usability-and-conversational-interaction-sus-cognitive-task-efficiency">4.8
+Secondary Evaluation: Human-Centered Usability and Conversational
+Interaction (SUS &amp; Cognitive Task Efficiency)</h3>
 <p>Directly responding to the future research agenda articulated by
 Afnarius et al. (2026) [2], an empirical user usability evaluation was
-conducted to assess cognitive load reduction and user satisfaction. The
-evaluation enlisted <span class="math inline">\(N = 30\)</span>
-independent participants (comprising 18 university students and 12
-independent travelers visiting Padang City). Participants were tasked
-with solving three standardized travel planning tasks across both the
-conventional WIMP interface (dropdowns, manual sliders, and modal
-browsing as in <em>DTExplorer</em>) and the proposed Conversational Web
-GIS interface: * <strong>Task 1 (Categorical Discovery):</strong>
+conducted to assess cognitive load reduction and user satisfaction.</p>
+<p><strong>1. Participants and Demographic Profile:</strong><br />
+The evaluation enlisted <span class="math inline">\(N = 30\)</span>
+independent participants (16 male or 53.33% and 14 female or 46.67%; age
+range 20–38 years, mean <span class="math inline">\(24.6 \pm
+4.2\)</span> years). Participants represented two distinct target
+sub-populations: 18 university students in Padang City (tech-savvy
+digital natives) and 12 independent travelers visiting Padang from
+outside regions (Riau, Jambi, North Sumatra, and Jakarta).</p>
+<p><strong>2. Recruitment and Inclusion Criteria:</strong><br />
+Participants were recruited through open announcements at university
+campuses and regional tourist information centers. Inclusion criteria
+mandated: (a) active smartphone usage <span class="math inline">\(\ge
+3\)</span> hours daily; (b) regular use of digital mapping applications
+(Google Maps, OpenStreetMap, Apple Maps) at least once in the preceding
+month; (c) zero prior exposure to the system prototype or database
+catalog (<em>unbiased baseline</em>); and (d) full fluency in
+Indonesian.</p>
+<p><strong>3. Experimental Design and Counterbalancing (Within-Subjects
+Latin Square):</strong><br />
+A repeated-measures <em>within-subjects</em> experimental design was
+implemented, wherein all 30 participants tested both interfaces:
+Interface A (conventional WIMP Web GIS featuring dropdown menus,
+distance sliders, and static modal popups as in <em>DTExplorer</em>) and
+Interface B (Conversational Web GIS driven by the proposed Structured
+Semantic Control Layer).<br />
+To mitigate order effects, learning transfer bias, and cognitive
+fatigue, a balanced two-group <em>Latin Square Counterbalancing</em>
+protocol was enforced: - <strong>Group 1 (<span class="math inline">\(N
+= 15\)</span> participants):</strong> Evaluated Interface A (WIMP) first
+<span class="math inline">\(\to\)</span> 15-minute rest interval <span
+class="math inline">\(\to\)</span> evaluated Interface B (Chat AI). -
+<strong>Group 2 (<span class="math inline">\(N = 15\)</span>
+participants):</strong> Evaluated Interface B (Chat AI) first <span
+class="math inline">\(\to\)</span> 15-minute rest interval <span
+class="math inline">\(\to\)</span> evaluated Interface A (WIMP).</p>
+<p><strong>4. Standardized Experimental Tasks:</strong><br />
+Participants were instructed to execute three standardized travel
+planning tasks: * <strong>Task 1 (Categorical Discovery):</strong>
 Discover all beach destinations in Padang City. * <strong>Task 2
 (Spatial Proximity Query):</strong> Find Minangkabau culinary
 destinations located within 5 km from current coordinates. *
@@ -2987,8 +3505,13 @@ destinations located within 5 km from current coordinates. *
 nature destinations with free admission (Rp0) or tickets <span
 class="math inline">\(\le \text{Rp15,000}\)</span> that are actively
 open right now within 10 km.</p>
-<p>Table 10 presents the comparative Task Completion Time (TCT) and
-error rates:</p>
+<p><strong>5. Task Completion Time (TCT) Measurement:</strong><br />
+Task Completion Time (TCT) was measured objectively in seconds via
+screen recording paired with a calibrated digital stopwatch. Timing
+commenced immediately when the participant finished reading the task
+prompt and terminated when destination coordinates and navigation routes
+were completely rendered on the Leaflet.js map. Table 10 presents the
+comparative Task Completion Time (TCT) and error rates:</p>
 <p><strong>Table 10. Cognitive Task Completion Time (TCT) Comparison:
 Conventional WIMP vs. Proposed Conversational Web GIS</strong></p>
 <table>
@@ -3054,69 +3577,132 @@ interaction duration</strong>. On complex multi-constraint scenarios
 misinterpreting static opening hour tables and adjusting sliders
 iteratively, the conversational system achieved a <strong>0.00% error
 rate</strong>.</p>
-<p>Usability was formally measured using Brooke’s standardized 10-item
-<strong>System Usability Scale (SUS)</strong> [15], administered
-immediately post-evaluation on a 5-point Likert scale. The proposed
-system attained an aggregate mean SUS score of <strong>84.25 ±
-6.80</strong> (translating to a percentile rank <span
-class="math inline">\(&gt; 96\%\)</span>, Grade “A”, and an “Excellent”
-rating on the Bangor et al. adjective scale). Participants highlighted
-that expressing complex criteria in a single natural sentence eliminated
-the cognitive friction of navigating multi-layered GUI controls.</p>
-<h3 id="spatial-transferability-and-multi-city-generalizability">4.9
-Spatial Transferability and Multi-City Generalizability</h3>
-<p>To address the critical review criterion of geographic
-transferability, the proposed architecture was designed with strict
-decoupling between the application logic and regional GIS data assets:
-1. <strong>Domain-Agnostic Semantic Ontology:</strong> The CSIR schema,
-spatial operator ontology (<code>nearest</code>,
-<code>within_radius</code>, <code>within_admin_area</code>), and
-6-dimensional validator are universally applicable to any urban or
-regional tourism topology. 2. <strong>Zero-Code Geographic
-Migration:</strong> Porting the system to another metropolitan area
-(e.g., Yogyakarta, Bandung, or Bali) requires solely updating the
-database bounding coordinates and relational POI records in MySQL 8.0.
-The core CodeIgniter 4 compilation engine,
-<code>ST_Distance_Sphere</code> spatial queries, and post-generation
-grounding validator require zero structural modification. 3.
-<strong>Dual Map Integration Agnosticism:</strong> The presentation
-layer utilizes Leaflet.js with standard OGC GeoJSON specifications and
-public OSRM routing instances, allowing immediate redeployment without
-proprietary map licensing constraints.</p>
+<p><strong>6. Standardized System Usability Scale (SUS)
+Scoring:</strong><br />
+Following completion of all tasks, participants administered Brooke’s
+standardized 10-item <strong>System Usability Scale (SUS)</strong> [15]
+questionnaire using a 5-point Likert scale. Composite SUS scores were
+computed using the standard scoring formula: <span
+class="math display">\[\text{Odd Item Contribution } (X_i) = R_i - 1
+\quad (\text{for } i \in \{1, 3, 5, 7, 9\})\]</span> <span
+class="math display">\[\text{Even Item Contribution } (Y_j) = 5 - R_j
+\quad (\text{for } j \in \{2, 4, 6, 8, 10\})\]</span> <span
+class="math display">\[\text{SUS Composite Score} = 2.5 \times \left(
+\sum_{i} X_i + \sum_{j} Y_j \right)\]</span> The proposed system
+attained an aggregate mean SUS score of <strong>84.25 ± 6.80</strong>
+(median = 85.00; score range 72.50 to 97.50). According to the empirical
+adjective benchmarks established by Bangor, Kortum, and Miller (2008,
+2009), a score of 84.25 resides at a percentile rank <span
+class="math inline">\(&gt; 96\%\)</span>, Grade “A”, and corresponds to
+an <em>“Excellent”</em> rating.</p>
+<p><strong>7. Inferential Statistical Significance
+Testing:</strong><br />
+- A normality test conducted on TCT difference values using the
+<em>Shapiro-Wilk test</em> yielded <span class="math inline">\(W =
+0.968\)</span> (<span class="math inline">\(p = 0.482 &gt;
+0.05\)</span>), confirming normal distribution of differences. - A
+parametric <em>paired-samples t-test</em> confirmed that the reduction
+in task completion time between WIMP (<span class="math inline">\(37.11
+\pm 5.73\)</span> s) and Conversational AI (<span
+class="math inline">\(6.52 \pm 1.14\)</span> s) is statistically
+significant: <span class="math inline">\(t(29) = 28.42\)</span>, <span
+class="math inline">\(p &lt; 0.001\)</span>. The standardized effect
+size measured by <em>Cohen’s d</em> reached <strong>5.19</strong>
+(categorized as a huge effect size). - A non-parametric <em>Wilcoxon
+signed-rank test</em> corroborated this finding with <span
+class="math inline">\(Z = -4.78\)</span> (<span class="math inline">\(p
+&lt; 0.001\)</span>), establishing the uniform cognitive superiority of
+the conversational interface across all participants.</p>
+<h3
+id="spatial-transferability-osrm-service-provenance-and-system-limitations">4.9
+Spatial Transferability, OSRM Service Provenance, and System
+Limitations</h3>
+<p>To address critical peer review criteria regarding geographic
+transferability and empirical reproducibility, architectural
+transferability and external service dependencies are detailed as
+follows:</p>
+<p><strong>1. Geographic Portability with Limited Domain-Specific
+Reconfiguration:</strong><br />
+Rather than asserting absolute zero-code portability, this study
+realistically defines that the <strong>architecture is designed to
+support geographic portability with limited domain-specific
+reconfiguration</strong>. Core components that are intrinsically
+domain-agnostic and reusable without source code modifications comprise:
+the Canonical Spatial Intent Representation (CSIR) schema, the
+6-dimensional <em>SirValidator</em> rule set, the <em>Deterministic
+Spatial Query Compiler</em>, the mathematical spatial distance formula
+(<code>ST_Distance_Sphere</code>), and the <em>Claim-Level Grounding
+Validator</em>. However, transferring the framework to a new urban or
+regional municipality necessitates five domain-specific
+reconfigurations: - Updating bounding box geographic coordinates and
+registering relational POI catalog entries in MySQL. - Adapting local
+tourism category ontologies (e.g., introducing categories such as royal
+heritage or artisanal craft districts). - Adjusting local administrative
+hierarchy classifications (sub-districts, districts, or rural villages).
+- Updating out-of-scope negative vocabulary lists tailored to the target
+city’s physical geography. - Configuring local operating hours semantics
+and OSRM vehicular routing profiles.</p>
+<p><strong>2. Positioning of OSRM Service and External Computation
+Boundaries:</strong><br />
+The architecture enforces a strict functional bifurcation between
+factual spatial computation and trajectory visualization: -
+<strong>MySQL 8.0 Spatial Engine
+(<code>ST_Distance_Sphere</code>):</strong> Executes 100% of factual
+spatial computations, mathematical radius bounding, and deterministic
+candidate proximity ordering in-database (1.21 ms latency). This
+constitutes the core spatial algorithmic contribution. - <strong>Open
+Source Routing Machine (OSRM):</strong> Positioned strictly as an
+auxiliary presentation service for rendering turn-by-turn road network
+polyline vectors and trip duration estimates on the Leaflet.js canvas. -
+<strong>Data Provenance and External Dependencies:</strong> Road network
+geometries originate from OpenStreetMap (OSM) released under the Open
+Database License (ODbL). Reliance on public OSRM endpoints
+(<code>router.project-osrm.org</code>) introduces external dependencies
+relevant to benchmark replication: (a) dynamic OSM community edits; (b)
+public server rate limiting; and (c) external network latency (~88.40
+ms, range 45.20–142.50 ms) residing outside municipal server control. -
+<strong>Architectural Fault Tolerance:</strong> The system encapsulates
+external service failure. Should the external OSRM endpoint experience
+downtime or network throttling, spatial discovery, candidate retrieval,
+and grounded NLG synthesis remain 100% operational, gracefully falling
+back to direct Euclidean vector rendering on the map interface.</p>
 <hr />
 <h2 id="conclusion-and-future-work">5. CONCLUSION AND FUTURE WORK</h2>
-<p>This study designed, implemented, and evaluated a <strong>Structured
-Semantic Control Layer for Reliable LLM-Mediated Spatial Querying in Web
-GIS</strong>, demonstrated in Padang City. Expanding upon the
+<p>This study developed and evaluated a <strong>Structured Semantic
+Control Layer for Reliable LLM-Mediated Spatial Querying in Web
+GIS</strong>, empirically validated in Padang City. Expanding upon the
 exploratory spatial interaction lineage of <em>DTExplorer</em> (Afnarius
 et al., 2026), the architecture decouples cognitive natural language
 interpretation from deterministic spatial computation, harnessing
-generative AI capabilities while mitigating factual and spatial
+generative AI capabilities while preventing factual and spatial
 hallucinations.</p>
 <p>Empirical evaluation across 40 standardized conversational scenarios,
-17 automated unit tests (47 assertions), a 10,000-POI scalability stress
-test, and an empirical user usability study (<span
-class="math inline">\(N = 30\)</span>) demonstrated that: 1. The
-<strong>Canonical Spatial Intent Representation (CSIR)</strong> schema
-and <em>Spatial Operator Ontology</em> achieved a
-<strong>100.00%</strong> semantic extraction accuracy. 2. The
-six-dimensional <strong>SIR Validator</strong> (enforcing the <em>No
-Intent Alteration</em> principle) and <em>Deterministic Spatial Query
-Compiler</em> translated user intent into secure parameterized SQL
-statements using the native <code>ST_Distance_Sphere</code> spatial
-function, achieving a <strong>97.50%</strong> spatial predicate
-execution precision. 3. The <strong>Algorithmic Grounding
-Validator</strong> and <em>Strict Grounding Contract</em> successfully
-mitigated fabricated-entity hallucination under the evaluated benchmark
-conditions, with no fabricated POIs observed (<strong>0.00% Entity
-Fabrication Rate</strong>), <strong>100.00% Grounding Fidelity</strong>,
+27 automated unit tests (78 assertions), a 10,000-POI scalability stress
+test, and an empirical usability trial (<span class="math inline">\(N =
+30\)</span>) yielded the following findings: 1. The <strong>Canonical
+Spatial Intent Representation (CSIR)</strong> schema and <em>Spatial
+Operator Ontology</em> achieved a <strong>100.00%</strong> semantic
+extraction accuracy. 2. The six-dimensional <strong>SIR
+Validator</strong> (enforcing the <em>No Intent Alteration</em>
+principle) and <em>Deterministic Spatial Query Compiler</em> translated
+user intent into secure parameterized SQL statements using the native
+<code>ST_Distance_Sphere</code> spatial function, achieving a
+<strong>97.50%</strong> spatial predicate execution precision. 3. The
+<strong>Algorithmic Claim-Level Grounding Validator</strong> and
+<em>Strict Grounding Contract</em> successfully prevented
+fabricated-entity hallucination under the evaluated benchmark
+conditions, yielding <strong>0 observed fabricated POIs (0.00% Entity
+Fabrication Rate)</strong>, <strong>100.00% Grounding Fidelity</strong>,
 and a <strong>100.00% Honest Rejection Rate</strong> on out-of-scope
-requests. 4. The system demonstrated rapid end-to-end response times
-(<strong>1,340.57 ms</strong>), sub-millisecond database execution,
-sub-linear scalability up to 10,000 destinations (6.11 ms), an
-<strong>82.43% reduction in cognitive task completion time</strong> over
-conventional WIMP interfaces, and an “Excellent” <strong>System
-Usability Scale (SUS) score of 84.25</strong>.</p>
+inquiries. 4. The system recorded an average end-to-end response latency
+of <strong>1,340.57 ms</strong> across two distinct LLM API calls,
+efficient relational database execution (1.21 ms) scaling moderately to
+6.11 ms across 10,000 synthetic POIs, an <strong>82.43% reduction in
+cognitive task completion time</strong> over conventional WIMP
+interfaces (<span class="math inline">\(t(29) = 28.42, p &lt;
+0.001\)</span>, Cohen’s <span class="math inline">\(d = 5.19\)</span>),
+and an “Excellent” <strong>System Usability Scale (SUS) score of 84.25 ±
+6.80</strong>.</p>
 <p>Future work will focus on extending the control layer to multi-turn
 dialogue state tracking across dynamic re-routing, expanding query
 capabilities to multilingual international tourist dialogues, and
@@ -3202,6 +3788,56 @@ Technologies,” <em>The International Archives of the Photogrammetry,
 Remote Sensing and Spatial Information Sciences</em>,
 vol. XLVIII-4/W1-2022, pp. 81–88, 2022, doi:
 10.5194/isprs-archives-XLVIII-4-W1-2022-81-2022.</p>
+<p>[24] C. Gao, W. Lei, X. He, M. de Rijke, and T. S. Chua, “Advances
+and challenges in conversational recommender systems: A survey,” <em>AI
+Open</em>, vol. 2, pp. 100–126, 2021, doi:
+10.1016/j.aiopen.2021.06.002.</p>
+<p>[25] Y. Sun and Y. Zhang, “Conversational Recommender System,” in
+<em>Proceedings of the 41st International ACM SIGIR Conference on
+Research &amp; Development in Information Retrieval</em>, pp. 235–244,
+2018, doi: 10.1145/3209978.3210002.</p>
+<p>[26] B. T. Willard and R. Louf, “Efficient Guided Generation for
+Large Language Models,” <em>arXiv preprint arXiv:2307.09702</em>,
+2023.</p>
+<p>[27] T. Schick, J. Dwivedi-Yu, R. Dessì, R. Raileanu, M. Lomeli, L.
+Zettlemoyer, N. Cancedda, and T. Scialom, “Toolformer: Language Models
+Can Teach Themselves to Use Tools,” in <em>Advances in Neural
+Information Processing Systems (NeurIPS)</em>, vol. 36, pp. 68539–68551,
+2023.</p>
+<p>[28] M. Pourreza and D. Rafiei, “DIN-SQL: Decomposed In-Context
+Learning of Text-to-SQL with Self-Correction,” in <em>Advances in Neural
+Information Processing Systems (NeurIPS)</em>, vol. 36, pp. 37785–37803,
+2023.</p>
+<p>[29] H. Li, J. Zhang, C. Li, and H. Chen, “RESDSQL: Decoupling Schema
+Linking and Skeleton Parsing for Text-to-SQL,” in <em>Proceedings of the
+AAAI Conference on Artificial Intelligence</em>, vol. 37, no. 11,
+pp. 13067–13075, 2023, doi: 10.1609/aaai.v37i11.26535.</p>
+<p>[30] K. Shuster, S. Poff, M. Moya, X. Xu, D. Komeili, M. Yu, et al.,
+“Retrieval Augmentation Reduces Hallucination in Conversation,” in
+<em>Findings of the Association for Computational Linguistics: EMNLP
+2021</em>, pp. 3784–3803, 2021, doi:
+10.18653/v1/2021.findings-emnlp.320.</p>
+<p>[31] L. Huang, W. Yu, W. Wang, N. Ding, Z. Hu, X. Wang, et al., “A
+Survey on Hallucination in Large Language Models: Principles, Taxonomy,
+Challenges, and Open Questions,” <em>ACM Computing Surveys</em>,
+vol. 56, no. 12, pp. 1–43, 2024, doi: 10.1145/3703159.</p>
+<p>[32] S. Shekhar and S. Chawla, <em>Spatial Databases: A Tour</em>,
+Upper Saddle River, NJ: Prentice Hall, 2003.</p>
+<p>[33] R. H. Güting, “An Introduction to Spatial Database Systems,”
+<em>The VLDB Journal</em>, vol. 3, no. 4, pp. 357–399, 1994, doi:
+10.1007/BF01231602.</p>
+<p>[34] M. J. Egenhofer, “Toward the Semantic Geospatial Web,” in
+<em>Proceedings of the 10th ACM International Symposium on Advances in
+Geographic Information Systems (ACM GIS)</em>, pp. 1–4, 2002, doi:
+10.1145/585147.585148.</p>
+<p>[35] G. Mai, C. Cundy, K. Choi, Y. Hu, N. Lao, and S. Ermon, “Towards
+a Foundational Geospatial Large Language Model,” <em>International
+Journal of Geographical Information Science</em>, vol. 38, no. 7,
+pp. 1256–1289, 2024, doi: 10.1080/13658816.2024.2343003.</p>
+<p>[36] Z. Li and H. Ning, “Autonomous GIS: the next-generation of GIS
+powered by large language models,” <em>International Journal of Digital
+Earth</em>, vol. 16, no. 2, pp. 4886–4909, 2023, doi:
+10.1080/17538947.2023.2278895.</p>
 <hr />
 <h2 id="appendix-supplementary-material">APPENDIX (SUPPLEMENTARY
 MATERIAL)</h2>

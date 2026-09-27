@@ -67,7 +67,7 @@ def make_operational_framework_svg(lang="id"):
             "color_top": "#059669",
             "color_bg": "#f0fdf4",
             "color_border": "#bbf7d0",
-            "bullet1": escape_xml("• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (SPATIAL INDEX pada geom POINT)" if is_id else "• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (SPATIAL INDEX on geom POINT)"),
+            "bullet1": escape_xml("• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (Indeks Relasional & Geometri OGC)" if is_id else "• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (Relational Index & OGC Geometry)"),
             "bullet2": escape_xml("• Kernel C++: ST_Distance_Sphere(POINT(lng, lat), POINT(u_lng, u_lat)) / 1000.0" if is_id else "• C++ Kernel: ST_Distance_Sphere(POINT(lng, lat), POINT(u_lng, u_lat)) / 1000.0"),
             "bullet3": escape_xml("• Filter multi-kriteria: open_now, max_price, status ==> Tupel Fakta Tervalidasi F" if is_id else "• Multi-criteria filter: open_now, max_price, status ==> Verified Fact Table F"),
             "arrow": escape_xml("Himpunan Tupel Fakta Terverifikasi F = {t1, t2, ..., tk}" if is_id else "Verified Fact Tuples Set F = {t1, t2, ..., tk}")
@@ -380,12 +380,12 @@ def make_database_erd_svg(lang="id"):
   <rect x="420" y="185" width="60" height="24" rx="6" fill="#0284c7"/>
   <text x="450" y="201" text-anchor="middle" class="font-base" font-weight="700" font-size="11px" fill="#ffffff">1 : N</text>
 
-  <!-- Spatial Index Callout Box -->
+  <!-- Spatial Relational Callout Box -->
   <g filter="url(#erdShadow)">
     <rect x="50" y="380" width="340" height="150" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-    <text x="70" y="410" class="font-base" font-weight="700" font-size="13px" fill="#166534">SPATIAL INDEX &amp; FUNGSI GEODETIK</text>
+    <text x="70" y="410" class="font-base" font-weight="700" font-size="13px" fill="#166534">SPASIAL RELASIONAL &amp; FUNGSI GEODETIK</text>
     <line x1="70" y1="420" x2="370" y2="420" stroke="#bbf7d0" stroke-width="1"/>
-    <text x="70" y="445" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• SPATIAL INDEX (geom) pada MySQL 8.0</text>
+    <text x="70" y="445" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Indeks Relasional &amp; Skema OGC-Ready</text>
     <text x="70" y="468" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• ST_Distance_Sphere(geom, POINT(u_lng, u_lat))</text>
     <text x="70" y="491" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• ST_Distance_Sphere: Jarak Great-Circle Presisi Tinggi</text>
     <text x="70" y="514" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Filter Multikriteria: status, jam_buka, harga_tiket</text>
@@ -433,7 +433,7 @@ def make_architecture_5layer_svg(lang="id"):
             "num": "L4",
             "name": escape_xml("DETERMINISTIC SPATIAL COMPUTATION LAYER (DATA STORAGE & ENGINE)"),
             "sub": escape_xml("MySQL 8.0 InnoDB (SRID 4326 POINT) | Komputasi Jarak Bola Bumi C++ Bawaan" if is_id else "MySQL 8.0 InnoDB (SRID 4326 POINT) | Built-in C++ Great-Circle Computation"),
-            "tech": escape_xml("ST_Distance_Sphere(POINT, POINT) / 1000.0 | SPATIAL INDEX (geom) | Filter Relasional (open_now, harga)"),
+            "tech": escape_xml("ST_Distance_Sphere(POINT, POINT) / 1000.0 | Fungsi Geodesik C++ Native | Filter Relasional (open_now, harga)"),
             "color": "#059669",
             "bg": "#f0fdf4",
             "border": "#bbf7d0",
@@ -716,7 +716,7 @@ def make_trace_diagram_svg(lang="id"):
     <text x="{bx + 35}" y="{by + 92}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">FROM</tspan> wisata <tspan fill="#c084fc">JOIN</tspan> kategori <tspan fill="#c084fc">ON</tspan> wisata.kategori_id = kategori.id</text>
     <text x="{bx + 35}" y="{by + 108}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">WHERE</tspan> status_aktif = 1 <tspan fill="#c084fc">AND</tspan> kategori.nama = <tspan fill="#fef08a">'Pantai'</tspan> <tspan fill="#c084fc">AND</tspan> harga_tiket &lt;= 15000</text>
     <text x="{bx + 75}" y="{by + 124}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">AND</tspan> (<tspan fill="#fef08a">'14:30:00'</tspan> <tspan fill="#c084fc">BETWEEN</tspan> jam_buka <tspan fill="#c084fc">AND</tspan> jam_tutup) <tspan fill="#c084fc">ORDER BY</tspan> jarak_km <tspan fill="#c084fc">ASC LIMIT</tspan> 10;</text>
-    <text x="{bx + 35}" y="{by + 140}" class="font-base" font-size="9.5px" fill="#94a3b8">• Formula Spasial C++ Bawaan MySQL 8.0 ST_Distance_Sphere | SPATIAL INDEX R-Tree pada kolom geom POINT SRID 4326</text>
+    <text x="{bx + 35}" y="{by + 140}" class="font-base" font-size="9.5px" fill="#94a3b8">• Formula Geodesik C++ Native MySQL 8.0 ST_Distance_Sphere | Skema 3NF OGC-Ready</text>
   </g>
 ''')
 

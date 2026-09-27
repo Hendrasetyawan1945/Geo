@@ -106,14 +106,14 @@
   <rect x="420" y="185" width="60" height="24" rx="6" fill="#0284c7"/>
   <text x="450" y="201" text-anchor="middle" class="font-base" font-weight="700" font-size="11px" fill="#ffffff">1 : N</text>
 
-  <!-- Spatial Index Callout Box -->
+  <!-- Spatial Relational Callout Box -->
   <g filter="url(#erdShadow)">
     <rect x="50" y="380" width="340" height="150" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-    <text x="70" y="410" class="font-base" font-weight="700" font-size="13px" fill="#166534">SPATIAL INDEX &amp; FUNGSI GEODETIK</text>
+    <text x="70" y="410" class="font-base" font-weight="700" font-size="13px" fill="#166534">SPASIAL RELASIONAL &amp; FUNGSI GEODETIK</text>
     <line x1="70" y1="420" x2="370" y2="420" stroke="#bbf7d0" stroke-width="1"/>
-    <text x="70" y="445" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• SPATIAL INDEX (geom) pada MySQL 8.0</text>
+    <text x="70" y="445" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Indeks Relasional &amp; Skema OGC-Ready</text>
     <text x="70" y="468" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• ST_Distance_Sphere(geom, POINT(u_lng, u_lat))</text>
-    <text x="70" y="491" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Geodesik WGS84: Jarak Great-Circle Presisi Tinggi</text>
+    <text x="70" y="491" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• ST_Distance_Sphere: Jarak Great-Circle Presisi Tinggi</text>
     <text x="70" y="514" class="font-base" font-weight="500" font-size="11px" fill="#14532d">• Filter Multikriteria: status, jam_buka, harga_tiket</text>
   </g>
 </svg>

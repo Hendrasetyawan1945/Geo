@@ -203,7 +203,7 @@ def make_trace_diagram_svg(lang="id"):
     <text x="{bx + 35}" y="{by + 92}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">FROM</tspan> wisata <tspan fill="#c084fc">JOIN</tspan> kategori <tspan fill="#c084fc">ON</tspan> wisata.kategori_id = kategori.id</text>
     <text x="{bx + 35}" y="{by + 108}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">WHERE</tspan> status_aktif = 1 <tspan fill="#c084fc">AND</tspan> kategori.nama = <tspan fill="#fef08a">'Pantai'</tspan> <tspan fill="#c084fc">AND</tspan> harga_tiket &lt;= 15000</text>
     <text x="{bx + 75}" y="{by + 124}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">AND</tspan> (<tspan fill="#fef08a">'14:30:00'</tspan> <tspan fill="#c084fc">BETWEEN</tspan> jam_buka <tspan fill="#c084fc">AND</tspan> jam_tutup) <tspan fill="#c084fc">ORDER BY</tspan> jarak_km <tspan fill="#c084fc">ASC LIMIT</tspan> 10;</text>
-    <text x="{bx + 35}" y="{by + 140}" class="font-base" font-size="9.5px" fill="#94a3b8">• Formula Geodesik C++ Bawaan MySQL 8.0 | SPATIAL INDEX R-Tree pada kolom geom POINT SRID 4326</text>
+    <text x="{bx + 35}" y="{by + 140}" class="font-base" font-size="9.5px" fill="#94a3b8">• Formula Geodesik C++ Native MySQL 8.0 ST_Distance_Sphere | Skema 3NF OGC-Ready</text>
   </g>
 ''')
 

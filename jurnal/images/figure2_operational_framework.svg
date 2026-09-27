@@ -100,9 +100,9 @@
     <text x="106" y="655.0" text-anchor="middle" class="font-base num-text">4</text>
     <rect x="142" y="609" width="178.5" height="18" rx="4" fill="#059669"/>
     <text x="231.25" y="622" text-anchor="middle" class="font-base badge-text">DATA STORAGE &amp; ENGINE</text>
-    <text x="332.5" y="623" class="font-base stage-title">4. Deterministic Geodesic Spatial Computation &amp; Contextualization</text>
+    <text x="332.5" y="623" class="font-base stage-title">4. Deterministic Spherical Spatial Computation &amp; Contextualization</text>
     <line x1="142" y1="635" x2="870" y2="635" stroke="#bbf7d0" stroke-width="1.2"/>
-    <text x="145" y="653" class="font-base stage-desc">• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (SPATIAL INDEX on geom POINT)</text>
+    <text x="145" y="653" class="font-base stage-desc">• MySQL 8.0 InnoDB 3NF: wisata JOIN kategori (Relational Index &amp; OGC Geometry)</text>
     <text x="145" y="671" class="font-base stage-desc">• C++ Kernel: ST_Distance_Sphere(POINT(lng, lat), POINT(u_lng, u_lat)) / 1000.0</text>
     <text x="145" y="689" class="font-base stage-desc">• Multi-criteria filter: open_now, max_price, status ==&gt; Verified Fact Table F</text>
   </g>

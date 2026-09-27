@@ -242,7 +242,7 @@ def make_flowchart_5layer_svg():
     <rect x="{bx + 14}" y="{by + 10}" width="180" height="18" rx="4" fill="#0f766e"/>
     <text x="{bx + 104}" y="{by + 23}" text-anchor="middle" class="font-base badge-text">DATA STORAGE &amp; ENGINE</text>
     <text x="{bx + 204}" y="{by + 24}" class="font-base node-title">Eksekusi MySQL 8.0 Spatial Engine</text>
-    <text x="{bx + 18}" y="{by + 46}" class="font-base node-desc">• Evaluasi R-Tree SPATIAL INDEX pada kolom geom POINT (latensi rata-rata: 1,21 ms)</text>
+    <text x="{bx + 18}" y="{by + 46}" class="font-base node-desc">• Evaluasi Geodesik Native ST_Distance_Sphere pada MySQL 8.0 (latensi rata-rata: 1,21 ms)</text>
     <text x="{bx + 18}" y="{by + 62}" class="font-base node-desc">• Menghasilkan Tupel Fakta Terverifikasi: F = {{t₁, t₂, ..., t_k}} (Single Source of Truth)</text>
   </g>
 ''')
@@ -501,17 +501,17 @@ def make_sequence_diagram_svg():
     # Format: (y, from_act, to_act, label, note, is_return, color, marker)
     messages = [
         (170, 0, 1, "1. POST /api/chat (text, lat, lng)", "Kirim kueri bahasa alami + koordinat GPS", False, "#0284c7", "seqArrow"),
-        (215, 1, 2, "2. parseSIR(prompt, lat, lng)", "Isolasi sandbox JSON, temp: 0.0", False, "#7c3aed", "seqArrowPurple"),
+        (215, 1, 2, "2. parseSIR [LLM Call #1] (prompt, lat, lng)", "Isolasi sandbox JSON, temp: 0.0", False, "#7c3aed", "seqArrowPurple"),
         (260, 2, 1, "3. Raw SIR DTO (JSON)", "intent, category, radius, price", True, "#64748b", "seqArrowDash"),
         (305, 1, 3, "4. validate(rawSir)", "Uji 6 dimensi invarian No Intent Alteration", False, "#d97706", "seqArrow"),
         (350, 3, 1, "5. Canonical SIR (CSIR)", "Status: validated, Policy: execute_sql", True, "#64748b", "seqArrowDash"),
         (400, 1, 4, "6. compileAndExecute(csir, lat, lng)", "Kompilasi kueri spasial ST_Distance_Sphere", False, "#059669", "seqArrowGreen"),
-        (450, 4, 5, "7. SELECT ... ST_Distance_Sphere()", "Eksekusi SPATIAL INDEX R-Tree", False, "#0f766e", "seqArrow"),
-        (500, 5, 4, "8. Rows Data Fakta SQL", "Hasil terurut jarak lingkaran besar (1,21 ms)", True, "#64748b", "seqArrowDash"),
+        (450, 4, 5, "7. SELECT ... ST_Distance_Sphere()", "Evaluasi Geodesik Native C++ (1,21 ms)", False, "#0f766e", "seqArrow"),
+        (500, 5, 4, "8. Rows Data Fakta SQL", "Hasil terurut jarak lingkaran besar", True, "#64748b", "seqArrowDash"),
         (545, 4, 1, "9. Array Tupel Fakta Terverifikasi F", "Single Source of Truth", True, "#64748b", "seqArrowDash"),
         (595, 1, 6, "10. /route/v1/driving (user_coord, dest_coord)", "Kueri jaringan jalan raya turn-by-turn", False, "#0369a1", "seqArrow"),
         (640, 6, 1, "11. GeoJSON Polyline + Jarak & Durasi", "Geometri jalur jalan raya", True, "#64748b", "seqArrowDash"),
-        (685, 1, 2, "12. generateGroundedNlg(fakta_F, query)", "Sintesis draf percakapan terikat fakta", False, "#7c3aed", "seqArrowPurple"),
+        (685, 1, 2, "12. generateGroundedNlg [LLM Call #2] (fakta_F, query)", "Sintesis draf percakapan terikat fakta", False, "#7c3aed", "seqArrowPurple"),
         (730, 2, 1, "13. Draf Teks Respons NLG", "Narasi komunikatif", True, "#64748b", "seqArrowDash"),
         (775, 1, 7, "14. validateGrounding(drafTeks, fakta_F)", "Kontrak formal: Semua entitas ∈ F?", False, "#e11d48", "seqArrowRed"),
         (815, 7, 1, "15. GroundingResult (isGrounded: true)", "Entity Fabrication: 0,00% (Tanpa Halusinasi)", True, "#64748b", "seqArrowDash"),

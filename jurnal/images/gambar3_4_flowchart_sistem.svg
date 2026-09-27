@@ -159,7 +159,7 @@
     <rect x="254" y="648" width="195" height="18" rx="4" fill="#059669"/>
     <text x="351" y="661" text-anchor="middle" class="font-base badge-text">LAYER 4: COMPILER SPASIAL</text>
     <text x="458" y="662" class="font-base node-title">Spatial Query Compiler (Deterministik)</text>
-    <text x="258" y="684" class="font-base node-desc">• Kompilasi CSIR ke SQL terparameterisasi dengan formula geodesik ST_Distance_Sphere</text>
+    <text x="258" y="684" class="font-base node-desc">• Kompilasi CSIR ke SQL terparameterisasi dengan fungsi spasial bawaan ST_Distance_Sphere</text>
     <text x="258" y="700" class="font-base node-desc">• Penyusunan klausa filter: radius_km, kategori_id, max_price, status_operasional, jam_buka</text>
   </g>
 
@@ -175,7 +175,7 @@
     <rect x="244" y="766" width="180" height="18" rx="4" fill="#0f766e"/>
     <text x="334" y="779" text-anchor="middle" class="font-base badge-text">DATA STORAGE &amp; ENGINE</text>
     <text x="434" y="780" class="font-base node-title">Eksekusi MySQL 8.0 Spatial Engine</text>
-    <text x="248" y="802" class="font-base node-desc">• Evaluasi R-Tree SPATIAL INDEX pada kolom geom POINT (latensi rata-rata: 1,21 ms)</text>
+    <text x="248" y="802" class="font-base node-desc">• Evaluasi Geodesik Native ST_Distance_Sphere pada MySQL 8.0 (latensi rata-rata: 1,21 ms)</text>
     <text x="248" y="818" class="font-base node-desc">• Menghasilkan Tupel Fakta Terverifikasi: F = {t₁, t₂, ..., t_k} (Single Source of Truth)</text>
   </g>
 
