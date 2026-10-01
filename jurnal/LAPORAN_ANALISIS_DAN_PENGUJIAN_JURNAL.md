@@ -1,6 +1,6 @@
 # LAPORAN ANALISIS DAN PENGUJIAN KESELARASAN NASKAH JURNAL ILMIAH
 
-**Judul Penelitian:** *Conversational Spatial Information Retrieval with Strict Grounding and Native Geodesic Computation for Urban Tourism Recommendation*  
+**Judul Penelitian:** *Conversational Spatial Information Retrieval with Strict Grounding and Native Spherical Distance Computation for Urban Tourism Recommendation*  
 **Studi Kasus:** Sistem Rekomendasi Pariwisata Cerdas Kota Padang Berbasis Web GIS  
 **Status Evaluasi:** **SUDAH SESUAI & MEMENUHI SELURUH PRIORITAS REVIEWER (100% COMPLIANT)**  
 **Tanggal Evaluasi:** 25 September 2026  

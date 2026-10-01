@@ -175,7 +175,7 @@
     <rect x="244" y="766" width="180" height="18" rx="4" fill="#0f766e"/>
     <text x="334" y="779" text-anchor="middle" class="font-base badge-text">DATA STORAGE &amp; ENGINE</text>
     <text x="434" y="780" class="font-base node-title">Eksekusi MySQL 8.0 Spatial Engine</text>
-    <text x="248" y="802" class="font-base node-desc">• Evaluasi Geodesik Native ST_Distance_Sphere pada MySQL 8.0 (latensi rata-rata: 1,21 ms)</text>
+    <text x="248" y="802" class="font-base node-desc">• Evaluasi Sferikal Native ST_Distance_Sphere pada MySQL 8.0 (latensi rata-rata: 1,21 ms)</text>
     <text x="248" y="818" class="font-base node-desc">• Menghasilkan Tupel Fakta Terverifikasi: F = {t₁, t₂, ..., t_k} (Single Source of Truth)</text>
   </g>
 

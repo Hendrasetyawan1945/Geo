@@ -54,8 +54,8 @@ Tujuan peninjauan ini adalah memastikan tidak ada kontradiksi data, inkonsistens
 10. **Spatial Operator Ontology:** Mendefinisikan secara formal operator `nearest`, `within_radius`, `within_admin_area`, `open_now`, `open_24h`, `is_free`, `max_price`.
 
 ### 3.2 Presisi Komputasi Spasial dan Logika Temporal (Butir 11 – 16)
-11. **Distingsi Jarak Spasial Geodesik vs Jaringan Jalan:** Membedakan secara tegas jarak garis lengkung bumi (`ST_Distance_Sphere`) untuk penyaringan relasional dengan jaringan jalan raya (*road distance* via OSRM) untuk navigasi.
-12. **Native Geodesic Computation:** Menggunakan fungsi native C++ kernel `ST_Distance_Sphere` pada MySQL 8.0 yang kebal galat titik kambang `ACOS(>1.0)` dan mematuhi standar OGC WGS84.
+11. **Distingsi Jarak Spasial Sferikal (Great-Circle) vs Jaringan Jalan:** Membedakan secara tegas jarak garis lengkung model bola bumi (`ST_Distance_Sphere`) untuk penyaringan relasional dengan jaringan jalan raya (*road network distance* via OSRM) untuk navigasi.
+12. **Native Spherical Distance Computation:** Menggunakan fungsi native C++ kernel `ST_Distance_Sphere` pada MySQL 8.0 yang menghitung jarak lingkaran besar sferikal (*great-circle distance*), kebal galat titik kambang `ACOS(>1.0)`, dan menggunakan koordinat EPSG:4326.
 13. **Radius Masuk Klausa WHERE:** `SpatialQueryCompiler` menyematkan kondisi `ST_Distance_Sphere(...) / 1000.0 <= :radius` pada klausa `WHERE`, memastikan penyaringan radius deterministik terpisah dari pengurutan kedekatan (`nearest`).
 14. **Wilayah Administratif Terikat Spasial:** `within_admin_area` dipetakan ke predikat batas alamat relasional kecamatan Kota Padang.
 15. **Controlled Semantic Vocabulary:** Kata kunci dan nama target disaring secara terstruktur untuk mencegah injeksi semantik tak berbatas.

@@ -5,6 +5,7 @@ namespace App\Commands;
 use App\Controllers\ChatController;
 use App\Models\WisataModel;
 use App\Services\BenchmarkDataset;
+use App\Services\SpatialIntent\GroundingValidator;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
@@ -42,6 +43,7 @@ class RisetEvaluasi extends BaseCommand
         $validPois = array_column($semuaObjek, 'nama');
 
         $chatController = new ChatController();
+        $groundingValidator = new GroundingValidator();
 
         $isMock = isset($params['mock']) || CLI::getOption('mock') !== null;
         if ($isMock) {
@@ -58,6 +60,10 @@ class RisetEvaluasi extends BaseCommand
         $fabricatedPoiCount = 0;
         $honestRejections = 0;
         $totalOutOfScope = 0;
+
+        $totalClaimsAccumulated = 0;
+        $supportedClaimsAccumulated = 0;
+        $totalViolationsAccumulated = 0;
 
         $timings = [
             'intent' => [],
@@ -118,28 +124,22 @@ class RisetEvaluasi extends BaseCommand
                 $spatialMatches++;
             }
 
-            // 4. Evaluasi Grounding & Anti-Halusinasi
-            $fabricatedInThis = 0;
-            // Deteksi entitas di respons
-            foreach ($validPois as $poiName) {
-                // POI resmi valid
-            }
-            // Cek apakah ada klaim POI di luar data relasional
-            $isGrounded = true;
+            // 4. Evaluasi Algorithmic Claim-Level Grounding & Anti-Halusinasi
+            $groundingResult = $groundingValidator->validate($reply, $places);
+            $isGrounded = $groundingResult['isGrounded'];
+            $claimStats = $groundingResult['claimStats'];
+
+            $totalClaimsAccumulated += $claimStats['totalClaims'];
+            $supportedClaimsAccumulated += $claimStats['supportedClaims'];
+            $totalViolationsAccumulated += count($groundingResult['violations']);
+            $fabricatedInThis = count($groundingResult['fabricatedEntities']);
+
             if ($case['id'] >= 39 && $case['id'] <= 40) {
                 // Out of scope
                 $totalOutOfScope++;
                 if ($sir->executionPolicy === 'reject_out_of_scope') {
                     $honestRejections++;
                     $isGrounded = true;
-                }
-            } else {
-                // In scope: cek jika tempat dikembalikan, apakah semua ada di DB
-                foreach ($places as $p) {
-                    if (!in_array($p['nama'], $validPois, true)) {
-                        $fabricatedInThis++;
-                        $isGrounded = false;
-                    }
                 }
             }
 
@@ -149,23 +149,28 @@ class RisetEvaluasi extends BaseCommand
             $fabricatedPoiCount += $fabricatedInThis;
 
             $results[] = [
-                'id'       => $case['id'],
-                'grup'     => $case['grup'],
-                'prompt'   => $case['prompt'],
-                'category' => $sir->category,
-                'places_count' => count($places),
-                'grounded' => $isGrounded,
-                'total_ms' => round($timing['total_ms'], 2),
-                'sql_ms'   => round($timing['sql_ms'], 3),
+                'id'            => $case['id'],
+                'grup'          => $case['grup'],
+                'prompt'        => $case['prompt'],
+                'category'      => $sir->category,
+                'places_count'  => count($places),
+                'grounded'      => $isGrounded,
+                'total_claims'  => $claimStats['totalClaims'],
+                'supp_claims'   => $claimStats['supportedClaims'],
+                'claim_fidelity'=> $claimStats['fidelity'],
+                'total_ms'      => round($timing['total_ms'], 2),
+                'sql_ms'        => round($timing['sql_ms'], 3),
             ];
 
             CLI::write(sprintf(
-                "[%02d/%02d] %-32s | Cat: %-8s | Places: %02d | SQL: %5.2f ms | Total: %6.1f ms",
+                "[%02d/%02d] %-32s | Cat: %-8s | Places: %02d | Claims: %02d/%02d | SQL: %5.2f ms | Total: %6.1f ms",
                 $case['id'],
                 $totalTest,
                 substr($case['grup'], 0, 32),
                 $sir->category ?? '-',
                 count($places),
+                $claimStats['supportedClaims'],
+                $claimStats['totalClaims'],
                 $timing['sql_ms'],
                 $timing['total_ms']
             ));
@@ -175,7 +180,8 @@ class RisetEvaluasi extends BaseCommand
         $sirAcc = ($intentMatches / $totalTest) * 100.0;
         $catAcc = ($categoryMatches / $totalTest) * 100.0;
         $spaPrec = ($spatialMatches / $totalTest) * 100.0;
-        $groFid = ($groundedMatches / $totalTest) * 100.0;
+        $scenarioPassRate = ($groundedMatches / $totalTest) * 100.0;
+        $claimFidelity = $totalClaimsAccumulated > 0 ? ($supportedClaimsAccumulated / $totalClaimsAccumulated) * 100.0 : 100.0;
         $honestRate = $totalOutOfScope > 0 ? ($honestRejections / $totalOutOfScope) * 100.0 : 100.0;
 
         $meanTotal = array_sum($timings['total']) / count($timings['total']);
@@ -189,8 +195,9 @@ class RisetEvaluasi extends BaseCommand
         CLI::write(sprintf("1. Level 1: Semantic Intent Accuracy  : %6.2f%% (%d/%d)", $sirAcc, $intentMatches, $totalTest));
         CLI::write(sprintf("   Level 1: Category Accuracy         : %6.2f%% (%d/%d)", $catAcc, $categoryMatches, $totalTest));
         CLI::write(sprintf("2. Level 2: Spatial Predicate Match   : %6.2f%% (%d/%d)", $spaPrec, $spatialMatches, $totalTest));
-        CLI::write(sprintf("3. Level 3: Grounding Fidelity        : %6.2f%% (%d/%d)", $groFid, $groundedMatches, $totalTest));
-        CLI::write(sprintf("   Level 3: Entity Fabrication Rate   : %6.2f%% (%d POI palsu)", ($fabricatedPoiCount / $totalTest) * 100.0, $fabricatedPoiCount));
+        CLI::write(sprintf("3. Level 3: Claim-Level Grounding Fid : %6.2f%% (%d/%d klaim)", $claimFidelity, $supportedClaimsAccumulated, $totalClaimsAccumulated));
+        CLI::write(sprintf("   Level 3: Scenario Grounding Rate   : %6.2f%% (%d/%d skenario)", $scenarioPassRate, $groundedMatches, $totalTest));
+        CLI::write(sprintf("   Level 3: Entity Fabrication Rate   : %6.2f%% (%d POI palsu teramati)", ($fabricatedPoiCount / $totalTest) * 100.0, $fabricatedPoiCount));
         CLI::write(sprintf("   Level 3: Honest Rejection Rate     : %6.2f%% (%d/%d)", $honestRate, $honestRejections, $totalOutOfScope));
         CLI::write("------------------------------------------------------------------");
         CLI::write("                   PROFIL LATENSI KOMPUTASI (ms)");
@@ -212,12 +219,15 @@ class RisetEvaluasi extends BaseCommand
                 'total_test'=> $totalTest,
             ],
             'metrics' => [
-                'sir_accuracy' => $sirAcc,
-                'category_accuracy' => $catAcc,
-                'spatial_precision' => $spaPrec,
-                'grounding_fidelity' => $groFid,
+                'sir_accuracy'            => $sirAcc,
+                'category_accuracy'       => $catAcc,
+                'spatial_precision'       => $spaPrec,
+                'claim_grounding_fidelity'=> $claimFidelity,
+                'scenario_grounding_rate' => $scenarioPassRate,
+                'total_claims'            => $totalClaimsAccumulated,
+                'supported_claims'        => $supportedClaimsAccumulated,
                 'entity_fabrication_rate' => ($fabricatedPoiCount / $totalTest) * 100.0,
-                'honest_rejection_rate' => $honestRate,
+                'honest_rejection_rate'   => $honestRate,
             ],
             'latencies_ms' => [
                 'mean_intent' => round($meanIntent, 2),

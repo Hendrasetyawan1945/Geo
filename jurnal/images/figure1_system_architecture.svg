@@ -75,7 +75,7 @@
     <text x="85" y="534" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L4</text>
     <text x="114" y="534" class="font-base layer-title">DETERMINISTIC SPATIAL COMPUTATION LAYER (DATA STORAGE &amp; ENGINE)</text>
     <text x="114" y="556" class="font-base layer-sub">MySQL 8.0 InnoDB (SRID 4326 POINT) | Built-in C++ Great-Circle Computation</text>
-    <text x="114" y="576" class="font-base layer-tech">ST_Distance_Sphere(POINT, POINT) / 1000.0 | Fungsi Geodesik C++ Native | Filter Relasional (open_now, harga)</text>
+    <text x="114" y="576" class="font-base layer-tech">ST_Distance_Sphere(POINT, POINT) / 1000.0 | Fungsi Sferikal C++ Native | Filter Relasional (open_now, harga)</text>
   </g>
   <line x1="520.0" y1="594" x2="520.0" y2="630" stroke="#0284c7" stroke-width="2" marker-end="url(#archArrow)"/>
   <rect x="345.5" y="601.0" width="349.0" height="20" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
@@ -87,6 +87,6 @@
     <text x="85" y="666" text-anchor="middle" class="font-base" font-weight="800" font-size="12.5px" fill="#ffffff">L5</text>
     <text x="114" y="666" class="font-base layer-title">GROUNDED RESPONSE &amp; VERIFICATION LAYER (GROUNDING FIREWALL)</text>
     <text x="114" y="688" class="font-base layer-sub">Algorithmic Grounding Validator: Strict Contract ∀e ∈ Entities(Response), e ∈ F</text>
-    <text x="114" y="708" class="font-base layer-tech">Substitusi Otomatis Token Halusinasi dengan DTO Faktual | Dual-Payload Dispatcher (GeoJSON + Text)</text>
+    <text x="114" y="708" class="font-base layer-tech">Substitusi Otomatis Entitas Tak Ter-grounding dengan DTO Faktual | Dual-Payload Dispatcher (GeoJSON + Text)</text>
   </g>
 </svg>

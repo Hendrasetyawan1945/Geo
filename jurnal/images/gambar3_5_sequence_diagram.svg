@@ -165,7 +165,7 @@
   <line x1="670" y1="450" x2="810" y2="450" stroke="#0f766e" stroke-width="1.6" marker-end="url(#seqArrow)"/>
   <rect x="623.2" y="432" width="233.60000000000002" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
   <text x="740.0" y="444" text-anchor="middle" class="font-base msg-text" fill="#0f766e">7. SELECT ... ST_Distance_Sphere()</text>
-  <text x="740.0" y="462" text-anchor="middle" class="font-base msg-note">Evaluasi Geodesik Native C++ (1,21 ms)</text>
+  <text x="740.0" y="462" text-anchor="middle" class="font-base msg-note">Evaluasi Sferikal Native C++ (1,21 ms)</text>
 
 
   <!-- Message: 8. Rows Data Fakta SQL -->
@@ -221,7 +221,7 @@
   <line x1="1050" y1="815" x2="220" y2="815" stroke="#64748b" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#seqArrowDash)"/>
   <rect x="505.4" y="797" width="259.20000000000005" height="15" rx="3" fill="#ffffff" fill-opacity="0.9"/>
   <text x="635.0" y="809" text-anchor="middle" class="font-base msg-text" fill="#64748b">15. GroundingResult (isGrounded: true)</text>
-  <text x="635.0" y="827" text-anchor="middle" class="font-base msg-note">Entity Fabrication: 0,00% (Tanpa Halusinasi)</text>
+  <text x="635.0" y="827" text-anchor="middle" class="font-base msg-note">Entity Fabrication: 0,00% (0 POI Palsu Teramati)</text>
 
 
   <!-- Message: 16. JSON Dual-Payload {text, wisata, route} -->

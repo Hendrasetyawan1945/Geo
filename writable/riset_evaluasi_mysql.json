@@ -3,22 +3,25 @@
         "framework": "CodeIgniter 4.7.4",
         "database": "MySQL 8.0 Spatial",
         "function": "ST_Distance_Sphere",
-        "timestamp": "2026-09-26T07:47:24+00:00",
+        "timestamp": "2026-09-29T05:18:13+00:00",
         "total_test": 40
     },
     "metrics": {
         "sir_accuracy": 100,
         "category_accuracy": 82.5,
         "spatial_precision": 97.5,
-        "grounding_fidelity": 100,
+        "claim_grounding_fidelity": 100,
+        "scenario_grounding_rate": 100,
+        "total_claims": 386,
+        "supported_claims": 386,
         "entity_fabrication_rate": 0,
         "honest_rejection_rate": 100
     },
     "latencies_ms": {
-        "mean_intent": 0.05,
-        "mean_sql": 1.606,
+        "mean_intent": 0.04,
+        "mean_sql": 2.251,
         "mean_nlg": 0.01,
-        "mean_total": 1.68
+        "mean_total": 2.32
     },
     "cases": [
         {
@@ -28,8 +31,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 17.73,
-            "sql_ms": 17.243
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 31.3,
+            "sql_ms": 30.746
         },
         {
             "id": 2,
@@ -38,8 +44,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 1.36,
-            "sql_ms": 1.293
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 1.6,
+            "sql_ms": 1.535
         },
         {
             "id": 3,
@@ -48,8 +57,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 13.01,
-            "sql_ms": 12.922
+            "total_claims": 15,
+            "supp_claims": 15,
+            "claim_fidelity": 100,
+            "total_ms": 9.7,
+            "sql_ms": 9.598
         },
         {
             "id": 4,
@@ -58,8 +70,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 2.95,
-            "sql_ms": 2.893
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 2.04,
+            "sql_ms": 1.99
         },
         {
             "id": 5,
@@ -68,8 +83,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 0.34,
-            "sql_ms": 0.294
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 0.31,
+            "sql_ms": 0.271
         },
         {
             "id": 6,
@@ -78,8 +96,11 @@
             "category": "Pulau",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 2.78,
-            "sql_ms": 2.702
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 2.86,
+            "sql_ms": 2.796
         },
         {
             "id": 7,
@@ -88,8 +109,11 @@
             "category": "Pulau",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 1.04,
-            "sql_ms": 0.997
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 21.53,
+            "sql_ms": 21.478
         },
         {
             "id": 8,
@@ -98,8 +122,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 1.41,
-            "sql_ms": 1.063
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 0.37,
+            "sql_ms": 0.303
         },
         {
             "id": 9,
@@ -108,8 +135,11 @@
             "category": "Alam",
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.77,
-            "sql_ms": 0.67
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 1.35,
+            "sql_ms": 1.265
         },
         {
             "id": 10,
@@ -118,8 +148,11 @@
             "category": "Alam",
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.35,
-            "sql_ms": 0.308
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 0.67,
+            "sql_ms": 0.626
         },
         {
             "id": 11,
@@ -128,8 +161,11 @@
             "category": "Alam",
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.31,
-            "sql_ms": 0.273
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 0.33,
+            "sql_ms": 0.287
         },
         {
             "id": 12,
@@ -138,8 +174,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 0.69,
-            "sql_ms": 0.631
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 0.31,
+            "sql_ms": 0.266
         },
         {
             "id": 13,
@@ -148,8 +187,11 @@
             "category": "Museum",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 0.66,
-            "sql_ms": 0.604
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 0.89,
+            "sql_ms": 0.831
         },
         {
             "id": 14,
@@ -158,8 +200,11 @@
             "category": "Museum",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 1.18,
-            "sql_ms": 1.137
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 0.89,
+            "sql_ms": 0.854
         },
         {
             "id": 15,
@@ -168,8 +213,11 @@
             "category": "Museum",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 0.33,
-            "sql_ms": 0.28
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 0.48,
+            "sql_ms": 0.441
         },
         {
             "id": 16,
@@ -178,8 +226,11 @@
             "category": "Sejarah",
             "places_count": 1,
             "grounded": true,
-            "total_ms": 1.47,
-            "sql_ms": 1.401
+            "total_claims": 2,
+            "supp_claims": 2,
+            "claim_fidelity": 100,
+            "total_ms": 0.76,
+            "sql_ms": 0.675
         },
         {
             "id": 17,
@@ -188,8 +239,11 @@
             "category": "Museum",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 1.52,
-            "sql_ms": 1.471
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 0.5,
+            "sql_ms": 0.461
         },
         {
             "id": 18,
@@ -198,8 +252,11 @@
             "category": "Museum",
             "places_count": 3,
             "grounded": true,
-            "total_ms": 0.31,
-            "sql_ms": 0.276
+            "total_claims": 6,
+            "supp_claims": 6,
+            "claim_fidelity": 100,
+            "total_ms": 0.81,
+            "sql_ms": 0.769
         },
         {
             "id": 19,
@@ -208,8 +265,11 @@
             "category": "Kuliner",
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.67,
-            "sql_ms": 0.592
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 1.78,
+            "sql_ms": 1.7
         },
         {
             "id": 20,
@@ -218,8 +278,11 @@
             "category": "Kuliner",
             "places_count": 1,
             "grounded": true,
-            "total_ms": 2.76,
-            "sql_ms": 2.718
+            "total_claims": 2,
+            "supp_claims": 2,
+            "claim_fidelity": 100,
+            "total_ms": 0.38,
+            "sql_ms": 0.338
         },
         {
             "id": 21,
@@ -228,8 +291,11 @@
             "category": "Kuliner",
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.33,
-            "sql_ms": 0.281
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 0.34,
+            "sql_ms": 0.302
         },
         {
             "id": 22,
@@ -238,8 +304,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 0.42,
-            "sql_ms": 0.355
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 1.33,
+            "sql_ms": 1.274
         },
         {
             "id": 23,
@@ -248,8 +317,11 @@
             "category": null,
             "places_count": 9,
             "grounded": true,
-            "total_ms": 2,
-            "sql_ms": 1.942
+            "total_claims": 18,
+            "supp_claims": 18,
+            "claim_fidelity": 100,
+            "total_ms": 1.29,
+            "sql_ms": 1.236
         },
         {
             "id": 24,
@@ -258,8 +330,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 2.33,
-            "sql_ms": 2.266
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 0.98,
+            "sql_ms": 0.921
         },
         {
             "id": 25,
@@ -268,18 +343,24 @@
             "category": "Kuliner",
             "places_count": 1,
             "grounded": true,
-            "total_ms": 2.1,
-            "sql_ms": 2.032
+            "total_claims": 2,
+            "supp_claims": 2,
+            "claim_fidelity": 100,
+            "total_ms": 2.02,
+            "sql_ms": 1.98
         },
         {
             "id": 26,
             "grup": "Filter - Jam Sekarang",
             "prompt": "Wisata apa saja yang buka sekarang jam segini?",
             "category": null,
-            "places_count": 10,
+            "places_count": 4,
             "grounded": true,
-            "total_ms": 0.76,
-            "sql_ms": 0.695
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 0.81,
+            "sql_ms": 0.743
         },
         {
             "id": 27,
@@ -288,8 +369,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 0.66,
-            "sql_ms": 0.598
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 0.61,
+            "sql_ms": 0.564
         },
         {
             "id": 28,
@@ -298,8 +382,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 0.92,
-            "sql_ms": 0.868
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 0.49,
+            "sql_ms": 0.424
         },
         {
             "id": 29,
@@ -308,8 +395,11 @@
             "category": "Pantai",
             "places_count": 1,
             "grounded": true,
-            "total_ms": 0.34,
-            "sql_ms": 0.287
+            "total_claims": 2,
+            "supp_claims": 2,
+            "claim_fidelity": 100,
+            "total_ms": 0.32,
+            "sql_ms": 0.271
         },
         {
             "id": 30,
@@ -318,8 +408,11 @@
             "category": "Kuliner",
             "places_count": 2,
             "grounded": true,
-            "total_ms": 0.62,
-            "sql_ms": 0.583
+            "total_claims": 4,
+            "supp_claims": 4,
+            "claim_fidelity": 100,
+            "total_ms": 1.04,
+            "sql_ms": 0.997
         },
         {
             "id": 31,
@@ -328,8 +421,11 @@
             "category": null,
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.36,
-            "sql_ms": 0.312
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 0.33,
+            "sql_ms": 0.294
         },
         {
             "id": 32,
@@ -338,8 +434,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 0.87,
-            "sql_ms": 0.828
+            "total_claims": 10,
+            "supp_claims": 10,
+            "claim_fidelity": 100,
+            "total_ms": 0.32,
+            "sql_ms": 0.276
         },
         {
             "id": 33,
@@ -348,8 +447,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 0.4,
-            "sql_ms": 0.352
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 0.35,
+            "sql_ms": 0.3
         },
         {
             "id": 34,
@@ -358,8 +460,11 @@
             "category": "Alam",
             "places_count": 4,
             "grounded": true,
-            "total_ms": 0.33,
-            "sql_ms": 0.275
+            "total_claims": 8,
+            "supp_claims": 8,
+            "claim_fidelity": 100,
+            "total_ms": 1.21,
+            "sql_ms": 1.158
         },
         {
             "id": 35,
@@ -368,8 +473,11 @@
             "category": "Pantai",
             "places_count": 5,
             "grounded": true,
-            "total_ms": 0.58,
-            "sql_ms": 0.529
+            "total_claims": 15,
+            "supp_claims": 15,
+            "claim_fidelity": 100,
+            "total_ms": 0.45,
+            "sql_ms": 0.388
         },
         {
             "id": 36,
@@ -378,8 +486,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 1.65,
-            "sql_ms": 1.592
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 0.52,
+            "sql_ms": 0.467
         },
         {
             "id": 37,
@@ -388,8 +499,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 0.4,
-            "sql_ms": 0.345
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 0.39,
+            "sql_ms": 0.334
         },
         {
             "id": 38,
@@ -398,8 +512,11 @@
             "category": null,
             "places_count": 10,
             "grounded": true,
-            "total_ms": 0.38,
-            "sql_ms": 0.33
+            "total_claims": 20,
+            "supp_claims": 20,
+            "claim_fidelity": 100,
+            "total_ms": 0.91,
+            "sql_ms": 0.864
         },
         {
             "id": 39,
@@ -408,6 +525,9 @@
             "category": null,
             "places_count": 0,
             "grounded": true,
+            "total_claims": 0,
+            "supp_claims": 0,
+            "claim_fidelity": 100,
             "total_ms": 0.01,
             "sql_ms": 0
         },
@@ -418,6 +538,9 @@
             "category": null,
             "places_count": 0,
             "grounded": true,
+            "total_claims": 0,
+            "supp_claims": 0,
+            "claim_fidelity": 100,
             "total_ms": 0.01,
             "sql_ms": 0
         }

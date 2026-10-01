@@ -433,7 +433,7 @@ def make_architecture_5layer_svg(lang="id"):
             "num": "L4",
             "name": escape_xml("DETERMINISTIC SPATIAL COMPUTATION LAYER (DATA STORAGE & ENGINE)"),
             "sub": escape_xml("MySQL 8.0 InnoDB (SRID 4326 POINT) | Komputasi Jarak Bola Bumi C++ Bawaan" if is_id else "MySQL 8.0 InnoDB (SRID 4326 POINT) | Built-in C++ Great-Circle Computation"),
-            "tech": escape_xml("ST_Distance_Sphere(POINT, POINT) / 1000.0 | Fungsi Geodesik C++ Native | Filter Relasional (open_now, harga)"),
+            "tech": escape_xml("ST_Distance_Sphere(POINT, POINT) / 1000.0 | Fungsi Sferikal C++ Native | Filter Relasional (open_now, harga)"),
             "color": "#059669",
             "bg": "#f0fdf4",
             "border": "#bbf7d0",
@@ -443,7 +443,7 @@ def make_architecture_5layer_svg(lang="id"):
             "num": "L5",
             "name": escape_xml("GROUNDED RESPONSE & VERIFICATION LAYER (GROUNDING FIREWALL)"),
             "sub": escape_xml("Algorithmic Grounding Validator: Kontrak Ketat ∀e ∈ Entities(Response), e ∈ F" if is_id else "Algorithmic Grounding Validator: Strict Contract ∀e ∈ Entities(Response), e ∈ F"),
-            "tech": escape_xml("Substitusi Otomatis Token Halusinasi dengan DTO Faktual | Dual-Payload Dispatcher (GeoJSON + Text)"),
+            "tech": escape_xml("Substitusi Otomatis Entitas Tak Ter-grounding dengan DTO Faktual | Dual-Payload Dispatcher (GeoJSON + Text)"),
             "color": "#e11d48",
             "bg": "#fff1f2",
             "border": "#fecdd3",
@@ -716,7 +716,7 @@ def make_trace_diagram_svg(lang="id"):
     <text x="{bx + 35}" y="{by + 92}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">FROM</tspan> wisata <tspan fill="#c084fc">JOIN</tspan> kategori <tspan fill="#c084fc">ON</tspan> wisata.kategori_id = kategori.id</text>
     <text x="{bx + 35}" y="{by + 108}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">WHERE</tspan> status_aktif = 1 <tspan fill="#c084fc">AND</tspan> kategori.nama = <tspan fill="#fef08a">'Pantai'</tspan> <tspan fill="#c084fc">AND</tspan> harga_tiket &lt;= 15000</text>
     <text x="{bx + 75}" y="{by + 124}" class="font-mono" font-size="11px" fill="#38bdf8"><tspan fill="#c084fc">AND</tspan> (<tspan fill="#fef08a">'14:30:00'</tspan> <tspan fill="#c084fc">BETWEEN</tspan> jam_buka <tspan fill="#c084fc">AND</tspan> jam_tutup) <tspan fill="#c084fc">ORDER BY</tspan> jarak_km <tspan fill="#c084fc">ASC LIMIT</tspan> 10;</text>
-    <text x="{bx + 35}" y="{by + 140}" class="font-base" font-size="9.5px" fill="#94a3b8">• Formula Geodesik C++ Native MySQL 8.0 ST_Distance_Sphere | Skema 3NF OGC-Ready</text>
+    <text x="{bx + 35}" y="{by + 140}" class="font-base" font-size="9.5px" fill="#94a3b8">• Formula Sferikal C++ Native MySQL 8.0 ST_Distance_Sphere | Skema 3NF OGC-Ready</text>
   </g>
 ''')
 
@@ -797,7 +797,7 @@ def make_trace_diagram_svg(lang="id"):
     # STEP 6: GROUNDED RESPONSE & DUAL-SYNCHRONIZED CARTOGRAPHY
     bx = 50; by = 984; bw = 960; bh = 220
     step6_badge = "6. RESPON BERNARASI TER-GROUNDING &amp; KARTOGRAFI DWITUNGGAL" if is_id else "6. GROUNDED NARRATIVE &amp; DUAL CARTOGRAPHY"
-    step6_title = "Verifikasi Bebas Halusinasi &amp; Rendering Multimodal Sinkron" if is_id else "Hallucination-Free Verification &amp; Multimodal Rendering"
+    step6_title = "Verifikasi Kepatuhan Faktual &amp; Rendering Multimodal Sinkron" if is_id else "Algorithmic Grounding Verification &amp; Multimodal Rendering"
 
     svg.append(f'''
   <!-- STEP 6 -->
