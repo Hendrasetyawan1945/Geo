@@ -397,11 +397,11 @@ Evaluasi kinerja sistem diuji secara empiris menggunakan **40 skenario percakapa
 |---|---|:---:|:---:|:---:|
 | **Level 1: Semantic Parsing** | *SIR Slot Accuracy* | **100,00% (40/40)** | ≥ 85,00% | Memenuhi Standar |
 | | *Category Classification Accuracy* | **100,00% (40/40)** | ≥ 90,00% | Memenuhi Standar |
-| **Level 2: Spatial Execution** | *Spatial Predicate Match* | **97,50% (39/40)** | ≥ 95,00% | Memenuhi Standar |
+| **Level 2: Spatial Execution** | *Spatial Predicate Correctness* | **97,50% (39/40)** | ≥ 95,00% | Memenuhi Standar |
 | | *Operational & Cost Constraint Match* | **100,00% (40/40)** | ≥ 95,00% | Memenuhi Standar |
 | **Level 3: Grounding Verification**| *Entity Fabrication Rate* | **0,00% (0/40)** | 0,00% | Sempurna (*0 POI Palsu Teramati*) |
 | | *Unsupported Claim Rate* | **0,00% (0/40)** | ≤ 2,50% | Sempurna (*Strict Contract*) |
-| | *Claim-Level Grounding Fidelity (GF)* | **100,00% (384/384 klaim)** | ≥ 97,50% | Sempurna (*All Attributes*) |
+| | *Claim-Level Grounding Fidelity (GF)* | **100,00% (304/304 klaim)** | ≥ 97,50% | Sempurna (*4 Kategori Terverifikasi*) |
 | | *Scenario Grounding Pass Rate* | **100,00% (40/40 skenario)** | ≥ 95,00% | Sempurna |
 | | *Honest Rejection Rate* | **100,00% (2/2)** | 100,00% | Sempurna (*0 Pelanggaran Grounding Teramati*) |
 
@@ -409,7 +409,7 @@ Tabel 4 menyajikan rincian evaluasi kinerja sistem berdasarkan taksonomi tingkat
 
 **Tabel 4. Rincian Kinerja Evaluasi Berdasarkan Taksonomi Kompleksitas Kueri**
 
-| Level | Tingkat Kesulitan | Karakteristik Kueri | N | Contoh Masukan Pengguna | Akurasi SIR | Presisi Spasial | Grounding Fidelity |
+| Level | Tingkat Kesulitan | Karakteristik Kueri | N | Contoh Masukan Pengguna | Akurasi SIR | Kebenaran Spasial | Grounding Fidelity |
 |:---:|---|---|:---:|---|:---:|:---:|:---:|
 | **L1** | *Simple* | Filter tunggal kategori | 8 | *"rekomendasikan wisata pantai di Padang"* | 100,00% | 100,00% | 100,00% |
 | **L2** | *Spatial* | Batasan jarak / wilayah | 7 | *"pantai terdekat dalam radius 5 km"* | 100,00% | 100,00% | 100,00% |

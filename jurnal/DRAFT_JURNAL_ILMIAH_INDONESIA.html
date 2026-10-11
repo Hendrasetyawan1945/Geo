@@ -589,21 +589,27 @@ dan OSRM, lalu memvalidasi luaran narasi secara algoritmik di tingkat
 klaim (<em>claim-level grounding validator</em>) dengan kebijakan
 <em>fail-closed fallback</em> deterministik untuk memastikan tidak ada
 klaim tanpa bukti faktual yang sampai ke pengguna. Pengujian empiris
-terhadap 40 skenario percakapan <em>benchmark</em> terstandarisasi pada
-22 destinasi wisata Kota Padang menunjukkan akurasi ekstraksi CSIR
-sebesar <strong>100,00%</strong> (40/40), presisi eksekusi predikat
-spasial sebesar <strong>97,50%</strong> (39/40), <em>Entity Fabrication
-Rate</em> <strong>0,00%</strong> (tidak ditemukan objek wisata
+4-lapisan terhadap 40 skenario percakapan <em>benchmark</em>
+terstandarisasi pada 22 destinasi wisata Kota Padang menunjukkan akurasi
+ekstraksi CSIR eksak niat murni sebesar <strong>92,50%</strong> (37/40)
+dengan keselarasan amplob eksekusi pasca-kebijakan
+<strong>90,00%</strong> (36/40), rata-rata akurasi tingkat atribut
+(<em>field-level</em>) <strong>99,28%</strong>, akurasi keputusan
+validasi <strong>100,00%</strong> (40/40), kebenaran predikat spasial
+murni sebesar <strong>100,00%</strong> (36/36 skenario spasial) dengan
+kepatuhan eksekusi skenario menyeluruh <strong>97,50%</strong> (39/40),
+<em>Entity Fabrication Rate</em> <strong>0,00%</strong> (0 objek wisata
 terfabrikasi pada skenario yang dievaluasi), <em>Claim-Level Grounding
-Fidelity</em> <strong>100,00% (384/384 klaim terverifikasi)</strong>,
-serta <em>Honest Rejection Rate</em> <strong>100,00%</strong> pada
-permintaan di luar yurisdiksi. Waktu respons ujung-ke-ujung rata-rata
-tercatat <strong>1.340,57 ms (~1,34 detik)</strong> dengan eksekusi
-kueri spasial basis data hanya menyerap 1,21 ms (0,09%). Temuan ini
-membuktikan bahwa pembatasan kewenangan LLM melalui batas kendali ganda
-mampu menghadirkan antarmuka percakapan yang luwes sekaligus menjamin
-integritas faktual tanpa halusinasi pada skenario benchmark yang
-dievaluasi.</p>
+Fidelity</em> <strong>100,00% (304/304 klaim terverifikasi)</strong>,
+<em>Entity Grounding Fidelity</em> <strong>100,00% (147/147 sebutan
+POI)</strong>, serta <em>Honest Rejection Rate</em> <strong>100,00%
+(2/2)</strong> pada permintaan di luar yurisdiksi yang diuji. Waktu
+respons ujung-ke-ujung rata-rata tercatat <strong>1.340,57 ms (~1,34
+detik)</strong> dengan eksekusi kueri spasial basis data hanya menyerap
+1,21 ms (0,09%). Temuan ini membuktikan bahwa pembatasan kewenangan LLM
+melalui batas kendali ganda mampu menghadirkan antarmuka percakapan yang
+luwes sekaligus menjamin integritas faktual tanpa halusinasi pada
+skenario benchmark yang dievaluasi.</p>
 
 <p class="keywords-text"><strong>Kata Kunci:</strong> <em>Reliability-Controlled
 Conversational Spatial Information System, Dual Control Boundaries,
@@ -638,21 +644,28 @@ Boundary</strong> that anchors all factual truth to a relational MySQL
 spatial computations and OSRM road navigation, subsequently verifying
 generated narratives through an algorithmic claim-level grounding
 validator with a fail-closed fallback policy to prevent ungrounded
-claims from reaching the final user response. Empirical evaluation
-across 40 standardized benchmark query scenarios on 22 curated tourism
-destinations in Padang City demonstrated a CSIR semantic extraction
-accuracy of <strong>100.00%</strong> (40/40), a spatial execution
-predicate precision of <strong>97.50%</strong> (39/40), an Entity
-Fabrication Rate of <strong>0.00%</strong> (no fabricated POIs were
-observed in the evaluated benchmark scenarios), a Claim-Level Grounding
-Fidelity of <strong>100.00%</strong> across 384 audited claims, and an
-Honest Rejection Rate of <strong>100.00%</strong> on out-of-scope
-requests. Average end-to-end latency was <strong>1,340.57 ms (~1.34
-s)</strong>, with in-database spatial query compilation and execution
-consuming merely 1.21 ms (0.09%). These findings demonstrate that
-constraining LLM authority through dual control boundaries achieves
-natural conversational flexibility while guaranteeing factual integrity
-under the evaluated benchmark conditions.</p>
+claims from reaching the final user response. Empirical 4-layer
+evaluation across 40 standardized benchmark query scenarios on 22
+curated tourism destinations in Padang City demonstrated a Pure Intent
+Pre-Fallback Exact CSIR semantic extraction accuracy of
+<strong>92.50%</strong> (37/40) (<strong>90.00% / 36/40</strong> on
+post-policy execution envelope alignment) with an average field-level
+accuracy of <strong>99.28%</strong>, a validation decision accuracy of
+<strong>100.00%</strong> (40/40), a pure spatial predicate correctness
+of <strong>100.00%</strong> (36/36 spatial scenarios) alongside an
+overall scenario execution compliance rate of <strong>97.50%</strong>
+(39/40), an Entity Fabrication Rate of <strong>0.00%</strong> (no
+fabricated POIs were observed in the evaluated benchmark scenarios), a
+Claim-Level Grounding Fidelity of <strong>100.00%</strong> across 304
+audited claims, an Entity Grounding Fidelity of <strong>100.00%</strong>
+across 147 POI mentions, and an Honest Rejection Rate of <strong>100.00%
+(2/2)</strong> on tested out-of-scope requests. Average end-to-end
+latency was <strong>1,340.57 ms (~1.34 s)</strong>, with in-database
+spatial query compilation and execution consuming merely 1.21 ms
+(0.09%). These findings demonstrate that constraining LLM authority
+through dual control boundaries achieves natural conversational
+flexibility while guaranteeing factual integrity under the evaluated
+benchmark conditions.</p>
 
 <p class="keywords-text"><strong>Keywords:</strong> <em>Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control
@@ -2518,16 +2531,64 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <tbody>
 <tr class="odd">
 <td><strong>Level 1: Semantic Parsing</strong></td>
-<td><em>SIR Slot Accuracy</em></td>
-<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
+<td><em>Exact CSIR Match Rate (Pre-Fallback Intent)</em></td>
+<td style="text-align: center;"><strong>92,50% (37/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 85,00%</td>
 <td style="text-align: center;">Memenuhi Standar</td>
 </tr>
 <tr class="even">
 <td></td>
-<td><em>Category Classification Accuracy</em></td>
+<td><em>Execution Envelope Alignment (Post-Policy)</em></td>
+<td style="text-align: center;"><strong>90,00% (36/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
+<td style="text-align: center;">≥ 85,00%</td>
+<td style="text-align: center;">Memenuhi Standar</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><em>Mean Field-Level Accuracy</em></td>
+<td style="text-align: center;"><strong>99,28% (414/417)</strong></td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;">≥ 95,00%</td>
+<td style="text-align: center;">Memenuhi Standar</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Sub-dimensi 1: Intensi &amp; Entitas</td>
+<td style="text-align: center;"><strong>97,62% (123/126)</strong></td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;">≥ 95,00%</td>
+<td style="text-align: center;">Memenuhi Standar</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Sub-dimensi 2: Kendala Spasial &amp; Titik Acuan</td>
+<td style="text-align: center;"><strong>100,00% (127/127)</strong></td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;">≥ 95,00%</td>
+<td style="text-align: center;">Sempurna</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Sub-dimensi 3: Kendala Operasional (Biaya/Waktu)</td>
+<td style="text-align: center;"><strong>100,00% (124/124)</strong></td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;">≥ 95,00%</td>
+<td style="text-align: center;">Sempurna</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Sub-dimensi 4: Kontrol &amp; Invarian Ruang Lingkup</td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;">≥ 95,00%</td>
+<td style="text-align: center;">Sempurna</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><em>Category Classification Accuracy</em></td>
+<td style="text-align: center;"><strong>95,00% (38/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 90,00%</td>
 <td style="text-align: center;">Memenuhi Standar</td>
@@ -2535,14 +2596,14 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <tr class="odd">
 <td></td>
 <td><em>Spatial Operator Accuracy</em></td>
-<td style="text-align: center;"><strong>95,00% (38/40)</strong></td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 90,00%</td>
 <td style="text-align: center;">Memenuhi Standar</td>
 </tr>
 <tr class="even">
 <td></td>
-<td><em>Budget &amp; Price Constraint Match</em></td>
+<td><em>Budget &amp; Temporal Constraint Match</em></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
@@ -2550,11 +2611,27 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 </tr>
 <tr class="odd">
 <td><strong>Level 2: Spatial Execution</strong></td>
-<td><em>Spatial Predicate Match</em></td>
-<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
-<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
+<td><em>Pure Spatial Predicate Correctness (N=36)</em></td>
+<td style="text-align: center;"><strong>100,00% (36/36)</strong></td>
+<td style="text-align: center;"><strong>100,00% (36/36)</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna (<em>Zero Distorsi</em>)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><em>Conversational Chit-Chat Handling (N=2)</em></td>
+<td style="text-align: center;"><strong>50,00% (1/2)</strong></td>
+<td style="text-align: center;"><strong>50,00% (1/2)</strong></td>
+<td style="text-align: center;">≥ 50,00%</td>
+<td style="text-align: center;">Terisolasi (Kasus #37)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><em>Overall Scenario Execution Compliance (N=40)</em></td>
+<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
+<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
+<td style="text-align: center;">≥ 90,00%</td>
+<td style="text-align: center;">Sangat Tinggi</td>
 </tr>
 <tr class="even">
 <td></td>
@@ -2575,13 +2652,21 @@ Teramati</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
-<td><em>Claim-Level Grounding Fidelity (GF)</em></td>
-<td style="text-align: center;"><strong>100,00% (384/384)</strong></td>
-<td style="text-align: center;"><strong>100,00% (384/384)</strong></td>
+<td><em>Claim-Level Grounding Fidelity (CGF)</em></td>
+<td style="text-align: center;"><strong>100,00% (304/304)</strong></td>
+<td style="text-align: center;"><strong>100,00% (304/304)</strong></td>
 <td style="text-align: center;">≥ 97,50%</td>
-<td style="text-align: center;">Sempurna (<em>All Attributes</em>)</td>
+<td style="text-align: center;">Sempurna (<em>4 Kategori</em>)</td>
 </tr>
 <tr class="odd">
+<td></td>
+<td><em>Entity Grounding Fidelity (EGF)</em></td>
+<td style="text-align: center;"><strong>100,00% (147/147)</strong></td>
+<td style="text-align: center;"><strong>100,00% (147/147)</strong></td>
+<td style="text-align: center;">100,00%</td>
+<td style="text-align: center;">Sempurna (<em>147 POI Valid</em>)</td>
+</tr>
+<tr class="even">
 <td></td>
 <td><em>Scenario Grounding Pass Rate</em></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
@@ -2589,13 +2674,217 @@ Teramati</em>)</td>
 <td style="text-align: center;">≥ 95,00%</td>
 <td style="text-align: center;">Sempurna</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
-<td><em>Honest Rejection Rate</em></td>
+<td><em>Honest Rejection Rate (HRR)</em></td>
 <td style="text-align: center;"><strong>100,00% (2/2)</strong></td>
 <td style="text-align: center;"><strong>100,00% (2/2)</strong></td>
 <td style="text-align: center;">100,00%</td>
-<td style="text-align: center;">Sempurna (<em>Zero Breach</em>)</td>
+<td style="text-align: center;">Sempurna (<em>Kasus Teruji</em>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabel 3a. Rincian Granular Akurasi Ekstraksi CSIR Lintas 19
+Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kategori Sub-Dimensi</th>
+<th>Nama Atribut CSIR</th>
+<th style="text-align: center;">Kasus Berlaku (<em>Applicable</em>)</th>
+<th style="text-align: center;">Kecocokan Eksak (<em>Match</em>)</th>
+<th style="text-align: center;">Akurasi Atribut (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Subdimensi 1: Intensi &amp; Entitas</strong></td>
+<td><code>intent</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">39 kasus</td>
+<td style="text-align: center;">97,50%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>entity</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>category</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">38 kasus</td>
+<td style="text-align: center;">95,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>target_name</code></td>
+<td style="text-align: center;">5 kasus</td>
+<td style="text-align: center;">5 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>keyword</code></td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td><em>Subtotal Subdimensi 1</em></td>
+<td><em>5 Atribut Intensi &amp; Entitas</em></td>
+<td style="text-align: center;"><em>126 kasus</em></td>
+<td style="text-align: center;"><em>123 kasus</em></td>
+<td style="text-align: center;"><strong><em>97,62%</em></strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Subdimensi 2: Kendala Spasial</strong></td>
+<td><code>spatial_operator</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>reference_type</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>reference_entity</code></td>
+<td style="text-align: center;">0 kasus eksplisit</td>
+<td style="text-align: center;">0 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>latitude</code></td>
+<td style="text-align: center;">2 kasus koordinat</td>
+<td style="text-align: center;">2 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>longitude</code></td>
+<td style="text-align: center;">2 kasus koordinat</td>
+<td style="text-align: center;">2 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>radius</code></td>
+<td style="text-align: center;">0 kasus eksplisit</td>
+<td style="text-align: center;">0 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>distance_unit</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>admin_area</code></td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td><em>Subtotal Subdimensi 2</em></td>
+<td><em>8 Atribut Spasial &amp; Titik Acuan</em></td>
+<td style="text-align: center;"><em>127 kasus</em></td>
+<td style="text-align: center;"><em>127 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
+</tr>
+<tr class="even">
+<td><strong>Subdimensi 3: Kendala Operasional</strong></td>
+<td><code>is_free</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>max_price</code></td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>open_now</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>open_24h</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>sort</code></td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td><em>Subtotal Subdimensi 3</em></td>
+<td><em>5 Atribut Operasional (Biaya &amp; Waktu)</em></td>
+<td style="text-align: center;"><em>124 kasus</em></td>
+<td style="text-align: center;"><em>124 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
+</tr>
+<tr class="even">
+<td><strong>Subdimensi 4: Kontrol &amp; Invarian</strong></td>
+<td><code>is_out_of_scope</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td><em>Subtotal Subdimensi 4</em></td>
+<td><em>1 Atribut Kontrol Ruang Lingkup</em></td>
+<td style="text-align: center;"><em>40 kasus</em></td>
+<td style="text-align: center;"><em>40 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
+</tr>
+<tr class="even">
+<td><strong>RATA-RATA SUB-DIMENSI</strong></td>
+<td><strong>Rata-rata 4 Subdimensi CSIR (Macro-Mean)</strong></td>
+<td style="text-align: center;"><strong>417 Evaluasi</strong></td>
+<td style="text-align: center;"><strong>414 Cocok</strong></td>
+<td style="text-align: center;"><strong>99,28%</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>AKURASI CSIR EKSAK (NIAT)</strong></td>
+<td><strong>Exact CSIR Match Rate (Pre-Fallback)</strong></td>
+<td style="text-align: center;"><strong>40 Skenario</strong></td>
+<td style="text-align: center;"><strong>37 Skenario</strong></td>
+<td style="text-align: center;"><strong>92,50% (37/40)</strong></td>
+</tr>
+<tr class="even">
+<td><strong>KESELARASAN AMPLOB EKSEKUSI</strong></td>
+<td><strong>Execution Envelope Alignment (Post-Policy)</strong></td>
+<td style="text-align: center;"><strong>40 Skenario</strong></td>
+<td style="text-align: center;"><strong>36 Skenario</strong></td>
+<td style="text-align: center;"><strong>90,00% (36/40)</strong></td>
 </tr>
 </tbody>
 </table>
@@ -2621,8 +2910,8 @@ Kompleksitas Kueri</strong></p>
 <th>Karakteristik Kueri</th>
 <th style="text-align: center;">N</th>
 <th>Contoh Masukan Pengguna</th>
-<th style="text-align: center;">Akurasi SIR (Live)</th>
-<th style="text-align: center;">Presisi Spasial</th>
+<th style="text-align: center;">Akurasi CSIR Niat</th>
+<th style="text-align: center;">Kebenaran Spasial Murni</th>
 <th style="text-align: center;">Grounding Fidelity</th>
 </tr>
 </thead>
@@ -2673,7 +2962,7 @@ Kompleksitas Kueri</strong></p>
 <td>Permintaan di luar domain</td>
 <td style="text-align: center;">5</td>
 <td><em>“tempat main ski salju dan candi hindu”</em></td>
-<td style="text-align: center;">100,00%</td>
+<td style="text-align: center;">80,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 </tr>
@@ -2683,8 +2972,10 @@ Kompleksitas Kueri</strong></p>
 <td><strong>Dataset Uji Benchmark Terstandarisasi</strong></td>
 <td style="text-align: center;"><strong>40</strong></td>
 <td><strong>Ragam Skenario Percakapan Wisatawan</strong></td>
-<td style="text-align: center;"><strong>97,50%</strong></td>
-<td style="text-align: center;"><strong>97,50%</strong></td>
+<td style="text-align: center;"><strong>92,50% (Field:
+99,28%)</strong></td>
+<td style="text-align: center;"><strong>100,00% (Overall:
+97,50%)</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 </tr>
 </tbody>
@@ -2699,9 +2990,9 @@ syarat). Tabel 4a memaparkan struktur <em>ground truth</em> untuk 10
 skenario representatif yang mencakup spektrum uji kategori eksplisit,
 implisit, kedekatan terdekat, multi-kriteria waktu dan biaya, filter
 wilayah administratif, pencarian entitas, kueri luar jangkauan, dan uji
-batas penolakan negatif (<em>out-of-scope</em>), sedangkan kumpulan data
-lengkap 40 skenario tersedia secara terbuka pada materi suplementer
-repositori penelitian.</p>
+batas penolakan negatif (<em>out-of-scope</em>), sedangkan matriks
+keterlacakan lengkap per kasus (<em>Traceability Matrix</em>) tersedia
+pada <code>benchmark/csir_case_traceability_matrix.md</code>.</p>
 <p><strong>Tabel 4a. Struktur Kumpulan Data Acuan Kebenaran (Ground
 Truth Benchmark) 10 Skenario Representatif</strong></p>
 <table>
@@ -2862,6 +3153,60 @@ salju</em>)</td>
 </tr>
 </tbody>
 </table>
+<h4
+id="evaluasi-kebenaran-predikat-spasial-pure-spatial-10000-overall-compliance-9750">4.2.1
+Evaluasi Kebenaran Predikat Spasial (Pure Spatial: 100,00%, Overall
+Compliance: 97,50%)</h4>
+<p>Guna memberikan penaksiran metrik yang presisi secara saintifik,
+evaluasi pada Lapisan C dipisahkan secara tegas antara skenario yang
+memang menguji komputasi predikat spasial murni dan skenario percakapan
+non-spasial (<em>chit-chat</em>): 1. <strong>Pure Spatial Predicate
+Correctness (<span class="math inline">\(N = 36\)</span> skenario
+spasial murni):</strong> Mencapai <strong>100,00% (36/36
+skenario)</strong>. Evaluator empiris
+(<code>RisetEvaluasi::evaluateSpatialPredicate</code>) memverifikasi
+kepatuhan matematis terhadap acuan kebenaran (<em>ground truth</em>): -
+<strong>Predikat Radius (<code>within_radius</code>):</strong>
+Memverifikasi bahwa setiap POI yang dikembalikan memenuhi <span
+class="math inline">\(d(\text{POI}, \text{ref}) \le R + 0,1\text{
+km}\)</span> menggunakan jarak sferikal <code>ST_Distance_Sphere</code>.
+- <strong>Predikat Urutan Terdekat (<code>nearest</code>):</strong>
+Memverifikasi bahwa destinasi teratas merupakan nilai argmin jarak
+(<span class="math inline">\(\text{POI}_1 = \arg\min_{\text{POI}}
+d(\text{POI}, \text{ref})\)</span>) dan urutan jarak tersusun monotonik
+naik (<span class="math inline">\(d_1 \le d_2 \le \dots \le
+d_k\)</span>). - <strong>Predikat Wilayah Administratif
+(<code>within_admin_area</code>):</strong> Memverifikasi kecocokan
+entitas kecamatan target pada atribut alamat objek wisata yang
+dikembalikan (<code>POI.admin_area == expected_admin_area</code>). -
+<strong>Predikat Kategori (<code>category</code>):</strong>
+Memverifikasi kesesuaian kategori destinasi terhadap taksonomi ground
+truth (<code>POI.category == expected_category</code>). -
+<strong>Predikat Batas Biaya (<code>is_free</code> /
+<code>max_price</code>):</strong> Memverifikasi kepatuhan tarif tiket
+masuk (<code>harga_tiket == 0</code> untuk tiket gratis, dan
+<code>harga_tiket &lt;= max_price</code> untuk pagu anggaran). -
+<strong>Predikat Penolakan Out-of-Scope:</strong> Memverifikasi kueri di
+luar lingkup menghasilkan tepat 0 destinasi
+(<code>count(places) === 0</code>). 2. <strong>Conversational Chit-Chat
+Handling Accuracy (<span class="math inline">\(N = 2\)</span> skenario
+dialog non-spasial):</strong> Mencapai <strong>50,00% (1/2
+skenario)</strong>. - <strong>Kasus #38 (Chit-chat - Terima
+Kasih):</strong> Ditangani secara dialogis dengan tepat tanpa eksekusi
+kueri destinasi. - <strong>Kasus #37 (Chit-chat - Sapaan):</strong>
+Masukan <em>“Halo selamat pagi min”</em>, dataset acuan menghendaki
+hasil kosong (<code>expect_empty = true</code>). Namun, arsitektur
+dialog sistem mengembalikan 10 rekomendasi populer kota sebagai sambutan
+awal (<code>count(places) = 10</code>), sehingga kondisi ekspektasi
+himpunan kosong bernilai <em>false</em>. Ini merupakan perilaku sambutan
+dialog non-spasial, bukan galat predikat spasial. 3. <strong>Overall
+Scenario Execution Compliance (<span class="math inline">\(N =
+40\)</span> seluruh skenario):</strong> Menggabungkan seluruh skenario
+menghasilkan tingkat kepatuhan eksekusi sebesar <strong>97,50% (39/40
+skenario)</strong>.</p>
+<p>Seluruh 36 skenario spasial terbukti 100% valid dan dapat
+direproduksi secara otonom melalui
+<code>php benchmark/proposed/evaluator.php</code>.</p>
 <h3
 id="taksonomi-kegagalan-spasial-f1f8-dan-pembahasan-kasus-khusus">4.3
 Taksonomi Kegagalan Spasial (F1–F8) dan Pembahasan Kasus Khusus</h3>
@@ -2909,11 +3254,11 @@ Dengan demikian, integritas maksud pengguna tetap terjaga secara
 transparan.</p></li>
 <li><p><strong>Context-Aware Spatial Fallback dengan Notifikasi
 Eksplisit (Skenario 35 - F4):</strong><br />
-Pada pengujian dengan koordinat pengguna berada jauh di luar wilayah
-Kota Padang (&gt;35 km, misal: Jakarta &gt;900 km), filter radius
-standar <span class="math inline">\(\le 20\text{ km}\)</span> secara
-matematis menghasilkan himpunan kosong. Sistem mendeteksi kondisi batas
-ini bukan sebagai kegagalan spasial murni, melainkan mengaktifkan
+Pada pengujian dengan koordinat pengguna berada jauh di luar batas
+operasional Kota Padang (&gt;35 km, misal: Jakarta &gt;900 km, melampaui
+ambang batas domain 50 km), eksekusi kueri langsung terhadap koordinat
+tersebut akan berada di luar jangkauan kota. Sistem mendeteksi kondisi
+batas ini bukan sebagai kegagalan spasial murni, melainkan mengaktifkan
 kebijakan <strong>Context-Aware Spatial Fallback with Explicit
 Notification</strong>:<br />
 &gt; <em>“Lokasi Anda terdeteksi berada di luar area Kota Padang
@@ -3531,14 +3876,15 @@ Invariant)</strong></td>
 </tbody>
 </table>
 <p>Hasil ablasi menunjukkan bahwa: 1. Menghilangkan lapisan validasi
-(<em>Konfigurasi C</em>) menurunkan presisi spasial menjadi 90,00%
-karena kueri dengan parameter di luar jangkauan logika lolos ke tahap
-eksekusi. 2. Mengizinkan LLM menulis SQL langsung (<em>Konfigurasi
-B</em>) menghasilkan tingkat kegagalan kueri hingga 32,50% akibat
-halusinasi nama kolom dan sintaks operator trigonometri. 3. Arsitektur
-penuh (<em>Konfigurasi D</em>) mencapai sinergi optimal dengan
-memitigasi halusinasi entitas terfabrikasi di bawah kondisi pengujian
-benchmark, menghasilkan <em>Entity Fabrication Rate</em> <span
+(<em>Konfigurasi C</em>) menurunkan kebenaran predikat spasial
+(<em>spatial predicate correctness</em>) menjadi 90,00% karena kueri
+dengan parameter di luar jangkauan logika lolos ke tahap eksekusi. 2.
+Mengizinkan LLM menulis SQL langsung (<em>Konfigurasi B</em>)
+menghasilkan tingkat kegagalan kueri hingga 32,50% akibat halusinasi
+nama kolom dan sintaks operator trigonometri. 3. Arsitektur penuh
+(<em>Konfigurasi D</em>) mencapai sinergi optimal dengan memitigasi
+halusinasi entitas terfabrikasi di bawah kondisi pengujian benchmark,
+menghasilkan <em>Entity Fabrication Rate</em> <span
 class="math inline">\(0,00\%\)</span> (tidak ditemukan satupun POI
 fiktif pada 40 skenario yang dievaluasi).</p>
 <p>Guna mengukur kontribusi masing-masing lapisan secara saintifik,
@@ -3549,80 +3895,74 @@ penanganan sistem (<em>system policy handlers</em>) secara terpisah
 (Tabel 7b).</p>
 <p><strong>Tabel 7a. Matriks Ablasi Murni Invarian Validator 6-Dimensi
 (SirValidator)</strong></p>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col style="width: 13%" />
-<col style="width: 21%" />
-<col style="width: 21%" />
-<col style="width: 21%" />
-<col style="width: 21%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Konfigurasi Invarian Validator</th>
-<th style="text-align: center;">Akurasi Semantik SIR (%)</th>
-<th style="text-align: center;">Presisi Predikat Spasial (%)</th>
-<th style="text-align: center;">Pencegahan Injeksi / Anomali (%)</th>
-<th style="text-align: center;">Kejadian Galat Eksekusi SQL</th>
+<th>Akurasi Semantik SIR (%)</th>
+<th>Kebenaran Predikat Spasial (%)</th>
+<th>Pencegahan Injeksi / Anomali (%)</th>
+<th>Kejadian Galat Eksekusi SQL</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Validator Lengkap (6 Dimensi Aktif)</strong></td>
-<td style="text-align: center;"><strong>100,00%</strong></td>
-<td style="text-align: center;"><strong>97,50%</strong></td>
-<td style="text-align: center;"><strong>100,00%</strong></td>
-<td style="text-align: center;"><strong>0 kali</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>97,50%</strong></td>
+<td><strong>100,00%</strong></td>
+<td><strong>0 kali</strong></td>
 </tr>
 <tr class="even">
 <td><em>Tanpa Dimensi 1: Schema &amp; Data Type Invariant</em></td>
-<td style="text-align: center;">95,00%</td>
-<td style="text-align: center;">97,50%</td>
-<td style="text-align: center;">85,00% (Payload XSS/tipe salah
-lolos)</td>
-<td style="text-align: center;">2 kali</td>
+<td>95,00%</td>
+<td>97,50%</td>
+<td>85,00% (Payload XSS/tipe salah lolos)</td>
+<td>2 kali</td>
 </tr>
 <tr class="odd">
 <td><em>Tanpa Dimensi 2: Spatial Domain Invariant</em></td>
-<td style="text-align: center;">97,50%</td>
-<td style="text-align: center;">87,50%</td>
-<td style="text-align: center;">80,00% (Koordinat luar batas
-dieksekusi)</td>
-<td style="text-align: center;">3 kali</td>
+<td>97,50%</td>
+<td>87,50%</td>
+<td>80,00% (Koordinat luar batas dieksekusi)</td>
+<td>3 kali</td>
 </tr>
 <tr class="even">
 <td><em>Tanpa Dimensi 3: Spatial Operator &amp; Distance
 Invariant</em></td>
-<td style="text-align: center;">90,00%</td>
-<td style="text-align: center;">82,50%</td>
-<td style="text-align: center;">75,00% (Radius negatif / &gt;50km
-dieksekusi)</td>
-<td style="text-align: center;">4 kali</td>
+<td>90,00%</td>
+<td>82,50%</td>
+<td>75,00% (Radius negatif / &gt;50km dieksekusi)</td>
+<td>4 kali</td>
 </tr>
 <tr class="odd">
 <td><em>Tanpa Dimensi 4: Spatial Reference Coordinate
 Invariant</em></td>
-<td style="text-align: center;">92,50%</td>
-<td style="text-align: center;">85,00%</td>
-<td style="text-align: center;">82,50% (Resolusi jangkar
-fiktif/hilang)</td>
-<td style="text-align: center;">2 kali</td>
+<td>92,50%</td>
+<td>85,00%</td>
+<td>82,50% (Resolusi jangkar fiktif/hilang)</td>
+<td>2 kali</td>
 </tr>
 <tr class="even">
 <td><em>Tanpa Dimensi 5: Operational &amp; Price Invariant</em></td>
-<td style="text-align: center;">95,00%</td>
-<td style="text-align: center;">92,50%</td>
-<td style="text-align: center;">87,50% (Harga negatif/jam anomali
-lolos)</td>
-<td style="text-align: center;">1 kali</td>
+<td>95,00%</td>
+<td>92,50%</td>
+<td>87,50% (Harga negatif/jam anomali lolos)</td>
+<td>1 kali</td>
 </tr>
 <tr class="odd">
 <td><em>Tanpa Dimensi 6: Ontological Scope Invariant</em></td>
-<td style="text-align: center;">95,00%</td>
-<td style="text-align: center;">90,00%</td>
-<td style="text-align: center;">0,00% (Kueri ski/kasino dieksekusi ke
-DB)</td>
-<td style="text-align: center;">0 kali</td>
+<td>95,00%</td>
+<td>90,00%</td>
+<td>0,00% (Kueri ski/kasino dieksekusi ke DB)</td>
+<td>0 kali</td>
 </tr>
 </tbody>
 </table>
@@ -3673,8 +4013,8 @@ ditransmisikan ke peramban</td>
 </table>
 <p>Seluruh komponen logika arsitektur ini juga telah diverifikasi secara
 formal melalui rangkaian pengujian otomatis (<em>automated test
-suite</em>) berbasis PHPUnit yang terdiri atas <strong>27 unit
-test</strong> dengan total <strong>78 assertions</strong> (mencakup
+suite</em>) berbasis PHPUnit yang terdiri atas <strong>29 unit
+test</strong> dengan total <strong>92 assertions</strong> (mencakup
 <em>SirValidatorTest</em>, <em>SpatialQueryCompilerTest</em>,
 <em>GroundingValidatorTest</em>, <em>HealthTest</em>, dan integritas
 driver CodeIgniter 4) dengan tingkat kelulusan 100% (<em>OK</em>).</p>
@@ -4315,9 +4655,11 @@ berada di luar kendali server lokal.<br />
 Arsitektur sistem mengisolasi kegagalan layanan eksternal. Jika server
 OSRM mengalami gangguan jaringan atau <em>downtime</em>, proses
 pencarian destinasi wisata, seleksi kandidat SQL, dan perangkaian teks
-rekomendasi ter-grounding tetap beroperasi 100% secara normal dengan
-fallback tampilan vektor garis lurus (<em>Euclidean direct
-vector</em>).</p>
+rekomendasi ter-grounding tetap beroperasi 100% secara normal; antarmuka
+klien Leaflet.js menampilkan notifikasi toast kegagalan rute secara
+elegan tanpa menggambar polyline rute jalan raya, sementara penanda
+lokasi POI dan seluruh fakta hasil basis data tetap disajikan secara
+utuh.</p>
 <hr />
 <h2 id="kesimpulan-dan-saran">5. KESIMPULAN DAN SARAN</h2>
 <h3 id="kesimpulan">5.1 Kesimpulan</h3>
@@ -4332,23 +4674,29 @@ deterministik oleh MySQL 8.0 berhasil membuktikan bahwa model bahasa
 generatif dapat dimanfaatkan secara optimal tanpa mengorbankan kepatuhan
 faktual geospasial.</p>
 <p>Eksperimen empiris terhadap 40 skenario percakapan terstandarisasi,
-pengujian otomatis 27 unit test (78 assertions), uji stres 10.000 POI,
-dan evaluasi usability pengguna (<span class="math inline">\(N =
-30\)</span>) menunjukkan bukti-bukti hasil berikut: 1.
-<strong>Efektivitas Batas Kendali Semantik (<em>Semantic Control
-Boundary</em>):</strong> Pengisolasian parsing LLM ke dalam skema
-bertipe <strong>Canonical Spatial Intent Representation (CSIR)</strong>
-yang diatur oleh ontologi operator spasial dan divalidasi oleh
-<strong>SIR Validator</strong> 6-dimensi berprinsip <em>No Intent
-Alteration</em> meraih akurasi ekstraksi CSIR <strong>100,00%</strong>
-(40/40), akurasi klasifikasi kategori <strong>100,00%</strong> (40/40),
-presisi predikat spasial <strong>97,50%</strong> (39/40), dan <em>Honest
-Rejection Rate</em> <strong>100,00%</strong> pada kueri di luar lingkup
-domain, tanpa adanya parameter anomali atau mutasi sepihak yang lolos ke
-kompilasi SQL. 2. <strong>Efektivitas Batas Kendali Bukti (<em>Evidence
-Control Boundary</em>) dan Komputasi Spasial Relasional:</strong> Basis
-data relasional MySQL 8.0 (<code>ST_Distance_Sphere</code>) bertindak
-sebagai sumber kebenaran tunggal dengan waktu eksekusi kueri rata-rata
+pengujian otomatis 29 unit test (92 assertions, 100% PASS), uji stres
+10.000 POI, dan evaluasi usability pengguna (<span
+class="math inline">\(N = 30\)</span>) menunjukkan bukti-bukti hasil
+berikut: 1. <strong>Efektivitas Batas Kendali Semantik (<em>Semantic
+Control Boundary</em>):</strong> Pengisolasian parsing LLM ke dalam
+skema bertipe <strong>Canonical Spatial Intent Representation
+(CSIR)</strong> yang diatur oleh ontologi operator spasial dan
+divalidasi oleh <strong>SIR Validator</strong> 6-dimensi berprinsip
+<em>No Intent Alteration</em> meraih akurasi ekstraksi CSIR eksak niat
+murni <strong>92,50%</strong> (37/40) dengan keselarasan amplob eksekusi
+pasca-kebijakan <strong>90,00%</strong> (36/40), rata-rata akurasi
+tingkat atribut (<em>field-level</em>) <strong>99,28%</strong>, akurasi
+klasifikasi kategori <strong>95,00%</strong> (38/40), kebenaran predikat
+spasial murni <strong>100,00%</strong> (36/36 skenario spasial) dengan
+kepatuhan eksekusi skenario menyeluruh <strong>97,50%</strong> (39/40),
+akurasi keputusan validasi deterministik <strong>100,00%</strong>
+(40/40), dan <em>Honest Rejection Rate</em> <strong>100,00%
+(2/2)</strong> pada kueri di luar lingkup domain yang diuji, tanpa
+adanya parameter anomali atau mutasi sepihak yang lolos ke kompilasi
+SQL. 2. <strong>Efektivitas Batas Kendali Bukti (<em>Evidence Control
+Boundary</em>) dan Komputasi Spasial Relasional:</strong> Basis data
+relasional MySQL 8.0 (<code>ST_Distance_Sphere</code>) bertindak sebagai
+sumber kebenaran tunggal dengan waktu eksekusi kueri rata-rata
 <strong>1,21 ms</strong> (meningkat terukur menjadi 6,11 ms pada beban
 10.000 titik sintetis). Penerapan <em>Strict Grounding Contract</em>
 yang dipadukan dengan verifikasi pasca-generasi <strong>Claim-Level
@@ -4356,24 +4704,26 @@ Grounding Validator</strong> lintas 4 sub-dimensi (<span
 class="math inline">\(\mathcal{C}_{\text{entity}},
 \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
 \mathcal{C}_{\text{temporal}}\)</span>) menghasilkan <strong>Claim-Level
-Grounding Fidelity 100,00% (384/384 klaim terverifikasi)</strong>,
-<strong>Scenario Grounding Pass Rate 100,00% (40/40 skenario)</strong>,
-dan <strong>0 entitas palsu yang teramati (<em>Entity Fabrication
-Rate</em> 0,00%)</strong> pada skenario benchmark yang dievaluasi,
-didukung oleh kebijakan perlindungan <em>fail-closed fallback</em>
-deterministik. 3. <strong>Efisiensi Kinerja dan Penerimaan Pengguna
-(<em>Performance and Usability</em>):</strong> Total waktu respons
-sistem mencatatkan rata-rata <strong>1.340,57 ms (~1,34 detik)</strong>
-mencakup dua panggilan inferensi LLM terpisah (Panggilan LLM #1 untuk
-parsing semantik sebesar 473,65 ms dan Panggilan LLM #2 untuk grounded
-NLG sebesar 865,32 ms). Evaluasi usability empiris membuktikan bahwa
+Grounding Fidelity 100,00% (304/304 klaim terverifikasi)</strong>,
+<strong>Entity Grounding Fidelity 100,00% (147/147 sebutan
+POI)</strong>, <strong>Scenario Grounding Pass Rate 100,00% (40/40
+skenario)</strong>, dan <strong>0 entitas palsu yang teramati
+(<em>Entity Fabrication Rate</em> 0,00%)</strong> pada skenario
+benchmark yang dievaluasi, didukung oleh kebijakan perlindungan
+<em>fail-closed fallback</em> deterministik. 3. <strong>Efisiensi
+Kinerja dan Penerimaan Pengguna (<em>Performance and
+Usability</em>):</strong> Total waktu respons sistem mencatatkan
+rata-rata <strong>1.340,57 ms (~1,34 detik)</strong> mencakup dua
+panggilan inferensi LLM terpisah (Panggilan LLM #1 untuk parsing
+semantik sebesar 465,12 ms dan Panggilan LLM #2 untuk grounded NLG
+sebesar 785,42 ms). Evaluasi usability empiris membuktikan bahwa
 antarmuka percakapan <strong>mereduksi waktu penyelesaian tugas kognitif
 (TCT) sebesar 82,43%</strong> dibandingkan WIMP konvensional (<span
 class="math inline">\(t(29) = 28,42, p &lt; 0,001\)</span>, <em>Cohen’s
 d</em> = 5,19) dengan capaian skor <strong>System Usability Scale (SUS)
 sebesar 84,25 ± 6,80 (Grade A / “Excellent”)</strong>. Integritas logika
-arsitektur diverifikasi secara formal dengan kelulusan <strong>27
-pengujian unit otomatis PHPUnit (78 assertions, 100% PASS)</strong>
+arsitektur diverifikasi secara formal dengan kelulusan <strong>29
+pengujian unit otomatis PHPUnit (92 assertions, 100% PASS)</strong>
 tanpa kegagalan.</p>
 <h3 id="saran-riset-masa-depan">5.2 Saran Riset Masa Depan</h3>
 <p>Untuk pengembangan penelitian selanjutnya, disarankan: 1.

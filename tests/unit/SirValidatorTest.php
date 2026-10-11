@@ -86,6 +86,25 @@ class SirValidatorTest extends CIUnitTestCase
     }
 
     /**
+     * Uji Dimensi 3: No Silent Spatial Assumption - within_radius tanpa radius (null) harus DITOLAK via clarify_user, bukan diasumsikan 20 km!
+     */
+    public function testWithinRadiusWithoutRadiusMustBeRejected()
+    {
+        $sir = new SpatialIntent(
+            spatialOperator: 'within_radius',
+            radius: null
+        );
+
+        $res = $this->validator->validate($sir);
+
+        $this->assertFalse($res['isValid']);
+        $this->assertSame('rejected', $sir->validationStatus);
+        $this->assertSame('clarify_user', $sir->executionPolicy);
+        $this->assertNotEmpty($sir->validationErrors);
+        $this->assertStringContainsString('memerlukan spesifikasi radius pencarian', $sir->validationErrors[0]);
+    }
+
+    /**
      * Uji Dimensi 4: Koordinat di luar batas bola bumi WGS84 harus ditolak.
      */
     public function testCoordinateBounds()
@@ -149,5 +168,53 @@ class SirValidatorTest extends CIUnitTestCase
         $this->assertTrue($sir->isOutOfScope);
         $this->assertSame('out_of_scope', $sir->validationStatus);
         $this->assertSame('reject_out_of_scope', $sir->executionPolicy);
+    }
+
+    /**
+     * Uji Formal Multi-Turn Semantic State Merging: CSIR_{t+1} = Merge(CSIR_t, \Delta CSIR_{t+1})
+     */
+    public function testMultiTurnSemanticStateMerging()
+    {
+        // Turn 1: Inisiasi spasial Pantai Padang
+        $csir1 = new SpatialIntent(
+            category: 'Pantai',
+            referenceType: 'gps',
+            latitude: -0.958742,
+            longitude: 100.354128,
+            spatialOperator: 'nearest',
+            rawQuery: 'Cari pantai dekat saya'
+        );
+        $this->validator->validate($csir1);
+
+        // Turn 2: Delta batasan harga (ujaran eliptik tanpa menyebut ulang 'pantai' atau GPS)
+        $delta2 = new SpatialIntent(
+            maxPrice: 15000,
+            rawQuery: 'Yang tiketnya di bawah 15 ribu'
+        );
+        $this->validator->validate($delta2);
+
+        // State transition: CSIR_2 = Merge(CSIR_1, Delta_2)
+        $csir2 = $csir1->mergeWith($delta2);
+
+        $this->assertSame('Pantai', $csir2->category);
+        $this->assertSame('gps', $csir2->referenceType);
+        $this->assertSame(-0.958742, $csir2->latitude);
+        $this->assertSame('nearest', $csir2->spatialOperator);
+        $this->assertSame(15000, $csir2->maxPrice);
+
+        // Turn 3: Delta batasan jam operasional
+        $delta3 = new SpatialIntent(
+            openNow: true,
+            rawQuery: 'Yang buka sekarang'
+        );
+        $this->validator->validate($delta3);
+
+        // State transition: CSIR_3 = Merge(CSIR_2, Delta_3)
+        $csir3 = $csir2->mergeWith($delta3);
+
+        $this->assertSame('Pantai', $csir3->category);
+        $this->assertSame(-0.958742, $csir3->latitude);
+        $this->assertSame(15000, $csir3->maxPrice);
+        $this->assertTrue($csir3->openNow);
     }
 }

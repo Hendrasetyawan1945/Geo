@@ -47,6 +47,20 @@ class SirValidator
         'trans studio',
     ];
 
+    /** Dimensi yang dinonaktifkan untuk pengujian ablasi eksperimental (1-6) */
+    protected array $disabledDimensions = [];
+
+    public function setDisabledDimensions(array $dims): self
+    {
+        $this->disabledDimensions = $dims;
+        return $this;
+    }
+
+    public function getDisabledDimensions(): array
+    {
+        return $this->disabledDimensions;
+    }
+
     /**
      * Jalankan validasi 6-dimensi terhadap objek SpatialIntent.
      *
@@ -58,22 +72,34 @@ class SirValidator
         $errors = [];
 
         // 1. Dimensi 1: Schema & Type Integrity
-        $this->validateSchemaAndTypes($sir);
+        if (!in_array(1, $this->disabledDimensions, true)) {
+            $this->validateSchemaAndTypes($sir);
+        }
 
         // 2. Dimensi 2: Spatial Domain Validity (No Intent Alteration!)
-        $this->validateSpatialDomain($sir, $errors);
+        if (!in_array(2, $this->disabledDimensions, true)) {
+            $this->validateSpatialDomain($sir, $errors);
+        }
 
         // 3. Dimensi 3: Spatial Operator Validity (No Silently Casting to 'none'!)
-        $this->validateSpatialOperator($sir, $errors);
+        if (!in_array(3, $this->disabledDimensions, true)) {
+            $this->validateSpatialOperator($sir, $errors);
+        }
 
         // 4. Dimensi 4: Reference Coordinate Bounds
-        $this->validateSpatialReference($sir, $errors);
+        if (!in_array(4, $this->disabledDimensions, true)) {
+            $this->validateSpatialReference($sir, $errors);
+        }
 
         // 5. Dimensi 5: Operational & Price Constraints (Consistency Rules)
-        $this->validateOperationalConstraints($sir, $errors);
+        if (!in_array(5, $this->disabledDimensions, true)) {
+            $this->validateOperationalConstraints($sir, $errors);
+        }
 
         // 6. Dimensi 6: Domain Scope & Ontological Boundary
-        $this->validateOntologicalScope($sir, $errors);
+        if (!in_array(6, $this->disabledDimensions, true)) {
+            $this->validateOntologicalScope($sir, $errors);
+        }
 
         // Finalisasi status Canonical SIR (CSIR)
         $isValid = empty($errors);
@@ -155,6 +181,11 @@ class SirValidator
     {
         if (!in_array($sir->spatialOperator, SpatialIntent::VALID_OPERATORS, true)) {
             $errors[] = sprintf("Operator spasial '%s' tidak terdaftar dalam ontologi spasial sistem.", $sir->spatialOperator);
+        }
+
+        // Operator within_radius wajib memiliki parameter radius yang valid (No Silent Spatial Assumption)
+        if ($sir->spatialOperator === 'within_radius' && $sir->radius === null) {
+            $errors[] = "Operator 'within_radius' memerlukan spesifikasi radius pencarian yang jelas (tidak boleh null). Silakan tentukan jarak atau radius pencarian Anda.";
         }
 
         // Operator within_admin_area wajib memiliki nama wilayah

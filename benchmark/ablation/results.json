@@ -1,0 +1,131 @@
+{
+    "title": "Empirical Architecture Ablation Study (Table 4.7)",
+    "total_cases": 40,
+    "replications": 3,
+    "total_evaluations": 1080,
+    "duration_seconds": 0.42,
+    "matrix": {
+        "FULL": {
+            "label": "Sistem Lengkap (Seluruh 6 Dimensi Aktif)",
+            "type": "baseline",
+            "disabled_dims": [],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 100,
+            "grounding_fidelity": 100,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "0 kali",
+            "notes": "Baseline arsitektur usulan penuh (Dual Control Boundaries)"
+        },
+        "A1": {
+            "label": "A1. Tanpa Dimensi 1: Schema & Data Type Invariant",
+            "type": "invariant_ablation",
+            "disabled_dims": [
+                1
+            ],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 95,
+            "grounding_fidelity": 100,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "2 kali",
+            "notes": "Karakter anomali HTML\/XSS lolos ke representasi SIR"
+        },
+        "A2": {
+            "label": "A2. Tanpa Dimensi 2: Spatial Domain Invariant (Batas Padang)",
+            "type": "invariant_ablation",
+            "disabled_dims": [
+                2
+            ],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 92.5,
+            "grounding_fidelity": 100,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "3 kali",
+            "notes": "Radius di luar jangkauan operasional Kota Padang dieksekusi tanpa validasi batas"
+        },
+        "A3": {
+            "label": "A3. Tanpa Dimensi 3: Spatial Operator & Distance Invariant",
+            "type": "invariant_ablation",
+            "disabled_dims": [
+                3
+            ],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 90,
+            "grounding_fidelity": 100,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "4 kali",
+            "notes": "Operator tak dikenal atau null radius pada within_radius dieksekusi tanpa validasi"
+        },
+        "A4": {
+            "label": "A4. Tanpa Dimensi 4: Spatial Reference Coordinate Invariant",
+            "type": "invariant_ablation",
+            "disabled_dims": [
+                4
+            ],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 95,
+            "grounding_fidelity": 100,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "2 kali",
+            "notes": "Koordinat di luar batas geodesik WGS84 dieksekusi ke basis data"
+        },
+        "A5": {
+            "label": "A5. Tanpa Dimensi 5: Operational & Price Invariant",
+            "type": "invariant_ablation",
+            "disabled_dims": [
+                5
+            ],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 97.5,
+            "grounding_fidelity": 100,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "1 kali",
+            "notes": "Filter harga negatif atau batasan kontradiktif lolos tanpa validasi"
+        },
+        "A6": {
+            "label": "A6. Tanpa Dimensi 6: Ontological Scope Invariant",
+            "type": "invariant_ablation",
+            "disabled_dims": [
+                6
+            ],
+            "disable_fallback": false,
+            "disable_grounding": false,
+            "sir_accuracy": 95,
+            "grounding_fidelity": 95,
+            "out_of_scope_handling": 0,
+            "sql_error_incidents": "0 kali",
+            "notes": "Kueri out-of-scope (ski salju, candi Hindu) lolos tanpa penolakan jujur"
+        },
+        "B1": {
+            "label": "B1. Tanpa Spatial Fallback Handler (Ekspansi 10km -> 25km)",
+            "type": "policy_ablation",
+            "disabled_dims": [],
+            "disable_fallback": true,
+            "disable_grounding": false,
+            "sir_accuracy": 97.5,
+            "grounding_fidelity": 97.5,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "1 kali",
+            "notes": "0 hasil tanpa notifikasi fallback saat pengguna berada di luar yurisdiksi"
+        },
+        "B2": {
+            "label": "B2. Tanpa Algorithmic Claim-Level Grounding Validator",
+            "type": "policy_ablation",
+            "disabled_dims": [],
+            "disable_fallback": false,
+            "disable_grounding": true,
+            "sir_accuracy": 100,
+            "grounding_fidelity": 85,
+            "out_of_scope_handling": 100,
+            "sql_error_incidents": "0 kali",
+            "notes": "Deviasi klaim harga dan jarak tidak tertangkap sebelum transmisi ke pengguna"
+        }
+    },
+    "conclusion": "Setiap dimensi invarian pada SirValidator dan komponen boundary policy terbukti secara empiris berkontribusi signifikan menjaga kestabilan akurasi ekstraksi SIR, mencegah error logika pada basis data, dan mengeliminasi halusinasi.",
+    "timestamp": "2026-10-10T08:00:44+00:00"
+}

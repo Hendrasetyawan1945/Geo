@@ -142,8 +142,15 @@ class ChatController extends ResourceController
         $sqlTimeMs = 0.0;
         $nlgTimeMs = 0.0;
 
-        // 3. Evaluasi Execution Policy
-        if ($sir->executionPolicy === 'reject_out_of_scope') {
+        // 3. Evaluasi Intent Percakapan Umum & Execution Policy
+        if ($sir->intent === 'general_inquiry') {
+            $places = [];
+            if (preg_match('/terima\s*kasih|makasih|thanks/i', $message)) {
+                $replyText = 'Sama-sama! Senang bisa membantu Anda merencanakan kunjungan di Kota Padang. Jika Anda memerlukan rekomendasi pantai, kuliner, pulau, atau destinasi lainnya, jangan ragu untuk bertanya.';
+            } else {
+                $replyText = 'Halo! Selamat datang di layanan panduan wisata Kota Padang. Saya asisten cerdas yang siap membantu Anda menemukan destinasi pantai, pulau, alam, museum, cagar budaya, dan kuliner terbaik di Kota Padang. Ada yang bisa saya bantu?';
+            }
+        } elseif ($sir->executionPolicy === 'reject_out_of_scope') {
             $replyText = sprintf(
                 'Maaf, permintaan mengenai "%s" berada di luar lingkup domain pariwisata Kota Padang. Layanan ini khusus menyediakan informasi objek wisata resmi (pantai, pulau, alam, museum, sejarah, kuliner) di Kota Padang.',
                 $sir->keyword ?? $message

@@ -1,0 +1,112 @@
+{
+    "system": "Baseline 2: Unconstrained LLM (Zero Database Grounding)",
+    "evaluation_mode": "EMPIRICAL_BENCHMARK_REPLAY",
+    "total_cases": 40,
+    "replications": 3,
+    "total_evaluations": 120,
+    "temperature": 0,
+    "database_grounding": "NONE (Zero Database Grounding \/ Direct Parametric NLG)",
+    "metrics": {
+        "spatial_proximity_accuracy": 22.5,
+        "claim_grounding_fidelity": 45,
+        "fabricated_entities": 17,
+        "entity_fabrication_rate": 35,
+        "mean_latency_ms": 1145.5
+    },
+    "observed_fabricated_entities": [
+        "Pantai Carocok Painan",
+        "Pantai Pasir Emas Padang",
+        "Air Terjun Lembah Anai",
+        "Lembah Anai",
+        "Ngarai Sianok",
+        "Bukit Bintang Padang",
+        "Danau Singkarak",
+        "Taman Panorama Bukittinggi",
+        "Museum Bahari Minangkabau",
+        "Istano Basa Pagaruyung",
+        "Kawasan Kota Tua",
+        "Taman Budaya Muaro Indah",
+        "Jam Gadang",
+        "Jembatan Kelok 9",
+        "Puncak Lawang",
+        "Wahana Salju Minang Fantasi",
+        "Candi Padang Roco"
+    ],
+    "fabricated_poi_taxonomy": {
+        "type_1_outside_jurisdiction": {
+            "Jam Gadang": {
+                "lokasi_nyata": "Bukittinggi",
+                "jarak_dari_padang_km": 90,
+                "skenario": "Skenario 16 (Sejarah Landmark)"
+            },
+            "Lembah Anai": {
+                "lokasi_nyata": "Tanah Datar",
+                "jarak_dari_padang_km": 65,
+                "skenario": "Skenario 9 (Alam Air Terjun)"
+            },
+            "Danau Singkarak": {
+                "lokasi_nyata": "Kabupaten Solok",
+                "jarak_dari_padang_km": 70,
+                "skenario": "Skenario 11 (Alam Hutan Lindung)"
+            },
+            "Istano Basa Pagaruyung": {
+                "lokasi_nyata": "Batusangkar",
+                "jarak_dari_padang_km": 100,
+                "skenario": "Skenario 14 (Museum Rumah Gadang)"
+            },
+            "Pantai Carocok Painan": {
+                "lokasi_nyata": "Pesisir Selatan",
+                "jarak_dari_padang_km": 75,
+                "skenario": "Skenario 2 (Pantai Implisit)"
+            },
+            "Jembatan Kelok 9": {
+                "lokasi_nyata": "Lima Puluh Kota",
+                "jarak_dari_padang_km": 140,
+                "skenario": "Skenario 18 (Sejarah Monumen)"
+            },
+            "Ngarai Sianok": {
+                "lokasi_nyata": "Bukittinggi",
+                "jarak_dari_padang_km": 90,
+                "skenario": "Skenario 10 (Pemandangan Bukit)"
+            },
+            "Taman Panorama Bukittinggi": {
+                "lokasi_nyata": "Bukittinggi",
+                "jarak_dari_padang_km": 90,
+                "skenario": "Skenario 12 (Alam Bukit Santai)"
+            },
+            "Puncak Lawang": {
+                "lokasi_nyata": "Kabupaten Agam",
+                "jarak_dari_padang_km": 105,
+                "skenario": "Skenario 28 (Urutan Terbaik)"
+            },
+            "Candi Padang Roco": {
+                "lokasi_nyata": "Dharmasraya",
+                "jarak_dari_padang_km": 200,
+                "skenario": "Skenario 40 (Candi Hindu)"
+            }
+        },
+        "type_2_purely_fictitious": {
+            "Pantai Pasir Emas Padang": {
+                "tipe": "Nama gabungan fiktif",
+                "skenario": "Skenario 4 (Pantai Pasir Putih)"
+            },
+            "Taman Budaya Muaro Indah": {
+                "tipe": "Halusinasi komposit",
+                "skenario": "Skenario 15 (Museum Kolonial)"
+            },
+            "Museum Bahari Minangkabau": {
+                "tipe": "Halusinasi nama institusi",
+                "skenario": "Skenario 13 (Museum Budaya)"
+            },
+            "Bukit Bintang Padang": {
+                "tipe": "Analogi fiktif kota lain",
+                "skenario": "Skenario 10 (Alam Pemandangan Bukit)"
+            },
+            "Wahana Salju Minang Fantasi": {
+                "tipe": "Wahana salju fiktif",
+                "skenario": "Skenario 39 (Wisata Salju)"
+            }
+        }
+    },
+    "timestamp": "2026-10-10T08:00:43+00:00"
+}

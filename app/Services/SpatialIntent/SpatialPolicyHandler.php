@@ -41,25 +41,36 @@ class SpatialPolicyHandler
             );
 
             if ($distFromCenter > self::SERVICE_AREA_THRESHOLD_KM) {
-                // Posisi di luar area Padang: aktifkan fallback dengan notifikasi transparan
+                // Posisi di luar area Padang: aktifkan fallback dengan notifikasi transparan.
+                // Prinsip No Intent Alteration: maksud asli pengguna (latitude, longitude, referenceType)
+                // TETAP dipertahankan utuh, sedangkan titik eksekusi basis data yang disesuaikan kebijakan
+                // dicatat pada resolvedLatitude, resolvedLongitude, dan resolvedReferenceType.
                 $sir->fallbackApplied = true;
                 $sir->fallbackNotice = sprintf(
                     'Lokasi Anda terdeteksi berada di luar area Kota Padang (sekitar %.1f km). Rekomendasi disajikan berdasarkan titik pusat Kota Padang sebagai acuan rencana kunjungan Anda.',
                     $distFromCenter
                 );
 
-                // Tetapkan titik acuan komputasi ke pusat kota Padang
-                $sir->referenceType = 'city_center';
-                $sir->latitude = self::PADANG_CENTER_LAT;
-                $sir->longitude = self::PADANG_CENTER_LNG;
+                // Tetapkan titik acuan eksekusi kebijakan operasional ke pusat Kota Padang
+                $sir->resolvedReferenceType = 'city_center';
+                $sir->resolvedLatitude = self::PADANG_CENTER_LAT;
+                $sir->resolvedLongitude = self::PADANG_CENTER_LNG;
+            } else {
+                $sir->resolvedReferenceType = $sir->referenceType;
+                $sir->resolvedLatitude = $sir->latitude;
+                $sir->resolvedLongitude = $sir->longitude;
             }
         } elseif ($sir->spatialOperator === 'nearest' || $sir->spatialOperator === 'within_radius') {
             // Jika butuh acuan spasial tetapi GPS tidak tersedia, gunakan pusat kota dengan notifikasi
             $sir->fallbackApplied = true;
             $sir->fallbackNotice = 'Koordinat GPS Anda belum aktif. Rekomendasi disajikan berdasarkan titik acuan pusat Kota Padang.';
-            $sir->referenceType = 'city_center';
-            $sir->latitude = self::PADANG_CENTER_LAT;
-            $sir->longitude = self::PADANG_CENTER_LNG;
+            $sir->resolvedReferenceType = 'city_center';
+            $sir->resolvedLatitude = self::PADANG_CENTER_LAT;
+            $sir->resolvedLongitude = self::PADANG_CENTER_LNG;
+        } else {
+            $sir->resolvedReferenceType = $sir->referenceType;
+            $sir->resolvedLatitude = $sir->latitude;
+            $sir->resolvedLongitude = $sir->longitude;
         }
 
         return $sir;

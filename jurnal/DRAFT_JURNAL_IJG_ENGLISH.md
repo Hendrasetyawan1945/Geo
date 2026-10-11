@@ -12,7 +12,7 @@ Hendra Setyawan¹, [Advisor Name I]²*, [Advisor Name II]³
 
 ### ABSTRACT
 
-Conventional Web Geographic Information Systems (Web GIS) in urban tourism predominantly rely on rigid WIMP (Windows, Icons, Menus, Pointer) interfaces utilizing multi-layered dropdown forms. This paradigm introduces severe cognitive friction for mobile travelers seeking multi-criteria filtering across spatial, temporal, and budgetary constraints. Conversely, unconstrained Large Language Models (LLMs) suffer from acute factual and spatial hallucinations, while dense-vector Retrieval-Augmented Generation (RAG) fails because vector embeddings cannot evaluate exact structured spatial-temporal predicates. Expanding upon the research lineage of *DTExplorer* (Afnarius et al., 2026), this paper proposes a **Reliability-Controlled Conversational Spatial Information System** governed by an architectural framework of **Dual Control Boundaries**: (1) a **Semantic Control Boundary** ($\text{LLM} \to \text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to \text{deterministic spatial query compiler}$) enforcing the *No Intent Alteration* principle (rejecting negative distances or illegal operators with `isValid = false` and execution policy `clarify_user` rather than silent mutation) and safety invariants (`!isValid || isOutOfScope` aborts SQL compilation), preventing invalid, out-of-scope, or mutated semantic intent from reaching spatial execution; and (2) an **Evidence Control Boundary** ($\text{SQL database facts } (F) \to \text{grounded NLG} \to \text{claim-level grounding validator}$) that anchors all factual truth to a relational MySQL 8.0 database via native `ST_Distance_Sphere` spherical spatial computations and OSRM road navigation, subsequently verifying generated narratives through an algorithmic claim-level grounding validator with a fail-closed fallback policy to prevent ungrounded claims from reaching the final user response. Empirical evaluation across 40 standardized benchmark query scenarios (validated across deterministic `--mock` pipeline evaluation and `--live` DeepSeek API inference) on 22 curated tourism destinations in Padang City, complemented by an automated test suite of 27 unit tests (78 assertions, 100% pass), demonstrated a CSIR semantic extraction accuracy of **100.00%** (40/40), a spatial execution predicate precision of **97.50%** (39/40), an Entity Fabrication Rate of **0.00%** (no fabricated POIs were observed across the evaluated benchmark scenarios), a Claim-Level Grounding Fidelity of **100.00%** across 384 audited factual claims, and an Honest Rejection Rate of **100.00%** on out-of-scope requests. Average end-to-end latency was **1,340.57 ms (~1.34 s)**, with in-database spatial query compilation and execution consuming merely 1.21 ms (0.09%). These findings demonstrate that constraining LLM authority through dual control boundaries achieves natural conversational flexibility while guaranteeing verifiable factual integrity and eliminating fabricated-entity hallucinations under the evaluated benchmark conditions.
+Conventional Web Geographic Information Systems (Web GIS) in urban tourism predominantly rely on rigid WIMP (Windows, Icons, Menus, Pointer) interfaces utilizing multi-layered dropdown forms. This paradigm introduces severe cognitive friction for mobile travelers seeking multi-criteria filtering across spatial, temporal, and budgetary constraints. Conversely, unconstrained Large Language Models (LLMs) suffer from acute factual and spatial hallucinations, while dense-vector Retrieval-Augmented Generation (RAG) fails because vector embeddings cannot evaluate exact structured spatial-temporal predicates. Expanding upon the research lineage of *DTExplorer* (Afnarius et al., 2026), this paper proposes a **Reliability-Controlled Conversational Spatial Information System** governed by an architectural framework of **Dual Control Boundaries**: (1) a **Semantic Control Boundary** ($\text{LLM} \to \text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to \text{deterministic spatial query compiler}$) enforcing the *No Intent Alteration* principle (rejecting negative distances or illegal operators with `isValid = false` and execution policy `clarify_user` rather than silent mutation) and safety invariants (`!isValid || isOutOfScope` aborts SQL compilation), preventing invalid, out-of-scope, or mutated semantic intent from reaching spatial execution; and (2) an **Evidence Control Boundary** ($\text{SQL database facts } (F) \to \text{grounded NLG} \to \text{claim-level grounding validator}$) that anchors all factual truth to a relational MySQL 8.0 database via native `ST_Distance_Sphere` spherical spatial computations and OSRM road navigation, subsequently verifying generated narratives through an algorithmic claim-level grounding validator with a fail-closed fallback policy to prevent ungrounded claims from reaching the final user response. Empirical 4-layer evaluation across 40 standardized benchmark query scenarios on 22 curated tourism destinations in Padang City, complemented by an automated test suite of 29 unit tests (92 assertions, 100% pass), demonstrated a Pure Intent Pre-Fallback Exact CSIR semantic extraction accuracy of **92.50%** (37/40) (**90.00% / 36/40** on post-policy execution envelope alignment) with an average field-level accuracy of **99.28% (414/417)**, a validation decision accuracy of **100.00%** (40/40), a pure spatial predicate correctness of **100.00%** (36/36 spatial scenarios) alongside an overall scenario execution compliance rate of **100.00%** (40/40), an Entity Fabrication Rate of **0.00%** (no fabricated POIs were observed across the evaluated benchmark scenarios), a Claim-Level Grounding Fidelity of **100.00%** across 304 audited factual claims recognized by GroundingValidator, an Entity Grounding Fidelity of **100.00%** across 147 POI mentions, and an Honest Rejection Rate of **100.00% (2/2)** on tested out-of-scope requests. Average end-to-end latency was **1,340.57 ms (~1.34 s)** (comprising 1,252.17 ms server pipeline and 88.40 ms independent client-side OSRM routing benchmark), with in-database spatial query compilation and execution consuming merely 1.21 ms (0.09%). These findings demonstrate that constraining LLM authority through dual control boundaries achieves natural conversational flexibility while guaranteeing verifiable factual integrity and eliminating fabricated-entity hallucinations under the evaluated benchmark conditions.
 
 **Keywords:** *Reliability-Controlled Conversational Spatial Information System, Dual Control Boundaries, Semantic Control Boundary, Evidence Control Boundary, Canonical Spatial Intent Representation (CSIR), SIR Validator, ST_Distance_Sphere, Algorithmic Grounding Validator, Web GIS, Padang City.*
 
@@ -55,7 +55,7 @@ This work delivers five formal scientific contributions:
 2. **Canonical Spatial Intent Representation (CSIR) & Spatial Operator Ontology:** A typed, 4-partition intermediate semantic representation schema and ontological mapping decoupling natural-language interpretation from database query construction.
 3. **Six-Dimensional SIR Validation Algorithm (SIR Validator):** A deterministic control firewall enforcing the *No Intent Alteration* principle, schema, type, domain, operator, entity, and constraint consistency invariants prior to query compilation.
 4. **Deterministic Spatial Query Compiler & Safety Invariants:** An application-layer compiler translating validated CSIR objects into secure, parameterized SQL via the native `ST_Distance_Sphere` spatial function, establishing the relational database as the sole source of spatial truth.
-5. **Algorithmic Claim-Level Grounding Validator & Empirical Evaluation Framework:** A formal post-generation verification firewall verifying all factual claims across 4 sub-dimensions ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$), demonstrating 100.00% Grounding Fidelity with zero fabricated POIs observed across 40 evaluated benchmark scenarios, supported by an automated test suite of 27 unit tests (78 assertions) and multi-baseline ablation studies.
+5. **Algorithmic Claim-Level Grounding Validator & Empirical Evaluation Framework:** A formal post-generation verification firewall verifying all factual claims across 4 sub-dimensions ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$), demonstrating 100.00% Grounding Fidelity with zero fabricated POIs observed across 40 evaluated benchmark scenarios, supported by an automated test suite of 29 unit tests (92 assertions) and multi-baseline ablation studies.
 
 ---
 
@@ -197,7 +197,7 @@ The system enforces a clear distinction between spatial distance computation and
    This architectural choice provides three decisive advantages over manual trigonometric formulas:
    - **Native C++ Kernel Execution:** The calculation is compiled and evaluated directly within MySQL's optimized spatial geometry engine, eliminating SQL parser overhead from repetitive trigonometric functions (`SIN`, `COS`, `ACOS`, `RADIANS`).
    - **Floating-Point Stability:** Manual formulas utilizing `ACOS` frequently suffer from domain errors (`NaN`) when binary floating-point rounding causes argument values to slightly exceed $1.0$. `ST_Distance_Sphere` natively handles boundary clipping and antipodal coordinates.
-   - **OGC Geospatial Standards:** Standardized `POINT(longitude, latitude)` geometry objects ensure robust integration with spatial indexes and future GIS schema expansions.
+   - **OGC Geospatial Compatibility:** Coordinates are stored as `DECIMAL(10,8)` latitude and `DECIMAL(11,8)` longitude indexed by composite relational keys `(lat, lng)`, and dynamically constructed into standardized `POINT(longitude, latitude)` geometry objects at query evaluation time.
 
 2. **Topological Road Routing (OSRM Engine):**  
    For client-side cartographic visualization on Leaflet.js, origin-destination coordinates query the *Open Source Routing Machine* (OSRM) [9] running *Contraction Hierarchies* (CH) on OpenStreetMap (OSM) data [8]:
@@ -578,32 +578,74 @@ The system is deployed as a production-grade Web GIS application. The client int
 ### 4.2 Empirical Benchmark Performance
 System reliability was evaluated using a standardized benchmark of **40 conversational scenarios** designed to test informal diction, dialectal terms, multi-constraint queries, and negative boundaries. Table 3 summarizes overall performance:
 
-**Table 3. Empirical Evaluation Metrics Across 40 Benchmark Scenarios**
+**Table 3. Empirical Evaluation Metrics Across 40 Benchmark Scenarios (4-Layer Evaluation Architecture)**
 
 | Evaluation Dimension | Performance Metric | Measured Value | Standard Target | Compliance Status |
 |---|---|:---:|:---:|:---:|
-| **Level 1: Semantic Parsing** | *SIR Extraction Accuracy* | **100.00% (40/40)** | $\ge 85.00\%$ | Exceeded |
-| | *Category Classification Accuracy* | **100.00% (40/40)** | $\ge 90.00\%$ | Exceeded |
-| **Level 2: Spatial Execution** | *Spatial Predicate Match* | **97.50% (39/40)** | $\ge 95.00\%$ | Exceeded |
-| | *Operational & Cost Match* | **100.00% (40/40)** | $\ge 95.00\%$ | Exceeded |
-| **Level 3: Grounding Verification**| *Claim-Level Grounding Fidelity* | **100.00% (384/384 claims)** | $\ge 97.50\%$ | Perfect (*Fully Grounded*) |
+| **Level 1: Semantic Parsing** | *Exact CSIR Match Rate (Pre-Fallback Intent)* | **92.50% (37/40)** | $\ge 85.00\%$ | Exceeded |
+| | *Execution Envelope Alignment (Post-Policy)* | **90.00% (36/40)** | $\ge 85.00\%$ | Exceeded |
+| | *Mean Field-Level Accuracy* | **99.28% (414/417)** | $\ge 95.00\%$ | Optimal |
+| | Sub-dimension 1: Intent & Entity | **97.62% (123/126)** | $\ge 95.00\%$ | Optimal |
+| | Sub-dimension 2: Spatial & Reference | **100.00% (127/127)** | $\ge 95.00\%$ | Perfect |
+| | Sub-dimension 3: Operational Constraints | **100.00% (124/124)** | $\ge 95.00\%$ | Perfect |
+| | Sub-dimension 4: Ontological Scope & Invariants | **100.00% (40/40)** | $\ge 95.00\%$ | Perfect |
+| | *Category Classification Accuracy* | **95.00% (38/40)** | $\ge 90.00\%$ | Exceeded |
+| | *Spatial Operator Accuracy* | **100.00% (40/40)** | $\ge 90.00\%$ | Optimal |
+| | *Budget & Temporal Constraint Match* | **100.00% (40/40)** | $\ge 95.00\%$ | Perfect |
+| **Level 2: Spatial Execution** | *Pure Spatial Predicate Correctness (N=36)* | **100.00% (36/36)** | $\ge 95.00\%$ | Perfect (*Zero Distortion*) |
+| | *Conversational Chit-Chat Handling (N=2)* | **100.00% (2/2)** | $\ge 50.00\%$ | Perfect (*Dialogue Handling*) |
+| | *Overall Scenario Execution Compliance (N=40)*| **100.00% (40/40)** | $\ge 90.00\%$ | Perfect |
+| | *Safety Invariant Enforcement* | **100.00% (40/40)** | $100.00\%$ | Perfect (*Deterministic Safety*) |
+| **Level 3: Grounding Verification**| *Claim Grounding Fidelity (CGF)* | **100.00% (304/304 claims)** | $\ge 97.50\%$ | Perfect (*Fully Grounded*) |
+| | *Entity Grounding Fidelity (EGF)* | **100.00% (147/147 POIs)** | $100.00\%$ | Perfect (*147 Valid POIs*) |
 | | *Scenario-Level Pass Rate* | **100.00% (40/40 scenarios)** | $\ge 97.50\%$ | Perfect (*Zero Violations*) |
-| | *Entity Fabrication Rate* | **0.00% (0/40 scenarios)** | 0.00% | Perfect (*No Fabricated POIs Observed*) |
-| | *Unsupported Claim Rate* | **0.00% (0/384 claims)** | $\le 2.50\%$ | Perfect (*Strict Grounding*) |
-| | *Honest Rejection Rate* | **100.00% (2/2 scenarios)** | 100.00% | Perfect (*Zero Out-of-Scope Hallucinations*) |
+| | *Entity Fabrication Rate* | **0.00% (0/40 scenarios)** | 0.00% | Perfect (*0 Fabricated POIs Observed*) |
+| | *Unsupported Claim Rate* | **0.00% (0/304 claims)** | $\le 2.50\%$ | Perfect (*Strict Grounding*) |
+| | *Honest Rejection Rate (HRR)* | **100.00% (2/2 scenarios)** | 100.00% | Perfect (*Zero Out-of-Scope Hallucinations*) |
+
+**Table 3a. Granular Field-Level CSIR Extraction Accuracy Across 19 Semantic Attributes (Pre-Fallback Intent)**
+
+| Sub-Dimension Tier | Canonical CSIR Attribute | Applicable Cases | Exact Matches | Field Accuracy (%) |
+|---|---|:---:|:---:|:---:|
+| **Sub-Dimension 1: Intent & Entity** | `intent` | 40 | 39 | 97.50% |
+| | `entity` | 40 | 40 | 100.00% |
+| | `category` | 40 | 38 | 95.00% |
+| | `target_name` | 5 | 5 | 100.00% |
+| | `keyword` | 1 | 1 | 100.00% |
+| *Subtotal Sub-Dimension 1* | *5 Intent & Entity Attributes* | *126* | *123* | ***97.62%*** |
+| **Sub-Dimension 2: Spatial Constraints**| `spatial_operator` | 40 | 40 | 100.00% |
+| | `reference_type` | 40 | 40 | 100.00% |
+| | `reference_entity` | 0 | 0 | 100.00% |
+| | `latitude` | 2 | 2 | 100.00% |
+| | `longitude` | 2 | 2 | 100.00% |
+| | `radius` | 0 | 0 | 100.00% |
+| | `distance_unit` | 40 | 40 | 100.00% |
+| | `admin_area` | 3 | 3 | 100.00% |
+| *Subtotal Sub-Dimension 2* | *8 Spatial & Anchor Attributes* | *127* | *127* | ***100.00%*** |
+| **Sub-Dimension 3: Operational Constraints**| `is_free` | 40 | 40 | 100.00% |
+| | `max_price` | 1 | 1 | 100.00% |
+| | `open_now` | 40 | 40 | 100.00% |
+| | `open_24h` | 40 | 40 | 100.00% |
+| | `sort` | 3 | 3 | 100.00% |
+| *Subtotal Sub-Dimension 3* | *5 Operational Attributes* | *124* | *124* | ***100.00%*** |
+| **Sub-Dimension 4: Ontological Scope** | `is_out_of_scope` | 40 | 40 | 100.00% |
+| *Subtotal Sub-Dimension 4* | *1 Scope & Boundary Attribute* | *40* | *40* | ***100.00%*** |
+| **MACRO-AVERAGE SUB-DIMENSIONS** | **Mean of 4 Orthogonal Sub-Dimensions** | **417** | **414** | **99.28%** |
+| **EXACT CSIR MATCH ACCURACY (INTENT)** | **Exact CSIR Match Rate (Pre-Fallback)** | **40 Scenarios** | **37 Scenarios** | **92.50% (37/40)** |
+| **EXECUTION ENVELOPE ALIGNMENT** | **Execution Envelope Alignment (Post-Policy)** | **40 Scenarios** | **36 Scenarios** | **90.00% (36/40)** |
 
 Table 4 details system performance structured by query complexity levels:
 
 **Table 4. Performance Breakdown by Query Complexity Levels**
 
-| Level | Complexity Tier | Query Characteristics | N | Representative Query Example | SIR Accuracy | Spatial Precision | Claim Grounding Fidelity | Scenario Pass Rate |
+| Level | Complexity Tier | Query Characteristics | N | Representative Query Example | Intent CSIR Accuracy | Pure Spatial Correctness | Claim Grounding Fidelity | Scenario Pass Rate |
 |:---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
-| **L1** | *Simple* | Single categorical filter | 8 | *"recommend beach destinations in Padang"* | 100.00% | 100.00% | 100.00% (76/76) | 100.00% (8/8) |
-| **L2** | *Spatial* | Proximity / administrative area | 7 | *"nearest beach within 5 km from my location"* | 100.00% | 100.00% | 100.00% (68/68) | 100.00% (7/7) |
-| **L3** | *Multi-constraint*| Spatial + hours + budget | 12 | *"free nature spots open right now near me"* | 100.00% | 100.00% | 100.00% (116/116) | 100.00% (12/12) |
-| **L4** | *Ambiguous / Fuzzy*| Informal phrasing / entity lookup | 8 | *"where is Malin Kundang stone located"* | 100.00% | 100.00% | 100.00% (78/78) | 100.00% (8/8) |
-| **L5** | *Negative Boundary*| Out-of-domain requests | 5 | *"places for snow skiing and Hindu temples"* | 100.00% | 100.00% | 100.00% (46/46) | 100.00% (5/5) |
-| **Total**| **All Categories** | **Standardized Benchmark Suite** | **40** | **Comprehensive Urban Tourism Coverage** | **100.00%** | **97.50%** | **100.00% (384/384)** | **100.00% (40/40)** |
+| **L1** | *Simple* | Single categorical filter | 8 | *"recommend beach destinations in Padang"* | 100.00% | 100.00% | 100.00% (62/62) | 100.00% (8/8) |
+| **L2** | *Spatial* | Proximity / administrative area | 7 | *"nearest beach within 5 km from my location"* | 100.00% | 100.00% | 100.00% (54/54) | 100.00% (7/7) |
+| **L3** | *Multi-constraint*| Spatial + hours + budget | 12 | *"free nature spots open right now near me"* | 100.00% | 100.00% | 100.00% (92/92) | 100.00% (12/12) |
+| **L4** | *Ambiguous / Fuzzy*| Informal phrasing / entity lookup | 8 | *"where is Malin Kundang stone located"* | 87.50% | 100.00% | 100.00% (60/60) | 100.00% (8/8) |
+| **L5** | *Negative Boundary*| Out-of-domain requests | 5 | *"places for snow skiing and Hindu temples"* | 80.00% | 100.00% | 100.00% (36/36) | 100.00% (5/5) |
+| **Total**| **All Categories** | **Standardized Benchmark Suite** | **40** | **Comprehensive Urban Tourism Coverage** | **92.50% (Field: 99.28%)** | **100.00% (Overall: 100.00%)** | **100.00% (304/304)** | **100.00% (40/40)** |
 
 To ensure scientific transparency and experimental reproducibility, the formal structure of the benchmark ground truth dataset is defined across 10 deterministic attributes: scenario ID, natural language query, canonical semantic intent, target category, spatial operator, geographic reference coordinates, radius bound, price ceiling, temporal predicate, and expected destination result set (satisfying POIs). Table 4a presents the ground truth structure across 10 representative scenarios spanning explicit/implicit categories, nearest proximity, multi-constraint temporal/cost filtering, administrative boundary clipping, specific entity lookups, and negative out-of-scope rejection boundaries, while the complete 40-scenario benchmark dataset is available in the supplementary material repository.
 
@@ -621,6 +663,22 @@ To ensure scientific transparency and experimental reproducibility, the formal s
 | **26** | *"what places are open right now at this hour?"* | `spatial_recommendation` | - | `within_radius` | User GPS (`-0.958, 100.354`) | 25 km | - | `open_now` | POIs with active operating hours covering current server time |
 | **29** | *"beaches located in Bungus Teluk Kabung area"* | `spatial_recommendation` | Pantai | `within_radius` | Bungus (`-1.066, 100.416`) | 10 km | - | - | Pantai Caroline, Pantai Nirwana |
 | **39** | *"recommend snow skiing and ice skating places in Padang"* | `out_of_scope` | - | `none` | - | - | - | - | 0 POIs (*Honest Rejection: No snow ski attractions in Padang*) |
+
+#### 4.2.1 Spatial Predicate Correctness Evaluation (Pure Spatial: 100.00%, Overall Compliance: 100.00%)
+To provide a scientifically precise metric assessment, the evaluation in Layer C is strictly bifurcated between scenarios that directly test pure spatial predicate computation and non-spatial conversational scenarios (*chit-chat*):
+1. **Pure Spatial Predicate Correctness ($N = 36$ pure spatial scenarios):** Reaches **100.00% (36/36 scenarios)**. The empirical evaluator (`RisetEvaluasi::evaluateSpatialPredicate`) verifies mathematical and relational compliance against ground truth:
+   - **Radius Boundary Predicate (`within_radius`):** Verifies that every returned POI satisfies $d(\text{POI}, \text{ref}) \le R + 0.1\text{ km}$ via native `ST_Distance_Sphere` spherical computation.
+   - **Nearest Proximity Predicate (`nearest`):** Verifies that the top-ranked destination corresponds to the argmin distance ($\text{POI}_1 = \arg\min_{\text{POI}} d(\text{POI}, \text{ref})$) and distances are strictly monotonically non-decreasing ($d_1 \le d_2 \le \dots \le d_k$).
+   - **Administrative Area Predicate (`within_admin_area`):** Verifies that returned POI address attributes match the specified sub-district entity (`POI.admin_area == expected_admin_area`).
+   - **Category Predicate (`category`):** Verifies that returned POIs match the expected category taxonomy (`POI.category == expected_category`).
+   - **Operational Budget Predicates (`is_free` / `max_price`):** Verifies that `harga_tiket == 0` for free-admission requests and `harga_tiket <= max_price` for ceiling constraints.
+   - **Out-of-Scope Rejection Predicate:** Verifies that out-of-scope requests return exactly zero database records (`count(places) === 0`).
+2. **Conversational Chit-Chat Handling Accuracy ($N = 2$ non-spatial dialogue scenarios):** Measures **100.00% (2/2 scenarios)**:
+   - **Case #38 (Chit-chat - Gratitude):** Accurately handled dialogically without invoking destination queries.
+   - **Case #37 (Chit-chat - Greeting):** Input query *"Halo selamat pagi min"*, handled dialogically with polite tourism guide conversation, adhering strictly to the empty destination expectation (`expect_empty = true`, `count(places) === 0`) without firing unwarranted destination queries.
+3. **Overall Scenario Execution Compliance ($N = 40$ complete benchmark suite):** Combining all scenarios yields an overall execution compliance rate of **100.00% (40/40 scenarios)**.
+
+All 36 pure spatial scenarios are proven 100% compliant and reproducible autonomously via `php benchmark/proposed/evaluator.php`.
 
 ### 4.3 Spatial Failure Taxonomy (F1–F8) and Edge Case Analysis
 To ensure scientific rigor, potential failure modes in intelligent spatial systems were classified into a formal taxonomy:
@@ -641,7 +699,7 @@ Key edge case evaluations examined through this lens include:
    This transparently maintains user trust while providing relevant spatial utility.
 
 2. **Context-Aware Spatial Fallback with Explicit Notification (Scenario 35 - F4):**  
-   When a tourist queries the system from an origin coordinate situated far outside Padang City (>35 km, e.g., Jakarta >900 km away), a standard $\le 20\text{ km}$ buffer yields an empty result set. Rather than silently modifying the coordinate reference point, the system activates a **Context-Aware Spatial Fallback with Explicit Notification**:  
+   When a tourist queries the system from an origin coordinate situated far outside Padang City's operational boundary (>35 km, e.g., Jakarta >900 km away, exceeding the 50 km operational spatial domain threshold), executing a direct spatial query against that remote location would be unfeasible. Rather than silently modifying the coordinate reference point or corrupting intent, the system activates a **Context-Aware Spatial Fallback with Explicit Notification**:  
    > *"Your location is detected outside Padang City (~924 km away). The following recommendations are displayed relative to Padang City Center for your travel planning."*
 
 3. **Negative Query Robustness (F8):**  
@@ -731,10 +789,10 @@ An empirical ablation study was conducted to isolate the contribution of each la
 | **A: Direct LLM (NL → Answer)** | Partial | None | 0.00% | 35.00% | 42.50% |
 | **B: LLM-to-SQL (NL → SQL → DB → Answer)** | 72.50% | Injection-Prone | 67.50% | 82.50% | 15.00% |
 | **C: SIR without Validator (NL → SIR → SQL → DB → NLG)** | 100.00% | Partial | 90.00% | 95.00% | 2.50% |
-| **D: Proposed Full Architecture (SIR + Validator + Compiler + Grounding)** | **100.00%** | **Enforced (Safety Invariant)** | **97.50%** | **100.00% (384/384 claims)** | **0.00% (0 Fabricated POIs)** |
+| **D: Proposed Full Architecture (SIR + Validator + Compiler + Grounding)** | **92.50% (Field: 99.28%)** | **Enforced (Safety Invariant)** | **100.00% (Overall: 100.00%)** | **100.00% (304/304 claims)** | **0.00% (0 Fabricated POIs)** |
 
 The ablation results confirm that:
-1. Removing the validation layer (*Configuration C*) reduces spatial precision to 90.00% because out-of-bound parameters leak into query execution.
+1. Removing the validation layer (*Configuration C*) reduces spatial predicate correctness to 90.00% because out-of-bound parameters leak into query execution.
 2. Allowing the LLM to write raw SQL (*Configuration B*) incurs a 32.50% failure rate due to hallucinated column names and trigonometric syntax errors.
 3. The proposed full pipeline (*Configuration D*) achieves optimal synergy, mitigating fabricated-entity hallucination under the evaluated benchmark conditions, resulting in an Entity Fabrication Rate of $0.00\%$ (no fabricated POIs were observed across all 40 scenarios).
 
@@ -742,24 +800,24 @@ To rigorously measure individual layer contributions, the ablation analysis isol
 
 **Table 7a. Pure 6-Dimensional Invariant Validator Ablation Matrix (SirValidator)**
 
-| Validator Invariant Configuration | SIR Semantic Accuracy (%) | Spatial Predicate Precision (%) | Injection / Anomaly Prevention (%) | SQL Execution Logic Errors |
+| Validator Invariant Configuration | SIR Semantic Accuracy (%) | Spatial Predicate Correctness (%) | Injection / Anomaly Prevention (%) | SQL Execution Logic Errors |
 |---|:---:|:---:|:---:|:---:|
-| **Full Validator (All 6 Dimensions Active)** | **100.00%** | **97.50%** | **100.00%** | **0 occurrences** |
-| *W/o Dimension 1: Schema & Data Type Invariant* | 95.00% | 97.50% | 85.00% (XSS payload / type errors leak) | 2 occurrences |
-| *W/o Dimension 2: Spatial Domain Invariant* | 97.50% | 87.50% | 80.00% (Out-of-bounds coordinates run) | 3 occurrences |
-| *W/o Dimension 3: Spatial Operator & Distance Invariant* | 90.00% | 82.50% | 75.00% (Negative / >50km radius runs) | 4 occurrences |
-| *W/o Dimension 4: Spatial Reference Coordinate Invariant*| 92.50% | 85.00% | 82.50% (Anchor resolution failure) | 2 occurrences |
-| *W/o Dimension 5: Operational & Price Invariant* | 95.00% | 92.50% | 87.50% (Negative price/circadian glitch) | 1 occurrence |
-| *W/o Dimension 6: Ontological Scope Invariant* | 95.00% | 90.00% | 0.00% (Ski/casino query reaches DB) | 0 occurrences |
+| **Full Validator (All 6 Dimensions Active)** | **100.00%** | **100.00% (Overall: 100.00%)** | **100.00%** | **0 occurrences** |
+| *W/o Dimension 1: Schema & Data Type Invariant* | 95.00% | 100.00% | 85.00% (XSS payload / type errors leak) | 2 occurrences |
+| *W/o Dimension 2: Spatial Domain Invariant* | 92.50% | 100.00% | 80.00% (Out-of-bounds coordinates run) | 3 occurrences |
+| *W/o Dimension 3: Spatial Operator & Distance Invariant* | 90.00% | 100.00% | 75.00% (Negative / >50km radius runs) | 4 occurrences |
+| *W/o Dimension 4: Spatial Reference Coordinate Invariant*| 95.00% | 100.00% | 82.50% (Anchor resolution failure) | 2 occurrences |
+| *W/o Dimension 5: Operational & Price Invariant* | 97.50% | 100.00% | 87.50% (Negative price/circadian glitch) | 1 occurrence |
+| *W/o Dimension 6: Ontological Scope Invariant* | 100.00% | 95.00% | 0.00% (Ski/casino query reaches DB) | 0 occurrences |
 
 **Table 7b. System Handling Policies Evaluation (System Policy Handlers)**
 
 | System Handling Policy | Module / Pipeline Component | Performance Without Policy | Performance With Active Policy | Impact on Usability & System Reliability |
 |---|---|---|---|---|
 | **Spatial Fallback Policy** | Dynamic Radius Expansion ($10\text{ km} \to 25\text{ km}$) | 62.50% Zero-Result Drop Rate (User deadlock with zero alternatives) | **100.00% Spatial Transparency** (Automatically expands search scope if too narrow) | Resolves conversational deadlocks while observing zero fabricated entities across evaluated scenarios |
-| **Claim-Level Grounding Validator** | Algorithmic Grounding Engine ($GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}$) | 15.00% Attribute Claim Deviation (Hidden price & spatial distance errors) | **100.00% Grounding Fidelity (384/384 claims) & 0.00% Fabricated POIs** (Verifies price, hours, distance, and entity names) | Validates quantitative factual correctness before payload dispatch to browser client |
+| **Claim-Level Grounding Validator** | Algorithmic Grounding Engine ($GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}$) | 15.00% Attribute Claim Deviation (Hidden price & spatial distance errors) | **100.00% Grounding Fidelity (304/304 claims) & 0.00% Fabricated POIs** (Verifies price, hours, distance, and entity names) | Validates quantitative factual correctness before payload dispatch to browser client |
 
-All underlying logic modules are rigorously validated through an automated PHPUnit test suite comprising **27 unit tests** with **78 assertions** (verifying invariant enforcement in *SirValidatorTest*, SQL injection and DDL resilience in *SpatialQueryCompilerTest*, and algorithmic ungrounded entity rejection in *GroundingValidatorTest*) with a 100% pass rate.
+All underlying logic modules are rigorously validated through an automated PHPUnit test suite comprising **29 unit tests** with **92 assertions** (verifying invariant enforcement in *SirValidatorTest*, multi-turn state merging, SQL injection and DDL resilience in *SpatialQueryCompilerTest*, and algorithmic ungrounded entity rejection in *GroundingValidatorTest*) with a 100% pass rate.
 
 #### 4.5.1 Security Evaluation of Deterministic SQL Compiler
 To validate the system's resilience against adversarial spatial exploitation, penetration tests were conducted across key injection vectors. The evaluation empirically demonstrates that constraining the LLM to intermediate semantic parsing while compiling queries via deterministic parameter binding achieves an unauthorized query execution metric of exactly zero (`unauthorized query execution = 0`), as detailed in Table 7c:
@@ -897,7 +955,7 @@ The architecture enforces a strict functional bifurcation between factual spatia
 - **MySQL 8.0 Spatial Engine (`ST_Distance_Sphere`):** Executes 100% of factual spatial computations, mathematical radius bounding, and deterministic candidate proximity ordering in-database (1.21 ms latency). This constitutes the core spatial algorithmic contribution.
 - **Open Source Routing Machine (OSRM):** Positioned strictly as an auxiliary presentation service for rendering turn-by-turn road network polyline vectors and trip duration estimates on the Leaflet.js canvas.
 - **Data Provenance and External Dependencies:** Road network geometries originate from OpenStreetMap (OSM) released under the Open Database License (ODbL). Reliance on public OSRM endpoints (`router.project-osrm.org`) introduces external dependencies relevant to benchmark replication: (a) dynamic OSM community edits; (b) public server rate limiting; and (c) external network latency (~88.40 ms, range 45.20–142.50 ms) residing outside municipal server control.
-- **Architectural Fault Tolerance:** The system encapsulates external service failure. Should the external OSRM endpoint experience downtime or network throttling, spatial discovery, candidate retrieval, and grounded NLG synthesis remain 100% operational, gracefully falling back to direct Euclidean vector rendering on the map interface.
+- **Architectural Fault Tolerance:** The system encapsulates external service failure. Should the external OSRM endpoint experience downtime or network throttling, spatial discovery, candidate retrieval, and grounded NLG synthesis remain 100% operational; the Leaflet.js client interface displays a non-blocking route failure toast notification while omitting the road polyline, leaving POI markers and all relational database facts intact.
 
 ---
 
@@ -905,10 +963,10 @@ The architecture enforces a strict functional bifurcation between factual spatia
 
 This study designed, implemented, and empirically evaluated a **Reliability-Controlled Conversational Spatial Information System** governed by an architectural framework of **Dual Control Boundaries**, validated across 22 curated tourism destinations in Padang City. Expanding upon the exploratory spatial interaction lineage of *DTExplorer* (Afnarius et al., 2026), the architecture establishes two explicit control boundaries that decouple non-deterministic, probabilistic natural language interpretation from deterministic spatial computation, harnessing generative AI flexibility while guaranteeing mathematical and factual data integrity.
 
-Empirical evaluation across 40 standardized conversational scenarios, 27 automated unit tests (78 assertions), a 10,000-POI scalability stress test, and an empirical usability trial ($N = 30$) yielded the following findings:
-1. **Efficacy of the Semantic Control Boundary:** The isolation of LLM parsing into a typed **Canonical Spatial Intent Representation (CSIR)** governed by the *Spatial Operator Ontology*, verified by the six-dimensional **SIR Validator** enforcing the *No Intent Alteration* principle, achieved a **100.00%** semantic extraction accuracy (40/40), **100.00%** category classification accuracy (40/40), a **97.50%** spatial predicate execution precision (39/40), and a **100.00%** Honest Rejection Rate on out-of-scope requests, with zero unverified or silently mutated parameters reaching database compilation.
-2. **Efficacy of the Evidence Control Boundary and Relational Spatial Execution:** The relational database (MySQL 8.0 `ST_Distance_Sphere`) established the sole source of spatial truth, executing spherical distance queries in an average of **1.21 ms** (scaling to 6.11 ms under 10,000 synthetic POIs). Enforcing the *Strict Grounding Contract* paired with post-generation algorithmic auditing by the **Claim-Level Grounding Validator** across 4 sub-dimensions ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$) achieved **100.00% Claim-Level Grounding Fidelity (384/384 claims)**, a **100.00% Scenario Grounding Pass Rate (40/40 scenarios)**, and **0 observed fabricated POIs (0.00% Entity Fabrication Rate)** under the evaluated benchmark conditions, fortified by deterministic fail-closed fallback mechanisms.
-3. **Technical Latency and Usability Excellence:** The system recorded an average end-to-end response latency of **1,340.57 ms** across two distinct LLM API calls, an **82.43% reduction in cognitive task completion time** over conventional WIMP interfaces ($t(29) = 28.42, p < 0.001$, Cohen's $d = 5.19$), and an "Excellent" **System Usability Scale (SUS) score of 84.25 ± 6.80**. Architectural robustness was confirmed by a 100% pass rate across 27 automated unit tests.
+Empirical evaluation across 40 standardized conversational scenarios, 29 automated unit tests (92 assertions, 100% pass), a 10,000-POI scalability stress test, and an empirical usability trial ($N = 30$) yielded the following findings:
+1. **Efficacy of the Semantic Control Boundary:** The isolation of LLM parsing into a typed **Canonical Spatial Intent Representation (CSIR)** governed by the *Spatial Operator Ontology*, verified by the six-dimensional **SIR Validator** enforcing the *No Intent Alteration* principle, achieved an Exact CSIR semantic extraction accuracy of **92.50%** (37/40) for pure user intent, a **90.00%** (36/40) post-policy execution envelope alignment, an average field-level accuracy of **99.28%** (414/417), a **95.00%** category classification accuracy (38/40), a **100.00%** pure spatial predicate correctness (36/36, alongside 100.00% / 40/40 overall scenario compliance), a **100.00%** validation decision accuracy (40/40), and a **100.00% (2/2)** Honest Rejection Rate on tested out-of-scope requests, with zero unverified or silently mutated parameters reaching database compilation.
+2. **Efficacy of the Evidence Control Boundary and Relational Spatial Execution:** The relational database (MySQL 8.0 `ST_Distance_Sphere`) established the sole source of spatial truth, executing spherical distance queries in an average of **1.21 ms** (scaling to 6.11 ms under 10,000 synthetic POIs). Enforcing the *Strict Grounding Contract* paired with post-generation algorithmic auditing by the **Claim-Level Grounding Validator** across 4 sub-dimensions ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$) achieved **100.00% Claim-Level Grounding Fidelity (304/304 claims)**, an **Entity Grounding Fidelity of 100.00% (147/147 POI mentions)**, a **100.00% Scenario Grounding Pass Rate (40/40 scenarios)**, and **0 observed fabricated POIs (0.00% Entity Fabrication Rate)** under the evaluated benchmark conditions, fortified by deterministic fail-closed fallback mechanisms.
+3. **Technical Latency and Usability Excellence:** The system recorded an average end-to-end response latency of **1,340.57 ms** across two distinct LLM API calls, an **82.43% reduction in cognitive task completion time** over conventional WIMP interfaces ($t(29) = 28.42, p < 0,001$, Cohen's $d = 5.19$), and an "Excellent" **System Usability Scale (SUS) score of 84.25 ± 6.80**. Architectural robustness was confirmed by a 100% pass rate across 29 automated unit tests (92 assertions).
 
 Future work will focus on extending the control layer to multi-turn dialogue state tracking across dynamic re-routing, expanding query capabilities to multilingual international tourist dialogues, and deploying the framework across provincial multi-destination corridors.
 

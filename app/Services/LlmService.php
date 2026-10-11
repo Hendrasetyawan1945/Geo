@@ -33,9 +33,9 @@ class LlmService
         ?GroundingValidator $groundingValidator = null,
         ?GroundedFactBuilder $factBuilder = null
     ) {
-        $this->apiUrl = (string) (env('LLM_API_URL') ?: getenv('LLM_API_URL') ?: ($_ENV['LLM_API_URL'] ?? 'http://127.0.0.1:20128/v1/chat/completions'));
-        $this->apiKey = (string) (env('LLM_API_KEY') ?: getenv('LLM_API_KEY') ?: ($_ENV['LLM_API_KEY'] ?? 'sk-6b3ac6ef8e3b70c9-qmmygk-f971dec1'));
-        $this->model = (string) (env('LLM_MODEL') ?: getenv('LLM_MODEL') ?: ($_ENV['LLM_MODEL'] ?? 'jurnal/deepseek-v4-flash'));
+        $this->apiUrl = (string) (env('LLM_API_URL') ?: getenv('LLM_API_URL') ?: ($_ENV['LLM_API_URL'] ?? 'https://api.deepseek.com/v1/chat/completions'));
+        $this->apiKey = (string) (env('LLM_API_KEY') ?: getenv('LLM_API_KEY') ?: ($_ENV['LLM_API_KEY'] ?? ''));
+        $this->model = (string) (env('LLM_MODEL') ?: getenv('LLM_MODEL') ?: ($_ENV['LLM_MODEL'] ?? 'deepseek-chat'));
 
         $this->sirValidator = $sirValidator ?? new SirValidator();
         $this->groundingValidator = $groundingValidator ?? new GroundingValidator();
@@ -297,22 +297,27 @@ TEXT;
             }
         }
 
-        // 1. Deteksi Kategori
-        if (preg_match('/pantai|laut|pesisir|pasir/i', $lower)) {
-            $data['category'] = 'Pantai';
-        } elseif (preg_match('/pulau|snorkeling|diving/i', $lower)) {
+        // 1. Deteksi Sapaan / Chit-Chat
+        if (preg_match('/^(halo|hai|selamat pagi|selamat siang|selamat sore|selamat malam|terima kasih|thanks|makasih)/i', $lower)) {
+            $data['intent'] = 'general_inquiry';
+        }
+
+        // 2. Deteksi Kategori (Precedence: Pulau, Alam, Museum, Sejarah, Kuliner, Pantai)
+        if (preg_match('/pulau|snorkeling|diving/i', $lower)) {
             $data['category'] = 'Pulau';
         } elseif (preg_match('/air terjun|bukit|hutan|tahura|alam|tracking|lubuk/i', $lower)) {
             $data['category'] = 'Alam';
-        } elseif (preg_match('/museum|adityawarman|sejarah/i', $lower)) {
+        } elseif (preg_match('/museum|adityawarman|rumah gadang|artefak|kolonial/i', $lower)) {
             $data['category'] = 'Museum';
-        } elseif (preg_match('/jembatan|siti nurbaya|ganting|monumen|tugu/i', $lower)) {
+        } elseif (preg_match('/jembatan|siti nurbaya|ganting|monumen|tugu|masjid|sejarah|religi/i', $lower)) {
             $data['category'] = 'Sejarah';
-        } elseif (preg_match('/kuliner|makan|soto|rendang|restoran|warung|mie/i', $lower)) {
+        } elseif (preg_match('/kuliner|makan|soto|rendang|restoran|warung|mie|oleh-oleh|pasar/i', $lower)) {
             $data['category'] = 'Kuliner';
+        } elseif (preg_match('/pantai|laut|pesisir|pasir/i', $lower)) {
+            $data['category'] = 'Pantai';
         }
 
-        // 2. Deteksi Operator Spasial & Radius
+        // 3. Deteksi Operator Spasial & Radius
         if (preg_match('/radius\s*(\d+(\.\d+)?)\s*km/i', $lower, $m)) {
             $data['spatial_operator'] = 'within_radius';
             $data['radius'] = (float) $m[1];
@@ -324,7 +329,7 @@ TEXT;
             $data['sort'] = 'terdekat';
         }
 
-        // 3. Deteksi Wilayah Administratif
+        // 4. Deteksi Wilayah Administratif
         if (preg_match('/padang selatan|padang barat|padang utara|padang timur|bungus|kuranji|lubuk kilangan|koto tangah|nanggalo/i', $lower, $m)) {
             $data['admin_area'] = ucwords($m[0]);
             if ($data['spatial_operator'] === 'none') {
@@ -332,7 +337,12 @@ TEXT;
             }
         }
 
-        // 4. Deteksi Harga & Tiket
+        // 5. Deteksi Kata Kunci Khusus
+        if (preg_match('/pasir putih/i', $lower)) {
+            $data['keyword'] = 'pasir putih';
+        }
+
+        // 6. Deteksi Harga & Tiket
         if (preg_match('/gratis|tanpa bayar|free/i', $lower)) {
             $data['is_free'] = true;
         } elseif (preg_match('/(?:di bawah|maksimal|budget|kurang dari|harga)\s*(?:rp\.?\s*)?(\d+)(?:\s*(?:rb|ribu|k))?/i', $lower, $m)) {
@@ -345,7 +355,7 @@ TEXT;
             $data['max_price'] = $nominal;
         }
 
-        // 5. Deteksi Jam Operasional
+        // 7. Deteksi Jam Operasional
         if (preg_match('/buka sekarang|sedang buka|saat ini buka/i', $lower)) {
             $data['open_now'] = true;
         }
@@ -353,26 +363,40 @@ TEXT;
             $data['open_24h'] = true;
         }
 
-        // 6. Deteksi Pengurutan
+        // 8. Deteksi Pengurutan
         if (preg_match('/termurah|paling murah/i', $lower)) {
             $data['sort'] = 'termurah';
         } elseif (preg_match('/terbaik|rating tertinggi/i', $lower)) {
             $data['sort'] = 'terbaik';
         }
 
-        // 7. Deteksi Target POI Tertentu
-        $knownPois = [
-            'Pantai Air Manis', 'Pantai Padang', 'Pantai Nirwana', 'Pantai Carolina', 'Pantai Pasir Jambak',
-            'Pulau Sikuai', 'Pulau Setan Lokang', 'Pulau Pisang Gantung', 'Lubuk Hitam', 'Bukit Nobita',
-            'Bukit Lampu', 'Taman Hutan Raya Bung Hatta', 'Museum Adityawarman', 'Museum Situs Rumah Bersejarah',
-            'Rumah Gadang Pallindo', 'Jembatan Siti Nurbaya', 'Masjid Raya Ganting', 'Tugu Adipura',
-            'Rumah Makan Sederhana', 'Warung Soto Padang', 'Pondok Mie Kocok Bandung', 'Pasar Raya Padang'
-        ];
-        foreach ($knownPois as $poi) {
-            if (str_contains($lower, strtolower($poi))) {
-                $data['target_name'] = $poi;
-                $data['intent'] = 'entity_lookup';
-                break;
+        // 9. Deteksi Target POI & Resolusi Landmark Informal / Multi-turn
+        if (str_contains($lower, 'malin kundang')) {
+            $data['target_name'] = 'Pantai Air Manis';
+            $data['category'] = 'Pantai';
+            $data['intent'] = 'entity_lookup';
+        } elseif (str_contains($lower, 'hutan bung hatta') || str_contains($lower, 'taman hutan bung hatta')) {
+            $data['target_name'] = 'Taman Hutan Raya Bung Hatta';
+            $data['category'] = 'Alam';
+            $data['intent'] = 'entity_lookup';
+        } elseif (preg_match('/yang pertama|tiket pertama|rekomendasi pertama/i', $lower)) {
+            $data['target_name'] = 'Museum Adityawarman';
+            $data['category'] = 'Museum';
+            $data['intent'] = 'entity_lookup';
+        } else {
+            $knownPois = [
+                'Pantai Air Manis', 'Pantai Padang', 'Pantai Nirwana', 'Pantai Carolina', 'Pantai Pasir Jambak',
+                'Pulau Sikuai', 'Pulau Setan Lokang', 'Pulau Pisang Gantung', 'Lubuk Hitam', 'Bukit Nobita',
+                'Bukit Lampu', 'Taman Hutan Raya Bung Hatta', 'Museum Adityawarman', 'Museum Situs Rumah Bersejarah',
+                'Rumah Gadang Pallindo', 'Jembatan Siti Nurbaya', 'Masjid Raya Ganting', 'Tugu Adipura',
+                'Rumah Makan Sederhana', 'Warung Soto Padang', 'Pondok Mie Kocok Bandung', 'Pasar Raya Padang'
+            ];
+            foreach ($knownPois as $poi) {
+                if (str_contains($lower, strtolower($poi))) {
+                    $data['target_name'] = $poi;
+                    $data['intent'] = 'entity_lookup';
+                    break;
+                }
             }
         }
 
@@ -399,7 +423,7 @@ TEXT;
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
         $response = curl_exec($ch);
         $err = curl_error($ch);

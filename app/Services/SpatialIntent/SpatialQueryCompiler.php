@@ -37,7 +37,9 @@ class SpatialQueryCompiler
         }
 
         $params = [];
-        $hasCoords = ($sir->latitude !== null && $sir->longitude !== null);
+        $execLat = $sir->getExecutionLatitude();
+        $execLng = $sir->getExecutionLongitude();
+        $hasCoords = ($execLat !== null && $execLng !== null);
 
         // Basis SELECT
         $selectFields = [
@@ -61,8 +63,8 @@ class SpatialQueryCompiler
         // Komputasi Jarak Spasial (MySQL 8.0 ST_Distance_Sphere)
         if ($hasCoords) {
             $selectFields[] = 'ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(?, ?)) / 1000.0, 2) AS jarak_km';
-            $params[] = $sir->longitude;
-            $params[] = $sir->latitude;
+            $params[] = $execLng;
+            $params[] = $execLat;
         } else {
             $selectFields[] = 'NULL AS jarak_km';
         }
@@ -127,16 +129,16 @@ class SpatialQueryCompiler
         // 7. Filter Radius Spasial
         if ($sir->spatialOperator === 'within_radius' && $hasCoords && $sir->radius !== null) {
             $sql .= 'AND (ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(?, ?)) / 1000.0) <= ? ';
-            $params[] = $sir->longitude;
-            $params[] = $sir->latitude;
+            $params[] = $execLng;
+            $params[] = $execLat;
             $params[] = $sir->radius;
         }
 
         // 8. Klausul Pengurutan (ORDER BY)
         if ($hasCoords && ($sir->spatialOperator === 'nearest' || $sir->sort === 'terdekat')) {
             $sql .= 'ORDER BY ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(?, ?)) ASC ';
-            $params[] = $sir->longitude;
-            $params[] = $sir->latitude;
+            $params[] = $execLng;
+            $params[] = $execLat;
         } elseif ($sir->sort === 'termurah') {
             $sql .= 'ORDER BY wisata.harga_tiket ASC ';
         } elseif ($sir->sort === 'termahal') {
@@ -148,8 +150,8 @@ class SpatialQueryCompiler
             $sql .= 'ORDER BY (wisata.harga_tiket = 0) DESC, wisata.harga_tiket ASC ';
         } elseif ($hasCoords) {
             $sql .= 'ORDER BY ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(?, ?)) ASC ';
-            $params[] = $sir->longitude;
-            $params[] = $sir->latitude;
+            $params[] = $execLng;
+            $params[] = $execLat;
         } else {
             $sql .= 'ORDER BY wisata.rating DESC ';
         }

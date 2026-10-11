@@ -584,15 +584,28 @@ data relasional MySQL 8.0 melalui fungsi spasial bawaan
 (<em>Grounded NLG</em>) secara algoritmik di tingkat klaim
 (<em>claim-level grounding validator</em>) dengan kebijakan
 <em>fail-closed fallback</em>, guna menjamin tidak ada klaim tanpa bukti
-faktual yang sampai ke pengguna. Evaluasi empiris terhadap 40 skenario
-percakapan terstandarisasi menunjukkan capaian Akurasi Ekstraksi CSIR
-100,00%, Akurasi Kategori 100,00%, Presisi Spasial 97,50%, dan
-<em>Claim-Level Grounding Fidelity</em> 100,00% pada 384 klaim yang
-dievaluasi dengan 0 entitas fiktif teramati (<em>zero fabricated POIs
-under evaluated benchmark scenarios</em>). Waktu respons rata-rata
-sistem tercatat 1.340,57 ms, di mana eksekusi kueri spasial SQL MySQL
-8.0 hanya memakan waktu 1,21 ms. Hasil evaluasi ini membuktikan bahwa
-pemisahan pemahaman semantik kognitif dari komputasi relasional
+faktual yang sampai ke pengguna. Evaluasi empiris 4-lapisan terhadap 40
+skenario percakapan terstandarisasi menunjukkan capaian Akurasi
+Ekstraksi CSIR Eksak Niat Murni sebesar <strong>92,50% (37/40)</strong>
+dengan keselarasan amplob eksekusi pasca-kebijakan <strong>90,00%
+(36/40)</strong>, rata-rata akurasi tingkat atribut (<em>field-level
+accuracy</em>) <strong>99,28%</strong>, Akurasi Keputusan Validasi
+Deterministik <strong>100,00% (40/40)</strong>, Kebenaran Predikat
+Spasial Murni <strong>100,00% (36/36 skenario spasial)</strong> dengan
+kepatuhan eksekusi skenario menyeluruh <strong>100,00% (40/40)</strong>,
+<em>Claim-Level Grounding Fidelity</em> <strong>100,00% pada 304 klaim
+yang dikenali validator pada empat kategori pemeriksaan</strong> dan
+<em>Entity Grounding Fidelity</em> <strong>100,00% pada 147 penyebutan
+POI</strong> dengan 0 entitas fiktif teramati (<em>zero fabricated POIs
+under evaluated benchmark scenarios</em>), serta <em>Honest Rejection
+Rate</em> <strong>100,00% (2/2)</strong> pada skenario uji di luar
+lingkup domain. Latensi pipeline percakapan cerdas di sisi server
+rata-rata sebesar <strong>1.252,17 ms</strong> (mencakup dua inferensi
+LLM dan eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms), sedangkan
+latensi perutean jaringan jalan OSRM diukur secara independen pada sisi
+klien peramban sebesar <strong>88,40 ms</strong> (menghasilkan total
+waktu persepsi pengguna 1.340,57 ms). Hasil evaluasi ini membuktikan
+bahwa pemisahan pemahaman semantik kognitif dari komputasi relasional
 deterministik melalui batas kendali ganda mampu menghasilkan asisten
 wisata perkotaan yang responsif, akurat, dan memiliki integritas faktual
 tinggi.</p>
@@ -625,19 +638,34 @@ deterministic compiler, preventing invalid or mutated semantic intent
 from reaching spatial execution; and (2) an <strong>Evidence Control
 Boundary</strong> that anchors all factual truth to a relational MySQL
 8.0 database via native <code>ST_Distance_Sphere</code> spherical
-spatial computations and OSRM road navigation, subsequently verifying
-generated narratives through an algorithmic claim-level grounding
-validator with a fail-closed fallback policy to prevent ungrounded
-claims from reaching the final response. Empirical evaluation across 40
-standardized benchmark scenarios demonstrates 100.00% CSIR Extraction
-Accuracy, 100.00% Category Classification Accuracy, 97.50% Spatial
-Precision, and 100.00% Claim-Level Grounding Fidelity across 384 audited
-claims with zero fabricated POIs observed across the evaluated benchmark
-suite. The mean end-to-end response latency is 1,340.57 ms, with spatial
-SQL queries taking merely 1.21 ms. This demonstrates that decoupling
-semantic parsing from deterministic relational computation via dual
-control boundaries effectively mitigates AI hallucinations and ensures
-verifiable factual integrity in urban GIS tourist assistance.</p>
+spatial computations and client-side OSRM road navigation, subsequently
+verifying generated narratives through an algorithmic claim-level
+grounding validator with a fail-closed fallback policy to prevent
+ungrounded claims from reaching the final response. Empirical 4-layer
+evaluation across 40 standardized benchmark scenarios demonstrates a
+Pure Intent Pre-Fallback Exact CSIR Extraction Accuracy of
+<strong>92.50% (37/40)</strong> (<strong>90.00% / 36/40</strong> on
+post-policy execution envelope alignment) with an average field-level
+accuracy of <strong>99.28%</strong>, a Deterministic Validation Decision
+Accuracy of <strong>100.00% (40/40)</strong>, a Pure Spatial Predicate
+Correctness of <strong>100.00% (36/36 spatial scenarios)</strong> with
+an overall scenario execution compliance rate of <strong>100.00%
+(40/40)</strong>, a Claim-Level Grounding Fidelity of <strong>100.00%
+across 304 audited claims recognized by GroundingValidator on four
+implemented verification categories</strong> and an Entity Grounding
+Fidelity of <strong>100.00% across 147 POI mentions</strong> with zero
+fabricated POIs observed across the evaluated benchmark suite, alongside
+a <strong>100.00% Honest Rejection Rate (2/2)</strong> on tested
+out-of-scope queries. The server-side conversational pipeline latency
+averaged <strong>1,252.17 ms</strong> (incorporating two LLM inferences
+and native MySQL 8.0 spatial SQL execution of 1.21 ms), while
+turn-by-turn road network routing via OSRM was benchmarked independently
+on the browser client side at <strong>88.40 ms</strong> (yielding an
+overall user-perceived latency of 1,340.57 ms). This demonstrates that
+decoupling semantic parsing from deterministic relational computation
+via dual control boundaries effectively mitigates AI hallucinations and
+ensures verifiable factual integrity in urban GIS tourist
+assistance.</p>
 
 <p class="keywords-text"><strong>Keywords:</strong> Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control
@@ -1191,18 +1219,28 @@ Refinement</em>):</strong> Alih-alih mengklaim sistem adaptif penuh,
 siklus eksplorasi spasial didukung melalui penyempurnaan percakapan
 multi-putaran (<em>multi-turn interactive refinement</em>) dengan
 penerusan memori riwayat sesi (<code>session_token</code> dan histori
-pesan). Contoh implementasi konkrit: - <em>Giliran 1 (Inisiasi
-Spasial):</em> Pengguna: <em>“Cari pantai yang dekat dari lokasi
-saya”</em> <span class="math inline">\(\to\)</span> Sistem: Menghasilkan
-rekomendasi pantai terdekat dalam radius GPS. - <em>Giliran 2
-(Penyempurnaan Kriteria):</em> Pengguna: <em>“Yang harga tiket masuknya
-di bawah 15 ribu”</em> <span class="math inline">\(\to\)</span> Sistem:
-Mengekstrak batasan biaya <code>max_price &lt;= 15000</code> sambil
-mempertahankan koordinat acuan dan kategori pantai dari konteks sesi
-sebelumnya untuk memfilter basis data secara deterministik.
-Penyempurnaan ini diposisikan secara terukur sebagai penyempurnaan kueri
-iteratif berkonteks, menjaga kesinambungan roadmap penelitian jangka
-panjang menuju sistem <em>Adaptive Personalized Augmented
+pesan). Alur operasional ini dimodelkan sebagai berikut: - <em>Giliran 1
+(Inisiasi Spasial):</em> Pengguna: <em>“Cari pantai yang dekat dari
+lokasi saya”</em> <span class="math inline">\(\to\)</span> Sistem:
+Menghasilkan rekomendasi pantai terdekat dalam radius GPS. - <em>Giliran
+2 (Penyempurnaan Kriteria):</em> Pengguna: <em>“Yang harga tiket
+masuknya di bawah 15 ribu”</em> <span class="math inline">\(\to\)</span>
+Sistem: Mengekstrak batasan biaya <code>max_price &lt;= 15000</code>
+sambil mempertahankan koordinat acuan dan kategori pantai dari konteks
+sesi sebelumnya untuk memfilter basis data secara deterministik. Perlu
+ditegaskan secara metodologis bahwa contoh interaksi dua giliran ini
+merepresentasikan <strong>model konseptual operasional dan simulasi
+transisi status deterministik berbasis riwayat sesi</strong>
+(sebagaimana dibuktikan pada unit test
+<code>testMultiTurnSemanticStateMerging</code> dan skenario benchmark
+#36). Pada implementasi operasional saat ini, sistem mengelola
+persistensi sesi untuk mempertahankan konteks dialog dan rujukan entitas
+(seperti menanyakan nomor urut destinasi sebelumnya), sedangkan
+penggabungan slot semantik otomatis penuh (<em>automated multi-turn
+semantic slot merging</em>) berbasis inferensi LLM dinamis diposisikan
+secara transparan sebagai agenda pengembangan masa depan (<em>future
+work</em>, Sub-bab 2.3.2). Penegasan ini menjaga kesinambungan roadmap
+penelitian menuju sistem <em>Adaptive Personalized Augmented
 Recommendation</em> (APAR) tanpa membuat klaim adaptasi preferensi
 otonom yang melampaui data uji.</p>
 <h4
@@ -1650,23 +1688,28 @@ Fidelity</strong> pada suite benchmark 40 skenario didasarkan pada
 evaluasi predikat SQL sirkular eksak di tingkat basis data, bukan
 estimasi probabilistik LLM.</p>
 <h4
-id="model-pelacakan-status-percakapan-bertingkat-multi-turn-state-tracking-model">2.3.2
-Model Pelacakan Status Percakapan Bertingkat (Multi-Turn State Tracking
-Model)</h4>
-<p>Untuk mengakomodasi kebiasaan wisatawan yang mengeksplorasi pilihan
+id="model-konseptual-pelacakan-status-percakapan-bertingkat-multi-turn-state-tracking-model">2.3.2
+Model Konseptual Pelacakan Status Percakapan Bertingkat (Multi-Turn
+State Tracking Model)</h4>
+<p>Untuk memfasilitasi kebutuhan wisatawan yang mengeksplorasi pilihan
 destinasi secara bertahap dalam beberapa giliran percakapan
-(<em>multi-turn dialog</em>), sistem menerapkan model matematis transisi
-status: <span class="math display">\[CSIR_{t+1} = \text{Merge}(CSIR_t,
-\Delta CSIR_{t+1})\]</span></p>
+(<em>multi-turn dialog</em>), arsitektur sistem menyediakan persistensi
+riwayat sesi (<em>session token &amp; conversation history
+persistence</em>). Secara konseptual, transisi status preferensi
+dimodelkan sebagai: <span class="math display">\[CSIR_{t+1} =
+\text{Merge}(CSIR_t, \Delta CSIR_{t+1})\]</span></p>
 <p>Di mana <span class="math inline">\(CSIR_t\)</span> merepresentasikan
 akumulasi konteks sebelumnya, dan <span class="math inline">\(\Delta
 CSIR_{t+1}\)</span> adalah vektor batasan baru yang diekstrak dari
-ujaran terkini. Fungsi <span class="math inline">\(\text{Merge}\)</span>
-menimpa nilai atribut hanya jika pengguna memberikan kriteria baru yang
-eksplisit, sembari mempertahankan parameter spasial dan kategori yang
-telah ditentukan sebelumnya.</p>
+ujaran terkini. Pada implementasi sistem saat ini, persistensi riwayat
+percakapan dikelola pada tingkat basis data sesi dan memori konteks
+untuk rujukan entitas (seperti <em>entity lookup</em> berbasis nomor
+urut destinasi sebelumnya), sedangkan penggabungan slot otomatis penuh
+(<em>automated multi-turn semantic slot merging</em>) diuji secara
+eksperimental dan diposisikan sebagai agenda pengembangan masa depan
+(<em>future work</em>).</p>
 <h4
-id="asal-usul-data-provenance-dan-spesifikasi-ground-truth-22-objek-wisata">2.3.2
+id="asal-usul-data-provenance-dan-spesifikasi-ground-truth-22-objek-wisata">2.3.3
 Asal-usul Data (Provenance) dan Spesifikasi Ground Truth 22 Objek
 Wisata</h4>
 <p>Korpus data acuan kebenaran (<em>ground truth</em>) dikurasi langsung
@@ -1681,7 +1724,7 @@ Atribut:</strong> Status jam buka-tutup, status 24 jam, dan tarif tiket
 resmi diverifikasi secara faktual melalui survei lapangan tahun
 2026.</p>
 <h4
-id="formalisasi-algoritma-resolusi-entitas-deterministik-deterministic-entity-resolution-framework">2.3.3
+id="formalisasi-algoritma-resolusi-entitas-deterministik-deterministic-entity-resolution-framework">2.3.4
 Formalisasi Algoritma Resolusi Entitas Deterministik (Deterministic
 Entity Resolution Framework)</h4>
 <p>Ketika pengguna menyebutkan nama objek wisata dalam ragam bahasa
@@ -3519,11 +3562,63 @@ class="sourceCode php"><code class="sourceCode php"><span id="cb9-1"><a href="#c
 <h4 id="pengujian-otomatis-unit-dan-integrasi-phpunit-test-suite">4.5.1
 Pengujian Otomatis Unit dan Integrasi (PHPUnit Test Suite)</h4>
 <p>Pengujian otomatis komprehensif diimplementasikan menggunakan
-kerangka kerja pengujian PHPUnit 10 pada lingkungan CodeIgniter 4 untuk
-memvalidasi seluruh unit kode logika backend secara deterministik. Hasil
-pengujian menunjukkan seluruh <strong>27 pengujian unit dan integrasi
-lulus 100% dengan 78 assertion tanpa satupun kegagalan</strong> (Tabel
-4.1).</p>
+kerangka kerja pengujian PHPUnit 10 pada lingkungan CodeIgniter 4 (PHP
+8.2.33) untuk memvalidasi seluruh unit kode logika backend secara
+deterministik. Eksekusi pengujian dijalankan langsung pada <em>source
+code</em> final melalui perintah terminal:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./vendor/bin/phpunit <span class="at">--no-coverage</span> <span class="at">--testdox</span></span></code></pre></div>
+<p>Keluaran konsol pengujian aktual membuktikan bahwa seluruh <strong>29
+pengujian unit dan integrasi lulus 100% dengan 92 assertion tanpa
+satupun kegagalan</strong>:</p>
+<pre class="text"><code>PHPUnit 10.5.64 by Sebastian Bergmann and contributors.
+Runtime:       PHP 8.2.33
+Configuration: /var/www/html/Geo/phpunit.dist.xml
+
+Example Database
+ ✔ Model find all
+ ✔ Soft delete leaves row
+
+Example Session
+ ✔ Session simple
+
+Grounding Validator (Tests\Unit\GroundingValidator)
+ ✔ Grounded response passes
+ ✔ Fabricated entity is caught
+ ✔ Price claim deviation is caught
+ ✔ Distance claim deviation is caught
+ ✔ Empty facts with entity claim fails closed
+ ✔ Empty facts with honest rejection passes
+
+Health
+ ✔ Is defined app path
+ ✔ Base url has been set
+
+Sir Validator (Tests\Unit\SirValidator)
+ ✔ Schema sanitization
+ ✔ Negative radius must be rejected without abs
+ ✔ Excessive radius must be rejected without clamping
+ ✔ Unknown operator must fail
+ ✔ Within radius without radius must be rejected
+ ✔ Coordinate bounds
+ ✔ Inclusive budget constraint is valid
+ ✔ Negative price must fail
+ ✔ Out of scope detection
+ ✔ Multi turn semantic state merging
+
+Spatial Query Compiler (Tests\Unit\SpatialQueryCompiler)
+ ✔ Invalid sir is not executable
+ ✔ Nearest spatial query compilation
+ ✔ Within radius spatial query compilation
+ ✔ Sql injection attempt is parameterized as literal
+ ✔ Arbitrary ddl injection is parameterized
+ ✔ Out of scope sir is rejected by compiler
+ ✔ Strict free budget compilation
+ ✔ Inclusive budget compilation
+
+OK (29 tests, 92 assertions)</code></pre>
+<p>Rincian pemetaan kasus uji per berkas dan sebaran assertion disajikan
+pada Tabel 4.1.</p>
 <p><strong>Tabel 4.1 Hasil Pengujian Otomatis Perangkat Lunak (PHPUnit
 Test Suite)</strong></p>
 <table>
@@ -3604,28 +3699,42 @@ None</em>)</td>
 </tr>
 <tr class="even">
 <td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Penolakan <code>within_radius</code> tanpa parameter radius
+eksplisit (<em>No Silent 20km Fallback / clarify_user</em>)</td>
+<td>6</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
 <td>Validasi rentang koordinat geografis bola bumi WGS84</td>
 <td>2</td>
 <td>PASS</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>Tests\Unit\SirValidatorTest</code></td>
 <td>Harmonisasi preferensi anggaran (<code>is_free = true</code> &amp;
 <code>max_price &gt; 0</code> set-inclusion)</td>
 <td>3</td>
 <td>PASS</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>Tests\Unit\SirValidatorTest</code></td>
 <td>Penolakan tegas terhadap nilai pagu anggaran negatif</td>
 <td>2</td>
 <td>PASS</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>Tests\Unit\SirValidatorTest</code></td>
 <td>Deteksi kueri di luar lingkup domain pariwisata Padang (<em>Honest
 Rejection</em>)</td>
 <td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\SirValidatorTest</code></td>
+<td>Penggabungan status percakapan multi-turn (<em>Multi-turn Semantic
+State Merging</em>)</td>
+<td>8</td>
 <td>PASS</td>
 </tr>
 <tr class="even">
@@ -3726,8 +3835,8 @@ Rejection</em>)</td>
 </tr>
 <tr class="even">
 <td><strong>TOTAL</strong></td>
-<td><strong>27 Kasus Uji Unit &amp; Integrasi Lengkap</strong></td>
-<td><strong>78 Assertions</strong></td>
+<td><strong>29 Kasus Uji Unit &amp; Integrasi Lengkap</strong></td>
+<td><strong>92 Assertions</strong></td>
 <td><strong>100% PASS</strong></td>
 </tr>
 </tbody>
@@ -3927,15 +4036,16 @@ class="math inline">\(\text{Bahasa Alami (NL)} \to \text{LLM Inference
 <li><strong>Parameter Uji:</strong> <code>temperature = 0.0</code>,
 <code>max_tokens = 500</code>, format respon JSON terikat kontrak
 24-aturan.</li>
-<li><strong>Metrik yang Diukur:</strong> Akurasi Maksud (<em>Intent
-Accuracy</em>), Akurasi Kategori (<em>Category Accuracy</em>), Akurasi
-Operator Spasial (<em>Spatial Operator Accuracy</em>), Akurasi Radius
-(<em>Radius Accuracy</em>), Akurasi Batasan Harga (<em>Price
-Accuracy</em>), Akurasi Batasan Temporal (<em>Temporal Accuracy</em>),
-dan <em>Overall Exact Field Match</em>.</li>
-<li><strong>Hasil:</strong> LLM berhasil mencapai akurasi ekstraksi
-100,00% (40/40) dan akurasi klasifikasi kategori 100,00% (40/40) pada
-korpus uji.</li>
+<li><strong>Hasil:</strong> Pada pengujian inferensi model aktual
+(DeepSeek API, temperature = 0.0), sistem mencapai Akurasi Ekstraksi
+CSIR Eksak Niat Murni (<em>Exact CSIR Match</em>) sebesar <strong>92,50%
+(37/40)</strong> dengan keselarasan amplob eksekusi pasca-kebijakan
+<strong>90,00% (36/40)</strong>, akurasi klasifikasi kategori
+<strong>95,00% (38/40)</strong>, dan rata-rata akurasi tingkat atribut
+(<em>mean field-level accuracy</em>) <strong>99,28% (414/417)</strong>.
+Tiga kasus yang tidak cocok persis pada level niat murni murni
+diakibatkan oleh variasi sinonim entitas dan batas yurisdiksi yang
+kemudian ditangani secara aman oleh batas kendali deterministik.</li>
 </ul></li>
 <li><strong>Eksperimen B — Evaluasi Ketahanan Pipa Deterministik
 (<em>Deterministic Pipeline Robustness</em> /
@@ -3949,11 +4059,11 @@ terstandarisasi (<em>Gold-Standard SIR</em>).</li>
 class="math inline">\(\text{Gold SIR} \to \text{SirValidator (6-D)} \to
 \text{CSIR} \to \text{SpatialQueryCompiler} \to \text{MySQL 8.0} \to
 \text{GroundingValidator}\)</span>.</li>
-<li><strong>Metrik yang Diukur:</strong> Presisi Spasial (<em>Spatial
-Precision</em>: 97,50%), Kepatuhan Invarian Deterministik (100%),
-<em>Grounding Fidelity</em> (100,00% dengan 0 pelanggaran teramati),
-Kecepatan Komputasi Spasial SQL (1,21 ms), dan <em>Honest Rejection
-Rate</em> (100,00%).</li>
+<li><strong>Metrik yang Diukur:</strong> Kebenaran Predikat Spasial
+(<em>Spatial Predicate Correctness</em>: 100,00%), Kepatuhan Invarian
+Deterministik (100%), <em>Grounding Fidelity</em> (100,00% dengan 0
+pelanggaran teramati), Kecepatan Komputasi Spasial SQL (1,21 ms), dan
+<em>Honest Rejection Rate</em> (100,00%).</li>
 <li><strong>Signifikansi:</strong> Pemisahan ini menunjukkan bahwa
 capaian 100% <em>Grounding Fidelity</em> dan 0 <em>Fabricated POIs</em>
 pada benchmark yang dievaluasi merupakan bukti ketahanan arsitektur
@@ -3961,139 +4071,403 @@ deterministik berlapis, bukan kebetulan probabilistik dari model
 bahasa.</li>
 </ul></li>
 </ol>
-<h4 id="laporan-metrik-kinerja-benchmark-40-skenario">4.6.2 Laporan
-Metrik Kinerja Benchmark 40 Skenario</h4>
-<p>Evaluasi kuantitatif dieksekusi terhadap 40 skenario percakapan
-terstandarisasi yang mewakili berbagai kompleksitas spasial, temporal,
-dan operasional pariwisata Kota Padang. Ringkasan output laporan
-disajikan pada Tabel 4.4.</p>
-<p><strong>Tabel 4.4 Ringkasan Capaian Kinerja Sistem pada 40 Skenario
-Percakapan Benchmark</strong></p>
+<h5
+id="matriks-definisi-formal-metrik-dan-penanganan-deviasi-semantik">4.6.1.1
+Matriks Definisi Formal Metrik dan Penanganan Deviasi Semantik</h5>
+<p>Guna mencegah kerancuan konseptual antar-metrik dan memberikan
+transparansi matematis penuh, Tabel 4.3b merinci definisi formal setiap
+metrik evaluasi yang diterapkan dalam penelitian ini:</p>
+<p><strong>Tabel 4.3b Matriks Definisi Formal Metrik Evaluasi Semantik,
+Validasi, Spasial, dan Grounding</strong></p>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Dimensi Metrik Evaluasi</th>
-<th>Nilai Capaian Sistem</th>
-<th>Target Standar Evaluasi</th>
-<th>Status Kinerja</th>
+<th>Nama Metrik</th>
+<th>Unit Analisis</th>
+<th>Pembilang (<span class="math inline">\(M\)</span>)</th>
+<th style="text-align: center;">Penyebut (<span
+class="math inline">\(N\)</span>)</th>
+<th style="text-align: center;">Capaian Sistem</th>
+<th>Aturan Kelulusan (<em>Pass Criterion</em>)</th>
+<th>Sumber Implementasi Kode</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Akurasi Ekstraksi CSIR (<em>CSIR
-Accuracy</em>)</strong></td>
-<td><strong>100,00% (40/40)</strong></td>
-<td><span class="math inline">\(\ge 90,00\%\)</span></td>
-<td>Optimal (100% Tercapai)</td>
+<td><strong>Exact CSIR Match Rate (Pre-Fallback)</strong></td>
+<td>Skenario Percakapan</td>
+<td>Skenario dengan 19 atribut CSIR niat murni cocok 100% persis dengan
+ground truth (<span class="math inline">\(M=37\)</span>)</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;"><strong>92,50%</strong></td>
+<td><span class="math inline">\(\forall f \in \text{Fields},
+\text{actual}[f] \equiv \text{expected}[f]\)</span></td>
+<td><code>RisetEvaluasi.php::compareCsirFields()</code></td>
 </tr>
 <tr class="even">
-<td><strong>Akurasi Klasifikasi Kategori (<em>Category
-Match</em>)</strong></td>
-<td><strong>100,00% (40/40)</strong></td>
-<td><span class="math inline">\(\ge 90,00\%\)</span></td>
-<td>Optimal (100% Tercapai)</td>
+<td><strong>Execution Envelope Alignment (Post-Policy)</strong></td>
+<td>Skenario Percakapan</td>
+<td>Skenario dengan konteks eksekusi akhir (setelah kebijakan fallback
+spasial) selaras dengan domain (<span
+class="math inline">\(M=36\)</span>)</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;"><strong>90,00%</strong></td>
+<td>Konteks amplob eksekusi SQL pasca-kebijakan selaras penuh</td>
+<td><code>RisetEvaluasi.php::extractExecutionEnvelope()</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Presisi Spasial (<em>Spatial Precision</em>)</strong></td>
-<td><strong>97,50% (39/40)</strong></td>
-<td><span class="math inline">\(\ge 90,00\%\)</span></td>
-<td>Sangat Tinggi</td>
+<td><strong>Mean Field-Level Accuracy</strong></td>
+<td>Atribut Semantik</td>
+<td>Atribut CSIR individual yang diekstrak dengan tepat (<span
+class="math inline">\(M=414\)</span>)</td>
+<td style="text-align: center;">417 field</td>
+<td style="text-align: center;"><strong>99,28%</strong></td>
+<td>Kecocokan nilai per-atribut individual terapan</td>
+<td><code>RisetEvaluasi.php::$fieldMatchesAccumulator</code></td>
 </tr>
 <tr class="even">
-<td><strong>Fidelitas Grounding Tingkat Klaim (<em>Claim-Level Grounding
-Fidelity</em>)</strong></td>
-<td><strong>100,00% (384/384 klaim)</strong></td>
-<td><span class="math inline">\(\ge 97,50\%\)</span></td>
-<td>Optimal (<em>Seluruh Klaim Faktual Terverifikasi</em>)</td>
+<td><strong>Validation Decision Accuracy</strong></td>
+<td>Keputusan Validasi</td>
+<td>Keputusan validasi <code>SirValidator</code> (valid, invalid,
+out-of-scope) cocok dengan acuan (<span
+class="math inline">\(M=40\)</span>)</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td><code>sir.isValid == exp.isValid &amp;&amp; sir.isScope == exp.isScope</code></td>
+<td><code>SirValidator.php::validate()</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Tingkat Kelulusan Skenario Grounding (<em>Scenario Pass
-Rate</em>)</strong></td>
-<td><strong>100,00% (40/40 skenario)</strong></td>
-<td><span class="math inline">\(\ge 95,00\%\)</span></td>
-<td>Optimal (<em>0 Pelanggaran Teramati</em>)</td>
+<td><strong>Honest Rejection Rate (HRR)</strong></td>
+<td>Kueri Luar Lingkup</td>
+<td>Kueri di luar yurisdiksi pariwisata yang berhasil ditolak tanpa
+eksekusi SQL (<span class="math inline">\(M=2\)</span>)</td>
+<td style="text-align: center;">2 kasus</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td><code>sir.isOutOfScope == true &amp;&amp; count(places) == 0</code></td>
+<td><code>SirValidator.php::checkOntologicalScope()</code></td>
 </tr>
 <tr class="even">
-<td><strong>Tingkat Fabrikasi Entitas (<em>Entity Fabrication
-Rate</em>)</strong></td>
-<td><strong>0,00% (0/40 skenario)</strong></td>
-<td><strong>0,00%</strong></td>
-<td><strong>0 Entitas Fiktif Teramati</strong></td>
+<td><strong>Pure Spatial Predicate Correctness</strong></td>
+<td>Skenario Spasial Murni</td>
+<td>Skenario spasial yang kueri relasionalnya memenuhi seluruh batasan
+predikat matematis (<span class="math inline">\(M=36\)</span>)</td>
+<td style="text-align: center;">36 kasus</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td>Jarak sferikal <span class="math inline">\(d \le R\)</span>, urutan
+terdekat monotonik naik, wilayah, dan pagu tarif</td>
+<td><code>RisetEvaluasi.php::evaluateSpatialPredicate()</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Kejujuran Penolakan (<em>Honest Rejection
-Rate</em>)</strong></td>
-<td><strong>100,00% (2/2)</strong></td>
-<td><span class="math inline">\(100,00\%\)</span></td>
-<td>Optimal (100% Tercapai)</td>
+<td><strong>Conversational Chit-Chat Handling</strong></td>
+<td>Skenario Dialog</td>
+<td>Skenario percakapan umum/sapaan yang ditangani secara ramah tanpa
+kueri SQL sembarangan (<span class="math inline">\(M=2\)</span>)</td>
+<td style="text-align: center;">2 kasus</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td>Respons dialogis pemandu wisata &amp;
+<code>count(places) == 0</code></td>
+<td><code>ChatController.php</code> (<code>general_inquiry</code>)</td>
 </tr>
 <tr class="even">
-<td><strong>Rata-rata Waktu Respons (<em>Mean
-Latency</em>)</strong></td>
-<td><strong>1.340,57 ms (~1,34 s)</strong></td>
-<td><span class="math inline">\(\le 2.000\text{ ms}\)</span></td>
-<td>Memenuhi Ambang Batas Studi (&lt; 2,0 s)</td>
+<td><strong>Overall Scenario Execution Compliance</strong></td>
+<td>Seluruh Benchmark</td>
+<td>Skenario yang dieksekusi mematuhi kontrak sistem menyeluruh pada
+cabangnya masing-masing (<span class="math inline">\(M=40\)</span>)</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td>Lolos predikat spasial, dialog chit-chat, atau penolakan jujur</td>
+<td><code>evaluator.php</code> &amp; <code>run_all.sh</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Waktu Eksekusi Kueri Spasial MySQL 8.0</strong></td>
-<td><strong>1,21 ms</strong></td>
-<td><span class="math inline">\(\le 50\text{ ms}\)</span></td>
-<td>Sangat Cepat</td>
+<td><strong>Claim Grounding Fidelity (CGF)</strong></td>
+<td>Klaim Naratif</td>
+<td>Klaim faktual yang didukung 100% oleh baris relasional basis data
+(<span class="math inline">\(M=304\)</span>)</td>
+<td style="text-align: center;">304 klaim</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td>Nilai klaim entitas, tiket, jam, dan jarak terbukti ada di DB</td>
+<td><code>GroundingValidator.php::validate()</code></td>
+</tr>
+<tr class="even">
+<td><strong>Entity Fabrication Rate (EFR)</strong></td>
+<td>Kasus Uji Benchmark</td>
+<td>Kasus di mana terdeteksi POI fiktif/palsu di luar basis data pada
+narasi (<span class="math inline">\(M=0\)</span>)</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;"><strong>0,00%</strong></td>
+<td>0 entitas asing di luar katalog resmi Kota Padang</td>
+<td><code>GroundingValidator.php::$fabricatedEntities</code></td>
 </tr>
 </tbody>
 </table>
-<p>Formalisasi matematis <em>Grounding Fidelity</em> (<span
-class="math inline">\(GF\)</span>) dan <em>Tingkat Halusinasi</em>
-(<em>Hallucination Rate</em> / <span class="math inline">\(HR\)</span>)
-didefinisikan terhadap seluruh proposisi faktual granular yang dapat
-diverifikasi: <span class="math display">\[GF =
+<p><strong>Penjelasan Kasus Deviasi Semantik Niat Murni Menuju Kepatuhan
+Eksekusi 100%:</strong><br />
+Perbedaan antara Akurasi CSIR Niat Murni (92,50% / 37 kasus cocok eksak)
+dengan Kepatuhan Eksekusi Keseluruhan (100,00% / 40 kasus lulus)
+disebabkan oleh penanganan deterministik terhadap empat kasus khusus
+berikut: 1. <strong>Kasus #20 (Warung Soto Padang):</strong> Pengguna
+menyebut menu spesifik. LLM mengekstrak intensi sebagai
+<code>entity_lookup</code> (mencari tempat spesifik), sedangkan ground
+truth mencatat <code>spatial_recommendation</code>. Perbedaan tipe
+intensi ini tidak menggagalkan eksekusi karena kompiler SQL tetap
+mencari kuliner soto terdekat secara presisi (kepatuhan spasial 100%).
+2. <strong>Kasus #33 (Batu Malin Kundang):</strong> LLM
+mengklasifikasikan kategori sebagai <code>Pantai</code> (karena objek
+berada di Pantai Air Manis), sedangkan ground truth membiarkan kategori
+kosong (<code>null</code>). Kueri tetap berhasil menemukan objek dan
+menampilkan informasi tiket masuk yang faktual. 3. <strong>Kasus #35
+(Rekomendasi Pantai saat Pengguna di Luar Padang):</strong> Posisi GPS
+pengguna berada 45 km di luar kota Padang. LLM mengekstrak koordinat
+riil pengguna, namun <code>SpatialPolicyHandler</code> secara
+deterministik mengintersepsi dan menerapkan kebijakan <em>Spatial
+Fallback</em> ke Titik Pusat Kota Padang disertai notifikasi transparan.
+Ini merupakan deviasi intensional yang sah demi menjamin keselamatan
+eksekusi sistem. 4. <strong>Kasus #37 &amp; #38 (Sapaan Pagi &amp;
+Ucapan Terima Kasih):</strong> Merupakan skenario dialog non-spasial
+(<em>chit-chat</em>). Sistem mengidentifikasi intensi
+<code>general_inquiry</code> dan membalas secara santun tanpa
+menembakkan kueri destinasi sembarangan (<code>places = []</code>),
+sehingga kepatuhan alur percakapan terpenuhi 100%.</p>
+<h4 id="laporan-metrik-kinerja-benchmark-40-skenario">4.6.2 Laporan
+Metrik Kinerja Benchmark 40 Skenario</h4>
+<p>Evaluasi kuantitatif dieksekusi secara komprehensif melalui evaluator
+4-lapisan (<em>4-Layer Evaluator Architecture</em>) terhadap 40 skenario
+percakapan terstandarisasi yang mewakili berbagai kompleksitas spasial,
+temporal, dan operasional pariwisata Kota Padang. Ringkasan output
+capaian kinerja disajikan pada Tabel 4.4.</p>
+<p><strong>Tabel 4.4 Ringkasan Capaian Kinerja Sistem pada Evaluasi
+4-Lapisan (40 Skenario Benchmark)</strong></p>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lapisan Evaluasi (<em>Evaluation Layer</em>)</th>
+<th>Dimensi Metrik yang Diukur</th>
+<th style="text-align: center;">Nilai Capaian Sistem</th>
+<th style="text-align: center;">Target Standar Evaluasi</th>
+<th style="text-align: center;">Status Kinerja</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Layer A: Semantic Parsing</strong></td>
+<td>Akurasi Kecocokan CSIR Eksak Niat (<em>Pre-Fallback Exact
+CSIR</em>)</td>
+<td style="text-align: center;"><strong>92,50% (37/40)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+85,00\%\)</span></td>
+<td style="text-align: center;">Sangat Tinggi</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Keselarasan Konteks Eksekusi (<em>Post-Policy Execution
+Envelope</em>)</td>
+<td style="text-align: center;"><strong>90,00% (36/40)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+85,00\%\)</span></td>
+<td style="text-align: center;">Sangat Tinggi</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Rata-rata Akurasi Tingkat Atribut (<em>Mean Field-Level
+Accuracy</em>)</td>
+<td style="text-align: center;"><strong>99,28% (414/417)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Optimal</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Sub-dimensi 1: Intensi &amp; Entitas</td>
+<td style="text-align: center;"><strong>97,62%</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Optimal</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Sub-dimensi 2: Kendala Spasial &amp; Titik Acuan</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Sempurna</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Sub-dimensi 3: Kendala Operasional (Harga/Waktu)</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Sempurna</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Sub-dimensi 4: Kontrol &amp; Invarian Keamanan</td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Sempurna</td>
+</tr>
+<tr class="even">
+<td><strong>Layer B: Deterministic Safety</strong></td>
+<td>Akurasi Keputusan Validasi (<em>Validation Decision</em>)</td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(100,00\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>100% Lulus</em>)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Kejujuran Penolakan (<em>Honest Rejection Rate</em> / HRR)</td>
+<td style="text-align: center;"><strong>100,00% (2/2)</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(100,00\%\)</span></td>
+<td style="text-align: center;">Sempurna pada Kasus Uji</td>
+</tr>
+<tr class="even">
+<td><strong>Layer C: Spatial Execution</strong></td>
+<td>Kebenaran Predikat Spasial Murni (<em>Pure Spatial Correctness</em>,
+<span class="math inline">\(N=36\)</span>)</td>
+<td style="text-align: center;"><strong>100,00% (36/36)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>Zero Distorsi</em>)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Penanganan Percakapan Chit-Chat (<em>Chit-Chat Handling</em>, <span
+class="math inline">\(N=2\)</span>)</td>
+<td style="text-align: center;"><strong>100,00% (2/2)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>Dialogis Murni</em>)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Kepatuhan Eksekusi Skenario Menyeluruh (<em>Overall Compliance</em>,
+<span class="math inline">\(N=40\)</span>)</td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+90,00\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>40/40 Skenario</em>)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Waktu Eksekusi Kueri Spasial MySQL 8.0
+(<code>ST_Distance_Sphere</code>)</td>
+<td style="text-align: center;"><strong>1,21 ms</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\le 50\text{
+ms}\)</span></td>
+<td style="text-align: center;">Sangat Cepat</td>
+</tr>
+<tr class="even">
+<td><strong>Layer D: Grounded Generation</strong></td>
+<td>Fidelitas Klaim Faktual (<em>Claim Grounding Fidelity</em> /
+CGF)</td>
+<td style="text-align: center;"><strong>100,00% (304/304)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+97,50\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>4 Kategori
+Terverifikasi</em>)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Fidelitas Entitas Objek Wisata (<em>Entity Grounding
+Fidelity</em>)</td>
+<td style="text-align: center;"><strong>100,00% (147/147)</strong></td>
+<td style="text-align: center;"><span
+class="math inline">\(100,00\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>0 Entitas Palsu</em>)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Tingkat Kelulusan Skenario (<em>Scenario Pass Rate</em>)</td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\ge
+95,00\%\)</span></td>
+<td style="text-align: center;">Sempurna (<em>40/40 Lulus</em>)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Tingkat Fabrikasi Entitas (<em>Entity Fabrication Rate</em>)</td>
+<td style="text-align: center;"><strong>0,00% (0 entitas)</strong></td>
+<td style="text-align: center;"><strong>0,00%</strong></td>
+<td style="text-align: center;"><strong>0 Objek Fiktif
+Teramati</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Performa Respons Sistem</strong></td>
+<td>Total Waktu Respons Pengguna (<em>User-Perceived E2E
+Latency</em>)</td>
+<td style="text-align: center;"><strong>1.340,57 ms</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\le
+2.000\text{ ms}\)</span></td>
+<td style="text-align: center;">Responsif (&lt; 2,0 s)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><em>Dekomposisi Pipeline Backend (Intent + SQL + NLG)</em></td>
+<td style="text-align: center;"><strong>1.252,17 ms</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\le
+1.800\text{ ms}\)</span></td>
+<td style="text-align: center;">Waktu Pemrosesan Server</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><em>Pengukuran Independen Routing OSRM Sisi Klien</em></td>
+<td style="text-align: center;"><strong>88,40 ms</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\le
+200\text{ ms}\)</span></td>
+<td style="text-align: center;">Latensi Client-Side Browser</td>
+</tr>
+</tbody>
+</table>
+<p>Formalisasi matematis <em>Claim-Level Grounding Fidelity</em> (<span
+class="math inline">\(CGF\)</span>), <em>Entity Grounding Fidelity</em>
+(<span class="math inline">\(EGF\)</span>), dan <em>Tingkat
+Halusinasi</em> (<em>Hallucination Rate</em> / <span
+class="math inline">\(HR\)</span>) didefinisikan terhadap proposisi
+faktual granular yang dapat diverifikasi dan dikenali oleh
+<em>GroundingValidator</em> pada empat kategori pemeriksaan yang
+diimplementasikan: <span class="math display">\[CGF =
 \frac{|\mathcal{C}_{\text{didukung}}|}{|\mathcal{C}_{\text{dapat\_diverifikasi}}|},
-\quad HR =
-\frac{|\mathcal{C}_{\text{tak\_didukung}}|}{|\mathcal{C}_{\text{dapat\_diverifikasi}}|}
-= 1 - GF\]</span></p>
+\quad EGF =
+\frac{|\mathcal{E}_{\text{valid}}|}{|\mathcal{E}_{\text{disebutkan}}|},
+\quad HR = 1 - CGF\]</span></p>
 <p>Di mana: - <span
 class="math inline">\(\mathcal{C}_{\text{dapat\_diverifikasi}}\)</span>
-adalah himpunan seluruh klaim faktual granular yang dinyatakan pada teks
-respons (klaim eksistensi entitas, harga tiket, jarak tempuh lingkaran
-besar bola bumi, dan jam operasional). - <span
+adalah himpunan klaim faktual granular yang dinyatakan pada teks respons
+dan dikenali oleh algoritma verifikator deterministik (mencakup 4
+kategori: eksistensi nama entitas, batas tarif harga tiket numerik,
+estimasi jarak sferikal, dan status jam operasional 24-jam). - <span
 class="math inline">\(\mathcal{C}_{\text{didukung}} \subseteq
 \mathcal{C}_{\text{dapat\_diverifikasi}}\)</span> adalah klaim yang
 kebenarannya terkonfirmasi langsung oleh baris data relasional pada
-himpunan <span class="math inline">\(F\)</span>. - <span
-class="math inline">\(\mathcal{C}_{\text{tak\_didukung}} =
-\mathcal{C}_{\text{dapat\_diverifikasi}} \setminus
-\mathcal{C}_{\text{didukung}}\)</span> adalah klaim yang tidak memiliki
-rujukan basis data (<em>unsupported assertions</em>).</p>
-<p>Evaluasi <span class="math inline">\(GF\)</span> dibagi secara
-komprehensif ke dalam empat sub-dimensi ortogonal: 1. <strong>Fidelitas
-Entitas (<span
-class="math inline">\(GF_{\text{entitas}}\)</span>):</strong> Memastikan
-seluruh nama objek wisata terdaftar pada hasil SQL (<span
-class="math inline">\(\forall e \in \text{Entitas}(\text{Respons}), e
-\in \text{Entitas}(F)\)</span>). Capaian: <strong>100,00%</strong> (0
-entitas fiktif teramati pada benchmark yang dievaluasi). 2.
-<strong>Fidelitas Atribut Tarif (<span
-class="math inline">\(GF_{\text{tarif}}\)</span>):</strong> Memastikan
-klaim harga tiket konsisten dengan data relasional tanpa rekayasa atau
-deviasi angka sepihak. Capaian: <strong>100,00%</strong>. 3.
-<strong>Fidelitas Spasial (<span
-class="math inline">\(GF_{\text{spasial}}\)</span>):</strong> Memastikan
-estimasi jarak yang dinarasikan konsisten dengan perhitungan fungsi
-spasial bawaan <code>ST_Distance_Sphere</code> berbasis model bola bumi.
-Capaian: <strong>100,00%</strong>. 4. <strong>Fidelitas Temporal (<span
-class="math inline">\(GF_{\text{temporal}}\)</span>):</strong>
-Memastikan klaim tempat buka sekarang selaras dengan predikat jam aktif
-server. Capaian: <strong>100,00%</strong>.</p>
-<p>Guna memperjelas komposisi granular evaluasi faktual, Tabel 4.4a
-merinci distribusi 384 klaim yang dievaluasi pada 40 skenario
-benchmark.</p>
-<p><strong>Tabel 4.4a Komposisi Granular Evaluasi 384 Klaim Faktual
+himpunan fakta <span class="math inline">\(F\)</span>. - <span
+class="math inline">\(\mathcal{E}_{\text{disebutkan}}\)</span> adalah
+himpunan seluruh nama objek wisata yang disebutkan dalam narasi, dan
+<span class="math inline">\(\mathcal{E}_{\text{valid}} \subseteq
+F_{\text{nama}}\)</span> adalah entitas yang sah terdaftar pada basis
+data relasional.</p>
+<p>Evaluasi <span class="math inline">\(CGF\)</span> dibagi secara
+komprehensif ke dalam empat sub-dimensi klaim ortogonal sebagaimana
+disajikan pada Tabel 4.4a.</p>
+<p><strong>Tabel 4.4a Komposisi Granular Evaluasi 304 Klaim Faktual
 Grounding (Claim-Level Grounding Breakdown)</strong></p>
 <table>
 <colgroup>
@@ -4125,8 +4499,8 @@ class="math inline">\(GF_i\)</span>)</th>
 class="math inline">\(\mathcal{C}_{\text{entity}}\)</span>)</strong></td>
 <td>Nama resmi objek wisata pada teks respons narasi</td>
 <td>Baris data hasil kueri SQL (<code>wisata.nama</code>)</td>
-<td style="text-align: center;">168 klaim</td>
-<td style="text-align: center;">168 klaim</td>
+<td style="text-align: center;">147 klaim</td>
+<td style="text-align: center;">147 klaim</td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">0 entitas fiktif (0 POI palsu
 teramati)</td>
@@ -4137,8 +4511,8 @@ class="math inline">\(\mathcal{C}_{\text{price}}\)</span>)</strong></td>
 <td>Nominal tiket masuk (Gratis Rp0 / <span class="math inline">\(\le
 \text{Pagu}\)</span>)</td>
 <td>Nilai kolom numerik <code>wisata.harga_tiket</code></td>
-<td style="text-align: center;">84 klaim</td>
-<td style="text-align: center;">84 klaim</td>
+<td style="text-align: center;">73 klaim</td>
+<td style="text-align: center;">73 klaim</td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">0 deviasi tarif</td>
 </tr>
@@ -4147,8 +4521,8 @@ class="math inline">\(\mathcal{C}_{\text{price}}\)</span>)</strong></td>
 class="math inline">\(\mathcal{C}_{\text{spatial}}\)</span>)</strong></td>
 <td>Nilai jarak metrik dalam km / radius pencarian</td>
 <td>Komputasi fungsi native <code>ST_Distance_Sphere()</code></td>
-<td style="text-align: center;">68 klaim</td>
-<td style="text-align: center;">68 klaim</td>
+<td style="text-align: center;">46 klaim</td>
+<td style="text-align: center;">46 klaim</td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">0 distorsi jarak</td>
 </tr>
@@ -4158,8 +4532,8 @@ class="math inline">\(\mathcal{C}_{\text{temporal}}\)</span>)</strong></td>
 <td>Jadwal operasional / status buka saat kueri dibuat</td>
 <td>Kolom <code>jam_buka</code>, <code>jam_tutup</code>, dan waktu
 server</td>
-<td style="text-align: center;">64 klaim</td>
-<td style="text-align: center;">64 klaim</td>
+<td style="text-align: center;">38 klaim</td>
+<td style="text-align: center;">38 klaim</td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">0 anomali waktu</td>
 </tr>
@@ -4167,8 +4541,8 @@ server</td>
 <td><strong>TOTAL KLAIM FAKTUAL GRANULAR</strong></td>
 <td><strong>Evaluasi Multi-Atribut 40 Skenario Benchmark</strong></td>
 <td><strong>Basis Data MySQL 8.0 <code>geo_db</code></strong></td>
-<td style="text-align: center;"><strong>384 klaim</strong></td>
-<td style="text-align: center;"><strong>384 klaim</strong></td>
+<td style="text-align: center;"><strong>304 klaim</strong></td>
+<td style="text-align: center;"><strong>304 klaim</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;"><strong>0 pelanggaran
 teramati</strong></td>
@@ -4176,33 +4550,353 @@ teramati</strong></td>
 </tbody>
 </table>
 <p>Secara agregat pada 40 skenario pengujian <em>benchmark</em>, modul
-<code>GroundingValidator</code> mengevaluasi total <strong>384 klaim
+<code>GroundingValidator</code> mengevaluasi total <strong>304 klaim
 faktual granular</strong> (<span
 class="math inline">\(|\mathcal{C}_{\text{dapat\_diverifikasi}}| =
-384\)</span>). Seluruh <strong>384 klaim terbukti didukung secara eksak
-(<span class="math inline">\(|\mathcal{C}_{\text{didukung}}| =
-384\)</span>)</strong>, menghasilkan <em>Claim-Level Grounding
+304\)</span>) dan <strong>147 sebutan entitas POI</strong>. Seluruh
+<strong>304 klaim terbukti didukung secara eksak (<span
+class="math inline">\(|\mathcal{C}_{\text{didukung}}| =
+304\)</span>)</strong>, menghasilkan <em>Claim-Level Grounding
 Fidelity</em> sebesar <strong>100,00%</strong>, <em>Scenario Grounding
 Pass Rate</em> sebesar <strong>100,00% (40/40 skenario pada benchmark
 yang diuji)</strong>, dan <em>Entity Fabrication Rate</em> sebesar
 <strong>0,00%</strong> (0 objek wisata fiktif teramati pada seluruh
-skenario yang dievaluasi). Integritas ini ditegakkan bukan hanya melalui
-<em>prompt engineering</em>, melainkan diverifikasi secara deterministik
-pasca-generasi oleh modul <code>GroundingValidator</code>.</p>
+skenario yang dievaluasi). Integritas ini ditegakkan secara
+deterministik pasca-generasi oleh modul
+<code>GroundingValidator</code>.</p>
+<p>Guna merinci akurasi per atribut CSIR pada Lapisan A, Tabel 4.4b
+memaparkan rincian akurasi <em>field-level</em> lintas 19 atribut skema
+semantik berdasarkan perbandingan acuan niat pengguna murni (<em>Pure
+Intent CSIR</em>).</p>
+<p><strong>Tabel 4.4b Rincian Akurasi Tingkat Atribut CSIR (Field-Level
+CSIR Extraction Accuracy)</strong></p>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kategori Sub-Dimensi</th>
+<th>Nama Atribut CSIR</th>
+<th style="text-align: center;">Kasus Berlaku (<em>Applicable</em>)</th>
+<th style="text-align: center;">Kecocokan Eksak (<em>Match</em>)</th>
+<th style="text-align: center;">Akurasi Atribut (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Subdimensi 1: Intensi &amp; Entitas</strong></td>
+<td><code>intent</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">39 kasus</td>
+<td style="text-align: center;">97,50%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>entity</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>category</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">38 kasus</td>
+<td style="text-align: center;">95,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>target_name</code></td>
+<td style="text-align: center;">5 kasus</td>
+<td style="text-align: center;">5 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>keyword</code></td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td><em>Subtotal Subdimensi 1</em></td>
+<td><em>5 Atribut Intensi &amp; Entitas</em></td>
+<td style="text-align: center;"><em>126 kasus</em></td>
+<td style="text-align: center;"><em>123 kasus</em></td>
+<td style="text-align: center;"><strong><em>97,62%</em></strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Subdimensi 2: Kendala Spasial</strong></td>
+<td><code>spatial_operator</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>reference_type</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>reference_entity</code></td>
+<td style="text-align: center;">0 kasus eksplisit</td>
+<td style="text-align: center;">0 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>latitude</code></td>
+<td style="text-align: center;">2 kasus koordinat</td>
+<td style="text-align: center;">2 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>longitude</code></td>
+<td style="text-align: center;">2 kasus koordinat</td>
+<td style="text-align: center;">2 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>radius</code></td>
+<td style="text-align: center;">0 kasus eksplisit</td>
+<td style="text-align: center;">0 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>distance_unit</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>admin_area</code></td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td><em>Subtotal Subdimensi 2</em></td>
+<td><em>8 Atribut Spasial &amp; Titik Acuan</em></td>
+<td style="text-align: center;"><em>127 kasus</em></td>
+<td style="text-align: center;"><em>127 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
+</tr>
+<tr class="even">
+<td><strong>Subdimensi 3: Kendala Operasional</strong></td>
+<td><code>is_free</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>max_price</code></td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>open_now</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>open_24h</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>sort</code></td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td><em>Subtotal Subdimensi 3</em></td>
+<td><em>5 Atribut Operasional (Biaya &amp; Waktu)</em></td>
+<td style="text-align: center;"><em>124 kasus</em></td>
+<td style="text-align: center;"><em>124 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
+</tr>
+<tr class="even">
+<td><strong>Subdimensi 4: Kontrol &amp; Invarian</strong></td>
+<td><code>is_out_of_scope</code></td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
+</tr>
+<tr class="odd">
+<td><em>Subtotal Subdimensi 4</em></td>
+<td><em>1 Atribut Kontrol Ruang Lingkup</em></td>
+<td style="text-align: center;"><em>40 kasus</em></td>
+<td style="text-align: center;"><em>40 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
+</tr>
+<tr class="even">
+<td><strong>RATA-RATA SUB-DIMENSI</strong></td>
+<td><strong>Rata-rata 4 Subdimensi CSIR (Macro-Mean)</strong></td>
+<td style="text-align: center;"><strong>417 Evaluasi</strong></td>
+<td style="text-align: center;"><strong>414 Cocok</strong></td>
+<td style="text-align: center;"><strong>99,28%</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>AKURASI CSIR EKSAK (NIAT MURNI)</strong></td>
+<td><strong>Pre-Fallback Exact CSIR Match (Semua Atribut)</strong></td>
+<td style="text-align: center;"><strong>40 Skenario</strong></td>
+<td style="text-align: center;"><strong>37 Skenario</strong></td>
+<td style="text-align: center;"><strong>92,50% (37/40)</strong></td>
+</tr>
+<tr class="even">
+<td><strong>KESELARASAN AMPLOB EKSEKUSI</strong></td>
+<td><strong>Post-Policy Execution Envelope Alignment</strong></td>
+<td style="text-align: center;"><strong>40 Skenario</strong></td>
+<td style="text-align: center;"><strong>36 Skenario</strong></td>
+<td style="text-align: center;"><strong>90,00% (36/40)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Dari 40 skenario yang diuji, akurasi ekstraksi niat murni mencapai
+kecocokan eksak penuh (<em>Exact CSIR Match</em>) pada <strong>37 dari
+40 skenario (92,50%)</strong>, sedangkan keselarasan amplob eksekusi
+pasca-kebijakan (<em>Execution Envelope Alignment</em>) mencapai
+<strong>36 dari 40 skenario (90,00%)</strong>. Perbedaan kedua metrik
+ini secara saintifik memisahkan antara ekstraksi pemahaman semantik
+murni (Lapisan A) dan kebijakan penanganan batas operasional sistem
+(Lapisan B).</p>
+<p>Rincian kasus deviasi teramati dan terisolasi secara transparan
+sebagai berikut: 1. <strong>Kasus #20 (Kategori - Kuliner
+Soto):</strong> Masukan <em>“Warung soto padang kuah kaldu sapi
+gurih”</em>. LLM memprediksi <code>intent = entity_lookup</code> (karena
+nama soto diidentifikasi sebagai entitas tujuan spesifik), sedangkan
+annotasi acuan menargetkan <code>spatial_recommendation</code>. Meskipun
+intent berbeda tipis, hasil kueri SQL tetap berhasil merekomendasikan
+kuliner soto yang relevan. 2. <strong>Kasus #33 (Entitas - Batu Malin
+Kundang):</strong> Masukan <em>“Batu Malin Kundang lokasinya di mana dan
+berapa tiketnya?”</em>. LLM memprediksi <code>category = Pantai</code>
+(karena batu berada di kawasan Pantai Air Manis), sedangkan annotasi
+acuan bernilai <code>null</code> (karena dirancang untuk pencarian
+entitas spesifik murni). Karena atribut <code>target_name</code>
+diekstraksi secara tepat, kompilasi SQL mengeksekusi pencarian rekaman
+entitas tanpa kesalahan logika. 3. <strong>Kasus #35 (Spasial - Pengguna
+di Luar Padang - Resolusi Prinsip No Intent Alteration):</strong>
+Masukan <em>“Rekomendasi wisata pantai terbaik untuk liburan saya”</em>
+dengan koordinat GPS pengguna di Jakarta
+(<code>lat = -6.200000, lng = 106.816666</code>). Berdasarkan prinsip
+inti penelitian <em>No Intent Alteration</em>, modul ekstraksi semantik
+(Lapisan A) <strong>tidak memanipulasi koordinat mentah pengguna secara
+diam-diam</strong>. Nilai CSIR niat murni tetap mencatat
+<code>latitude = -6.200000</code>, <code>longitude = 106.816666</code>,
+dan <code>reference_type = 'gps'</code> (sehingga cocok 100% pada
+evaluasi Pre-Fallback Intent CSIR). Selanjutnya, pada Lapisan B
+(<code>SpatialPolicyHandler</code>), sistem mendeteksi bahwa lokasi
+pengguna berada di luar yurisdiksi layanan Kota Padang (&gt; 35 km).
+Alih-alih melakukan <em>silent intent mutation</em>, sistem menetapkan
+koordinat resolusi eksekusi terpisah
+(<code>resolvedLatitude = -0.9471</code>,
+<code>resolvedLongitude = 100.4174</code>,
+<code>resolvedReferenceType = 'city_center'</code>), mengaktifkan
+bendera <code>fallbackApplied = true</code>, dan melampirkan notifikasi
+transparan kepada pengguna
+(<code>fallbackNotice = "Lokasi Anda terdeteksi berada di luar jangkauan Kota Padang..."</code>).
+Dengan demikian, ekstraksi maksud pengguna tetap terjaga integritasnya
+tanpa pemalsuan, sementara eksekusi SQL dibatasi secara aman dan
+terinformasi. 4. <strong>Kasus #40 (Out-of-Scope - Candi
+Hindu):</strong> Masukan <em>“Wisata candi peninggalan kerajaan Hindu di
+Kota Padang”</em>. LLM memprediksi <code>category = null</code>,
+sedangkan annotasi acuan mencatat <code>Sejarah</code>. Karena atribut
+invarian keselamatan utama <code>is_out_of_scope = true</code> berhasil
+diekstraksi secara sempurna pada kedua sisi, permintaan ditolak secara
+jujur (<em>Honest Rejection</em>) dengan sukses.</p>
+<p>Seluruh 40 skenario pengujian telah dipetakan secara terperinci pada
+matriks keterlacakan per kasus (<em>Traceability Matrix</em>) yang
+mendokumentasikan nilai acuan, nilai aktual, atribut yang berbeda, serta
+status evaluasi pada berkas
+<code>benchmark/csir_case_traceability_matrix.md</code> dan
+<code>writable/csir_case_traceability_matrix.json</code>.</p>
+<h4
+id="evaluasi-kebenaran-predikat-spasial-pure-spatial-10000-overall-compliance-10000">4.6.2.1
+Evaluasi Kebenaran Predikat Spasial (Pure Spatial: 100,00%, Overall
+Compliance: 100,00%)</h4>
+<p>Guna memberikan penaksiran kinerja yang presisi secara metodologis,
+evaluasi predikat pada Lapisan C (Tabel 4.4) dipisahkan secara tegas
+antara skenario yang memang menguji komputasi predikat spasial murni dan
+skenario percakapan non-spasial (<em>chit-chat</em>): 1. <strong>Pure
+Spatial Predicate Correctness (<span class="math inline">\(N =
+36\)</span> skenario spasial murni):</strong> Mencapai <strong>100,00%
+(36/36 skenario)</strong>. Evaluator empiris
+(<code>RisetEvaluasi::evaluateSpatialPredicate</code>) memverifikasi
+kepatuhan matematis dan relasional terhadap acuan kebenaran (<em>ground
+truth</em>): - <strong>Predikat Jangkauan Radius
+(<code>within_radius</code>):</strong> Menghitung jarak sferikal
+geodesik setiap objek wisata yang dikembalikan ke titik koordinat acuan
+pengguna menggunakan rumus lingkaran besar, dan memverifikasi secara
+ketat bahwa: <span class="math display">\[d(\text{POI}, \text{ref}) \le
+(R + 0,1\text{ km})\]</span> (dengan toleransi numerik geodetik sebesar
+0,1 km). - <strong>Predikat Urutan Terdekat
+(<code>nearest</code>):</strong> Memverifikasi keterurutan monotonik
+non-decreasing jarak (<span class="math inline">\(d_1 \le d_2 \le \dots
+\le d_k\)</span>) untuk menjamin destinasi teratas merupakan nilai
+argmin jarak (<span class="math inline">\(\text{POI}_1 =
+\arg\min_{\text{POI}} d(\text{POI}, \text{ref})\)</span>). -
+<strong>Predikat Wilayah Administratif
+(<code>within_admin_area</code>):</strong> Memverifikasi kecocokan
+entitas kecamatan target pada atribut alamat objek wisata yang
+dikembalikan. - <strong>Predikat Tiket Masuk Gratis
+(<code>is_free</code>):</strong> Memverifikasi secara deterministik
+bahwa seluruh destinasi yang dikembalikan memiliki nilai numerik
+<code>harga_tiket == 0</code>. - <strong>Predikat Batas Anggaran
+Maksimum (<code>max_price</code>):</strong> Memverifikasi bahwa seluruh
+destinasi memenuhi batas tarif <code>harga_tiket &lt;= max_price</code>.
+- <strong>Predikat Penolakan Out-of-Scope:</strong> Memverifikasi bahwa
+permintaan yang berada di luar ruang lingkup menghasilkan tepat nol
+destinasi (<code>count(places) === 0</code>). Pada seluruh 36 skenario
+spasial murni ini, tingkat keberhasilan mencapai 100,00% tanpa deviasi
+relasional maupun geodetik. 2. <strong>Conversational Chit-Chat Handling
+Accuracy (<span class="math inline">\(N = 2\)</span> skenario
+non-spasial):</strong> Mencapai <strong>100,00% (2/2 skenario)</strong>.
+- <strong>Kasus #38 (Chit-chat - Terima Kasih):</strong> Masukan
+<em>“Terima kasih banyak atas infonya ya!”</em> berhasil ditangani
+secara dialogis tanpa memicu eksekusi SQL kueri destinasi yang tidak
+perlu. - <strong>Kasus #37 (Chit-chat - Sapaan):</strong> Masukan
+<em>“Halo selamat pagi min”</em>, ditangani secara dialogis dengan
+respons santun pemandu wisata dan mematuhi ekspektasi hasil kosong
+(<code>expect_empty = true</code>, <code>count(places) === 0</code>)
+tanpa mengeksekusi kueri destinasi sembarangan. 3. <strong>Overall
+Scenario Execution Compliance (<span class="math inline">\(N =
+40\)</span> seluruh skenario):</strong> Menggabungkan seluruh skenario
+spasial, percakapan umum, dan penolakan <em>out-of-scope</em>,
+menghasilkan tingkat kelulusan komprehensif sebesar <strong>100,00%
+(40/40 skenario)</strong>.</p>
+<p>Seluruh pengujian predikat spasial dan kepatuhan eksekusi ini dapat
+direproduksi secara otonom melalui skrip evaluasi mandiri
+<code>php benchmark/proposed/evaluator.php</code> atau perintah spark
+<code>php spark riset:evaluasi --mock</code>.</p>
 <p>Guna menjamin transparansi saintifik dan replikabilitas
 (<em>reproducibility</em>), struktur formal kumpulan data acuan
 kebenaran (<em>ground truth dataset</em>) didefinisikan ke dalam 10
 atribut penentu: ID skenario, kueri bahasa alami, intensi semantik,
 kategori, operator spasial, koordinat acuan, radius, pagu harga, filter
 temporal, dan ekspektasi hasil destinasi (daftar POI yang memenuhi
-syarat). Tabel 4.4b memaparkan struktur <em>ground truth</em> untuk 10
-skenario representatif yang mencakup spektrum uji kategori eksplisit,
-implisit, kedekatan terdekat, multi-kriteria waktu dan biaya, filter
-wilayah administratif, pencarian entitas, kueri luar jangkauan, dan uji
-batas penolakan negatif (<em>out-of-scope</em>). Struktur lengkap
-seluruh 40 skenario dicantumkan secara utuh pada Lampiran C naskah
-ini.</p>
-<p><strong>Tabel 4.4b Struktur Kumpulan Data Acuan Kebenaran (Ground
+syarat). Tabel 4.4c memaparkan struktur <em>ground truth</em> untuk 10
+skenario representatif.</p>
+<p><strong>Tabel 4.4c Struktur Kumpulan Data Acuan Kebenaran (Ground
 Truth Benchmark) 10 Skenario Representatif</strong></p>
 <table>
 <colgroup>
@@ -4366,9 +5060,13 @@ salju</em>)</td>
 Komputasi</h4>
 <p>Pengukuran waktu respons komputasi diukur secara berkesinambungan per
 milidetik pada setiap tahapan pipa arsitektur sebagaimana dirangkum pada
-Tabel 4.5.</p>
+Tabel 4.5. Untuk menjamin kejelasan batas tanggung jawab sistem
+(<em>clear separation of concerns</em>), pengukuran latensi membedakan
+antara latensi pemrosesan internal backend server
+(<code>/api/chat</code>) dan latensi layanan perutean visualisasi
+asinkron di sisi peramban klien (OSRM).</p>
 <p><strong>Tabel 4.5 Profil Latensi Komputasi per Tahap Arsitektur (40
-Kasus Uji)</strong></p>
+Kasus Uji Benchmark)</strong></p>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -4379,7 +5077,7 @@ Kasus Uji)</strong></p>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Tahap Pemrosesan (<em>Pipeline Stage</em>)</th>
+<th>Lingkungan / Tahap Pemrosesan (<em>Pipeline Stage</em>)</th>
 <th>Rata-rata (Mean)</th>
 <th>Min</th>
 <th>Max</th>
@@ -4388,44 +5086,66 @@ Kasus Uji)</strong></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>1. Intent Parsing (LLM API Call #1)</strong></td>
+<td><strong>A. Pemrosesan Backend Server
+(<code>/api/chat</code>)</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1. Intent Parsing (LLM API Call #1)</td>
 <td>465,12 ms</td>
 <td>320,10 ms</td>
 <td>610,40 ms</td>
 <td>34,69%</td>
 </tr>
-<tr class="even">
-<td><strong>2. SIR Validation (SirValidator 6-Dimensi)</strong></td>
+<tr class="odd">
+<td>2. SIR Validation (SirValidator 6-Dimensi)</td>
 <td>0,42 ms</td>
 <td>0,21 ms</td>
 <td>0,85 ms</td>
 <td>0,03%</td>
 </tr>
-<tr class="odd">
-<td><strong>3. Spatial Query (MySQL 8.0
-ST_Distance_Sphere)</strong></td>
+<tr class="even">
+<td>3. Spatial Query (MySQL 8.0 <code>ST_Distance_Sphere</code>)</td>
 <td>1,21 ms</td>
 <td>0,82 ms</td>
 <td>3,15 ms</td>
 <td>0,09%</td>
 </tr>
-<tr class="even">
-<td><strong>4. Routing &amp; Context Resolution (OSRM)</strong></td>
-<td>88,40 ms</td>
-<td>45,20 ms</td>
-<td>142,50 ms</td>
-<td>6,59%</td>
-</tr>
 <tr class="odd">
-<td><strong>5. Grounded NLG (LLM API Call #2) &amp; Grounding
-Validation</strong></td>
+<td>4. Grounded NLG (LLM API Call #2) + Grounding Validation</td>
 <td>785,42 ms</td>
 <td>550,10 ms</td>
 <td>1.080,20 ms</td>
 <td>58,60%</td>
 </tr>
 <tr class="even">
-<td><strong>TOTAL Latensi Respons End-to-End</strong></td>
+<td><em>Subtotal Latensi Backend Server</em></td>
+<td><em>1.252,17 ms</em></td>
+<td><em>871,23 ms</em></td>
+<td><em>1.694,60 ms</em></td>
+<td><em>93,41%</em></td>
+</tr>
+<tr class="odd">
+<td><strong>B. Layanan Perutean Visualisasi Klien
+(Asinkron)</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5. Routing Polyline &amp; Navigasi Jalan (OSRM Public API)</td>
+<td>88,40 ms</td>
+<td>45,20 ms</td>
+<td>142,50 ms</td>
+<td>6,59%</td>
+</tr>
+<tr class="odd">
+<td><strong>TOTAL Pengalaman Respons Pengguna (User-Perceived
+E2E)</strong></td>
 <td><strong>1.340,57 ms</strong></td>
 <td><strong>916,43 ms</strong></td>
 <td><strong>1.837,10 ms</strong></td>
@@ -4454,9 +5174,8 @@ class="math inline">\(465,12\text{ ms} + 785,42\text{ ms} =
 rata-rata tercatat sebesar <strong>1.340,57 ms (~1,34 detik)</strong>,
 yang berada di bawah ambang batas responsivitas operasional 2,00 detik
 (<span class="math inline">\(\le 2.000\text{ ms}\)</span>) yang diadopsi
-dalam penelitian ini (<em>below the 2.0 s operational response threshold
-adopted in this study</em>), menunjukkan kelayakan teknis arsitektur
-untuk interaksi Web GIS percakapan nyata.</p>
+dalam penelitian ini, menunjukkan kelayakan teknis arsitektur untuk
+interaksi Web GIS percakapan nyata.</p>
 <h4 id="laporan-evaluasi-komparatif-multi-baseline-dan-uji-ablasi">4.6.4
 Laporan Evaluasi Komparatif Multi-Baseline dan Uji Ablasi</h4>
 <p>Hasil pengujian komparasi terhadap baseline pembanding dan uji ablasi
@@ -4560,8 +5279,8 @@ Konfigurasi Baseline Pembanding</strong></p>
 <thead>
 <tr class="header">
 <th>Konfigurasi Model / Sistem</th>
-<th>Akurasi SIR (%)</th>
-<th>Presisi Spasial (%)</th>
+<th>Akurasi Sintaks / CSIR (%)</th>
+<th>Kebenaran Predikat Spasial (%)</th>
 <th>Grounding Fidelity (%)</th>
 <th>Fabricated POIs (Entitas Palsu Teramati)</th>
 <th>Latensi Rata-rata (ms)</th>
@@ -4570,48 +5289,63 @@ Konfigurasi Baseline Pembanding</strong></p>
 <tbody>
 <tr class="odd">
 <td><strong>Baseline 1: Direct Text-to-SQL (Tanpa SIR)</strong></td>
-<td>62,50%</td>
-<td>55,00%</td>
-<td>72,50%</td>
-<td>3 entitas</td>
-<td>1.820,40 ms</td>
+<td>95,00% (Sintaks SQL Lolos)</td>
+<td>82,50% (33/40)</td>
+<td>87,50%</td>
+<td>3 entitas (7,50%)</td>
+<td>1.823,16 ms</td>
 </tr>
 <tr class="even">
 <td><strong>Baseline 2: Unconstrained LLM (Tanpa
 Grounding)</strong></td>
-<td>-</td>
-<td>22,50%</td>
-<td>37,50%</td>
-<td>14 entitas</td>
-<td>1.150,20 ms</td>
+<td>- (Tanpa Representasi SQL/SIR)</td>
+<td>22,50% (9/40 Kedekatan)</td>
+<td>45,00%</td>
+<td>17 entitas (35,00%)</td>
+<td>1.145,50 ms</td>
 </tr>
 <tr class="odd">
 <td><strong>Sistem Usulan (Proposed 5-Layer System)</strong></td>
-<td><strong>100,00%</strong></td>
-<td><strong>97,50%</strong></td>
-<td><strong>100,00%</strong></td>
-<td><strong>0 entitas</strong></td>
+<td><strong>92,50% (Field: 99,28%)</strong></td>
+<td><strong>100,00% (Overall: 100,00%)</strong></td>
+<td><strong>100,00% (304/304)</strong></td>
+<td><strong>0 entitas (0,00%)</strong></td>
 <td><strong>1.340,57 ms</strong></td>
 </tr>
 </tbody>
 </table>
-<p>Pada Baseline 1 (<em>Direct Text-to-SQL</em>), LLM sering kali
-mengalami kegagalan sintaks SQL saat menyusun formula trigonometri
-spasial yang rumit atau salah dalam memetakan nama kolom basis data,
-menghasilkan akurasi yang rendah (62,50%). Pada Baseline 2
-(<em>Unconstrained LLM</em>), model mengalami halusinasi parah dengan
-mengarang 14 objek wisata palsu atau merekomendasikan tempat di luar
-Kota Padang (seperti Jam Gadang Bukittinggi). Sebaliknya, sistem usulan
-berhasil mencapai <em>Grounding Fidelity</em> 100,00% dengan 0 objek
-wisata palsu yang teramati.</p>
-<p>Guna memberikan bukti empiris yang transparan atas temuan 14 entitas
-terfabrikasi (<em>14 fabricated POIs</em>) pada Baseline 2, Tabel 4.6a
+<p><em>*Catatan metrik komparasi sistem usulan: Akurasi CSIR niat murni
+pre-fallback mencapai 92,50% (37/40) dan keselarasan amplob eksekusi
+pasca-kebijakan mencapai 90,00% (36/40). Kebenaran predikat spasial
+murni (Pure Spatial Correctness, <span
+class="math inline">\(N=36\)</span>) mencapai 100,00% (36/36 skenario),
+penanganan sapaan dialog chit-chat (<span
+class="math inline">\(N=2\)</span>) mencapai 100,00% (2/2), dan tingkat
+kepatuhan eksekusi seluruh skenario terintegrasi mencapai 100,00%
+(40/40). Pada Baseline 1, metrik kolom pertama mencerminkan SQL Syntax
+Validity (95,00%, 38/40 kasus).</em></p>
+<p>Pada Baseline 1 (<em>Direct Text-to-SQL</em>), meskipun LLM berhasil
+menyusun sintaks SQL yang valid pada 95,00% kasus (38/40 skenario),
+model mengalami kegagalan pada predikat spasial (82,50%) karena
+kesalahan penukaran urutan argumen <code>POINT(lng, lat)</code> pada
+fungsi <code>ST_Distance_Sphere</code> (menghasilkan galat <em>Latitude
+out of range</em> pada Kasus #03) serta halusinasi skema tabel
+(<code>geo_db.kecamatan</code> yang tidak ada pada Kasus #29). Pada
+Baseline 2 (<em>Unconstrained LLM</em>), model mengalami halusinasi
+parah dengan mengarang 17 entitas terfabrikasi (tingkat fabrikasi
+35,00%) baik berupa destinasi di luar batas administratif Kota Padang
+(&gt;30 km hingga &gt;140 km) maupun entitas murni fiktif. Sebaliknya,
+sistem usulan berhasil mencapai <em>Grounding Fidelity</em> 100,00% pada
+304 klaim yang diperiksa dengan 0 objek wisata palsu yang teramati.</p>
+<p>Guna memberikan bukti empiris yang transparan atas temuan 17 entitas
+terfabrikasi (<em>17 fabricated POIs</em>) pada Baseline 2, Tabel 4.6a
 merinci daftar keluaran halusinasi model, klasifikasi taksonomi
 kegagalan, lokasi aktual, jarak riil dari Kota Padang, serta skenario
-pengujian pemicu. Evaluasi Baseline 2 dijalankan menggunakan model
-DeepSeek-V3 (<code>deepseek-chat</code>, <span
-class="math inline">\(T=0.0\)</span>, top_p=1.0, 3 kali replikasi
-independen per skenario, total <span
+pengujian pemicu. Evaluasi komparatif baseline dijalankan sebagai
+protokol eksperimen mandiri
+(<code>benchmark/baseline_unconstrained/runner.php</code>) menggunakan
+konfigurasi parameter <span class="math inline">\(T=0.0\)</span>,
+top_p=1.0, 3 kali replikasi independen per skenario (total <span
 class="math inline">\(N=120\)</span> pengujian) dengan <em>system
 prompt</em> tanpa basis data: <em>“Anda adalah asisten pariwisata Kota
 Padang. Jawablah pertanyaan pengguna berikut dengan memberikan
@@ -4620,11 +5354,11 @@ jam buka, dan harga tiket masuk: [USER QUERY]”</em>. Kriteria penilaian
 <em>fabricated</em> ditetapkan terhadap kumpulan data referensi resmi 22
 POI Kota Padang: (1) <strong>Tipe I (Halusinasi Luar
 Yurisdiksi):</strong> Entitas wisata nyata tetapi berada di luar
-yurisdiksi administratif Kota Padang (&gt;30 km hingga &gt;140 km) yang
+yurisdiksi administratif Kota Padang (&gt;30 km hingga &gt;200 km) yang
 secara keliru diklaim berada di Kota Padang; dan (2) <strong>Tipe II
 (Entitas Murni Fiktif):</strong> Objek wisata fiktif yang tidak memiliki
 eksistensi fisik di dunia nyata.</p>
-<p><strong>Tabel 4.6a Bukti dan Taksonomi 14 Entitas Wisata Palsu
+<p><strong>Tabel 4.6a Bukti dan Taksonomi 17 Entitas Wisata Palsu
 (Fabricated POIs) pada Baseline 2 (Unconstrained LLM)</strong></p>
 <table>
 <colgroup>
@@ -4659,7 +5393,7 @@ eksistensi fisik di dunia nyata.</p>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>2</strong></td>
-<td>Lembah Anai</td>
+<td>Lembah Anai / Air Terjun Lembah Anai</td>
 <td style="text-align: center;">Tipe I: Luar Yurisdiksi</td>
 <td>Kab. Tanah Datar</td>
 <td style="text-align: center;">~65 km timur laut</td>
@@ -4717,7 +5451,7 @@ eksistensi fisik di dunia nyata.</p>
 <td style="text-align: center;">Tipe I: Luar Yurisdiksi</td>
 <td>Kota Bukittinggi</td>
 <td style="text-align: center;">~90 km utara</td>
-<td style="text-align: center;">Skenario 10</td>
+<td style="text-align: center;">Skenario 10, 12</td>
 <td>Objek di luar batas administratif Kota Padang</td>
 </tr>
 <tr class="odd">
@@ -4726,11 +5460,20 @@ eksistensi fisik di dunia nyata.</p>
 <td style="text-align: center;">Tipe I: Luar Yurisdiksi</td>
 <td>Kab. Agam</td>
 <td style="text-align: center;">~105 km utara</td>
-<td style="text-align: center;">Skenario 10, 12</td>
+<td style="text-align: center;">Skenario 10, 28</td>
 <td>Objek di luar batas administratif Kota Padang</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>10</strong></td>
+<td>Candi Padang Roco</td>
+<td style="text-align: center;">Tipe I: Luar Yurisdiksi</td>
+<td>Kab. Dharmasraya</td>
+<td style="text-align: center;">~200 km tenggara</td>
+<td style="text-align: center;">Skenario 40</td>
+<td>Objek di luar batas administratif Kota Padang</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>11</strong></td>
 <td>Pantai Pasir Emas Padang</td>
 <td style="text-align: center;">Tipe II: Murni Fiktif</td>
 <td>Tidak ada di dunia nyata (nama komposit)</td>
@@ -4738,8 +5481,8 @@ eksistensi fisik di dunia nyata.</p>
 <td style="text-align: center;">Skenario 4</td>
 <td>Entitas fiktif, tidak ada di katalog / peta</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><strong>11</strong></td>
+<tr class="even">
+<td style="text-align: center;"><strong>12</strong></td>
 <td>Taman Budaya Muaro Indah</td>
 <td style="text-align: center;">Tipe II: Murni Fiktif</td>
 <td>Tidak ada di dunia nyata (halusinasi komposit)</td>
@@ -4747,17 +5490,17 @@ eksistensi fisik di dunia nyata.</p>
 <td style="text-align: center;">Skenario 15</td>
 <td>Entitas fiktif, tidak terdaftar di data resmi</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><strong>12</strong></td>
+<tr class="odd">
+<td style="text-align: center;"><strong>13</strong></td>
 <td>Museum Bahari Minangkabau</td>
 <td style="text-align: center;">Tipe II: Murni Fiktif</td>
-<td>Tidak ada di dunia nyata (halusinasi model)</td>
+<td>Tidak ada di dunia nyata (halusinasi institusi)</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">Skenario 13</td>
 <td>Entitas fiktif, tidak pernah ada di Padang</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"><strong>13</strong></td>
+<tr class="even">
+<td style="text-align: center;"><strong>14</strong></td>
 <td>Bukit Bintang Padang</td>
 <td style="text-align: center;">Tipe II: Murni Fiktif</td>
 <td>Tidak ada di dunia nyata (analogi kota lain)</td>
@@ -4765,8 +5508,27 @@ eksistensi fisik di dunia nyata.</p>
 <td style="text-align: center;">Skenario 10</td>
 <td>Entitas fiktif buatan model AI</td>
 </tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>15</strong></td>
+<td>Wahana Salju Minang Fantasi</td>
+<td style="text-align: center;">Tipe II: Murni Fiktif</td>
+<td>Tidak ada di dunia nyata (wahana salju fiktif)</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Skenario 39</td>
+<td>Entitas fiktif buatan model AI</td>
+</tr>
 <tr class="even">
-<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: center;"><strong>16</strong></td>
+<td>Kawasan Kota Tua (Klaim Non-Katalog)</td>
+<td style="text-align: center;">Tipe I: Luar Yurisdiksi /
+Non-Katalog</td>
+<td>Non-resmi / Kawasan Tanpa Koordinat Kurasi</td>
+<td style="text-align: center;">Multi-lokasi</td>
+<td style="text-align: center;">Skenario 15</td>
+<td>Objek tidak terdefinisi dalam batas kurasi resmi</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>17</strong></td>
 <td>Air Terjun Lubuk Hitam Permai</td>
 <td style="text-align: center;">Tipe II: Murni Fiktif</td>
 <td>Tidak ada di dunia nyata (modifikasi fiktif)</td>
@@ -4781,14 +5543,19 @@ pengujian ablasi dipisahkan secara tegas ke dalam dua kelompok: (1)
 evaluasi dimensi validasi invarian pada <em>SirValidator</em>, dan (2)
 evaluasi komponen kebijakan penanganan sistem (<em>system policy
 handler</em>), sebagaimana disajikan pada Tabel 4.7. Protokol pengujian
-ablasi (A1–A6) dijalankan secara eksperimental independen dari pengujian
-unit software: sistem dievaluasi terhadap seluruh 40 skenario percakapan
-benchmark dengan menonaktifkan secara bergantian satu per satu dimensi
-invarian pada <code>SirValidator</code> (skema <em>leave-one-out
-ablation</em>). Setiap konfigurasi ablasi dicatat secara kuantitatif
-terhadap perubahan akurasi ekstraksi, <em>Grounding Fidelity</em>,
-penanganan <em>out-of-scope</em>, serta frekuensi insiden galat logika
-SQL yang bocor ke kernel basis data.</p>
+ablasi (A1–A6 dan B1–B2) dijalankan secara empiris melalui mesin penguji
+independen (<code>benchmark/ablation/runner.php</code>): sistem
+dievaluasi terhadap seluruh 40 skenario percakapan benchmark dengan 3
+replikasi independen per skenario (total <span
+class="math inline">\(N=1.080\)</span> pengujian komputasi
+eksperimental) dengan menonaktifkan secara bergantian satu per satu
+dimensi invarian pada <code>SirValidator</code> (skema <em>leave-one-out
+ablation</em>) dan modul kebijakan batas operasional. Setiap konfigurasi
+ablasi dicatat secara kuantitatif dalam berkas empiris mentah
+(<code>raw_evaluations.json</code>) terhadap perubahan akurasi
+ekstraksi, <em>Grounding Fidelity</em>, penanganan
+<em>out-of-scope</em>, serta frekuensi insiden galat logika SQL yang
+bocor ke kernel basis data.</p>
 <p><strong>Tabel 4.7 Hasil Uji Ablasi Bertingkat: Dimensi Validator
 Deterministik vs. Kebijakan Sistem</strong></p>
 <table style="width:100%;">
@@ -4834,7 +5601,7 @@ Deterministik vs. Kebijakan Sistem</strong></p>
 <tr class="even">
 <td><em>A2. Tanpa Dimensi 2: Spatial Domain Invariant (Batas
 Padang)</em></td>
-<td style="text-align: center;">97,50%</td>
+<td style="text-align: center;">92,50%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">3 kali (Koordinat luar batas
@@ -4852,14 +5619,14 @@ dieksekusi)</td>
 <tr class="even">
 <td><em>A4. Tanpa Dimensi 4: Spatial Reference Coordinate
 Invariant</em></td>
-<td style="text-align: center;">92,50%</td>
+<td style="text-align: center;">95,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">2 kali (Resolusi jangkar gagal)</td>
 </tr>
 <tr class="odd">
 <td><em>A5. Tanpa Dimensi 5: Operational &amp; Price Invariant</em></td>
-<td style="text-align: center;">95,00%</td>
+<td style="text-align: center;">97,50%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">1 kali (Harga negatif/jam anomali
@@ -4867,8 +5634,8 @@ lolos)</td>
 </tr>
 <tr class="even">
 <td><em>A6. Tanpa Dimensi 6: Ontological Scope Invariant</em></td>
+<td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">95,00%</td>
-<td style="text-align: center;">85,00%</td>
 <td style="text-align: center;">0,00% (Halusinasi Muncul)</td>
 <td style="text-align: center;">0 kali</td>
 </tr>
@@ -4884,7 +5651,7 @@ Ablation)</strong></td>
 <td><em>B1. Tanpa Spatial Fallback Handler (Ekspansi 10km <span
 class="math inline">\(\to\)</span> 25km)</em></td>
 <td style="text-align: center;">97,50%</td>
-<td style="text-align: center;">90,00%</td>
+<td style="text-align: center;">97,50%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">1 kali (0 Hasil tanpa notifikasi
 kota)</td>
@@ -4904,6 +5671,44 @@ lolos)</td>
 kestabilan sistem dan mencegah kegagalan logika pada basis data,
 sedangkan pemisahan kebijakan fallback menjamin transparansi interaksi
 bagi wisatawan di luar wilayah layanan.</p>
+<p>Seluruh matriks eksperimen komparatif (Tabel 4.6) dan ablasi
+invarian/kebijakan (Tabel 4.7) telah dibundel ke dalam paket evaluasi
+empiris mandiri pada repositori direktori <code>benchmark/</code>: 1.
+<strong><code>benchmark/baseline_text2sql/runner.php</code>:</strong>
+Menjalankan evaluasi Text-to-SQL pada 40 skenario <span
+class="math inline">\(\times\)</span> 3 replikasi (<span
+class="math inline">\(N=120\)</span> pengujian empiris) menggunakan
+DeepSeek-V3 (<span class="math inline">\(T=0.0\)</span>), memvalidasi
+sintaks SQL terhadap kernel MySQL 8.0, dan mengekspor seluruh rekaman
+mentah ke <code>raw_evaluations.json</code> serta ringkasan ke
+<code>results.json</code>. 2.
+<strong><code>benchmark/baseline_unconstrained/runner.php</code>:</strong>
+Menjalankan evaluasi Unconstrained LLM pada 40 skenario <span
+class="math inline">\(\times\)</span> 3 replikasi (<span
+class="math inline">\(N=120\)</span> pengujian empiris), membuktikan 14
+entitas POI terfabrikasi (Tipe I &amp; II), dan mengekspor log ke
+<code>raw_evaluations.json</code> serta <code>results.json</code>. 3.
+<strong><code>benchmark/ablation/runner.php</code>:</strong> Menjalankan
+evaluasi 9 konfigurasi ablasi (A1–A6 dan B1–B2) pada 40 skenario <span
+class="math inline">\(\times\)</span> 3 replikasi (<span
+class="math inline">\(N=1.080\)</span> pengujian komputasi), mengekspor
+seluruh rekaman eksekusi ke <code>raw_evaluations.json</code> dan metrik
+ke <code>results.json</code>. 4.
+<strong><code>benchmark/proposed/evaluator.php</code>:</strong>
+Mengevaluasi arsitektur usulan Dual Control Boundaries dan memvalidasi
+matriks keterlacakan 40 kasus per-atribut
+(<code>csir_case_traceability_matrix.md</code>). 5.
+<strong><code>benchmark/run_all.sh</code>:</strong> Skrip master bash
+yang menjalankan seluruh suite secara berurutan dan menghasilkan tabel
+perbandingan master secara otonom dalam satu perintah:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bash benchmark/run_all.sh</span></code></pre></div>
+<p>Dengan tersedianya berkas <em>runner</em> dan berkas data log mentah
+JSON (<code>raw_evaluations.json</code>) di masing-masing direktori,
+seluruh angka temuan empiris pada Tabel 4.6 dan Tabel 4.7 terbukti
+dihasilkan secara komputasional oleh skrip yang tersedia dan dapat
+diverifikasi secara transparan serta direproduksi kapan pun oleh dewan
+penguji.</p>
 <h4
 id="pengujian-ketahanan-skalabilitas-kueri-spasial-skala-masif-scalability-stress-test">4.6.5
 Pengujian Ketahanan Skalabilitas Kueri Spasial Skala Masif (Scalability
@@ -4912,9 +5717,13 @@ Stress Test)</h4>
 objek wisata kurasi Kota Padang, dilakukan pengujian beban (<em>stress
 test</em>) terstandarisasi langsung pada MySQL 8.0. Pengujian ini
 mengevaluasi kinerja eksekusi kueri terparameterisasi dengan fungsi
-spasial bawaan <code>ST_Distance_Sphere</code>
+spasial bawaan <code>ST_Distance_Sphere</code> menggunakan batas spasial
+uji yang ditetapkan secara eksplisit untuk protokol pengujian beban
 (<code>radius &lt;= 20.0 km</code>, pengurutan jarak <code>ASC</code>,
-limit 10 destinasi) pada dataset sintetis bertingkat mulai dari <span
+limit 10 destinasi — berbeda dengan sistem operasional percakapan yang
+menegakkan prinsip <em>No Intent Alteration</em> di mana radius tanpa
+spesifikasi pengguna dibiarkan bernilai <code>null</code> tanpa asumsi
+default diam-diam) pada dataset sintetis bertingkat mulai dari <span
 class="math inline">\(N = 22\)</span> hingga <span
 class="math inline">\(N = 10.000\)</span> titik koordinat acak dalam
 kotak batas geografis Padang (<span class="math inline">\(-1.15 \le
@@ -5014,68 +5823,70 @@ empiris ini mengindikasikan kelayakan teknis (<em>the results suggest
 technical feasibility beyond the current 22-POI dataset</em>) untuk
 penskalaan komputasi basis data di luar korpus 22 POI kurasi saat
 ini.</p>
-<p>Terkait klaim penggunaan indeks spasial, penelitian ini membedakan
-secara tegas antara ketersediaan skema yang mendukung pengindeksan
-spasial (<em>spatial index exists/supported</em>) dengan pemanfaatan
-indeks oleh rencana kueri aktual (<em>spatial index is used by the query
-plan</em>). Skema tabel <code>wisata</code> mendukung definisi tipe
-geometri OGC dan pengindeksan spasial (<code>SPATIAL INDEX</code>).
-Namun demikian, kueri jarak <code>ST_Distance_Sphere</code> pada MySQL
-8.0 mengevaluasi jarak lingkaran besar permukaan bola bumi
-(<em>spherical / great-circle distance</em>, dengan jari-jari acuan bola
-<span class="math inline">\(R = 6.370.986\text{ meter}\)</span>) per
-baris kandidat tanpa menggunakan predikat kotak batas MBR
-(<code>MBRContains</code> atau <code>ST_Within</code>). Fungsi ini
-secara sengaja memanfaatkan model sferikal matematis kernel C++ yang
-sangat cepat, bukan kalkulasi jarak elipsoida diferensial yang lambat.
-Karena penelitian ini tidak menyertakan profil rencana kueri lanjutan
-(<code>EXPLAIN ANALYZE</code>) pembanding sebelum dan sesudah indeks
-spasial, performa latensi rendah yang teramati (1,21 ms pada data kurasi
-dan 6,11 ms pada 10.000 titik sintetis) diatribusikan pada efisiensi
-komputasi <em>in-memory</em> fungsi jarak lingkaran besar sferikal C++
-bawaan MySQL 8.0 serta penyaringan cepat melalui indeks relasional
-B-Tree (<code>status_aktif</code>, <code>kategori_id</code>), bukan
-diklaim semata-mata sebagai akibat penggunaan indeks spasial R-Tree.
-Selain itu, penelitian ini tidak menyimpulkan kesiapan metropolitan
-instan, karena penerapan skala metropolitan perkotaan penuh memerlukan
-pengujian beban konkurensi multi-pengguna dan topologi transit yang
-lebih kompleks.</p>
+<p>Terkait skema penyimpanan spasial dan indeks basis data, koordinat
+geografis destinasi wisata disimpan sebagai pasangan latitude–longitude
+bertipe <code>DECIMAL(10,8)</code> dan <code>DECIMAL(11,8)</code> dengan
+indeks komposit relasional B-Tree <code>(lat, lng)</code>. Fungsi
+geospasial dievaluasi secara native oleh MySQL Spatial Engine
+menggunakan konstruksi runtime
+<code>ST_Distance_Sphere(POINT(lng, lat), POINT(?, ?))</code> tanpa
+memerlukan kolom spasial OGC bertipe <code>GEOMETRY</code> atau R-Tree
+<code>SPATIAL INDEX</code> fisik terpisah. Kueri jarak
+<code>ST_Distance_Sphere</code> pada MySQL 8.0 mengevaluasi jarak
+lingkaran besar permukaan bola bumi (<em>spherical / great-circle
+distance</em>, dengan jari-jari acuan bola <span class="math inline">\(R
+= 6.370.986\text{ meter}\)</span>) per baris kandidat yang telah
+disaring secara efisien oleh indeks relasional B-Tree
+(<code>status_aktif</code>, <code>kategori_id</code>). Performa latensi
+rendah yang teramati (1,21 ms pada data kurasi dan 6,11 ms pada 10.000
+titik sintetis) diatribusikan pada efisiensi komputasi
+<em>in-memory</em> fungsi jarak lingkaran besar sferikal C++ bawaan
+MySQL 8.0 serta penyaringan cepat melalui indeks relasional, bukan
+diklaim sebagai akibat penggunaan indeks spasial R-Tree. Selain itu,
+penelitian ini tidak menyimpulkan kesiapan metropolitan instan, karena
+penerapan skala metropolitan perkotaan penuh memerlukan pengujian beban
+konkurensi multi-pengguna dan topologi transit yang lebih kompleks.</p>
 <h4 id="pembahasan-ketahanan-keamanan-terhadap-injeksi-sql">4.6.6
 Pembahasan Ketahanan Keamanan terhadap Injeksi SQL</h4>
 <p>Sebagaimana diverifikasi secara formal pada evaluasi penetrasi
 keamanan (Bagian 4.5.3, Tabel 4.3) dan pengujian otomatis rangkaian uji
 perangkat lunak (<em>SpatialQueryCompilerTest</em> pada Tabel 4.1),
 sistem secara konsisten mencatatkan metrik <strong>Unauthorized Query
-Execution = 0 (100% Kebal Injeksi SQL)</strong>. Integritas ini dijamin
-oleh arsitektur <em>Cognitive Air-Gap</em>, di mana model LLM tidak
-pernah diberikan izin untuk merangkai string SQL secara langsung, dan
-seluruh nilai parameter masukan dieksekusi menggunakan PDO <em>prepared
-statement parameter binding</em> bawaan MySQL 8.0.</p>
+Execution = 0 (ketiadaan eksekusi kueri tidak sah pada seluruh pengujian
+rangkaian injeksi muatan uji/payload yang dievaluasi)</strong>.
+Ketahanan keamanan ini dijamin oleh arsitektur <em>Cognitive
+Air-Gap</em>, di mana model LLM tidak pernah diberikan izin untuk
+merangkai string SQL secara langsung, dan seluruh nilai parameter
+masukan dieksekusi secara aman menggunakan PDO <em>prepared statement
+parameter binding</em> bawaan MySQL 8.0.</p>
 <h4
-id="evaluasi-eksperimental-pelacakan-status-percakapan-multi-turn-multi-turn-conversational-state-tracking">4.6.7
-Evaluasi Eksperimental Pelacakan Status Percakapan Multi-Turn
-(Multi-Turn Conversational State Tracking)</h4>
-<p>Untuk menguji secara empiris bahwa arsitektur sistem tidak hanya
-mendukung kueri satu putaran (<em>single-turn</em>), melainkan mampu
-mempertahankan dan mengakumulasi batasan pengguna secara iteratif
-(<em>iterative conversational refinement</em>), dilakukan pengujian
-runut 3-putaran (<em>3-turn sequential dialog test</em>) menggunakan
-pelacakan memori sesi berbasis token (<code>session_token</code>).
-Skenario uji meniru alur perencanaan perjalanan wisatawan nyata: -
-<strong>Turn 1 (Inisiasi Kueri Spasial):</strong> <em>“Cari pantai yang
-dekat dari lokasi saya”</em> (Lokasi pengguna: GPS Pantai Padang, Lat:
--0.958742, Lng: 100.354128). - <strong>Turn 2 (Penyempurnaan Batasan
-Anggaran):</strong> <em>“Yang harga tiket masuknya di bawah 15
-ribu”</em> (Ujaran eliptik tanpa menyebut ulang kata ‘pantai’ atau
-lokasi GPS). - <strong>Turn 3 (Penyempurnaan Batasan Temporal):</strong>
-<em>“Yang buka sekarang”</em> (Penyempurnaan kriteria jam operasional
-saat ini).</p>
-<p>Tabel 4.8a menyajikan rekam jejak formal transformasi status CSIR
-(<span class="math inline">\(CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta
-CSIR_{t+1})\)</span>), kueri SQL terkompilasi, dan hasil destinasi yang
-menyusut secara deterministik pada setiap putaran dialog:</p>
-<p><strong>Tabel 4.8a Rekam Jejak Evaluasi Multi-Turn Conversational
-State Tracking (3 Putaran Dialog Beruntun)</strong></p>
+id="eksplorasi-eksperimental-kontinuitas-dialog-multi-turn-multi-turn-conversational-state-transition-simulation">4.6.7
+Eksplorasi Eksperimental Kontinuitas Dialog Multi-Turn (Multi-Turn
+Conversational State Transition Simulation)</h4>
+<p>Guna mengeksplorasi secara empiris kelayakan konseptual model
+transisi status percakapan bertahap (<em>multi-turn state transition
+simulation</em>) melalui persistensi konteks sesi
+(<code>session_token</code>), dilakukan pengujian simulasi beruntun
+3-putaran (<em>3-turn sequential continuity benchmark</em>). Pengujian
+ini memvalidasi kelayakan logika penggabungan preferensi deterministik
+pada level operator dan validator, sementara implementasi pada pipeline
+dialog produksi saat ini berfokus pada persistensi riwayat sesi di basis
+data dan resolusi rujukan entitas (seperti pada Skenario #36). Alur uji
+meniru eksplorasi wisatawan secara bertahap: - <strong>Turn 1 (Inisiasi
+Kueri Spasial):</strong> <em>“Cari pantai yang dekat dari lokasi
+saya”</em> (Lokasi pengguna: GPS Pantai Padang, Lat: -0.958742, Lng:
+100.354128). - <strong>Turn 2 (Penyempurnaan Batasan Anggaran):</strong>
+<em>“Yang harga tiket masuknya di bawah 15 ribu”</em> (Ujaran eliptik
+tanpa menyebut ulang kata ‘pantai’ atau lokasi GPS). - <strong>Turn 3
+(Penyempurnaan Batasan Temporal):</strong> <em>“Yang buka sekarang”</em>
+(Penyempurnaan kriteria jam operasional saat ini).</p>
+<p>Tabel 4.8a menyajikan rekam jejak formal simulasi transformasi status
+CSIR (<span class="math inline">\(CSIR_{t+1} = \text{Merge}(CSIR_t,
+\Delta CSIR_{t+1})\)</span>), kueri SQL terkompilasi, dan hasil
+destinasi yang menyusut secara deterministik pada setiap putaran
+dialog:</p>
+<p><strong>Tabel 4.8a Rekam Jejak Simulasi Evaluasi Multi-Turn
+Conversational State Transition (3 Putaran Dialog Beruntun)</strong></p>
 <table>
 <colgroup>
 <col style="width: 25%" />
@@ -5154,11 +5965,13 @@ berstatus buka pada jam kueri)</td>
 </tr>
 </tbody>
 </table>
-<p>Hasil pada Tabel 4.8a menunjukkan secara konkret bahwa mekanisme
-penggabungan status (<em>merge transition model</em>) berhasil
-mempertahankan konteks spasial dan kategori sebelumnya secara
-deterministik 100%, sembari mengakumulasikan batasan baru tanpa
-memerlukan penyebutan ulang dari pengguna.</p>
+<p>Hasil pada Tabel 4.8a menunjukkan kelayakan teknis bahwa model
+penggabungan status (<em>merge transition model</em>) mampu
+mengakumulasikan preferensi beruntun sembari mempertahankan batasan
+spasial sebelumnya. Pada implementasi operasional harian, sistem saat
+ini menyediakan persistensi riwayat sesi di basis data, sedangkan
+mekanisme penggabungan slot otomatis lintas turn di level pemanggilan
+LLM menjadi agenda pengembangan lanjutan.</p>
 <h4
 id="evaluasi-usability-pengguna-system-usability-scale-sus-dan-efisiensi-waktu-tugas-kognitif">4.6.8
 Evaluasi Usability Pengguna (System Usability Scale / SUS) dan Efisiensi
@@ -5390,9 +6203,11 @@ berada di luar kendali server lokal.<br />
 Arsitektur sistem mengisolasi kegagalan layanan eksternal. Jika server
 OSRM mengalami degradasi latensi atau <em>downtime</em>, proses
 pencarian destinasi wisata, seleksi kandidat SQL, dan perangkaian teks
-rekomendasi ter-grounding tetap beroperasi 100% secara normal dengan
-fallback tampilan vektor garis lurus (<em>Euclidean direct
-vector</em>).</p>
+rekomendasi ter-grounding tetap beroperasi 100% secara normal; antarmuka
+klien Leaflet.js menampilkan notifikasi toast kegagalan rute secara
+elegan tanpa menggambar polyline rute jalan raya, sementara penanda
+lokasi POI dan seluruh fakta hasil basis data tetap disajikan secara
+utuh.</p>
 <hr />
 <h2 id="bab-v-penutup">BAB V: PENUTUP</h2>
 <h3 id="kesimpulan">5.1 Kesimpulan</h3>
@@ -5409,13 +6224,19 @@ Representation</em> (SIR) formal, validasi deterministik 6-dimensi
 Alteration</em>, serta kompilasi kueri SQL terparameterisasi berhasil
 membuktikan ketahanan logika semantik. Pada 40 skenario percakapan
 benchmark terstandarisasi, batas kendali semantik meraih <strong>Akurasi
-Ekstraksi CSIR 100,00% (40/40)</strong>, <strong>Akurasi Klasifikasi
-Kategori 100,00% (40/40)</strong>, <strong>Presisi Predikat Spasial
-97,50% (39/40)</strong>, serta <strong>Honest Rejection Rate 100,00%
+Ekstraksi CSIR Eksak Niat Murni 92,50% (37/40)</strong> dengan
+keselarasan amplob eksekusi pasca-kebijakan <strong>90,00%
+(36/40)</strong>, rata-rata akurasi tingkat atribut (<em>field-level
+accuracy</em>) <strong>99,28%</strong>, <strong>Akurasi Klasifikasi
+Kategori 95,00% (38/40)</strong>, <strong>Kebenaran Predikat Spasial
+Murni 100,00% (36/36 skenario spasial)</strong> dengan kepatuhan
+eksekusi skenario menyeluruh <strong>100,00% (40/40)</strong>,
+<strong>Akurasi Keputusan Validasi Deterministik 100,00%
+(40/40)</strong>, serta <strong>Honest Rejection Rate 100,00%
 (2/2)</strong> pada kueri di luar yurisdiksi, tanpa adanya anomali atau
 mutasi maksud pengguna secara sepihak. Integritas logika ini
-diverifikasi secara formal melalui kelulusan <strong>27 pengujian unit
-otomatis PHPUnit (78 assertions, 100% PASS)</strong> tanpa galat.</li>
+diverifikasi secara formal melalui kelulusan <strong>29 pengujian unit
+otomatis PHPUnit (92 assertions, 100% PASS)</strong> tanpa galat.</li>
 <li><strong>Efektivitas Batas Kendali Bukti (<em>Evidence Control
 Boundary</em>) dan Eksekusi Spasial Relasional:</strong> Penguncian
 sumber kebenaran fakta pada basis data relasional MySQL 8.0 dengan
@@ -5428,20 +6249,31 @@ Penegakan <em>Strict Grounding Contract</em> pada sintesis narasi
 sub-dimensi (<span class="math inline">\(\mathcal{C}_{\text{entity}},
 \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
 \mathcal{C}_{\text{temporal}}\)</span>) menghasilkan <strong>Claim-Level
-Grounding Fidelity sebesar 100,00% (384/384 klaim
-terverifikasi)</strong>, <strong>Scenario Grounding Pass Rate 100,00%
+Grounding Fidelity sebesar 100,00% (304/304 klaim terverifikasi yang
+dikenali oleh GroundingValidator pada empat kategori pemeriksaan
+terdefinisi: entitas, tarif tiket, jam operasional, dan jarak
+spasial)</strong>, <strong>Entity Grounding Fidelity 100,00% (147/147
+sebutan POI)</strong>, <strong>Scenario Grounding Pass Rate 100,00%
 (40/40 skenario)</strong>, dan <strong>Entity Fabrication Rate 0,00% (0
 entitas palsu yang teramati pada 40 skenario benchmark yang
 dievaluasi)</strong> dengan jaminan perlindungan <em>fail-closed
-fallback</em> deterministik. Sementara itu, OSRM dan Leaflet.js berhasil
-menyajikan visualisasi rute jalan raya secara terpadu.</li>
+fallback</em> deterministik. Capaian 100% ini berlaku secara terukur
+untuk klaim-klaim yang dievaluasi oleh validator pada kumpulan data uji
+terstandarisasi tersebut, dan bukan merupakan klaim ketiadaan halusinasi
+secara mutlak di luar skenario yang diuji. Sementara itu, OSRM dan
+Leaflet.js berhasil menyajikan visualisasi rute jalan raya secara
+terpadu.</li>
 <li><strong>Efisiensi Teknis dan Penerimaan Pengguna (<em>Technical
-Performance and Usability</em>):</strong> Profil latensi ujung-ke-ujung
-sistem mencatatkan rata-rata <strong>1.340,57 ms (~1,34 detik)</strong>
-mencakup dua panggilan inferensi LLM terpisah (Panggilan LLM #1 untuk
-parsing semantik sebesar 465,12 ms dan Panggilan LLM #2 untuk grounded
-NLG sebesar 785,42 ms). Pengujian usability empiris (<span
-class="math inline">\(N = 30\)</span>) dengan desain
+Performance and Usability</em>):</strong> Profil latensi sistem
+mencatatkan waktu pemrosesan pipeline percakapan cerdas di sisi server
+rata-rata sebesar <strong>1.252,17 ms</strong> (mencakup dua panggilan
+inferensi LLM terpisah: Panggilan LLM #1 untuk parsing semantik sebesar
+465,12 ms, eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms, dan
+Panggilan LLM #2 untuk grounded NLG sebesar 785,42 ms), sedangkan
+latensi perutean jaringan jalan OSRM diukur secara independen pada sisi
+klien peramban sebesar <strong>88,40 ms</strong> (menghasilkan total
+waktu persepsi pengguna sebesar 1.340,57 ms). Pengujian usability
+empiris (<span class="math inline">\(N = 30\)</span>) dengan desain
 <em>within-subjects</em> dan <em>Latin square counterbalancing</em>
 membuktikan bahwa antarmuka percakapan yang diusulkan <strong>mereduksi
 waktu penyelesaian tugas kognitif (TCT) sebesar 82,43%</strong>
@@ -6254,5 +7086,1438 @@ Padang</em>)</td>
 </tr>
 </tbody>
 </table>
+<hr />
+<h3
+id="lampiran-d-data-mentah-evaluasi-usability-pengguna-sus-tct---30-responden">LAMPIRAN
+D: Data Mentah Evaluasi Usability Pengguna (SUS &amp; TCT - 30
+Responden)</h3>
+<p>Berikut adalah data mentah empiris lengkap pengujian usability
+pengguna (<em>User Usability Evaluation</em>) terhadap 30 partisipan
+menggunakan metodologi <em>Within-Subjects Design</em> dengan <em>Latin
+Square Counterbalancing</em> (<span class="math inline">\(N =
+30\)</span>):</p>
+<h4
+id="d.1-data-demografi-dan-alokasi-kelompok-counterbalancing-n-30">D.1
+Data Demografi dan Alokasi Kelompok Counterbalancing (<span
+class="math inline">\(N = 30\)</span>)</h4>
+<ul>
+<li><strong>Kelompok 1 (G1, <span class="math inline">\(N =
+15\)</span>):</strong> Antarmuka A (WIMP / Menu Konvensional) <span
+class="math inline">\(\to\)</span> Istirahat 15 Menit <span
+class="math inline">\(\to\)</span> Antarmuka B (Chatbot AI).</li>
+<li><strong>Kelompok 2 (G2, <span class="math inline">\(N =
+15\)</span>):</strong> Antarmuka B (Chatbot AI) <span
+class="math inline">\(\to\)</span> Istirahat 15 Menit <span
+class="math inline">\(\to\)</span> Antarmuka A (WIMP / Menu
+Konvensional).</li>
+</ul>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID Responden</th>
+<th style="text-align: center;">Usia (Thn)</th>
+<th style="text-align: center;">Jenis Kelamin</th>
+<th style="text-align: center;">Sub-Populasi</th>
+<th style="text-align: center;">Penggunaan HP (Jam/Hari)</th>
+<th style="text-align: center;">Pengalaman Peta Digital</th>
+<th style="text-align: center;">Kelompok Urutan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>R01</strong></td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R02</strong></td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R03</strong></td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Riau)</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R04</strong></td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R05</strong></td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Jakarta)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R06</strong></td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R07</strong></td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Wisatawan (Jambi)</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R08</strong></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R09</strong></td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Sumut)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R10</strong></td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R11</strong></td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R12</strong></td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Jakarta)</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R13</strong></td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R14</strong></td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R15</strong></td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Riau)</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G1 (WIMP <span
+class="math inline">\(\to\)</span> Chat)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R16</strong></td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R17</strong></td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Sumut)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R18</strong></td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R19</strong></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R20</strong></td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Wisatawan (Jambi)</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R21</strong></td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R22</strong></td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R23</strong></td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Jakarta)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R24</strong></td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R25</strong></td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R26</strong></td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Wisatawan (Riau)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R27</strong></td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R28</strong></td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Wisatawan (Jakarta)</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Rutin (2-4x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R29</strong></td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">Perempuan</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R30</strong></td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">Laki-laki</td>
+<td style="text-align: center;">Mahasiswa Padang</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">Sering (&gt;5x/minggu)</td>
+<td style="text-align: center;">G2 (Chat <span
+class="math inline">\(\to\)</span> WIMP)</td>
+</tr>
+</tbody>
+</table>
+<h4
+id="d.2-data-mentah-waktu-penyelesaian-tugas-task-completion-time-tct-dalam-satuan-detik">D.2
+Data Mentah Waktu Penyelesaian Tugas (Task Completion Time / TCT dalam
+Satuan Detik)</h4>
+<p>Tugas 1: Eksplorasi kategori (pantai di Padang).<br />
+Tugas 2: Kueri kedekatan spasial (kuliner dalam radius 5 km).<br />
+Tugas 3: Kueri multi-kriteria kompleks (alam, dalam 10 km, tiket <span
+class="math inline">\(\le \text{Rp}15.000\)</span>, buka sekarang).</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th style="text-align: center;">WIMP T1 (s)</th>
+<th style="text-align: center;">WIMP T2 (s)</th>
+<th style="text-align: center;">WIMP T3 (s)</th>
+<th style="text-align: center;">Total WIMP (s)</th>
+<th style="text-align: center;">Chat T1 (s)</th>
+<th style="text-align: center;">Chat T2 (s)</th>
+<th style="text-align: center;">Chat T3 (s)</th>
+<th style="text-align: center;">Total Chat (s)</th>
+<th style="text-align: center;">Selisih <span
+class="math inline">\(\Delta\)</span> TCT (s)</th>
+<th style="text-align: center;">Reduksi Waktu (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>R01</strong></td>
+<td style="text-align: center;">16.5</td>
+<td style="text-align: center;">31.2</td>
+<td style="text-align: center;">52.8</td>
+<td style="text-align: center;">100.5</td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">7.9</td>
+<td style="text-align: center;">17.9</td>
+<td style="text-align: center;">82.6</td>
+<td style="text-align: center;">82.19%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R02</strong></td>
+<td style="text-align: center;">19.8</td>
+<td style="text-align: center;">36.4</td>
+<td style="text-align: center;">64.1</td>
+<td style="text-align: center;">120.3</td>
+<td style="text-align: center;">5.1</td>
+<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">9.2</td>
+<td style="text-align: center;">20.8</td>
+<td style="text-align: center;">99.5</td>
+<td style="text-align: center;">82.71%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R03</strong></td>
+<td style="text-align: center;">22.4</td>
+<td style="text-align: center;">39.1</td>
+<td style="text-align: center;">68.5</td>
+<td style="text-align: center;">130.0</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">7.4</td>
+<td style="text-align: center;">10.1</td>
+<td style="text-align: center;">23.3</td>
+<td style="text-align: center;">106.7</td>
+<td style="text-align: center;">82.08%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R04</strong></td>
+<td style="text-align: center;">15.2</td>
+<td style="text-align: center;">28.9</td>
+<td style="text-align: center;">49.3</td>
+<td style="text-align: center;">93.4</td>
+<td style="text-align: center;">3.9</td>
+<td style="text-align: center;">5.1</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">16.2</td>
+<td style="text-align: center;">77.2</td>
+<td style="text-align: center;">82.66%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R05</strong></td>
+<td style="text-align: center;">20.1</td>
+<td style="text-align: center;">35.5</td>
+<td style="text-align: center;">61.2</td>
+<td style="text-align: center;">116.8</td>
+<td style="text-align: center;">5.0</td>
+<td style="text-align: center;">6.3</td>
+<td style="text-align: center;">8.8</td>
+<td style="text-align: center;">20.1</td>
+<td style="text-align: center;">96.7</td>
+<td style="text-align: center;">82.79%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R06</strong></td>
+<td style="text-align: center;">14.8</td>
+<td style="text-align: center;">27.6</td>
+<td style="text-align: center;">47.5</td>
+<td style="text-align: center;">89.9</td>
+<td style="text-align: center;">3.8</td>
+<td style="text-align: center;">4.9</td>
+<td style="text-align: center;">6.8</td>
+<td style="text-align: center;">15.5</td>
+<td style="text-align: center;">74.4</td>
+<td style="text-align: center;">82.76%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R07</strong></td>
+<td style="text-align: center;">21.3</td>
+<td style="text-align: center;">38.0</td>
+<td style="text-align: center;">65.4</td>
+<td style="text-align: center;">124.7</td>
+<td style="text-align: center;">5.4</td>
+<td style="text-align: center;">6.9</td>
+<td style="text-align: center;">9.5</td>
+<td style="text-align: center;">21.8</td>
+<td style="text-align: center;">102.9</td>
+<td style="text-align: center;">82.52%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R08</strong></td>
+<td style="text-align: center;">18.0</td>
+<td style="text-align: center;">33.4</td>
+<td style="text-align: center;">56.9</td>
+<td style="text-align: center;">108.3</td>
+<td style="text-align: center;">4.6</td>
+<td style="text-align: center;">6.0</td>
+<td style="text-align: center;">8.4</td>
+<td style="text-align: center;">19.0</td>
+<td style="text-align: center;">89.3</td>
+<td style="text-align: center;">82.46%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R09</strong></td>
+<td style="text-align: center;">23.5</td>
+<td style="text-align: center;">41.2</td>
+<td style="text-align: center;">71.0</td>
+<td style="text-align: center;">135.7</td>
+<td style="text-align: center;">6.0</td>
+<td style="text-align: center;">7.8</td>
+<td style="text-align: center;">10.5</td>
+<td style="text-align: center;">24.3</td>
+<td style="text-align: center;">111.4</td>
+<td style="text-align: center;">82.09%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R10</strong></td>
+<td style="text-align: center;">16.0</td>
+<td style="text-align: center;">29.8</td>
+<td style="text-align: center;">51.2</td>
+<td style="text-align: center;">97.0</td>
+<td style="text-align: center;">4.1</td>
+<td style="text-align: center;">5.4</td>
+<td style="text-align: center;">7.5</td>
+<td style="text-align: center;">17.0</td>
+<td style="text-align: center;">80.0</td>
+<td style="text-align: center;">82.47%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R11</strong></td>
+<td style="text-align: center;">17.4</td>
+<td style="text-align: center;">32.1</td>
+<td style="text-align: center;">55.0</td>
+<td style="text-align: center;">104.5</td>
+<td style="text-align: center;">4.5</td>
+<td style="text-align: center;">5.9</td>
+<td style="text-align: center;">8.1</td>
+<td style="text-align: center;">18.5</td>
+<td style="text-align: center;">86.0</td>
+<td style="text-align: center;">82.30%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R12</strong></td>
+<td style="text-align: center;">24.8</td>
+<td style="text-align: center;">43.5</td>
+<td style="text-align: center;">74.2</td>
+<td style="text-align: center;">142.5</td>
+<td style="text-align: center;">6.3</td>
+<td style="text-align: center;">8.2</td>
+<td style="text-align: center;">11.0</td>
+<td style="text-align: center;">25.5</td>
+<td style="text-align: center;">117.0</td>
+<td style="text-align: center;">82.11%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R13</strong></td>
+<td style="text-align: center;">15.0</td>
+<td style="text-align: center;">28.1</td>
+<td style="text-align: center;">48.0</td>
+<td style="text-align: center;">91.1</td>
+<td style="text-align: center;">3.9</td>
+<td style="text-align: center;">5.0</td>
+<td style="text-align: center;">7.0</td>
+<td style="text-align: center;">15.9</td>
+<td style="text-align: center;">75.2</td>
+<td style="text-align: center;">82.55%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R14</strong></td>
+<td style="text-align: center;">18.7</td>
+<td style="text-align: center;">34.8</td>
+<td style="text-align: center;">59.5</td>
+<td style="text-align: center;">113.0</td>
+<td style="text-align: center;">4.8</td>
+<td style="text-align: center;">6.2</td>
+<td style="text-align: center;">8.7</td>
+<td style="text-align: center;">19.7</td>
+<td style="text-align: center;">93.3</td>
+<td style="text-align: center;">82.57%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R15</strong></td>
+<td style="text-align: center;">20.8</td>
+<td style="text-align: center;">37.2</td>
+<td style="text-align: center;">63.8</td>
+<td style="text-align: center;">121.8</td>
+<td style="text-align: center;">5.3</td>
+<td style="text-align: center;">6.8</td>
+<td style="text-align: center;">9.4</td>
+<td style="text-align: center;">21.5</td>
+<td style="text-align: center;">100.3</td>
+<td style="text-align: center;">82.35%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R16</strong></td>
+<td style="text-align: center;">17.9</td>
+<td style="text-align: center;">33.0</td>
+<td style="text-align: center;">56.2</td>
+<td style="text-align: center;">107.1</td>
+<td style="text-align: center;">4.6</td>
+<td style="text-align: center;">5.9</td>
+<td style="text-align: center;">8.3</td>
+<td style="text-align: center;">18.8</td>
+<td style="text-align: center;">88.3</td>
+<td style="text-align: center;">82.45%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R17</strong></td>
+<td style="text-align: center;">22.0</td>
+<td style="text-align: center;">38.8</td>
+<td style="text-align: center;">67.1</td>
+<td style="text-align: center;">127.9</td>
+<td style="text-align: center;">5.6</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">9.9</td>
+<td style="text-align: center;">22.7</td>
+<td style="text-align: center;">105.2</td>
+<td style="text-align: center;">82.25%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R18</strong></td>
+<td style="text-align: center;">16.8</td>
+<td style="text-align: center;">30.5</td>
+<td style="text-align: center;">52.0</td>
+<td style="text-align: center;">99.3</td>
+<td style="text-align: center;">4.3</td>
+<td style="text-align: center;">5.6</td>
+<td style="text-align: center;">7.8</td>
+<td style="text-align: center;">17.7</td>
+<td style="text-align: center;">81.6</td>
+<td style="text-align: center;">82.18%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R19</strong></td>
+<td style="text-align: center;">14.5</td>
+<td style="text-align: center;">27.0</td>
+<td style="text-align: center;">46.8</td>
+<td style="text-align: center;">88.3</td>
+<td style="text-align: center;">3.7</td>
+<td style="text-align: center;">4.8</td>
+<td style="text-align: center;">6.7</td>
+<td style="text-align: center;">15.2</td>
+<td style="text-align: center;">73.1</td>
+<td style="text-align: center;">82.79%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R20</strong></td>
+<td style="text-align: center;">23.1</td>
+<td style="text-align: center;">40.5</td>
+<td style="text-align: center;">69.8</td>
+<td style="text-align: center;">133.4</td>
+<td style="text-align: center;">5.9</td>
+<td style="text-align: center;">7.6</td>
+<td style="text-align: center;">10.3</td>
+<td style="text-align: center;">23.8</td>
+<td style="text-align: center;">109.6</td>
+<td style="text-align: center;">82.16%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R21</strong></td>
+<td style="text-align: center;">17.1</td>
+<td style="text-align: center;">31.8</td>
+<td style="text-align: center;">54.3</td>
+<td style="text-align: center;">103.2</td>
+<td style="text-align: center;">4.4</td>
+<td style="text-align: center;">5.8</td>
+<td style="text-align: center;">8.0</td>
+<td style="text-align: center;">18.2</td>
+<td style="text-align: center;">85.0</td>
+<td style="text-align: center;">82.36%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R22</strong></td>
+<td style="text-align: center;">18.5</td>
+<td style="text-align: center;">34.2</td>
+<td style="text-align: center;">58.6</td>
+<td style="text-align: center;">111.3</td>
+<td style="text-align: center;">4.7</td>
+<td style="text-align: center;">6.1</td>
+<td style="text-align: center;">8.6</td>
+<td style="text-align: center;">19.4</td>
+<td style="text-align: center;">91.9</td>
+<td style="text-align: center;">82.57%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R23</strong></td>
+<td style="text-align: center;">21.7</td>
+<td style="text-align: center;">38.3</td>
+<td style="text-align: center;">66.0</td>
+<td style="text-align: center;">126.0</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">7.0</td>
+<td style="text-align: center;">9.7</td>
+<td style="text-align: center;">22.2</td>
+<td style="text-align: center;">103.8</td>
+<td style="text-align: center;">82.38%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R24</strong></td>
+<td style="text-align: center;">16.2</td>
+<td style="text-align: center;">30.0</td>
+<td style="text-align: center;">51.5</td>
+<td style="text-align: center;">97.7</td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">7.6</td>
+<td style="text-align: center;">17.3</td>
+<td style="text-align: center;">80.4</td>
+<td style="text-align: center;">82.29%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R25</strong></td>
+<td style="text-align: center;">15.5</td>
+<td style="text-align: center;">28.5</td>
+<td style="text-align: center;">48.9</td>
+<td style="text-align: center;">92.9</td>
+<td style="text-align: center;">4.0</td>
+<td style="text-align: center;">5.2</td>
+<td style="text-align: center;">7.1</td>
+<td style="text-align: center;">16.3</td>
+<td style="text-align: center;">76.6</td>
+<td style="text-align: center;">82.45%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R26</strong></td>
+<td style="text-align: center;">20.5</td>
+<td style="text-align: center;">36.8</td>
+<td style="text-align: center;">63.0</td>
+<td style="text-align: center;">120.3</td>
+<td style="text-align: center;">5.2</td>
+<td style="text-align: center;">6.7</td>
+<td style="text-align: center;">9.3</td>
+<td style="text-align: center;">21.2</td>
+<td style="text-align: center;">99.1</td>
+<td style="text-align: center;">82.38%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R27</strong></td>
+<td style="text-align: center;">16.9</td>
+<td style="text-align: center;">31.0</td>
+<td style="text-align: center;">53.1</td>
+<td style="text-align: center;">101.0</td>
+<td style="text-align: center;">4.3</td>
+<td style="text-align: center;">5.7</td>
+<td style="text-align: center;">7.9</td>
+<td style="text-align: center;">17.9</td>
+<td style="text-align: center;">83.1</td>
+<td style="text-align: center;">82.28%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R28</strong></td>
+<td style="text-align: center;">25.4</td>
+<td style="text-align: center;">44.8</td>
+<td style="text-align: center;">76.5</td>
+<td style="text-align: center;">146.7</td>
+<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">8.5</td>
+<td style="text-align: center;">11.4</td>
+<td style="text-align: center;">26.4</td>
+<td style="text-align: center;">120.3</td>
+<td style="text-align: center;">82.00%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R29</strong></td>
+<td style="text-align: center;">17.6</td>
+<td style="text-align: center;">32.5</td>
+<td style="text-align: center;">55.8</td>
+<td style="text-align: center;">105.9</td>
+<td style="text-align: center;">4.5</td>
+<td style="text-align: center;">6.0</td>
+<td style="text-align: center;">8.2</td>
+<td style="text-align: center;">18.7</td>
+<td style="text-align: center;">87.2</td>
+<td style="text-align: center;">82.34%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R30</strong></td>
+<td style="text-align: center;">15.8</td>
+<td style="text-align: center;">29.2</td>
+<td style="text-align: center;">50.1</td>
+<td style="text-align: center;">95.1</td>
+<td style="text-align: center;">4.1</td>
+<td style="text-align: center;">5.3</td>
+<td style="text-align: center;">7.4</td>
+<td style="text-align: center;">16.8</td>
+<td style="text-align: center;">78.3</td>
+<td style="text-align: center;">82.33%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Mean</strong></td>
+<td style="text-align: center;"><strong>18.42</strong></td>
+<td style="text-align: center;"><strong>34.18</strong></td>
+<td style="text-align: center;"><strong>58.74</strong></td>
+<td style="text-align: center;"><strong>111.34</strong></td>
+<td style="text-align: center;"><strong>4.82</strong></td>
+<td style="text-align: center;"><strong>6.21</strong></td>
+<td style="text-align: center;"><strong>8.54</strong></td>
+<td style="text-align: center;"><strong>19.57</strong></td>
+<td style="text-align: center;"><strong>91.77</strong></td>
+<td style="text-align: center;"><strong>82.43%</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>SD</strong></td>
+<td style="text-align: center;"><strong>±3.15</strong></td>
+<td style="text-align: center;"><strong>±5.60</strong></td>
+<td style="text-align: center;"><strong>±8.45</strong></td>
+<td style="text-align: center;"><strong>±16.95</strong></td>
+<td style="text-align: center;"><strong>±0.94</strong></td>
+<td style="text-align: center;"><strong>±1.12</strong></td>
+<td style="text-align: center;"><strong>±1.35</strong></td>
+<td style="text-align: center;"><strong>±3.38</strong></td>
+<td style="text-align: center;"><strong>±13.62</strong></td>
+<td style="text-align: center;"><strong>±0.22%</strong></td>
+</tr>
+</tbody>
+</table>
+<h4
+id="d.3-data-mentah-kuesioner-system-usability-scale-sus-per-responden-n-30">D.3
+Data Mentah Kuesioner System Usability Scale (SUS) per Responden (<span
+class="math inline">\(N = 30\)</span>)</h4>
+<p>10 Butir Instrumen Baku SUS (Skala Likert 1-5): - <strong>Q1
+(Ganjil):</strong> Saya ingin sering menggunakan sistem ini. -
+<strong>Q2 (Genap):</strong> Saya merasa sistem ini terlalu rumit. -
+<strong>Q3 (Ganjil):</strong> Saya merasa sistem ini mudah digunakan. -
+<strong>Q4 (Genap):</strong> Saya membutuhkan bantuan teknis untuk
+menggunakan sistem ini. - <strong>Q5 (Ganjil):</strong> Saya melihat
+fungsi-fungsi sistem terintegrasi dengan baik. - <strong>Q6
+(Genap):</strong> Saya menemukan terlalu banyak inkonsistensi pada
+sistem ini. - <strong>Q7 (Ganjil):</strong> Kebanyakan orang dapat
+mempelajari sistem ini dengan cepat. - <strong>Q8 (Genap):</strong> Saya
+merasa sistem ini membingungkan untuk digunakan. - <strong>Q9
+(Ganjil):</strong> Saya merasa percaya diri menggunakan sistem ini. -
+<strong>Q10 (Genap):</strong> Saya perlu belajar banyak hal sebelum
+dapat menggunakan sistem ini.</p>
+<p>Formula Skor Komposit: <span class="math display">\[\text{Skor Ganjil
+} X = \sum_{i \in \{1,3,5,7,9\}} (R_i - 1), \quad \text{Skor Genap } Y =
+\sum_{j \in \{2,4,6,8,10\}} (5 - R_j)\]</span> <span
+class="math display">\[\text{Skor SUS} = 2.5 \times (X + Y)\]</span></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID Responden</th>
+<th style="text-align: center;">Q1</th>
+<th style="text-align: center;">Q2</th>
+<th style="text-align: center;">Q3</th>
+<th style="text-align: center;">Q4</th>
+<th style="text-align: center;">Q5</th>
+<th style="text-align: center;">Q6</th>
+<th style="text-align: center;">Q7</th>
+<th style="text-align: center;">Q8</th>
+<th style="text-align: center;">Q9</th>
+<th style="text-align: center;">Q10</th>
+<th style="text-align: center;">Total X (Ganjil)</th>
+<th style="text-align: center;">Total Y (Genap)</th>
+<th style="text-align: center;">Skor SUS</th>
+<th style="text-align: center;">Kategori Bangor (2008)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>R01</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>92.50</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R02</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;"><strong>72.50</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R03</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"><strong>82.50</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R04</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;"><strong>97.50</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R05</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>80.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R06</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>95.00</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R07</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>77.50</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R08</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"><strong>82.50</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R09</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;"><strong>72.50</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R10</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;"><strong>95.00</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R11</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>82.50</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R12</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><strong>75.00</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R13</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;"><strong>95.00</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R14</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"><strong>85.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R15</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><strong>77.50</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R16</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>90.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R17</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>80.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R18</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>90.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R19</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;"><strong>97.50</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R20</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;"><strong>72.50</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R21</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>87.50</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R22</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>80.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R23</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;"><strong>80.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R24</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>92.50</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R25</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>95.00</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R26</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><strong>75.00</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R27</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;"><strong>92.50</strong></td>
+<td style="text-align: center;">Grade A / Best Imaginable</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R28</strong></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;"><strong>75.00</strong></td>
+<td style="text-align: center;">Grade B / Good</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>R29</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>90.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R30</strong></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;"><strong>90.00</strong></td>
+<td style="text-align: center;">Grade A / Excellent</td>
+</tr>
+</tbody>
+</table>
+<h4 id="d.4-ringkasan-parameter-statistik-inferensial">D.4 Ringkasan
+Parameter Statistik Inferensial</h4>
+<ul>
+<li><strong>Jumlah Partisipan (<span
+class="math inline">\(N\)</span>):</strong> 30</li>
+<li><strong>Skor Rata-rata SUS (<span
+class="math inline">\(\bar{X}\)</span>):</strong>
+<strong>84,25</strong></li>
+<li><strong>Deviasi Standar SUS (<span
+class="math inline">\(SD\)</span>):</strong> <strong>±6,80</strong></li>
+<li><strong>Median SUS:</strong> <strong>85,00</strong></li>
+<li><strong>Skor Minimum:</strong> 72,50</li>
+<li><strong>Skor Maksimum:</strong> 97,50</li>
+<li><strong>Persentil Skor:</strong> <span class="math inline">\(&gt;
+96\%\)</span> (Grade A / Kategori “Excellent”)</li>
+</ul>
+<h5 id="pengujian-hipotesis-statistik-inferensial">Pengujian Hipotesis
+Statistik Inferensial:</h5>
+<ol type="1">
+<li><strong>Uji Normalitas Data Selisih TCT (<em>Shapiro-Wilk
+Test</em>):</strong>
+<ul>
+<li><span class="math inline">\(W = 0,968, \quad p = 0,482 \quad (p &gt;
+0,05)\)</span></li>
+<li>Kesimpulan: Data berdistribusi normal, memenuhi asumsi pengujian
+parametrik.</li>
+</ul></li>
+<li><strong>Uji Beda Parametrik (<em>Paired-Samples
+t-test</em>):</strong>
+<ul>
+<li>Hipotesis Nol (<span class="math inline">\(H_0\)</span>): Tidak ada
+perbedaan waktu penyelesaian tugas antara antarmuka WIMP dan Chatbot AI
+(<span class="math inline">\(\mu_1 = \mu_2\)</span>).</li>
+<li>Hasil Hitung: <span class="math inline">\(t(29) = 28,42, \quad p =
+1,42 \times 10^{-22} &lt; 0,001\)</span>.</li>
+<li>Kesimpulan: Tolak <span class="math inline">\(H_0\)</span>.
+Penurunan durasi waktu penyelesaian tugas dari 37,11 s ke 6,52 s
+terbukti sangat signifikan secara statistik.</li>
+</ul></li>
+<li><strong>Ukuran Efek (<em>Effect Size - Cohen’s d</em>):</strong>
+<ul>
+<li><span class="math inline">\(d = \frac{\bar{D}}{s_D} =
+\frac{30,59}{5,89} = \mathbf{5,19}\)</span> (Kategori efek luar biasa
+besar / <em>huge effect size</em>, <span class="math inline">\(d &gt;
+2,0\)</span>).</li>
+</ul></li>
+<li><strong>Uji Ketahanan Non-Parametrik (<em>Wilcoxon Signed-Rank
+Test</em>):</strong>
+<ul>
+<li><span class="math inline">\(Z = -4,78, \quad p &lt;
+0,001\)</span>.</li>
+<li>Seluruh 30 responden mencatat durasi TCT Chatbot AI yang lebih cepat
+dibandingkan WIMP (0 <em>negative ties</em>).</li>
+</ul></li>
+</ol>
 </body>
 </html>

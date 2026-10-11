@@ -59,7 +59,7 @@ class SpatialIntent
         public ?string $referenceEntity = null,
         public ?float $latitude = null,
         public ?float $longitude = null,
-        public ?float $radius = 20.0, // Default radius 20.0 km jika radius query
+        public ?float $radius = null,
         public string $distanceUnit = 'km',
         public ?string $adminArea = null,
 
@@ -81,7 +81,33 @@ class SpatialIntent
         public ?string $outOfScopeReason = null,
         public bool $fallbackApplied = false,
         public ?string $fallbackNotice = null,
+
+        // === Resolusi Eksekusi Kebijakan Operasional (Operational Boundary Resolution) ===
+        // Mempertahankan maksud asli pengguna (latitude, longitude, referenceType) tetap utuh (No Intent Alteration),
+        // sementara titik eksekusi basis data yang disesuaikan kebijakan operasional dicatat secara eksplisit di sini.
+        public ?float $resolvedLatitude = null,
+        public ?float $resolvedLongitude = null,
+        public ?string $resolvedReferenceType = null,
     ) {}
+
+    /**
+     * Koordinat dan tipe referensi efektif yang digunakan oleh kompiler kueri spasial.
+     * Menggunakan resolusi kebijakan jika fallback diterapkan, atau nilai asli pengguna jika tidak ada fallback.
+     */
+    public function getExecutionLatitude(): ?float
+    {
+        return $this->resolvedLatitude ?? $this->latitude;
+    }
+
+    public function getExecutionLongitude(): ?float
+    {
+        return $this->resolvedLongitude ?? $this->longitude;
+    }
+
+    public function getExecutionReferenceType(): string
+    {
+        return $this->resolvedReferenceType ?? $this->referenceType;
+    }
 
     /**
      * Instansiasi Raw SIR dari array hasil parsing LLM.
@@ -168,7 +194,7 @@ class SpatialIntent
             referenceEntity: isset($data['reference_entity']) ? (string) $data['reference_entity'] : null,
             latitude: isset($data['latitude']) && is_numeric($data['latitude']) ? (float) $data['latitude'] : null,
             longitude: isset($data['longitude']) && is_numeric($data['longitude']) ? (float) $data['longitude'] : null,
-            radius: $radiusVal ?? ($spatialOp === 'within_radius' ? 20.0 : null),
+            radius: $radiusVal,
             distanceUnit: (string) ($data['distance_unit'] ?? $data['unit'] ?? 'km'),
             adminArea: $adminArea,
             isFree: $isFree,
@@ -219,6 +245,9 @@ class SpatialIntent
                 'out_of_scope_reason' => $this->outOfScopeReason,
                 'fallback_applied'  => $this->fallbackApplied,
                 'fallback_notice'   => $this->fallbackNotice,
+                'resolved_latitude' => $this->resolvedLatitude,
+                'resolved_longitude' => $this->resolvedLongitude,
+                'resolved_reference_type' => $this->resolvedReferenceType,
             ],
         ];
     }
@@ -231,5 +260,48 @@ class SpatialIntent
     public function toCsir(): array
     {
         return $this->toCanonicalArray();
+    }
+
+    /**
+     * Menggabungkan status CSIR saat ini dengan vektor delta ujaran baru (Multi-turn Semantic State Merging).
+     * Sesuai model matematis formal: CSIR_{t+1} = Merge(CSIR_t, \Delta CSIR_{t+1})
+     *
+     * @param self $delta
+     * @return self
+     */
+    public function mergeWith(self $delta): self
+    {
+        return new self(
+            intent: ($delta->intent !== 'explore' && $delta->intent !== '') ? $delta->intent : $this->intent,
+            entity: $delta->entity ?? $this->entity,
+            category: $delta->category ?? $this->category,
+            targetName: $delta->targetName ?? $this->targetName,
+            keyword: $delta->keyword ?? $this->keyword,
+            spatialOperator: ($delta->spatialOperator !== 'none' && $delta->spatialOperator !== '') ? $delta->spatialOperator : $this->spatialOperator,
+            referenceType: ($delta->referenceType !== 'none' && $delta->referenceType !== 'unknown') ? $delta->referenceType : $this->referenceType,
+            referenceEntity: $delta->referenceEntity ?? $this->referenceEntity,
+            latitude: $delta->latitude ?? $this->latitude,
+            longitude: $delta->longitude ?? $this->longitude,
+            radius: $delta->radius ?? $this->radius,
+            distanceUnit: $delta->distanceUnit ?: $this->distanceUnit,
+            adminArea: $delta->adminArea ?? $this->adminArea,
+            isFree: $delta->isFree ?: $this->isFree,
+            maxPrice: $delta->maxPrice ?? $this->maxPrice,
+            openNow: $delta->openNow ?: $this->openNow,
+            open24h: $delta->open24h ?: $this->open24h,
+            sort: ($delta->sort !== 'none' && $delta->sort !== '') ? $delta->sort : $this->sort,
+            rawQuery: $delta->rawQuery !== '' ? $delta->rawQuery : $this->rawQuery,
+            isValid: $delta->isValid,
+            validationStatus: $delta->validationStatus,
+            validationErrors: $delta->validationErrors,
+            executionPolicy: $delta->executionPolicy,
+            isOutOfScope: $delta->isOutOfScope,
+            outOfScopeReason: $delta->outOfScopeReason,
+            fallbackApplied: $delta->fallbackApplied,
+            fallbackNotice: $delta->fallbackNotice,
+            resolvedLatitude: $delta->resolvedLatitude ?? $this->resolvedLatitude,
+            resolvedLongitude: $delta->resolvedLongitude ?? $this->resolvedLongitude,
+            resolvedReferenceType: $delta->resolvedReferenceType ?? $this->resolvedReferenceType
+        );
     }
 }
