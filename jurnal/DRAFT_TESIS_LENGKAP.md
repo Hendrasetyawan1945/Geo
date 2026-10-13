@@ -26,38 +26,6 @@ Oleh:
 
 </div>
 
----
-
-<div class="cover-page">
-
-# RANCANG BANGUN SISTEM REKOMENDASI PARIWISATA BERBASIS LARGE LANGUAGE MODEL (LLM) DAN STRICT SQL GROUNDING UNTUK PEMBERIAN SARAN DESTINASI WISATA CERDAS
-*(Studi Kasus: Kawasan Pariwisata Kota Padang)*
-
-<br>
-
-**HALAMAN JUDUL**
-
-Diajukan sebagai Salah Satu Syarat untuk Memperoleh Gelar Magister Teknik (M.T.)  
-pada Program Studi Magister Teknik Elektro, Fakultas Teknik, Universitas Andalas
-
-<br>
-
-Oleh:  
-**HENDRA SETYAWAN**  
-**NIM: 2420952007**
-
-<br>
-
-**PROGRAM STUDI MAGISTER TEKNIK ELEKTRO**  
-**DEPARTEMEN TEKNIK ELEKTRO – FAKULTAS TEKNIK**  
-**UNIVERSITAS ANDALAS**  
-**PADANG**  
-**2026**
-
-</div>
-
----
-
 ## LEMBAR PENGESAHAN TESIS
 
 <br>
@@ -167,8 +135,7 @@ Padang, Oktober 2026
 
 ## DAFTAR ISI
 
-- **HALAMAN SAMPUL LUAR**
-- **HALAMAN JUDUL (SAMPUL DALAM)**
+- **HALAMAN SAMPUL**
 - **LEMBAR PENGESAHAN TESIS**
 - **HALAMAN PERNYATAAN ORISINALITAS**
 - **ABSTRAK (BAHASA INDONESIA)**
@@ -326,7 +293,7 @@ Ruang lingkup dan batasan dalam penelitian ini adalah:
 
 ### 1.4 Rumusan Masalah
 1. Bagaimana merancang bangun arsitektur *Reliability-Controlled Conversational Spatial Information System* dengan Batas Kendali Semantik (*Semantic Control Boundary*) berbasis *Spatial Intent Representation* (SIR) dan modul validasi deterministik 6-dimensi untuk mencegah distorsi maksud semantik sebelum mencapai eksekusi basis data?
-2. Bagaimana merancang bangun Batas Kendali Bukti (*Evidence Control Boundary*) dengan fungsi spasial bawaan `ST_Distance_Sphere`, OSRM, serta verifikasi *claim-level grounding* untuk menjamin seluruh respons faktual didukung penuh oleh fakta relasional dan bebas dari fabrikasi entitas?
+2. Bagaimana merancang bangun Batas Kendali Bukti (*Evidence Control Boundary*) dengan fungsi spasial bawaan `ST_Distance_Sphere`, OSRM, serta verifikasi *claim-level grounding* untuk memitigasi risiko halusinasi dan memverifikasi bahwa respons faktual pada ruang klaim yang diuji didukung oleh fakta relasional?
 3. Seberapa tinggi tingkat akurasi ekstraksi intensi, keandalan penjaminan fakta (*Claim-Level Grounding Fidelity*), dan performa efisiensi waktu respons (*latency*) dari sistem yang dikembangkan pada 40 skenario percakapan terstandarisasi?
 
 ### 1.5 Tujuan Penelitian
@@ -363,7 +330,7 @@ Penelitian ini menggunakan pendekatan rekayasa perangkat lunak terapan yang dipa
 
 ### 2.2 Landasan Pendekatan: Kerangka Batas Kendali Ganda (*The Dual Control Boundaries Framework*) dan Arsitektur 5-Lapis
 
-Guna mewujudkan **Reliability-Controlled Conversational Spatial Information System** yang memiliki ketahanan tinggi terhadap halusinasi faktual pada ruang lingkup domain terdefinisi dan mencegah manipulasi data eksekusi, sistem ini dirancang bukan sekadar sebagai pipa pemrosesan sekuensial, melainkan beroperasi di bawah fondasi teoritis **Batas Kendali Ganda (*Dual Control Boundaries Framework*)**:
+Guna mewujudkan **Reliability-Controlled Conversational Spatial Information System** pada Kawasan Pariwisata Kota Padang, sistem dirancang untuk memitigasi risiko halusinasi faktual dan spasial melalui validasi intensi, komputasi relasional deterministik, serta pemeriksaan grounding terhadap klaim yang dikenali pada empat kategori yang diimplementasikan. Capaian evaluasi berlaku secara terukur pada skenario benchmark dan ruang klaim terdefinisi yang diuji (bukan jaminan universal atas seluruh variasi bahasa alami terbuka), di bawah fondasi teoritis **Batas Kendali Ganda (*Dual Control Boundaries Framework*)**:
 
 ```
                  PROBABILISTIC LLM (Layer 2)
@@ -402,16 +369,17 @@ Dua mekanisme batas kendali utama tersebut didefinisikan secara presisi sebagai 
 
 1. **Batas Kendali Semantik (*Semantic Control Boundary*):**
    $$\begin{aligned}
-   \text{Tahap Ekstraksi Niat} & : \quad \text{LLM} \longrightarrow \mathcal{S}_{\text{raw}} \\
-   \text{Tahap Validasi Deterministik} & : \quad \mathcal{S}_{\text{raw}} \xrightarrow{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \quad (\text{Prinsip: No Intent Alteration}) \\
-   \text{Tahap Kompilasi Spasial} & : \quad \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}_{\text{parameterized}}
+   \text{Tahap 1 (Ekstraksi Niat)} & : \quad \text{User NL} \longrightarrow \mathcal{S}_{\text{raw}} \quad (\text{via LLM Semantic Parser}) \\
+   \text{Tahap 2 (Validasi Invarian)} & : \quad \mathcal{S}_{\text{raw}} \longrightarrow \mathcal{S}_{\text{csir}} \quad (\text{via 6-D SirValidator, Prinsip: No Intent Alteration}) \\
+   \text{Tahap 3 (Kompilasi Spasial)} & : \quad \mathcal{S}_{\text{csir}} \longrightarrow \text{SQL}_{\text{parameterized}} \quad (\text{via Spatial Query Compiler})
    \end{aligned}$$
    Batas ini bertugas mengisolasi model bahasa probabilistik dari eksekusi basis data. Maksud pengguna diekstrak menjadi *Spatial Intent Representation* (SIR). Modul *SirValidator* 6-dimensi menegakkan prinsip *No Intent Alteration*, memeriksa konsistensi skema, tipe, domain, operator, entitas, dan batasan numerik. Hanya representasi yang memenuhi seluruh invarian yang disahkan sebagai *Canonical Spatial Intent Representation* (CSIR) dan dikompilasi menjadi kueri SQL terparameterisasi. Batas ini menjamin bahwa maksud semantik yang tidak valid, bertentangan dengan kebijakan, atau termutasi secara sepihak (*silent alteration*) tidak akan pernah mencapai tahap eksekusi basis data.
 
 2. **Batas Kendali Bukti (*Evidence Control Boundary*):**
    $$\begin{aligned}
-   \text{Sintesis Terkontrak} & : \quad F \longrightarrow \text{Grounded NLG} \\
-   \text{Audit \& Fallback} & : \quad \text{Grounded NLG} \xrightarrow{\text{GroundingValidator}} \text{Respons Terverifikasi} \quad (\text{Kebijakan: Fail-Closed})
+   \text{Tahap 1 (Eksekusi Relasional)} & : \quad \text{SQL} \longrightarrow \text{Himpunan Fakta } F \quad (\text{MySQL 8.0 ST\_Distance\_Sphere}) \\
+   \text{Tahap 2 (Sintesis Narasi)} & : \quad F \longrightarrow \text{Draft NLG} \quad (\text{LLM \#2, Strict Grounding Contract}) \\
+   \text{Tahap 3 (Audit \& Fallback)} & : \quad \text{Draft NLG} \longrightarrow \text{Respons Terverifikasi} \quad (\text{GroundingValidator, Kebijakan: Fail-Closed})
    \end{aligned}$$
    Batas ini mengendalikan tahap sintesis respons akhir pengguna. Fakta relasional $F$ hasil eksekusi deterministik MySQL 8.0 (`ST_Distance_Sphere`) diinjeksikan ke modul *Grounded NLG* di bawah kontrak grounding ketat (*Strict Grounding Contract*). Selanjutnya, teks narasi yang dihasilkan diverifikasi secara algoritmik di tingkat klaim (*Claim-Level Grounding Validator*) lintas 4 sub-dimensi ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$). Jika terdeteksi klaim tanpa bukti atau entitas di luar $F$, sistem mengaktifkan kebijakan *fail-closed fallback* deterministik guna memverifikasi bahwa seluruh klaim pada empat kategori yang dievaluasi didukung secara eksak oleh fakta basis data relasional sebelum diteruskan ke pengguna.
 
@@ -454,10 +422,10 @@ Untuk menguji ketahanan sistem secara ilmiah dan metodologis, kebenaran operasio
 
 Rangkaian ini membentuk pipa sekuensial yang teruji:
 $$\begin{aligned}
-\textbf{Fase 1 (Semantik):} & \quad NL \xrightarrow{\text{Inferensi Kognitif}} CSIR \\
-\textbf{Fase 2 (Kompilasi):} & \quad CSIR \xrightarrow{\text{Kompilasi Deterministik}} \text{SQL} \\
-\textbf{Fase 3 (Eksekusi Spasial):} & \quad \text{SQL} \xrightarrow{\text{MySQL 8.0 ST\_Distance\_Sphere}} \text{Himpunan Fakta } (F) \\
-\textbf{Fase 4 (Verifikasi Fakta):} & \quad F \xrightarrow[\text{Fail-Closed}]{\text{GroundingValidator}} \text{Respons Bernarasi Terverifikasi}
+\textbf{Fase 1 (Kebenaran Semantik)} & : \quad NL \longrightarrow CSIR \quad (\text{Inferensi Kognitif Terstandarisasi}) \\
+\textbf{Fase 2 (Kebenaran Kompilasi)} & : \quad CSIR \longrightarrow \text{SQL} \quad (\text{Kompilasi Deterministik Non-LLM}) \\
+\textbf{Fase 3 (Kebenaran Eksekusi)} & : \quad \text{SQL} \longrightarrow \text{Himpunan Fakta } F \quad (\text{MySQL 8.0 ST\_Distance\_Sphere}) \\
+\textbf{Fase 4 (Kebenaran Grounding)} & : \quad F \longrightarrow \text{Respons Terverifikasi} \quad (\text{Algorithmic Firewall, Kebijakan: Fail-Closed})
 \end{aligned}$$
 
 #### 2.2.2 Kerangka Operasional Interaksi Spasial Eksploratori Terkontrol Semantik
@@ -494,9 +462,9 @@ Guna memastikan konsistensi terminologis dan ketepatan pemodelan, penelitian ini
 Siklus hidup transformasi dinyatakan secara formal sebagai:
 $$\begin{aligned}
 \text{Langkah 1 (Parsing Bahasa Alami):} & \quad \mathcal{S}_{\text{raw}} = \text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}}) \\
-\text{Langkah 2 (Pengikatan Konteks Spasial):} & \quad \mathcal{S}_{\text{raw}} \xrightarrow{\text{Geospatial Resolver}} \mathcal{S}_{\text{csir}} \\
-\text{Langkah 3 (Validasi Invarian 6-Dimensi):} & \quad \mathcal{S}_{\text{csir}} \xrightarrow{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir, valid}} \quad (\text{Prinsip: No Intent Alteration}) \\
-\text{Langkah 4 (Kompilasi SQL Spasial):} & \quad \mathcal{S}_{\text{csir, valid}} \xrightarrow{\text{Query Compiler}} \text{SQL}_{\text{parameterized}}
+\text{Langkah 2 (Pengikatan Konteks Spasial):} & \quad \mathcal{S}_{\text{raw}} \longrightarrow \mathcal{S}_{\text{csir}} \quad (\text{Geospatial Resolver}) \\
+\text{Langkah 3 (Validasi Invarian 6-Dimensi):} & \quad \mathcal{S}_{\text{csir}} \longrightarrow \mathcal{S}_{\text{csir, valid}} \quad (\text{SirValidator 6-D, No Intent Alteration}) \\
+\text{Langkah 4 (Kompilasi SQL Spasial):} & \quad \mathcal{S}_{\text{csir, valid}} \longrightarrow \text{SQL}_{\text{parameterized}} \quad (\text{Query Compiler})
 \end{aligned}$$
 
 Secara matematis, CSIR dimodelkan sebagai tupel formal perantara semantik (*typed intermediate representation*) kanonikal yang memiliki tepat 19 atribut:
@@ -661,9 +629,15 @@ SCHEMA:
 Arsitektur yang diusulkan secara sadar dan eksplisit membagi pemrosesan AI ke dalam **dua pemanggilan LLM terpisah (*two distinct LLM inference calls*)** yang diselingi oleh inti komputasi deterministik:
 
 $$\begin{aligned}
-\textbf{Fase I (Pemahaman Maksud \& Parsing):} & \quad \text{User NL} \xrightarrow{\text{LLM \#1 (Intent Parser)}} \text{Raw SIR} \xrightarrow{\text{SirValidator}} \text{CSIR} \xrightarrow{\text{Compiler}} \text{SQL} \\
-\textbf{Fase II (Eksekusi Spasial Relasional):} & \quad \text{SQL} \xrightarrow{\text{MySQL 8.0 (ST\_Distance\_Sphere)}} \text{Fakta Terverifikasi } F_{SQL} \\
-\textbf{Fase III (Sintesis \& Audit Grounding):} & \quad F_{SQL} \xrightarrow{\text{LLM \#2 (Grounded NLG)}} \text{Draft NLG} \xrightarrow[\text{Fail-Closed}]{\text{GroundingValidator}} \text{Respons Akhir}
+\textbf{Fase I (Pemahaman Maksud \& Parsing):} & \\
+\quad \text{I.a (Ekstraksi Niat):} & \quad \text{User NL} \longrightarrow \text{Raw SIR} \quad (\text{LLM \#1 Intent Parser}) \\
+\quad \text{I.b (Validasi Invarian):} & \quad \text{Raw SIR} \longrightarrow \text{CSIR} \quad (\text{SirValidator, No Intent Alteration}) \\
+\quad \text{I.c (Kompilasi Kueri):} & \quad \text{CSIR} \longrightarrow \text{SQL}_{\text{parameterized}} \quad (\text{Spatial Query Compiler}) \\
+\textbf{Fase II (Eksekusi Spasial Relasional):} & \\
+\quad \text{II.a (Kalkulasi Jarak \& Filter):} & \quad \text{SQL}_{\text{parameterized}} \longrightarrow \text{Fakta Terverifikasi } F_{\text{SQL}} \quad (\text{MySQL 8.0 ST\_Distance\_Sphere}) \\
+\textbf{Fase III (Sintesis \& Audit Grounding):} & \\
+\quad \text{III.a (Perangkaian Narasi):} & \quad F_{\text{SQL}} \longrightarrow \text{Draft NLG} \quad (\text{LLM \#2, Strict Grounding Contract}) \\
+\quad \text{III.b (Verifikasi Klaim \& Audit):} & \quad \text{Draft NLG} \longrightarrow \text{Respons Akhir} \quad (\text{GroundingValidator, Kebijakan Fail-Closed})
 \end{aligned}$$
 
 Pemisahan dua titik panggilan LLM ini merupakan fondasi utama mengapa arsitektur mampu mencapai *grounding* deterministik:
@@ -788,7 +762,7 @@ Dalam implementasi riil, diterapkan dua aturan pengayaan:
 - **Context-Aware Spatial Fallback:** Jika koordinat pengguna terdeteksi berada di luar jangkauan Kota Padang ($> 35\text{ km}$, misalnya pengguna mengakses dari Pekanbaru atau Jakarta), sistem secara transparan memberikan notifikasi bahwa pengguna berada di luar wilayah Padang dan rekomendasi dialihkan menggunakan titik acuan pusat Kota Padang (Balai Kota / Pusat Kota).
 
 ### 2.7 Algorithmic Claim-Level Grounding Validator Pasca-Generasi
-Untuk menutup celah halusinasi pada perangkaian narasi akhir (*Layer 5*), sistem mengimplementasikan *Algorithmic Grounding Validator* pada kelas `GroundingValidator.php`. Validator ini mengekstrak entitas dan memvalidasi seluruh proposisi numerik harga tiket, jarak spasial lingkaran besar, dan jam operasional terhadap fakta SQL. Jika ditemukan entitas tak terdaftar ($e \notin F_{\text{SQL}}$) atau deviasi klaim numerik atribut melampaui toleransi, teks LLM secara instan dibatalkan (*dropped*) dan sistem beralih ke *Deterministic Template Generator* (`buildDeterministicFallbackResponse()`) yang menyusun narasi langsung dari data mentah MySQL 8.0, memastikan tidak ada entitas palsu yang lolos ke pengguna (*0 fabricated POIs observed* pada pengujian empiris).
+Untuk menutup celah halusinasi pada perangkaian narasi akhir (*Layer 5*), sistem mengimplementasikan *Algorithmic Grounding Validator* pada kelas `GroundingValidator.php`. Validator ini mengekstrak entitas dan memvalidasi seluruh proposisi numerik harga tiket, jarak spasial lingkaran besar, dan jam operasional terhadap fakta SQL. Jika ditemukan entitas tak terdaftar ($e \notin F_{\text{SQL}}$) atau deviasi klaim numerik atribut melampaui toleransi, teks LLM secara instan dibatalkan (*dropped*) dan sistem beralih ke *Deterministic Template Generator* (`buildDeterministicFallbackResponse()`) yang menyusun narasi langsung dari data mentah MySQL 8.0, memitigasi risiko halusinasi faktual sehingga tidak ditemukan entitas fiktif yang lolos ke pengguna (*0 fabricated POIs observed* pada 40 skenario pengujian empiris yang dievaluasi).
 
 ### 2.8 Taksonomi Kegagalan Spasial (F1–F8)
 Untuk mengevaluasi keandalan sistem secara ketat, dirumuskan taksonomi kegagalan spasial yang terdiri dari 8 kelas kegagalan (Tabel 2.4).
@@ -1869,7 +1843,7 @@ Berdasarkan data kuantitatif pada Tabel 4.7 dan Tabel 4.7a, penelitian ini membe
    **Ya, secara mutlak (100% reduksi mutasi diam-diam).** Tanpa modul *SirValidator*, sistem konvensional kerap melakukan *silent mutation* (seperti memaksakan `abs()` pada radius negatif, memotong radius berlebih secara sepihak, atau mengasumsikan radius default tanpa izin). Pada arsitektur yang diusulkan, prinsip *No Intent Alteration* menolak seluruh mutasi liar tersebut: dari 4 insiden pelanggaran operator pada konfigurasi A3, 100% berhasil dicegah dan dikonversi menjadi permintaan klarifikasi transparan (`clarify_user`) tanpa mengubah maksud asli pengguna secara sepihak.
 
 2. **Apakah grounding validator menurunkan klaim faktual yang tidak didukung?**  
-   **Ya, secara signifikan.** Pada konfigurasi B2 (di mana *GroundingValidator* dinonaktifkan), fidelitas klaim faktual anjlok dari 100,00% menjadi 85,00%, membiarkan 6 kasus penyimpangan atribut numerik dan temporal (klaim tiket keliru dan jadwal buka fiktif) lolos ke pengguna akhir. Dengan mengaktifkan *GroundingValidator*, seluruh klaim tidak berdasar tersebut berhasil diintersepsi secara deterministik pasca-generasi dan dialihkan ke template berbasis data fakta SQL, menjamin zero un-grounded claims yang diterima pengguna.
+   **Ya, secara signifikan.** Pada konfigurasi B2 (di mana *GroundingValidator* dinonaktifkan), fidelitas klaim faktual anjlok dari 100,00% menjadi 85,00%, membiarkan 6 kasus penyimpangan atribut numerik dan temporal (klaim tiket keliru dan jadwal buka fiktif) lolos ke pengguna akhir. Dengan mengaktifkan *GroundingValidator*, seluruh klaim tidak berdasar tersebut berhasil diintersepsi secara deterministik pasca-generasi dan dialihkan ke template berbasis data fakta SQL, memverifikasi bahwa tidak ditemukan klaim tanpa dukungan basis data (*zero un-grounded claims observed*) pada ruang klaim empat kategori yang diuji.
 
 3. **Berapa besar perubahan performa ketika tiap komponen dinonaktifkan?**  
    Penonaktifan masing-masing komponen memicu degradasi terukur:

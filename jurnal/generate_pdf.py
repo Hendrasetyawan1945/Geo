@@ -42,6 +42,11 @@ h1.title {
     display: none !important;
 }
 
+/* Hide horizontal rules to eliminate stray line and empty page artifacts */
+hr {
+    display: none !important;
+}
+
 h1 {
     font-size: 16pt;
     font-weight: bold;
@@ -221,9 +226,7 @@ p.keywords-text,
 }
 
 hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 2em 0;
+    display: none !important;
 }
 
 table {
