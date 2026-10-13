@@ -153,6 +153,7 @@ Padang, Oktober 2026
   - 1.5 Tujuan Penelitian
   - 1.6 Manfaat Penelitian
   - 1.7 Kebaruan Penelitian (*Novelty*)
+  - 1.8 Sistematika Penulisan
 - **BAB II: METODOLOGI PENELITIAN DAN LANDASAN TEORI**
   - 2.1 Metodologi Penelitian dan Alur Kerja
   - 2.2 Landasan Pendekatan: Kerangka Batas Kendali Ganda
@@ -306,9 +307,17 @@ Ruang lingkup dan batasan dalam penelitian ini adalah:
 - **Bagi Masyarakat dan Wisatawan (Praktis):** Menyediakan sarana asisten wisata cerdas yang mudah digunakan, informatif, akurat, dan terverifikasi secara faktual bagi wisatawan yang berkunjung ke Kota Padang.
 - **Bagi Pemerintah Daerah dan Pengelola Wisata:** Menyediakan prototipe teknologi *Smart Tourism* yang dapat diadaptasi oleh Dinas Pariwisata Kota Padang guna mempromosikan destinasi unggulan daerah secara modern dan efisien.
 
-### 1.7 Sistematika Penulisan
+### 1.7 Kebaruan Penelitian (*Novelty*)
+Penelitian ini menghadirkan lima kebaruan ilmiah dan rekayasa perangkat lunak utama dalam domain *Conversational Spatial Information Systems* (CSIS):
+1. **Paradigma Batas Kendali Ganda (*Dual Control Boundaries Framework*):** Merumuskan pemisahan struktural antara inferensi bahasa kognitif probabilistik model bahasa dan komputasi relasional deterministik basis data melalui *Semantic Control Boundary* di hulu kueri dan *Evidence Control Boundary* di hilir narasi.
+2. **Isolasi Bersekat Kognitif (*Cognitive Air-Gap Architecture*):** Meniadakan akses langsung model bahasa ke penulisan sintaks SQL atau pembacaan tabel basis data secara mentah, mencegah kerentanan manipulasi sintaksis dan halusinasi skema relasional.
+3. **Formalisasi Skema Kanonik CSIR 19-Atribut Berprinsip *No Intent Alteration*:** Menetapkan kontrak perantara semantik bertipe ketat (*strictly typed IR*) yang diverifikasi oleh *SirValidator* 6-dimensi deterministik, menjamin maksud spasial pengguna tidak termutasi secara sepihak (*zero silent alteration*).
+4. **Komputasi Geodesik Deterministik Kernel MySQL 8.0 `ST_Distance_Sphere`:** Menggantikan kalkulasi jarak Euclidean planar dengan formula model bola bumi WGS84 pada basis data relasional untuk penyeleksian spasial eksak dan efisiensi eksekusi sub-milidetik (1,21 ms).
+5. **Algorithmic Claim-Level Grounding Validator dengan Invarian *Fail-Closed*:** Mengimplementasikan modul verifikasi pasca-generasi otomatis yang mengaudit proposisi entitas, harga tiket, jam operasional, dan jarak spasial terhadap tabel fakta SQL, secara deterministik mengalihkan respons ke template data mentah bila terdeteksi diskrepansi faktual.
+
+### 1.8 Sistematika Penulisan
 Naskah tesis ini disusun dalam lima bab dengan sistematika sebagai berikut:
-- **BAB I PENDAHULUAN:** Menguraikan latar belakang masalah, identifikasi masalah, batasan masalah, rumusan masalah, tujuan, manfaat penelitian, dan sistematika penulisan.
+- **BAB I PENDAHULUAN:** Menguraikan latar belakang masalah, identifikasi masalah, batasan masalah, rumusan masalah, tujuan, manfaat penelitian, kebaruan penelitian (*novelty*), dan sistematika penulisan.
 - **BAB II METODOLOGI PENELITIAN:** Membahas metodologi riset, alur kerja, arsitektur 5-lapis, formalisasi SIR, validasi deterministik 6-dimensi, grounding contract, taksonomi kegagalan F1–F8, dan desain evaluasi multi-baseline.
 - **BAB III PERANCANGAN SISTEM:** Menjelaskan perancangan antarmuka pengguna (UI), perancangan basis data relasional (ERD dan kamus data), fungsi spasial bawaan ST_Distance_Sphere, serta perancangan proses (Flowchart, DFD, Activity Diagram, Sequence Diagram).
 - **BAB IV IMPLEMENTASI DAN PENGUJIAN SISTEM:** Memaparkan lingkungan perangkat keras/lunak, implementasi kode sumber nyata, antarmuka, basis data, modul proses, pengujian otomatis PHPUnit, serta analisis hasil benchmark 40 skenario evaluasi empiris.
@@ -1652,7 +1661,7 @@ Guna memperkuat validitas ilmiah kumpulan data uji, penelitian ini menerapkan pe
 1. **Pemisahan Kumpulan Data (Development Set vs. Frozen Benchmark Test Set):** Kumpulan data perancangan awal (*Prompt-Tuning & Development Set*, $N=20$ skenario eksploratif) digunakan secara ketat hanya pada fase rekayasa prompt dan penyusunan skema antarmuka. Setelah arsitektur dibekukan (*architecture freeze*), evaluasi empiris akhir Lapisan A–D dijalankan secara mandiri pada **40 Skenario Percakapan Benchmark Terstandarisasi (*Frozen Benchmark Test Set*)** yang tidak pernah dilibatkan dalam tuning bobot atau prompt LLM (*zero data leakage*).
 2. **Protokol Evaluasi dan Kesepakatan Antar-Anotator (Inter-Annotator Agreement):** Nilai acuan kebenaran (*ground truth annotation*) pada seluruh 40 skenario ditinjau dan divalidasi secara independen oleh dua orang anotator ahli (Anotator 1: Peneliti Rekayasa Perangkat Lunak dan Sistem Geospasial; Anotator 2: Pakar Domain Linguistik dan Manajemen Destinasi Wisata). Pengukuran tingkat kesepakatan antar-anotator terhadap 19 atribut CSIR dan ekspektasi hasil kueri dihitung menggunakan formula *Cohen's Kappa*:
    $$\kappa = \frac{P_o - P_e}{1 - P_e}$$
-   Di mana $P_o$ adalah proporsi kesepakatan teramati ($97,25\%$) dan $P_e$ adalah probabilitas kesepakatan kebetulan acak ($54,12\%$). Hasil perhitungan menghasilkan nilai **Cohen's Kappa $\kappa = 0,94$**, yang mengindikasikan tingkat kesepakatan hampir sempurna (*near-perfect inter-annotator agreement*). Seluruh perbedaan tipis diselesaikan melalui protokol rekonsiliasi formal (*adjudication protocol*) hingga tercapai konsensus 100%.
+   Di mana $P_o$ adalah proporsi kesepakatan teramati awal pra-adjudikasi ($97,25\%$) dan $P_e$ adalah probabilitas kesepakatan kebetulan acak ($54,12\%$). Hasil perhitungan menghasilkan nilai **Cohen's Kappa pra-adjudikasi $\kappa = 0,94$**, yang mengindikasikan tingkat kesepakatan awal yang hampir sempurna (*near-perfect inter-annotator agreement*). Seluruh perbedaan awal (diskrepansi awal sebesar 2,75%) kemudian dituntaskan melalui protokol rekonsiliasi formal (*formal adjudication protocol*) hingga mencapai konsensus bulat 100% pasca-adjudikasi (*100% post-adjudication consensus*).
 
 Di samping 40 skenario utama, arsitektur sistem diuji secara ketat terhadap sepuluh ragam variasi bahasa alami ekstrem, kasus batas spasial, serangan injeksi, dan anomali operasional sebagaimana dirangkum pada Tabel 4.4f.
 
@@ -1683,7 +1692,7 @@ Guna menjamin transparansi metodologis mutlak dan menghindari ketaksaan interpre
 
 2. **Tingkat 2: Himpunan Data Ground Truth Benchmark Percakapan (40 Skenario Terstandarisasi):**
    - **Cakupan Skenario:** 40 skenario pertanyaan pengguna yang dirumuskan merata lintas 8 taksonomi ragam kueri: (1) kueri spasial atribut tunggal (pantai terdekat), (2) filter multi-kriteria spasial, jam operasional, dan anggaran, (3) pencarian nama POI spesifik dan resolusi alias lokal, (4) referensi spasial relatif terhadap landmark acuan, (5) kasus batas numerik ekstrem (radius 0 km, batas atas 50 km, batas anggaran pas), (6) kriteria sirkadian 24 jam dan malam hari, (7) kueri negatif di luar yurisdiksi, dan (8) percakapan chit-chat tanpa niat spasial.
-   - **Sumber & Kriteria Validasi:** Dirumuskan berdasarkan pola penelusuran wisatawan riil pada September 2026. Setiap skenario dianotasi ganda: *Gold-Standard Raw SIR* (17 slot intensi) dan *Gold-Standard Canonical CSIR* (19 atribut kanonik tervalidasi dengan koordinat WGS84). Anotasi diverifikasi secara independen oleh dua peneliti dengan *inter-annotator agreement* 100% (Cohen's Kappa $\kappa = 0,94$).
+   - **Sumber & Kriteria Validasi:** Dirumuskan berdasarkan pola penelusuran wisatawan riil pada September 2026. Setiap skenario dianotasi ganda: *Gold-Standard Raw SIR* (17 slot intensi) dan *Gold-Standard Canonical CSIR* (19 atribut kanonik tervalidasi dengan koordinat WGS84). Anotasi diverifikasi secara independen oleh dua peneliti dengan tingkat kesepakatan awal pra-adjudikasi sebesar 97,25% (Cohen's Kappa pra-adjudikasi $\kappa = 0,94$, kategori *near-perfect agreement*), yang kemudian diselesaikan melalui adjudikasi rekonsiliasi formal hingga mencapai konsensus bulat 100% (*100% post-adjudication consensus*).
    - **Alasan Penggunaan:** Menjadi tolok ukur kebenaran mutlak (*ground truth benchmark* pada `benchmark/dataset_40.json`) untuk mengukur akurasi ekstraksi niat (*Exact CSIR Match Rate*), keputusan validasi, dan kepatuhan amplob eksekusi pasca-kebijakan.
 
 3. **Tingkat 3: Himpunan Data Referensi Entitas Luar Wilayah & Negatif (14 Destinasi Regional Sumbar + Entitas Fiktif):**
