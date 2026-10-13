@@ -73,6 +73,33 @@ h1 + p {
     margin-bottom: 1.5em;
 }
 
+/* Formal Academic Cover Page */
+.cover-page,
+section.cover-page {
+    text-align: center !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    padding-top: 1.5cm;
+    min-height: 20cm;
+    margin-bottom: 2cm;
+}
+.cover-page h1,
+section.cover-page h1 {
+    font-size: 15pt !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.8em !important;
+}
+.cover-page p,
+section.cover-page p {
+    text-align: center !important;
+    text-indent: 0 !important;
+    margin-bottom: 1.2em !important;
+    line-height: 1.5 !important;
+}
+
 h2 {
     font-size: 14pt;
     font-weight: bold;
@@ -87,7 +114,9 @@ h2[id^="bab-"],
 h2[id^="lembar-"],
 h2[id^="pernyataan-"],
 h2[id^="kata-pengantar"],
-h2[id^="daftar-"] {
+h2[id^="daftar-"],
+h2[id^="abstrak"],
+h2[id^="abstract"] {
     page-break-before: always;
     break-before: page;
 }

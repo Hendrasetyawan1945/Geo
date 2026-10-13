@@ -1,5 +1,30 @@
+<div class="cover-page">
+
 # RANCANG BANGUN SISTEM REKOMENDASI PARIWISATA BERBASIS LARGE LANGUAGE MODEL (LLM) DAN STRICT SQL GROUNDING UNTUK PEMBERIAN SARAN DESTINASI WISATA CERDAS
 *(Studi Kasus: Kawasan Pariwisata Kota Padang)*
+
+<br>
+
+**TESIS**
+
+Diajukan sebagai Salah Satu Syarat untuk Memperoleh Gelar Magister Teknik (M.T.)  
+pada Program Studi Magister Teknik Elektro, Fakultas Teknik, Universitas Andalas
+
+<br>
+
+Oleh:  
+**HENDRA SETYAWAN**  
+**NIM: 2420952007**
+
+<br>
+
+**PROGRAM STUDI MAGISTER TEKNIK ELEKTRO**  
+**DEPARTEMEN TEKNIK ELEKTRO – FAKULTAS TEKNIK**  
+**UNIVERSITAS ANDALAS**  
+**PADANG**  
+**2026**
+
+</div>
 
 ---
 
