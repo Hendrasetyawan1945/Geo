@@ -22,7 +22,7 @@
         "spatial_predicate_correctness": 82.5,
         "grounding_fidelity": 87.5,
         "fabricated_entities": 3,
-        "mean_latency_ms": 1822.95
+        "mean_latency_ms": 1820.05
     },
     "observed_failure_taxonomy": {
         "F1_inverted_coordinate_parameters": "Kesalahan penukaran urutan argumen POINT(lng, lat) pada ST_Distance_Sphere",
@@ -31,9 +31,9 @@
         "F4_unhandled_empty_result": "Tidak menyediakan mekanisme klarifikasi saat kueri menghasilkan 0 baris"
     },
     "sample_syntax_errors": {
-        "Case #03 (Kategori - Pantai Terdekat)": "Latitude 100.362600 is out of range in function st_distance_sphere. It must be within [-90.000000, 90.000000].",
+        "Case #03 (Kategori - Pantai Terdekat)": "Out of range error: Latitude should be [-90,90] in function ST_Distance_Sphere.",
         "Case #29 (Spasial - Wilayah Bungus)": "Table 'geo_db.kecamatan' doesn't exist"
     },
     "execution_regime": "MOCK_REPLAY",
-    "timestamp": "2026-10-13T08:03:32+00:00"
+    "timestamp": "2026-10-13T19:44:05+08:00"
 }

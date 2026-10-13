@@ -306,13 +306,13 @@ TEXT;
         // 2. Deteksi Kategori (Precedence: Pulau, Alam, Museum, Sejarah, Kuliner, Pantai)
         if (preg_match('/pulau|snorkeling|diving/i', $lower)) {
             $data['category'] = 'Pulau';
-        } elseif (preg_match('/air terjun|bukit|hutan|tahura|\balam\b|tracking|lubuk/i', $lower)) {
+        } elseif (preg_match('/air terjun|aia tajun|aia tabik|bukit|hutan|tahura|\balam\b|tracking|lubuk/i', $lower)) {
             $data['category'] = 'Alam';
         } elseif (preg_match('/museum|adityawarman|rumah gadang|artefak|kolonial/i', $lower)) {
             $data['category'] = 'Museum';
         } elseif (preg_match('/jembatan|siti nurbaya|ganting|monumen|tugu|masjid|sejarah|religi/i', $lower)) {
             $data['category'] = 'Sejarah';
-        } elseif (preg_match('/kuliner|makan|soto|rendang|restoran|warung|mie|oleh-oleh|pasar/i', $lower)) {
+        } elseif (preg_match('/kuliner|makan|soto|rendang|restoran|warung|mie|oleh-oleh|pasar|lamak/i', $lower)) {
             $data['category'] = 'Kuliner';
         } elseif (preg_match('/pantai|laut|pesisir|pasir/i', $lower)) {
             $data['category'] = 'Pantai';
@@ -324,7 +324,7 @@ TEXT;
             $data['reference_entity'] = ucwords(trim($mRef[1]));
         } elseif (str_contains($lower, 'pusat kota') || str_contains($lower, 'balai kota')) {
             $data['reference_type'] = 'city_center';
-        } elseif (preg_match('/dari lokasi saya|dari saya|dekat saya|dari sini|posisi saya/i', $lower)) {
+        } elseif (preg_match('/dari lokasi saya|dari saya|dekat saya|dari sini|posisi saya|dakek siko|dakek sinan/i', $lower)) {
             $data['reference_type'] = 'gps';
         }
 
@@ -339,7 +339,7 @@ TEXT;
             // Operator within_radius tetapi angka radius tidak diberikan (Missing parameter invariant)
             $data['spatial_operator'] = 'within_radius';
             $data['radius'] = null;
-        } elseif (preg_match('/terdekat|paling dekat|dekat/i', $lower)) {
+        } elseif (preg_match('/terdekat|paling dekat|dekat|dakek/i', $lower)) {
             $data['spatial_operator'] = 'nearest';
             $data['sort'] = 'terdekat';
         }

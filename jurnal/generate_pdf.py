@@ -4,7 +4,7 @@ import re
 import subprocess
 import sys
 
-JURNAL_DIR = "/var/www/html/Geo/jurnal"
+JURNAL_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ACADEMIC_CSS = """
 @page {

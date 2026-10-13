@@ -7,7 +7,7 @@ Generates the restructured DRAFT_JURNAL_ILMIAH_INDONESIA.md following the 9-sect
 import os
 import re
 
-JURNAL_DIR = "/var/www/html/Geo/jurnal"
+JURNAL_DIR = os.path.dirname(os.path.abspath(__file__))
 SRC_PATH = os.path.join(JURNAL_DIR, "DRAFT_JURNAL_ILMIAH_INDONESIA.md")
 OUT_PATH = os.path.join(JURNAL_DIR, "DRAFT_JURNAL_ILMIAH_INDONESIA.md")
 

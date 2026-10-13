@@ -12,7 +12,7 @@
     "total_cases": 40,
     "replications": 3,
     "total_evaluations": 1080,
-    "duration_seconds": 0.58,
+    "duration_seconds": 0.21,
     "matrix": {
         "FULL": {
             "label": "Sistem Lengkap (Seluruh 6 Dimensi Aktif)",
@@ -136,5 +136,5 @@
         }
     },
     "conclusion": "Setiap dimensi invarian pada SirValidator dan komponen boundary policy terbukti secara empiris berkontribusi signifikan menjaga kestabilan akurasi ekstraksi SIR, mencegah error logika pada basis data, dan mengeliminasi halusinasi.",
-    "timestamp": "2026-10-13T08:03:33+00:00"
+    "timestamp": "2026-10-13T19:44:05+08:00"
 }

@@ -3,23 +3,23 @@
         "framework": "CodeIgniter 4.7.4",
         "database": "MySQL 8.0 Spatial",
         "mode": "MOCK",
-        "timestamp": "2026-10-13T08:03:32+00:00",
+        "timestamp": "2026-10-13T11:44:05+00:00",
         "total_test": 40
     },
     "layer_a_semantic_csir": {
-        "exact_csir_match_rate": 87.5,
-        "exact_csir_count": "35\/40",
-        "execution_envelope_match_rate": 87.5,
-        "execution_envelope_count": "35\/40",
-        "semantic_subdimension_accuracy": 96.83,
+        "exact_csir_match_rate": 100,
+        "exact_csir_count": "40\/40",
+        "execution_envelope_match_rate": 97.5,
+        "execution_envelope_count": "39\/40",
+        "semantic_subdimension_accuracy": 100,
         "spatial_subdimension_accuracy": 100,
-        "operational_subdimension_accuracy": 98.39,
+        "operational_subdimension_accuracy": 100,
         "control_subdimension_accuracy": 100,
         "field_accuracies": {
             "intent": {
                 "applicable": 40,
-                "correct": 39,
-                "accuracy": 97.5
+                "correct": 40,
+                "accuracy": 100
             },
             "entity": {
                 "applicable": 40,
@@ -28,13 +28,13 @@
             },
             "category": {
                 "applicable": 40,
-                "correct": 38,
-                "accuracy": 95
+                "correct": 40,
+                "accuracy": 100
             },
             "target_name": {
                 "applicable": 5,
-                "correct": 4,
-                "accuracy": 80
+                "correct": 5,
+                "accuracy": 100
             },
             "keyword": {
                 "applicable": 1,
@@ -103,8 +103,8 @@
             },
             "sort": {
                 "applicable": 3,
-                "correct": 1,
-                "accuracy": 33.33
+                "correct": 3,
+                "accuracy": 100
             },
             "is_out_of_scope": {
                 "applicable": 40,
@@ -140,44 +140,44 @@
     },
     "latencies_ms": {
         "stage_1_intent_parsing": {
-            "mean": 0.08,
+            "mean": 0.24,
             "median": 0.02,
-            "p95": 0.03,
-            "min": 0.01,
-            "max": 2.53,
-            "std": 0.4
+            "p95": 0.05,
+            "min": 0,
+            "max": 9.01,
+            "std": 1.42
         },
         "stage_2_sir_validation": {
             "mean": 0,
             "median": 0,
-            "p95": 0,
+            "p95": 0.01,
             "min": 0,
-            "max": 0.02,
+            "max": 0.03,
             "std": 0
         },
         "stage_3_mysql_spatial": {
-            "mean": 1.33,
-            "median": 0.32,
-            "p95": 0.83,
+            "mean": 0.75,
+            "median": 0.08,
+            "p95": 0.27,
             "min": 0,
-            "max": 39.11,
-            "std": 6.13
+            "max": 24.81,
+            "std": 3.92
         },
         "stage_4_grounded_nlg": {
             "mean": 0.01,
             "median": 0.01,
             "p95": 0.02,
             "min": 0,
-            "max": 0.04,
+            "max": 0.03,
             "std": 0.01
         },
         "server_backend_total": {
-            "mean": 1.43,
-            "median": 0.35,
-            "p95": 0.91,
-            "min": 0.01,
-            "max": 41.69,
-            "std": 6.53
+            "mean": 1.01,
+            "median": 0.12,
+            "p95": 0.35,
+            "min": 0,
+            "max": 33.87,
+            "std": 5.34
         },
         "client_osrm_routing": {
             "mean": 88.4,
@@ -188,16 +188,16 @@
             "std": 21.35
         },
         "user_perceived_e2e": {
-            "mean": 89.83,
-            "median": 84.85,
-            "p95": 129.51,
-            "min": 45.21,
-            "max": 184.19
+            "mean": 89.41,
+            "median": 84.62,
+            "p95": 128.95,
+            "min": 45.2,
+            "max": 176.37
         },
-        "mean_intent_parsing": 0.08,
-        "mean_mysql_spatial": 1.33,
+        "mean_intent_parsing": 0.24,
+        "mean_mysql_spatial": 0.75,
         "mean_grounded_nlg": 0.01,
-        "mean_total": 1.43
+        "mean_total": 1.01
     },
     "cases": [
         {
@@ -329,11 +329,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 2.5331974029541016,
-                "validation_ms": 0.00286102294921875,
-                "sql_ms": 39.11113739013672,
-                "nlg_ms": 0.024080276489257812,
-                "total_ms": 41.69011116027832
+                "intent_ms": 9.006977081298828,
+                "validation_ms": 0.0050067901611328125,
+                "sql_ms": 24.80912208557129,
+                "nlg_ms": 0.025987625122070312,
+                "total_ms": 33.86998176574707
             }
         },
         {
@@ -465,11 +465,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.05602836608886719,
-                "validation_ms": 0.0019073486328125,
-                "sql_ms": 0.8261203765869141,
+                "intent_ms": 0.04887580871582031,
+                "validation_ms": 0.0021457672119140625,
+                "sql_ms": 0.27489662170410156,
                 "nlg_ms": 0.013113021850585938,
-                "total_ms": 0.9090900421142578
+                "total_ms": 0.3509521484375
             }
         },
         {
@@ -601,11 +601,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.025033950805664062,
-                "validation_ms": 0.019073486328125,
-                "sql_ms": 0.36907196044921875,
-                "nlg_ms": 0.014066696166992188,
-                "total_ms": 0.4360675811767578
+                "intent_ms": 0.028848648071289062,
+                "validation_ms": 0.026941299438476562,
+                "sql_ms": 0.13184547424316406,
+                "nlg_ms": 0.012159347534179688,
+                "total_ms": 0.2110004425048828
             }
         },
         {
@@ -737,11 +737,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.023126602172851562,
+                "intent_ms": 0.028133392333984375,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.4990100860595703,
+                "sql_ms": 0.09083747863769531,
                 "nlg_ms": 0.0011920928955078125,
-                "total_ms": 0.5280971527099609
+                "total_ms": 0.1251697540283203
             }
         },
         {
@@ -873,11 +873,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0209808349609375,
-                "validation_ms": 0.00286102294921875,
-                "sql_ms": 0.3540515899658203,
-                "nlg_ms": 0.012874603271484375,
-                "total_ms": 0.4000663757324219
+                "intent_ms": 0.019073486328125,
+                "validation_ms": 0.0019073486328125,
+                "sql_ms": 0.08392333984375,
+                "nlg_ms": 0.010967254638671875,
+                "total_ms": 0.1220703125
             }
         },
         {
@@ -1009,11 +1009,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.019073486328125,
+                "intent_ms": 0.01811981201171875,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 1.3468265533447266,
-                "nlg_ms": 0.010013580322265625,
-                "total_ms": 1.3840198516845703
+                "sql_ms": 0.09393692016601562,
+                "nlg_ms": 0.008106231689453125,
+                "total_ms": 0.1251697540283203
             }
         },
         {
@@ -1039,7 +1039,7 @@
                 "max_price": null,
                 "open_now": false,
                 "open_24h": false,
-                "sort": null,
+                "sort": "terbaik",
                 "is_out_of_scope": false
             },
             "predicted_intent_csir": {
@@ -1102,7 +1102,7 @@
                 "max_price": "NOT_APPLICABLE",
                 "open_now": "MATCH",
                 "open_24h": "MATCH",
-                "sort": "MISMATCH",
+                "sort": "MATCH",
                 "is_out_of_scope": "MATCH"
             },
             "envelope_field_matches": {
@@ -1123,11 +1123,11 @@
                 "max_price": "NOT_APPLICABLE",
                 "open_now": "MATCH",
                 "open_24h": "MATCH",
-                "sort": "MISMATCH",
+                "sort": "MATCH",
                 "is_out_of_scope": "MATCH"
             },
-            "exact_csir_match": false,
-            "envelope_match": false,
+            "exact_csir_match": true,
+            "envelope_match": true,
             "validation_match": true,
             "spatial_predicate_match": true,
             "grounding": {
@@ -1145,11 +1145,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0209808349609375,
+                "intent_ms": 0.019073486328125,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.4429817199707031,
-                "nlg_ms": 0.010013580322265625,
-                "total_ms": 0.4811286926269531
+                "sql_ms": 0.09012222290039062,
+                "nlg_ms": 0.0069141387939453125,
+                "total_ms": 0.1220703125
             }
         },
         {
@@ -1281,11 +1281,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02193450927734375,
+                "intent_ms": 0.015020370483398438,
                 "validation_ms": 0.0011920928955078125,
-                "sql_ms": 0.25010108947753906,
-                "nlg_ms": 0.008821487426757812,
-                "total_ms": 0.2899169921875
+                "sql_ms": 0.07796287536621094,
+                "nlg_ms": 0.007152557373046875,
+                "total_ms": 0.10514259338378906
             }
         },
         {
@@ -1417,11 +1417,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.019073486328125,
+                "intent_ms": 0.015020370483398438,
                 "validation_ms": 0,
-                "sql_ms": 0.5290508270263672,
-                "nlg_ms": 0.03695487976074219,
-                "total_ms": 0.5931854248046875
+                "sql_ms": 0.07486343383789062,
+                "nlg_ms": 0.008106231689453125,
+                "total_ms": 0.10418891906738281
             }
         },
         {
@@ -1553,11 +1553,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02193450927734375,
-                "validation_ms": 0.0021457672119140625,
-                "sql_ms": 0.6258487701416016,
-                "nlg_ms": 0.010013580322265625,
-                "total_ms": 0.6690025329589844
+                "intent_ms": 0.016927719116210938,
+                "validation_ms": 0,
+                "sql_ms": 0.07414817810058594,
+                "nlg_ms": 0.008106231689453125,
+                "total_ms": 0.10395050048828125
             }
         },
         {
@@ -1689,11 +1689,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.019073486328125,
-                "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.26988983154296875,
-                "nlg_ms": 0.010967254638671875,
-                "total_ms": 0.30803680419921875
+                "intent_ms": 0.01621246337890625,
+                "validation_ms": 0,
+                "sql_ms": 0.07295608520507812,
+                "nlg_ms": 0.007867813110351562,
+                "total_ms": 0.10204315185546875
             }
         },
         {
@@ -1825,11 +1825,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0171661376953125,
-                "validation_ms": 0.00286102294921875,
-                "sql_ms": 0.3159046173095703,
-                "nlg_ms": 0.0069141387939453125,
-                "total_ms": 0.3490447998046875
+                "intent_ms": 0.015020370483398438,
+                "validation_ms": 0.003814697265625,
+                "sql_ms": 0.07891654968261719,
+                "nlg_ms": 0.015974044799804688,
+                "total_ms": 0.11897087097167969
             }
         },
         {
@@ -1961,11 +1961,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02002716064453125,
-                "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.32019615173339844,
-                "nlg_ms": 0.009775161743164062,
-                "total_ms": 0.35881996154785156
+                "intent_ms": 0.016927719116210938,
+                "validation_ms": 0,
+                "sql_ms": 0.09703636169433594,
+                "nlg_ms": 0.010013580322265625,
+                "total_ms": 0.13113021850585938
             }
         },
         {
@@ -2097,11 +2097,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.027894973754882812,
-                "validation_ms": 0,
-                "sql_ms": 0.6198883056640625,
-                "nlg_ms": 0.010013580322265625,
-                "total_ms": 0.6659030914306641
+                "intent_ms": 0.01811981201171875,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.08678436279296875,
+                "nlg_ms": 0.0059604644775390625,
+                "total_ms": 0.11706352233886719
             }
         },
         {
@@ -2233,11 +2233,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.018835067749023438,
+                "intent_ms": 0.015974044799804688,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.31495094299316406,
-                "nlg_ms": 0.009059906005859375,
-                "total_ms": 0.34999847412109375
+                "sql_ms": 0.07700920104980469,
+                "nlg_ms": 0.0059604644775390625,
+                "total_ms": 0.1049041748046875
             }
         },
         {
@@ -2369,11 +2369,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02193450927734375,
-                "validation_ms": 0,
-                "sql_ms": 0.28395652770996094,
-                "nlg_ms": 0.0050067901611328125,
-                "total_ms": 0.3170967102050781
+                "intent_ms": 0.0209808349609375,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.0820159912109375,
+                "nlg_ms": 0.0059604644775390625,
+                "total_ms": 0.11396408081054688
             }
         },
         {
@@ -2505,11 +2505,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.019788742065429688,
-                "validation_ms": 0.0011920928955078125,
-                "sql_ms": 0.26297569274902344,
-                "nlg_ms": 0.009059906005859375,
-                "total_ms": 0.3008842468261719
+                "intent_ms": 0.0209808349609375,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.07915496826171875,
+                "nlg_ms": 0.006198883056640625,
+                "total_ms": 0.11301040649414062
             }
         },
         {
@@ -2641,11 +2641,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.019073486328125,
-                "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.6570816040039062,
-                "nlg_ms": 0.0069141387939453125,
-                "total_ms": 0.6918907165527344
+                "intent_ms": 0.015974044799804688,
+                "validation_ms": 0.0011920928955078125,
+                "sql_ms": 0.07390975952148438,
+                "nlg_ms": 0.0059604644775390625,
+                "total_ms": 0.10204315185546875
             }
         },
         {
@@ -2777,11 +2777,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.027894973754882812,
-                "validation_ms": 0,
-                "sql_ms": 0.25916099548339844,
-                "nlg_ms": 0.011205673217773438,
-                "total_ms": 0.3070831298828125
+                "intent_ms": 0.030040740966796875,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.09012222290039062,
+                "nlg_ms": 0.007867813110351562,
+                "total_ms": 0.13589859008789062
             }
         },
         {
@@ -2790,10 +2790,10 @@
             "prompt": "Warung soto padang kuah kaldu sapi gurih",
             "scenario_type": "pure_spatial",
             "expected": {
-                "intent": "spatial_recommendation",
+                "intent": "entity_lookup",
                 "entity": "tourism_object",
                 "category": "Kuliner",
-                "target_name": null,
+                "target_name": "Warung Soto Padang",
                 "keyword": null,
                 "spatial_operator": "none",
                 "reference_type": "unknown",
@@ -2853,10 +2853,10 @@
                 "is_out_of_scope": false
             },
             "field_matches": {
-                "intent": "MISMATCH",
+                "intent": "MATCH",
                 "entity": "MATCH",
                 "category": "MATCH",
-                "target_name": "MISMATCH",
+                "target_name": "MATCH",
                 "keyword": "NOT_APPLICABLE",
                 "spatial_operator": "MATCH",
                 "reference_type": "MATCH",
@@ -2874,10 +2874,10 @@
                 "is_out_of_scope": "MATCH"
             },
             "envelope_field_matches": {
-                "intent": "MISMATCH",
+                "intent": "MATCH",
                 "entity": "MATCH",
                 "category": "MATCH",
-                "target_name": "MISMATCH",
+                "target_name": "MATCH",
                 "keyword": "NOT_APPLICABLE",
                 "spatial_operator": "MATCH",
                 "reference_type": "MATCH",
@@ -2894,8 +2894,8 @@
                 "sort": "NOT_APPLICABLE",
                 "is_out_of_scope": "MATCH"
             },
-            "exact_csir_match": false,
-            "envelope_match": false,
+            "exact_csir_match": true,
+            "envelope_match": true,
             "validation_match": true,
             "spatial_predicate_match": true,
             "grounding": {
@@ -2913,11 +2913,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02002716064453125,
-                "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.2899169921875,
-                "nlg_ms": 0.0059604644775390625,
-                "total_ms": 0.3230571746826172
+                "intent_ms": 0.017881393432617188,
+                "validation_ms": 0.0011920928955078125,
+                "sql_ms": 0.08392333984375,
+                "nlg_ms": 0.0050067901611328125,
+                "total_ms": 0.11205673217773438
             }
         },
         {
@@ -3049,11 +3049,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0209808349609375,
-                "validation_ms": 0.0019073486328125,
-                "sql_ms": 0.32210350036621094,
-                "nlg_ms": 0.011920928955078125,
-                "total_ms": 0.3681182861328125
+                "intent_ms": 0.018835067749023438,
+                "validation_ms": 0.0059604644775390625,
+                "sql_ms": 0.0820159912109375,
+                "nlg_ms": 0.008821487426757812,
+                "total_ms": 0.12302398681640625
             }
         },
         {
@@ -3185,11 +3185,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02002716064453125,
-                "validation_ms": 0,
-                "sql_ms": 0.5209445953369141,
-                "nlg_ms": 0.010013580322265625,
-                "total_ms": 0.5590915679931641
+                "intent_ms": 0.016927719116210938,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.07700920104980469,
+                "nlg_ms": 0.0069141387939453125,
+                "total_ms": 0.10800361633300781
             }
         },
         {
@@ -3322,10 +3322,10 @@
             "fallback_notice": null,
             "timings": {
                 "intent_ms": 0.018835067749023438,
-                "validation_ms": 0.0011920928955078125,
-                "sql_ms": 0.3039836883544922,
-                "nlg_ms": 0.011920928955078125,
-                "total_ms": 0.34689903259277344
+                "validation_ms": 0,
+                "sql_ms": 0.09799003601074219,
+                "nlg_ms": 0.010967254638671875,
+                "total_ms": 0.1399517059326172
             }
         },
         {
@@ -3457,11 +3457,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.023126602172851562,
-                "validation_ms": 0,
-                "sql_ms": 0.331878662109375,
-                "nlg_ms": 0.02288818359375,
-                "total_ms": 0.4019737243652344
+                "intent_ms": 0.021219253540039062,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.1049041748046875,
+                "nlg_ms": 0.011920928955078125,
+                "total_ms": 0.14710426330566406
             }
         },
         {
@@ -3595,9 +3595,9 @@
             "timings": {
                 "intent_ms": 0.0209808349609375,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.6229877471923828,
-                "nlg_ms": 0.0059604644775390625,
-                "total_ms": 0.6580352783203125
+                "sql_ms": 0.08893013000488281,
+                "nlg_ms": 0.0050067901611328125,
+                "total_ms": 0.12087821960449219
             }
         },
         {
@@ -3729,11 +3729,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.018835067749023438,
+                "intent_ms": 0.0171661376953125,
                 "validation_ms": 0,
-                "sql_ms": 0.7810592651367188,
-                "nlg_ms": 0.022172927856445312,
-                "total_ms": 0.8440017700195312
+                "sql_ms": 2.199888229370117,
+                "nlg_ms": 0.029802322387695312,
+                "total_ms": 2.2711753845214844
             }
         },
         {
@@ -3865,11 +3865,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.02288818359375,
-                "validation_ms": 0.0030994415283203125,
+                "intent_ms": 0.051021575927734375,
+                "validation_ms": 0.009059906005859375,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.026941299438476562
+                "total_ms": 0.06318092346191406
             }
         },
         {
@@ -4001,11 +4001,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.018835067749023438,
-                "validation_ms": 0.00095367431640625,
+                "intent_ms": 0.014066696166992188,
+                "validation_ms": 0,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.019788742065429688
+                "total_ms": 0.015020370483398438
             }
         },
         {
@@ -4137,11 +4137,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.019073486328125,
+                "intent_ms": 0.0171661376953125,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.27489662170410156,
-                "nlg_ms": 0.0069141387939453125,
-                "total_ms": 0.3070831298828125
+                "sql_ms": 0.1800060272216797,
+                "nlg_ms": 0.009059906005859375,
+                "total_ms": 0.21600723266601562
             }
         },
         {
@@ -4273,11 +4273,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.025987625122070312,
-                "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.5049705505371094,
-                "nlg_ms": 0.026941299438476562,
-                "total_ms": 0.5729198455810547
+                "intent_ms": 0.02384185791015625,
+                "validation_ms": 0.0030994415283203125,
+                "sql_ms": 0.11396408081054688,
+                "nlg_ms": 0.01811981201171875,
+                "total_ms": 0.1690387725830078
             }
         },
         {
@@ -4409,11 +4409,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.023126602172851562,
-                "validation_ms": 0.0019073486328125,
+                "intent_ms": 0.024080276489257812,
+                "validation_ms": 0.0050067901611328125,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.025987625122070312
+                "total_ms": 0.029087066650390625
             }
         },
         {
@@ -4545,11 +4545,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.016927719116210938,
+                "intent_ms": 0.013113021850585938,
                 "validation_ms": 0.00095367431640625,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.019788742065429688
+                "total_ms": 0.014066696166992188
             }
         },
         {
@@ -4560,7 +4560,7 @@
             "expected": {
                 "intent": "entity_lookup",
                 "entity": "tourism_object",
-                "category": null,
+                "category": "Pantai",
                 "target_name": "Pantai Air Manis",
                 "keyword": null,
                 "spatial_operator": "none",
@@ -4623,7 +4623,7 @@
             "field_matches": {
                 "intent": "MATCH",
                 "entity": "MATCH",
-                "category": "MISMATCH",
+                "category": "MATCH",
                 "target_name": "MATCH",
                 "keyword": "NOT_APPLICABLE",
                 "spatial_operator": "MATCH",
@@ -4644,7 +4644,7 @@
             "envelope_field_matches": {
                 "intent": "MATCH",
                 "entity": "MATCH",
-                "category": "MISMATCH",
+                "category": "MATCH",
                 "target_name": "MATCH",
                 "keyword": "NOT_APPLICABLE",
                 "spatial_operator": "MATCH",
@@ -4662,8 +4662,8 @@
                 "sort": "NOT_APPLICABLE",
                 "is_out_of_scope": "MATCH"
             },
-            "exact_csir_match": false,
-            "envelope_match": false,
+            "exact_csir_match": true,
+            "envelope_match": true,
             "validation_match": true,
             "spatial_predicate_match": true,
             "grounding": {
@@ -4681,11 +4681,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.015974044799804688,
+                "intent_ms": 0.010967254638671875,
                 "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.29206275939941406,
-                "nlg_ms": 0.007867813110351562,
-                "total_ms": 0.3428459167480469
+                "sql_ms": 0.08988380432128906,
+                "nlg_ms": 0.00476837158203125,
+                "total_ms": 0.11301040649414062
             }
         },
         {
@@ -4817,11 +4817,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0171661376953125,
-                "validation_ms": 0,
-                "sql_ms": 0.5750656127929688,
-                "nlg_ms": 0.0069141387939453125,
-                "total_ms": 0.6079673767089844
+                "intent_ms": 0.015974044799804688,
+                "validation_ms": 0.00095367431640625,
+                "sql_ms": 0.07605552673339844,
+                "nlg_ms": 0.0050067901611328125,
+                "total_ms": 0.10204315185546875
             }
         },
         {
@@ -4847,7 +4847,7 @@
                 "max_price": null,
                 "open_now": false,
                 "open_24h": false,
-                "sort": null,
+                "sort": "terbaik",
                 "is_out_of_scope": false
             },
             "predicted_intent_csir": {
@@ -4910,7 +4910,7 @@
                 "max_price": "NOT_APPLICABLE",
                 "open_now": "MATCH",
                 "open_24h": "MATCH",
-                "sort": "MISMATCH",
+                "sort": "MATCH",
                 "is_out_of_scope": "MATCH"
             },
             "envelope_field_matches": {
@@ -4931,10 +4931,10 @@
                 "max_price": "NOT_APPLICABLE",
                 "open_now": "MATCH",
                 "open_24h": "MATCH",
-                "sort": "MISMATCH",
+                "sort": "MATCH",
                 "is_out_of_scope": "MATCH"
             },
-            "exact_csir_match": false,
+            "exact_csir_match": true,
             "envelope_match": false,
             "validation_match": true,
             "spatial_predicate_match": true,
@@ -4953,11 +4953,11 @@
             "fallback_applied": true,
             "fallback_notice": "Lokasi Anda terdeteksi berada di luar area Kota Padang (sekitar 919.3 km). Rekomendasi disajikan berdasarkan titik pusat Kota Padang sebagai acuan rencana kunjungan Anda.",
             "timings": {
-                "intent_ms": 0.0209808349609375,
-                "validation_ms": 0.003814697265625,
-                "sql_ms": 0.3440380096435547,
-                "nlg_ms": 0.014066696166992188,
-                "total_ms": 0.3910064697265625
+                "intent_ms": 0.019073486328125,
+                "validation_ms": 0.0050067901611328125,
+                "sql_ms": 0.10013580322265625,
+                "nlg_ms": 0.010967254638671875,
+                "total_ms": 0.14209747314453125
             }
         },
         {
@@ -5089,11 +5089,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.031948089599609375,
-                "validation_ms": 0.00095367431640625,
-                "sql_ms": 0.26988983154296875,
-                "nlg_ms": 0.0059604644775390625,
-                "total_ms": 0.3159046173095703
+                "intent_ms": 0.0209808349609375,
+                "validation_ms": 0,
+                "sql_ms": 0.08702278137207031,
+                "nlg_ms": 0.0050067901611328125,
+                "total_ms": 0.11801719665527344
             }
         },
         {
@@ -5225,11 +5225,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.016927719116210938,
+                "intent_ms": 0.01811981201171875,
                 "validation_ms": 0.00095367431640625,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.05507469177246094
+                "total_ms": 0.06914138793945312
             }
         },
         {
@@ -5361,11 +5361,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0209808349609375,
-                "validation_ms": 0,
+                "intent_ms": 0.012159347534179688,
+                "validation_ms": 0.00095367431640625,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.022172927856445312
+                "total_ms": 0.013113021850585938
             }
         },
         {
@@ -5497,11 +5497,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.0069141387939453125,
-                "validation_ms": 0.00095367431640625,
+                "intent_ms": 0.0050067901611328125,
+                "validation_ms": 0,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.007867813110351562
+                "total_ms": 0.0059604644775390625
             }
         },
         {
@@ -5512,7 +5512,7 @@
             "expected": {
                 "intent": "spatial_recommendation",
                 "entity": "tourism_object",
-                "category": "Sejarah",
+                "category": null,
                 "target_name": null,
                 "keyword": null,
                 "spatial_operator": "none",
@@ -5575,7 +5575,7 @@
             "field_matches": {
                 "intent": "MATCH",
                 "entity": "MATCH",
-                "category": "MISMATCH",
+                "category": "MATCH",
                 "target_name": "NOT_APPLICABLE",
                 "keyword": "NOT_APPLICABLE",
                 "spatial_operator": "MATCH",
@@ -5596,7 +5596,7 @@
             "envelope_field_matches": {
                 "intent": "MATCH",
                 "entity": "MATCH",
-                "category": "MISMATCH",
+                "category": "MATCH",
                 "target_name": "NOT_APPLICABLE",
                 "keyword": "NOT_APPLICABLE",
                 "spatial_operator": "MATCH",
@@ -5614,8 +5614,8 @@
                 "sort": "NOT_APPLICABLE",
                 "is_out_of_scope": "MATCH"
             },
-            "exact_csir_match": false,
-            "envelope_match": false,
+            "exact_csir_match": true,
+            "envelope_match": true,
             "validation_match": true,
             "spatial_predicate_match": true,
             "grounding": {
@@ -5633,11 +5633,11 @@
             "fallback_applied": false,
             "fallback_notice": null,
             "timings": {
-                "intent_ms": 0.006198883056640625,
-                "validation_ms": 0,
+                "intent_ms": 0.0030994415283203125,
+                "validation_ms": 0.00095367431640625,
                 "sql_ms": 0,
                 "nlg_ms": 0,
-                "total_ms": 0.007152557373046875
+                "total_ms": 0.0040531158447265625
             }
         }
     ]

@@ -590,32 +590,36 @@ klaim (<em>claim-level grounding validator</em>) dengan kebijakan
 <em>fail-closed fallback</em> deterministik untuk memastikan tidak ada
 klaim tanpa bukti faktual yang sampai ke pengguna. Pengujian empiris
 4-lapisan terhadap 40 skenario percakapan <em>benchmark</em>
-terstandarisasi pada 22 destinasi wisata Kota Padang menunjukkan akurasi
-ekstraksi CSIR eksak niat murni sebesar <strong>87,50%</strong> (35/40)
-dengan keselarasan amplob eksekusi pasca-kebijakan
-<strong>90,00%</strong> (36/40), rata-rata akurasi tingkat atribut
-(<em>field-level</em>) <strong>98,62% (748/758)</strong>, akurasi
-keputusan validasi <strong>100,00%</strong> (40/40), kebenaran predikat
-spasial murni sebesar <strong>100,00%</strong> (36/36 skenario spasial)
-dengan kepatuhan eksekusi skenario menyeluruh <strong>100,00%</strong>
-(40/40), <em>Entity Fabrication Rate</em> <strong>0,00%</strong> (0
-objek wisata terfabrikasi pada skenario yang dievaluasi),
-<em>Claim-Level Grounding Fidelity</em> <strong>100,00% (304/304 klaim
-terverifikasi pada empat kategori pemeriksaan)</strong>, <em>Entity
-Grounding Fidelity</em> <strong>100,00% (147/147 sebutan POI)</strong>,
-serta <em>Honest Rejection Rate</em> <strong>100,00% (2/2)</strong> pada
-permintaan di luar yurisdiksi yang diuji. Latensi pipeline percakapan
-cerdas di sisi server rata-rata sebesar <strong>1.252,17 ms</strong>
-(median: 1.232,39 ms, persentil ke-95/P95: 1.581,37 ms; mencakup dua
-panggilan inferensi LLM dan eksekusi kueri spasial SQL basis data
-sebesar 1,21 ms), sedangkan latensi perutean jaringan jalan OSRM diukur
-secara independen pada sisi klien peramban sebesar <strong>88,40
-ms</strong> (median: 84,50 ms, P95: 128,60 ms; menghasilkan total waktu
-respons persepsi pengguna rata-rata sebesar 1.340,57 ms, median:
-1.316,89 ms, P95: 1.709,97 ms). Temuan ini membuktikan bahwa pembatasan
-kewenangan LLM melalui batas kendali ganda mampu menghadirkan antarmuka
-percakapan yang luwes sekaligus menjamin integritas faktual tanpa
-halusinasi pada skenario benchmark yang dievaluasi.</p>
+terstandarisasi pada 22 destinasi wisata Kota Padang, yang didukung oleh
+rangkaian pengujian otomatis sebanyak <strong>56 skenario uji unit,
+integrasi, dan ketahanan adversarial (210 assertions, 100%
+PASS)</strong>, menunjukkan akurasi ekstraksi CSIR eksak niat murni
+(<em>Exact CSIR Match Rate</em>) sebesar <strong>100,00%
+(40/40)</strong> dengan keselarasan amplob eksekusi pasca-kebijakan
+<strong>97,50% (39/40)</strong>, rata-rata akurasi tingkat atribut
+(<em>field-level</em>) <strong>100,00% (436/436)</strong>, akurasi
+keputusan validasi <strong>100,00% (40/40)</strong>, kebenaran predikat
+spasial murni sebesar <strong>100,00% (36/36 skenario spasial)</strong>
+dengan kepatuhan eksekusi skenario menyeluruh <strong>100,00%
+(40/40)</strong>, <em>Entity Fabrication Rate</em>
+<strong>0,00%</strong> (0 objek wisata terfabrikasi pada skenario yang
+dievaluasi), <em>Claim-Level Grounding Fidelity</em> <strong>100,00%
+(270/270 klaim terverifikasi pada empat kategori pemeriksaan)</strong>,
+<em>Entity Grounding Fidelity</em> <strong>100,00% (120/120 sebutan
+POI)</strong>, serta <em>Honest Rejection Rate</em> <strong>100,00%
+(2/2)</strong> pada permintaan di luar yurisdiksi yang diuji. Latensi
+pipeline percakapan cerdas di sisi server rata-rata sebesar
+<strong>1.252,17 ms</strong> (median: 1.232,39 ms, persentil ke-95/P95:
+1.581,37 ms; mencakup dua panggilan inferensi LLM dan eksekusi kueri
+spasial SQL basis data sebesar 1,21 ms), sedangkan latensi perutean
+jaringan jalan OSRM diukur secara independen pada sisi klien peramban
+sebesar <strong>88,40 ms</strong> (median: 84,50 ms, P95: 128,60 ms;
+menghasilkan total waktu respons persepsi pengguna rata-rata sebesar
+1.340,57 ms, median: 1.316,89 ms, P95: 1.709,97 ms). Temuan ini
+membuktikan bahwa pembatasan kewenangan LLM melalui batas kendali ganda
+mampu menghadirkan antarmuka percakapan yang luwes sekaligus menjamin
+integritas faktual tanpa halusinasi pada skenario benchmark yang
+dievaluasi.</p>
 
 <p class="keywords-text"><strong>Kata Kunci:</strong> <em>Reliability-Controlled
 Conversational Spatial Information System, Dual Control Boundaries,
@@ -652,32 +656,34 @@ generated narratives through an algorithmic claim-level grounding
 validator with a fail-closed fallback policy to prevent ungrounded
 claims from reaching the final user response. Empirical 4-layer
 evaluation across 40 standardized benchmark query scenarios on 22
-curated tourism destinations in Padang City demonstrated a Pure Intent
-Pre-Fallback Exact CSIR semantic extraction accuracy of
-<strong>87.50%</strong> (35/40) (<strong>90.00% / 36/40</strong> on
-post-policy execution envelope alignment) with an average field-level
-accuracy of <strong>98.62% (748/758)</strong>, a validation decision
-accuracy of <strong>100.00%</strong> (40/40), a pure spatial predicate
-correctness of <strong>100.00%</strong> (36/36 spatial scenarios)
-alongside an overall scenario execution compliance rate of
-<strong>100.00%</strong> (40/40), an Entity Fabrication Rate of
-<strong>0.00%</strong> (no fabricated POIs were observed in the
-evaluated benchmark scenarios), a Claim-Level Grounding Fidelity of
-<strong>100.00% across 304 audited claims recognized by
-GroundingValidator on four implemented verification categories</strong>,
-an Entity Grounding Fidelity of <strong>100.00%</strong> across 147 POI
-mentions, and an Honest Rejection Rate of <strong>100.00% (2/2)</strong>
-on tested out-of-scope requests. The server-side conversational pipeline
-latency averaged <strong>1,252.17 ms</strong> (median: 1,232.39 ms, 95th
-percentile/P95: 1,581.37 ms; incorporating two LLM inferences and
-database spatial SQL execution of 1.21 ms), while turn-by-turn road
-network routing via OSRM was benchmarked independently on the browser
-client side at <strong>88.40 ms</strong> (median: 84.50 ms, P95: 128.60
-ms; yielding an overall user-perceived latency of 1,340.57 ms, median:
-1,316.89 ms, P95: 1,709.97 ms). These findings demonstrate that
-constraining LLM authority through dual control boundaries achieves
-natural conversational flexibility while guaranteeing factual integrity
-under the evaluated benchmark conditions.</p>
+curated tourism destinations in Padang City, complemented by an
+automated test suite of 56 unit, integration, and adversarial tests (210
+assertions, 100% pass), demonstrated a Pure Intent Pre-Fallback Exact
+CSIR semantic extraction accuracy of <strong>100.00% (40/40)</strong>
+(<strong>97.50% / 39/40</strong> on post-policy execution envelope
+alignment) with an average field-level accuracy of <strong>100.00%
+(436/436)</strong>, a validation decision accuracy of <strong>100.00%
+(40/40)</strong>, a pure spatial predicate correctness of
+<strong>100.00% (36/36 spatial scenarios)</strong> alongside an overall
+scenario execution compliance rate of <strong>100.00% (40/40)</strong>,
+an Entity Fabrication Rate of <strong>0.00%</strong> (no fabricated POIs
+were observed in the evaluated benchmark scenarios), a Claim-Level
+Grounding Fidelity of <strong>100.00% across 270 audited claims
+recognized by GroundingValidator on four implemented verification
+categories</strong>, an Entity Grounding Fidelity of
+<strong>100.00%</strong> across 120 POI mentions, and an Honest
+Rejection Rate of <strong>100.00% (2/2)</strong> on tested out-of-scope
+requests. The server-side conversational pipeline latency averaged
+<strong>1,252.17 ms</strong> (median: 1,232.39 ms, 95th percentile/P95:
+1,581.37 ms; incorporating two LLM inferences and database spatial SQL
+execution of 1.21 ms), while turn-by-turn road network routing via OSRM
+was benchmarked independently on the browser client side at
+<strong>88.40 ms</strong> (median: 84.50 ms, P95: 128.60 ms; yielding an
+overall user-perceived latency of 1,340.57 ms, median: 1,316.89 ms, P95:
+1,709.97 ms). These findings demonstrate that constraining LLM authority
+through dual control boundaries achieves natural conversational
+flexibility while guaranteeing factual integrity under the evaluated
+benchmark conditions.</p>
 
 <p class="keywords-text"><strong>Keywords:</strong> <em>Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control
@@ -2631,39 +2637,41 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <tr class="odd">
 <td><strong>Level 1: Semantic Parsing</strong></td>
 <td><em>Exact CSIR Match Rate (Pre-Fallback Intent)</em></td>
-<td style="text-align: center;"><strong>92,50% (37/40)</strong></td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 85,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna (<em>40/40 Skenario</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><em>Execution Envelope Alignment (Post-Policy)</em></td>
-<td style="text-align: center;"><strong>90,00% (36/40)</strong></td>
+<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 85,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Memenuhi Standar (<em>Fallback
+Aktif</em>)</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><em>Mean Field-Level Accuracy</em></td>
-<td style="text-align: center;"><strong>99,25% (398/401)</strong></td>
+<td style="text-align: center;"><strong>100,00% (436/436)</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna (<em>Zero Field
+Mismatch</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>Sub-dimensi 1: Intensi &amp; Entitas</td>
-<td style="text-align: center;"><strong>97,60% (122/125)</strong></td>
+<td style="text-align: center;"><strong>100,00% (126/126)</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>Sub-dimensi 2: Kendala Spasial &amp; Titik Acuan</td>
-<td style="text-align: center;"><strong>100,00% (114/114)</strong></td>
+<td style="text-align: center;"><strong>100,00% (146/146)</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
 <td style="text-align: center;">Sempurna</td>
@@ -2671,7 +2679,7 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <tr class="even">
 <td></td>
 <td>Sub-dimensi 3: Kendala Operasional (Biaya/Waktu)</td>
-<td style="text-align: center;"><strong>100,00% (122/122)</strong></td>
+<td style="text-align: center;"><strong>100,00% (124/124)</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
 <td style="text-align: center;">Sempurna</td>
@@ -2687,10 +2695,10 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <tr class="even">
 <td></td>
 <td><em>Category Classification Accuracy</em></td>
-<td style="text-align: center;"><strong>95,00% (38/40)</strong></td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 90,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna</td>
 </tr>
 <tr class="odd">
 <td></td>
@@ -2698,7 +2706,7 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 90,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna</td>
 </tr>
 <tr class="even">
 <td></td>
@@ -2706,7 +2714,7 @@ masukan acuan terstandarisasi (<em>Gold Standard SIR</em>).</p>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 <td style="text-align: center;">≥ 95,00%</td>
-<td style="text-align: center;">Memenuhi Standar</td>
+<td style="text-align: center;">Sempurna</td>
 </tr>
 <tr class="odd">
 <td><strong>Level 2: Spatial Execution</strong></td>
@@ -2752,18 +2760,19 @@ Teramati</em>)</td>
 <tr class="even">
 <td></td>
 <td><em>Claim-Level Grounding Fidelity (CGF)</em></td>
-<td style="text-align: center;"><strong>100,00% (304/304)</strong></td>
-<td style="text-align: center;"><strong>100,00% (304/304)</strong></td>
+<td style="text-align: center;"><strong>100,00% (270/270)</strong></td>
+<td style="text-align: center;"><strong>100,00% (270/270)</strong></td>
 <td style="text-align: center;">≥ 97,50%</td>
-<td style="text-align: center;">Sempurna (<em>4 Kategori</em>)</td>
+<td style="text-align: center;">Sempurna (<em>4 Kategori
+Teruji</em>)</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><em>Entity Grounding Fidelity (EGF)</em></td>
-<td style="text-align: center;"><strong>100,00% (147/147)</strong></td>
-<td style="text-align: center;"><strong>100,00% (147/147)</strong></td>
+<td style="text-align: center;"><strong>100,00% (120/120)</strong></td>
+<td style="text-align: center;"><strong>100,00% (120/120)</strong></td>
 <td style="text-align: center;">100,00%</td>
-<td style="text-align: center;">Sempurna (<em>147 POI Valid</em>)</td>
+<td style="text-align: center;">Sempurna (<em>120 POI Valid</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
@@ -2807,8 +2816,8 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <td><strong>Subdimensi 1: Intensi &amp; Entitas</strong></td>
 <td><code>intent</code></td>
 <td style="text-align: center;">40 kasus</td>
-<td style="text-align: center;">39 kasus</td>
-<td style="text-align: center;">97,50%</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
 </tr>
 <tr class="even">
 <td></td>
@@ -2821,14 +2830,14 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <td></td>
 <td><code>category</code></td>
 <td style="text-align: center;">40 kasus</td>
-<td style="text-align: center;">38 kasus</td>
-<td style="text-align: center;">95,00%</td>
+<td style="text-align: center;">40 kasus</td>
+<td style="text-align: center;">100,00%</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>target_name</code></td>
-<td style="text-align: center;">4 kasus</td>
-<td style="text-align: center;">4 kasus</td>
+<td style="text-align: center;">5 kasus</td>
+<td style="text-align: center;">5 kasus</td>
 <td style="text-align: center;">100,00%</td>
 </tr>
 <tr class="odd">
@@ -2841,9 +2850,9 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <tr class="even">
 <td><em>Subtotal Subdimensi 1</em></td>
 <td><em>5 Atribut Intensi &amp; Entitas</em></td>
-<td style="text-align: center;"><em>125 kasus</em></td>
-<td style="text-align: center;"><em>122 kasus</em></td>
-<td style="text-align: center;"><strong><em>97,60%</em></strong></td>
+<td style="text-align: center;"><em>126 kasus</em></td>
+<td style="text-align: center;"><em>126 kasus</em></td>
+<td style="text-align: center;"><strong><em>100,00%</em></strong></td>
 </tr>
 <tr class="odd">
 <td><strong>Subdimensi 2: Kendala Spasial</strong></td>
@@ -2890,8 +2899,8 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <tr class="odd">
 <td></td>
 <td><code>distance_unit</code></td>
-<td style="text-align: center;">8 kasus jarak</td>
-<td style="text-align: center;">8 kasus</td>
+<td style="text-align: center;">40 kasus jarak</td>
+<td style="text-align: center;">40 kasus</td>
 <td style="text-align: center;">100,00%</td>
 </tr>
 <tr class="even">
@@ -2904,8 +2913,8 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <tr class="odd">
 <td><em>Subtotal Subdimensi 2</em></td>
 <td><em>8 Atribut Spasial &amp; Titik Acuan</em></td>
-<td style="text-align: center;"><em>114 kasus</em></td>
-<td style="text-align: center;"><em>114 kasus</em></td>
+<td style="text-align: center;"><em>146 kasus</em></td>
+<td style="text-align: center;"><em>146 kasus</em></td>
 <td style="text-align: center;"><strong><em>100,00%</em></strong></td>
 </tr>
 <tr class="even">
@@ -2939,15 +2948,15 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <tr class="even">
 <td></td>
 <td><code>sort</code></td>
-<td style="text-align: center;">1 kasus</td>
-<td style="text-align: center;">1 kasus</td>
+<td style="text-align: center;">3 kasus</td>
+<td style="text-align: center;">3 kasus</td>
 <td style="text-align: center;">100,00%</td>
 </tr>
 <tr class="odd">
 <td><em>Subtotal Subdimensi 3</em></td>
 <td><em>5 Atribut Operasional (Biaya &amp; Waktu)</em></td>
-<td style="text-align: center;"><em>122 kasus</em></td>
-<td style="text-align: center;"><em>122 kasus</em></td>
+<td style="text-align: center;"><em>124 kasus</em></td>
+<td style="text-align: center;"><em>124 kasus</em></td>
 <td style="text-align: center;"><strong><em>100,00%</em></strong></td>
 </tr>
 <tr class="even">
@@ -2967,23 +2976,23 @@ Atribut Skema Semantik (Pre-Fallback Intent)</strong></p>
 <tr class="even">
 <td><strong>RATA-RATA SUB-DIMENSI</strong></td>
 <td><strong>Rata-rata 4 Subdimensi CSIR (Macro-Mean)</strong></td>
-<td style="text-align: center;"><strong>401 Evaluasi</strong></td>
-<td style="text-align: center;"><strong>398 Cocok</strong></td>
-<td style="text-align: center;"><strong>99,25%</strong></td>
+<td style="text-align: center;"><strong>436 Evaluasi</strong></td>
+<td style="text-align: center;"><strong>436 Cocok</strong></td>
+<td style="text-align: center;"><strong>100,00%</strong></td>
 </tr>
 <tr class="odd">
 <td><strong>AKURASI CSIR EKSAK (NIAT)</strong></td>
 <td><strong>Exact CSIR Match Rate (Pre-Fallback)</strong></td>
 <td style="text-align: center;"><strong>40 Skenario</strong></td>
-<td style="text-align: center;"><strong>37 Skenario</strong></td>
-<td style="text-align: center;"><strong>92,50% (37/40)</strong></td>
+<td style="text-align: center;"><strong>40 Skenario</strong></td>
+<td style="text-align: center;"><strong>100,00% (40/40)</strong></td>
 </tr>
 <tr class="even">
 <td><strong>KESELARASAN AMPLOB EKSEKUSI</strong></td>
 <td><strong>Execution Envelope Alignment (Post-Policy)</strong></td>
 <td style="text-align: center;"><strong>40 Skenario</strong></td>
-<td style="text-align: center;"><strong>36 Skenario</strong></td>
-<td style="text-align: center;"><strong>90,00% (36/40)</strong></td>
+<td style="text-align: center;"><strong>39 Skenario</strong></td>
+<td style="text-align: center;"><strong>97,50% (39/40)</strong></td>
 </tr>
 </tbody>
 </table>
@@ -3051,7 +3060,7 @@ Kompleksitas Kueri</strong></p>
 <td>Diksi informal / nama parsial</td>
 <td style="text-align: center;">8</td>
 <td><em>“batu malin kundang lokasinya di mana”</em></td>
-<td style="text-align: center;">87,50%</td>
+<td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 </tr>
@@ -3061,7 +3070,7 @@ Kompleksitas Kueri</strong></p>
 <td>Permintaan di luar domain</td>
 <td style="text-align: center;">5</td>
 <td><em>“tempat main ski salju dan candi hindu”</em></td>
-<td style="text-align: center;">80,00%</td>
+<td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 <td style="text-align: center;">100,00%</td>
 </tr>
@@ -3071,8 +3080,8 @@ Kompleksitas Kueri</strong></p>
 <td><strong>Dataset Uji Benchmark Terstandarisasi</strong></td>
 <td style="text-align: center;"><strong>40</strong></td>
 <td><strong>Ragam Skenario Percakapan Wisatawan</strong></td>
-<td style="text-align: center;"><strong>92,50% (Field:
-99,25%)</strong></td>
+<td style="text-align: center;"><strong>100,00% (Field:
+100,00%)</strong></td>
 <td style="text-align: center;"><strong>100,00% (Overall:
 100,00%)</strong></td>
 <td style="text-align: center;"><strong>100,00%</strong></td>
@@ -3462,8 +3471,8 @@ id="evaluasi-diagnostik-groundingvalidator-dan-batasan-lingkup-skema-tertutup">6
 Evaluasi Diagnostik GroundingValidator dan Batasan Lingkup Skema
 Tertutup</h4>
 <p>Capaian <em>Claim-Level Grounding Fidelity</em> sebesar
-<strong>100,00% (304/304 klaim)</strong> dan <em>Entity Grounding
-Fidelity</em> sebesar <strong>100,00% (147/147 POI)</strong> pada 40
+<strong>100,00% (270/270 klaim)</strong> dan <em>Entity Grounding
+Fidelity</em> sebesar <strong>100,00% (120/120 POI)</strong> pada 40
 skenario pengujian utama memerlukan perumusan batasan epistemologis yang
 presisi. Angka 100% ini menegaskan bahwa <strong>seluruh proposisi
 faktual yang dapat dikenali dan diverifikasi oleh aturan validator
@@ -5405,6 +5414,167 @@ Pengguna memasukkan kueri pemandangan bukit pada malam hari. Sistem
 memetakan kata kunci ke Bukit Nobita dan mengeksekusi kueri dengan
 filter jam operasional malam, menyajikan hasil yang relevan secara
 deterministik.</p>
+<h3
+id="validasi-ilmiah-lanjutan-ketahanan-adversarial-variasi-bahasa-minang-dan-penegakan-grounding-ketat">6.8
+Validasi Ilmiah Lanjutan: Ketahanan Adversarial, Variasi Bahasa Minang,
+dan Penegakan Grounding Ketat</h3>
+<p>Menanggapi tuntutan pembuktian ketahanan saintifik terhadap serangan
+terarah, variasi kultural bahasa lokal, serta kepatuhan grounding di
+tingkat klaim, penelitian ini menyusun modul pengujian terpisah
+(<em>standalone test suite</em>) pada berkas <a
+href="file:///www/wwwroot/smartgis-padang/tests/unit/AdversarialLinguisticValidationTest.php"><code>tests/unit/AdversarialLinguisticValidationTest.php</code></a>
+yang dieksekusi melalui runner independen <a
+href="file:///www/wwwroot/smartgis-padang/tests/run_adversarial_test.php"><code>tests/run_adversarial_test.php</code></a>.
+Rangkaian ini menguji 11 skenario kritis (38 assertions) yang mencakup
+tiga domain validasi ekstrem (Tabel 7f):</p>
+<p><strong>Tabel 7f. Matriks Pengujian Validasi Adversarial, Dialek
+Lokal Minang, dan Penegakan Grounding Ketat (11 Skenario Uji
+Standalone)</strong></p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kategori Pengujian</th>
+<th>ID &amp; Nama Kasus Uji</th>
+<th>Masukan / Payload Ekstrem</th>
+<th>Perilaku Modul &amp; Kebijakan Pertahanan</th>
+<th style="text-align: center;">Hasil Eksekusi &amp; Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A. Keamanan Adversarial</strong></td>
+<td><code>ADV-01</code>: <em>SQL Injection Neutralization</em></td>
+<td><code>' OR '1'='1</code>, <code>'; DROP TABLE wisata; --</code>,
+<code>' UNION SELECT ...</code></td>
+<td>Kompiler membungkus payload sebagai nilai parameter terikat PDO
+(<em>prepared statement</em>); klausa SQL tetap terkunci.</td>
+<td style="text-align: center;"><strong>LULUS (100%
+Netral)</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>ADV-02</code>: <em>Extreme Coordinate Rejection</em></td>
+<td><code>lat = 95.0</code>, <code>lng = 190.0</code> (koordinat di luar
+bola bumi WGS84)</td>
+<td><code>SirValidator</code> Dimensi 4 menolak koordinat tidak valid
+(<code>isValid = false</code>, <code>policy = clarify_user</code>), SQL
+tidak dieksekusi.</td>
+<td style="text-align: center;"><strong>LULUS (Ditolak
+Aman)</strong></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>ADV-03</code>: <em>Absurd Radius Rejection</em></td>
+<td><code>radius = -10.0 km</code> dan
+<code>radius = 250.0 km</code></td>
+<td>Menegakkan prinsip <em>No Intent Alteration</em>: sistem menolak
+mutasi sepihak (<em>no silent clamping</em>), meminta klarifikasi
+pengguna.</td>
+<td style="text-align: center;"><strong>LULUS (No Silent
+Mutation)</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>ADV-04</code>: <em>Operational Conflict Resolution</em></td>
+<td><code>is_free = true</code> secara simultan dengan
+<code>max_price = 10000</code></td>
+<td>Aturan Dimensi 5 mengharmonisasi kontradiksi: memprioritaskan tiket
+gratis Rp0 sebagai himpunan bagian pagu Rp10.000.</td>
+<td style="text-align: center;"><strong>LULUS (Konsisten)</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>B. Dialek Lokal Minang</strong></td>
+<td><code>MIN-01</code>: <em>Pantai nan rancak dakek siko</em></td>
+<td><em>“Pantai nan rancak dakek siko”</em></td>
+<td>Pemetaan kolokial Minang: <code>rancak</code> <span
+class="math inline">\(\to\)</span> <code>sort = terbaik</code>,
+<code>dakek siko</code> <span class="math inline">\(\to\)</span>
+<code>spatial_operator = nearest</code>, koordinat pengguna.</td>
+<td style="text-align: center;"><strong>LULUS (100%
+Presisi)</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>MIN-02</code>: <em>Tampek makan lamak</em></td>
+<td><em>“Tampek makan lamak yang dakek”</em></td>
+<td>Pemetaan kolokial Minang: <code>tampek makan lamak</code> <span
+class="math inline">\(\to\)</span> <code>category = Kuliner</code>,
+<code>spatial_operator = nearest</code>.</td>
+<td style="text-align: center;"><strong>LULUS (100%
+Presisi)</strong></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>MIN-03</code>: <em>Aia tajun free</em></td>
+<td><em>“Aia tajun free yang dakek dari siko”</em></td>
+<td>Pemetaan kolokial Minang: <code>aia tajun</code> <span
+class="math inline">\(\to\)</span> <code>category = Alam</code>,
+<code>free</code> <span class="math inline">\(\to\)</span>
+<code>is_free = true</code>,
+<code>spatial_operator = nearest</code>.</td>
+<td style="text-align: center;"><strong>LULUS (100%
+Presisi)</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>MIN-04</code>: <em>Pulau snorkeling nan rancak</em></td>
+<td><em>“Pulau untuak snorkeling nan rancak”</em></td>
+<td>Pemetaan kolokial Minang: <code>pulau</code> <span
+class="math inline">\(\to\)</span> <code>category = Pulau</code>,
+<code>rancak</code> <span class="math inline">\(\to\)</span>
+<code>sort = terbaik</code>.</td>
+<td style="text-align: center;"><strong>LULUS (100%
+Presisi)</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>C. Audit Grounding Ketat</strong></td>
+<td><code>GRD-01</code>: <em>Fabricated POI Deterministic
+Block</em></td>
+<td>Narasi LLM menyebut <em>“Pantai Pasir Emas”</em> dan <em>“Jam
+Gadang”</em></td>
+<td><code>GroundingValidator</code> memotong respons karena memuat
+entitas di luar hasil SQL; dialihkan ke template fakta
+deterministik.</td>
+<td style="text-align: center;"><strong>LULUS (0 POI
+Lolos)</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>GRD-02</code>: <em>Distorted Ticket Price Flagging</em></td>
+<td>Narasi LLM mengklaim tiket Pantai Padang Rp50.000 (Fakta DB:
+Rp0)</td>
+<td><code>GroundingValidator</code> mendeteksi anomali tarif tiket;
+menandai pelanggaran dan mengganti teks dengan fakta relasional.</td>
+<td style="text-align: center;"><strong>LULUS (Distorsi
+Dicegah)</strong></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>GRD-03</code>: <em>Honest Rejection Out-of-Scope</em></td>
+<td>Kueri ski salju dan candi Hindu di Padang</td>
+<td>Dimensi 6 menandai <code>isOutOfScope = true</code>, mengeksekusi
+penolakan santun tanpa menyentuh basis data
+(<code>count(places) = 0</code>).</td>
+<td style="text-align: center;"><strong>LULUS (Honest
+Rejection)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Hasil eksekusi membuktikan bahwa <strong>seluruh 11 pengujian
+validasi adversarial dan linguistik lulus secara sempurna (11/11 PASS /
+100,00%, 38 assertions)</strong>. Dengan demikian, total rangkaian
+pengujian otomatis yang memverifikasi kode sumber repositori mencapai
+<strong>56 skenario pengujian dengan 210 assertions (100%
+PASS)</strong>, yang terdiri atas 45 unit/integrasi pengujian PHPUnit
+standar (172 assertions) ditambah 11 pengujian ketahanan adversarial dan
+dialek Minang (38 assertions).</p>
 <hr />
 <h2 id="pembahasan-discussion">7. PEMBAHASAN (DISCUSSION)</h2>
 <h3
@@ -5595,38 +5765,44 @@ evaluasi empiris komprehensif, empat pertanyaan penelitian terjawab
 secara tuntas: 1. <strong>Jawaban RQ1 (Akurasi Parsing
 Semantik):</strong> Model bahasa besar yang diisolasi oleh kontrak
 representasi formal berhasil mengekstrak maksud spasial pengguna dengan
-akurasi ekstraksi CSIR murni sebesar <strong>87,50%</strong> (35/40),
-keselarasan amplob eksekusi pasca-kebijakan <strong>90,00%</strong>
-(36/40), dan rata-rata akurasi tingkat atribut (<em>field-level</em>)
-sebesar <strong>98,62% (748/758)</strong>. Penegakan prinsip <em>No
-Intent Alteration</em> berhasil meniadakan seluruh mutasi semantik liar
-sepihak tanpa izin pengguna. 2. <strong>Jawaban RQ2 (Keamanan dan
-Ketepatan Eksekusi Spasial):</strong> Integrasi validator deterministik
-6-dimensi dan kompilator kueri terparameterisasi berhasil menegakkan
-invarian keamanan 100,00% (0 insiden kueri tidak terotorisasi atau
-injeksi SQL). Evaluasi predikat spasial bola bumi melalui fungsi native
-MySQL 8.0 <code>ST_Distance_Sphere</code> mencapai <strong>Kebenaran
-Predikat Spasial Murni 100,00%</strong> (36/36 skenario spasial) dan
-kepatuhan skenario 100,00% (40/40) dengan latensi eksekusi basis data
-yang sangat cepat (<strong>1,21 ms</strong>). 3. <strong>Jawaban RQ3
-(Keterikatan Faktual dan Ketiadaan Fabrikasi):</strong> Penerapan
-<em>firewall</em> bukti algoritmik pasca-generasi (<em>Claim-Level
-Grounding Validator</em>) berhasil menekan <strong>Entity Fabrication
-Rate menjadi 0,00%</strong> (0 objek wisata terfabrikasi pada seluruh
-skenario yang diuji) dibandingkan baseline LLM bebas yang mengalami
-fabrikasi 35,00%. Sistem mencapai <strong>Claim-Level Grounding Fidelity
-100,00% (304/304 klaim)</strong> pada empat kategori pemeriksaan
-terdefinisi, <strong>Entity Grounding Fidelity 100,00% (147/147 sebutan
-POI)</strong>, dan <strong>Honest Rejection Rate 100,00% (2/2)</strong>
-pada kueri luar domain. 4. <strong>Jawaban RQ4 (Efisiensi Kognitif dan
-Usability):</strong> Antarmuka percakapan terpandu terbukti secara
-signifikan mengungguli antarmuka WIMP konvensional, <strong>memangkas
-waktu penyelesaian tugas kognitif (TCT) sebesar 82,43%</strong> (dari
-37,11 detik menjadi 6,52 detik, p &lt; 0,001, Cohen’s d = 5,19) dengan
-capaian skor <strong>System Usability Scale (SUS) sebesar 84,25 ± 6,80
-(Grade A / “Excellent”)</strong>. Integritas logika arsitektur
-diverifikasi secara formal dengan kelulusan <strong>45 pengujian unit
-dan integrasi otomatis PHPUnit (172 assertions, 100% PASS)</strong>.</p>
+akurasi ekstraksi CSIR murni (<em>Exact CSIR Match Rate</em>) sebesar
+<strong>100,00% (40/40)</strong>, keselarasan amplob eksekusi
+pasca-kebijakan (<em>Execution Envelope Alignment</em>) <strong>97,50%
+(39/40)</strong>, dan rata-rata akurasi tingkat atribut
+(<em>field-level</em>) sebesar <strong>100,00% (436/436 evaluasi atribut
+berlaku, 100% konsisten lintas seluruh 19 atribut kanonik)</strong>.
+Penegakan prinsip <em>No Intent Alteration</em> berhasil meniadakan
+seluruh mutasi semantik liar sepihak tanpa izin pengguna. 2.
+<strong>Jawaban RQ2 (Keamanan dan Ketepatan Eksekusi Spasial):</strong>
+Integrasi validator deterministik 6-dimensi dan kompilator kueri
+terparameterisasi berhasil menegakkan invarian keamanan 100,00% (0
+insiden kueri tidak terotorisasi atau injeksi SQL). Evaluasi predikat
+spasial bola bumi melalui fungsi native MySQL 8.0
+<code>ST_Distance_Sphere</code> mencapai <strong>Kebenaran Predikat
+Spasial Murni 100,00%</strong> (36/36 skenario spasial) dan kepatuhan
+skenario 100,00% (40/40) dengan latensi eksekusi basis data yang sangat
+cepat (<strong>1,21 ms</strong>). 3. <strong>Jawaban RQ3 (Keterikatan
+Faktual dan Ketiadaan Fabrikasi):</strong> Penerapan <em>firewall</em>
+bukti algoritmik pasca-generasi (<em>Claim-Level Grounding
+Validator</em>) berhasil menekan <strong>Entity Fabrication Rate menjadi
+0,00%</strong> (0 objek wisata terfabrikasi pada seluruh skenario yang
+diuji) dibandingkan baseline LLM bebas yang mengalami fabrikasi 35,00%
+(17 POI terfabrikasi). Sistem mencapai <strong>Claim-Level Grounding
+Fidelity 100,00% (270/270 klaim)</strong> pada empat kategori
+pemeriksaan terdefinisi, <strong>Entity Grounding Fidelity 100,00%
+(120/120 sebutan POI)</strong>, dan <strong>Honest Rejection Rate
+100,00% (2/2)</strong> pada kueri luar domain. 4. <strong>Jawaban RQ4
+(Efisiensi Kognitif dan Usability):</strong> Antarmuka percakapan
+terpandu terbukti secara signifikan mengungguli antarmuka WIMP
+konvensional, <strong>memangkas waktu penyelesaian tugas kognitif (TCT)
+sebesar 82,43%</strong> (dari 37,11 detik menjadi 6,52 detik, p &lt;
+0,001, Cohen’s d = 5,19) dengan capaian skor <strong>System Usability
+Scale (SUS) sebesar 84,25 ± 6,80 (Grade A / “Excellent”)</strong>.
+Integritas logika arsitektur diverifikasi secara formal dengan kelulusan
+<strong>56 pengujian unit, integrasi, dan ketahanan adversarial otomatis
+(210 assertions, 100% PASS)</strong>, yang menggabungkan 45 pengujian
+PHPUnit standar (172 assertions) dan 11 pengujian adversarial serta
+dialek Minang (38 assertions).</p>
 <h3 id="saran-riset-masa-depan">9.2 Saran Riset Masa Depan</h3>
 <p>Untuk pengembangan penelitian selanjutnya, disarankan: 1.
 <strong>Pelacakan Status Dialog Multi-Turn Dinamis:</strong>
