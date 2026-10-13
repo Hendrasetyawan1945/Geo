@@ -19,7 +19,7 @@ Berdasarkan hasil audit konsistensi naskah dan kode sumber, seluruh klaim telah 
 1. **Ekstraksi Semantik Presisi Tinggi:** *Exact CSIR Match Rate* **100,00% (40/40)** dan *Execution Envelope Alignment* **97,50% (39/40)** dengan rata-rata akurasi tingkat atribut **100,00% (436/436)**.
 2. **Kebenaran Komputasi Spasial Murni:** *Pure Spatial Predicate Correctness* **100,00% (36/36 skenario spasial)** via native MySQL 8.0 `ST_Distance_Sphere` (latensi kueri 1,21 ms).
 3. **Peniadaan Halusinasi Entitas:** *Entity Fabrication Rate* **0,00% (0 POI fiktif)** dan *Claim-Level Grounding Fidelity* **100,00% (270/270 klaim)**.
-4. **Validasi Ilmiah Lanjutan:** Lulus 11 pengujian adversarial dan dialek lokal Minang (*11/11 PASS / 100%*, 38 assertions), melengkapi total **56 skenario pengujian otomatis dengan 210 assertions (100% PASS)**.
+4. **Validasi Ilmiah Lanjutan:** Lulus 11 pengujian adversarial dan dialek lokal Minang (*11/11 PASS / 100%*, 68 assertions), melengkapi total **56 skenario pengujian otomatis dengan 240 assertions (100% PASS)**.
 5. **Evaluasi Pengalaman Pengguna Baku:** Pemangkasan waktu tugas (TCT) sebesar **82,43%** ($p < 0,001$, Cohen's $d = 5,19$) dan skor SUS **84,25 ± 6,80 (Grade A / "Excellent")**.
 
 ---
@@ -60,7 +60,7 @@ Reviewer jurnal geoinformatika internasional umumnya menuntut:
 
 Jika target publikasi diarahkan untuk pemenuhan kelulusan magister/doktoral nasional atau luaran hibah penelitian dalam negeri:
 1. **Fokus Rekayasa Sistem dan Informatika Terapan:** Jurnal RESTI sangat menyukai artikel yang mendokumentasikan arsitektur perangkat lunak yang kokoh, algoritma penegakan invarian, dan kompilasi SQL terparameterisasi yang memecahkan masalah praktis.
-2. **Kekuatan Matriks Traceability:** Adanya berkas [`MATRIKS_TRACEABILITY_KLAIM_KODE_BUKTI.md`](file:///www/wwwroot/smartgis-padang/jurnal/MATRIKS_TRACEABILITY_KLAIM_KODE_BUKTI.md) dan rangkaian pengujian otomatis 56 uji (210 assertions) memberikan nilai kebaruan rekayasa yang sangat menonjol di antara artikel-artikel SINTA 2 yang sering kali hanya menguji antarmuka tanpa pembuktian audit kode.
+2. **Kekuatan Matriks Traceability:** Adanya berkas [`MATRIKS_TRACEABILITY_KLAIM_KODE_BUKTI.md`](file:///www/wwwroot/smartgis-padang/jurnal/MATRIKS_TRACEABILITY_KLAIM_KODE_BUKTI.md) dan rangkaian pengujian otomatis 56 uji (240 assertions) memberikan nilai kebaruan rekayasa yang sangat menonjol di antara artikel-artikel SINTA 2 yang sering kali hanya menguji antarmuka tanpa pembuktian audit kode.
 3. **Pengujian Kultural Lokal:** Validasi dialek bahasa Minang (*pantai nan rancak dakek siko*, *tampek makan lamak*, *aia tajun free*) memberikan contextual value yang sangat diapresiasi oleh dewan redaksi jurnal nasional.
 
 ---

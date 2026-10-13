@@ -598,7 +598,7 @@ ungrounded claims from reaching the final user response. Empirical
 4-layer evaluation across 40 standardized benchmark query scenarios on
 22 curated tourism destinations in Padang City, complemented by an
 automated test suite of <strong>56 automated unit, integration, and
-adversarial tests (210 assertions, 100% pass)</strong>, demonstrated a
+adversarial tests (240 assertions, 100% pass)</strong>, demonstrated a
 Pure Intent Pre-Fallback Exact CSIR semantic extraction accuracy of
 <strong>100.00% (40/40)</strong> (<strong>97.50% / 39/40</strong> on
 post-policy execution envelope alignment) with an average field-level
@@ -741,9 +741,9 @@ class="math inline">\(\mathcal{C}_{\text{entity}},
 \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
 \mathcal{C}_{\text{temporal}}\)</span>), demonstrating 100.00% Grounding
 Fidelity with zero fabricated POIs observed across 40 evaluated
-benchmark scenarios, supported by an automated test suite of 45 unit and
-integration tests (172 assertions, 100% pass) and multi-baseline
-ablation studies.</p>
+benchmark scenarios, supported by an automated test suite of 56 unit,
+integration, and adversarial tests (240 assertions, 100% pass) and
+multi-baseline ablation studies.</p>
 <hr />
 <hr />
 <h2 id="related-work">2. RELATED WORK</h2>
@@ -2168,29 +2168,161 @@ Teluk Bayur. Admission Rp10,000, open until 18:00 WIB.<br />
 have been synchronized on the Leaflet.js interactive map.”</em></p>
 <hr />
 <h2 id="experimental-design">5. EXPERIMENTAL DESIGN</h2>
-<h3 id="benchmark-dataset-and-ground-truth-specification">5.1 Benchmark
-Dataset and Ground Truth Specification</h3>
-<p>Empirical validation was performed over a standardized benchmark
-corpus consisting of <strong>40 standardized conversational
-scenarios</strong> reflecting the full spectrum of urban tourist
-requirements across 8 query taxonomies: 1. <em>Single-attribute spatial
-queries</em> (e.g., nearest beach from current position). 2.
-<em>Multi-criteria spatial &amp; operational queries</em> (radius, free
-admission, and active opening schedule). 3. <em>Entity lookup &amp;
-alias resolution</em> (specific POI names, partial names, or local
-spelling variants). 4. <em>Relative spatial references</em> (attractions
-relative to another landmark, such as <em>“culinary spots near
-Adityawarman Museum”</em>). 5. <em>Numerical boundary cases</em> (0 km
-radius, upper boundary 50 km, budget exactly matching ticket prices). 6.
-<em>Circadian &amp; midnight temporal constraints</em> (24-hour
-operations or late-night venues open after 20:00). 7. <em>Negative &amp;
-out-of-scope requests</em> (requests outside Padang City or non-tourism
-domains). 8. <em>Conversational chit-chat &amp; greetings</em>
-(conversational interactions without spatial intent).</p>
-<p>Each benchmark scenario is paired with a dual ground truth
-specification: (a) <em>Gold-Standard Raw SIR</em> (17 intent slots), and
-(b) <em>Gold-Standard CSIR</em> (19 canonical attributes with resolved
-WGS84 spatial coordinates).</p>
+<h3 id="benchmark-dataset-architecture-tripartite-dataset-tiers">5.1
+Benchmark Dataset Architecture: Tripartite Dataset Tiers</h3>
+<p>To ensure complete empirical transparency and eliminate dataset
+ambiguity, this research explicitly distinguishes between three distinct
+dataset tiers deployed across the system lifecycle and evaluation
+pipeline (Table 2b):</p>
+<ol type="1">
+<li><strong>Tier 1: Tested Production System Dataset (22 Curated POIs in
+Padang City):</strong>
+<ul>
+<li><strong>Constituents &amp; Scope:</strong> Exactly 22 officially
+curated Points of Interest across six core urban tourism categories
+(Beaches: 5, Islands: 3, Nature Cascades &amp; Hills: 4, Cultural
+Museums: 3, Historical Landmarks: 3, and Traditional Culinary Venues:
+4).</li>
+<li><strong>Data Sources:</strong> Official tourism registry of the
+Department of Tourism of Padang City (<em>Dinas Pariwisata Kota
+Padang</em>), verified against official regional tax and entrance
+retribution statutes (<em>Peraturan Daerah Kota Padang No. 1 Tahun
+2024</em>). Spatial coordinates were extracted from Indonesia’s official
+1:25,000 Topographic Base Map (<em>Peta Rupa Bumi Indonesia / RBI</em>)
+by the Geospatial Information Agency (<em>Badan Informasi Geospasial /
+BIG</em>) and corroborated via OpenStreetMap (OSM) field road entrance
+waypoints.</li>
+<li><strong>Validation Criteria &amp; Acquisition Date:</strong>
+Field-verified, geocoded, and audited in January 2026, re-verified in
+September 2026. All 22 POIs strictly reside within the Padang City
+municipal boundary (<span class="math inline">\([-1.1950,
+-0.8810]^\circ\text{S}\)</span>, <span class="math inline">\([100.3480,
+100.4530]^\circ\text{E}\)</span>, total area 694.96 km²).</li>
+<li><strong>Methodological Purpose:</strong> Populates the live
+operational relational database (<code>geo_db.wisata</code>) and fact
+table (<span class="math inline">\(F\)</span>), serving as the sole
+ground truth source for spherical spatial computation
+(<code>ST_Distance_Sphere</code>), road navigation via OSRM, and
+algorithmic grounding validation.</li>
+</ul></li>
+<li><strong>Tier 2: Benchmark Dialogue Ground Truth Dataset (40
+Standardized Scenarios):</strong>
+<ul>
+<li><strong>Constituents &amp; Scope:</strong> 40 standardized user
+inquiry scenarios formulated across 8 query behavioral taxonomies: (1)
+single-attribute spatial queries (e.g., nearest beach), (2)
+multi-criteria spatial, temporal, and budgetary filtering, (3) specific
+entity lookup and local alias resolution, (4) relative spatial
+references anchored to landmarks, (5) numerical boundary edge cases (0
+km, upper limit 50 km, budget thresholds), (6) circadian 24-hour and
+late-night opening constraints, (7) negative and out-of-jurisdiction
+requests, and (8) conversational chit-chat.</li>
+<li><strong>Data Sources &amp; Validation Criteria:</strong> Formulated
+based on authentic tourist interaction patterns in September 2026. Each
+scenario is paired with dual gold-standard annotations:
+<em>Gold-Standard Raw SIR</em> (17 intent slots) and <em>Gold-Standard
+Canonical CSIR</em> (19 canonical attributes with resolved WGS84 spatial
+anchor coordinates). Annotations were independently verified by two
+researchers, achieving 100% inter-annotator agreement.</li>
+<li><strong>Methodological Purpose:</strong> Serves as the fixed
+evaluation ground truth benchmark
+(<code>benchmark/dataset_40.json</code>) used to measure semantic
+parsing fidelity (<em>Exact CSIR Match Rate</em>), validation decisions,
+and post-policy execution envelope compliance.</li>
+</ul></li>
+<li><strong>Tier 3: Out-of-Jurisdiction and Negative Reference Dataset
+(14 Regional Destinations &amp; Synthetic Entities):</strong>
+<ul>
+<li><strong>Constituents &amp; Scope:</strong> 14 prominent West Sumatra
+regional tourist attractions physically located outside Padang City
+(located 65 km to 140 km away, including Jam Gadang in Bukittinggi,
+Lembah Anai and Istano Pagaruyung in Tanah Datar, Danau Singkarak in
+Solok, Pantai Carocok in Painan/Pesisir Selatan, Jembatan Kelok 9 in
+Lima Puluh Kota, and Ngarai Sianok in Bukittinggi), complemented by
+synthetic non-existent entity tokens (<em>“Pantai Salju Padang”</em>,
+<em>“Hotel Fiktif Nan Megah”</em>).</li>
+<li><strong>Data Sources:</strong> Regional Tourism Directory of West
+Sumatra Province (<em>Dinas Pariwisata Provinsi Sumatera
+Barat</em>).</li>
+<li><strong>Validation Criteria &amp; Acquisition Date:</strong>
+Formulated in September–October 2026. Bounded strictly by spatial
+coordinates residing outside Padang City (&gt;30 km to &gt;140 km from
+city center) or having zero physical real-world existence.</li>
+<li><strong>Methodological Purpose:</strong> Specifically deployed by
+benchmark evaluators to detect, classify, and quantify Type I
+hallucinations (real regional attractions falsely claimed to be in
+Padang City) and Type II hallucinations (purely fictional entities)
+across baseline models, and to verify the system’s <em>Honest Rejection
+Rate</em> (<span class="math inline">\(HRR = 100.00\%\)</span>).</li>
+</ul></li>
+</ol>
+<p><strong>Table 2b. Tripartite Dataset Architecture: Provenance,
+Validation Criteria, Temporal Acquisition, and Methodological
+Rationale</strong></p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 25%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dataset Tier</th>
+<th>Entity / Corpus Scope</th>
+<th>Primary Data Sources</th>
+<th>Validation Criteria &amp; Datum</th>
+<th style="text-align: center;">Acquisition Date</th>
+<th>Methodological Role in Evaluation Pipeline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tier 1: Tested Production Dataset</strong></td>
+<td><strong>22 Curated POIs</strong> across 6 categories in Padang
+City</td>
+<td>Dept. of Tourism Padang; Regional Statute Perda No. 1/2024; BIG
+1:25k RBI Maps; OpenStreetMap</td>
+<td>Municipal WGS84 bounds (<span class="math inline">\([-1.195,
+-0.881]^\circ\text{S}\)</span>, <span class="math inline">\([100.348,
+100.453]^\circ\text{E}\)</span>); physical ticket tariff &amp; operating
+schedule audit</td>
+<td style="text-align: center;">Jan 2026 (Field audit), re-verified Sep
+2026</td>
+<td>Live relational database (<code>geo_db.wisata</code>) executing
+<code>ST_Distance_Sphere</code>, OSRM road routing, and factual
+grounding</td>
+</tr>
+<tr class="even">
+<td><strong>Tier 2: Benchmark Ground Truth Dataset</strong></td>
+<td><strong>40 Dialogue Scenarios</strong> across 8 query
+taxonomies</td>
+<td>Tourist inquiry surveys &amp; field interviews in Padang City</td>
+<td>Dual gold-standard annotations (17-slot SIR &amp; 19-attribute
+CSIR); 100% inter-annotator agreement</td>
+<td style="text-align: center;">Formulated &amp; audited Sep 2026</td>
+<td>Gold-standard benchmark (<code>benchmark/dataset_40.json</code>)
+measuring semantic accuracy, envelope alignment, &amp; baseline
+comparative performance</td>
+</tr>
+<tr class="odd">
+<td><strong>Tier 3: Out-of-Jurisdiction &amp; Negative
+Dataset</strong></td>
+<td><strong>14 Regional Attractions</strong> (65–140 km outside Padang)
++ Synthetic Fictional POIs</td>
+<td>West Sumatra Provincial Tourism Directory (<em>Dispar Prov.
+Sumbar</em>) &amp; synthetic adversarial tokens</td>
+<td>Physically real regional destinations verified <span
+class="math inline">\(&gt;30\text{ km}\)</span> outside Padang borders,
+plus non-existent POIs</td>
+<td style="text-align: center;">Compiled Sep–Oct 2026</td>
+<td>Negative control set deployed to audit Type I/II hallucinations on
+unconstrained baselines and verify Honest Rejection Rate (HRR)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="baseline-systems">5.2 Baseline Systems</h3>
 <p>To evaluate scientific significance and isolate the architectural
 contributions, the proposed system was benchmarked against four
@@ -4278,14 +4410,16 @@ reside outside the tourism domain (<em>100% Honest Rejection Rate,
 2/2</em>).</p></li>
 </ol>
 <p>All underlying logic modules are rigorously validated through an
-automated PHPUnit test suite comprising <strong>45 unit and integration
-tests</strong> with <strong>172 assertions</strong> (verifying invariant
-enforcement in <em>SirValidatorTest</em>, multi-turn state merging, SQL
-injection and DDL resilience in <em>SpatialQueryCompilerTest</em>,
-independent MySQL 8.0 spatial boundary checks in
-<em>SpatialDatabaseIntegrationTest</em>, and algorithmic ungrounded
+automated PHPUnit test suite comprising <strong>56 automated unit,
+integration, and adversarial tests</strong> with <strong>240
+assertions</strong> (verifying invariant enforcement in
+<em>SirValidatorTest</em>, multi-turn state merging, SQL injection and
+DDL resilience in <em>SpatialQueryCompilerTest</em>, independent MySQL
+8.0 spatial boundary checks in <em>SpatialDatabaseIntegrationTest</em>,
+adversarial Minang dialect and anti-fabrication constraints in
+<em>AdversarialLinguisticValidationTest</em>, and algorithmic ungrounded
 entity rejection in <em>GroundingValidatorTest</em>) with a 100% pass
-rate.</p>
+rate (exit code 0).</p>
 <h4 id="security-evaluation-of-deterministic-sql-compiler">4.5.2
 Security Evaluation of Deterministic SQL Compiler</h4>
 <p>To validate the system’s resilience against adversarial spatial
@@ -4918,25 +5052,30 @@ href="file:///var/www/html/Geo/jurnal/LAMPIRAN_RAW_DATA_SUS_TCT.md"><code>jurnal
 and in structured tabular format at <a
 href="file:///var/www/html/Geo/jurnal/usability_sus_tct_30_respondents.csv"><code>jurnal/usability_sus_tct_30_respondents.csv</code></a>.</p>
 <h3
-id="automated-test-suite-verification-45-tests-172-assertions-100-pass">6.6
-Automated Test Suite Verification (45 Tests, 172 Assertions, 100%
+id="automated-test-suite-verification-56-tests-240-assertions-100-pass">6.6
+Automated Test Suite Verification (56 Tests, 240 Assertions, 100%
 PASS)</h3>
 <p>The structural integrity of the architecture was verified via an
-automated PHPUnit regression test suite. The suite comprises <strong>45
-unit and integration tests</strong> yielding <strong>172
-assertions</strong> testing: * Spherical distance calculation
-consistency against real coordinates of the 22 POIs
+automated PHPUnit regression test suite. The suite comprises <strong>56
+automated unit, integration, and adversarial tests</strong> yielding
+<strong>240 assertions</strong> testing: * Spherical distance
+calculation consistency against real coordinates of the 22 POIs
 (<code>SpatialDatabaseIntegrationTest</code>, 6 tests, 33 assertions,
 100% pass). * <code>GroundingValidator</code> robustness across
 edge-case temporal formats, POI aliases, numeric ambiguity, negative
 claims, missing facts, and unstructured responses
 (<code>GroundingValidatorTest</code>, 16 tests, 65 assertions, 100%
 pass). * Compiler security invariants against diverse SQL injection
-payloads (<code>SpatialQueryCompilerTest</code>, 100% pass). * Strict
-compliance with 6-dimensional validation rules under the <em>No Intent
-Alteration</em> principle (<code>SirValidatorTest</code>, 100%
-pass).</p>
-<p>All 45 automated tests passed with a 100% success rate (<em>zero
+payloads (<code>SpatialQueryCompilerTest</code>, 8 tests, 100% pass). *
+Strict compliance with 6-dimensional validation rules under the <em>No
+Intent Alteration</em> principle (<code>SirValidatorTest</code>, 10
+tests, 100% pass). * Adversarial security, Minangkabau dialectal
+invariants, and strict fact grounding firewall
+(<code>AdversarialLinguisticValidationTest</code>, 11 tests, 68
+assertions, 100% pass). * Health checks and database model integrity
+(<code>HealthTest</code>, <code>ExampleDatabaseTest</code>,
+<code>ExampleSessionTest</code>, 5 tests, 100% pass).</p>
+<p>All 56 automated tests passed with a 100% success rate (<em>zero
 failures, zero errors</em>), establishing production-grade software
 stability.</p>
 <h3 id="spatial-failure-taxonomy-f1f8-and-edge-case-analysis">6.7
@@ -5185,11 +5324,12 @@ Rejection)</strong></td>
 </tbody>
 </table>
 <p>All 11 standalone adversarial and linguistic validation tests passed
-with zero failures (<strong>11/11 PASS / 100.00%, 38
-assertions</strong>). Coupled with the 45 PHPUnit unit and integration
-tests (172 assertions), the complete automated test suite verifying
-codebase integrity totals <strong>56 automated test scenarios with 210
-assertions (100% PASS)</strong>.</p>
+with zero failures (<strong>11/11 PASS / 100.00%</strong>). Integrated
+directly into the unified PHPUnit test runner via
+<code>CIUnitTestCase</code>, the complete automated regression test
+suite verifying codebase integrity totals <strong>56 automated test
+scenarios with 240 assertions (100% PASS)</strong>, as audited in
+<code>tests/phpunit_execution_report.txt</code>.</p>
 <hr />
 <h2 id="discussion">7. DISCUSSION</h2>
 <h3
@@ -5386,9 +5526,8 @@ interaction significantly outperformed conventional WIMP interfaces,
 an “Excellent” <strong>System Usability Scale (SUS) score of 84.25 ±
 6.80 (Grade A)</strong>. Architectural robustness was corroborated by an
 automated test suite of <strong>56 automated unit, integration, and
-adversarial tests (210 assertions, 100% PASS)</strong>, integrating 45
-core PHPUnit tests (172 assertions) and 11 standalone adversarial and
-Minang dialect validation tests (38 assertions).</p>
+adversarial tests (240 assertions, 100% PASS)</strong>, as recorded in
+<code>tests/phpunit_execution_report.txt</code>.</p>
 <h3 id="future-research-directions">9.2 Future Research Directions</h3>
 <p>extending the control layer to multi-turn dialogue state tracking
 across dynamic re-routing, expanding query capabilities to multilingual

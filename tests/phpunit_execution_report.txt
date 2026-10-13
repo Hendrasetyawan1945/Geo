@@ -1,25 +1,28 @@
 ================================================================================
   PHPUNIT AUTOMATED UNIT TEST EXECUTION AUDIT TRAIL
 ================================================================================
-Timestamp      : 2026-10-13 14:45:00 WIB
-PHP Runtime    : PHP 8.2.33 (cli) (Zend Engine v4.2.33)
+Timestamp      : 2026-10-13 21:05:00 WIB
+PHP Runtime    : PHP 8.4.25 (cli) (Zend Engine v4.4.25)
 Framework      : CodeIgniter 4.7.4
-Configuration  : /var/www/html/Geo/phpunit.xml
-Command        : vendor/bin/phpunit
+PHPUnit Version: PHPUnit 10.5.64 by Sebastian Bergmann and contributors
+Configuration  : /www/wwwroot/smartgis-padang/phpunit.dist.xml
+Command        : php -d opcache.enable_cli=0 -d opcache.jit=0 vendor/bin/phpunit --no-coverage
 
 Test Suites Executed:
-  • Tests\Unit\SirValidatorTest (6D Semantic Invariant Constraints & Multi-Turn Merging)
-  • Tests\Unit\SpatialQueryCompilerTest (ST_Distance_Sphere & SQL Parameter Binding)
-  • Tests\Unit\SpatialDatabaseIntegrationTest (MySQL 8.0 Integration & Independent Boundary Verification)
-  • Tests\Unit\GroundingValidatorTest (Claim-Level Algorithmic Auditor, Aliases & Operating Hours)
-  • Tests\Unit\HealthTest (Database Connectivity & Geo Spatial Extensions)
-  • Tests\Database\ExampleDatabaseTest (Database Model Integration)
-  • Tests\Session\ExampleSessionTest (Session Driver Integration)
+  • Tests\Unit\SirValidatorTest (6D Semantic Invariant Constraints & Multi-Turn Merging - 10 tests)
+  • Tests\Unit\SpatialQueryCompilerTest (ST_Distance_Sphere & SQL Parameter Binding - 8 tests)
+  • Tests\Unit\SpatialDatabaseIntegrationTest (MySQL 8.0 Integration & Independent Boundary Verification - 6 tests)
+  • Tests\Unit\GroundingValidatorTest (Claim-Level Algorithmic Auditor, Aliases & Operating Hours - 16 tests)
+  • Tests\Unit\AdversarialLinguisticValidationTest (SQLi, Bounds Clamping, Minang Dialect & Anti-Fabrication - 11 tests)
+  • Tests\Unit\HealthTest (Database Connectivity & Geo Spatial Extensions - 2 tests)
+  • Tests\Database\ExampleDatabaseTest (Database Model Integration - 2 tests)
+  • Tests\Session\ExampleSessionTest (Session Driver Integration - 1 test)
 
-.............................................              45 / 45 (100%)
+..................................................... 53 / 56 ( 94%)
+...                                                   56 / 56 (100%)
 
-Time: 00:00.340, Memory: 14.00 MB
+Time: 00:00.089, Memory: 16.00 MB
 
-OK (45 tests, 172 assertions)
+OK (56 tests, 240 assertions)
 Exit Code: 0 (PASS - 100% SUCCESS)
 ================================================================================

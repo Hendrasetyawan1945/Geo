@@ -11,37 +11,9 @@ use App\Services\SpatialIntent\SirValidator;
 use App\Services\SpatialIntent\SpatialIntent;
 use App\Services\SpatialIntent\SpatialPolicyHandler;
 use App\Services\SpatialIntent\SpatialQueryCompiler;
-if (!class_exists('Tests\Unit\StandaloneTestCase')) {
-    abstract class StandaloneTestCase {
-        protected function setUp(): void {}
-        public function assertTrue(mixed $condition, string $message = ''): void {
-            if (!$condition) throw new \AssertionError($message ?: "Failed asserting that condition is true.");
-        }
-        public function assertFalse(mixed $condition, string $message = ''): void {
-            if ($condition) throw new \AssertionError($message ?: "Failed asserting that condition is false.");
-        }
-        public function assertSame(mixed $expected, mixed $actual, string $message = ''): void {
-            if ($expected !== $actual) throw new \AssertionError($message ?: "Failed asserting that " . json_encode($actual) . " is identical to " . json_encode($expected));
-        }
-        public function assertStringContainsString(string $needle, string $haystack, string $message = ''): void {
-            if (!str_contains($haystack, $needle)) throw new \AssertionError($message ?: "Failed asserting that '{$haystack}' contains '{$needle}'.");
-        }
-        public function assertStringNotContainsString(string $needle, string $haystack, string $message = ''): void {
-            if (str_contains($haystack, $needle)) throw new \AssertionError($message ?: "Failed asserting that '{$haystack}' does not contain '{$needle}'.");
-        }
-        public function assertContains(mixed $needle, array $haystack, string $message = ''): void {
-            if (!in_array($needle, $haystack, true)) throw new \AssertionError($message ?: "Failed asserting that array contains element.");
-        }
-        public function assertNotEmpty(mixed $val, string $message = ''): void {
-            if (empty($val)) throw new \AssertionError($message ?: "Failed asserting that value is not empty.");
-        }
-        public function assertEmpty(mixed $val, string $message = ''): void {
-            if (!empty($val)) throw new \AssertionError($message ?: "Failed asserting that value is empty.");
-        }
-    }
-}
+use CodeIgniter\Test\CIUnitTestCase;
 
-class AdversarialLinguisticValidationTest extends StandaloneTestCase
+class AdversarialLinguisticValidationTest extends CIUnitTestCase
 {
     protected SirValidator $sirValidator;
     protected SpatialQueryCompiler $compiler;

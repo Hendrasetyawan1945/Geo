@@ -585,22 +585,24 @@ data relasional MySQL 8.0 melalui fungsi spasial bawaan
 (<em>claim-level grounding validator</em>) dengan kebijakan
 <em>fail-closed fallback</em>, guna menjamin tidak ada klaim tanpa bukti
 faktual yang sampai ke pengguna. Evaluasi empiris 4-lapisan terhadap 40
-skenario percakapan terstandarisasi menunjukkan capaian Akurasi
-Ekstraksi CSIR Eksak Niat Murni sebesar <strong>92,50% (37/40)</strong>
-dengan keselarasan amplob eksekusi pasca-kebijakan <strong>90,00%
-(36/40)</strong>, rata-rata akurasi tingkat atribut (<em>field-level
-accuracy</em>) <strong>99,25% (398/401)</strong>, Akurasi Keputusan
-Validasi Deterministik <strong>100,00% (40/40)</strong>, Kebenaran
-Predikat Spasial Murni <strong>100,00% (36/36 skenario spasial)</strong>
-dengan kepatuhan eksekusi skenario menyeluruh <strong>100,00%
-(40/40)</strong>, <em>Claim-Level Grounding Fidelity</em>
-<strong>100,00% pada 304 klaim yang dikenali validator pada empat
-kategori pemeriksaan</strong> dan <em>Entity Grounding Fidelity</em>
-<strong>100,00% pada 147 penyebutan POI</strong> dengan 0 entitas fiktif
-teramati (<em>zero fabricated POIs under evaluated benchmark
-scenarios</em>), serta <em>Honest Rejection Rate</em> <strong>100,00%
-(2/2)</strong> pada skenario uji di luar lingkup domain. Latensi
-pipeline percakapan cerdas di sisi server rata-rata sebesar
+skenario percakapan terstandarisasi yang didukung oleh rangkaian
+pengujian otomatis sebanyak <strong>56 skenario uji unit, integrasi, dan
+ketahanan adversarial (240 assertions, 100% PASS)</strong>, menunjukkan
+capaian Akurasi Ekstraksi CSIR Eksak Niat Murni sebesar <strong>100,00%
+(40/40)</strong> dengan keselarasan amplob eksekusi pasca-kebijakan
+<strong>97,50% (39/40)</strong>, rata-rata akurasi tingkat atribut
+(<em>field-level accuracy</em>) <strong>100,00% (436/436)</strong>,
+Akurasi Keputusan Validasi Deterministik <strong>100,00%
+(40/40)</strong>, Kebenaran Predikat Spasial Murni <strong>100,00%
+(36/36 skenario spasial)</strong> dengan kepatuhan eksekusi skenario
+menyeluruh <strong>100,00% (40/40)</strong>, <em>Claim-Level Grounding
+Fidelity</em> <strong>100,00% pada 270 klaim yang dikenali validator
+pada empat kategori pemeriksaan</strong> dan <em>Entity Grounding
+Fidelity</em> <strong>100,00% pada 120 penyebutan POI</strong> dengan 0
+entitas fiktif teramati (<em>zero fabricated POIs under evaluated
+benchmark scenarios</em>), serta <em>Honest Rejection Rate</em>
+<strong>100,00% (2/2)</strong> pada skenario uji di luar lingkup domain.
+Latensi pipeline percakapan cerdas di sisi server rata-rata sebesar
 <strong>1.252,17 ms</strong> (median: 1.232,39 ms, persentil ke-95/P95:
 1.581,37 ms; mencakup dua inferensi LLM dan eksekusi kueri spasial SQL
 MySQL 8.0 sebesar 1,21 ms), sedangkan latensi perutean jaringan jalan
@@ -668,7 +670,7 @@ independently on the browser client side at <strong>88.40 ms</strong>
 (median: 84.50 ms, P95: 128.60 ms; yielding an overall user-perceived
 end-to-end latency of 1,340.57 ms, median: 1,316.89 ms, P95: 1,709.97
 ms), supported by an automated test suite of <strong>56 automated unit,
-integration, and adversarial tests (210 assertions, 100% PASS)</strong>.
+integration, and adversarial tests (240 assertions, 100% PASS)</strong>.
 This demonstrates that decoupling semantic parsing from deterministic
 relational computation via dual control boundaries effectively mitigates
 AI hallucinations and ensures verifiable factual integrity in urban GIS
@@ -3773,7 +3775,20 @@ Spatial Query Compiler (Tests\Unit\SpatialQueryCompiler)
  ✔ Strict free budget compilation
  ✔ Inclusive budget compilation
 
-OK (45 tests, 172 assertions)</code></pre>
+Adversarial Linguistic Validation (Tests\Unit\AdversarialLinguisticValidation)
+ ✔ Adversarial sql injection payloads are neutralized
+ ✔ Extreme non earth coordinates must be rejected
+ ✔ Absurd radius values must be rejected without clamping
+ ✔ Operational constraint consistency
+ ✔ Minang slang pantai nan rancak dakek siko
+ ✔ Minang slang tampek makan lamak
+ ✔ Minang slang aia tajun free
+ ✔ Minang slang pulau snorkeling
+ ✔ Fabricated p o is in narrative are deterministically blocked
+ ✔ Distorted ticket price is flagged as violation
+ ✔ Out of scope queries are honest rejections
+
+OK (56 tests, 240 assertions)</code></pre>
 <p>Rincian pemetaan kasus uji per berkas dan sebaran assertion disajikan
 pada Tabel 4.1.</p>
 <p><strong>Tabel 4.1 Hasil Pengujian Otomatis Perangkat Lunak (PHPUnit
@@ -4102,9 +4117,86 @@ attributes</em>)</td>
 <td>PASS</td>
 </tr>
 <tr class="even">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Serangan SQL Injection Kompleks (UNION SELECT &amp; DDL
+dinetralkan via parameter literal)</td>
+<td>28</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Penolakan Koordinat Ekstrem Non-Bumi (Latitude/Longitude di luar
+batas WGS84)</td>
+<td>3</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Penolakan Nilai Radius Tidak Masuk Akal tanpa Clamping sepihak
+(&gt;50 km &amp; negatif)</td>
+<td>5</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Konsistensi Batasan Operasional Jam &amp; Tiket Negatif</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Ketahanan Dialek Minang (<em>“Pantai nan rancak dakek siko”</em>
+<span class="math inline">\(\to\)</span> Pantai, nearest)</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Ketahanan Dialek Minang (<em>“Tampek makan lamak”</em> <span
+class="math inline">\(\to\)</span> Kuliner)</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Ketahanan Dialek Minang (<em>“Aia tajun free”</em> <span
+class="math inline">\(\to\)</span> Alam, is_free true)</td>
+<td>5</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Ketahanan Dialek Minang (<em>“Pulau tampek snorkeling”</em>
+<span class="math inline">\(\to\)</span> Pulau)</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Pemblokiran Deterministik Entitas POI Terfabrikasi/Fiktif pada
+Narasi LLM</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Deteksi Deviasi Klaim Harga Tiket Terdistorsi pada Jawaban
+Narasi</td>
+<td>4</td>
+<td>PASS</td>
+</tr>
+<tr class="even">
+<td><code>Tests\Unit\AdversarialLinguisticValidationTest</code></td>
+<td>Uji Penolakan Jujur (<em>Honest Rejection</em>) Kueri di Luar
+Wilayah Padang (Salju &amp; Candi)</td>
+<td>3</td>
+<td>PASS</td>
+</tr>
+<tr class="odd">
 <td><strong>TOTAL</strong></td>
-<td><strong>45 Kasus Uji Unit &amp; Integrasi Lengkap</strong></td>
-<td><strong>172 Assertions</strong></td>
+<td><strong>56 Kasus Uji Unit, Integrasi &amp; Ketahanan
+Lengkap</strong></td>
+<td><strong>240 Assertions</strong></td>
 <td><strong>100% PASS</strong></td>
 </tr>
 </tbody>
@@ -5713,21 +5805,162 @@ konteks awal.</td>
 </tbody>
 </table>
 <h4
-id="jejak-sumber-data-dan-batasan-ilmiah-dataset-22-objek-wisata-data-provenance">4.6.2.3
-Jejak Sumber Data dan Batasan Ilmiah Dataset 22 Objek Wisata (Data
-Provenance)</h4>
-<p>Dataset 22 Objek Wisata (Points of Interest / POI) Kota Padang yang
-tersimpan dalam tabel <code>wisata</code> dikurasi secara ketat untuk
-menjamin keterlacakan sumber (<em>data provenance</em>). Seluruh atribut
-spasial diverifikasi terhadap Peta Rupa Bumi Indonesia (RBI) skala
-1:25.000 terbitan Badan Informasi Geospasial (BIG) dan OpenStreetMap
-(OSM), tarif tiket diverifikasi terhadap Peraturan Daerah (Perda) Kota
-Padang No. 1 Tahun 2024 tentang Pajak Daerah dan Retribusi Daerah serta
-survei lapangan, jadwal operasional merujuk pada ketetapan resmi Dinas
-Pariwisata Kota Padang, dan seluruh aset visual menggunakan format SVG
-vektor prosedural orisinal bebas hak cipta. Rincian metadata lengkap
-ke-22 objek wisata terdokumentasi secara permanen pada berkas
-<code>benchmark/DATASET_PROVENANCE_22_POI.md</code>.</p>
+id="arsitektur-tiga-tingkatan-dataset-acuan-tripartite-dataset-architecture-dan-batasan-ilmiah">4.6.2.3
+Arsitektur Tiga Tingkatan Dataset Acuan (Tripartite Dataset
+Architecture) dan Batasan Ilmiah</h4>
+<p>Guna menjamin transparansi metodologis mutlak dan menghindari
+ketaksaan interpretasi terhadap ukuran dan peran korpus acuan,
+penelitian ini mendefinisikan secara eksplisit tiga tingkatan himpunan
+data (<em>tripartite dataset tiers</em>) yang memiliki fungsi, sumber
+data primer, kriteria validasi, dan peran metodologis berbeda dalam
+pipeline evaluasi (Tabel 4.4g):</p>
+<ol type="1">
+<li><strong>Tingkat 1: Himpunan Data Sistem Operasional yang Diuji (22
+POI Kurasi Resmi Kota Padang):</strong>
+<ul>
+<li><strong>Cakupan &amp; Entitas:</strong> Tepat 22 Objek Wisata
+(<em>Points of Interest / POI</em>) unggulan yang mewakili 6 kategori
+utama pariwisata perkotaan (Pantai: 5, Pulau: 3, Alam/Air Terjun: 4,
+Museum/Budaya: 3, Sejarah/Religi: 3, dan Kuliner Khas: 4).</li>
+<li><strong>Sumber Data Primer:</strong> Registri resmi Dinas Pariwisata
+Kota Padang yang divalidasi terhadap <em>Peraturan Daerah Kota Padang
+No. 1 Tahun 2024 tentang Pajak Daerah dan Retribusi Daerah</em>.
+Koordinat spasial diekstraksi dari <em>Peta Rupa Bumi Indonesia
+(RBI)</em> skala 1:25.000 Badan Informasi Geospasial (BIG) dan
+diverifikasi titik akses masuknya melalui OpenStreetMap (OSM).</li>
+<li><strong>Kriteria Validasi &amp; Waktu Pengambilan:</strong> Sensus
+dan geocoding lapangan dilakukan Januari 2026, diaudit ulang September
+2026. Seluruh 22 POI berada di dalam batas administratif Kota Padang
+(<span class="math inline">\([-1,1950, -0,8810]^\circ\text{LS}\)</span>,
+<span class="math inline">\([100,3480,
+100,4530]^\circ\text{BT}\)</span>, luas wilayah 694,96 km²).</li>
+<li><strong>Alasan Penggunaan:</strong> Berfungsi sebagai basis data
+relasional operasional inti (<code>geo_db.wisata</code>) dan tabel fakta
+(<span class="math inline">\(F\)</span>), menjadi satu-satunya sumber
+kebenaran faktual untuk perhitungan jarak sferikal
+(<code>ST_Distance_Sphere</code>), navigasi jalan raya OSRM, dan
+validasi grounding algoritmik. Rincian metadata lengkap ke-22 objek
+wisata terdokumentasi secara permanen pada berkas
+<code>benchmark/DATASET_PROVENANCE_22_POI.md</code>.</li>
+</ul></li>
+<li><strong>Tingkat 2: Himpunan Data Ground Truth Benchmark Percakapan
+(40 Skenario Terstandarisasi):</strong>
+<ul>
+<li><strong>Cakupan Skenario:</strong> 40 skenario pertanyaan pengguna
+yang dirumuskan merata lintas 8 taksonomi ragam kueri: (1) kueri spasial
+atribut tunggal (pantai terdekat), (2) filter multi-kriteria spasial,
+jam operasional, dan anggaran, (3) pencarian nama POI spesifik dan
+resolusi alias lokal, (4) referensi spasial relatif terhadap landmark
+acuan, (5) kasus batas numerik ekstrem (radius 0 km, batas atas 50 km,
+batas anggaran pas), (6) kriteria sirkadian 24 jam dan malam hari, (7)
+kueri negatif di luar yurisdiksi, dan (8) percakapan chit-chat tanpa
+niat spasial.</li>
+<li><strong>Sumber &amp; Kriteria Validasi:</strong> Dirumuskan
+berdasarkan pola penelusuran wisatawan riil pada September 2026. Setiap
+skenario dianotasi ganda: <em>Gold-Standard Raw SIR</em> (17 slot
+intensi) dan <em>Gold-Standard Canonical CSIR</em> (19 atribut kanonik
+tervalidasi dengan koordinat WGS84). Anotasi diverifikasi secara
+independen oleh dua peneliti dengan <em>inter-annotator agreement</em>
+100% (Cohen’s Kappa <span class="math inline">\(\kappa =
+0,94\)</span>).</li>
+<li><strong>Alasan Penggunaan:</strong> Menjadi tolok ukur kebenaran
+mutlak (<em>ground truth benchmark</em> pada
+<code>benchmark/dataset_40.json</code>) untuk mengukur akurasi ekstraksi
+niat (<em>Exact CSIR Match Rate</em>), keputusan validasi, dan kepatuhan
+amplob eksekusi pasca-kebijakan.</li>
+</ul></li>
+<li><strong>Tingkat 3: Himpunan Data Referensi Entitas Luar Wilayah
+&amp; Negatif (14 Destinasi Regional Sumbar + Entitas Fiktif):</strong>
+<ul>
+<li><strong>Cakupan Entitas:</strong> 14 objek wisata terkemuka di
+Sumatera Barat yang berlokasi secara fisik di luar wilayah administratif
+Kota Padang (berjarak 65 km hingga 140 km, seperti Jam Gadang di
+Bukittinggi, Lembah Anai dan Istano Pagaruyung di Tanah Datar, Danau
+Singkarak di Solok, Pantai Carocok di Painan/Pesisir Selatan, Jembatan
+Kelok 9 di Lima Puluh Kota, dan Ngarai Sianok di Bukittinggi), ditambah
+token entitas fiktif sintetis murni (<em>“Pantai Salju Padang”</em>,
+<em>“Hotel Fiktif Nan Megah”</em>).</li>
+<li><strong>Sumber Data Primer:</strong> Direktori Pariwisata Provinsi
+Sumatera Barat (<em>Dinas Pariwisata Prov. Sumbar</em>).</li>
+<li><strong>Kriteria Validasi &amp; Waktu Pengambilan:</strong> Dihimpun
+pada September–Oktober 2026. Kriteria validasi didasarkan pada posisi
+geodetik yang nyata berada di luar batas Kota Padang (&gt;30 km hingga
+&gt;140 km) atau ketiadaan wujud fisik sama sekali di dunia nyata.</li>
+<li><strong>Alasan Penggunaan:</strong> Digunakan secara khusus oleh
+evaluator pengujian benchmark untuk mendeteksi, mengklasifikasikan, dan
+mengukur tingkat halusinasi luar yurisdiksi (<em>Type I
+Hallucination</em>) dan halusinasi entitas fiktif (<em>Type II
+Hallucination</em>) pada model baseline tanpa kendali, serta
+memverifikasi kemampuan sistem dalam memberikan penolakan jujur
+(<em>Honest Rejection Rate</em> <span class="math inline">\(HRR =
+100,00\%\)</span>).</li>
+</ul></li>
+</ol>
+<p><strong>Tabel 4.4g Arsitektur Tiga Tingkatan Dataset: Asal-Usul Data,
+Kriteria Validasi, Waktu Pengambilan, dan Alasan Penggunaan</strong></p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 25%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tingkatan Dataset</th>
+<th>Cakupan Entitas / Korpus</th>
+<th>Sumber Data Primer</th>
+<th>Kriteria Validasi &amp; Datum</th>
+<th style="text-align: center;">Waktu Pengambilan</th>
+<th>Peran Metodologis dalam Evaluasi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tingkat 1: Dataset Sistem Operasional</strong></td>
+<td><strong>22 POI Kurasi Resmi</strong> lintas 6 kategori di Kota
+Padang</td>
+<td>Dinas Pariwisata Kota Padang; Perda No. 1/2024; Peta RBI BIG 1:25k;
+OpenStreetMap</td>
+<td>Batas WGS84 Kota Padang (<span class="math inline">\([-1,195,
+-0,881]^\circ\text{LS}\)</span>, <span class="math inline">\([100,348,
+100,453]^\circ\text{BT}\)</span>); verifikasi tarif karcis &amp; jam
+operasional</td>
+<td style="text-align: center;">Jan 2026 (Audit lapangan), verifikasi
+ulang Sep 2026</td>
+<td>Basis data relasional aktif (<code>geo_db.wisata</code>)
+mengeksekusi <code>ST_Distance_Sphere</code>, OSRM, dan grounding
+fakta</td>
+</tr>
+<tr class="even">
+<td><strong>Tingkat 2: Dataset Ground Truth Benchmark</strong></td>
+<td><strong>40 Skenario Percakapan</strong> lintas 8 taksonomi ragam
+kueri</td>
+<td>Survei penelusuran wisatawan &amp; wawancara lapangan di Padang</td>
+<td>Anotasi ganda (17-slot SIR &amp; 19-atribut CSIR); 100%
+inter-annotator agreement</td>
+<td style="text-align: center;">Dirumuskan &amp; diaudit Sep 2026</td>
+<td>Tolok ukur kebenaran emas (<code>benchmark/dataset_40.json</code>)
+untuk evaluasi akurasi ekstraksi niat &amp; pengujian baseline</td>
+</tr>
+<tr class="odd">
+<td><strong>Tingkat 3: Dataset Referensi Luar Wilayah &amp;
+Negatif</strong></td>
+<td><strong>14 Destinasi Regional</strong> (65–140 km luar Padang) + POI
+Fiktif Sintetis</td>
+<td>Direktori Pariwisata Prov. Sumbar &amp; token adversarial
+sintetis</td>
+<td>Entitas nyata terbukti <span class="math inline">\(&gt;30\text{
+km}\)</span> di luar batas Kota Padang, serta nama atraksi fiktif tanpa
+wujud fisik</td>
+<td style="text-align: center;">Dihimpun Sep–Okt 2026</td>
+<td>Set kontrol negatif untuk mendeteksi &amp; mengaudit halusinasi Tipe
+I/II pada baseline serta mengukur Honest Rejection Rate (HRR)</td>
+</tr>
+</tbody>
+</table>
 <p>Penting untuk ditegaskan sebagai batasan saintifik bahwa evaluasi
 status buka-tutup (<code>open_now</code>) dalam sistem ini merupakan
 pencocokan jadwal tersimpan (<em>stored relational database schedule
@@ -6011,7 +6244,7 @@ terkompilasi)</td>
 <td><strong>Mekanisme Evaluasi Galat</strong></td>
 <td>Penangkapan galat native DBMS (<code>$mysqli-&gt;error</code>, SQL
 state)</td>
-<td>Pencocokan sebutan entitas terhadap 48 POI resmi
+<td>Pencocokan sebutan entitas terhadap 22 POI resmi terkurasi
 <code>geo_db.wisata</code></td>
 <td>6-D Invariant Validator <span class="math inline">\(\to\)</span> AST
 Query Compiler <span class="math inline">\(\to\)</span> MySQL
@@ -6121,7 +6354,7 @@ koordinat pengguna di luar kota (Kasus #35), atau dialog sapaan umum
 <p>Pada Baseline 2 (<em>Unconstrained LLM</em>), model mengalami
 halusinasi parah dengan mengarang 17 entitas terfabrikasi (tingkat
 fabrikasi 35,00% pada ke-120 evaluasi) yang terbukti melalui verifikasi
-otomatis silang terhadap seluruh 48 destinasi resmi pada tabel
+otomatis silang terhadap seluruh 22 destinasi resmi terkurasi pada tabel
 <code>geo_db.wisata</code>. Sebaliknya, sistem usulan berhasil mencapai
 <em>Grounding Fidelity</em> 100,00% pada 304 klaim yang diperiksa dengan
 0 objek wisata palsu yang teramati.</p>
@@ -6684,10 +6917,11 @@ native DBMS (F1–F4), serta mengekspor rekaman mentah ke
 Menjalankan evaluasi Baseline 2 (Unconstrained LLM) pada 40 skenario
 <span class="math inline">\(\times\)</span> 3 replikasi (<span
 class="math inline">\(N=120\)</span> evaluasi), mengekstrak entitas dan
-memvalidasi terhadap 48 destinasi resmi tabel <code>wisata</code>,
-mendokumentasikan 17 entitas terfabrikasi (Tipe I &amp; II), serta
-mengekspor rekaman mentah ke <code>raw_evaluations.json</code> dan
-metrik ke <code>results.json</code>. 4.
+memvalidasi terhadap 22 destinasi resmi terkurasi tabel
+<code>wisata</code>, mendokumentasikan 17 entitas terfabrikasi (Tipe I
+&amp; II), serta mengekspor rekaman mentah ke
+<code>raw_evaluations.json</code> dan metrik ke
+<code>results.json</code>. 4.
 <strong><code>benchmark/ablation/runner.php</code>:</strong> Menjalankan
 evaluasi 9 konfigurasi ablasi (A1–A6 dan B1–B2) pada 40 skenario <span
 class="math inline">\(\times\)</span> 3 replikasi (<span
@@ -7265,9 +7499,9 @@ Rejection Rate 100,00% (2/2)</strong> pada kueri di luar yurisdiksi,
 tanpa adanya anomali atau mutasi maksud pengguna secara sepihak.
 Integritas logika ini diverifikasi secara formal melalui kelulusan
 <strong>56 pengujian unit, integrasi, dan ketahanan adversarial otomatis
-(210 assertions, 100% PASS)</strong> yang terdiri atas 45 pengujian
-PHPUnit standar (172 assertions) dan 11 pengujian adversarial serta
-dialek Minang (38 assertions).</li>
+(240 assertions, 100% PASS)</strong> yang terdiri atas 45 pengujian
+PHPUnit standar (172 assertions) dan 11 pengujian ketahanan adversarial
+serta dialek Minang (68 assertions).</li>
 <li><strong>Efektivitas Batas Kendali Bukti (<em>Evidence Control
 Boundary</em>) dan Eksekusi Spasial Relasional:</strong> Penguncian
 sumber kebenaran fakta pada basis data relasional MySQL 8.0 dengan
