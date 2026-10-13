@@ -135,7 +135,7 @@ SEMANTIC RULES:
 SPATIAL & PRESERVATION RULES:
 12. Preserve spatial constraints exactly as expressed by the user.
 13. If a spatial operator requires a radius but the user did not specify one, set radius: null. NEVER infer, guess, or default a radius value.
-14. Do not convert or silently modify a user's spatial constraint (e.g., do not clamp or modify negative numbers).
+14. Do not convert or silently modify a user's spatial constraint (e.g., do not clamp or modify negative numbers). If distance is stated in meters (e.g., "3000 meter"), normalize the value to kilometers (e.g., 3.0) with distance_unit: "km".
 
 PRICE & BUDGET RULES:
 15. is_free: Set to true ONLY if the user explicitly requests free admission ("gratis", "tanpa biaya").
@@ -278,6 +278,7 @@ TEXT;
             'keyword'          => null,
             'spatial_operator' => 'none',
             'reference_type'   => 'unknown',
+            'reference_entity' => null,
             'radius'           => null,
             'distance_unit'    => 'km',
             'admin_area'       => null,
@@ -305,7 +306,7 @@ TEXT;
         // 2. Deteksi Kategori (Precedence: Pulau, Alam, Museum, Sejarah, Kuliner, Pantai)
         if (preg_match('/pulau|snorkeling|diving/i', $lower)) {
             $data['category'] = 'Pulau';
-        } elseif (preg_match('/air terjun|bukit|hutan|tahura|alam|tracking|lubuk/i', $lower)) {
+        } elseif (preg_match('/air terjun|bukit|hutan|tahura|\balam\b|tracking|lubuk/i', $lower)) {
             $data['category'] = 'Alam';
         } elseif (preg_match('/museum|adityawarman|rumah gadang|artefak|kolonial/i', $lower)) {
             $data['category'] = 'Museum';
@@ -317,13 +318,27 @@ TEXT;
             $data['category'] = 'Pantai';
         }
 
-        // 3. Deteksi Operator Spasial & Radius
-        if (preg_match('/radius\s*(\d+(\.\d+)?)\s*km/i', $lower, $m)) {
+        // 3. Deteksi Titik Acuan Spasial (reference_type & reference_entity)
+        if (preg_match('/dari\s+(pantai air manis|pantai padang|pantai nirwana|pantai carolina|pantai pasir jambak|pulau sikuai|bukit nobita|taman hutan raya bung hatta|museum adityawarman|jembatan siti nurbaya)/i', $lower, $mRef)) {
+            $data['reference_type'] = 'poi';
+            $data['reference_entity'] = ucwords(trim($mRef[1]));
+        } elseif (str_contains($lower, 'pusat kota') || str_contains($lower, 'balai kota')) {
+            $data['reference_type'] = 'city_center';
+        } elseif (preg_match('/dari lokasi saya|dari saya|dekat saya|dari sini|posisi saya/i', $lower)) {
+            $data['reference_type'] = 'gps';
+        }
+
+        // 4. Deteksi Operator Spasial & Radius (km, meter, negatif, nol, boundary, missing)
+        if (preg_match('/(?:radius|dalam)\s*(-?\d+(?:\.\d+)?)\s*(?:km|kilometer)/i', $lower, $m)) {
             $data['spatial_operator'] = 'within_radius';
             $data['radius'] = (float) $m[1];
-        } elseif (preg_match('/dalam\s*(\d+(\.\d+)?)\s*km/i', $lower, $m)) {
+        } elseif (preg_match('/(?:radius|dalam)\s*(\d+(?:\.\d+)?)\s*(?:meter|m)\b/i', $lower, $m)) {
             $data['spatial_operator'] = 'within_radius';
-            $data['radius'] = (float) $m[1];
+            $data['radius'] = (float) $m[1] / 1000.0; // Normalisasi meter ke kilometer
+        } elseif (preg_match('/(?:dalam\s+radius|radius\s+pencarian|radius\s+dari)/i', $lower)) {
+            // Operator within_radius tetapi angka radius tidak diberikan (Missing parameter invariant)
+            $data['spatial_operator'] = 'within_radius';
+            $data['radius'] = null;
         } elseif (preg_match('/terdekat|paling dekat|dekat/i', $lower)) {
             $data['spatial_operator'] = 'nearest';
             $data['sort'] = 'terdekat';
@@ -371,31 +386,34 @@ TEXT;
         }
 
         // 9. Deteksi Target POI & Resolusi Landmark Informal / Multi-turn
-        if (str_contains($lower, 'malin kundang')) {
-            $data['target_name'] = 'Pantai Air Manis';
-            $data['category'] = 'Pantai';
-            $data['intent'] = 'entity_lookup';
-        } elseif (str_contains($lower, 'hutan bung hatta') || str_contains($lower, 'taman hutan bung hatta')) {
-            $data['target_name'] = 'Taman Hutan Raya Bung Hatta';
-            $data['category'] = 'Alam';
-            $data['intent'] = 'entity_lookup';
-        } elseif (preg_match('/yang pertama|tiket pertama|rekomendasi pertama/i', $lower)) {
-            $data['target_name'] = 'Museum Adityawarman';
-            $data['category'] = 'Museum';
-            $data['intent'] = 'entity_lookup';
-        } else {
-            $knownPois = [
-                'Pantai Air Manis', 'Pantai Padang', 'Pantai Nirwana', 'Pantai Carolina', 'Pantai Pasir Jambak',
-                'Pulau Sikuai', 'Pulau Setan Lokang', 'Pulau Pisang Gantung', 'Lubuk Hitam', 'Bukit Nobita',
-                'Bukit Lampu', 'Taman Hutan Raya Bung Hatta', 'Museum Adityawarman', 'Museum Situs Rumah Bersejarah',
-                'Rumah Gadang Pallindo', 'Jembatan Siti Nurbaya', 'Masjid Raya Ganting', 'Tugu Adipura',
-                'Rumah Makan Sederhana', 'Warung Soto Padang', 'Pondok Mie Kocok Bandung', 'Pasar Raya Padang'
-            ];
-            foreach ($knownPois as $poi) {
-                if (str_contains($lower, strtolower($poi))) {
-                    $data['target_name'] = $poi;
-                    $data['intent'] = 'entity_lookup';
-                    break;
+        // Jika POI hanya disebut sebagai titik acuan (reference_entity), jangan jadikan target_name
+        if ($data['reference_entity'] === null) {
+            if (str_contains($lower, 'malin kundang')) {
+                $data['target_name'] = 'Pantai Air Manis';
+                $data['category'] = 'Pantai';
+                $data['intent'] = 'entity_lookup';
+            } elseif (str_contains($lower, 'hutan bung hatta') || str_contains($lower, 'taman hutan bung hatta')) {
+                $data['target_name'] = 'Taman Hutan Raya Bung Hatta';
+                $data['category'] = 'Alam';
+                $data['intent'] = 'entity_lookup';
+            } elseif (preg_match('/yang pertama|tiket pertama|rekomendasi pertama/i', $lower)) {
+                $data['target_name'] = 'Museum Adityawarman';
+                $data['category'] = 'Museum';
+                $data['intent'] = 'entity_lookup';
+            } else {
+                $knownPois = [
+                    'Pantai Air Manis', 'Pantai Padang', 'Pantai Nirwana', 'Pantai Carolina', 'Pantai Pasir Jambak',
+                    'Pulau Sikuai', 'Pulau Setan Lokang', 'Pulau Pisang Gantung', 'Lubuk Hitam', 'Bukit Nobita',
+                    'Bukit Lampu', 'Taman Hutan Raya Bung Hatta', 'Museum Adityawarman', 'Museum Situs Rumah Bersejarah',
+                    'Rumah Gadang Pallindo', 'Jembatan Siti Nurbaya', 'Masjid Raya Ganting', 'Tugu Adipura',
+                    'Rumah Makan Sederhana', 'Warung Soto Padang', 'Pondok Mie Kocok Bandung', 'Pasar Raya Padang'
+                ];
+                foreach ($knownPois as $poi) {
+                    if (str_contains($lower, strtolower($poi))) {
+                        $data['target_name'] = $poi;
+                        $data['intent'] = 'entity_lookup';
+                        break;
+                    }
                 }
             }
         }

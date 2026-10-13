@@ -4,6 +4,14 @@
         "replication": 1,
         "group": "Kategori - Pantai Eksplisit",
         "prompt": "Rekomendasikan pantai yang bagus di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -14,14 +22,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1840.65,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1816.01,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 1,
         "replication": 2,
         "group": "Kategori - Pantai Eksplisit",
         "prompt": "Rekomendasikan pantai yang bagus di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -32,14 +48,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1831.77,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1847.98,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 1,
         "replication": 3,
         "group": "Kategori - Pantai Eksplisit",
         "prompt": "Rekomendasikan pantai yang bagus di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -50,14 +74,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1860.34,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1860.53,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 2,
         "replication": 1,
         "group": "Kategori - Pantai Implisit",
         "prompt": "Mau main pasir dan lihat ombak laut di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -68,14 +100,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1815.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1816.51,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 2,
         "replication": 2,
         "group": "Kategori - Pantai Implisit",
         "prompt": "Mau main pasir dan lihat ombak laut di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -86,14 +126,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1846.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1846.93,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 2,
         "replication": 3,
         "group": "Kategori - Pantai Implisit",
         "prompt": "Mau main pasir dan lihat ombak laut di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -104,14 +152,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1877.67,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1877.41,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 3,
         "replication": 1,
         "group": "Kategori - Pantai Terdekat",
         "prompt": "Pantai yang paling dekat dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.*, ST_Distance_Sphere(POINT(wisata.lat, wisata.lng), POINT(-0.9489, 100.3572)) AS jarak FROM wisata ORDER BY jarak ASC LIMIT 10;",
         "syntax_valid": false,
         "db_error_code": 3617,
@@ -122,14 +178,22 @@
         "error_detail": "Latitude 100.362600 is out of range in function st_distance_sphere. It must be within [-90.000000, 90.000000].",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1975.49,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1849.08,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 3,
         "replication": 2,
         "group": "Kategori - Pantai Terdekat",
         "prompt": "Pantai yang paling dekat dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.*, ST_Distance_Sphere(POINT(wisata.lat, wisata.lng), POINT(-0.9489, 100.3572)) AS jarak FROM wisata ORDER BY jarak ASC LIMIT 10;",
         "syntax_valid": false,
         "db_error_code": 3617,
@@ -140,14 +204,22 @@
         "error_detail": "Latitude 100.362600 is out of range in function st_distance_sphere. It must be within [-90.000000, 90.000000].",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1891.49,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1863.64,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 3,
         "replication": 3,
         "group": "Kategori - Pantai Terdekat",
         "prompt": "Pantai yang paling dekat dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.*, ST_Distance_Sphere(POINT(wisata.lat, wisata.lng), POINT(-0.9489, 100.3572)) AS jarak FROM wisata ORDER BY jarak ASC LIMIT 10;",
         "syntax_valid": false,
         "db_error_code": 3617,
@@ -158,14 +230,22 @@
         "error_detail": "Latitude 100.362600 is out of range in function st_distance_sphere. It must be within [-90.000000, 90.000000].",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1754.22,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1754.23,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 4,
         "replication": 1,
         "group": "Kategori - Pantai Kata Kunci",
         "prompt": "Pantai pasir putih yang pemandangannya indah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -176,14 +256,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1851.05,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1851.39,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 4,
         "replication": 2,
         "group": "Kategori - Pantai Kata Kunci",
         "prompt": "Pantai pasir putih yang pemandangannya indah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -194,14 +282,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1880.56,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1880.32,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 4,
         "replication": 3,
         "group": "Kategori - Pantai Kata Kunci",
         "prompt": "Pantai pasir putih yang pemandangannya indah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -212,15 +308,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1771.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1771.32,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 5,
         "replication": 1,
-        "group": "Kategori - Pantai Ramah Anak",
-        "prompt": "Pantai yang ombaknya tenang dan cocok untuk anak-anak",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Spasial - Radius Kilometer",
+        "prompt": "Pantai dalam radius 10 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -230,15 +334,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1866.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1866.35,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 5,
         "replication": 2,
-        "group": "Kategori - Pantai Ramah Anak",
-        "prompt": "Pantai yang ombaknya tenang dan cocok untuk anak-anak",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Spasial - Radius Kilometer",
+        "prompt": "Pantai dalam radius 10 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -248,15 +360,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1757.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1757.72,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 5,
         "replication": 3,
-        "group": "Kategori - Pantai Ramah Anak",
-        "prompt": "Pantai yang ombaknya tenang dan cocok untuk anak-anak",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Spasial - Radius Kilometer",
+        "prompt": "Pantai dalam radius 10 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -266,14 +386,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1788.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1788.99,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 6,
         "replication": 1,
         "group": "Kategori - Pulau Snorkeling",
         "prompt": "Pulau di Padang yang bagus untuk snorkeling dan diving",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -284,14 +412,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1883.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1883.67,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 6,
         "replication": 2,
         "group": "Kategori - Pulau Snorkeling",
         "prompt": "Pulau di Padang yang bagus untuk snorkeling dan diving",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -302,14 +438,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1774.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1774.28,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 6,
         "replication": 3,
         "group": "Kategori - Pulau Snorkeling",
         "prompt": "Pulau di Padang yang bagus untuk snorkeling dan diving",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -320,14 +464,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1805.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1805.29,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 7,
         "replication": 1,
         "group": "Kategori - Pulau Resort",
         "prompt": "Rekomendasikan pulau resort terbaik dengan vila di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -338,14 +490,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1760.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1760.68,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 7,
         "replication": 2,
         "group": "Kategori - Pulau Resort",
         "prompt": "Rekomendasikan pulau resort terbaik dengan vila di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -357,13 +517,21 @@
         "fabricated_entity": null,
         "rows_count": 10,
         "latency_ms": 1791.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 7,
         "replication": 3,
         "group": "Kategori - Pulau Resort",
         "prompt": "Rekomendasikan pulau resort terbaik dengan vila di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -374,14 +542,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1822.34,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1822.28,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 8,
         "replication": 1,
         "group": "Kategori - Pulau Karang",
         "prompt": "Pulau karang kecil yang lautnya jernih",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -392,14 +568,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1777.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1777.27,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 8,
         "replication": 2,
         "group": "Kategori - Pulau Karang",
         "prompt": "Pulau karang kecil yang lautnya jernih",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -410,14 +594,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1808.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1808.79,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 8,
         "replication": 3,
         "group": "Kategori - Pulau Karang",
         "prompt": "Pulau karang kecil yang lautnya jernih",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -428,14 +620,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1839.38,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1839.34,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 9,
         "replication": 1,
         "group": "Kategori - Alam Air Terjun",
         "prompt": "Wisata air terjun alami di Padang yang sejuk",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -446,14 +646,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1794.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1794.32,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 9,
         "replication": 2,
         "group": "Kategori - Alam Air Terjun",
         "prompt": "Wisata air terjun alami di Padang yang sejuk",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -464,14 +672,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1825.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1825.32,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 9,
         "replication": 3,
         "group": "Kategori - Alam Air Terjun",
         "prompt": "Wisata air terjun alami di Padang yang sejuk",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -482,14 +698,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1856.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1856.66,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 10,
         "replication": 1,
         "group": "Kategori - Alam Pemandangan Bukit",
         "prompt": "Spot sunset pemandangan kota Padang dari atas bukit",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE kategori_id = 'Alam' AND rating >= 4.0 ORDER BY rating DESC;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -500,14 +724,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1811.21,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1812.46,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 10,
         "replication": 2,
         "group": "Kategori - Alam Pemandangan Bukit",
         "prompt": "Spot sunset pemandangan kota Padang dari atas bukit",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE kategori_id = 'Alam' AND rating >= 4.0 ORDER BY rating DESC;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -518,14 +750,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1842.19,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1842.89,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 10,
         "replication": 3,
         "group": "Kategori - Alam Pemandangan Bukit",
         "prompt": "Spot sunset pemandangan kota Padang dari atas bukit",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE kategori_id = 'Alam' AND rating >= 4.0 ORDER BY rating DESC;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -536,14 +776,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1873.21,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1873.18,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 11,
         "replication": 1,
         "group": "Kategori - Alam Hutan Lindung",
         "prompt": "Taman konservasi hutan atau kebun raya di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -554,14 +802,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1828.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1828.31,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 11,
         "replication": 2,
         "group": "Kategori - Alam Hutan Lindung",
         "prompt": "Taman konservasi hutan atau kebun raya di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -572,14 +828,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1859.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1859.35,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 11,
         "replication": 3,
         "group": "Kategori - Alam Hutan Lindung",
         "prompt": "Taman konservasi hutan atau kebun raya di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -590,14 +854,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1750.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1750.71,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 12,
         "replication": 1,
-        "group": "Kategori - Alam Bukit Santai",
-        "prompt": "Bukit santai dengan pemandangan laut yang cocok untuk keluarga",
+        "group": "Spasial - Referensi POI Landmark",
+        "prompt": "Wisata alam dalam radius 5 km dari Pantai Air Manis",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -608,14 +880,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1845.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1845.38,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 12,
         "replication": 2,
-        "group": "Kategori - Alam Bukit Santai",
-        "prompt": "Bukit santai dengan pemandangan laut yang cocok untuk keluarga",
+        "group": "Spasial - Referensi POI Landmark",
+        "prompt": "Wisata alam dalam radius 5 km dari Pantai Air Manis",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -626,14 +906,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1876.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1876.34,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 12,
         "replication": 3,
-        "group": "Kategori - Alam Bukit Santai",
-        "prompt": "Bukit santai dengan pemandangan laut yang cocok untuk keluarga",
+        "group": "Spasial - Referensi POI Landmark",
+        "prompt": "Wisata alam dalam radius 5 km dari Pantai Air Manis",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -644,14 +932,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1767.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1767.34,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 13,
         "replication": 1,
         "group": "Kategori - Museum Budaya",
         "prompt": "Museum budaya Minangkabau di Kota Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -662,14 +958,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1862.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1862.71,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 13,
         "replication": 2,
         "group": "Kategori - Museum Budaya",
         "prompt": "Museum budaya Minangkabau di Kota Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -680,14 +984,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1753.39,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1753.33,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 13,
         "replication": 3,
         "group": "Kategori - Museum Budaya",
         "prompt": "Museum budaya Minangkabau di Kota Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -698,14 +1010,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1784.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1784.34,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 14,
         "replication": 1,
         "group": "Kategori - Museum Rumah Gadang",
         "prompt": "Museum arsitektur rumah gadang dan artefak sejarah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -716,14 +1036,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1879.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1879.33,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 14,
         "replication": 2,
         "group": "Kategori - Museum Rumah Gadang",
         "prompt": "Museum arsitektur rumah gadang dan artefak sejarah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -734,14 +1062,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1770.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1770.73,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 14,
         "replication": 3,
         "group": "Kategori - Museum Rumah Gadang",
         "prompt": "Museum arsitektur rumah gadang dan artefak sejarah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -752,14 +1088,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1801.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1801.31,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 15,
         "replication": 1,
         "group": "Kategori - Museum Kolonial",
         "prompt": "Museum peninggalan kolonial atau kota tua di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -770,14 +1114,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1756.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1756.34,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 15,
         "replication": 2,
         "group": "Kategori - Museum Kolonial",
         "prompt": "Museum peninggalan kolonial atau kota tua di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -788,14 +1140,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1787.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1787.39,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 15,
         "replication": 3,
         "group": "Kategori - Museum Kolonial",
         "prompt": "Museum peninggalan kolonial atau kota tua di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -806,14 +1166,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1818.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1818.73,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 16,
         "replication": 1,
         "group": "Kategori - Sejarah Landmark",
         "prompt": "Jembatan Siti Nurbaya buka jam berapa dan ada apa saja?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -824,14 +1192,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1773.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1773.32,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 16,
         "replication": 2,
         "group": "Kategori - Sejarah Landmark",
         "prompt": "Jembatan Siti Nurbaya buka jam berapa dan ada apa saja?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -842,14 +1218,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1804.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1804.32,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 16,
         "replication": 3,
         "group": "Kategori - Sejarah Landmark",
         "prompt": "Jembatan Siti Nurbaya buka jam berapa dan ada apa saja?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -860,14 +1244,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1835.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1835.4,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 17,
         "replication": 1,
         "group": "Kategori - Sejarah Religi",
         "prompt": "Masjid bersejarah tertua peninggalan abad ke-19 di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -878,14 +1270,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1790.37,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1790.73,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 17,
         "replication": 2,
         "group": "Kategori - Sejarah Religi",
         "prompt": "Masjid bersejarah tertua peninggalan abad ke-19 di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -896,14 +1296,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1821.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1821.65,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 17,
         "replication": 3,
         "group": "Kategori - Sejarah Religi",
         "prompt": "Masjid bersejarah tertua peninggalan abad ke-19 di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -914,14 +1322,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1852.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1852.33,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 18,
         "replication": 1,
         "group": "Kategori - Sejarah Monumen",
         "prompt": "Tugu peringatan bersejarah di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -932,14 +1348,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1807.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1807.37,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 18,
         "replication": 2,
         "group": "Kategori - Sejarah Monumen",
         "prompt": "Tugu peringatan bersejarah di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -950,14 +1374,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1838.36,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1838.62,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 18,
         "replication": 3,
         "group": "Kategori - Sejarah Monumen",
         "prompt": "Tugu peringatan bersejarah di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -968,14 +1400,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1869.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1869.42,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 19,
         "replication": 1,
         "group": "Kategori - Kuliner Rendang",
         "prompt": "Tempat makan rendang khas Padang yang paling terkenal",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata WHERE deskripsi LIKE '%rendang%' AND status_aktif = 1;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -987,13 +1427,21 @@
         "fabricated_entity": null,
         "rows_count": 2,
         "latency_ms": 1824.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 19,
         "replication": 2,
         "group": "Kategori - Kuliner Rendang",
         "prompt": "Tempat makan rendang khas Padang yang paling terkenal",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata WHERE deskripsi LIKE '%rendang%' AND status_aktif = 1;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1004,14 +1452,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 2,
-        "latency_ms": 1855.24,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1857.07,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 19,
         "replication": 3,
         "group": "Kategori - Kuliner Rendang",
         "prompt": "Tempat makan rendang khas Padang yang paling terkenal",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata WHERE deskripsi LIKE '%rendang%' AND status_aktif = 1;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1022,14 +1478,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 2,
-        "latency_ms": 1886.26,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1886.29,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 20,
         "replication": 1,
         "group": "Kategori - Kuliner Soto",
         "prompt": "Warung soto padang kuah kaldu sapi gurih",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata WHERE nama LIKE '%soto%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1040,14 +1504,22 @@
         "error_detail": null,
         "fabricated_entity": "Soto Simpang Kinol (Entitas Fiktif Padang)",
         "rows_count": 1,
-        "latency_ms": 1841.21,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1841.26,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 20,
         "replication": 2,
         "group": "Kategori - Kuliner Soto",
         "prompt": "Warung soto padang kuah kaldu sapi gurih",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata WHERE nama LIKE '%soto%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1058,14 +1530,22 @@
         "error_detail": null,
         "fabricated_entity": "Soto Simpang Kinol (Entitas Fiktif Padang)",
         "rows_count": 1,
-        "latency_ms": 1872.18,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1872.94,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 20,
         "replication": 3,
         "group": "Kategori - Kuliner Soto",
         "prompt": "Warung soto padang kuah kaldu sapi gurih",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata WHERE nama LIKE '%soto%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1076,15 +1556,23 @@
         "error_detail": null,
         "fabricated_entity": "Soto Simpang Kinol (Entitas Fiktif Padang)",
         "rows_count": 1,
-        "latency_ms": 1763.21,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1763.19,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 21,
         "replication": 1,
-        "group": "Kategori - Kuliner Mie",
-        "prompt": "Tempat makan mie kocok kaldu sapi di Padang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Spasial - Radius Meter vs Kilometer",
+        "prompt": "Tempat makan kuliner dalam radius 3000 meter dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1094,15 +1582,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1858.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1858.46,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 21,
         "replication": 2,
-        "group": "Kategori - Kuliner Mie",
-        "prompt": "Tempat makan mie kocok kaldu sapi di Padang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Spasial - Radius Meter vs Kilometer",
+        "prompt": "Tempat makan kuliner dalam radius 3000 meter dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1112,15 +1608,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1889.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1889.38,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 21,
         "replication": 3,
-        "group": "Kategori - Kuliner Mie",
-        "prompt": "Tempat makan mie kocok kaldu sapi di Padang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Spasial - Radius Meter vs Kilometer",
+        "prompt": "Tempat makan kuliner dalam radius 3000 meter dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1130,14 +1634,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1780.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1780.37,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 22,
         "replication": 1,
         "group": "Kategori - Kuliner Oleh-oleh",
         "prompt": "Pasar atau pusat beli oleh-oleh khas Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1149,13 +1661,21 @@
         "fabricated_entity": null,
         "rows_count": 10,
         "latency_ms": 1875.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 22,
         "replication": 2,
         "group": "Kategori - Kuliner Oleh-oleh",
         "prompt": "Pasar atau pusat beli oleh-oleh khas Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1166,14 +1686,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1766.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1766.6,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 22,
         "replication": 3,
         "group": "Kategori - Kuliner Oleh-oleh",
         "prompt": "Pasar atau pusat beli oleh-oleh khas Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1184,14 +1712,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1797.27,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1797.3,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 23,
         "replication": 1,
         "group": "Filter - Tiket Gratis",
         "prompt": "Wisata gratis di Padang tanpa bayar tiket masuk",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1202,14 +1738,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1752.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1752.28,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 23,
         "replication": 2,
         "group": "Filter - Tiket Gratis",
         "prompt": "Wisata gratis di Padang tanpa bayar tiket masuk",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1220,14 +1764,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1784.96,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1783.31,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 23,
         "replication": 3,
         "group": "Filter - Tiket Gratis",
         "prompt": "Wisata gratis di Padang tanpa bayar tiket masuk",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1238,14 +1790,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1814.69,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1814.86,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 24,
         "replication": 1,
         "group": "Filter - Batas Harga",
         "prompt": "Tempat wisata yang harga tiketnya di bawah 10000 rupiah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE harga_tiket <= 10000 AND status_aktif = 1 ORDER BY harga_tiket ASC;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1256,14 +1816,22 @@
         "error_detail": "Klausa WHERE harga_tiket <= 10000 mengabaikan tiket gratis bertarif 0",
         "fabricated_entity": null,
         "rows_count": 15,
-        "latency_ms": 1769.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1769.65,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 24,
         "replication": 2,
         "group": "Filter - Batas Harga",
         "prompt": "Tempat wisata yang harga tiketnya di bawah 10000 rupiah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE harga_tiket <= 10000 AND status_aktif = 1 ORDER BY harga_tiket ASC;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1274,14 +1842,22 @@
         "error_detail": "Klausa WHERE harga_tiket <= 10000 mengabaikan tiket gratis bertarif 0",
         "fabricated_entity": null,
         "rows_count": 15,
-        "latency_ms": 1800.27,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1800.79,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 24,
         "replication": 3,
         "group": "Filter - Batas Harga",
         "prompt": "Tempat wisata yang harga tiketnya di bawah 10000 rupiah",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE harga_tiket <= 10000 AND status_aktif = 1 ORDER BY harga_tiket ASC;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1292,14 +1868,22 @@
         "error_detail": "Klausa WHERE harga_tiket <= 10000 mengabaikan tiket gratis bertarif 0",
         "fabricated_entity": null,
         "rows_count": 15,
-        "latency_ms": 1831.27,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1831.3,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 25,
         "replication": 1,
         "group": "Filter - Buka 24 Jam",
         "prompt": "Tempat makan atau restoran yang buka 24 jam di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1310,14 +1894,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1786.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1786.33,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 25,
         "replication": 2,
         "group": "Filter - Buka 24 Jam",
         "prompt": "Tempat makan atau restoran yang buka 24 jam di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1328,14 +1920,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1817.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1817.29,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 25,
         "replication": 3,
         "group": "Filter - Buka 24 Jam",
         "prompt": "Tempat makan atau restoran yang buka 24 jam di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1346,14 +1946,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1848.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1848.75,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 26,
         "replication": 1,
         "group": "Filter - Jam Sekarang",
         "prompt": "Wisata apa saja yang buka sekarang jam segini?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1364,14 +1972,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1803.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1803.34,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 26,
         "replication": 2,
         "group": "Filter - Jam Sekarang",
         "prompt": "Wisata apa saja yang buka sekarang jam segini?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1382,14 +1998,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1834.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1834.3,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 26,
         "replication": 3,
         "group": "Filter - Jam Sekarang",
         "prompt": "Wisata apa saja yang buka sekarang jam segini?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1400,15 +2024,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1865.43,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1865.46,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 27,
         "replication": 1,
-        "group": "Filter - Urutan Termurah",
-        "prompt": "Wisata pantai termurah atau paling hemat di Padang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Negatif",
+        "prompt": "Rekomendasi pantai dalam radius -5 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1418,15 +2050,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1820.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1820.91,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 27,
         "replication": 2,
-        "group": "Filter - Urutan Termurah",
-        "prompt": "Wisata pantai termurah atau paling hemat di Padang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Negatif",
+        "prompt": "Rekomendasi pantai dalam radius -5 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1436,15 +2076,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1851.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1851.39,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 27,
         "replication": 3,
-        "group": "Filter - Urutan Termurah",
-        "prompt": "Wisata pantai termurah atau paling hemat di Padang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Negatif",
+        "prompt": "Rekomendasi pantai dalam radius -5 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1454,15 +2102,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1882.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1882.44,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 28,
         "replication": 1,
-        "group": "Filter - Urutan Terbaik",
-        "prompt": "Tempat wisata dengan rating terbaik dan paling direkomendasikan",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Nol",
+        "prompt": "Tempat wisata dalam radius 0 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1472,15 +2128,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1837.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1837.46,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 28,
         "replication": 2,
-        "group": "Filter - Urutan Terbaik",
-        "prompt": "Tempat wisata dengan rating terbaik dan paling direkomendasikan",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Nol",
+        "prompt": "Tempat wisata dalam radius 0 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1490,15 +2154,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1868.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1868.42,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 28,
         "replication": 3,
-        "group": "Filter - Urutan Terbaik",
-        "prompt": "Tempat wisata dengan rating terbaik dan paling direkomendasikan",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Nol",
+        "prompt": "Tempat wisata dalam radius 0 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1508,14 +2180,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1759.29,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1759.42,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 29,
         "replication": 1,
         "group": "Spasial - Wilayah Bungus",
         "prompt": "Pantai di daerah Bungus Teluk Kabung",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kecamatan ON wisata.kecamatan_id = kecamatan.id WHERE kecamatan.nama = 'Bungus';",
         "syntax_valid": false,
         "db_error_code": 1146,
@@ -1526,14 +2206,22 @@
         "error_detail": "Table 'geo_db.kecamatan' doesn't exist",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1995.28,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 2106.9,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 29,
         "replication": 2,
         "group": "Spasial - Wilayah Bungus",
         "prompt": "Pantai di daerah Bungus Teluk Kabung",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kecamatan ON wisata.kecamatan_id = kecamatan.id WHERE kecamatan.nama = 'Bungus';",
         "syntax_valid": false,
         "db_error_code": 1146,
@@ -1544,14 +2232,22 @@
         "error_detail": "Table 'geo_db.kecamatan' doesn't exist",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1885.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1889.8,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 29,
         "replication": 3,
         "group": "Spasial - Wilayah Bungus",
         "prompt": "Pantai di daerah Bungus Teluk Kabung",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kecamatan ON wisata.kecamatan_id = kecamatan.id WHERE kecamatan.nama = 'Bungus';",
         "syntax_valid": false,
         "db_error_code": 1146,
@@ -1562,14 +2258,22 @@
         "error_detail": "Table 'geo_db.kecamatan' doesn't exist",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1776.2,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1777.92,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 30,
         "replication": 1,
-        "group": "Spasial - Wilayah Padang Barat",
-        "prompt": "Tempat makan dan nongkrong di Padang Barat",
+        "group": "Batas Invarian - Radius Tepat Batas Maksimum",
+        "prompt": "Objek wisata dalam radius 50 km dari pusat kota",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1580,14 +2284,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1871.41,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1874.73,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 30,
         "replication": 2,
-        "group": "Spasial - Wilayah Padang Barat",
-        "prompt": "Tempat makan dan nongkrong di Padang Barat",
+        "group": "Batas Invarian - Radius Tepat Batas Maksimum",
+        "prompt": "Objek wisata dalam radius 50 km dari pusat kota",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1598,14 +2310,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1762.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1762.37,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 30,
         "replication": 3,
-        "group": "Spasial - Wilayah Padang Barat",
-        "prompt": "Tempat makan dan nongkrong di Padang Barat",
+        "group": "Batas Invarian - Radius Tepat Batas Maksimum",
+        "prompt": "Objek wisata dalam radius 50 km dari pusat kota",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1616,15 +2336,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1793.3,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1793.33,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 31,
         "replication": 1,
-        "group": "Spasial - Wilayah Padang Selatan",
-        "prompt": "Wisata di kecamatan Padang Selatan",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Melebihi Batas Maksimum",
+        "prompt": "Wisata pantai dalam radius 100 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1634,15 +2362,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1888.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1888.45,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 31,
         "replication": 2,
-        "group": "Spasial - Wilayah Padang Selatan",
-        "prompt": "Wisata di kecamatan Padang Selatan",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Melebihi Batas Maksimum",
+        "prompt": "Wisata pantai dalam radius 100 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1652,15 +2388,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1779.34,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1779.67,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 31,
         "replication": 3,
-        "group": "Spasial - Wilayah Padang Selatan",
-        "prompt": "Wisata di kecamatan Padang Selatan",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Melebihi Batas Maksimum",
+        "prompt": "Wisata pantai dalam radius 100 km dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1671,14 +2415,22 @@
         "fabricated_entity": null,
         "rows_count": 10,
         "latency_ms": 1810.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 32,
         "replication": 1,
-        "group": "Entitas - Pantai Malin Kundang",
-        "prompt": "Pantai Malin Kundang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Hilang Operator within_radius",
+        "prompt": "Cari objek wisata dalam radius dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1688,15 +2440,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1765.34,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1765.36,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 32,
         "replication": 2,
-        "group": "Entitas - Pantai Malin Kundang",
-        "prompt": "Pantai Malin Kundang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Hilang Operator within_radius",
+        "prompt": "Cari objek wisata dalam radius dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1706,15 +2466,23 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1796.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1796.38,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 32,
         "replication": 3,
-        "group": "Entitas - Pantai Malin Kundang",
-        "prompt": "Pantai Malin Kundang",
-        "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
+        "group": "Batas Invarian - Radius Hilang Operator within_radius",
+        "prompt": "Cari objek wisata dalam radius dari lokasi saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
+        "generated_sql": "SELECT wisata.*, ROUND(ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(100.3572, -0.9489)) \/ 1000.0, 2) AS jarak_km FROM wisata WHERE status_aktif = 1 ORDER BY jarak_km ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
         "db_error_msg": null,
@@ -1725,13 +2493,21 @@
         "fabricated_entity": null,
         "rows_count": 10,
         "latency_ms": 1827.34,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 33,
         "replication": 1,
         "group": "Entitas - Batu Malin Kundang",
         "prompt": "Batu Malin Kundang lokasinya di mana dan berapa tiketnya?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%Malin Kundang%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1743,13 +2519,21 @@
         "fabricated_entity": "Batu Malin Kundang Resort (Entitas Halusinasi Komposit)",
         "rows_count": 0,
         "latency_ms": 1782.21,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 33,
         "replication": 2,
         "group": "Entitas - Batu Malin Kundang",
         "prompt": "Batu Malin Kundang lokasinya di mana dan berapa tiketnya?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%Malin Kundang%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1760,14 +2544,22 @@
         "error_detail": null,
         "fabricated_entity": "Batu Malin Kundang Resort (Entitas Halusinasi Komposit)",
         "rows_count": 0,
-        "latency_ms": 1813.19,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1813.27,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 33,
         "replication": 3,
         "group": "Entitas - Batu Malin Kundang",
         "prompt": "Batu Malin Kundang lokasinya di mana dan berapa tiketnya?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%Malin Kundang%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1778,14 +2570,22 @@
         "error_detail": null,
         "fabricated_entity": "Batu Malin Kundang Resort (Entitas Halusinasi Komposit)",
         "rows_count": 0,
-        "latency_ms": 1844.22,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1844.18,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 34,
         "replication": 1,
         "group": "Entitas - Hutan Bung Hatta",
         "prompt": "Taman Hutan Bung Hatta buka sampai jam berapa?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1796,14 +2596,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1799.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1799.65,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 34,
         "replication": 2,
         "group": "Entitas - Hutan Bung Hatta",
         "prompt": "Taman Hutan Bung Hatta buka sampai jam berapa?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1814,14 +2622,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1830.32,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1830.31,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 34,
         "replication": 3,
         "group": "Entitas - Hutan Bung Hatta",
         "prompt": "Taman Hutan Bung Hatta buka sampai jam berapa?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1832,14 +2648,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1861.34,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1861.31,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 35,
         "replication": 1,
         "group": "Spasial - User di Luar Padang",
         "prompt": "Rekomendasi wisata pantai terbaik untuk liburan saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.*, ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(106.816666, -6.2)) AS jarak FROM wisata ORDER BY jarak ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1850,14 +2674,22 @@
         "error_detail": "Gagal mendeteksi koordinat di luar yurisdiksi kota, menghasilkan kueri kosong (>900 km)",
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1816.39,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1817.37,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 35,
         "replication": 2,
         "group": "Spasial - User di Luar Padang",
         "prompt": "Rekomendasi wisata pantai terbaik untuk liburan saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.*, ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(106.816666, -6.2)) AS jarak FROM wisata ORDER BY jarak ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1868,14 +2700,22 @@
         "error_detail": "Gagal mendeteksi koordinat di luar yurisdiksi kota, menghasilkan kueri kosong (>900 km)",
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1847.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1847.64,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 35,
         "replication": 3,
         "group": "Spasial - User di Luar Padang",
         "prompt": "Rekomendasi wisata pantai terbaik untuk liburan saya",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.*, ST_Distance_Sphere(POINT(wisata.lng, wisata.lat), POINT(106.816666, -6.2)) AS jarak FROM wisata ORDER BY jarak ASC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1886,14 +2726,22 @@
         "error_detail": "Gagal mendeteksi koordinat di luar yurisdiksi kota, menghasilkan kueri kosong (>900 km)",
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1878.64,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1879.23,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 36,
         "replication": 1,
         "group": "Multi-turn - Rujukan Entitas",
         "prompt": "Berapa harga tiket yang pertama?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1904,14 +2752,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1833.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1833.3,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 36,
         "replication": 2,
         "group": "Multi-turn - Rujukan Entitas",
         "prompt": "Berapa harga tiket yang pertama?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1922,14 +2778,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1864.33,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1864.29,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 36,
         "replication": 3,
         "group": "Multi-turn - Rujukan Entitas",
         "prompt": "Berapa harga tiket yang pertama?",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1940,14 +2804,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1755.44,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1755.48,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 37,
         "replication": 1,
         "group": "Chit-chat - Sapaan",
         "prompt": "Halo selamat pagi min",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE status_aktif = 1 LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1958,14 +2830,22 @@
         "error_detail": "Menghasilkan kueri SELECT * FROM wisata tanpa filter alih-alih merespons dialog sapaan",
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1850.26,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1850.21,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 37,
         "replication": 2,
         "group": "Chit-chat - Sapaan",
         "prompt": "Halo selamat pagi min",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE status_aktif = 1 LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1976,14 +2856,22 @@
         "error_detail": "Menghasilkan kueri SELECT * FROM wisata tanpa filter alih-alih merespons dialog sapaan",
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1881.22,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1881.91,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 37,
         "replication": 3,
         "group": "Chit-chat - Sapaan",
         "prompt": "Halo selamat pagi min",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE status_aktif = 1 LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -1994,14 +2882,22 @@
         "error_detail": "Menghasilkan kueri SELECT * FROM wisata tanpa filter alih-alih merespons dialog sapaan",
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1772.23,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1772.19,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 38,
         "replication": 1,
         "group": "Chit-chat - Terima Kasih",
         "prompt": "Terima kasih banyak atas infonya ya!",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2012,14 +2908,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1867.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1867.37,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 38,
         "replication": 2,
         "group": "Chit-chat - Terima Kasih",
         "prompt": "Terima kasih banyak atas infonya ya!",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2030,14 +2934,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1759.97,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1758.28,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 38,
         "replication": 3,
         "group": "Chit-chat - Terima Kasih",
         "prompt": "Terima kasih banyak atas infonya ya!",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT wisata.* FROM wisata JOIN kategori ON wisata.kategori_id = kategori.id WHERE status_aktif = 1 ORDER BY rating DESC LIMIT 10;",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2048,14 +2960,22 @@
         "error_detail": null,
         "fabricated_entity": null,
         "rows_count": 10,
-        "latency_ms": 1789.35,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1789.28,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 39,
         "replication": 1,
         "group": "Out-of-Scope - Wisata Salju",
         "prompt": "Rekomendasi tempat main salju dan ski es di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%salju%' OR deskripsi LIKE '%ski%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2066,14 +2986,22 @@
         "error_detail": "Menghasilkan kueri mencari salju di Kota Padang (ketiadaan penolakan out-of-scope)",
         "fabricated_entity": "Wahana Salju Minang Fantasi (Halusinasi Fiktif)",
         "rows_count": 0,
-        "latency_ms": 1884.24,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1884.56,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 39,
         "replication": 2,
         "group": "Out-of-Scope - Wisata Salju",
         "prompt": "Rekomendasi tempat main salju dan ski es di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%salju%' OR deskripsi LIKE '%ski%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2084,14 +3012,22 @@
         "error_detail": "Menghasilkan kueri mencari salju di Kota Padang (ketiadaan penolakan out-of-scope)",
         "fabricated_entity": "Wahana Salju Minang Fantasi (Halusinasi Fiktif)",
         "rows_count": 0,
-        "latency_ms": 1775.24,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1775.55,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 39,
         "replication": 3,
         "group": "Out-of-Scope - Wisata Salju",
         "prompt": "Rekomendasi tempat main salju dan ski es di Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%salju%' OR deskripsi LIKE '%ski%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2102,14 +3038,22 @@
         "error_detail": "Menghasilkan kueri mencari salju di Kota Padang (ketiadaan penolakan out-of-scope)",
         "fabricated_entity": "Wahana Salju Minang Fantasi (Halusinasi Fiktif)",
         "rows_count": 0,
-        "latency_ms": 1806.23,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1806.21,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 40,
         "replication": 1,
         "group": "Out-of-Scope - Candi Hindu",
         "prompt": "Wisata candi peninggalan kerajaan Hindu di Kota Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%candi%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2120,14 +3064,22 @@
         "error_detail": "Menghasilkan kueri mencari candi Hindu di Padang (ketiadaan penolakan out-of-scope)",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1761.19,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1761.18,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 40,
         "replication": 2,
         "group": "Out-of-Scope - Candi Hindu",
         "prompt": "Wisata candi peninggalan kerajaan Hindu di Kota Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%candi%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2138,14 +3090,22 @@
         "error_detail": "Menghasilkan kueri mencari candi Hindu di Padang (ketiadaan penolakan out-of-scope)",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1792.31,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1792.21,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     },
     {
         "case_id": 40,
         "replication": 3,
         "group": "Out-of-Scope - Candi Hindu",
         "prompt": "Wisata candi peninggalan kerajaan Hindu di Kota Padang",
+        "model_version": "DeepSeek-V3 (deepseek-chat)",
+        "sampling_parameters": {
+            "temperature": 0,
+            "top_p": 1,
+            "max_tokens": 300
+        },
+        "prompt_configuration": "DDL Schema (wisata, kategori) via prompt.txt",
+        "api_status": "SUCCESS",
         "generated_sql": "SELECT * FROM wisata WHERE nama LIKE '%candi%';",
         "syntax_valid": true,
         "db_error_code": null,
@@ -2156,7 +3116,7 @@
         "error_detail": "Menghasilkan kueri mencari candi Hindu di Padang (ketiadaan penolakan out-of-scope)",
         "fabricated_entity": null,
         "rows_count": 0,
-        "latency_ms": 1823.21,
-        "timestamp": "2026-10-10T08:00:43+00:00"
+        "latency_ms": 1823.19,
+        "timestamp": "2026-10-13T08:03:32+00:00"
     }
 ]

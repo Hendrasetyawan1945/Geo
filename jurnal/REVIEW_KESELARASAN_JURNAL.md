@@ -22,7 +22,7 @@ Tujuan peninjauan ini adalah memastikan tidak ada kontradiksi data, inkonsistens
 | **Pustaka Web GIS & Tile Peta** | Leaflet.js v1.9.4 dengan OpenStreetMap (OSM) Tiles | Leaflet.js v1.9.4 dengan OpenStreetMap (OSM) Tiles | ✅ 100% Identik |
 | **Mesin Navigasi & Rute Jalan** | Open Source Routing Machine (OSRM API v5 driving profile) | Open Source Routing Machine (OSRM API v5 driving profile) | ✅ 100% Identik |
 | **Layanan Model Bahasa (LLM)** | DeepSeek API via `LlmService` (Parser SIR & Grounded NLG) | DeepSeek API via `LlmService` (Parser SIR & Grounded NLG) | ✅ 100% Identik |
-| **Formalisasi Semantik** | *Canonical Spatial Intent Representation* (CSIR) 4 partisi, 17 atribut formal | *Canonical Spatial Intent Representation* (CSIR) 4 partisi, 17 atribut formal | ✅ 100% Identik |
+| **Formalisasi Semantik** | *Canonical Spatial Intent Representation* (CSIR) 4 partisi, 19 atribut formal | *Canonical Spatial Intent Representation* (CSIR) 4 partisi, 19 atribut formal | ✅ 100% Identik |
 | **Ontologi Operator Spasial** | `nearest`, `within_radius`, `within_admin_area`, `open_now`, `open_24h`, `is_free`, `max_price` | `nearest`, `within_radius`, `within_admin_area`, `open_now`, `open_24h`, `is_free`, `max_price` | ✅ 100% Identik |
 | **Modul Validasi Deterministik**| `SirValidator` 6-Dimensi (Schema, Type, Domain, Operator, Out-of-Scope, Consistency) | `SirValidator` 6-Dimensi (Schema, Type, Domain, Operator, Out-of-Scope, Consistency) | ✅ 100% Identik |
 | **Kompiler Kueri Spasial** | `SpatialQueryCompiler` (SQL terparameterisasi, `ST_Distance_Sphere`, midnight crossover) | `SpatialQueryCompiler` (SQL terparameterisasi, `ST_Distance_Sphere`, midnight crossover) | ✅ 100% Identik |

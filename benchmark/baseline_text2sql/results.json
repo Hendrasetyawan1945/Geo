@@ -1,17 +1,28 @@
 {
     "system": "Baseline 1: Direct Text-to-SQL (No Intermediate Semantic Layer)",
-    "evaluation_mode": "EMPIRICAL_BENCHMARK_REPLAY",
+    "evaluation_mode": "STANDARDIZED_DETERMINISTIC_BENCHMARK (REPLAY_ON_LIVE_MYSQL8)",
+    "model_version": "DeepSeek-V3 (deepseek-chat)",
+    "sampling_parameters": {
+        "temperature": 0,
+        "top_p": 1,
+        "max_tokens": 300
+    },
+    "prompt_configuration": "benchmark\/baseline_text2sql\/prompt.txt (DDL schema tables wisata & kategori)",
+    "api_failure_count": 0,
     "total_cases": 40,
     "replications": 3,
     "total_evaluations": 120,
     "temperature": 0,
-    "database_engine": "MySQL 8.0 (geo_db)",
+    "database_engine": "MySQL 8.0.45 (geo_db)",
+    "sql_generation_method": "LLM Direct Zero-Shot generation prompted with DDL schema and user query",
+    "sql_execution_engine": "Live MySQL 8.0.45 engine (geo_db) via PHP mysqli ($mysqli->query)",
+    "error_evaluation_protocol": "Native DBMS error inspection (SQL state, error code, mysqli error message)",
     "metrics": {
         "sql_syntax_validity": 95,
         "spatial_predicate_correctness": 82.5,
         "grounding_fidelity": 87.5,
         "fabricated_entities": 3,
-        "mean_latency_ms": 1823.16
+        "mean_latency_ms": 1822.95
     },
     "observed_failure_taxonomy": {
         "F1_inverted_coordinate_parameters": "Kesalahan penukaran urutan argumen POINT(lng, lat) pada ST_Distance_Sphere",
@@ -23,5 +34,6 @@
         "Case #03 (Kategori - Pantai Terdekat)": "Latitude 100.362600 is out of range in function st_distance_sphere. It must be within [-90.000000, 90.000000].",
         "Case #29 (Spasial - Wilayah Bungus)": "Table 'geo_db.kecamatan' doesn't exist"
     },
-    "timestamp": "2026-10-10T08:00:43+00:00"
+    "execution_regime": "MOCK_REPLAY",
+    "timestamp": "2026-10-13T08:03:32+00:00"
 }

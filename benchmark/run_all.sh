@@ -31,12 +31,12 @@ echo ""
 
 # 2. Baseline 1: Direct Text-to-SQL
 echo "[2/4] Menjalankan Runner Baseline 1 (Direct Text-to-SQL)..."
-php "$SCRIPT_DIR/baseline_text2sql/runner.php" < /dev/null
+php "$SCRIPT_DIR/baseline_text2sql/runner.php" $EVAL_FLAG < /dev/null
 echo ""
 
 # 3. Baseline 2: Unconstrained LLM
 echo "[3/4] Menjalankan Runner Baseline 2 (Unconstrained LLM)..."
-php "$SCRIPT_DIR/baseline_unconstrained/runner.php" < /dev/null
+php "$SCRIPT_DIR/baseline_unconstrained/runner.php" $EVAL_FLAG < /dev/null
 echo ""
 
 # 4. Ablation Study Runner

@@ -135,7 +135,9 @@ class ChatController extends ResourceController
         }
 
         // 2. Kebijakan Spasial & Batas Wilayah Padang
+        $tVal0 = microtime(true);
         $sir = $this->policyHandler->applyPolicy($sir);
+        $validationTimeMs = (microtime(true) - $tVal0) * 1000.0;
 
         $replyText = '';
         $places = [];
@@ -186,10 +188,11 @@ class ChatController extends ResourceController
             'sir'       => $sir,
             'places'    => $places,
             'timings'   => [
-                'intent_ms' => $intentTimeMs,
-                'sql_ms'    => $sqlTimeMs,
-                'nlg_ms'    => $nlgTimeMs,
-                'total_ms'  => $totalTimeMs,
+                'intent_ms'     => $intentTimeMs,
+                'validation_ms' => $validationTimeMs,
+                'sql_ms'        => $sqlTimeMs,
+                'nlg_ms'        => $nlgTimeMs,
+                'total_ms'      => $totalTimeMs,
             ],
         ];
     }

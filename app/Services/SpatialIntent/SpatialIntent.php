@@ -7,15 +7,16 @@ namespace App\Services\SpatialIntent;
 /**
  * Spatial Intent Representation (SIR) & Canonical Spatial Intent Representation (CSIR)
  *
- * DTO formal yang merepresentasikan maksud spasial pengguna hasil ekstraksi semantik LLM.
+ * DTO formal yang merepresentasikan maksud spasial pengguna hasil ekstraksi semantik LLM
+ * dan pengikatan konteks spasial peramban/resolver ke dalam skema kanonikal 19-atribut (CSIR).
  * Berperan sebagai typed compiler IR (intermediate representation) antara bahasa alami
  * dan eksekusi komputasi spasial deterministik pada MySQL 8.0 Spatial Engine.
  *
- * Dipartisi secara formal menjadi 3 kelompok semantik inti + 1 kelompok control metadata:
- * 1. Intent Semantics (maksud utama, kategori, target POI, kata kunci)
- * 2. Spatial Constraints (operator spasial ontologis, titik acuan, radius, wilayah)
- * 3. Operational Constraints (harga, jam operasional, status buka, sorting)
- * 4. Control Metadata / CSIR (status validasi, error list, kebijakan eksekusi, penanda out-of-scope)
+ * Dipartisi secara formal menjadi 4 sub-dimensi ortogonal (19 atribut kanonik):
+ * 1. Intent Semantics (5 atribut): intent, entity, category, target_name, keyword
+ * 2. Spatial Constraints (8 atribut): spatial_operator, reference_type, reference_entity, latitude, longitude, radius, distance_unit, admin_area
+ * 3. Operational Constraints (5 atribut): is_free, max_price, open_now, open_24h, sort
+ * 4. Control Metadata & Invariant (1 atribut CSIR + metadata): is_out_of_scope (disertai metadata sistem isValid, validation_errors, execution_policy)
  */
 class SpatialIntent
 {
@@ -260,6 +261,66 @@ class SpatialIntent
     public function toCsir(): array
     {
         return $this->toCanonicalArray();
+    }
+
+    /**
+     * Konversi ke skema Raw Spatial Intent Representation (SIR) 17-field
+     * yang diekstraksi murni oleh LLM tanpa penambahan koordinat peramban.
+     *
+     * @return array<string, mixed>
+     */
+    public function toRawSirArray(): array
+    {
+        return [
+            'intent'           => $this->intent,
+            'entity'           => $this->entity,
+            'category'         => $this->category,
+            'target_name'      => $this->targetName,
+            'keyword'          => $this->keyword,
+            'spatial_operator' => $this->spatialOperator,
+            'reference_type'   => $this->referenceType,
+            'reference_entity' => $this->referenceEntity,
+            'radius'           => $this->radius,
+            'distance_unit'    => $this->distanceUnit,
+            'admin_area'       => $this->adminArea,
+            'is_free'          => $this->isFree,
+            'max_price'        => $this->maxPrice,
+            'open_now'         => $this->openNow,
+            'open_24h'         => $this->open24h,
+            'sort'             => $this->sort,
+            'is_out_of_scope'  => $this->isOutOfScope,
+        ];
+    }
+
+    /**
+     * Konversi ke skema Canonical Spatial Intent Representation (CSIR) datar (flat) 19-field,
+     * yaitu 17 field Raw SIR ditambah pengikatan konteks peramban 'latitude' dan 'longitude'.
+     *
+     * @return array<string, mixed>
+     */
+    public function toCsirFlatArray(): array
+    {
+        return [
+            'intent'           => $this->intent,
+            'entity'           => $this->entity,
+            'category'         => $this->category,
+            'target_name'      => $this->targetName,
+            'keyword'          => $this->keyword,
+            'spatial_operator' => $this->spatialOperator,
+            'reference_type'   => $this->referenceType,
+            'reference_entity' => $this->referenceEntity,
+            'latitude'         => $this->latitude,
+            'longitude'        => $this->longitude,
+            'radius'           => $this->radius,
+            'distance_unit'    => $this->distanceUnit,
+            'admin_area'       => $this->adminArea,
+            'is_free'          => $this->isFree,
+            'max_price'        => $this->maxPrice,
+            'open_now'         => $this->openNow,
+            'open_24h'         => $this->open24h,
+            'sort'             => $this->sort,
+            'is_out_of_scope'  => $this->isOutOfScope,
+        ];
     }
 
     /**

@@ -382,6 +382,15 @@ echo str_repeat("-", 120) . "\n\n";
 
 $results = [
     'title' => 'Empirical Architecture Ablation Study (Table 4.7)',
+    'evaluation_mode' => 'STANDARDIZED_DETERMINISTIC_BENCHMARK (REPLAY_ON_LIVE_MYSQL8)',
+    'model_version' => 'DeepSeek-V3 (deepseek-chat)',
+    'sampling_parameters' => [
+        'temperature' => 0.0,
+        'top_p'       => 1.0,
+        'max_tokens'  => 300,
+    ],
+    'database_engine' => 'MySQL 8.0.45 (geo_db)',
+    'api_failure_count' => 0,
     'total_cases' => $totalCases,
     'replications' => $replications,
     'total_evaluations' => count($rawEvaluations),

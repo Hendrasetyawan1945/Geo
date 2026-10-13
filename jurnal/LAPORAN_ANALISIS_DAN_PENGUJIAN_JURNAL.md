@@ -37,7 +37,7 @@ Berdasarkan telaah mendalam terhadap naskah artikel jurnal ilmiah ([DRAFT_JURNAL
 | **PRIORITAS 1: Complete Trace** | Minimal 8 elemen: (1) Prompt SIR, (2) Prompt NLG, (3) Contoh Input, (4) Output SIR, (5) Validasi, (6) SQL, (7) Hasil SQL, (8) Final Response | Tersaji lengkap dan berurutan pada **Seksi 3.5** (Naskah ID) dan **Seksi 3.3.2** (Naskah EN), diperkuat oleh **Gambar 4 / Figure 4**. | ✅ **Sesuai** |
 | **PRIORITAS 2: Satukan SIR & CSIR** | Tentukan dengan jelas: Raw SIR vs. [CSIR / Validated CSIR] | Tersaji pada **Seksi 2.3** lengkap dengan rumus siklus hidup intent $\mathcal{S}_{\text{raw}} \to \mathcal{S}_{\text{csir}} \to \text{SQL}$ dan pembagian 4 partisi ortogonal. | ✅ **Sesuai** |
 | **Posisi: Prinsip & Struktur Prompt** | Main paper | Tersaji pada **Seksi 3.3.1** (*Information Extraction Sandboxing*). | ✅ **Sesuai** |
-| **Posisi: Skema SIR / CSIR** | Main paper | Tersaji pada **Seksi 2.3 & Tabel 2** (17 atribut formal, 4 partisi). | ✅ **Sesuai** |
+| **Posisi: Skema SIR / CSIR** | Main paper | Tersaji pada **Seksi 2.3 & Tabel 2** (19 atribut formal, 4 partisi). | ✅ **Sesuai** |
 | **Posisi: Prompt Inti (Structured Output)** | Main paper / compact listing | Tersaji pada **Listing 1 & Listing 2** di Seksi 3.3.2. | ✅ **Sesuai** |
 | **Posisi: Prompt Lengkap** | Appendix / Supplementary Material | Tersaji lengkap pada **Lampiran A & Lampiran B**. | ✅ **Sesuai** |
 | **Posisi: Contoh Input $\to$ SIR $\to$ SQL** | Main paper | Tersaji pada **Seksi 3.5** (8 langkah lengkap). | ✅ **Sesuai** |

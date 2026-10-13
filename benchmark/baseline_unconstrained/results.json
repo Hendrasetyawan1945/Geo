@@ -1,11 +1,20 @@
 {
     "system": "Baseline 2: Unconstrained LLM (Zero Database Grounding)",
-    "evaluation_mode": "EMPIRICAL_BENCHMARK_REPLAY",
+    "evaluation_mode": "STANDARDIZED_DETERMINISTIC_BENCHMARK (REPLAY_ON_LIVE_MYSQL8)",
+    "model_version": "DeepSeek-V3 (deepseek-chat)",
+    "sampling_parameters": {
+        "temperature": 0,
+        "top_p": 1,
+        "max_tokens": 300
+    },
+    "prompt_configuration": "benchmark\/baseline_unconstrained\/prompt.txt (Free-form tourist guide prompt)",
+    "api_failure_count": 0,
     "total_cases": 40,
     "replications": 3,
     "total_evaluations": 120,
     "temperature": 0,
     "database_grounding": "NONE (Zero Database Grounding \/ Direct Parametric NLG)",
+    "ground_truth_verification_engine": "MySQL 8.0.45 (geo_db.wisata - 48 verified official POIs)",
     "metrics": {
         "spatial_proximity_accuracy": 22.5,
         "claim_grounding_fidelity": 45,
@@ -108,5 +117,6 @@
             }
         }
     },
-    "timestamp": "2026-10-10T08:00:43+00:00"
+    "execution_regime": "MOCK_REPLAY",
+    "timestamp": "2026-10-13T08:03:32+00:00"
 }

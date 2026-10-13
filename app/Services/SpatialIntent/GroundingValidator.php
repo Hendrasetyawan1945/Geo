@@ -56,6 +56,22 @@ class GroundingValidator
         'Kuliner',
     ];
 
+    /** Peta alias dan variasi penamaan lokal objek wisata menuju nama kanonikal resmi */
+    public const POI_ALIASES = [
+        'pantai aia manih'          => 'Pantai Air Manis',
+        'aia manih'                 => 'Pantai Air Manis',
+        'batu malin kundang'        => 'Pantai Air Manis',
+        'taplau'                    => 'Pantai Padang',
+        'tapi lauik'                => 'Pantai Padang',
+        'tahura bung hatta'         => 'Taman Hutan Raya Bung Hatta',
+        'hutan bung hatta'          => 'Taman Hutan Raya Bung Hatta',
+        'museum aditiawarman'       => 'Museum Adityawarman',
+        'adityawarman'              => 'Museum Adityawarman',
+        'rumah bersejarah'          => 'Museum Situs Rumah Bersejarah',
+        'siti nurbaya'              => 'Jembatan Siti Nurbaya',
+        'masjid ganting'            => 'Masjid Raya Ganting',
+    ];
+
     /**
      * Validasi claim-level grounding respons teks terhadap himpunan fakta SQL.
      *
@@ -74,6 +90,24 @@ class GroundingValidator
         $fabricated = [];
         $totalClaims = 0;
         $supportedClaims = 0;
+
+        // 0. Penanganan respons teks kosong
+        if (trim($llmResponse) === '') {
+            if (!empty($retrievedFacts)) {
+                return [
+                    'isGrounded'         => false,
+                    'violations'         => ['Respons narasi kosong (Empty response) padahal fakta basis data tersedia.'],
+                    'fabricatedEntities' => [],
+                    'claimStats'         => ['totalClaims' => 1, 'supportedClaims' => 0, 'fidelity' => 0.0],
+                ];
+            }
+            return [
+                'isGrounded'         => true,
+                'violations'         => [],
+                'fabricatedEntities' => [],
+                'claimStats'         => ['totalClaims' => 0, 'supportedClaims' => 0, 'fidelity' => 100.0],
+            ];
+        }
 
         $mentionedPois = $this->extractMentionedPois($llmResponse);
 
@@ -159,7 +193,7 @@ class GroundingValidator
     }
 
     /**
-     * Ekstraksi seluruh nama POI yang disebut dalam respons (format tebal **Nama** maupun kamus master).
+     * Ekstraksi seluruh nama POI yang disebut dalam respons (format tebal **Nama**, kamus master, maupun alias lokal).
      *
      * @param string $text
      * @return list<string>
@@ -173,15 +207,42 @@ class GroundingValidator
         if (preg_match_all('/\*\*([^*]+)\*\*/', $text, $matches)) {
             foreach ($matches[1] as $boldPhrase) {
                 $trimmed = trim($boldPhrase);
-                foreach (self::MASTER_POI_NAMES as $masterPoi) {
-                    if (strcasecmp($trimmed, $masterPoi) === 0 && !in_array($masterPoi, $found, true)) {
-                        $found[] = $masterPoi;
+                $lowerTrimmed = strtolower($trimmed);
+                // Abaikan label struktural narasi seperti **Catatan**, **Tips**
+                if (in_array($lowerTrimmed, ['catatan', 'tips', 'informasi', 'rekomendasi', 'perhatian'], true)) {
+                    continue;
+                }
+                // Cek apakah merupakan alias lokal
+                if (isset(self::POI_ALIASES[$lowerTrimmed])) {
+                    $canonical = self::POI_ALIASES[$lowerTrimmed];
+                    if (!in_array($canonical, $found, true)) {
+                        $found[] = $canonical;
                     }
+                    continue;
+                }
+                $matchedMaster = false;
+                foreach (self::MASTER_POI_NAMES as $masterPoi) {
+                    if (strcasecmp($lowerTrimmed, strtolower($masterPoi)) === 0 && !in_array($masterPoi, $found, true)) {
+                        $found[] = $masterPoi;
+                        $matchedMaster = true;
+                        break;
+                    }
+                }
+                // Jika tidak cocok master POI, tetap sertakan sebagai kandidat entitas (menangkap halusinasi fiktif/luar wilayah)
+                if (!$matchedMaster && !in_array($trimmed, $found, true)) {
+                    $found[] = $trimmed;
                 }
             }
         }
 
-        // 2. Pencocokan langsung terhadap daftar master 22 POI
+        // 2. Pencocokan langsung terhadap daftar alias lokal terdaftar
+        foreach (self::POI_ALIASES as $alias => $canonical) {
+            if (str_contains($lowerText, $alias) && !in_array($canonical, $found, true)) {
+                $found[] = $canonical;
+            }
+        }
+
+        // 3. Pencocokan langsung terhadap daftar master 22 POI
         foreach (self::MASTER_POI_NAMES as $masterPoi) {
             if (str_contains($lowerText, strtolower($masterPoi)) && !in_array($masterPoi, $found, true)) {
                 $found[] = $masterPoi;
@@ -192,7 +253,7 @@ class GroundingValidator
     }
 
     /**
-     * Verifikasi klaim harga tiket masuk.
+     * Verifikasi klaim harga tiket masuk (positif maupun negatif).
      */
     private function verifyPriceClaim(
         string $context,
@@ -207,7 +268,21 @@ class GroundingValidator
             return;
         }
 
-        // Deteksi klaim gratis
+        // A. Deteksi klaim negatif harga (contoh: "tidak gratis", "bukan gratis")
+        if (preg_match('/\b(tidak|bukan|belum)\s+(?:berstatus\s+)?(gratis|free|tanpa biaya)\b/i', $context)) {
+            $totalClaims++;
+            if ($actualPrice > 0) {
+                $supportedClaims++; // Benar: faktualnya berbayar (tidak gratis)
+            } else {
+                $violations[] = sprintf(
+                    "Klaim harga untuk '%s' menyimpang: dinyatakan tidak gratis, tetapi data faktual adalah gratis (Rp0).",
+                    $poi
+                );
+            }
+            return;
+        }
+
+        // B. Deteksi klaim positif gratis (contoh: "tiket gratis", "tanpa biaya")
         if (preg_match('/\b(gratis|tanpa biaya|free)\b/i', $context)) {
             $totalClaims++;
             if ($actualPrice === 0) {
@@ -222,7 +297,7 @@ class GroundingValidator
             return;
         }
 
-        // Deteksi klaim harga eksplisit (Rp10.000 atau 10.000 rupiah atau 10 ribu)
+        // C. Deteksi klaim harga nominal eksplisit (Rp10.000 atau 10.000 rupiah atau 10 ribu)
         if (preg_match('/(?:rp\.?\s*|tiket\s*(?:masuk\s*)?(?:sebesar\s*)?)([0-9.]+)/i', $context, $m)) {
             $rawNumber = str_replace('.', '', $m[1]);
             $claimedPrice = (int) $rawNumber;
@@ -275,8 +350,8 @@ class GroundingValidator
             $claimedDist = (float) str_replace(',', '.', $m[1]);
             $totalClaims++;
 
-            // Toleransi pembulatan teks narasi sebesar 0.6 km
-            if (abs($claimedDist - $actualDist) <= 0.6) {
+            // Toleransi pembulatan teks narasi sebesar 0.6 km (dengan proteksi presisi float IEEE-754)
+            if (round(abs($claimedDist - $actualDist), 4) <= 0.6) {
                 $supportedClaims++;
             } else {
                 $violations[] = sprintf(
@@ -290,7 +365,7 @@ class GroundingValidator
     }
 
     /**
-     * Verifikasi klaim jam operasional dan status buka.
+     * Verifikasi klaim jam operasional dan status buka (positif maupun negatif).
      */
     private function verifyOperationalClaim(
         string $context,
@@ -300,9 +375,25 @@ class GroundingValidator
         int &$totalClaims,
         int &$supportedClaims
     ): void {
+        $is24h = ($fact['jam_buka'] ?? '') === '00:00:00' && ($fact['jam_tutup'] ?? '') >= '23:59:00';
+
+        // A. Deteksi klaim negatif 24 jam (contoh: "tidak buka 24 jam", "bukan 24 jam")
+        if (preg_match('/\b(tidak|bukan|belum)\s+(?:buka\s+|beroperasi\s+)?24\s*jam\b/i', $context)) {
+            $totalClaims++;
+            if (!$is24h) {
+                $supportedClaims++; // Benar: memang tidak buka 24 jam
+            } else {
+                $violations[] = sprintf(
+                    "Klaim operasional untuk '%s' menyimpang: dinyatakan tidak buka 24 jam, padahal data faktual adalah 24 jam.",
+                    $poi
+                );
+            }
+            return;
+        }
+
+        // B. Deteksi klaim positif 24 jam
         if (preg_match('/\b24\s*jam\b/i', $context)) {
             $totalClaims++;
-            $is24h = ($fact['jam_buka'] ?? '') === '00:00:00' && ($fact['jam_tutup'] ?? '') >= '23:59:00';
             if ($is24h) {
                 $supportedClaims++;
             } else {

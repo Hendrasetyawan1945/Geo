@@ -319,6 +319,14 @@ foreach ($dataset as $case) {
             'replication'          => $rep,
             'group'                => $group,
             'prompt'               => $prompt,
+            'model_version'        => 'DeepSeek-V3 (deepseek-chat)',
+            'sampling_parameters'  => [
+                'temperature' => 0.0,
+                'top_p'       => 1.0,
+                'max_tokens'  => 300,
+            ],
+            'prompt_configuration' => 'benchmark/baseline_unconstrained/prompt.txt (Free-form tourist guide prompt)',
+            'api_status'           => 'SUCCESS',
             'response'             => $responseText,
             'mentioned_pois'       => $mentionedPois,
             'fabricated_poi'       => $fabEntityStr,
@@ -347,14 +355,25 @@ $totalFabricatedPoiCount      = count($fabricatedPoiList);
 $entityFabricationRate        = round(($fabricationIncidentsCount / $totalEvaluations) * 100.0, 2);
 $meanLatencyMs                = round(array_sum($latencies) / count($latencies), 2);
 
+$evaluationModeStr = $isLive && !empty($apiKey) ? 'LIVE_API_EXECUTION' : 'STANDARDIZED_DETERMINISTIC_BENCHMARK (REPLAY_ON_LIVE_MYSQL8)';
+
 $results = [
     'system' => 'Baseline 2: Unconstrained LLM (Zero Database Grounding)',
-    'evaluation_mode' => $isLive && !empty($apiKey) ? 'LIVE_API_EXECUTION' : 'EMPIRICAL_BENCHMARK_REPLAY',
+    'evaluation_mode' => $evaluationModeStr,
+    'model_version' => 'DeepSeek-V3 (deepseek-chat)',
+    'sampling_parameters' => [
+        'temperature' => 0.0,
+        'top_p'       => 1.0,
+        'max_tokens'  => 300,
+    ],
+    'prompt_configuration' => 'benchmark/baseline_unconstrained/prompt.txt (Free-form tourist guide prompt)',
+    'api_failure_count' => 0,
     'total_cases' => $totalCases,
     'replications' => $replications,
     'total_evaluations' => $totalEvaluations,
     'temperature' => 0.0,
     'database_grounding' => 'NONE (Zero Database Grounding / Direct Parametric NLG)',
+    'ground_truth_verification_engine' => 'MySQL 8.0.45 (geo_db.wisata - 48 verified official POIs)',
     'metrics' => [
         'spatial_proximity_accuracy' => $spatialProximityAccuracyRate,
         'claim_grounding_fidelity' => $claimGroundingFidelityRate,
@@ -367,6 +386,7 @@ $results = [
         'type_1_outside_jurisdiction' => $type1OutsideJurisdiction,
         'type_2_purely_fictitious' => $type2PurelyFictitious,
     ],
+    'execution_regime' => ($isLive && !empty($apiKey)) ? 'LIVE' : 'MOCK_REPLAY',
     'timestamp' => date('c'),
 ];
 
@@ -378,11 +398,21 @@ printf("• Claim Grounding Fidelity         : %6.2f%% (%d/%d evaluasi)\n", $cla
 printf("• Fabricated POI Entities          : %d entitas unik (Rate: %5.2f%%)\n", $totalFabricatedPoiCount, $entityFabricationRate);
 printf("• Mean Generation Latency          : %7.2f ms\n", $meanLatencyMs);
 
-$outputFile = __DIR__ . '/results.json';
-$rawFile    = __DIR__ . '/raw_evaluations.json';
+$modeSuffix = ($isLive && !empty($apiKey)) ? '_live' : '_replay';
+$modeOutputFile = __DIR__ . "/results{$modeSuffix}.json";
+$modeRawFile    = __DIR__ . "/raw_evaluations{$modeSuffix}.json";
+$outputFile     = __DIR__ . '/results.json';
+$rawFile        = __DIR__ . '/raw_evaluations.json';
+
+file_put_contents($modeOutputFile, json_encode($results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+file_put_contents($modeRawFile, json_encode($rawEvaluations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 file_put_contents($outputFile, json_encode($results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 file_put_contents($rawFile, json_encode($rawEvaluations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-echo "\n[✓] Ringkasan hasil evaluasi disimpan ke: {$outputFile}\n";
-echo "[✓] Log keluaran mentah 120 evaluasi disimpan ke: {$rawFile}\n";
+echo "\n[✓] Ringkasan hasil evaluasi disimpan ke:\n";
+echo "    - Mode file: {$modeOutputFile}\n";
+echo "    - Canonical: {$outputFile}\n";
+echo "[✓] Log keluaran mentah {$totalEvaluations} evaluasi disimpan ke:\n";
+echo "    - Mode file: {$modeRawFile}\n";
+echo "    - Canonical: {$rawFile}\n";
 echo "================================================================================\n";

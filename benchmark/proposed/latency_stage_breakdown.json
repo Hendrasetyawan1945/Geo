@@ -1,0 +1,72 @@
+{
+    "stage_1_intent_parsing": {
+        "stage_name": "Intent Parsing (LLM API Call #1)",
+        "mean_ms": 465.12,
+        "median_ms": 458.3,
+        "p95_ms": 582.4,
+        "min_ms": 320.1,
+        "max_ms": 610.4,
+        "std_dev_ms": 62.15,
+        "proportion_pct": 34.69
+    },
+    "stage_2_sir_validation": {
+        "stage_name": "SIR Validation (SirValidator 6-Dimensi)",
+        "mean_ms": 0.42,
+        "median_ms": 0.39,
+        "p95_ms": 0.72,
+        "min_ms": 0.21,
+        "max_ms": 0.85,
+        "std_dev_ms": 0.12,
+        "proportion_pct": 0.03
+    },
+    "stage_3_mysql_spatial": {
+        "stage_name": "Spatial Query (MySQL 8.0 ST_Distance_Sphere)",
+        "mean_ms": 1.21,
+        "median_ms": 1.1,
+        "p95_ms": 2.45,
+        "min_ms": 0.82,
+        "max_ms": 3.15,
+        "std_dev_ms": 0.38,
+        "proportion_pct": 0.09
+    },
+    "stage_4_grounded_nlg": {
+        "stage_name": "Grounded NLG (LLM API Call #2 + GroundingValidator)",
+        "mean_ms": 785.42,
+        "median_ms": 772.6,
+        "p95_ms": 995.8,
+        "min_ms": 550.1,
+        "max_ms": 1080.2,
+        "std_dev_ms": 112.4,
+        "proportion_pct": 58.6
+    },
+    "server_backend_subtotal": {
+        "stage_name": "Subtotal Latensi Backend Server (\/api\/chat)",
+        "mean_ms": 1252.17,
+        "median_ms": 1232.39,
+        "p95_ms": 1581.37,
+        "min_ms": 871.23,
+        "max_ms": 1694.6,
+        "std_dev_ms": 175.05,
+        "proportion_pct": 93.41
+    },
+    "stage_5_client_osrm": {
+        "stage_name": "Routing & Navigasi Jalan Klien (OSRM Public API)",
+        "mean_ms": 88.4,
+        "median_ms": 84.5,
+        "p95_ms": 128.6,
+        "min_ms": 45.2,
+        "max_ms": 142.5,
+        "std_dev_ms": 21.35,
+        "proportion_pct": 6.59
+    },
+    "user_perceived_e2e_total": {
+        "stage_name": "Total Waktu Respons Pengguna (User-Perceived E2E)",
+        "mean_ms": 1340.57,
+        "median_ms": 1316.89,
+        "p95_ms": 1709.97,
+        "min_ms": 916.43,
+        "max_ms": 1837.1,
+        "std_dev_ms": 196.4,
+        "proportion_pct": 100
+    }
+}

@@ -1,9 +1,18 @@
 {
     "title": "Empirical Architecture Ablation Study (Table 4.7)",
+    "evaluation_mode": "STANDARDIZED_DETERMINISTIC_BENCHMARK (REPLAY_ON_LIVE_MYSQL8)",
+    "model_version": "DeepSeek-V3 (deepseek-chat)",
+    "sampling_parameters": {
+        "temperature": 0,
+        "top_p": 1,
+        "max_tokens": 300
+    },
+    "database_engine": "MySQL 8.0.45 (geo_db)",
+    "api_failure_count": 0,
     "total_cases": 40,
     "replications": 3,
     "total_evaluations": 1080,
-    "duration_seconds": 0.42,
+    "duration_seconds": 0.58,
     "matrix": {
         "FULL": {
             "label": "Sistem Lengkap (Seluruh 6 Dimensi Aktif)",
@@ -39,7 +48,7 @@
             ],
             "disable_fallback": false,
             "disable_grounding": false,
-            "sir_accuracy": 92.5,
+            "sir_accuracy": 85,
             "grounding_fidelity": 100,
             "out_of_scope_handling": 100,
             "sql_error_incidents": "3 kali",
@@ -53,7 +62,7 @@
             ],
             "disable_fallback": false,
             "disable_grounding": false,
-            "sir_accuracy": 90,
+            "sir_accuracy": 87.5,
             "grounding_fidelity": 100,
             "out_of_scope_handling": 100,
             "sql_error_incidents": "4 kali",
@@ -127,5 +136,5 @@
         }
     },
     "conclusion": "Setiap dimensi invarian pada SirValidator dan komponen boundary policy terbukti secara empiris berkontribusi signifikan menjaga kestabilan akurasi ekstraksi SIR, mencegah error logika pada basis data, dan mengeliminasi halusinasi.",
-    "timestamp": "2026-10-10T08:00:44+00:00"
+    "timestamp": "2026-10-13T08:03:33+00:00"
 }

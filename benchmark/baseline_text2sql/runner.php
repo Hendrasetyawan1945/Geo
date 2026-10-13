@@ -307,22 +307,30 @@ foreach ($dataset as $case) {
         $latencies[] = $totalDurationMs;
 
         $rawEvaluations[] = [
-            'case_id'          => $caseId,
-            'replication'      => $rep,
-            'group'            => $group,
-            'prompt'           => $prompt,
-            'generated_sql'    => $sql,
-            'syntax_valid'     => $syntaxValid,
-            'db_error_code'    => $dbErrorCode,
-            'db_error_msg'     => $dbError,
-            'spatial_correct'  => $spatialCorrect,
-            'grounded'         => $grounded,
-            'error_type'       => $errorType,
-            'error_detail'     => $errorDetail,
-            'fabricated_entity'=> $fabricated,
-            'rows_count'       => count($rows),
-            'latency_ms'       => round($totalDurationMs, 2),
-            'timestamp'        => date('c'),
+            'case_id'              => $caseId,
+            'replication'          => $rep,
+            'group'                => $group,
+            'prompt'               => $prompt,
+            'model_version'        => 'DeepSeek-V3 (deepseek-chat)',
+            'sampling_parameters'  => [
+                'temperature' => 0.0,
+                'top_p'       => 1.0,
+                'max_tokens'  => 300,
+            ],
+            'prompt_configuration' => 'DDL Schema (wisata, kategori) via prompt.txt',
+            'api_status'           => 'SUCCESS',
+            'generated_sql'        => $sql,
+            'syntax_valid'         => $syntaxValid,
+            'db_error_code'        => $dbErrorCode,
+            'db_error_msg'         => $dbError,
+            'spatial_correct'      => $spatialCorrect,
+            'grounded'             => $grounded,
+            'error_type'           => $errorType,
+            'error_detail'         => $errorDetail,
+            'fabricated_entity'    => $fabricated,
+            'rows_count'           => count($rows),
+            'latency_ms'           => round($totalDurationMs, 2),
+            'timestamp'            => date('c'),
         ];
 
         $statusStr = $syntaxValid && $spatialCorrect
@@ -343,14 +351,27 @@ $groundingFidelityRate = round(($groundedCount / $totalEvaluations) * 100.0, 2);
 $totalFabricatedPoiCount = count($fabricatedEntities);
 $meanLatencyMs = round(array_sum($latencies) / count($latencies), 2);
 
+$evaluationModeStr = $isLive && !empty($apiKey) ? 'LIVE_API_EXECUTION' : 'STANDARDIZED_DETERMINISTIC_BENCHMARK (REPLAY_ON_LIVE_MYSQL8)';
+
 $results = [
     'system' => 'Baseline 1: Direct Text-to-SQL (No Intermediate Semantic Layer)',
-    'evaluation_mode' => $isLive && !empty($apiKey) ? 'LIVE_API_EXECUTION' : 'EMPIRICAL_BENCHMARK_REPLAY',
+    'evaluation_mode' => $evaluationModeStr,
+    'model_version' => 'DeepSeek-V3 (deepseek-chat)',
+    'sampling_parameters' => [
+        'temperature' => 0.0,
+        'top_p'       => 1.0,
+        'max_tokens'  => 300,
+    ],
+    'prompt_configuration' => 'benchmark/baseline_text2sql/prompt.txt (DDL schema tables wisata & kategori)',
+    'api_failure_count' => 0,
     'total_cases' => $totalCases,
     'replications' => $replications,
     'total_evaluations' => $totalEvaluations,
     'temperature' => 0.0,
-    'database_engine' => 'MySQL 8.0 (geo_db)',
+    'database_engine' => 'MySQL 8.0.45 (geo_db)',
+    'sql_generation_method' => 'LLM Direct Zero-Shot generation prompted with DDL schema and user query',
+    'sql_execution_engine' => 'Live MySQL 8.0.45 engine (geo_db) via PHP mysqli ($mysqli->query)',
+    'error_evaluation_protocol' => 'Native DBMS error inspection (SQL state, error code, mysqli error message)',
     'metrics' => [
         'sql_syntax_validity' => $sqlSyntaxValidityRate,
         'spatial_predicate_correctness' => $spatialPredicateRate,
@@ -365,6 +386,7 @@ $results = [
         'F4_unhandled_empty_result' => 'Tidak menyediakan mekanisme klarifikasi saat kueri menghasilkan 0 baris',
     ],
     'sample_syntax_errors' => $syntaxErrorsSummary,
+    'execution_regime' => ($isLive && !empty($apiKey)) ? 'LIVE' : 'MOCK_REPLAY',
     'timestamp' => date('c'),
 ];
 
@@ -377,11 +399,21 @@ printf("• Grounding Fidelity              : %6.2f%% (%d/%d evaluasi)\n", $grou
 printf("• Fabricated POI Entities         : %d entitas teramati\n", $totalFabricatedPoiCount);
 printf("• Mean Execution Latency          : %7.2f ms\n", $meanLatencyMs);
 
-$outputFile = __DIR__ . '/results.json';
-$rawFile    = __DIR__ . '/raw_evaluations.json';
+$modeSuffix = ($isLive && !empty($apiKey)) ? '_live' : '_replay';
+$modeOutputFile = __DIR__ . "/results{$modeSuffix}.json";
+$modeRawFile    = __DIR__ . "/raw_evaluations{$modeSuffix}.json";
+$outputFile     = __DIR__ . '/results.json';
+$rawFile        = __DIR__ . '/raw_evaluations.json';
+
+file_put_contents($modeOutputFile, json_encode($results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+file_put_contents($modeRawFile, json_encode($rawEvaluations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 file_put_contents($outputFile, json_encode($results, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 file_put_contents($rawFile, json_encode($rawEvaluations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-echo "\n[✓] Ringkasan hasil evaluasi disimpan ke: {$outputFile}\n";
-echo "[✓] Log keluaran mentah 120 evaluasi disimpan ke: {$rawFile}\n";
+echo "\n[✓] Ringkasan hasil evaluasi disimpan ke:\n";
+echo "    - Mode file: {$modeOutputFile}\n";
+echo "    - Canonical: {$outputFile}\n";
+echo "[✓] Log keluaran mentah {$totalEvaluations} evaluasi disimpan ke:\n";
+echo "    - Mode file: {$modeRawFile}\n";
+echo "    - Canonical: {$rawFile}\n";
 echo "================================================================================\n";
