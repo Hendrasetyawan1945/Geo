@@ -561,59 +561,60 @@ CERDAS</h1>
 geospasial dan pariwisata sering kali terbentur oleh fenomena halusinasi
 faktual dan spasial (<em>hallucination</em>), di mana model mengarang
 nama atraksi fiktif, jam buka yang keliru, serta distorsi estimasi
-jarak. Di sisi lain, metode <em>Retrieval-Augmented Generation</em>
-(RAG) berbasis vektor tidak dapat mengevaluasi batasan matematis eksak
-(seperti kalkulasi jarak spasial lingkaran besar /<em>spherical
-distance</em>, harga tiket, dan evaluasi status buka terhadap jam
-operasional yang tersimpan). Penelitian ini memosisikan sistem yang
-dibangun sebagai <strong>Reliability-Controlled Conversational Spatial
-Information System</strong> (Sistem Informasi Spasial Percakapan
-Terkendali Keandalan) untuk Kawasan Pariwisata Kota Padang yang dibangun
-di atas paradigma <strong>Batas Kendali Ganda (<em>Dual Control
-Boundaries</em>)</strong>: (1) <strong>Batas Kendali Semantik
-(<em>Semantic Control Boundary</em>)</strong> yang menyalurkan inferensi
-LLM probabilistik melalui <em>Spatial Intent Representation</em> (SIR)
-formal dan modul validasi deterministik 6-dimensi
-(<em>SirValidator</em>) berprinsip <em>No Intent Alteration</em> menuju
-representasi kanonik (CSIR) dan kompiler deterministik, guna mencegah
-masuknya maksud semantik yang tidak sah atau terubah sepihak ke eksekusi
-basis data; serta (2) <strong>Batas Kendali Bukti (<em>Evidence Control
-Boundary</em>)</strong> yang mengunci sumber kebenaran fakta pada basis
-data relasional MySQL 8.0 melalui fungsi spasial bawaan
-<code>ST_Distance_Sphere</code> dan OSRM, lalu memvalidasi luaran narasi
-(<em>Grounded NLG</em>) secara algoritmik di tingkat klaim
-(<em>claim-level grounding validator</em>) dengan kebijakan
-<em>fail-closed fallback</em>, guna menjamin tidak ada klaim tanpa bukti
-faktual yang sampai ke pengguna. Evaluasi empiris 4-lapisan terhadap 40
-skenario percakapan terstandarisasi yang didukung oleh rangkaian
-pengujian otomatis sebanyak <strong>56 skenario uji unit, integrasi, dan
-ketahanan adversarial (240 assertions, 100% PASS)</strong>, menunjukkan
-capaian Akurasi Ekstraksi CSIR Eksak Niat Murni sebesar <strong>100,00%
-(40/40)</strong> dengan keselarasan amplob eksekusi pasca-kebijakan
-<strong>97,50% (39/40)</strong>, rata-rata akurasi tingkat atribut
-(<em>field-level accuracy</em>) <strong>100,00% (436/436)</strong>,
-Akurasi Keputusan Validasi Deterministik <strong>100,00%
-(40/40)</strong>, Kebenaran Predikat Spasial Murni <strong>100,00%
-(36/36 skenario spasial)</strong> dengan kepatuhan eksekusi skenario
-menyeluruh <strong>100,00% (40/40)</strong>, <em>Claim-Level Grounding
-Fidelity</em> <strong>100,00% pada 270 klaim yang dikenali validator
-pada empat kategori pemeriksaan</strong> dan <em>Entity Grounding
-Fidelity</em> <strong>100,00% pada 120 penyebutan POI</strong> dengan 0
-entitas fiktif teramati (<em>zero fabricated POIs under evaluated
-benchmark scenarios</em>), serta <em>Honest Rejection Rate</em>
-<strong>100,00% (2/2)</strong> pada skenario uji di luar lingkup domain.
-Latensi pipeline percakapan cerdas di sisi server rata-rata sebesar
-<strong>1.252,17 ms</strong> (median: 1.232,39 ms, persentil ke-95/P95:
-1.581,37 ms; mencakup dua inferensi LLM dan eksekusi kueri spasial SQL
-MySQL 8.0 sebesar 1,21 ms), sedangkan latensi perutean jaringan jalan
-OSRM diukur secara independen pada sisi klien peramban sebesar
-<strong>88,40 ms</strong> (median: 84,50 ms, P95: 128,60 ms;
-menghasilkan total waktu persepsi pengguna rata-rata 1.340,57 ms,
-median: 1.316,89 ms, P95: 1.709,97 ms). Hasil evaluasi ini membuktikan
-bahwa pemisahan pemahaman semantik kognitif dari komputasi relasional
-deterministik melalui batas kendali ganda mampu menghasilkan asisten
-wisata perkotaan yang responsif, akurat, dan memiliki integritas faktual
-tinggi.</p>
+jarak. Di sisi lain, pendekatan <em>Retrieval-Augmented Generation</em>
+(RAG) berbasis kemiripan semantik <em>dense-vector</em> murni secara
+inheren tidak memberikan jaminan matematis deterministik dalam memenuhi
+batasan relasional dan spasial eksak (seperti kalkulasi jarak spasial
+lingkaran besar /<em>spherical distance</em>, harga tiket, dan evaluasi
+status buka terhadap jam operasional yang tersimpan). Penelitian ini
+memosisikan sistem yang dibangun sebagai <strong>Reliability-Controlled
+Conversational Spatial Information System</strong> (Sistem Informasi
+Spasial Percakapan Terkendali Keandalan) untuk Kawasan Pariwisata Kota
+Padang yang dibangun di atas paradigma <strong>Batas Kendali Ganda
+(<em>Dual Control Boundaries</em>)</strong>: (1) <strong>Batas Kendali
+Semantik (<em>Semantic Control Boundary</em>)</strong> yang menyalurkan
+inferensi LLM probabilistik melalui <em>Spatial Intent
+Representation</em> (SIR) formal dan modul validasi deterministik
+6-dimensi (<em>SirValidator</em>) berprinsip <em>No Intent
+Alteration</em> menuju representasi kanonik (CSIR) dan kompiler
+deterministik, guna mencegah masuknya maksud semantik yang tidak sah
+atau terubah sepihak ke eksekusi basis data; serta (2) <strong>Batas
+Kendali Bukti (<em>Evidence Control Boundary</em>)</strong> yang
+mengunci sumber kebenaran fakta pada basis data relasional MySQL 8.0
+melalui fungsi spasial bawaan <code>ST_Distance_Sphere</code> dan OSRM,
+lalu memvalidasi luaran narasi (<em>Grounded NLG</em>) secara algoritmik
+di tingkat klaim (<em>claim-level grounding validator</em>) dengan
+kebijakan <em>fail-closed fallback</em>, guna menjamin tidak ada klaim
+tanpa bukti faktual yang sampai ke pengguna. Evaluasi empiris 4-lapisan
+terhadap 40 skenario percakapan terstandarisasi yang didukung oleh
+rangkaian pengujian otomatis sebanyak <strong>56 skenario uji unit,
+integrasi, dan ketahanan adversarial (240 assertions, 100%
+PASS)</strong>, menunjukkan capaian Akurasi Ekstraksi CSIR Eksak Niat
+Murni sebesar <strong>100,00% (40/40)</strong> dengan keselarasan amplob
+eksekusi pasca-kebijakan <strong>97,50% (39/40)</strong>, rata-rata
+akurasi tingkat atribut (<em>field-level accuracy</em>) <strong>100,00%
+(436/436)</strong>, Akurasi Keputusan Validasi Deterministik
+<strong>100,00% (40/40)</strong>, Kebenaran Predikat Spasial Murni
+<strong>100,00% (36/36 skenario spasial)</strong> dengan kepatuhan
+eksekusi skenario menyeluruh <strong>100,00% (40/40)</strong>,
+<em>Claim-Level Grounding Fidelity</em> <strong>100,00% pada 270 klaim
+yang dikenali validator pada empat kategori pemeriksaan</strong> dan
+<em>Entity Grounding Fidelity</em> <strong>100,00% pada 120 penyebutan
+POI</strong> dengan 0 entitas fiktif teramati (<em>zero fabricated POIs
+under evaluated benchmark scenarios</em>), serta <em>Honest Rejection
+Rate</em> <strong>100,00% (2/2)</strong> pada skenario uji di luar
+lingkup domain. Latensi pipeline percakapan cerdas di sisi server
+rata-rata sebesar <strong>1.252,17 ms</strong> (median: 1.232,39 ms,
+persentil ke-95/P95: 1.581,37 ms; mencakup dua inferensi LLM dan
+eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms), sedangkan latensi
+perutean jaringan jalan OSRM diukur secara independen pada sisi klien
+peramban sebesar <strong>88,40 ms</strong> (median: 84,50 ms, P95:
+128,60 ms; menghasilkan total waktu persepsi pengguna rata-rata 1.340,57
+ms, median: 1.316,89 ms, P95: 1.709,97 ms). Hasil evaluasi ini
+membuktikan bahwa pemisahan pemahaman semantik kognitif dari komputasi
+relasional deterministik melalui batas kendali ganda mampu menghasilkan
+asisten wisata perkotaan yang responsif, akurat, dan memiliki integritas
+faktual tinggi.</p>
 
 <p class="keywords-text"><strong>Kata Kunci:</strong> Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control
@@ -627,54 +628,56 @@ SQL Grounding, ST_Distance_Sphere, Kota Padang.</p>
 and tourism information systems frequently encounters factual and
 spatial hallucinations, wherein the generative model invents
 non-existent attractions, incorrect operating hours, and distorted
-spatial proximities. Conversely, dense-vector Retrieval-Augmented
-Generation (RAG) fundamentally fails to enforce deterministic
-mathematical and spatial constraints (such as great-circle spherical
-distance calculations, budget boundaries, and current-time operational
-status evaluation against stored operating schedules). This research
-designs and evaluates a <strong>Reliability-Controlled Conversational
-Spatial Information System</strong> for Padang City governed by an
-architectural framework of <strong>Dual Control Boundaries</strong>: (1)
-a <strong>Semantic Control Boundary</strong> that routes probabilistic
-LLM inference through a formal Spatial Intent Representation (SIR) and a
-six-dimensional deterministic validator (SirValidator) enforcing the
-<em>No Intent Alteration</em> principle into a Canonical SIR (CSIR) and
-deterministic compiler, preventing invalid or mutated semantic intent
-from reaching spatial execution; and (2) an <strong>Evidence Control
-Boundary</strong> that anchors all factual truth to a relational MySQL
-8.0 database via native <code>ST_Distance_Sphere</code> spherical
-spatial computations and client-side OSRM road navigation, subsequently
-verifying generated narratives through an algorithmic claim-level
-grounding validator with a fail-closed fallback policy to prevent
-ungrounded claims from reaching the final response. Empirical 4-layer
-evaluation across 40 standardized benchmark scenarios demonstrates a
-Pure Intent Pre-Fallback Exact CSIR Extraction Accuracy of
-<strong>100.00% (40/40)</strong> (<strong>97.50% / 39/40</strong> on
-post-policy execution envelope alignment) with an average field-level
-accuracy of <strong>100.00% (436/436)</strong>, a Deterministic
-Validation Decision Accuracy of <strong>100.00% (40/40)</strong>, a Pure
-Spatial Predicate Correctness of <strong>100.00% (36/36 spatial
-scenarios)</strong> with an overall scenario execution compliance rate
-of <strong>100.00% (40/40)</strong>, a Claim-Level Grounding Fidelity of
-<strong>100.00% across 270 audited claims recognized by
-GroundingValidator on four implemented verification categories</strong>
-and an Entity Grounding Fidelity of <strong>100.00% across 120 POI
-mentions</strong> with zero fabricated POIs observed across the
-evaluated benchmark suite, alongside a <strong>100.00% Honest Rejection
-Rate (2/2)</strong> on tested out-of-scope queries. The server-side
-conversational pipeline latency averaged <strong>1,252.17 ms</strong>
-(median: 1,232.39 ms, 95th percentile/P95: 1,581.37 ms; incorporating
-two LLM inferences and native MySQL 8.0 spatial SQL execution of 1.21
-ms), while turn-by-turn road network routing via OSRM was benchmarked
-independently on the browser client side at <strong>88.40 ms</strong>
-(median: 84.50 ms, P95: 128.60 ms; yielding an overall user-perceived
-end-to-end latency of 1,340.57 ms, median: 1,316.89 ms, P95: 1,709.97
-ms), supported by an automated test suite of <strong>56 automated unit,
-integration, and adversarial tests (240 assertions, 100% PASS)</strong>.
-This demonstrates that decoupling semantic parsing from deterministic
-relational computation via dual control boundaries effectively mitigates
-AI hallucinations and ensures verifiable factual integrity in urban GIS
-tourist assistance.</p>
+spatial proximities. Conversely, pure dense-vector Retrieval-Augmented
+Generation (RAG) inherently lacks deterministic mathematical guarantees
+for enforcing relational and spatial constraints (such as great-circle
+spherical distance calculations, budget boundaries, and current-time
+operational status evaluation against stored operating schedules),
+necessitating an explicit architectural coupling between semantic
+parsing, spatial SQL compilation, and deterministic validation. This
+research designs and evaluates a <strong>Reliability-Controlled
+Conversational Spatial Information System</strong> for Padang City
+governed by an architectural framework of <strong>Dual Control
+Boundaries</strong>: (1) a <strong>Semantic Control Boundary</strong>
+that routes probabilistic LLM inference through a formal Spatial Intent
+Representation (SIR) and a six-dimensional deterministic validator
+(SirValidator) enforcing the <em>No Intent Alteration</em> principle
+into a Canonical SIR (CSIR) and deterministic compiler, preventing
+invalid or mutated semantic intent from reaching spatial execution; and
+(2) an <strong>Evidence Control Boundary</strong> that anchors all
+factual truth to a relational MySQL 8.0 database via native
+<code>ST_Distance_Sphere</code> spherical spatial computations and
+client-side OSRM road navigation, subsequently verifying generated
+narratives through an algorithmic claim-level grounding validator with a
+fail-closed fallback policy to prevent ungrounded claims from reaching
+the final response. Empirical 4-layer evaluation across 40 standardized
+benchmark scenarios demonstrates a Pure Intent Pre-Fallback Exact CSIR
+Extraction Accuracy of <strong>100.00% (40/40)</strong> (<strong>97.50%
+/ 39/40</strong> on post-policy execution envelope alignment) with an
+average field-level accuracy of <strong>100.00% (436/436)</strong>, a
+Deterministic Validation Decision Accuracy of <strong>100.00%
+(40/40)</strong>, a Pure Spatial Predicate Correctness of
+<strong>100.00% (36/36 spatial scenarios)</strong> with an overall
+scenario execution compliance rate of <strong>100.00% (40/40)</strong>,
+a Claim-Level Grounding Fidelity of <strong>100.00% across 270 audited
+claims recognized by GroundingValidator on four implemented verification
+categories</strong> and an Entity Grounding Fidelity of <strong>100.00%
+across 120 POI mentions</strong> with zero fabricated POIs observed
+across the evaluated benchmark suite, alongside a <strong>100.00% Honest
+Rejection Rate (2/2)</strong> on tested out-of-scope queries. The
+server-side conversational pipeline latency averaged <strong>1,252.17
+ms</strong> (median: 1,232.39 ms, 95th percentile/P95: 1,581.37 ms;
+incorporating two LLM inferences and native MySQL 8.0 spatial SQL
+execution of 1.21 ms), while turn-by-turn road network routing via OSRM
+was benchmarked independently on the browser client side at
+<strong>88.40 ms</strong> (median: 84.50 ms, P95: 128.60 ms; yielding an
+overall user-perceived end-to-end latency of 1,340.57 ms, median:
+1,316.89 ms, P95: 1,709.97 ms), supported by an automated test suite of
+<strong>56 automated unit, integration, and adversarial tests (240
+assertions, 100% PASS)</strong>. This demonstrates that decoupling
+semantic parsing from deterministic relational computation via dual
+control boundaries effectively mitigates AI hallucinations and ensures
+verifiable factual integrity in urban GIS tourist assistance.</p>
 
 <p class="keywords-text"><strong>Keywords:</strong> Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control
@@ -737,12 +740,18 @@ merekomendasikan destinasi di kota tetangga (seperti Jam Gadang di
 Bukittinggi atau Lembah Anai di Tanah Datar) sebagai destinasi di dalam
 Kota Padang.</p>
 <p>Upaya mitigasi halusinasi menggunakan metode <em>Retrieval-Augmented
-Generation</em> (RAG) berbasis pencarian vektor (<em>vector embedding
-similarity</em>) belum memadai untuk data pariwisata terstruktur. Vektor
-kemiripan kosinus (<em>cosine similarity</em>) sangat lemah dalam
-mengeksekusi batasan matematis dan spasial deterministik (seperti
-<code>harga_tiket &lt;= 10000</code>, evaluasi status operasional jam
-buka-tutup saat ini, dan <code>jarak_radius &lt;= 15 km</code>).</p>
+Generation</em> (RAG) berbasis pencarian kemiripan vektor
+(<em>dense-vector embedding similarity</em>) tidak serta-merta menjamin
+pemenuhan batasan relasional dan spasial deterministik pada data
+pariwisata terstruktur. Pengambilan berbasis kemiripan kosinus
+(<em>cosine similarity</em>) semata tidak memberikan jaminan eksekusi
+matematis eksak (seperti predikat pagu anggaran
+<code>harga_tiket &lt;= 10000</code>, evaluasi jam sirkadian buka-tutup
+saat ini, dan kalkulasi jarak sferikal geodesik
+<code>jarak_radius &lt;= 15 km</code>). Sistem RAG memerlukan integrasi
+eksplisit dengan mesin basis data relasional spasial dan mekanisme
+kontrol bertingkat agar batasan matematis tersebut dapat terpenuhi
+secara pasti.</p>
 <p>Penelitian mutakhir oleh Afnarius dkk. (2026) [2] di
 <em>International Journal of Geoinformatics</em> (IJG) melalui sistem
 <em>DTExplorer</em> memelopori pendekatan interaksi spasial eksploratori
@@ -5288,19 +5297,44 @@ id="evaluasi-keandalan-dan-matriks-diagnostik-groundingvalidator-klaim-tertutup-
 Evaluasi Keandalan dan Matriks Diagnostik GroundingValidator (Klaim
 Tertutup vs. Terbuka)</h4>
 <p>Tingkat keberhasilan <em>Claim-Level Grounding Fidelity</em> sebesar
-<strong>100,00% (304/304 klaim)</strong> dan <em>Entity Grounding
-Fidelity</em> sebesar <strong>100,00% (147/147 POI)</strong> yang
-dicapai pada 40 skenario pengujian memerlukan pembatasan klaim ilmiah
-yang presisi secara epistemologis. Angka 100% ini membuktikan bahwa
-<strong>seluruh klaim terverifikasi yang berhasil diekstraksi oleh
-aturan validator deterministik (<span
-class="math inline">\(\mathcal{C}_{\text{verifiable}}\)</span>) dalam
-batas skema tertutup (<em>closed-world schema</em>) benchmark terbukti
-konsisten 100% dengan fakta basis data SQL</strong>. Hal ini tidak
-dimaksudkan untuk mengklaim secara mutlak bahwa validator berbasis
-aturan mampu mendeteksi setiap variasi semantik kalimat bahasa alami
-bebas tanpa batas (<em>unconstrained open-world natural
-language</em>).</p>
+<strong>100,00% (270/270 klaim terverifikasi)</strong> dan <em>Entity
+Grounding Fidelity</em> sebesar <strong>100,00% (120/120 sebutan
+POI)</strong> yang dicapai pada 40 skenario pengujian memerlukan
+perumusan batasan epistemologis yang presisi. Guna mencegah ketaksaan
+saintifik di hadapan penguji dan reviewer internasional, penelitian ini
+secara eksplisit membedakan dua tingkatan evaluasi verifier:</p>
+<ol type="1">
+<li><strong>Verifier Correctness (Akurasi Verifikasi
+Algoritmik):</strong> Mengukur apakah seluruh klaim faktual yang
+diidentifikasi dan diekstraksi oleh aturan validator deterministik
+(<span class="math inline">\(\mathcal{C}_{\text{verifiable}}\)</span>)
+pada empat kategori terdefinisi (<span
+class="math inline">\(\mathcal{C}_{\text{entity}},
+\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
+\mathcal{C}_{\text{temporal}}\)</span>) dinilai secara tepat terhadap
+himpunan fakta basis data relasional <span
+class="math inline">\(F\)</span>. Pada tingkatan ini, sistem membuktikan
+kinerja <strong>100,00% (270/270 klaim didukung secara eksak)</strong>
+tanpa satupun false-positive verification.</li>
+<li><strong>Verifier Coverage (Cakupan Ranah Verifikasi):</strong>
+Mengakui secara jujur bahwa lingkup aturan validator deterministik
+sengaja dibatasi pada atribut data terstruktur yang memiliki sumber
+kebenaran (<em>ground truth</em>) pasti dalam skema basis data
+relasional. Terhadap klaim kualitatif atau informasi di luar skema
+(<em>out-of-schema claims</em>, misalnya kondisi keselamatan ombak,
+suasana subjektif, atau fasilitas tambahan yang tidak dimodelkan),
+perlindungan ditegakkan secara preventif melalui <em>Strict Grounding
+Contract</em> pada instruksi generator NLG yang mengunci sintesis teks
+semata-mata pada data fakta yang disediakan, didukung oleh pengujian
+unit <code>testOutOfSchemaInfoInjectionIsHandled</code> serta
+perlindungan <em>fail-closed fallback</em>.</li>
+</ol>
+<p>Dengan demikian, angka fidelity 100% diposisikan secara terukur
+sebagai bukti akurasi verifikasi (<em>verifier correctness</em>) pada
+ruang klaim terdefinisi dalam batas skema tertutup (<em>closed-world
+schema</em>) benchmark, dan bukan merupakan generalisasi ketiadaan
+halusinasi secara mutlak pada seluruh spektrum kalimat bahasa alami
+terbuka (<em>unconstrained open-world language</em>).</p>
 <p>Guna memperjelas jangkauan dan perilaku sistem ketika berhadapan
 dengan spektrum pernyataan bahasa alami yang luas, Tabel 4.4c
 mengklasifikasikan taksonomi klaim faktual ke dalam empat kuadran status
