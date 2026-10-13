@@ -588,39 +588,39 @@ Boundary</em>)</strong> yang mengunci fakta pada basis data relasional
 MySQL 8.0 melalui fungsi spasial bawaan <code>ST_Distance_Sphere</code>
 dan OSRM, lalu memvalidasi luaran narasi secara algoritmik di tingkat
 klaim (<em>claim-level grounding validator</em>) dengan kebijakan
-<em>fail-closed fallback</em> deterministik untuk memastikan tidak ada
-klaim tanpa bukti faktual yang sampai ke pengguna. Pengujian empiris
-4-lapisan terhadap 40 skenario percakapan <em>benchmark</em>
-terstandarisasi pada 22 destinasi wisata Kota Padang, yang didukung oleh
-rangkaian pengujian otomatis sebanyak <strong>56 skenario uji unit,
-integrasi, dan ketahanan adversarial (240 assertions, 100%
-PASS)</strong>, menunjukkan akurasi ekstraksi CSIR eksak niat murni
-(<em>Exact CSIR Match Rate</em>) sebesar <strong>100,00%
-(40/40)</strong> dengan keselarasan amplob eksekusi pasca-kebijakan
-<strong>97,50% (39/40)</strong>, rata-rata akurasi tingkat atribut
-(<em>field-level</em>) <strong>100,00% (436/436)</strong>, akurasi
-keputusan validasi <strong>100,00% (40/40)</strong>, kebenaran predikat
-spasial murni sebesar <strong>100,00% (36/36 skenario spasial)</strong>
-dengan kepatuhan eksekusi skenario menyeluruh <strong>100,00%
-(40/40)</strong>, <em>Entity Fabrication Rate</em>
-<strong>0,00%</strong> (0 objek wisata terfabrikasi pada skenario yang
-dievaluasi), <em>Claim-Level Grounding Fidelity</em> <strong>100,00%
-(270/270 klaim terverifikasi pada empat kategori pemeriksaan)</strong>,
-<em>Entity Grounding Fidelity</em> <strong>100,00% (120/120 sebutan
-POI)</strong>, serta <em>Honest Rejection Rate</em> <strong>100,00%
-(2/2)</strong> pada permintaan di luar yurisdiksi yang diuji. Latensi
-pipeline percakapan cerdas di sisi server rata-rata sebesar
-<strong>1.252,17 ms</strong> (median: 1.232,39 ms, persentil ke-95/P95:
-1.581,37 ms; mencakup dua panggilan inferensi LLM dan eksekusi kueri
-spasial SQL basis data sebesar 1,21 ms), sedangkan latensi perutean
-jaringan jalan OSRM diukur secara independen pada sisi klien peramban
-sebesar <strong>88,40 ms</strong> (median: 84,50 ms, P95: 128,60 ms;
-menghasilkan total waktu respons persepsi pengguna rata-rata sebesar
-1.340,57 ms, median: 1.316,89 ms, P95: 1.709,97 ms). Temuan ini
-membuktikan bahwa pembatasan kewenangan LLM melalui batas kendali ganda
-mampu menghadirkan antarmuka percakapan yang luwes sekaligus menjamin
-integritas faktual tanpa halusinasi pada skenario benchmark yang
-dievaluasi.</p>
+<em>fail-closed fallback</em> deterministik guna memverifikasi
+keselarasan klaim faktual pada empat kategori pemeriksaan skema tertutup
+sebelum respons disajikan kepada pengguna. Pengujian empiris 4-lapisan
+terhadap 40 skenario percakapan <em>benchmark</em> terstandarisasi pada
+22 destinasi wisata Kota Padang, yang didukung oleh rangkaian pengujian
+otomatis sebanyak <strong>56 skenario uji unit, integrasi, dan ketahanan
+adversarial (240 assertions, 100% PASS)</strong>, menunjukkan akurasi
+ekstraksi CSIR eksak niat murni (<em>Exact CSIR Match Rate</em>) sebesar
+<strong>100,00% (40/40)</strong> dengan keselarasan amplob eksekusi
+pasca-kebijakan <strong>97,50% (39/40)</strong>, rata-rata akurasi
+tingkat atribut (<em>field-level</em>) <strong>100,00%
+(436/436)</strong>, akurasi keputusan validasi <strong>100,00%
+(40/40)</strong>, kebenaran predikat spasial murni sebesar
+<strong>100,00% (36/36 skenario spasial)</strong> dengan kepatuhan
+eksekusi skenario menyeluruh <strong>100,00% (40/40)</strong>,
+<em>Entity Fabrication Rate</em> <strong>0,00%</strong> (0 objek wisata
+terfabrikasi pada skenario yang dievaluasi), <em>Claim-Level Grounding
+Fidelity</em> <strong>100,00% (270/270 klaim terverifikasi pada empat
+kategori pemeriksaan)</strong>, <em>Entity Grounding Fidelity</em>
+<strong>100,00% (120/120 sebutan POI)</strong>, serta <em>Honest
+Rejection Rate</em> <strong>100,00% (2/2)</strong> pada permintaan di
+luar yurisdiksi yang diuji. Latensi pipeline percakapan cerdas di sisi
+server rata-rata sebesar <strong>1.252,17 ms</strong> (median: 1.232,39
+ms, persentil ke-95/P95: 1.581,37 ms; mencakup dua panggilan inferensi
+LLM dan eksekusi kueri spasial SQL basis data sebesar 1,21 ms),
+sedangkan latensi perutean jaringan jalan OSRM diukur secara independen
+pada sisi klien peramban sebesar <strong>88,40 ms</strong> (median:
+84,50 ms, P95: 128,60 ms; menghasilkan total waktu respons persepsi
+pengguna rata-rata sebesar 1.340,57 ms, median: 1.316,89 ms, P95:
+1.709,97 ms). Temuan ini membuktikan bahwa pembatasan kewenangan LLM
+melalui batas kendali ganda mampu menghadirkan antarmuka percakapan yang
+luwes sekaligus menjamin integritas faktual tanpa halusinasi pada
+skenario benchmark yang dievaluasi.</p>
 
 <p class="keywords-text"><strong>Kata Kunci:</strong> <em>Reliability-Controlled
 Conversational Spatial Information System, Dual Control Boundaries,

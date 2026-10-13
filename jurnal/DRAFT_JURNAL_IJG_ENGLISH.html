@@ -593,39 +593,39 @@ grounding validator}\)</span>) that anchors all factual truth to a
 relational MySQL 8.0 database via native <code>ST_Distance_Sphere</code>
 spherical spatial computations and OSRM road navigation, subsequently
 verifying generated narratives through an algorithmic claim-level
-grounding validator with a fail-closed fallback policy to prevent
-ungrounded claims from reaching the final user response. Empirical
-4-layer evaluation across 40 standardized benchmark query scenarios on
-22 curated tourism destinations in Padang City, complemented by an
-automated test suite of <strong>56 automated unit, integration, and
-adversarial tests (240 assertions, 100% pass)</strong>, demonstrated a
-Pure Intent Pre-Fallback Exact CSIR semantic extraction accuracy of
-<strong>100.00% (40/40)</strong> (<strong>97.50% / 39/40</strong> on
-post-policy execution envelope alignment) with an average field-level
-accuracy of <strong>100.00% (436/436)</strong>, a validation decision
-accuracy of <strong>100.00% (40/40)</strong>, a pure spatial predicate
-correctness of <strong>100.00% (36/36 spatial scenarios)</strong>
-alongside an overall scenario execution compliance rate of
-<strong>100.00% (40/40)</strong>, an Entity Fabrication Rate of
-<strong>0.00%</strong> (zero fabricated POIs were observed across the
-evaluated benchmark scenarios), a Claim-Level Grounding Fidelity of
-<strong>100.00% across 270 audited factual claims recognized by
-GroundingValidator on four implemented verification categories</strong>,
-an Entity Grounding Fidelity of <strong>100.00% across 120 POI
-mentions</strong>, and an Honest Rejection Rate of <strong>100.00%
-(2/2)</strong> on tested out-of-scope requests. Average server-side
-conversational pipeline latency was <strong>1,252.17 ms</strong>
-(median: 1,232.39 ms, 95th percentile/P95: 1,581.37 ms; incorporating
-two LLM inferences and native MySQL 8.0 spatial SQL execution of 1.21
-ms), while turn-by-turn road network routing via OSRM was benchmarked
-independently on the browser client side at <strong>88.40 ms</strong>
-(median: 84.50 ms, P95: 128.60 ms; yielding an overall user-perceived
-end-to-end latency of 1,340.57 ms, median: 1,316.89 ms, P95: 1,709.97
-ms). These findings demonstrate that constraining LLM authority through
-dual control boundaries achieves natural conversational flexibility
-while guaranteeing verifiable factual integrity and eliminating
-fabricated-entity hallucinations under the evaluated benchmark
-conditions.</p>
+grounding validator with a fail-closed fallback policy, auditing factual
+claim concordance across the four defined closed-world schema dimensions
+before narrative presentation to the user. Empirical 4-layer evaluation
+across 40 standardized benchmark query scenarios on 22 curated tourism
+destinations in Padang City, complemented by an automated test suite of
+<strong>56 automated unit, integration, and adversarial tests (240
+assertions, 100% pass)</strong>, demonstrated a Pure Intent Pre-Fallback
+Exact CSIR semantic extraction accuracy of <strong>100.00%
+(40/40)</strong> (<strong>97.50% / 39/40</strong> on post-policy
+execution envelope alignment) with an average field-level accuracy of
+<strong>100.00% (436/436)</strong>, a validation decision accuracy of
+<strong>100.00% (40/40)</strong>, a pure spatial predicate correctness
+of <strong>100.00% (36/36 spatial scenarios)</strong> alongside an
+overall scenario execution compliance rate of <strong>100.00%
+(40/40)</strong>, an Entity Fabrication Rate of <strong>0.00%</strong>
+(zero fabricated POIs were observed across the evaluated benchmark
+scenarios), a Claim-Level Grounding Fidelity of <strong>100.00% across
+270 audited factual claims recognized by GroundingValidator on four
+implemented verification categories</strong>, an Entity Grounding
+Fidelity of <strong>100.00% across 120 POI mentions</strong>, and an
+Honest Rejection Rate of <strong>100.00% (2/2)</strong> on tested
+out-of-scope requests. Average server-side conversational pipeline
+latency was <strong>1,252.17 ms</strong> (median: 1,232.39 ms, 95th
+percentile/P95: 1,581.37 ms; incorporating two LLM inferences and native
+MySQL 8.0 spatial SQL execution of 1.21 ms), while turn-by-turn road
+network routing via OSRM was benchmarked independently on the browser
+client side at <strong>88.40 ms</strong> (median: 84.50 ms, P95: 128.60
+ms; yielding an overall user-perceived end-to-end latency of 1,340.57
+ms, median: 1,316.89 ms, P95: 1,709.97 ms). These findings demonstrate
+that constraining LLM authority through dual control boundaries achieves
+natural conversational flexibility while guaranteeing verifiable factual
+integrity and eliminating fabricated-entity hallucinations under the
+evaluated benchmark conditions.</p>
 
 <p class="keywords-text"><strong>Keywords:</strong> <em>Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control

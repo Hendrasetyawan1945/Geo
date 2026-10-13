@@ -584,37 +584,38 @@ mengunci sumber kebenaran fakta pada basis data relasional MySQL 8.0
 melalui fungsi spasial bawaan <code>ST_Distance_Sphere</code> dan OSRM,
 lalu memvalidasi luaran narasi (<em>Grounded NLG</em>) secara algoritmik
 di tingkat klaim (<em>claim-level grounding validator</em>) dengan
-kebijakan <em>fail-closed fallback</em>, guna menjamin tidak ada klaim
-tanpa bukti faktual yang sampai ke pengguna. Evaluasi empiris 4-lapisan
-terhadap 40 skenario percakapan terstandarisasi yang didukung oleh
-rangkaian pengujian otomatis sebanyak <strong>56 skenario uji unit,
-integrasi, dan ketahanan adversarial (240 assertions, 100%
-PASS)</strong>, menunjukkan capaian Akurasi Ekstraksi CSIR Eksak Niat
-Murni sebesar <strong>100,00% (40/40)</strong> dengan keselarasan amplob
-eksekusi pasca-kebijakan <strong>97,50% (39/40)</strong>, rata-rata
-akurasi tingkat atribut (<em>field-level accuracy</em>) <strong>100,00%
-(436/436)</strong>, Akurasi Keputusan Validasi Deterministik
-<strong>100,00% (40/40)</strong>, Kebenaran Predikat Spasial Murni
-<strong>100,00% (36/36 skenario spasial)</strong> dengan kepatuhan
-eksekusi skenario menyeluruh <strong>100,00% (40/40)</strong>,
-<em>Claim-Level Grounding Fidelity</em> <strong>100,00% pada 270 klaim
-yang dikenali validator pada empat kategori pemeriksaan</strong> dan
-<em>Entity Grounding Fidelity</em> <strong>100,00% pada 120 penyebutan
-POI</strong> dengan 0 entitas fiktif teramati (<em>zero fabricated POIs
-under evaluated benchmark scenarios</em>), serta <em>Honest Rejection
-Rate</em> <strong>100,00% (2/2)</strong> pada skenario uji di luar
-lingkup domain. Latensi pipeline percakapan cerdas di sisi server
-rata-rata sebesar <strong>1.252,17 ms</strong> (median: 1.232,39 ms,
-persentil ke-95/P95: 1.581,37 ms; mencakup dua inferensi LLM dan
-eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms), sedangkan latensi
-perutean jaringan jalan OSRM diukur secara independen pada sisi klien
-peramban sebesar <strong>88,40 ms</strong> (median: 84,50 ms, P95:
-128,60 ms; menghasilkan total waktu persepsi pengguna rata-rata 1.340,57
-ms, median: 1.316,89 ms, P95: 1.709,97 ms). Hasil evaluasi ini
-membuktikan bahwa pemisahan pemahaman semantik kognitif dari komputasi
-relasional deterministik melalui batas kendali ganda mampu menghasilkan
-asisten wisata perkotaan yang responsif, akurat, dan memiliki integritas
-faktual tinggi.</p>
+kebijakan <em>fail-closed fallback</em>, guna memverifikasi keselarasan
+klaim faktual pada empat kategori pemeriksaan skema tertutup sebelum
+respons disajikan kepada pengguna. Evaluasi empiris 4-lapisan terhadap
+40 skenario percakapan terstandarisasi yang didukung oleh rangkaian
+pengujian otomatis sebanyak <strong>56 skenario uji unit, integrasi, dan
+ketahanan adversarial (240 assertions, 100% PASS)</strong>, menunjukkan
+capaian Akurasi Ekstraksi CSIR Eksak Niat Murni sebesar <strong>100,00%
+(40/40)</strong> dengan keselarasan amplob eksekusi pasca-kebijakan
+<strong>97,50% (39/40)</strong>, rata-rata akurasi tingkat atribut
+(<em>field-level accuracy</em>) <strong>100,00% (436/436)</strong>,
+Akurasi Keputusan Validasi Deterministik <strong>100,00%
+(40/40)</strong>, Kebenaran Predikat Spasial Murni <strong>100,00%
+(36/36 skenario spasial)</strong> dengan kepatuhan eksekusi skenario
+menyeluruh <strong>100,00% (40/40)</strong>, <em>Claim-Level Grounding
+Fidelity</em> <strong>100,00% pada 270 klaim yang dikenali validator
+pada empat kategori pemeriksaan</strong> dan <em>Entity Grounding
+Fidelity</em> <strong>100,00% pada 120 penyebutan POI</strong> dengan 0
+entitas fiktif teramati (<em>zero fabricated POIs under evaluated
+benchmark scenarios</em>), serta <em>Honest Rejection Rate</em>
+<strong>100,00% (2/2)</strong> pada skenario uji di luar lingkup domain.
+Latensi pipeline percakapan cerdas di sisi server rata-rata sebesar
+<strong>1.252,17 ms</strong> (median: 1.232,39 ms, persentil ke-95/P95:
+1.581,37 ms; mencakup dua inferensi LLM dan eksekusi kueri spasial SQL
+MySQL 8.0 sebesar 1,21 ms), sedangkan latensi perutean jaringan jalan
+OSRM diukur secara independen pada sisi klien peramban sebesar
+<strong>88,40 ms</strong> (median: 84,50 ms, P95: 128,60 ms;
+menghasilkan total waktu persepsi pengguna rata-rata 1.340,57 ms,
+median: 1.316,89 ms, P95: 1.709,97 ms). Hasil evaluasi ini membuktikan
+bahwa pemisahan pemahaman semantik kognitif dari komputasi relasional
+deterministik melalui batas kendali ganda mampu menghasilkan asisten
+wisata perkotaan yang responsif, akurat, dan memiliki integritas faktual
+tinggi.</p>
 
 <p class="keywords-text"><strong>Kata Kunci:</strong> Reliability-Controlled Conversational
 Spatial Information System, Dual Control Boundaries, Semantic Control
@@ -649,8 +650,9 @@ factual truth to a relational MySQL 8.0 database via native
 <code>ST_Distance_Sphere</code> spherical spatial computations and
 client-side OSRM road navigation, subsequently verifying generated
 narratives through an algorithmic claim-level grounding validator with a
-fail-closed fallback policy to prevent ungrounded claims from reaching
-the final response. Empirical 4-layer evaluation across 40 standardized
+fail-closed fallback policy, auditing factual claim concordance across
+the four defined closed-world schema dimensions before narrative
+presentation. Empirical 4-layer evaluation across 40 standardized
 benchmark scenarios demonstrates a Pure Intent Pre-Fallback Exact CSIR
 Extraction Accuracy of <strong>100.00% (40/40)</strong> (<strong>97.50%
 / 39/40</strong> on post-policy execution envelope alignment) with an
@@ -3223,14 +3225,18 @@ href="file:///var/www/html/Geo/app/Views/webgis.php">webgis.php</a>.
 Tampilan ini mengintegrasikan seluruh elemen visual secara harmonis:</p>
 <ol type="1">
 <li><p><strong>Inisialisasi Peta Digital:</strong> Peta digital
-diinisialisasi dengan titik pusat koordinat Kota Padang (Latitude:
-<code>-0.9471</code>, Longitude: <code>100.3543</code>) dengan tingkat
-pembesaran (<em>zoom level</em>) awal 12:</p>
+diinisialisasi dengan titik pusat koordinat baku Kota Padang (Latitude:
+<code>-0.9471</code>, Longitude: <code>100.4174</code>):</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> map <span class="op">=</span> L<span class="op">.</span><span class="fu">map</span>(<span class="st">&#39;map&#39;</span><span class="op">,</span> { <span class="dt">zoomControl</span><span class="op">:</span> <span class="kw">false</span> })<span class="op">.</span><span class="fu">setView</span>([<span class="op">-</span><span class="fl">0.9471</span><span class="op">,</span> <span class="fl">100.3543</span>]<span class="op">,</span> <span class="dv">12</span>)<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>L<span class="op">.</span><span class="fu">tileLayer</span>(<span class="st">&#39;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&#39;</span><span class="op">,</span> {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">attribution</span><span class="op">:</span> <span class="st">&#39;&amp;copy; OpenStreetMap contributors&#39;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span></code></pre></div></li>
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PADANG_CENTER <span class="op">=</span> [<span class="op">-</span><span class="fl">0.9471</span><span class="op">,</span> <span class="fl">100.4174</span>]<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> map <span class="op">=</span> L<span class="op">.</span><span class="fu">map</span>(<span class="st">&#39;map&#39;</span><span class="op">,</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">center</span><span class="op">:</span> PADANG_CENTER<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">zoom</span><span class="op">:</span> <span class="dv">13</span><span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">zoomControl</span><span class="op">:</span> <span class="kw">false</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>L<span class="op">.</span><span class="fu">tileLayer</span>(<span class="st">&#39;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&#39;</span><span class="op">,</span> {</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">attribution</span><span class="op">:</span> <span class="st">&#39;&amp;copy; OpenStreetMap contributors&#39;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span></code></pre></div></li>
 <li><p><strong>Plotting Marker Tematik dan Jendela Popup:</strong>
 Setiap objek wisata dari basis data diplot menggunakan ikon SVG yang
 disesuaikan dengan warnanya. Saat penanda diklik, jendela popup

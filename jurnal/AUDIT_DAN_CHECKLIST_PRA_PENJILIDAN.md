@@ -29,10 +29,10 @@ Berdasarkan evaluasi independen berstandar peer-review internasional:
 | No | Butir Pemeriksaan | Status | Bukti Keterlacakan di Repositori |
 |:--:|---|:---:|---|
 | **A1** | **Seragamkan Judul Resmi Tesis** | **✅ SELESAI** | Judul resmi Bahasa Indonesia disahkan pada sampul [`DRAFT_TESIS_LENGKAP.md`](file:///www/wwwroot/smartgis-padang/jurnal/DRAFT_TESIS_LENGKAP.md), dengan judul konseptual arsitektur diperkenalkan di Abstrak dan Bab 1. |
-| **A2** | **Rekonsiliasi Koordinat Pusat Kota** | **✅ SELESAI** | Titik jangkar pusat kota diseragamkan 100% ke koordinat resmi Balai Kota Padang: `(-0.9471, 100.4174)`. Koordinat lama `(-0.9556, 100.3606)` pada Skenario #30 telah diperbarui. |
+| **A2** | **Rekonsiliasi Koordinat Pusat Kota** | **✅ SELESAI** | Titik jangkar pusat kota diseragamkan 100% ke koordinat resmi Balai Kota Padang: `(-0.9471, 100.4174)`. Koordinat lama `(-0.9556, 100.3606)` pada Skenario #30 serta `100.3543` pada inisialisasi peta Leaflet (Bab 4.2) telah disinkronkan ke titik resmi kanonik. |
 | **A3** | **Sinkronisasi Definisi Pengujian Otomatis** | **✅ SELESAI** | Fase 5 Metodologi diperbarui: total **56 pengujian otomatis dengan 240 assertions** (45 unit/integrasi standar + 11 adversarial dialek Minang). |
 | **A4** | **Audit Konsistensi Angka Lintas Bab** | **✅ SELESAI** | Seluruh metrik identik: Exact CSIR 100% (40/40), Envelope 97,50% (39/40), Spatial Correctness 100% (36/36), Grounding 100% (270/270), POI Mentions 100% (120/120), Fabricated POI 0,00%, Latensi 1,21 ms, SUS 84,25, TCT cut 82,43%. |
-| **A5** | **Batasan Klaim Grounding (Bukan Kebal Universal)** | **✅ SELESAI** | Bab 4.6.2.2 Tesis dan Section 4.2.2 Jurnal menegaskan pemisahan epistemologis **Verifier Correctness** (100% pada 4 dimensi terstruktur) vs. **Verifier Coverage** (skema tertutup). |
+| **A5** | **Batasan Klaim Grounding (Bukan Kebal Universal)** | **✅ SELESAI** | Abstrak dan Bab 4.6.2.2 Tesis serta Section 4.2.2 Jurnal menegaskan pemisahan epistemologis **Verifier Correctness** (100% pada 4 dimensi terstruktur) vs. **Verifier Coverage** (skema tertutup); kalimat absolut bebas halusinasi universal dieliminasi. |
 
 ---
 
