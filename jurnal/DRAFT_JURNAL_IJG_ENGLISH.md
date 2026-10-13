@@ -1199,7 +1199,7 @@ This study designed, implemented, and empirically evaluated a **Reliability-Cont
 4. **Answer to RQ4 (Cognitive Efficiency & Usability):** Guided conversational interaction significantly outperformed conventional WIMP interfaces, **reducing cognitive Task Completion Time (TCT) by 82.43%** (from 37.11 s to 6.52 s, p < 0.001, Cohen's d = 5.19) while securing an "Excellent" **System Usability Scale (SUS) score of 84.25 ± 6.80 (Grade A)**. Architectural robustness was corroborated by an automated test suite of **56 automated unit, integration, and adversarial tests (240 assertions, 100% PASS)**, as recorded in `tests/phpunit_execution_report.txt`.
 
 ### 9.2 Future Research Directions
-extending the control layer to multi-turn dialogue state tracking across dynamic re-routing, expanding query capabilities to multilingual international tourist dialogues, and deploying the framework across provincial multi-destination corridors.
+Future research trajectories include: (1) extending the control layer to multi-turn dialogue state tracking across dynamic multi-hop re-routing, (2) expanding semantic normalization and query capabilities to multilingual international tourist dialogues, and (3) deploying the dual control framework across provincial multi-destination tourism corridors.
 
 ---
 

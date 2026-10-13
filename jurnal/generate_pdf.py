@@ -386,7 +386,7 @@ def convert_md_to_pdf(md_filename, pdf_filename, is_journal=False):
 
     # Step 3: Chrome Headless HTML to PDF
     import tempfile
-    with tempfile.TemporaryDirectory() as temp_profile_dir:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temp_profile_dir:
         cmd_chrome = [
             "google-chrome",
             "--headless",
@@ -406,6 +406,7 @@ def convert_md_to_pdf(md_filename, pdf_filename, is_journal=False):
                 return False
         except subprocess.TimeoutExpired:
             print(f"[!] Chrome rendering timed out on {md_filename}")
+            subprocess.run(["pkill", "-9", "-f", "chrome"], capture_output=True)
             return False
 
     # Step 4: Pandoc MD to DOCX
