@@ -111,12 +111,15 @@ h2 {
 
 /* Page breaks for major chapters and prelims in Thesis */
 h2[id^="bab-"], 
-h2[id^="lembar-"],
-h2[id^="pernyataan-"],
-h2[id^="kata-pengantar"],
+h2[id*="pengesahan"],
+h2[id*="pernyataan"],
+h2[id*="orisinalitas"],
+h2[id*="kata-pengantar"],
 h2[id^="daftar-"],
+h2[id*="daftar"],
 h2[id^="abstrak"],
-h2[id^="abstract"] {
+h2[id^="abstract"],
+h2[id*="lampiran"] {
     page-break-before: always;
     break-before: page;
 }

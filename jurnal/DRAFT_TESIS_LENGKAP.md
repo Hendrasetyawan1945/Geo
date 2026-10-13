@@ -28,9 +28,105 @@ Oleh:
 
 ---
 
+<div class="cover-page">
+
+# RANCANG BANGUN SISTEM REKOMENDASI PARIWISATA BERBASIS LARGE LANGUAGE MODEL (LLM) DAN STRICT SQL GROUNDING UNTUK PEMBERIAN SARAN DESTINASI WISATA CERDAS
+*(Studi Kasus: Kawasan Pariwisata Kota Padang)*
+
+<br>
+
+**HALAMAN JUDUL**
+
+Diajukan sebagai Salah Satu Syarat untuk Memperoleh Gelar Magister Teknik (M.T.)  
+pada Program Studi Magister Teknik Elektro, Fakultas Teknik, Universitas Andalas
+
+<br>
+
+Oleh:  
+**HENDRA SETYAWAN**  
+**NIM: 2420952007**
+
+<br>
+
+**PROGRAM STUDI MAGISTER TEKNIK ELEKTRO**  
+**DEPARTEMEN TEKNIK ELEKTRO – FAKULTAS TEKNIK**  
+**UNIVERSITAS ANDALAS**  
+**PADANG**  
+**2026**
+
+</div>
+
+---
+
+## LEMBAR PENGESAHAN TESIS
+
+<br>
+
+**Judul Tesis:**  
+RANCANG BANGUN SISTEM REKOMENDASI PARIWISATA BERBASIS LARGE LANGUAGE MODEL (LLM) DAN STRICT SQL GROUNDING UNTUK PEMBERIAN SARAN DESTINASI WISATA CERDAS  
+*(Studi Kasus: Kawasan Pariwisata Kota Padang)*
+
+**Nama Mahasiswa:** Hendra Setyawan  
+**NIM:** 2420952007  
+**Program Studi:** Magister Teknik Elektro  
+**Departemen:** Teknik Elektro  
+**Fakultas:** Fakultas Teknik, Universitas Andalas  
+
+<br>
+
+Tesis ini telah dipertahankan di hadapan Dewan Penguji Sidang Tesis dan dinyatakan **LULUS** untuk memenuhi salah satu syarat memperoleh gelar **Magister Teknik (M.T.)**.
+
+<br>
+
+**Komisi Pembimbing:**
+
+| Pembimbing Utama | Pembimbing Pendamping |
+|:---:|:---:|
+| <br><br><br>**(Dr. Eng. Ir. Advisor I, M.T.)**<br>NIP. 1975xxxxxxxxxxxxxx | <br><br><br>**(Dr. Advisor II, S.T., M.Kom.)**<br>NIP. 1980xxxxxxxxxxxxxx |
+
+<br>
+
+**Mengetahui,**  
+**Ketua Departemen Teknik Elektro Universitas Andalas**
+
+<br><br><br>
+**(Dr. Ir. Chair of Department, M.T., IPM.)**  
+NIP. 1970xxxxxxxxxxxxxx
+
+---
+
+## HALAMAN PERNYATAAN ORISINALITAS
+
+Saya yang bertanda tangan di bawah ini:
+
+- **Nama:** Hendra Setyawan
+- **NIM:** 2420952007
+- **Program Studi:** Magister Teknik Elektro
+- **Fakultas:** Fakultas Teknik, Universitas Andalas
+
+Dengan ini menyatakan dengan sesungguhnya bahwa naskah tesis berjudul:
+
+> **"Rancang Bangun Sistem Rekomendasi Pariwisata Berbasis Large Language Model (LLM) dan Strict SQL Grounding untuk Pemberian Saran Destinasi Wisata Cerdas (Studi Kasus: Kawasan Pariwisata Kota Padang)"**
+
+adalah benar-benar karya asli dan mandiri saya sendiri, bukan hasil plagiarisme, fabrikasi data, atau duplikasi dari karya ilmiah pihak lain. Sumber referensi, kutipan, perangkat lunak pustaka terbuka, serta data benchmark yang digunakan telah dicantumkan secara transparan sesuai dengan kaidah dan etika penulisan karya ilmiah akademik yang berlaku.
+
+Apabila di kemudian hari terbukti terdapat unsur plagiarisme atau pemalsuan data dalam naskah ini, saya bersedia menerima sanksi akademik yang tegas sesuai peraturan perundang-undangan dan ketentuan yang berlaku di Universitas Andalas, termasuk pencabutan gelar akademik yang telah diperoleh.
+
+<br>
+
+Padang, Oktober 2026  
+Yang menyatakan,
+
+<br><br><br>
+*(Materai Rp10.000)*  
+**Hendra Setyawan, S.Kom.**  
+NIM. 2420952007
+
+---
+
 ## ABSTRAK
 
-Penerapan *Large Language Model* (LLM) pada sistem informasi geospasial dan pariwisata sering kali terbentur oleh fenomena halusinasi faktual dan spasial (*hallucination*), di mana model mengarang nama atraksi fiktif, jam buka yang keliru, serta distorsi estimasi jarak. Di sisi lain, pendekatan *Retrieval-Augmented Generation* (RAG) berbasis kemiripan semantik *dense-vector* murni secara inheren tidak memberikan jaminan matematis deterministik dalam memenuhi batasan relasional dan spasial eksak (seperti kalkulasi jarak spasial lingkaran besar /*spherical distance*, harga tiket, dan evaluasi status buka terhadap jam operasional yang tersimpan). Penelitian ini memosisikan sistem yang dibangun sebagai **Reliability-Controlled Conversational Spatial Information System** (Sistem Informasi Spasial Percakapan Terkendali Keandalan) untuk Kawasan Pariwisata Kota Padang yang dibangun di atas paradigma **Batas Kendali Ganda (*Dual Control Boundaries*)**: (1) **Batas Kendali Semantik (*Semantic Control Boundary*)** yang menyalurkan inferensi LLM probabilistik melalui *Spatial Intent Representation* (SIR) formal dan modul validasi deterministik 6-dimensi (*SirValidator*) berprinsip *No Intent Alteration* menuju representasi kanonik (CSIR) dan kompiler deterministik, guna mencegah masuknya maksud semantik yang tidak sah atau terubah sepihak ke eksekusi basis data; serta (2) **Batas Kendali Bukti (*Evidence Control Boundary*)** yang mengunci sumber kebenaran fakta pada basis data relasional MySQL 8.0 melalui fungsi spasial bawaan `ST_Distance_Sphere` dan OSRM, lalu memvalidasi luaran narasi (*Grounded NLG*) secara algoritmik di tingkat klaim (*claim-level grounding validator*) dengan kebijakan *fail-closed fallback*, guna memverifikasi keselarasan klaim faktual pada empat kategori pemeriksaan skema tertutup sebelum respons disajikan kepada pengguna. Evaluasi empiris 4-lapisan terhadap 40 skenario percakapan terstandarisasi yang didukung oleh rangkaian pengujian otomatis sebanyak **56 skenario uji unit, integrasi, dan ketahanan adversarial (240 assertions, 100% PASS)**, menunjukkan capaian Akurasi Ekstraksi CSIR Eksak Niat Murni sebesar **100,00% (40/40)** dengan keselarasan amplob eksekusi pasca-kebijakan **97,50% (39/40)**, rata-rata akurasi tingkat atribut (*field-level accuracy*) **100,00% (436/436)**, Akurasi Keputusan Validasi Deterministik **100,00% (40/40)**, Kebenaran Predikat Spasial Murni **100,00% (36/36 skenario spasial)** dengan kepatuhan eksekusi skenario menyeluruh **100,00% (40/40)**, *Claim-Level Grounding Fidelity* **100,00% pada 270 klaim yang dikenali validator pada empat kategori pemeriksaan** dan *Entity Grounding Fidelity* **100,00% pada 120 penyebutan POI** dengan 0 entitas fiktif teramati (*zero fabricated POIs under evaluated benchmark scenarios*), serta *Honest Rejection Rate* **100,00% (2/2)** pada skenario uji di luar lingkup domain. Latensi pipeline percakapan cerdas di sisi server rata-rata sebesar **1.252,17 ms** (median: 1.232,39 ms, persentil ke-95/P95: 1.581,37 ms; mencakup dua inferensi LLM dan eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms), sedangkan latensi perutean jaringan jalan OSRM diukur secara independen pada sisi klien peramban sebesar **88,40 ms** (median: 84,50 ms, P95: 128,60 ms). Dengan demikian, total waktu respons pengguna mencatat estimasi rata-rata gabungan aditif sebesar **1.340,57 ms** (gabungan pemrosesan server backend dan perutean jalan klien). Capaian grounding fidelity 100% pada 40 skenario benchmark membuktikan kebenaran verifikasi pada ruang klaim terdefinisi di empat kategori yang diimplementasikan (bukan jaminan universal atas seluruh variasi teks di luar skema). Hasil evaluasi ini membuktikan bahwa pemisahan pemahaman semantik kognitif dari komputasi relasional deterministik melalui batas kendali ganda mampu menghasilkan asisten wisata perkotaan yang responsif, akurat, dan memiliki integritas faktual tinggi.
+Penerapan *Large Language Model* (LLM) pada sistem informasi geospasial dan pariwisata sering kali terbentur oleh fenomena halusinasi faktual dan spasial (*hallucination*), di mana model mengarang nama atraksi fiktif, jam buka yang keliru, serta distorsi estimasi jarak. Di sisi lain, pendekatan *Retrieval-Augmented Generation* (RAG) berbasis kemiripan semantik *dense-vector* murni secara inheren tidak memberikan jaminan matematis deterministik dalam memenuhi batasan relasional dan spasial eksak (seperti kalkulasi jarak spasial lingkaran besar /*spherical distance*, harga tiket, dan evaluasi status buka terhadap jam operasional yang tersimpan). Penelitian ini memosisikan sistem yang dibangun sebagai **Reliability-Controlled Conversational Spatial Information System** (Sistem Informasi Spasial Percakapan Terkendali Keandalan) untuk Kawasan Pariwisata Kota Padang yang dibangun di atas paradigma **Batas Kendali Ganda (*Dual Control Boundaries*)**: (1) **Batas Kendali Semantik (*Semantic Control Boundary*)** yang menyalurkan inferensi LLM probabilistik melalui *Spatial Intent Representation* (SIR) formal dan modul validasi deterministik 6-dimensi (*SirValidator*) berprinsip *No Intent Alteration* menuju representasi kanonik (CSIR) dan kompiler deterministik, guna mencegah masuknya maksud semantik yang tidak sah atau terubah sepihak ke eksekusi basis data; serta (2) **Batas Kendali Bukti (*Evidence Control Boundary*)** yang mengunci sumber kebenaran fakta pada basis data relasional MySQL 8.0 melalui fungsi spasial bawaan `ST_Distance_Sphere` dan OSRM, lalu memvalidasi luaran narasi (*Grounded NLG*) secara algoritmik di tingkat klaim (*claim-level grounding validator*) dengan kebijakan *fail-closed fallback*, guna memverifikasi keselarasan klaim faktual pada empat kategori pemeriksaan skema tertutup sebelum respons disajikan kepada pengguna. Evaluasi empiris 4-lapisan terhadap 40 skenario percakapan terstandarisasi yang didukung oleh rangkaian pengujian otomatis sebanyak **56 skenario uji unit, integrasi, dan ketahanan adversarial (240 assertions, 100% PASS)**, menunjukkan capaian Akurasi Ekstraksi CSIR Eksak Niat Murni sebesar **100,00% (40/40)** dengan keselarasan amplob eksekusi pasca-kebijakan **97,50% (39/40)**, rata-rata akurasi tingkat atribut (*field-level accuracy*) **100,00% (436/436)**, Akurasi Keputusan Validasi Deterministik **100,00% (40/40)**, Kebenaran Predikat Spasial Murni **100,00% (36/36 skenario spasial)** dengan kepatuhan eksekusi skenario menyeluruh **100,00% (40/40)**, *Claim-Level Grounding Fidelity* **100,00% pada 270 klaim yang dikenali validator pada empat kategori pemeriksaan** dan *Entity Grounding Fidelity* **100,00% pada 120 penyebutan POI** dengan 0 entitas fiktif teramati (*zero fabricated POIs under evaluated benchmark scenarios*), serta *Honest Rejection Rate* **100,00% (2/2)** pada skenario uji di luar lingkup domain. Latensi pipeline percakapan cerdas di sisi server rata-rata sebesar **1.252,17 ms** (median: 1.232,39 ms, persentil ke-95/P95: 1.581,37 ms; mencakup dua inferensi LLM dan eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms), sedangkan latensi perutean jaringan jalan OSRM diukur secara independen pada sisi klien peramban sebesar **88,40 ms** (median: 84,50 ms, P95: 128,60 ms). Dengan demikian, total waktu respons pengguna mencatat estimasi rata-rata gabungan aditif sebesar **1.340,57 ms** (gabungan pemrosesan server backend dan perutean jalan klien; median dan P95 dilaporkan terpisah per lingkungan pengukuran). Capaian grounding fidelity 100% pada 40 skenario benchmark membuktikan kebenaran verifikasi pada ruang klaim terdefinisi di empat kategori yang diimplementasikan (bukan jaminan universal atas seluruh variasi teks di luar skema). Hasil evaluasi ini membuktikan bahwa pemisahan pemahaman semantik kognitif dari komputasi relasional deterministik melalui batas kendali ganda mampu menghasilkan asisten wisata perkotaan yang responsif, akurat, dan memiliki integritas faktual tinggi.
 
 **Kata Kunci:** Reliability-Controlled Conversational Spatial Information System, Dual Control Boundaries, Semantic Control Boundary, Evidence Control Boundary, Large Language Model (LLM), Strict SQL Grounding, ST_Distance_Sphere, Kota Padang.
 
@@ -38,9 +134,143 @@ Penerapan *Large Language Model* (LLM) pada sistem informasi geospasial dan pari
 
 ## ABSTRACT
 
-The deployment of Large Language Models (LLMs) in urban geospatial and tourism information systems frequently encounters factual and spatial hallucinations, wherein the generative model invents non-existent attractions, incorrect operating hours, and distorted spatial proximities. Conversely, pure dense-vector Retrieval-Augmented Generation (RAG) inherently lacks deterministic mathematical guarantees for enforcing relational and spatial constraints (such as great-circle spherical distance calculations, budget boundaries, and current-time operational status evaluation against stored operating schedules), necessitating an explicit architectural coupling between semantic parsing, spatial SQL compilation, and deterministic validation. This research designs and evaluates a **Reliability-Controlled Conversational Spatial Information System** for Padang City governed by an architectural framework of **Dual Control Boundaries**: (1) a **Semantic Control Boundary** that routes probabilistic LLM inference through a formal Spatial Intent Representation (SIR) and a six-dimensional deterministic validator (SirValidator) enforcing the *No Intent Alteration* principle into a Canonical SIR (CSIR) and deterministic compiler, preventing invalid or mutated semantic intent from reaching spatial execution; and (2) an **Evidence Control Boundary** that anchors all factual truth to a relational MySQL 8.0 database via native `ST_Distance_Sphere` spherical spatial computations and client-side OSRM road navigation, subsequently verifying generated narratives through an algorithmic claim-level grounding validator with a fail-closed fallback policy, auditing factual claim concordance across the four defined closed-world schema dimensions before narrative presentation. Empirical 4-layer evaluation across 40 standardized benchmark scenarios demonstrates a Pure Intent Pre-Fallback Exact CSIR Extraction Accuracy of **100.00% (40/40)** (**97.50% / 39/40** on post-policy execution envelope alignment) with an average field-level accuracy of **100.00% (436/436)**, a Deterministic Validation Decision Accuracy of **100.00% (40/40)**, a Pure Spatial Predicate Correctness of **100.00% (36/36 spatial scenarios)** with an overall scenario execution compliance rate of **100.00% (40/40)**, a Claim-Level Grounding Fidelity of **100.00% across 270 audited claims recognized by GroundingValidator on four implemented verification categories** and an Entity Grounding Fidelity of **100.00% across 120 POI mentions** with zero fabricated POIs observed across the evaluated benchmark suite, alongside a **100.00% Honest Rejection Rate (2/2)** on tested out-of-scope queries. The server-side conversational pipeline latency averaged **1,252.17 ms** (median: 1,232.39 ms, 95th percentile/P95: 1,581.37 ms; incorporating two LLM inferences and native MySQL 8.0 spatial SQL execution of 1.21 ms), while turn-by-turn road network routing via OSRM was benchmarked independently on the browser client side at **88.40 ms** (median: 84.50 ms, P95: 128.60 ms), yielding an additive composite mean user-perceived latency of **1,340.57 ms** across server computation and client routing. The 100% grounding fidelity achieved across the 40 benchmark scenarios demonstrates empirical verification correctness across the four implemented closed-world claim dimensions, rather than a universal claim of detecting all open-ended linguistic hallucinations. Supported by an automated test suite of **56 automated unit, integration, and adversarial tests (240 assertions, 100% PASS)**, this demonstrates that decoupling semantic parsing from deterministic relational computation via dual control boundaries effectively mitigates AI hallucinations and ensures verifiable factual integrity in urban GIS tourist assistance.
+The deployment of Large Language Models (LLMs) in urban geospatial and tourism information systems frequently encounters factual and spatial hallucinations, wherein the generative model invents non-existent attractions, incorrect operating hours, and distorted spatial proximities. Conversely, pure dense-vector Retrieval-Augmented Generation (RAG) inherently lacks deterministic mathematical guarantees for enforcing relational and spatial constraints (such as great-circle spherical distance calculations, budget boundaries, and current-time operational status evaluation against stored operating schedules), necessitating an explicit architectural coupling between semantic parsing, spatial SQL compilation, and deterministic validation. This research designs and evaluates a **Reliability-Controlled Conversational Spatial Information System** for Padang City governed by an architectural framework of **Dual Control Boundaries**: (1) a **Semantic Control Boundary** that routes probabilistic LLM inference through a formal Spatial Intent Representation (SIR) and a six-dimensional deterministic validator (SirValidator) enforcing the *No Intent Alteration* principle into a Canonical SIR (CSIR) and deterministic compiler, preventing invalid or mutated semantic intent from reaching spatial execution; and (2) an **Evidence Control Boundary** that anchors all factual truth to a relational MySQL 8.0 database via native `ST_Distance_Sphere` spherical spatial computations and client-side OSRM road navigation, subsequently verifying generated narratives through an algorithmic claim-level grounding validator with a fail-closed fallback policy, auditing factual claim concordance across the four defined closed-world schema dimensions before narrative presentation. Empirical 4-layer evaluation across 40 standardized benchmark scenarios demonstrates a Pure Intent Pre-Fallback Exact CSIR Extraction Accuracy of **100.00% (40/40)** (**97.50% / 39/40** on post-policy execution envelope alignment) with an average field-level accuracy of **100.00% (436/436)**, a Deterministic Validation Decision Accuracy of **100.00% (40/40)**, a Pure Spatial Predicate Correctness of **100.00% (36/36 spatial scenarios)** with an overall scenario execution compliance rate of **100.00% (40/40)**, a Claim-Level Grounding Fidelity of **100.00% across 270 audited claims recognized by GroundingValidator on four implemented verification categories** and an Entity Grounding Fidelity of **100.00% across 120 POI mentions** with zero fabricated POIs observed across the evaluated benchmark suite, alongside a **100.00% Honest Rejection Rate (2/2)** on tested out-of-scope queries. The server-side conversational pipeline latency averaged **1,252.17 ms** (median: 1,232.39 ms, 95th percentile/P95: 1,581.37 ms; incorporating two LLM inferences and native MySQL 8.0 spatial SQL execution of 1.21 ms), while turn-by-turn road network routing via OSRM was benchmarked independently on the browser client side at **88.40 ms** (median: 84.50 ms, P95: 128.60 ms), yielding an additive composite mean user-perceived latency of **1,340.57 ms** across server computation and client routing (medians and P95s reported separately per computing tier). The 100% grounding fidelity achieved across the 40 benchmark scenarios demonstrates empirical verification correctness across the four implemented closed-world claim dimensions, rather than a universal claim of detecting all open-ended linguistic hallucinations. Supported by an automated test suite of **56 automated unit, integration, and adversarial tests (240 assertions, 100% PASS)**, this demonstrates that decoupling semantic parsing from deterministic relational computation via dual control boundaries effectively mitigates AI hallucinations and ensures verifiable factual integrity in urban GIS tourist assistance.
 
 **Keywords:** Reliability-Controlled Conversational Spatial Information System, Dual Control Boundaries, Semantic Control Boundary, Evidence Control Boundary, Large Language Model (LLM), Strict SQL Grounding, ST_Distance_Sphere Function, Padang City.
+
+---
+
+## KATA PENGANTAR
+
+Puji dan syukur ke hadirat Allah Subhanahu wa Ta'ala atas limpahan rahmat, taufik, dan hidayah-Nya, sehingga penulis dapat menyelesaikan naskah tesis yang berjudul *"Rancang Bangun Sistem Rekomendasi Pariwisata Berbasis Large Language Model (LLM) dan Strict SQL Grounding untuk Pemberian Saran Destinasi Wisata Cerdas (Studi Kasus: Kawasan Pariwisata Kota Padang)"*.
+
+Penelitian ini dirancang untuk menjawab tantangan fundamental dalam sistem informasi geospasial perkotaan cerdas, khususnya fenomena halusinasi model bahasa generatif dan ketiadaan jaminan deterministik spasial melalui paradigma *Batas Kendali Ganda (Dual Control Boundaries)*.
+
+Penyelesaian tesis ini tidak terlepas dari bimbingan, dorongan, dan bantuan berbagai pihak. Penulis menyampaikan ucapan terima kasih yang tulus dan penghargaan setinggi-tingginya kepada:
+1. Rektor Universitas Andalas beserta segenap pimpinan universitas.
+2. Dekan dan Wakil Dekan Fakultas Teknik Universitas Andalas.
+3. Ketua Departemen Teknik Elektro dan Ketua Program Studi Magister Teknik Elektro Universitas Andalas.
+4. Komisi Pembimbing atas arahan akademis yang mendalam, kesabaran, dan bimbingan kritis selama penelitian.
+5. Dewan Penguji Sidang Tesis atas saran, masukan perbaikan, dan evaluasi konstruktif yang menyempurnakan naskah ini.
+6. Dinas Pariwisata Kota Padang atas ketersediaan data kurasi resmi destinasi pariwisata.
+7. Seluruh responden dan evaluator atas partisipasinya dalam pengujian usability sistem.
+8. Orang tua, keluarga tercinta, serta rekan-rekan seperjuangan atas doa dan dukungan moral yang tiada henti.
+
+Penulis menyadari naskah ini masih memiliki ruang penyempurnaan. Semoga karya ini dapat memberikan kontribusi nyata bagi perkembangan ilmu pengetahuan geoinformatika dan kecerdasan buatan terapan di Indonesia.
+
+<br>
+
+Padang, Oktober 2026  
+**Penulis**
+
+---
+
+## DAFTAR ISI
+
+- **HALAMAN SAMPUL LUAR**
+- **HALAMAN JUDUL (SAMPUL DALAM)**
+- **LEMBAR PENGESAHAN TESIS**
+- **HALAMAN PERNYATAAN ORISINALITAS**
+- **ABSTRAK (BAHASA INDONESIA)**
+- **ABSTRACT (ENGLISH)**
+- **KATA PENGANTAR**
+- **DAFTAR ISI**
+- **DAFTAR TABEL**
+- **DAFTAR GAMBAR**
+- **DAFTAR LAMPIRAN**
+- **BAB I: PENDAHULUAN**
+  - 1.1 Latar Belakang Masalah
+  - 1.2 Identifikasi Masalah
+  - 1.3 Batasan Masalah
+  - 1.4 Rumusan Masalah
+  - 1.5 Tujuan Penelitian
+  - 1.6 Manfaat Penelitian
+  - 1.7 Kebaruan Penelitian (*Novelty*)
+- **BAB II: METODOLOGI PENELITIAN DAN LANDASAN TEORI**
+  - 2.1 Metodologi Penelitian dan Alur Kerja
+  - 2.2 Landasan Pendekatan: Kerangka Batas Kendali Ganda
+  - 2.3 Formalisasi Skema Representasi Niat Spasial (CSIR)
+  - 2.4 Rekayasa Kompensasi Ketidaksempurnaan LLM
+  - 2.5 Kompiler Kueri Spasial dan Integrasi MySQL 8.0
+  - 2.6 Grounding Contract dan Preservasi Maksud
+  - 2.7 Algorithmic Claim-Level Grounding Validator Pasca-Generasi
+  - 2.8 Taksonomi Kegagalan Spasial (F1–F8)
+- **BAB III: PERANCANGAN SISTEM (UI, DATABASE, PROSES)**
+  - 3.1 Perancangan Antarmuka Pengguna (*User Interface*)
+  - 3.2 Perancangan Basis Data Relasional Spasial
+  - 3.3 Pembuktian Matematis Fungsi Spasial Bawaan ST_Distance_Sphere
+  - 3.4 Perancangan Alur Pemrosesan Sistem (*Process Design*)
+- **BAB IV: IMPLEMENTASI DAN PENGUJIAN SISTEM**
+  - 4.1 Lingkungan Implementasi
+  - 4.2 Implementasi Antarmuka Pengguna (*User Interface*)
+  - 4.3 Implementasi Basis Data Relasional Spasial
+  - 4.4 Verifikasi Fungsionalitas Modul
+  - 4.5 Pengujian Usability dan Efisiensi Kognitif (SUS & TCT)
+  - 4.6 Hasil Evaluasi Empiris Benchmark 40 Skenario
+- **BAB V: PENUTUP**
+  - 5.1 Kesimpulan
+  - 5.2 Saran dan Rencana Riset Masa Depan
+- **DAFTAR PUSTAKA**
+- **LAMPIRAN**
+
+---
+
+## DAFTAR TABEL
+
+- **Tabel 2.1** Skema Formal 19 Atribut Canonical Spatial Intent Representation (CSIR)
+- **Tabel 2.2** Spesifikasi Formal Ontologi Operator Spasial Sistem Rekomendasi Pariwisata
+- **Tabel 2.3** Taksonomi Perlakuan Semantik SIR: Normalization, Validation, Rejection, Clarification, dan Enrichment
+- **Tabel 2.4** Taksonomi Kegagalan Spasial (F1–F8) pada Sistem Rekomendasi Percakapan Geospasial
+- **Tabel 3.1** Struktur Kamus Data Tabel `wisata`
+- **Tabel 3.2** Struktur Kamus Data Tabel `kategori`
+- **Tabel 3.3** Struktur Kamus Data Tabel `chat_sessions`
+- **Tabel 3.4** Struktur Kamus Data Tabel `chat_messages`
+- **Tabel 3.5** Struktur Kamus Data Tabel `users`
+- **Tabel 3.6** Pembuktian Keselarasan dan Kecepatan Komputasi Spasial di Wilayah Kota Padang
+- **Tabel 3.7** Spesifikasi Enam Dimensi Validasi Invarian SirValidator
+- **Tabel 4.0** Pemetaan Formal Atribut SIR ke Aturan Kompiler dan Predikat SQL Terparameterisasi MySQL 8.0
+- **Tabel 4.1** Hasil Pengujian Otomatis Perangkat Lunak (PHPUnit Test Suite)
+- **Tabel 4.2** Hasil Pengujian Fungsional Black Box Antarmuka Pengguna
+- **Tabel 4.3** Matriks Hasil Evaluasi Keamanan Kompiler SQL Spasial
+- **Tabel 4.3b** Matriks Definisi Formal Metrik Evaluasi Semantik, Validasi, Spasial, dan Grounding
+- **Tabel 4.4** Ringkasan Capaian Kinerja Sistem pada Evaluasi 4-Lapisan (40 Skenario Benchmark)
+- **Tabel 4.4a** Komposisi Granular Evaluasi 270 Klaim Faktual Grounding (Claim-Level Grounding Breakdown)
+- **Tabel 4.4b** Rincian Akurasi Tingkat Atribut CSIR (Field-Level CSIR Extraction Accuracy)
+- **Tabel 4.4c** Taksonomi Klaim Faktual Bahasa Alami dan Kebijakan Penegakan Integritas GroundingValidator
+- **Tabel 4.4d** Matriks Konfusi dan Evaluasi Diagnostik Modul GroundingValidator (Korpus Teranotasi Independen 20 Kasus Uji)
+- **Tabel 4.4e** Struktur Kumpulan Data Acuan Kebenaran (Ground Truth Benchmark) 10 Skenario Representatif
+- **Tabel 4.4f** Matriks Uji Ketahanan Bahasa Alami dan Kasus Batas Ekstrem (Robustness & Edge-Case Benchmark Matrix)
+- **Tabel 4.4g** Arsitektur Tiga Tingkatan Dataset: Asal-Usul Data, Kriteria Validasi, Waktu Pengambilan, dan Alasan Penggunaan
+- **Tabel 4.5** Profil Latensi Komputasi per Tahap Arsitektur (40 Kasus Uji Benchmark, $N = 120$ Replikasi)
+- **Tabel 4.5a** Spesifikasi Protokol Eksperimen Komparasi Multi-Baseline Terstandarisasi
+- **Tabel 4.6** Evaluasi Komparatif Sistem Usulan terhadap Konfigurasi Baseline Pembanding
+- **Tabel 4.6a** Bukti dan Taksonomi 17 Entitas Wisata Palsu (Fabricated POIs) pada Baseline 2 (Unconstrained LLM)
+- **Tabel 4.7** Hasil Uji Ablasi Bertingkat: Dimensi Validator Deterministik vs. Kebijakan Sistem
+- **Tabel 4.7a** Analisis Komparasi Berpasangan (Pairwise Ablation Breakdown) dan Kasus Kegagalan Riil Saat Komponen Dinonaktifkan
+- **Tabel 4.8** Hasil Pengujian Skalabilitas Eksekusi Kueri Spasial MySQL 8.0 (50 Iterasi per Skala)
+- **Tabel 4.8a** Rekam Jejak Simulasi Evaluasi Multi-Turn Conversational State Transition (3 Putaran Dialog Beruntun)
+- **Tabel 4.9** Hasil Pengujian Waktu Penyelesaian Tugas (TCT): Antarmuka WIMP vs. Conversational Web GIS
+
+---
+
+## DAFTAR GAMBAR
+
+- **Gambar 2.1** Diagram Alur Arsitektur 5-Lapis Sistem Rekomendasi Pariwisata Berbasis Strict Grounding dan Batas Kendali Ganda
+- **Gambar 2.2** Kerangka Operasional Interaksi Spasial Eksploratori Terkontrol Semantik (Siklus Iteratif Kognitif-Kendali-Eksekusi)
+- **Gambar 2.3** Model Konseptual Basis Data Spasial Relasional Ternormalisasi 3NF
+- **Gambar 3.1** Desain Antarmuka Pengguna Utama Aplikasi Web GIS Pariwisata Kota Padang (Peta Interaktif Leaflet OSM, Drawer Rekomendasi, dan Panel Chat)
+- **Gambar 3.2** Desain Visualisasi Rute Navigasi Kendaraan Terintegrasi OSRM pada Antarmuka Peta
+- **Gambar 3.3** Entity Relationship Diagram (ERD) Basis Data Sistem Rekomendasi Pariwisata Padang
+- **Gambar 3.4** Flowchart Alur Pemrosesan Sistem Rekomendasi Pariwisata 5-Lapis dengan Penegakan CSIR dan Grounding Validator
+- **Gambar 3.5** Sequence Diagram Interaksi Percakapan Spasial Lengkap dengan Validasi Grounding
+
+---
+
+## DAFTAR LAMPIRAN
+
+- **Lampiran 1** Spesifikasi Lengkap Kumpulan Data Acuan Kebenaran (Ground Truth Benchmark 40 Skenario Percakapan)
+- **Lampiran 2** Log Eksekusi Pengujian Otomatis Perangkat Lunak (PHPUnit Test Suite: 56 Tests, 240 Assertions, 100% PASS)
+- **Lampiran 3** Matriks Keselarasan Naskah Tesis terhadap Publikasi Jurnal Internasional Geoinformatika (IJG)
 
 ---
 
@@ -59,8 +289,15 @@ Upaya mitigasi halusinasi menggunakan metode *Retrieval-Augmented Generation* (R
 
 Penelitian mutakhir oleh Afnarius dkk. (2026) [2] di *International Journal of Geoinformatics* (IJG) melalui sistem *DTExplorer* memelopori pendekatan interaksi spasial eksploratori sadar-skala (*scale-aware exploratory spatial interaction*) pada skala mikro pedesaan (Desa Wisata Ulakan) dengan 43 POI terkurasi. *DTExplorer* menggunakan arsitektur *Three-Tier* (Presentation, Application, Data) dengan kueri statis dan formula Euclidean planar (`ST_Distance * 111.32`). Kendati sangat efektif di pedesaan, *DTExplorer* masih bertumpu pada kontrol WIMP konvensional (*slider* radius dan *dropdown* menu) dan mencatat perlunya riset masa depan untuk antarmuka percakapan, multi-kriteria waktu/biaya, dan evaluasi performa teknis. Di sisi lain, proyek serumpun seperti *Kustomrut* mengembangkan pembentukan rencana perjalanan spasial terkendali pengguna (*user-controlled spatial itinerary*) berbasis Google Directions API.
 
-Berangkat dari trajektori penelitian tersebut, riset ini menghadirkan lompatan ilmiah penting melalui evolusi paradigma interaksi dan kendali:
-$$\text{DTExplorer [Eksplorasi Spasial WIMP]} \longrightarrow \text{Kustomrut [Rute Perjalanan Terkendali Pengguna]} \longrightarrow \text{Conversational Web GIS [Intensi Spasial Alami]} \longrightarrow \text{Reliability-Controlled Dual Boundaries}$$
+$$\begin{aligned}
+\text{Tahap I} & : \text{DTExplorer (Eksplorasi Spasial WIMP)} \\
+& \quad \Downarrow \\
+\text{Tahap II} & : \text{Kustomrut (Rute Perjalanan Terkendali Pengguna)} \\
+& \quad \Downarrow \\
+\text{Tahap III} & : \text{Conversational Web GIS (Intensi Spasial Alami)} \\
+& \quad \Downarrow \\
+\text{Tahap IV} & : \textbf{Reliability-Controlled Dual Boundaries (Sistem Usulan)}
+\end{aligned}$$
 
 Keberbaruan ilmiah (*scientific novelty*) penelitian ini **bukan sekadar menambahkan antarmuka chatbot di atas peta digital**, melainkan **pergeseran paradigma interaksi dan kontrol (*interaction and control paradigm shift*)** menuju sebuah **Reliability-Controlled Conversational Spatial Information System** (Sistem Informasi Spasial Percakapan Terkendali Keandalan). Sistem ini dikendalikan oleh dua mekanisme batas kontrol fundamental:
 1. **Batas Kendali Semantik (*Semantic Control Boundary*)**: $\text{LLM} \to \text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to \text{Kompiler Kueri Spasial Deterministik}$. Batas ini bertugas mengisolasi LLM probabilistik, mengekstrak maksud pengguna ke dalam representasi semantik formal, serta memvalidasi invarian keamanan dan ontologi spasial dengan prinsip *No Intent Alteration* agar maksud semantik yang tidak valid atau terubah sepihak tidak pernah menyentuh mesin eksekusi basis data.
@@ -126,7 +363,7 @@ Penelitian ini menggunakan pendekatan rekayasa perangkat lunak terapan yang dipa
 
 ### 2.2 Landasan Pendekatan: Kerangka Batas Kendali Ganda (*The Dual Control Boundaries Framework*) dan Arsitektur 5-Lapis
 
-Guna mewujudkan **Reliability-Controlled Conversational Spatial Information System** yang kebal terhadap halusinasi faktual dan manipulasi data, sistem ini dirancang bukan sekadar sebagai pipa pemrosesan sekuensial, melainkan beroperasi di bawah fondasi teoritis **Batas Kendali Ganda (*Dual Control Boundaries Framework*)**:
+Guna mewujudkan **Reliability-Controlled Conversational Spatial Information System** yang memiliki ketahanan tinggi terhadap halusinasi faktual pada ruang lingkup domain terdefinisi dan mencegah manipulasi data eksekusi, sistem ini dirancang bukan sekadar sebagai pipa pemrosesan sekuensial, melainkan beroperasi di bawah fondasi teoritis **Batas Kendali Ganda (*Dual Control Boundaries Framework*)**:
 
 ```
                  PROBABILISTIC LLM (Layer 2)
@@ -164,12 +401,19 @@ Guna mewujudkan **Reliability-Controlled Conversational Spatial Information Syst
 Dua mekanisme batas kendali utama tersebut didefinisikan secara presisi sebagai berikut:
 
 1. **Batas Kendali Semantik (*Semantic Control Boundary*):**
-   $$\text{LLM} \longrightarrow \mathcal{S}_{\text{raw}} \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}_{\text{parameterized}}$$
+   $$\begin{aligned}
+   \text{Tahap Ekstraksi Niat} & : \quad \text{LLM} \longrightarrow \mathcal{S}_{\text{raw}} \\
+   \text{Tahap Validasi Deterministik} & : \quad \mathcal{S}_{\text{raw}} \xrightarrow{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \quad (\text{Prinsip: No Intent Alteration}) \\
+   \text{Tahap Kompilasi Spasial} & : \quad \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}_{\text{parameterized}}
+   \end{aligned}$$
    Batas ini bertugas mengisolasi model bahasa probabilistik dari eksekusi basis data. Maksud pengguna diekstrak menjadi *Spatial Intent Representation* (SIR). Modul *SirValidator* 6-dimensi menegakkan prinsip *No Intent Alteration*, memeriksa konsistensi skema, tipe, domain, operator, entitas, dan batasan numerik. Hanya representasi yang memenuhi seluruh invarian yang disahkan sebagai *Canonical Spatial Intent Representation* (CSIR) dan dikompilasi menjadi kueri SQL terparameterisasi. Batas ini menjamin bahwa maksud semantik yang tidak valid, bertentangan dengan kebijakan, atau termutasi secara sepihak (*silent alteration*) tidak akan pernah mencapai tahap eksekusi basis data.
 
 2. **Batas Kendali Bukti (*Evidence Control Boundary*):**
-   $$F \longrightarrow \text{Grounded NLG} \xrightarrow[\text{Fail-Closed}]{\text{Claim-Level Validator}} \text{Respons Terverifikasi}$$
-   Batas ini mengendalikan tahap sintesis respons akhir pengguna. Fakta relasional $F$ hasil eksekusi deterministik MySQL 8.0 (`ST_Distance_Sphere`) diinjeksikan ke modul *Grounded NLG* di bawah kontrak grounding ketat (*Strict Grounding Contract*). Selanjutnya, teks narasi yang dihasilkan diverifikasi secara algoritmik di tingkat klaim (*Claim-Level Grounding Validator*) lintas 4 sub-dimensi ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$). Jika terdeteksi klaim tanpa bukti atau entitas di luar $F$, sistem mengaktifkan kebijakan *fail-closed fallback* deterministik untuk memastikan tidak ada klaim tanpa dukungan basis data yang sampai ke pengguna.
+   $$\begin{aligned}
+   \text{Sintesis Terkontrak} & : \quad F \longrightarrow \text{Grounded NLG} \\
+   \text{Audit \& Fallback} & : \quad \text{Grounded NLG} \xrightarrow{\text{GroundingValidator}} \text{Respons Terverifikasi} \quad (\text{Kebijakan: Fail-Closed})
+   \end{aligned}$$
+   Batas ini mengendalikan tahap sintesis respons akhir pengguna. Fakta relasional $F$ hasil eksekusi deterministik MySQL 8.0 (`ST_Distance_Sphere`) diinjeksikan ke modul *Grounded NLG* di bawah kontrak grounding ketat (*Strict Grounding Contract*). Selanjutnya, teks narasi yang dihasilkan diverifikasi secara algoritmik di tingkat klaim (*Claim-Level Grounding Validator*) lintas 4 sub-dimensi ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$). Jika terdeteksi klaim tanpa bukti atau entitas di luar $F$, sistem mengaktifkan kebijakan *fail-closed fallback* deterministik guna memverifikasi bahwa seluruh klaim pada empat kategori yang dievaluasi didukung secara eksak oleh fakta basis data relasional sebelum diteruskan ke pengguna.
 
 Secara teknis rekayasa perangkat lunak, kerangka batas kendali ganda ini direalisasikan ke dalam **Arsitektur Pipa 5-Lapis (*5-Layer Pipeline Architecture*)** yang memisahkan tugas kognitif dari eksekusi basis data secara tegas (*Separation of Concerns*):
 
@@ -209,7 +453,12 @@ Untuk menguji ketahanan sistem secara ilmiah dan metodologis, kebenaran operasio
    $$\mathcal{C}_{\text{grounding}}: F \longrightarrow \text{Respons Naratif Ter-grounding}$$
 
 Rangkaian ini membentuk pipa sekuensial yang teruji:
-$$\boxed{NL \xrightarrow[\text{Semantik}]{\text{Kognitif}} CSIR \xrightarrow[\text{Deterministik}]{\text{Kompilasi}} \text{SQL} \xrightarrow[\text{Spherical}]{\text{Spatial DBMS}} \text{Hasil Spasial } (F) \xrightarrow[\text{Grounding}]{\text{Algorithmic Firewall}} \text{Respons Bernarasi}}$$
+$$\begin{aligned}
+\textbf{Fase 1 (Semantik):} & \quad NL \xrightarrow{\text{Inferensi Kognitif}} CSIR \\
+\textbf{Fase 2 (Kompilasi):} & \quad CSIR \xrightarrow{\text{Kompilasi Deterministik}} \text{SQL} \\
+\textbf{Fase 3 (Eksekusi Spasial):} & \quad \text{SQL} \xrightarrow{\text{MySQL 8.0 ST\_Distance\_Sphere}} \text{Himpunan Fakta } (F) \\
+\textbf{Fase 4 (Verifikasi Fakta):} & \quad F \xrightarrow[\text{Fail-Closed}]{\text{GroundingValidator}} \text{Respons Bernarasi Terverifikasi}
+\end{aligned}$$
 
 #### 2.2.2 Kerangka Operasional Interaksi Spasial Eksploratori Terkontrol Semantik
 Guna memodelkan interaksi antara formulasi intensi pengguna, parameterisasi skala spasial, penyaringan atribut multi-kriteria, dan visualisasi pemetaan, Gambar 2.2 menggambarkan **Kerangka Operasional Interaksi Spasial Eksploratori Terkontrol Semantik (*The Iterative Cognitive-Control-Execution Loop*)**, yang mentransformasikan kerangka kerja operasional *DTExplorer* (Afnarius dkk., 2026, Gambar 8) [2].
@@ -243,7 +492,12 @@ Guna memastikan konsistensi terminologis dan ketepatan pemodelan, penelitian ini
 2. **Canonical Spatial Intent Representation (CSIR / $\mathcal{S}_{\text{csir}}$):** Bentuk kanonik bertipe ketat (*strictly typed*) hasil pengikatan konteks spasial dan verifikasi deterministik oleh *SirValidator* 6-Dimensi (Lapisan 3). Hanya representasi yang lulus seluruh invarian ontologi dan domain spasial yang berstatus **Validated CSIR ($\mathcal{S}_{\text{csir}}$)** dan diizinkan dikompilasi menjadi kueri SQL spasial.
 
 Siklus hidup transformasi dinyatakan secara formal sebagai:
-$$\mathcal{S}_{\text{raw}} = \text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}}) \xrightarrow[\text{Context Anchoring}]{\text{Geospatial Resolver}} \mathcal{S}_{\text{csir}} \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir, valid}} \xrightarrow{\text{Compiler}} \text{SQL}$$
+$$\begin{aligned}
+\text{Langkah 1 (Parsing Bahasa Alami):} & \quad \mathcal{S}_{\text{raw}} = \text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}}) \\
+\text{Langkah 2 (Pengikatan Konteks Spasial):} & \quad \mathcal{S}_{\text{raw}} \xrightarrow{\text{Geospatial Resolver}} \mathcal{S}_{\text{csir}} \\
+\text{Langkah 3 (Validasi Invarian 6-Dimensi):} & \quad \mathcal{S}_{\text{csir}} \xrightarrow{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir, valid}} \quad (\text{Prinsip: No Intent Alteration}) \\
+\text{Langkah 4 (Kompilasi SQL Spasial):} & \quad \mathcal{S}_{\text{csir, valid}} \xrightarrow{\text{Query Compiler}} \text{SQL}_{\text{parameterized}}
+\end{aligned}$$
 
 Secara matematis, CSIR dimodelkan sebagai tupel formal perantara semantik (*typed intermediate representation*) kanonikal yang memiliki tepat 19 atribut:
 
@@ -406,7 +660,11 @@ SCHEMA:
 #### 2.4.2 Arsitektur Dua Titik Panggilan LLM (Two-Stage LLM Grounding Architecture)
 Arsitektur yang diusulkan secara sadar dan eksplisit membagi pemrosesan AI ke dalam **dua pemanggilan LLM terpisah (*two distinct LLM inference calls*)** yang diselingi oleh inti komputasi deterministik:
 
-$$\text{User NL} \xrightarrow{\textbf{LLM \#1 (Intent Parsing)}} \text{Raw SIR} \xrightarrow[\text{Algoritmik}]{\text{SirValidator}} \text{SQL} \xrightarrow[\text{Deterministik}]{\text{MySQL 8.0}} \text{Facts } F_{SQL} \xrightarrow{\textbf{LLM \#2 (Grounded NLG)}} \text{Draft NLG} \xrightarrow[\text{Algoritmik}]{\text{GroundingValidator}} \text{Final Output}$$
+$$\begin{aligned}
+\textbf{Fase I (Pemahaman Maksud \& Parsing):} & \quad \text{User NL} \xrightarrow{\text{LLM \#1 (Intent Parser)}} \text{Raw SIR} \xrightarrow{\text{SirValidator}} \text{CSIR} \xrightarrow{\text{Compiler}} \text{SQL} \\
+\textbf{Fase II (Eksekusi Spasial Relasional):} & \quad \text{SQL} \xrightarrow{\text{MySQL 8.0 (ST\_Distance\_Sphere)}} \text{Fakta Terverifikasi } F_{SQL} \\
+\textbf{Fase III (Sintesis \& Audit Grounding):} & \quad F_{SQL} \xrightarrow{\text{LLM \#2 (Grounded NLG)}} \text{Draft NLG} \xrightarrow[\text{Fail-Closed}]{\text{GroundingValidator}} \text{Respons Akhir}
+\end{aligned}$$
 
 Pemisahan dua titik panggilan LLM ini merupakan fondasi utama mengapa arsitektur mampu mencapai *grounding* deterministik:
 1. **Panggilan LLM #1 (Natural Language $\to$ Raw SIR $\to$ CSIR):** LLM hanya bertindak sebagai penerjemah bahasa kognitif murni untuk memetakan ujaran bebas pengguna ke dalam format semantik terstruktur (Raw SIR 17-slot semantik murni). Model dilarang mengarang koordinat GPS; nilai koordinat `latitude` dan `longitude` disuntikkan secara deterministik dari peramban/resolver sehingga membentuk CSIR 19-atribut utuh. Pada tahap ini, LLM dilarang keras menghasilkan sintaks SQL, dilarang mengakses basis data, dan dilarang memberikan jawaban rekomendasi langsung.
@@ -426,7 +684,7 @@ Desain dua titik ini memperjelas mengapa latensi total sistem (~1.340 ms) didomi
 
 #### 2.4.3 Contoh Alur Nyata: Masukan Pengguna → SIR → Kueri SQL → Hasil Basis Data → Narasi Ter-Grounding
 Untuk memperjelas transformasi deterministik ujung-ke-ujung (*end-to-end concrete trace*) yang diminta oleh penelaah, perhatikan skenario masukan operasional berikut:
-* **Masukan Bahasa Alami (Input):** *"Carikan pantai dalam radius 10 km dari lokasi saya yang buka sekarang dan tiket di bawah 15 ribu"* (Koordinat GPS: `-0.9471, 100.3541`).
+* **Masukan Bahasa Alami (Input):** *"Carikan pantai dalam radius 10 km dari lokasi saya yang buka sekarang dan tiket di bawah 15 ribu"* (disimulasikan dengan **Titik Masukan GPS Uji A [Kawasan Pusat Kota]**: `[-0.9471, 100.3541]`, yang sengaja dibedakan dari **Titik B [Pesisir Pantai Padang]**: `[-0.958, 100.354]` pada pengujian posisi tepi laut di bagian evaluasi).
 * **Representasi Semantik Terstruktur (SIR JSON Tervalidasi):**
   ```json
   {
@@ -533,9 +791,9 @@ Dalam implementasi riil, diterapkan dua aturan pengayaan:
 Untuk menutup celah halusinasi pada perangkaian narasi akhir (*Layer 5*), sistem mengimplementasikan *Algorithmic Grounding Validator* pada kelas `GroundingValidator.php`. Validator ini mengekstrak entitas dan memvalidasi seluruh proposisi numerik harga tiket, jarak spasial lingkaran besar, dan jam operasional terhadap fakta SQL. Jika ditemukan entitas tak terdaftar ($e \notin F_{\text{SQL}}$) atau deviasi klaim numerik atribut melampaui toleransi, teks LLM secara instan dibatalkan (*dropped*) dan sistem beralih ke *Deterministic Template Generator* (`buildDeterministicFallbackResponse()`) yang menyusun narasi langsung dari data mentah MySQL 8.0, memastikan tidak ada entitas palsu yang lolos ke pengguna (*0 fabricated POIs observed* pada pengujian empiris).
 
 ### 2.8 Taksonomi Kegagalan Spasial (F1–F8)
-Untuk mengevaluasi keandalan sistem secara ketat, dirumuskan taksonomi kegagalan spasial yang terdiri dari 8 kelas kegagalan (Tabel 2.3).
+Untuk mengevaluasi keandalan sistem secara ketat, dirumuskan taksonomi kegagalan spasial yang terdiri dari 8 kelas kegagalan (Tabel 2.4).
 
-**Tabel 2.3 Taksonomi Kegagalan Spasial (F1–F8) pada Sistem Rekomendasi Percakapan Geospasial**
+**Tabel 2.4 Taksonomi Kegagalan Spasial (F1–F8) pada Sistem Rekomendasi Percakapan Geospasial**
 
 | Kode | Jenis Kegagalan | Deskripsi Kegagalan | Target Pencegahan Sistem |
 |---|---|---|---|
@@ -1486,7 +1744,10 @@ Pengukuran waktu respons komputasi diukur secara berkesinambungan per milidetik 
 | *Subtotal Latensi Backend Server* | *1.252,17 ms* | *1.232,39 ms* | *1.581,37 ms* | *871,23 ms* | *1.694,60 ms* | *93,41%* |
 | **B. Layanan Perutean Visualisasi Klien (Asinkron)** | | | | | | |
 | 5. Routing Polyline & Navigasi Jalan (OSRM Public API) | 88,40 ms | 84,50 ms | 128,60 ms | 45,20 ms | 142,50 ms | 6,59% |
-| **TOTAL Pengalaman Respons Pengguna (*User-Perceived E2E*)** | **1.340,57 ms** | **1.316,89 ms** | **1.709,97 ms** | **916,43 ms** | **1.837,10 ms** | **100,00%** |
+| **TOTAL Pengalaman Respons Pengguna (*Estimasi Komposit Aditif*)** | **1.340,57 ms** | —* | —* | —* | —* | **100,00%** |
+
+*\*Catatan Metodologis Pelaporan Latensi Komposit:*
+> Sesuai kaidah inferensi statistik, waktu respons total pengguna dilaporkan sebagai estimasi rata-rata gabungan aditif ($\mu_{\text{total}} = \mu_{\text{backend}} + \mu_{\text{osrm}} = 1.252,17\text{ ms} + 88,40\text{ ms} = 1.340,57\text{ ms}$). Metrik non-linear seperti median dan P95 tidak dijumlahkan secara langsung antar-lingkungan yang diukur pada instrumen independen (server backend vs klien peramban), melainkan dilaporkan secara terpisah pada subtotal masing-masing lingkungan di atas.
 
 *Catatan Metodologis Pemisahan Rezim Evaluasi (Live LLM vs. Deterministic Offline Mock):*
 > Pengukuran profil kinerja utama di atas dievaluasi pada mode inferensi *Live LLM* terhubung penuh ($N=120$), yang merepresentasikan interaksi nyata pengguna dengan model bahasa besar dalam kondisi operasional produksi. Di samping mode live ini, repositori penelitian juga menyediakan mode eksekusi deterministik in-memory (*offline mock pipeline* via bendera `--mock` pada modul runner benchmark) yang secara khusus dirancang untuk audit invarian logika lokal dan otomasi pengujian regresi berkesinambungan (CI/CD) tanpa dependensi jaringan eksternal. Pada mode *mock* tersebut, latensi pemrosesan backend tercatat rata-rata sebesar **8,99 ms** (median: 8,65 ms, P95: 14,20 ms) karena komputasi hanya melibatkan *in-memory rule-engine* dan kueri lokal. Pemisahan formal ini memastikan bahwa metrik pengujian lingkungan produksi nyata dan lingkungan verifikasi logika lokal terdefinisi secara terpisah dan tidak dicampuradukkan dalam penarikan kesimpulan ilmiah.
@@ -1495,7 +1756,7 @@ Hasil profiling menunjukkan bahwa komputasi spasial MySQL 8.0 dengan fungsi spas
 1. **Panggilan LLM #1 (Intent Parsing):** Mentranslasikan ujaran bahasa alami pengguna menjadi *Raw SIR* terstruktur dengan rata-rata durasi **465,12 ms** (median: 458,30 ms, P95: 582,40 ms; 34,69%).
 2. **Panggilan LLM #2 (Grounded NLG) + Validasi Deterministik:** Merangkai narasi rekomendasi berdasarkan fakta SQL resmi yang langsung diverifikasi secara algoritmik oleh `GroundingValidator` (rata-rata total: **785,42 ms**, median: 772,60 ms, P95: 995,80 ms; 58,60%).
 
-Secara kumulatif, total latensi inferensi jaringan LLM adalah $465,12\text{ ms} + 785,42\text{ ms} = 1.250,54\text{ ms}$ (~1,25 detik). Total waktu respons sistem rata-rata tercatat sebesar **1.340,57 ms** (median: 1.316,89 ms, P95: 1.709,97 ms; ~1,34 detik), yang berada di bawah ambang batas responsivitas operasional 2,00 detik ($\le 2.000\text{ ms}$) yang diadopsi dalam penelitian ini, menunjukkan kelayakan teknis arsitektur untuk interaksi Web GIS percakapan nyata.
+Secara kumulatif, total latensi inferensi jaringan LLM adalah $465,12\text{ ms} + 785,42\text{ ms} = 1.250,54\text{ ms}$ (~1,25 detik). Total waktu respons sistem mencatatkan estimasi rata-rata gabungan aditif sebesar **1.340,57 ms** (~1,34 detik; dengan median dan P95 dilaporkan terpisah per lingkungan pengukuran), yang berada di bawah ambang batas responsivitas operasional 2,00 detik ($\le 2.000\text{ ms}$) yang diadopsi dalam penelitian ini, menunjukkan kelayakan teknis arsitektur untuk interaksi Web GIS percakapan nyata.
 
 #### 4.6.4 Laporan Evaluasi Komparatif Multi-Baseline dan Uji Ablasi
 Hasil pengujian komparasi terhadap baseline pembanding dan uji ablasi komponen sistem dirangkum pada Tabel 4.6 dan Tabel 4.7. Seluruh konfigurasi sistem dijalankan di bawah protokol eksperimental terstandarisasi yang dirinci pada Tabel 4.5a, menjamin keterbandingan yang adil (*fair benchmark*): model LLM yang sama (DeepSeek-V3, `temperature = 0.0`, `top_p = 1.0`, `max_tokens = 300`), 40 skenario percakapan benchmark yang identik (masing-masing direplikasi 3 kali pengujian independen sehingga total $N=120$ evaluasi per sistem), dan basis data relasional MySQL 8.0 `geo_db` aktual yang sama.
@@ -1766,7 +2027,7 @@ Berdasarkan serangkaian perancangan perangkat lunak, implementasi arsitektur bat
 2. **Efektivitas Batas Kendali Bukti (*Evidence Control Boundary*) dan Eksekusi Spasial Relasional:**
    Penguncian sumber kebenaran fakta pada basis data relasional MySQL 8.0 dengan fungsi spasial bawaan `ST_Distance_Sphere` berbasis model bola bumi mencatatkan waktu eksekusi kueri rata-rata **1,21 ms** (dan 6,11 ms pada pengujian beban 10.000 titik sintetis). Penegakan *Strict Grounding Contract* pada sintesis narasi (*Grounded NLG*) yang dipadukan dengan verifikasi pasca-generasi *Algorithmic Claim-Level Grounding Validator* lintas 4 sub-dimensi ($\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}$) menghasilkan **Claim-Level Grounding Fidelity sebesar 100,00% (270/270 klaim terverifikasi yang dikenali oleh GroundingValidator pada empat kategori pemeriksaan terdefinisi: entitas, tarif tiket, jam operasional, dan jarak spasial)**, **Entity Grounding Fidelity 100,00% (120/120 sebutan POI)**, **Scenario Grounding Pass Rate 100,00% (40/40 skenario)**, dan **Entity Fabrication Rate 0,00% (0 entitas palsu yang teramati pada 40 skenario benchmark yang dievaluasi)** dengan jaminan perlindungan *fail-closed fallback* deterministik. Capaian 100% ini berlaku secara terukur untuk klaim-klaim yang dievaluasi oleh validator pada kumpulan data uji terstandarisasi tersebut, dan bukan merupakan klaim ketiadaan halusinasi secara mutlak di luar skenario yang diuji. Sementara itu, OSRM dan Leaflet.js berhasil menyajikan visualisasi rute jalan raya secara terpadu.
 3. **Efisiensi Teknis dan Penerimaan Pengguna (*Technical Performance and Usability*):**
-   Profil latensi sistem mencatatkan waktu pemrosesan pipeline percakapan cerdas di sisi server rata-rata sebesar **1.252,17 ms** (median: 1.232,39 ms, persentil ke-95/P95: 1.581,37 ms; mencakup dua panggilan inferensi LLM terpisah: Panggilan LLM #1 untuk parsing semantik sebesar 465,12 ms, validasi deterministik 0,42 ms, eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms, dan Panggilan LLM #2 untuk grounded NLG sebesar 785,42 ms), sedangkan latensi perutean jaringan jalan OSRM diukur secara independen pada sisi klien peramban sebesar **88,40 ms** (median: 84,50 ms, P95: 128,60 ms; menghasilkan total waktu persepsi pengguna rata-rata sebesar 1.340,57 ms, median: 1.316,89 ms, P95: 1.709,97 ms). Pengujian usability empiris ($N = 30$) dengan desain *within-subjects* dan *Latin square counterbalancing* membuktikan bahwa antarmuka percakapan yang diusulkan **mereduksi waktu penyelesaian tugas kognitif (TCT) sebesar 82,43%** dibandingkan antarmuka WIMP konvensional ($t(29) = 28,42, p < 0,001$, *Cohen's d* = 5,19) serta meraih skor kepuasan **System Usability Scale (SUS) sebesar 84,25 ± 6,80 (Grade A / predikat "Excellent")**.
+   Profil latensi sistem mencatatkan waktu pemrosesan pipeline percakapan cerdas di sisi server rata-rata sebesar **1.252,17 ms** (median: 1.232,39 ms, persentil ke-95/P95: 1.581,37 ms; mencakup dua panggilan inferensi LLM terpisah: Panggilan LLM #1 untuk parsing semantik sebesar 465,12 ms, validasi deterministik 0,42 ms, eksekusi kueri spasial SQL MySQL 8.0 sebesar 1,21 ms, dan Panggilan LLM #2 untuk grounded NLG sebesar 785,42 ms), sedangkan latensi perutean jaringan jalan OSRM diukur secara independen pada sisi klien peramban sebesar **88,40 ms** (median: 84,50 ms, P95: 128,60 ms; menghasilkan estimasi total waktu persepsi pengguna rata-rata aditif sebesar **1.340,57 ms**, dengan median dan P95 dilaporkan terpisah per lingkungan pengukuran guna mematuhi kaidah statistik). Pengujian usability empiris ($N = 30$) dengan desain *within-subjects* dan *Latin square counterbalancing* membuktikan bahwa antarmuka percakapan yang diusulkan **mereduksi waktu penyelesaian tugas kognitif (TCT) sebesar 82,43%** dibandingkan antarmuka WIMP konvensional ($t(29) = 28,42, p < 0,001$, *Cohen's d* = 5,19) serta meraih skor kepuasan **System Usability Scale (SUS) sebesar 84,25 ± 6,80 (Grade A / predikat "Excellent")**.
 
 ### 5.2 Saran Pengembangan
 Untuk penyempurnaan sistem pada penelitian berikutnya, disarankan beberapa arahan pengembangan strategis:
