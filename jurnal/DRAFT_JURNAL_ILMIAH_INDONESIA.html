@@ -226,9 +226,6 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="/usr/share/javascript/mathjax/MathJax.js"
-  type="text/javascript"></script>
 <style>
 
 @page {
@@ -544,6 +541,15 @@ li {
 .math {
     font-family: "Cambria Math", "Times New Roman", serif;
 }
+math {
+    font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", "Times New Roman", serif;
+    font-size: 1.05em;
+}
+math[display="block"] {
+    display: block;
+    text-align: center;
+    margin: 1em 0;
+}
 
 </style>
 </head>
@@ -813,12 +819,10 @@ kebenaran (<em>single source of truth</em>). 5. <strong>Algorithmic
 Claim-Level Grounding Validator &amp; Kerangka Evaluasi
 Empiris:</strong> Menetapkan kontrak grounding mutlak pada tahap
 pembentukan narasi rekomendasi (<em>Grounded NLG</em>) dan audit klaim
-faktual lintas 4 sub-dimensi (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
-\mathcal{C}_{\text{temporal}}\)</span>), dilengkapi taksonomi kegagalan
-formal (F1–F8) dan evaluasi perbandingan multi-baseline serta
-<em>ablation study</em>.</p>
+faktual lintas 4 sub-dimensi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>),
+dilengkapi taksonomi kegagalan formal (F1–F8) dan evaluasi perbandingan
+multi-baseline serta <em>ablation study</em>.</p>
 <hr />
 <hr />
 <h2 id="kajian-terkait-related-work">2. KAJIAN TERKAIT (RELATED
@@ -874,15 +878,16 @@ Namun demikian, pada domain geospasial perkotaan yang melibatkan kendala
 multi-kriteria (seperti radius jarak bola bumi, batasan anggaran, dan
 jam buka-tutup sirkadian), RAG vektor terbukti gagal secara fundamental.
 Vektor <em>embedding</em> tidak mampu mengevaluasi predikat ketaksamaan
-numerik eksak (<span class="math inline">\(d \le 10\text{ km}\)</span>,
-<span class="math inline">\(\text{harga} \le 15.000\)</span>). Selain
-itu, upaya mitigasi halusinasi pasca-generasi yang mengandalkan LLM
-sekunder (<em>LLM-as-a-judge</em>) menimbulkan inkonsistensi stokastik
-baru dan beban latensi berlebih. Penelitian ini mengusulkan verifikasi
-berbasis aturan deterministik (<em>deterministic algorithmic claim-level
-grounding validator</em>) yang mengaudit setiap klaim terhadap tupel
-basis data relasional secara matematis tanpa campur tangan model
-generatif tambahan.</p>
+numerik eksak
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>≤</mo><mn>10</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">d \le 10\text{ km}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">harga</mtext><mo>≤</mo><mn>15.000</mn></mrow><annotation encoding="application/x-tex">\text{harga} \le 15.000</annotation></semantics></math>).
+Selain itu, upaya mitigasi halusinasi pasca-generasi yang mengandalkan
+LLM sekunder (<em>LLM-as-a-judge</em>) menimbulkan inkonsistensi
+stokastik baru dan beban latensi berlebih. Penelitian ini mengusulkan
+verifikasi berbasis aturan deterministik (<em>deterministic algorithmic
+claim-level grounding validator</em>) yang mengaudit setiap klaim
+terhadap tupel basis data relasional secara matematis tanpa campur
+tangan model generatif tambahan.</p>
 <h3 id="sistem-rekomendasi-spasial-berbasis-kendala">2.4 Sistem
 Rekomendasi Spasial Berbasis Kendala</h3>
 <p>Dalam taksonomi sistem temu kembali dan rekomendasi pariwisata [1],
@@ -919,23 +924,20 @@ model optimasi komputasi yang membebani peladen. Kendati demikian,
 <em>DTExplorer</em> masih bertumpu pada antarmuka WIMP (<em>Windows,
 Icons, Menus, Pointer</em>) konvensional dengan <em>slider</em> radius
 dan formulir HTML tarik-turun, menggunakan aproksimasi jarak Euclidean
-planar (<span class="math inline">\(\text{ST\_Distance} \times
-111.32\)</span>), serta secara eksplisit mencatat perlunya riset
-lanjutan untuk antarmuka percakapan berbasis AI, pemfilteran
-multi-kriteria waktu/biaya, dan evaluasi performa teknis tingkat
-milidetik. 2. <strong>Kustomrut (Afnarius dkk.):</strong> Mengembangkan
-interaktivitas rute wisata yang dapat disesuaikan langsung oleh pengguna
-(<em>user-controlled itinerary customization</em>) berbasis Google
-Directions API. 3. <strong>Penelitian Ini (Reliability-Controlled
-Conversational Spatial Information System):</strong> Memajukan paradigma
-tersebut ke arah kueri spasial percakapan terpandu (<em>reliable
-AI-mediated spatial querying</em>) pada skala perkotaan Kota Padang
-(694,96 km²). Evolusi trajektori riset ini membentuk rantai kemajuan
-ilmiah: <span class="math display">\[\text{DTExplorer [Eksplorasi
-Spasial WIMP]} \longrightarrow \text{Kustomrut [Rute Perjalanan
-Terkendali Pengguna]} \longrightarrow \text{Conversational Web GIS
-[Intensi Spasial Alami]} \longrightarrow \text{Reliability-Controlled
-Dual Boundaries}\]</span></p>
+planar
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">ST_Distance</mtext><mo>×</mo><mn>111.32</mn></mrow><annotation encoding="application/x-tex">\text{ST\_Distance} \times 111.32</annotation></semantics></math>),
+serta secara eksplisit mencatat perlunya riset lanjutan untuk antarmuka
+percakapan berbasis AI, pemfilteran multi-kriteria waktu/biaya, dan
+evaluasi performa teknis tingkat milidetik. 2. <strong>Kustomrut
+(Afnarius dkk.):</strong> Mengembangkan interaktivitas rute wisata yang
+dapat disesuaikan langsung oleh pengguna (<em>user-controlled itinerary
+customization</em>) berbasis Google Directions API. 3.
+<strong>Penelitian Ini (Reliability-Controlled Conversational Spatial
+Information System):</strong> Memajukan paradigma tersebut ke arah kueri
+spasial percakapan terpandu (<em>reliable AI-mediated spatial
+querying</em>) pada skala perkotaan Kota Padang (694,96 km²). Evolusi
+trajektori riset ini membentuk rantai kemajuan ilmiah:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">DTExplorer [Eksplorasi Spasial WIMP]</mtext><mo>→</mo><mtext mathvariant="normal">Kustomrut [Rute Perjalanan Terkendali Pengguna]</mtext><mo>→</mo><mtext mathvariant="normal">Conversational Web GIS [Intensi Spasial Alami]</mtext><mo>→</mo><mtext mathvariant="normal">Reliability-Controlled Dual Boundaries</mtext></mrow><annotation encoding="application/x-tex">\text{DTExplorer [Eksplorasi Spasial WIMP]} \longrightarrow \text{Kustomrut [Rute Perjalanan Terkendali Pengguna]} \longrightarrow \text{Conversational Web GIS [Intensi Spasial Alami]} \longrightarrow \text{Reliability-Controlled Dual Boundaries}</annotation></semantics></math></p>
 <p>Keberbaruan ilmiah (<em>scientific novelty</em>) penelitian ini
 <strong>bukan sekadar menambahkan antarmuka chatbot di atas peta
 digital</strong>, melainkan <strong>pergeseran paradigma interaksi dan
@@ -943,18 +945,16 @@ kontrol (<em>interaction and control paradigm shift</em>)</strong>
 menuju sebuah <strong>Reliability-Controlled Conversational Spatial
 Information System</strong> yang diatur oleh dua mekanisme batas kontrol
 fundamental: - <strong>Batas Kendali Semantik (<em>Semantic Control
-Boundary</em>):</strong> <span class="math inline">\(\text{LLM} \to
-\text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to
-\text{Deterministic Spatial Query Compiler}\)</span>. Bertujuan mencegah
-maksud semantik yang tidak sah, di luar domain, atau termutasi sepihak
-mencapai eksekusi basis data dengan menegakkan prinsip <em>No Intent
-Alteration</em>. - <strong>Batas Kendali Bukti (<em>Evidence Control
-Boundary</em>):</strong> <span class="math inline">\(\text{Fakta SQL }
-(F) \to \text{Grounded NLG} \to \text{Claim-Level Grounding Validator}
-\to \text{Fail-Closed Fallback}\)</span>. Bertujuan mengunci fakta pada
-hasil kueri basis data relasional MySQL 8.0
-(<code>ST_Distance_Sphere</code>), menyintesis narasi ramah pengguna di
-bawah kontrak grounding ketat, serta memverifikasi kebenaran setiap
+Boundary</em>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">LLM</mtext><mo>→</mo><mtext mathvariant="normal">SIR</mtext><mo>→</mo><mtext mathvariant="normal">6D SirValidator</mtext><mo>→</mo><mtext mathvariant="normal">CSIR</mtext><mo>→</mo><mtext mathvariant="normal">Deterministic Spatial Query Compiler</mtext></mrow><annotation encoding="application/x-tex">\text{LLM} \to \text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to \text{Deterministic Spatial Query Compiler}</annotation></semantics></math>.
+Bertujuan mencegah maksud semantik yang tidak sah, di luar domain, atau
+termutasi sepihak mencapai eksekusi basis data dengan menegakkan prinsip
+<em>No Intent Alteration</em>. - <strong>Batas Kendali Bukti
+(<em>Evidence Control Boundary</em>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Fakta SQL </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mtext mathvariant="normal">Grounded NLG</mtext><mo>→</mo><mtext mathvariant="normal">Claim-Level Grounding Validator</mtext><mo>→</mo><mtext mathvariant="normal">Fail-Closed Fallback</mtext></mrow><annotation encoding="application/x-tex">\text{Fakta SQL } (F) \to \text{Grounded NLG} \to \text{Claim-Level Grounding Validator} \to \text{Fail-Closed Fallback}</annotation></semantics></math>.
+Bertujuan mengunci fakta pada hasil kueri basis data relasional MySQL
+8.0 (<code>ST_Distance_Sphere</code>), menyintesis narasi ramah pengguna
+di bawah kontrak grounding ketat, serta memverifikasi kebenaran setiap
 klaim secara algoritmik sebelum respons dikirimkan ke pengguna.</p>
 <p>Dalam taksonomi sistem temu kembali informasi, sistem ini
 didefinisikan secara presisi sebagai <strong>sistem rekomendasi spasial
@@ -1034,53 +1034,46 @@ Kendali Ganda (<em>Dual Control Boundaries Framework</em>)</strong>:</p>
                 (Leaflet.js + OSRM Route)</code></pre>
 <p>Sistem dikendalikan oleh dua batas kontrol berurutan yang diformalkan
 secara matematis dan logis: 1. <strong>Batas Kendali Semantik (<em>The
-Semantic Control Boundary</em> / <span
-class="math inline">\(\mathcal{B}_{\text{semantik}}\)</span>):</strong>
-<span class="math display">\[\mathcal{B}_{\text{semantik}}:
-\text{LLM}(NL) \longrightarrow \mathcal{S}_{\text{raw}}
-\xrightarrow[\text{No Intent
-Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}}
-\xrightarrow{\text{Compiler}}
-\text{SQL}_{\text{terparameterisasi}}\]</span> Batas ini mengisolasi
-model probabilistik dari operasi basis data. Masukan bahasa alami
-diparsing menjadi representasi semantik perantara <em>Spatial Intent
-Representation</em> (SIR). Modul <em>SirValidator</em> 6-dimensi
-menegakkan prinsip <em>No Intent Alteration</em> serta invarian skema,
-tipe, domain, operator, entitas, dan batasan numerik. Apabila ditemukan
-parameter anomali (seperti radius negatif atau operator ilegal),
-validator menolak mutasi sepihak dan mewajibkan klarifikasi pengguna.
-Pelanggaran invarian (<code>!isValid || isOutOfScope</code>) membatalkan
-kompilasi kueri SQL, memastikan bahwa maksud yang tidak sah tidak pernah
-menyentuh mesin basis data. 2. <strong>Batas Kendali Bukti (<em>The
-Evidence Control Boundary</em> / <span
-class="math inline">\(\mathcal{B}_{\text{bukti}}\)</span>):</strong>
-<span class="math display">\[\mathcal{B}_{\text{bukti}}: F
-\longrightarrow \text{Grounded NLG}
-\xrightarrow[\text{Fail-Closed}]{\text{Claim-Level Validator}}
-\text{Respons}_{\text{terverifikasi}}\]</span> Batas ini mengatur
-sintesis naratif akhir respons pengguna. Mesin spasial deterministik
-(MySQL 8.0 <code>ST_Distance_Sphere</code>) mengeksekusi SQL
-terparameterisasi, menghasilkan himpunan fakta relasional <span
-class="math inline">\(F\)</span> yang tidak dapat diubah
-(<em>immutable</em>). Modul <em>Grounded NLG</em> dibatasi oleh kontrak
-instruksi sistem ketat yang melarang inferensi tanpa bukti. Selanjutnya,
-<em>Algorithmic Claim-Level Grounding Validator</em> mengaudit teks
-respons pada 4 sub-dimensi (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
-\mathcal{C}_{\text{temporal}}\)</span>). Jika terdeteksi klaim tanpa
-bukti (<span class="math inline">\(\exists c \notin F\)</span>), sistem
-memicu mekanisme <em>fail-closed fallback</em> deterministik untuk
-memastikan 0 klaim tanpa dasar yang sampai ke pengguna.</p>
+Semantic Control Boundary</em> /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℬ</mi><mtext mathvariant="normal">semantik</mtext></msub><annotation encoding="application/x-tex">\mathcal{B}_{\text{semantik}}</annotation></semantics></math>):</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℬ</mi><mtext mathvariant="normal">semantik</mtext></msub><mo>:</mo><mtext mathvariant="normal">LLM</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mi>L</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><munderover><mo>→</mo><mtext mathvariant="normal">No Intent Alteration</mtext><msub><mtext mathvariant="normal">SirValidator</mtext><mtext mathvariant="normal">6-D</mtext></msub></munderover><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><mover><mo>→</mo><mtext mathvariant="normal">Compiler</mtext></mover><msub><mtext mathvariant="normal">SQL</mtext><mtext mathvariant="normal">terparameterisasi</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{B}_{\text{semantik}}: \text{LLM}(NL) \longrightarrow \mathcal{S}_{\text{raw}} \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}_{\text{terparameterisasi}}</annotation></semantics></math>
+Batas ini mengisolasi model probabilistik dari operasi basis data.
+Masukan bahasa alami diparsing menjadi representasi semantik perantara
+<em>Spatial Intent Representation</em> (SIR). Modul
+<em>SirValidator</em> 6-dimensi menegakkan prinsip <em>No Intent
+Alteration</em> serta invarian skema, tipe, domain, operator, entitas,
+dan batasan numerik. Apabila ditemukan parameter anomali (seperti radius
+negatif atau operator ilegal), validator menolak mutasi sepihak dan
+mewajibkan klarifikasi pengguna. Pelanggaran invarian
+(<code>!isValid || isOutOfScope</code>) membatalkan kompilasi kueri SQL,
+memastikan bahwa maksud yang tidak sah tidak pernah menyentuh mesin
+basis data. 2. <strong>Batas Kendali Bukti (<em>The Evidence Control
+Boundary</em> /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℬ</mi><mtext mathvariant="normal">bukti</mtext></msub><annotation encoding="application/x-tex">\mathcal{B}_{\text{bukti}}</annotation></semantics></math>):</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℬ</mi><mtext mathvariant="normal">bukti</mtext></msub><mo>:</mo><mi>F</mi><mo>→</mo><mtext mathvariant="normal">Grounded NLG</mtext><munderover><mo>→</mo><mtext mathvariant="normal">Fail-Closed</mtext><mtext mathvariant="normal">Claim-Level Validator</mtext></munderover><msub><mtext mathvariant="normal">Respons</mtext><mtext mathvariant="normal">terverifikasi</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{B}_{\text{bukti}}: F \longrightarrow \text{Grounded NLG} \xrightarrow[\text{Fail-Closed}]{\text{Claim-Level Validator}} \text{Respons}_{\text{terverifikasi}}</annotation></semantics></math>
+Batas ini mengatur sintesis naratif akhir respons pengguna. Mesin
+spasial deterministik (MySQL 8.0 <code>ST_Distance_Sphere</code>)
+mengeksekusi SQL terparameterisasi, menghasilkan himpunan fakta
+relasional
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+yang tidak dapat diubah (<em>immutable</em>). Modul <em>Grounded
+NLG</em> dibatasi oleh kontrak instruksi sistem ketat yang melarang
+inferensi tanpa bukti. Selanjutnya, <em>Algorithmic Claim-Level
+Grounding Validator</em> mengaudit teks respons pada 4 sub-dimensi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>).
+Jika terdeteksi klaim tanpa bukti
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∃</mo><mi>c</mi><mo>∉</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\exists c \notin F</annotation></semantics></math>),
+sistem memicu mekanisme <em>fail-closed fallback</em> deterministik
+untuk memastikan 0 klaim tanpa dasar yang sampai ke pengguna.</p>
 <p>Untuk menjamin integritas data geospasial, penelitian ini menetapkan
-aksioma arsitektural: <span class="math display">\[\boxed{\text{LLM
-interprets natural-language semantics; Spatial DBMS computes
-deterministic spatial relations.}}\]</span> Model LLM dilarang keras
-memegang otoritas langsung terhadap basis data. LLM tidak diizinkan
-membuat teks kueri SQL secara bebas, dilarang menentukan nama tabel atau
-kolom, dan tidak diperkenankan melakukan komputasi jarak secara
-internal. LLM bertindak murni sebagai <em>Semantic Interpreter</em> yang
-menghasilkan objek semantik perantara terstruktur.</p>
+aksioma arsitektural:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mtext mathvariant="normal">LLM interprets natural-language semantics; Spatial DBMS computes deterministic spatial relations.</mtext></menclose><annotation encoding="application/x-tex">\boxed{\text{LLM interprets natural-language semantics; Spatial DBMS computes deterministic spatial relations.}}</annotation></semantics></math>
+Model LLM dilarang keras memegang otoritas langsung terhadap basis data.
+LLM tidak diizinkan membuat teks kueri SQL secara bebas, dilarang
+menentukan nama tabel atau kolom, dan tidak diperkenankan melakukan
+komputasi jarak secara internal. LLM bertindak murni sebagai
+<em>Semantic Interpreter</em> yang menghasilkan objek semantik perantara
+terstruktur.</p>
 <h4
 id="kerangka-tiga-tingkat-kebenaran-the-tripartite-correctness-framework">3.1.1
 Kerangka Tiga Tingkat Kebenaran (The Tripartite Correctness
@@ -1088,38 +1081,34 @@ Framework)</h4>
 <p>Guna menetapkan pengujian ilmiah yang ketat bagi sistem informasi
 geospasial percakapan, penelitian ini merumuskan tiga dimensi kebenaran
 berurutan yang saling ortogonal: 1. <strong>Kebenaran Semantik
-(<em>Semantic Correctness</em> / <span
-class="math inline">\(\mathcal{C}_{\text{semantik}}\)</span>):</strong>
+(<em>Semantic Correctness</em> /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">semantik</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{semantik}}</annotation></semantics></math>):</strong>
 Menilai sejauh mana LLM secara akurat menerjemahkan ujaran bahasa alami
-pengguna (<span class="math inline">\(NL\)</span>) ke dalam representasi
-terstruktur (<span class="math inline">\(CSIR\)</span>) tanpa
-menghilangkan batasan atau mengarang kriteria yang tidak diminta: <span
-class="math display">\[\mathcal{C}_{\text{semantik}}: NL \longrightarrow
-CSIR\]</span> 2. <strong>Kebenaran Eksekusi Spasial (<em>Spatial
-Execution Correctness</em> / <span
-class="math inline">\(\mathcal{C}_{\text{spasial}}\)</span>):</strong>
+pengguna
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">NL</annotation></semantics></math>)
+ke dalam representasi terstruktur
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">CSIR</annotation></semantics></math>)
+tanpa menghilangkan batasan atau mengarang kriteria yang tidak diminta:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">semantik</mtext></msub><mo>:</mo><mi>N</mi><mi>L</mi><mo>→</mo><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{semantik}}: NL \longrightarrow CSIR</annotation></semantics></math>
+2. <strong>Kebenaran Eksekusi Spasial (<em>Spatial Execution
+Correctness</em> /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">spasial</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{spasial}}</annotation></semantics></math>):</strong>
 Menilai ketepatan kompilator deterministik dan mesin basis data dalam
-mentransformasikan <span class="math inline">\(CSIR\)</span> yang sah
-menjadi predikat SQL eksak yang dieksekusi langsung pada geometri
-relasional: <span class="math display">\[\mathcal{C}_{\text{spasial}}:
-CSIR \longrightarrow \text{SQL} \longrightarrow \text{Himpunan Fakta
-Spasial } (F)\]</span> 3. <strong>Kebenaran Grounding (<em>Grounding
-Correctness</em> / <span
-class="math inline">\(\mathcal{C}_{\text{grounding}}\)</span>):</strong>
+mentransformasikan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">CSIR</annotation></semantics></math>
+yang sah menjadi predikat SQL eksak yang dieksekusi langsung pada
+geometri relasional:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">spasial</mtext></msub><mo>:</mo><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi><mo>→</mo><mtext mathvariant="normal">SQL</mtext><mo>→</mo><mrow><mtext mathvariant="normal">Himpunan Fakta Spasial </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{spasial}}: CSIR \longrightarrow \text{SQL} \longrightarrow \text{Himpunan Fakta Spasial } (F)</annotation></semantics></math>
+3. <strong>Kebenaran Grounding (<em>Grounding Correctness</em> /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">grounding</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{grounding}}</annotation></semantics></math>):</strong>
 Menilai kepatuhan teks respons naratif asisten agar hanya menyatakan
-fakta yang benar-benar ada pada himpunan data hasil kueri <span
-class="math inline">\(F\)</span>, memitigasi risiko fabrikasi entitas
-maupun manipulasi atribut: <span
-class="math display">\[\mathcal{C}_{\text{grounding}}: F \longrightarrow
-\text{Respons Naratif Ter-grounding}\]</span></p>
+fakta yang benar-benar ada pada himpunan data hasil kueri
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>,
+memitigasi risiko fabrikasi entitas maupun manipulasi atribut:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">grounding</mtext></msub><mo>:</mo><mi>F</mi><mo>→</mo><mtext mathvariant="normal">Respons Naratif Ter-grounding</mtext></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{grounding}}: F \longrightarrow \text{Respons Naratif Ter-grounding}</annotation></semantics></math></p>
 <p>Rangkaian pembuktian ini menjadi tulang punggung ilmiah
-(<em>scientific backbone</em>) dari arsitektur yang diusulkan: <span
-class="math display">\[\boxed{NL
-\xrightarrow[\text{Semantik}]{\text{Kognitif}} CSIR
-\xrightarrow[\text{Deterministik}]{\text{Kompilasi}} \text{SQL}
-\xrightarrow[\text{Spherical}]{\text{Spatial DBMS}} \text{Hasil Spasial
-} (F) \xrightarrow[\text{Grounding}]{\text{Algorithmic Firewall}}
-\text{Respons Bernarasi}}\]</span></p>
+(<em>scientific backbone</em>) dari arsitektur yang diusulkan:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mrow><mi>N</mi><mi>L</mi><munderover><mo>→</mo><mtext mathvariant="normal">Semantik</mtext><mtext mathvariant="normal">Kognitif</mtext></munderover><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi><munderover><mo>→</mo><mtext mathvariant="normal">Deterministik</mtext><mtext mathvariant="normal">Kompilasi</mtext></munderover><mtext mathvariant="normal">SQL</mtext><munderover><mo>→</mo><mtext mathvariant="normal">Spherical</mtext><mtext mathvariant="normal">Spatial DBMS</mtext></munderover><mrow><mtext mathvariant="normal">Hasil Spasial </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><munderover><mo>→</mo><mtext mathvariant="normal">Grounding</mtext><mtext mathvariant="normal">Algorithmic Firewall</mtext></munderover><mtext mathvariant="normal">Respons Bernarasi</mtext></mrow></menclose><annotation encoding="application/x-tex">\boxed{NL \xrightarrow[\text{Semantik}]{\text{Kognitif}} CSIR \xrightarrow[\text{Deterministik}]{\text{Kompilasi}} \text{SQL} \xrightarrow[\text{Spherical}]{\text{Spatial DBMS}} \text{Hasil Spasial } (F) \xrightarrow[\text{Grounding}]{\text{Algorithmic Firewall}} \text{Respons Bernarasi}}</annotation></semantics></math></p>
 <h3
 id="formalisasi-representasi-maksud-spasial-penyatuan-konseptual-raw-sir-17-atribut-vs.-validated-csir-19-atribut">3.2
 Formalisasi Representasi Maksud Spasial: Penyatuan Konseptual Raw SIR
@@ -1132,39 +1121,33 @@ balik spasial berbasis AI, penelitian ini menyatukan konsep
 satu kerangka siklus hidup representasi maksud (<em>Intent
 Transformation Lifecycle</em>):</p>
 <ol type="1">
-<li><strong>Spatial Intent Representation (SIR / <span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>):</strong>
+<li><strong>Spatial Intent Representation (SIR /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>):</strong>
 Merupakan nomenklatur payung untuk representasi maksud spasial pengguna.
 Pada tahap awal ekstraksi oleh model bahasa (Lapisan 2), representasi
-ini berwujud <strong>Raw SIR (<span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>)</strong>—sebuah
+ini berwujud <strong>Raw SIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>)</strong>—sebuah
 dokumen JSON datar (<em>flat schema</em>) hasil inferensi kognitif
 probabilistik. Pada kondisi mentah ini, nilai atribut belum terjamin
 keabsahannya (misalnya: parameter radius berpotensi bernilai negatif
 jika LLM berhalusinasi, atau operator spasial di luar ontologi).</li>
-<li><strong>Canonical Spatial Intent Representation (CSIR / <span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>):</strong>
+<li><strong>Canonical Spatial Intent Representation (CSIR /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>):</strong>
 Merupakan representasi semantik kanonikal bertipe ketat (<em>strictly
 typed</em>) yang telah melalui verifikasi dan penegakan batas
 deterministik oleh <em>SIR Validator</em> 6-Dimensi (Lapisan 3). Hanya
 representasi yang memenuhi seluruh invarian ontologi, batas koordinat
 geografis WGS84, dan aturan keamanan basis data yang berhak menyandang
-status <strong>Validated CSIR (<span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>)</strong> dan
-diizinkan dikompilasi menjadi kueri SQL.</li>
+status <strong>Validated CSIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>)</strong>
+dan diizinkan dikompilasi menjadi kueri SQL.</li>
 </ol>
 <p>Hubungan transisi formal antara Raw SIR dan Validated CSIR dirumuskan
-sebagai: <span class="math display">\[\mathcal{S}_{\text{raw}} =
-\text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}})
-\xrightarrow[\text{No Intent
-Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}}
-\xrightarrow{\text{Compiler}} \text{SQL}\]</span></p>
+sebagai:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><mo>=</mo><mtext mathvariant="normal">LLM</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Prompt</mtext><mtext mathvariant="normal">SIR</mtext></msub><mo>,</mo><msub><mtext mathvariant="normal">Query</mtext><mtext mathvariant="normal">user</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow><munderover><mo>→</mo><mtext mathvariant="normal">No Intent Alteration</mtext><msub><mtext mathvariant="normal">SirValidator</mtext><mtext mathvariant="normal">6-D</mtext></msub></munderover><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><mover><mo>→</mo><mtext mathvariant="normal">Compiler</mtext></mover><mtext mathvariant="normal">SQL</mtext></mrow><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}} = \text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}}) \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}</annotation></semantics></math></p>
 <p>Skema CSIR mempartisi maksud spasial ke dalam 4 sub-domain ortogonal
-yang bertipe ketat (<em>strictly typed</em>): <span
-class="math display">\[\mathcal{S}_{\text{csir}} = \langle
-\mathcal{P}_{\text{intent}}, \mathcal{P}_{\text{spatial}},
-\mathcal{P}_{\text{operational}}, \mathcal{P}_{\text{control}}
-\rangle\]</span></p>
+yang bertipe ketat (<em>strictly typed</em>):
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">intent</mtext></msub><mo>,</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">operational</mtext></msub><mo>,</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">control</mtext></msub><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}} = \langle \mathcal{P}_{\text{intent}}, \mathcal{P}_{\text{spatial}}, \mathcal{P}_{\text{operational}}, \mathcal{P}_{\text{control}} \rangle</annotation></semantics></math></p>
 <p>Tabel 2 merinci 19 atribut formal pembentuk skema kanonikal CSIR
 lintas 4 partisi ortogonal:</p>
 <p><strong>Tabel 2. Spesifikasi Skema Formal Canonical Spatial Intent
@@ -1189,9 +1172,8 @@ Atribut)</strong></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong><span
-class="math inline">\(\mathcal{P}_{\text{intent}}\)</span> (Intent
-Semantics, 5 Atribut)</strong></td>
+<td><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">intent</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{intent}}</annotation></semantics></math>
+(Intent Semantics, 5 Atribut)</strong></td>
 <td><code>intent</code></td>
 <td><em>Enum</em></td>
 <td>Maksud utama interaksi</td>
@@ -1229,9 +1211,8 @@ Semantics, 5 Atribut)</strong></td>
 <td>String frasa penting (misal: “pasir putih”, “air terjun”)</td>
 </tr>
 <tr class="even">
-<td><strong><span
-class="math inline">\(\mathcal{P}_{\text{spatial}}\)</span> (Spatial
-Constraints, 8 Atribut)</strong></td>
+<td><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">spatial</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{spatial}}</annotation></semantics></math>
+(Spatial Constraints, 8 Atribut)</strong></td>
 <td><code>spatial_operator</code></td>
 <td><em>Enum</em></td>
 <td>Predikat spasial operasi</td>
@@ -1258,23 +1239,23 @@ Constraints, 8 Atribut)</strong></td>
 <td><code>latitude</code></td>
 <td><em>Float</em> / <em>Null</em></td>
 <td>Lintang koordinat acuan spasial</td>
-<td>Bilangan riil <span class="math inline">\(-90.0 \le \text{lat} \le
-90.0\)</span></td>
+<td>Bilangan riil
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>90.0</mn><mo>≤</mo><mtext mathvariant="normal">lat</mtext><mo>≤</mo><mn>90.0</mn></mrow><annotation encoding="application/x-tex">-90.0 \le \text{lat} \le 90.0</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>longitude</code></td>
 <td><em>Float</em> / <em>Null</em></td>
 <td>Bujur koordinat acuan spasial</td>
-<td>Bilangan riil <span class="math inline">\(-180.0 \le \text{lng} \le
-180.0\)</span></td>
+<td>Bilangan riil
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>180.0</mn><mo>≤</mo><mtext mathvariant="normal">lng</mtext><mo>≤</mo><mn>180.0</mn></mrow><annotation encoding="application/x-tex">-180.0 \le \text{lng} \le 180.0</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><code>radius</code></td>
 <td><em>Float</em> / <em>Null</em></td>
-<td>Nilai ambang batas radius (<span class="math inline">\(\ge
-0\)</span>)</td>
+<td>Nilai ambang batas radius
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\ge 0</annotation></semantics></math>)</td>
 <td>Nilai riil positif dalam kilometer (default: 20,0 km)</td>
 </tr>
 <tr class="even">
@@ -1292,8 +1273,7 @@ Constraints, 8 Atribut)</strong></td>
 <td>String nama wilayah (misal: “Bungus”, “Padang Barat”)</td>
 </tr>
 <tr class="even">
-<td><strong><span
-class="math inline">\(\mathcal{P}_{\text{operational}}\)</span>
+<td><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">operational</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{operational}}</annotation></semantics></math>
 (Operational Constraints, 5 Atribut)</strong></td>
 <td><code>is_free</code></td>
 <td><em>Boolean</em></td>
@@ -1305,8 +1285,8 @@ class="math inline">\(\mathcal{P}_{\text{operational}}\)</span>
 <td><code>max_price</code></td>
 <td><em>Integer</em> / <em>Null</em></td>
 <td>Batas atas tarif retribusi</td>
-<td>Bilangan bulat rupiah <span class="math inline">\(\ge
-0\)</span></td>
+<td>Bilangan bulat rupiah
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\ge 0</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td></td>
@@ -1331,9 +1311,8 @@ class="math inline">\(\mathcal{P}_{\text{operational}}\)</span>
 <code>terbaik</code>, <code>null</code></td>
 </tr>
 <tr class="odd">
-<td><strong><span
-class="math inline">\(\mathcal{P}_{\text{control}}\)</span> (Control
-Metadata &amp; Invariant, 1 Atribut CSIR)</strong></td>
+<td><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">control</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{control}}</annotation></semantics></math>
+(Control Metadata &amp; Invariant, 1 Atribut CSIR)</strong></td>
 <td><code>is_out_of_scope</code></td>
 <td><em>Boolean</em></td>
 <td>Penanda kueri di luar yurisdiksi</td>
@@ -1399,30 +1378,32 @@ merumuskan seluruh kriteria perjalanan dalam satu kalimat tunggal;
 interaksi berlangsung secara bertahap dan eksploratif. Untuk menjaga
 kesinambungan percakapan tanpa harus mengulang parsing dari awal atau
 merusak batasan yang telah disepakati sebelumnya, sistem memformalkan
-<strong>Model Pelacakan Status Percakapan Bertingkat</strong>: <span
-class="math display">\[CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta
-CSIR_{t+1})\]</span></p>
-<p>Di mana: - <span class="math inline">\(CSIR_t\)</span>
-merepresentasikan vektor status aktif pada giliran percakapan ke-<span
-class="math inline">\(t\)</span>. - <span class="math inline">\(\Delta
-CSIR_{t+1}\)</span> merupakan vektor maksud diferensial yang diekstraksi
-LLM dari ujaran lanjutan pengguna berdasarkan konteks riwayat dialog
-<span class="math inline">\(\mathcal{H}_t = \{(u_1, a_1), \dots, (u_t,
-a_t)\}\)</span>. - <span
-class="math inline">\(\text{Merge}(\cdot)\)</span> adalah fungsi
-transisi status deterministik: <span
-class="math display">\[\text{Merge}(CSIR_t, \Delta CSIR)_{k} =
-\begin{cases} \Delta CSIR_k, &amp; \text{jika } \Delta CSIR_k \neq
-\text{null} \land \Delta CSIR_k \neq \text{default} \\ CSIR_{t, k},
-&amp; \text{lainnya} \end{cases}\]</span></p>
+<strong>Model Pelacakan Status Percakapan Bertingkat</strong>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mtext mathvariant="normal">Merge</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta CSIR_{t+1})</annotation></semantics></math></p>
+<p>Di mana: -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">CSIR_t</annotation></semantics></math>
+merepresentasikan vektor status aktif pada giliran percakapan
+ke-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\Delta CSIR_{t+1}</annotation></semantics></math>
+merupakan vektor maksud diferensial yang diekstraksi LLM dari ujaran
+lanjutan pengguna berdasarkan konteks riwayat dialog
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℋ</mi><mi>t</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>u</mi><mn>1</mn></msub><mo>,</mo><msub><mi>a</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>…</mi><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>u</mi><mi>t</mi></msub><mo>,</mo><msub><mi>a</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathcal{H}_t = \{(u_1, a_1), \dots, (u_t, a_t)\}</annotation></semantics></math>.
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Merge</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Merge}(\cdot)</annotation></semantics></math>
+adalah fungsi transisi status deterministik:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Merge</mtext><msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>k</mi></msub><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">jika </mtext><mspace width="0.333em"></mspace></mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>k</mi></msub><mo>≠</mo><mtext mathvariant="normal">null</mtext><mo>∧</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>k</mi></msub><mo>≠</mo><mtext mathvariant="normal">default</mtext></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">lainnya</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\text{Merge}(CSIR_t, \Delta CSIR)_{k} = \begin{cases} \Delta CSIR_k, &amp; \text{jika } \Delta CSIR_k \neq \text{null} \land \Delta CSIR_k \neq \text{default} \\ CSIR_{t, k}, &amp; \text{lainnya} \end{cases}</annotation></semantics></math></p>
 <p>Sebagai contoh, ketika wisatawan mula-mula bertanya <em>“Cari pantai
-dekat saya”</em> (<span class="math inline">\(t=1 \implies
-\text{kategori} = \text{&#39;Pantai&#39;}, \text{operator} =
-\text{&#39;nearest&#39;}\)</span>), lalu melanjutkan <em>“Yang tiketnya
-gratis saja”</em> (<span class="math inline">\(t=2\)</span>), maka <span
-class="math inline">\(\Delta CSIR_{t=2}\)</span> menghasilkan <span
-class="math inline">\(\{\text{is\_free} = \text{true}, \text{max\_price}
-= 0\}\)</span>. Fungsi <span class="math inline">\(\text{Merge}\)</span>
+dekat saya”</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>⟹</mo><mtext mathvariant="normal">kategori</mtext><mo>=</mo><mtext mathvariant="normal">’Pantai’</mtext><mo>,</mo><mtext mathvariant="normal">operator</mtext><mo>=</mo><mtext mathvariant="normal">’nearest’</mtext></mrow><annotation encoding="application/x-tex">t=1 \implies \text{kategori} = \text{&#39;Pantai&#39;}, \text{operator} = \text{&#39;nearest&#39;}</annotation></semantics></math>),
+lalu melanjutkan <em>“Yang tiketnya gratis saja”</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">t=2</annotation></semantics></math>),
+maka
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\Delta CSIR_{t=2}</annotation></semantics></math>
+menghasilkan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">is_free</mtext><mo>=</mo><mtext mathvariant="normal">true</mtext><mo>,</mo><mtext mathvariant="normal">max_price</mtext><mo>=</mo><mn>0</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{\text{is\_free} = \text{true}, \text{max\_price} = 0\}</annotation></semantics></math>.
+Fungsi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">Merge</mtext><annotation encoding="application/x-tex">\text{Merge}</annotation></semantics></math>
 mempertahankan kategori pantai dan koordinat GPS pengguna sembari
 memperbarui batasan anggaran, mencegah sistem mereset konteks atau
 mengarang objek wisata yang tidak relevan.</p>
@@ -1451,9 +1432,10 @@ Klien (Jangkar Koordinat Deterministik, 2 Atribut):</strong> -
 Geolocation API peramban (<code>navigator.geolocation</code>) jika
 <code>reference_type = 'gps'</code>. - Jika
 <code>reference_type = 'city_center'</code>, resolver menyuntikkan
-koordinat titik pusat Kota Padang (<span class="math inline">\(-0.9471,
-100.4174\)</span>). - Jika <code>reference_type = 'poi'</code>, resolver
-melakukan <em>geocoding lookup</em> koordinat resmi objek
+koordinat titik pusat Kota Padang
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>0.9471</mn><mo>,</mo><mn>100.4174</mn></mrow><annotation encoding="application/x-tex">-0.9471, 100.4174</annotation></semantics></math>).
+- Jika <code>reference_type = 'poi'</code>, resolver melakukan
+<em>geocoding lookup</em> koordinat resmi objek
 <code>reference_entity</code> dari basis data spasial. 3.
 <strong>Metadata Kontrol Validasi (Dihasilkan oleh
 SirValidator):</strong> - <code>isValid</code>,
@@ -1470,27 +1452,30 @@ dengan prinsip <em>No Intent Alteration</em>, sistem memformalkan
 taksonomi lima operasi kontrol semantik: 1. <strong>Normalization
 (Normalisasi Sintaktis):</strong> Transformasi representasional murni
 pada level format tanpa mengubah makna maksud pengguna (misalnya:
-penyeragaman kapitalisasi resmi <code>'pantai'</code> <span
-class="math inline">\(\rightarrow\)</span> <code>'Pantai'</code>,
-pembersihan spasi berlebih, dan <code>strip_tags()</code> untuk keamanan
-injeksi string). 2. <strong>Validation (Validasi Invarian):</strong>
-Pemeriksaan kepatuhan parameter semantik terhadap batas keselamatan
-matematika dan domain spasial (memastikan <span
-class="math inline">\(-90 \le \text{lat} \le 90\)</span> dan <span
-class="math inline">\(radius &gt; 0\)</span>). 3. <strong>Rejection
-(Penolakan Jujur):</strong> Penolakan resmi terhadap kueri yang terbukti
-berada di luar yurisdiksi ontologi pariwisata Padang
-(<code>is_out_of_scope = true</code> <span
-class="math inline">\(\implies\)</span>
+penyeragaman kapitalisasi resmi <code>'pantai'</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+<code>'Pantai'</code>, pembersihan spasi berlebih, dan
+<code>strip_tags()</code> untuk keamanan injeksi string). 2.
+<strong>Validation (Validasi Invarian):</strong> Pemeriksaan kepatuhan
+parameter semantik terhadap batas keselamatan matematika dan domain
+spasial (memastikan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>90</mn><mo>≤</mo><mtext mathvariant="normal">lat</mtext><mo>≤</mo><mn>90</mn></mrow><annotation encoding="application/x-tex">-90 \le \text{lat} \le 90</annotation></semantics></math>
+dan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>u</mi><mi>s</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">radius &gt; 0</annotation></semantics></math>).
+3. <strong>Rejection (Penolakan Jujur):</strong> Penolakan resmi
+terhadap kueri yang terbukti berada di luar yurisdiksi ontologi
+pariwisata Padang (<code>is_out_of_scope = true</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
 <code>reject_out_of_scope</code>). 4. <strong>Clarification (Klarifikasi
 Pengguna - Inti No Intent Alteration):</strong> Meminta pengguna
 mengonfirmasi atau memperjelas parameter yang melanggar batas
-operasional atau ambigu (<code>isValid = false</code> <span
-class="math inline">\(\implies\)</span> <code>clarify_user</code>),
-<strong>bukan memotong atau memutasi nilai secara diam-diam</strong>. 5.
-<strong>Enrichment (Pengayaan Data Non-LLM):</strong> Pengisian atribut
-koordinat dan metadata relasional dari sumber eksternal tepercaya
-(Browser Geolocation API atau basis data spasial).</p>
+operasional atau ambigu (<code>isValid = false</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
+<code>clarify_user</code>), <strong>bukan memotong atau memutasi nilai
+secara diam-diam</strong>. 5. <strong>Enrichment (Pengayaan Data
+Non-LLM):</strong> Pengisian atribut koordinat dan metadata relasional
+dari sumber eksternal tepercaya (Browser Geolocation API atau basis data
+spasial).</p>
 <h3
 id="ontologi-operator-spasial-dan-resolusi-entitas-deterministik">3.3
 Ontologi Operator Spasial dan Resolusi Entitas Deterministik</h3>
@@ -1634,11 +1619,8 @@ MySQL 8.0.</p>
 <code>ST_Distance_Sphere(g1, g2 [, radius])</code> mengevaluasi jarak
 lingkaran besar (<em>great-circle / spherical distance</em>) berbasis
 model bola bumi dengan jari-jari rata-rata bumi (default MySQL 8.0:
-<span class="math inline">\(R = 6.370.986\text{ meter}\)</span>): <span
-class="math display">\[d_{\text{spasial}} =
-\frac{\text{ST\_Distance\_Sphere}(\text{POINT}(\text{lng}_1,
-\text{lat}_1), \text{POINT}(\text{lng}_2, \text{lat}_2))}{1000.0} \quad
-(\text{km})\]</span></p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>6.370</mn><mn>.986</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> meter</mtext></mrow></mrow><annotation encoding="application/x-tex">R = 6.370.986\text{ meter}</annotation></semantics></math>):
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mtext mathvariant="normal">spasial</mtext></msub><mo>=</mo><mfrac><mrow><mtext mathvariant="normal">ST_Distance_Sphere</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">lng</mtext><mn>1</mn></msub><mo>,</mo><msub><mtext mathvariant="normal">lat</mtext><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">lng</mtext><mn>2</mn></msub><mo>,</mo><msub><mtext mathvariant="normal">lat</mtext><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mn>1000.0</mn></mfrac><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">km</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{\text{spasial}} = \frac{\text{ST\_Distance\_Sphere}(\text{POINT}(\text{lng}_1, \text{lat}_1), \text{POINT}(\text{lng}_2, \text{lat}_2))}{1000.0} \quad (\text{km})</annotation></semantics></math></p>
 <p>Pemanfaatan fungsi bawaan basis data ini memberikan tiga keunggulan
 fundamental dibandingkan perumusan rumus manual:</p>
 <ul>
@@ -1650,8 +1632,8 @@ membebani parser SQL dengan ekspresi trigonometri panjang berulang
 <li><strong>Kekebalan terhadap Galat Titik Kambang (<em>Floating-Point
 Error Immunity</em>):</strong> Pada rumus manual berbasis
 <code>ACOS</code>, deviasi biner titik-kambang yang sedikit melampaui
-<span class="math inline">\(1.0\)</span> dapat memicu galat
-<code>NaN</code> (<em>domain error</em>). Fungsi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1.0</mn><annotation encoding="application/x-tex">1.0</annotation></semantics></math>
+dapat memicu galat <code>NaN</code> (<em>domain error</em>). Fungsi
 <code>ST_Distance_Sphere</code> menangani normalisasi batas koordinat
 dan singularitas kutub secara otomatis.</li>
 <li><strong>Kesesuaian Standar Geospasial OGC:</strong> Menggunakan
@@ -1665,12 +1647,10 @@ Engine):</strong><br />
 Untuk visualisasi navigasi rute nyata pada peta Leaflet.js, pasangan
 koordinat dikirimkan ke mesin <em>Open Source Routing Machine</em>
 (OSRM) [9] yang memanfaatkan data jalan OpenStreetMap (OSM) [8] dengan
-algoritma <em>Contraction Hierarchies</em> (CH): <span
-class="math display">\[\mathcal{G}_{\text{jalan}} = (V, E, W), \quad
-\text{Rute}_{\text{opt}} = \arg\min_{p \in \mathcal{P}(P_1, P_2)}
-\sum_{e \in p} W(e)\]</span> menghasilkan <em>polyline</em> lintasan
-jalan raya perkotaan serta estimasi durasi tempuh kendaraan yang
-akurat.</p></li>
+algoritma <em>Contraction Hierarchies</em> (CH):
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒢</mi><mtext mathvariant="normal">jalan</mtext></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo>,</mo><mi>W</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><msub><mtext mathvariant="normal">Rute</mtext><mtext mathvariant="normal">opt</mtext></msub><mo>=</mo><mo>arg</mo><munder><mo>min</mo><mrow><mi>p</mi><mo>∈</mo><mi>𝒫</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>P</mi><mn>1</mn></msub><mo>,</mo><msub><mi>P</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></munder><munder><mo>∑</mo><mrow><mi>e</mi><mo>∈</mo><mi>p</mi></mrow></munder><mi>W</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>e</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{G}_{\text{jalan}} = (V, E, W), \quad \text{Rute}_{\text{opt}} = \arg\min_{p \in \mathcal{P}(P_1, P_2)} \sum_{e \in p} W(e)</annotation></semantics></math>
+menghasilkan <em>polyline</em> lintasan jalan raya perkotaan serta
+estimasi durasi tempuh kendaraan yang akurat.</p></li>
 </ol>
 <h4 id="tabel-kontrak-formal-ontologi-operator-spasial">3.5.1 Tabel
 Kontrak Formal Ontologi Operator Spasial</h4>
@@ -1713,7 +1693,8 @@ Search</em></td>
 <td
 style="text-align: left;"><strong><code>within_radius</code></strong></td>
 <td style="text-align: left;">Menyaring destinasi yang berada di dalam
-radius lingkaran jarak <span class="math inline">\(r\)</span>.</td>
+radius lingkaran jarak
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>.</td>
 <td style="text-align: left;"><code>latitude</code>,
 <code>longitude</code>, <code>radius</code></td>
 <td
@@ -1749,61 +1730,54 @@ Pipa Formal Resolusi Entitas Deterministik (Deterministic Entity
 Resolution)</h4>
 <p>Jika pengguna menyebutkan nama tempat secara parsial atau dengan
 kesalahan ketik (<em>typo</em>), sistem menjalankan pipa resolusi
-entitas deterministik bertingkat: <span
-class="math display">\[\text{Query Entity } e \xrightarrow{\text{Tahap
-1}} \text{Exact Match} \xrightarrow{\text{Tahap 2}} \text{Infix LIKE}
-\xrightarrow{\text{Tahap 3}} \text{Normalized Levenshtein }
-\text{Sim}(e, c) \ge \tau \xrightarrow{\text{Tahap 4}} \text{Resolusi /
-Klarifikasi}\]</span></p>
-<p>Formula kesamaan string dinormalisasi dihitung berdasarkan: <span
-class="math display">\[\text{Sim}(s_1, s_2) = 1 -
-\frac{\text{Levenshtein}(s_1, s_2)}{\max(|s_1|, |s_2|)}\]</span> 1.
-<strong>Ambang Batas (<em>Similarity Threshold</em>):</strong>
-Ditetapkan <span class="math inline">\(\tau = 0,75\)</span> (75%). Nilai
-ini terbukti secara empiris mampu mentoleransi kesalahan ketik 1–2
-karakter (misal: <em>“Pantai Air Mnis”</em> <span
-class="math inline">\(\implies \text{Sim} = 0,93\)</span>), sekaligus
-menolak asosiasi salah (<em>false positive</em>, misal <em>“Pantai
-Padang”</em> vs <em>“Pasar Padang”</em> bernilai <span
-class="math inline">\(\text{Sim} = 0,69 &lt; 0,75\)</span>). 2.
-<strong>Penanganan Ambiguitas (<em>Ties Handling</em>):</strong> Jika
+entitas deterministik bertingkat:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Query Entity </mtext><mspace width="0.333em"></mspace></mrow><mi>e</mi><mover><mo>→</mo><mtext mathvariant="normal">Tahap 1</mtext></mover><mtext mathvariant="normal">Exact Match</mtext><mover><mo>→</mo><mtext mathvariant="normal">Tahap 2</mtext></mover><mtext mathvariant="normal">Infix LIKE</mtext><mover><mo>→</mo><mtext mathvariant="normal">Tahap 3</mtext></mover><mrow><mtext mathvariant="normal">Normalized Levenshtein </mtext><mspace width="0.333em"></mspace></mrow><mtext mathvariant="normal">Sim</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>e</mi><mo>,</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≥</mo><mi>τ</mi><mover><mo>→</mo><mtext mathvariant="normal">Tahap 4</mtext></mover><mtext mathvariant="normal">Resolusi / Klarifikasi</mtext></mrow><annotation encoding="application/x-tex">\text{Query Entity } e \xrightarrow{\text{Tahap 1}} \text{Exact Match} \xrightarrow{\text{Tahap 2}} \text{Infix LIKE} \xrightarrow{\text{Tahap 3}} \text{Normalized Levenshtein } \text{Sim}(e, c) \ge \tau \xrightarrow{\text{Tahap 4}} \text{Resolusi / Klarifikasi}</annotation></semantics></math></p>
+<p>Formula kesamaan string dinormalisasi dihitung berdasarkan:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Sim</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo>,</mo><msub><mi>s</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mtext mathvariant="normal">Levenshtein</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo>,</mo><msub><mi>s</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>s</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>,</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>s</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{Sim}(s_1, s_2) = 1 - \frac{\text{Levenshtein}(s_1, s_2)}{\max(|s_1|, |s_2|)}</annotation></semantics></math>
+1. <strong>Ambang Batas (<em>Similarity Threshold</em>):</strong>
+Ditetapkan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>τ</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>75</mn></mrow><annotation encoding="application/x-tex">\tau = 0,75</annotation></semantics></math>
+(75%). Nilai ini terbukti secara empiris mampu mentoleransi kesalahan
+ketik 1–2 karakter (misal: <em>“Pantai Air Mnis”</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟹</mo><mtext mathvariant="normal">Sim</mtext><mo>=</mo><mn>0</mn><mo>,</mo><mn>93</mn></mrow><annotation encoding="application/x-tex">\implies \text{Sim} = 0,93</annotation></semantics></math>),
+sekaligus menolak asosiasi salah (<em>false positive</em>, misal
+<em>“Pantai Padang”</em> vs <em>“Pasar Padang”</em> bernilai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Sim</mtext><mo>=</mo><mn>0</mn><mo>,</mo><mn>69</mn><mo>&lt;</mo><mn>0</mn><mo>,</mo><mn>75</mn></mrow><annotation encoding="application/x-tex">\text{Sim} = 0,69 &lt; 0,75</annotation></semantics></math>).
+2. <strong>Penanganan Ambiguitas (<em>Ties Handling</em>):</strong> Jika
 terdapat lebih dari 1 kandidat yang melampaui ambang batas dengan
-selisih <span class="math inline">\(|\text{Sim}_1 - \text{Sim}_2| &lt;
-0,10\)</span>, sistem <strong>tidak menebak secara sepihak</strong>,
-melainkan mengembalikan <code>execution_policy = 'clarify_user'</code>
-untuk meminta konfirmasi pengguna. 3. <strong>Otoritas
-Kanonikal:</strong> Penentuan entitas basis data dilakukan <strong>100%
-oleh resolver deterministik</strong>, bukan oleh halusinasi LLM.</p>
+selisih
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mtext mathvariant="normal">Sim</mtext><mn>1</mn></msub><mo>−</mo><msub><mtext mathvariant="normal">Sim</mtext><mn>2</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><mn>0</mn><mo>,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">|\text{Sim}_1 - \text{Sim}_2| &lt; 0,10</annotation></semantics></math>,
+sistem <strong>tidak menebak secara sepihak</strong>, melainkan
+mengembalikan <code>execution_policy = 'clarify_user'</code> untuk
+meminta konfirmasi pengguna. 3. <strong>Otoritas Kanonikal:</strong>
+Penentuan entitas basis data dilakukan <strong>100% oleh resolver
+deterministik</strong>, bukan oleh halusinasi LLM.</p>
 <p>Objek CSIR yang telah tervalidasi ditransformasikan menjadi
 pernyataan SQL terparameterisasi dengan teknik <em>parameter
 binding</em>. Kompilator secara ketat menegakkan invarian keamanan pada
 waktu kompilasi (<em>compile-time safety invariants</em>): 1.
 <strong>Invarian Eksekusi Aman (<em>Execution Invariant</em>):</strong>
-<span class="math display">\[\text{Safety Invariant: } \neg
-\text{CSIR.isValid} \lor \text{CSIR.is\_out\_of\_scope} \implies
-\text{Hasil} = \emptyset \quad (\text{Eksekusi SQL dibatalkan dengan
-beban DB 0})\]</span> 2. <strong>Invarian Batas Radius (<em>Radial
-Boundary Invariant</em>):</strong> Ketika
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Safety Invariant: </mtext><mspace width="0.333em"></mspace></mrow><mo>¬</mo><mtext mathvariant="normal">CSIR.isValid</mtext><mo>∨</mo><mtext mathvariant="normal">CSIR.is_out_of_scope</mtext><mo>⟹</mo><mtext mathvariant="normal">Hasil</mtext><mo>=</mo><mi>∅</mi><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Eksekusi SQL dibatalkan dengan beban DB 0</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Safety Invariant: } \neg \text{CSIR.isValid} \lor \text{CSIR.is\_out\_of\_scope} \implies \text{Hasil} = \emptyset \quad (\text{Eksekusi SQL dibatalkan dengan beban DB 0})</annotation></semantics></math>
+2. <strong>Invarian Batas Radius (<em>Radial Boundary
+Invariant</em>):</strong> Ketika
 <code>spatial_operator = 'within_radius'</code>, nilai ambang batas
-radius disematkan langsung ke dalam klausa <code>WHERE</code>: <span
-class="math display">\[\text{ST\_Distance\_Sphere}(\text{POINT}(\text{wisata.lng},
-\text{wisata.lat}), \text{POINT}(:lng, :lat)) / 1000.0 \le
-:radius\]</span> menjamin bahwa penyaringan radius berjalan
-deterministik secara matematis, bukan sekadar pengurutan kedekatan
-(<span class="math inline">\(\text{terdekat } k \neq \text{dalam }
-r\text{ km}\)</span>). 3. <strong>Invarian Temporal Melintasi Tengah
-Malam (<em>Midnight-Crossover Invariant</em>):</strong> Untuk
-mengevaluasi destinasi kuliner malam yang beroperasi melintasi pukul
-00:00 (misal: buka 22:00 s.d. 02:00 WIB), predikat SQL menerapkan logika
-sirkular terpotong: <span
-class="math display">\[\text{PredikatJamBuka}(t) = \begin{cases}
-   t \ge \text{jam\_buka} \land t \le \text{jam\_tutup}, &amp;
-\text{jika } \text{jam\_buka} \le \text{jam\_tutup} \\
-   t \ge \text{jam\_buka} \lor t \le \text{jam\_tutup}, &amp; \text{jika
-} \text{jam\_buka} &gt; \text{jam\_tutup}
-   \end{cases}\]</span> di mana <span class="math inline">\(t =
-\text{CURRENT\_TIME}()\)</span>, menjamin ketepatan evaluasi operasional
-siang maupun malam hari berdasarkan jadwal tersimpan.</p>
+radius disematkan langsung ke dalam klausa <code>WHERE</code>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">ST_Distance_Sphere</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">wisata.lng</mtext><mo>,</mo><mtext mathvariant="normal">wisata.lat</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mo>:</mo><mi>l</mi><mi>n</mi><mi>g</mi><mo>,</mo><mo>:</mo><mi>l</mi><mi>a</mi><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>1000.0</mn><mo>≤</mo><mo>:</mo><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{ST\_Distance\_Sphere}(\text{POINT}(\text{wisata.lng}, \text{wisata.lat}), \text{POINT}(:lng, :lat)) / 1000.0 \le :radius</annotation></semantics></math>
+menjamin bahwa penyaringan radius berjalan deterministik secara
+matematis, bukan sekadar pengurutan kedekatan
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">terdekat </mtext><mspace width="0.333em"></mspace></mrow><mi>k</mi><mo>≠</mo><mrow><mtext mathvariant="normal">dalam </mtext><mspace width="0.333em"></mspace></mrow><mi>r</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\text{terdekat } k \neq \text{dalam } r\text{ km}</annotation></semantics></math>).
+3. <strong>Invarian Temporal Melintasi Tengah Malam
+(<em>Midnight-Crossover Invariant</em>):</strong> Untuk mengevaluasi
+destinasi kuliner malam yang beroperasi melintasi pukul 00:00 (misal:
+buka 22:00 s.d. 02:00 WIB), predikat SQL menerapkan logika sirkular
+terpotong:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">PredikatJamBuka</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>t</mi><mo>≥</mo><mtext mathvariant="normal">jam_buka</mtext><mo>∧</mo><mi>t</mi><mo>≤</mo><mtext mathvariant="normal">jam_tutup</mtext><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">jika </mtext><mspace width="0.333em"></mspace></mrow><mtext mathvariant="normal">jam_buka</mtext><mo>≤</mo><mtext mathvariant="normal">jam_tutup</mtext></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mi>t</mi><mo>≥</mo><mtext mathvariant="normal">jam_buka</mtext><mo>∨</mo><mi>t</mi><mo>≤</mo><mtext mathvariant="normal">jam_tutup</mtext><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">jika </mtext><mspace width="0.333em"></mspace></mrow><mtext mathvariant="normal">jam_buka</mtext><mo>&gt;</mo><mtext mathvariant="normal">jam_tutup</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\text{PredikatJamBuka}(t) = \begin{cases} 
+   t \ge \text{jam\_buka} \land t \le \text{jam\_tutup}, &amp; \text{jika } \text{jam\_buka} \le \text{jam\_tutup} \\ 
+   t \ge \text{jam\_buka} \lor t \le \text{jam\_tutup}, &amp; \text{jika } \text{jam\_buka} &gt; \text{jam\_tutup} 
+   \end{cases}</annotation></semantics></math> di mana
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mtext mathvariant="normal">CURRENT_TIME</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t = \text{CURRENT\_TIME}()</annotation></semantics></math>,
+menjamin ketepatan evaluasi operasional siang maupun malam hari
+berdasarkan jadwal tersimpan.</p>
 <p>Tabel 2b memformalkan aturan pemetaan kompiler deterministik yang
 menerjemahkan atribut CSIR tervalidasi menjadi klausa SQL spasial
 terparameterisasi pada MySQL 8.0.</p>
@@ -1839,8 +1813,8 @@ distance</em>)</td>
 <td><code>operator = 'within_radius'</code></td>
 <td><code>RadialSearchRule</code></td>
 <td><code>HAVING jarak_km &lt;= ?</code></td>
-<td style="text-align: center;"><code>DOUBLE</code> (<span
-class="math inline">\(d \le 50.0\text{ km}\)</span>)</td>
+<td style="text-align: center;"><code>DOUBLE</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>≤</mo><mn>50.0</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">d \le 50.0\text{ km}</annotation></semantics></math>)</td>
 <td>Pembatasan radius lingkaran besar (<em>great-circle / spherical
 distance</em>)</td>
 </tr>
@@ -1856,8 +1830,8 @@ distance</em>)</td>
 <td><code>max_price != null</code></td>
 <td><code>PriceCeilingRule</code></td>
 <td><code>AND wisata.harga_tiket &lt;= ?</code></td>
-<td style="text-align: center;"><code>INTEGER</code> (<span
-class="math inline">\(P \ge 0\)</span>)</td>
+<td style="text-align: center;"><code>INTEGER</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P \ge 0</annotation></semantics></math>)</td>
 <td>Pembatasan plafon anggaran tarif tiket</td>
 </tr>
 <tr class="odd">
@@ -1902,8 +1876,8 @@ tersimpan</td>
 <tr class="even">
 <td><code>is_out_of_scope = true</code></td>
 <td><code>AirGapAbortionRule</code></td>
-<td><span class="math inline">\(\emptyset\)</span> <em>(Eksekusi SQL
-Dibatalkan Total)</em></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∅</mi><annotation encoding="application/x-tex">\emptyset</annotation></semantics></math>
+<em>(Eksekusi SQL Dibatalkan Total)</em></td>
 <td style="text-align: center;">Tanpa parameter</td>
 <td><em>Safety Invariant</em>: pencegahan eksekusi basis data</td>
 </tr>
@@ -1919,8 +1893,8 @@ Contract</em>):</p>
 <li><strong>Kewajiban Mutlak (<em>MUST</em>):</strong>
 <ol type="1">
 <li>Hanya menyebutkan entitas objek wisata yang terdapat pada himpunan
-data JSON yang dikembalikan basis data (<span
-class="math inline">\(F\)</span>).</li>
+data JSON yang dikembalikan basis data
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>).</li>
 <li>Mempertahankan nilai atribut harga tiket, jam buka, dan jarak persis
 sesuai fakta data tanpa pembulatan sepihak.</li>
 <li><strong>Prinsip Ketidaklengkapan Jujur (<em>Honest
@@ -1963,41 +1937,39 @@ kebijakan spasial jika terpicu.</p>
 <h4 id="formalisasi-matematis-grounding-fidelity">3.6.1 Formalisasi
 Matematis Grounding Fidelity</h4>
 <p>Guna menghadirkan landasan matematis terukur, <em>Grounding
-Fidelity</em> (<span class="math inline">\(GF\)</span>) dan
-<em>Hallucination Rate</em> (<span class="math inline">\(HR\)</span>)
+Fidelity</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">GF</annotation></semantics></math>)
+dan <em>Hallucination Rate</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">HR</annotation></semantics></math>)
 dirumuskan terhadap seluruh proposisi faktual yang dapat diverifikasi:
-<span class="math display">\[GF =
-\frac{|\mathcal{C}_{\text{didukung}}|}{|\mathcal{C}_{\text{dapat\_diverifikasi}}|},
-\quad HR =
-\frac{|\mathcal{C}_{\text{tak\_didukung}}|}{|\mathcal{C}_{\text{dapat\_diverifikasi}}|}
-= 1 - GF\]</span></p>
-<p>Di mana: - <span
-class="math inline">\(\mathcal{C}_{\text{dapat\_diverifikasi}}\)</span>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>F</mi><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">didukung</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">dapat_diverifikasi</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>H</mi><mi>R</mi><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">tak_didukung</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">dapat_diverifikasi</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac><mo>=</mo><mn>1</mn><mo>−</mo><mi>G</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">GF = \frac{|\mathcal{C}_{\text{didukung}}|}{|\mathcal{C}_{\text{dapat\_diverifikasi}}|}, \quad HR = \frac{|\mathcal{C}_{\text{tak\_didukung}}|}{|\mathcal{C}_{\text{dapat\_diverifikasi}}|} = 1 - GF</annotation></semantics></math></p>
+<p>Di mana: -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">dapat_diverifikasi</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{dapat\_diverifikasi}}</annotation></semantics></math>
 adalah himpunan seluruh klaim faktual yang dimunculkan pada respons teks
-(nama tempat, harga tiket, jarak tempuh, jam operasional). - <span
-class="math inline">\(\mathcal{C}_{\text{didukung}} \subseteq
-\mathcal{C}_{\text{dapat\_diverifikasi}}\)</span> adalah klaim yang
-kebenarannya terkonfirmasi langsung oleh baris data relasional pada
-himpunan <span class="math inline">\(F\)</span>. - <span
-class="math inline">\(\mathcal{C}_{\text{tak\_didukung}} =
-\mathcal{C}_{\text{dapat\_diverifikasi}} \setminus
-\mathcal{C}_{\text{didukung}}\)</span> adalah klaim yang tidak memiliki
-rujukan basis data (<em>unsupported assertions</em>).</p>
+(nama tempat, harga tiket, jarak tempuh, jam operasional). -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">didukung</mtext></msub><mo>⊆</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">dapat_diverifikasi</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{didukung}} \subseteq \mathcal{C}_{\text{dapat\_diverifikasi}}</annotation></semantics></math>
+adalah klaim yang kebenarannya terkonfirmasi langsung oleh baris data
+relasional pada himpunan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>.
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">tak_didukung</mtext></msub><mo>=</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">dapat_diverifikasi</mtext></msub><mo>\</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">didukung</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{tak\_didukung}} = \mathcal{C}_{\text{dapat\_diverifikasi}} \setminus \mathcal{C}_{\text{didukung}}</annotation></semantics></math>
+adalah klaim yang tidak memiliki rujukan basis data (<em>unsupported
+assertions</em>).</p>
 <p>Grounding Fidelity dievaluasi lintas 4 sub-dimensi ortogonal: 1.
-<strong>Fidelitas Entitas (<span
-class="math inline">\(GF_{\text{entitas}}\)</span>):</strong> <span
-class="math inline">\(\forall e \in \text{Entitas}(\text{Respons}), e
-\in \text{Entitas}(F)\)</span>. 2. <strong>Fidelitas Atribut (<span
-class="math inline">\(GF_{\text{atribut}}\)</span>):</strong> Memastikan
-tarif tiket dan jam buka tidak mengalami distorsi numerik: <span
-class="math inline">\(\forall p \in \text{Respons}, \text{Tarif}(p) =
-\text{Tarif}_{\text{SQL}}(p)\)</span>. 3. <strong>Fidelitas Spasial
-(<span class="math inline">\(GF_{\text{spasial}}\)</span>):</strong>
+<strong>Fidelitas Entitas
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">entitas</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{entitas}}</annotation></semantics></math>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entitas</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Respons</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entitas</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entitas}(\text{Respons}), e \in \text{Entitas}(F)</annotation></semantics></math>.
+2. <strong>Fidelitas Atribut
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">atribut</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{atribut}}</annotation></semantics></math>):</strong>
+Memastikan tarif tiket dan jam buka tidak mengalami distorsi numerik:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>p</mi><mo>∈</mo><mtext mathvariant="normal">Respons</mtext><mo>,</mo><mtext mathvariant="normal">Tarif</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mtext mathvariant="normal">Tarif</mtext><mtext mathvariant="normal">SQL</mtext></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall p \in \text{Respons}, \text{Tarif}(p) = \text{Tarif}_{\text{SQL}}(p)</annotation></semantics></math>.
+3. <strong>Fidelitas Spasial
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">spasial</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{spasial}}</annotation></semantics></math>):</strong>
 Memastikan klaim jarak radial konsisten dengan kalkulasi fungsi spasial
 bawaan <code>ST_Distance_Sphere</code> basis data dalam batas toleransi
-<span class="math inline">\(\epsilon = 0,05\text{ km}\)</span>. 4.
-<strong>Fidelitas Temporal (<span
-class="math inline">\(GF_{\text{temporal}}\)</span>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>05</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\epsilon = 0,05\text{ km}</annotation></semantics></math>.
+4. <strong>Fidelitas Temporal
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{temporal}}</annotation></semantics></math>):</strong>
 Memastikan status buka-tutup sesuai persis dengan evaluasi predikat
 sirkadian waktu aktif server.</p>
 <h4
@@ -2005,15 +1977,15 @@ id="verifikasi-algoritmik-pasca-generasi-algorithmic-grounding-validator">3.6.2
 Verifikasi Algoritmik Pasca-Generasi (Algorithmic Grounding
 Validator)</h4>
 <p>Sistem menempatkan firewall algoritmik independen di luar model
-bahasa: <span class="math display">\[\forall e \in
-\text{Entitas}(\text{Respons}_{\text{LLM}}), \quad e \in
-\text{Entitas}(\text{Fakta}_{\text{SQL}})\]</span> Apabila teks narasi
-memunculkan entitas di luar hasil kueri <span
-class="math inline">\(F\)</span>, validator langsung mengintersepsi
-respons, membatalkan teks halusinasi, dan menggantikannya dengan
-template deterministik berbasis data faktual SQL. Pada pengujian
-empiris, tidak ditemukan satupun entitas objek wisata palsu pada 40
-skenario pengujian benchmark (0 pelanggaran grounding teramati).</p>
+bahasa:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entitas</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Respons</mtext><mtext mathvariant="normal">LLM</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entitas</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Fakta</mtext><mtext mathvariant="normal">SQL</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entitas}(\text{Respons}_{\text{LLM}}), \quad e \in \text{Entitas}(\text{Fakta}_{\text{SQL}})</annotation></semantics></math>
+Apabila teks narasi memunculkan entitas di luar hasil kueri
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>,
+validator langsung mengintersepsi respons, membatalkan teks halusinasi,
+dan menggantikannya dengan template deterministik berbasis data faktual
+SQL. Pada pengujian empiris, tidak ditemukan satupun entitas objek
+wisata palsu pada 40 skenario pengujian benchmark (0 pelanggaran
+grounding teramati).</p>
 <p><img src="images/gambar4_alur_eksekusi_konkret.png" /></p>
 <p class="caption"><em>Gambar 4. Diagram Alur Konkret Eksekusi Sistem Ujung-ke-Ujung:
 Dari Ujaran Bahasa Alami ke Respons Bernarasi Ter-grounding dan
@@ -2070,8 +2042,7 @@ yang memuat <em>API Routing Controller</em>, <em>Scale-Aware
 Controller</em>, dan <em>Spatial Query Builder</em> berbasis kueri
 statis. 3. <em>Data Layer:</em> Basis data spasial MySQL yang menyimpan
 tipe geometri POINT dan mengeksekusi aproksimasi jarak Euclidean planar
-(<span class="math inline">\(\text{ST\_Distance} \times
-111.32\)</span>).</p>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">ST_Distance</mtext><mo>×</mo><mn>111.32</mn></mrow><annotation encoding="application/x-tex">\text{ST\_Distance} \times 111.32</annotation></semantics></math>).</p>
 <p>Meskipun terbukti sangat efektif untuk penjelajahan desa wisata pada
 skala mikro, arsitektur <em>three-tier</em> tersebut memiliki tiga
 keterbatasan ketika diterapkan pada skala perkotaan heterogen: (a)
@@ -2094,11 +2065,12 @@ C++ MySQL 8.0 <code>ST_Distance_Sphere</code>, menjamin perhitungan
 jarak lingkaran besar (<em>great-circle / spherical distance</em>) yang
 presisi dan stabil. * <strong>Verifikasi Grounding Algoritmik
 Pasca-Generasi (Layer 5):</strong> Memperkenalkan validator independen
-berbasis aturan <span class="math inline">\(\forall e \in
-\text{Entities}(\text{Response}), e \in F\)</span> yang memverifikasi
-kepatuhan klaim entitas faktual sebelum informasi disajikan ke peramban
-pengguna, menghasilkan <em>Entity Fabrication Rate</em>
-<strong>0,00%</strong> pada 40 skenario benchmark yang dievaluasi.</p>
+berbasis aturan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Response</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>e</mi><mo>∈</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entities}(\text{Response}), e \in F</annotation></semantics></math>
+yang memverifikasi kepatuhan klaim entitas faktual sebelum informasi
+disajikan ke peramban pengguna, menghasilkan <em>Entity Fabrication
+Rate</em> <strong>0,00%</strong> pada 40 skenario benchmark yang
+dievaluasi.</p>
 <h4
 id="kerangka-operasional-interaksi-spasial-eksploratori-terkontrol-semantik">4.2.1
 Kerangka Operasional Interaksi Spasial Eksploratori Terkontrol
@@ -2287,8 +2259,8 @@ Instruksi Sistem Grounded NLG (Grounded NLG System Prompt)</h4>
 <p>Pada Lapisan 5 (<em>Grounded Response Layer</em>), model bahasa
 diatur oleh <em>Strict Grounding Contract</em> (Listing 2 / Lampiran B)
 yang melarang keras penyebutan entitas di luar data fakta basis data
-<span class="math inline">\(F\)</span> dan mewajibkan nama tempat
-dicetak tebal.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+dan mewajibkan nama tempat dicetak tebal.</p>
 <h4
 id="masukan-pengguna-dan-konteks-situasional-user-input-situational-context">3.
 Masukan Pengguna dan Konteks Situasional (User Input &amp; Situational
@@ -2302,13 +2274,14 @@ sekarang dan tiket maksimal 15 ribu”</em></li>
 <li>Koordinat Geografis Pengguna (GPS WGS84):
 <code>Lat: -0.9471, Lng: 100.3541</code> (Pusat Kota Padang)</li>
 <li>Waktu Aktif Server: <code>14:30:00 WIB</code> (Siang hari)</li>
-<li>Status Sesi: Percakapan interaktif baru (<span
-class="math inline">\(t=1\)</span>, <code>history = []</code>)</li>
+<li>Status Sesi: Percakapan interaktif baru
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t=1</annotation></semantics></math>,
+<code>history = []</code>)</li>
 </ul></li>
 </ul>
 <h4 id="keluaran-sir-mentah-dari-llm-raw-sir-output-mathcals_textraw">4.
-Keluaran SIR Mentah dari LLM (Raw SIR Output <span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>)</h4>
+Keluaran SIR Mentah dari LLM (Raw SIR Output
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>)</h4>
 <p>Model inferensi memancarkan objek JSON murni
 (<code>temperature: 0.0</code>,
 <code>response_format: {"type": "json_object"}</code>):</p>
@@ -2334,17 +2307,18 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="
 <h4
 id="hasil-validasi-deterministik-sir-validation-report-validated-csir-mathcals_textcsir">5.
 Hasil Validasi Deterministik (SIR Validation Report &amp; Validated CSIR
-<span class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>)</h4>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>)</h4>
 <p>Lapisan kendali mengeksekusi <code>SirValidator</code> 6-dimensi
-untuk memeriksa <span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span> tanpa mutasi
-sepihak (<em>No Intent Alteration</em>): * <strong>Dimensi 1 (Schema
-&amp; Type):</strong> Lolos (Tipe data valid, sanitasi tag HTML/XSS
-aman). * <strong>Dimensi 2 (Spatial Domain):</strong> Lolos
-(<code>radius = 10.0 &gt; 0</code> dan <span class="math inline">\(\le
-50.0\text{ km}\)</span>). * <strong>Dimensi 3 (Operator
-Validity):</strong> Lolos (<code>within_radius</code> sah dalam ontologi
-sistem). * <strong>Dimensi 4 (Reference Bounds):</strong> Lolos
+untuk memeriksa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>
+tanpa mutasi sepihak (<em>No Intent Alteration</em>): * <strong>Dimensi
+1 (Schema &amp; Type):</strong> Lolos (Tipe data valid, sanitasi tag
+HTML/XSS aman). * <strong>Dimensi 2 (Spatial Domain):</strong> Lolos
+(<code>radius = 10.0 &gt; 0</code> dan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>50.0</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\le 50.0\text{ km}</annotation></semantics></math>).
+* <strong>Dimensi 3 (Operator Validity):</strong> Lolos
+(<code>within_radius</code> sah dalam ontologi sistem). *
+<strong>Dimensi 4 (Reference Bounds):</strong> Lolos
 (<code>-0.9471, 100.3541</code> valid dalam bola bumi WGS84). *
 <strong>Dimensi 5 (Price Consistency):</strong> Lolos
 (<code>max_price = 15000 &gt;= 0</code>, konsisten dengan
@@ -2354,8 +2328,8 @@ ada kata kunci di luar lingkup Padang). * <strong>Laporan Validasi
 Sistem:</strong> <code>isValid: true</code>,
 <code>violations: []</code>,
 <code>executionPolicy: "execute_sql"</code>. * <strong>Objek Validated
-CSIR (<span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>):</strong>
+CSIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>):</strong>
 Disimpan secara atomik ke dalam memori sesi dan siap dikompilasi ke
 SQL.</p>
 <h4
@@ -2394,10 +2368,10 @@ class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#c
 <h4
 id="hasil-eksekusi-basis-data-spasial-himpunan-tupel-fakta-terverifikasi-f">7.
 Hasil Eksekusi Basis Data Spasial (Himpunan Tupel Fakta Terverifikasi
-<span class="math inline">\(F\)</span>)</h4>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>)</h4>
 <p>Eksekusi kueri pada MySQL 8.0 Spatial Engine mengembalikan 4 rekaman
-relasional terverifikasi (<span class="math inline">\(1,21\text{
-ms}\)</span>):</p>
+relasional terverifikasi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>,</mo><mn>21</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> ms</mtext></mrow></mrow><annotation encoding="application/x-tex">1,21\text{ ms}</annotation></semantics></math>):</p>
 <table>
 <colgroup>
 <col style="width: 12%" />
@@ -2416,8 +2390,8 @@ ms}\)</span>):</p>
 <th style="text-align: center;">Harga Tiket</th>
 <th style="text-align: center;">Jam Buka - Tutup</th>
 <th style="text-align: center;">Rating</th>
-<th style="text-align: center;">Jarak Spasial Bola Bumi (<span
-class="math inline">\(d\)</span>)</th>
+<th style="text-align: center;">Jarak Spasial Bola Bumi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>)</th>
 </tr>
 </thead>
 <tbody>
@@ -2462,14 +2436,15 @@ class="math inline">\(d\)</span>)</th>
 <h4
 id="respons-bernarasi-akhir-ter-grounding-final-grounded-response">8.
 Respons Bernarasi Akhir Ter-Grounding (Final Grounded Response)</h4>
-<p>Model bahasa merangkai narasi rekomendasi berdasarkan data <span
-class="math inline">\(F\)</span> dan diverifikasi oleh
-<code>GroundingValidator</code> (<span class="math inline">\(\forall e
-\in \text{Entities}, e \in F \implies GF = 100,00\%\)</span>). Respons
-disajikan secara simultan pada panel chat dan peta Leaflet.js: &gt;
-<em>“Berikut adalah rekomendasi objek wisata pantai terdekat dalam
+<p>Model bahasa merangkai narasi rekomendasi berdasarkan data
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+dan diverifikasi oleh <code>GroundingValidator</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mo>,</mo><mi>e</mi><mo>∈</mo><mi>F</mi><mo>⟹</mo><mi>G</mi><mi>F</mi><mo>=</mo><mn>100</mn><mo>,</mo><mn>00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entities}, e \in F \implies GF = 100,00\%</annotation></semantics></math>).
+Respons disajikan secara simultan pada panel chat dan peta Leaflet.js:
+&gt; <em>“Berikut adalah rekomendasi objek wisata pantai terdekat dalam
 radius 10 km dari lokasi Anda yang sedang buka dan ramah anggaran (tiket
-<span class="math inline">\(\le\)</span> Rp15.000):</em><br />
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\le</annotation></semantics></math>
+Rp15.000):</em><br />
 &gt; 1. <strong>Pantai Padang (Taplau)</strong> — Berjarak 0,40 km.
 Tiket masuk gratis (Rp0), buka hingga pukul 22:00 WIB. Sangat dekat
 untuk menikmati panorama matahari terbenam.<br />
@@ -2511,15 +2486,15 @@ diverifikasi titik akses masuknya melalui OpenStreetMap (OSM).</li>
 <li><strong>Kriteria Validasi &amp; Waktu Pengambilan:</strong> Sensus
 dan geocoding lapangan dilakukan Januari 2026, diaudit ulang September
 2026. Seluruh 22 POI berada di dalam batas administratif Kota Padang
-(<span class="math inline">\([-1,1950, -0,8810]^\circ\text{LS}\)</span>,
-<span class="math inline">\([100,3480,
-100,4530]^\circ\text{BT}\)</span>, luas wilayah 694,96 km²).</li>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>1</mn><mo>,</mo><mn>1950</mn><mo>,</mo><mo>−</mo><mn>0</mn><mo>,</mo><mn>8810</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">LS</mtext></mrow><annotation encoding="application/x-tex">[-1,1950, -0,8810]^\circ\text{LS}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>100</mn><mo>,</mo><mn>3480</mn><mo>,</mo><mn>100</mn><mo>,</mo><mn>4530</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">BT</mtext></mrow><annotation encoding="application/x-tex">[100,3480, 100,4530]^\circ\text{BT}</annotation></semantics></math>,
+luas wilayah 694,96 km²).</li>
 <li><strong>Alasan Penggunaan:</strong> Berfungsi sebagai basis data
 relasional operasional inti (<code>geo_db.wisata</code>) dan tabel fakta
-(<span class="math inline">\(F\)</span>), menjadi satu-satunya sumber
-kebenaran faktual untuk perhitungan jarak sferikal
-(<code>ST_Distance_Sphere</code>), navigasi jalan raya OSRM, dan
-validasi grounding algoritmik.</li>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>),
+menjadi satu-satunya sumber kebenaran faktual untuk perhitungan jarak
+sferikal (<code>ST_Distance_Sphere</code>), navigasi jalan raya OSRM,
+dan validasi grounding algoritmik.</li>
 </ul></li>
 <li><strong>Tingkat 2: Himpunan Data Ground Truth Benchmark Percakapan
 (40 Skenario Terstandarisasi):</strong>
@@ -2569,8 +2544,8 @@ mengukur tingkat halusinasi luar yurisdiksi (<em>Type I
 Hallucination</em>) dan halusinasi entitas fiktif (<em>Type II
 Hallucination</em>) pada model baseline tanpa kendali, serta
 memverifikasi kemampuan sistem dalam memberikan penolakan jujur
-(<em>Honest Rejection Rate</em> <span class="math inline">\(HRR =
-100,00\%\)</span>).</li>
+(<em>Honest Rejection Rate</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>R</mi><mi>R</mi><mo>=</mo><mn>100</mn><mo>,</mo><mn>00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">HRR = 100,00\%</annotation></semantics></math>).</li>
 </ul></li>
 </ol>
 <p><strong>Tabel 2b. Arsitektur Tiga Tingkatan Dataset: Asal-Usul Data,
@@ -2601,10 +2576,10 @@ Kriteria Validasi, Waktu Pengambilan, dan Alasan Penggunaan</strong></p>
 Padang</td>
 <td>Dinas Pariwisata Kota Padang; Perda No. 1/2024; Peta RBI BIG 1:25k;
 OpenStreetMap</td>
-<td>Batas WGS84 Kota Padang (<span class="math inline">\([-1,195,
--0,881]^\circ\text{LS}\)</span>, <span class="math inline">\([100,348,
-100,453]^\circ\text{BT}\)</span>); verifikasi tarif karcis &amp; jam
-operasional</td>
+<td>Batas WGS84 Kota Padang
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>1</mn><mo>,</mo><mn>195</mn><mo>,</mo><mo>−</mo><mn>0</mn><mo>,</mo><mn>881</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">LS</mtext></mrow><annotation encoding="application/x-tex">[-1,195, -0,881]^\circ\text{LS}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>100</mn><mo>,</mo><mn>348</mn><mo>,</mo><mn>100</mn><mo>,</mo><mn>453</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">BT</mtext></mrow><annotation encoding="application/x-tex">[100,348, 100,453]^\circ\text{BT}</annotation></semantics></math>);
+verifikasi tarif karcis &amp; jam operasional</td>
 <td style="text-align: center;">Jan 2026 (Audit lapangan), verifikasi
 ulang Sep 2026</td>
 <td>Basis data relasional aktif (<code>geo_db.wisata</code>)
@@ -2629,9 +2604,10 @@ Negatif</strong></td>
 Fiktif Sintetis</td>
 <td>Direktori Pariwisata Prov. Sumbar &amp; token adversarial
 sintetis</td>
-<td>Entitas nyata terbukti <span class="math inline">\(&gt;30\text{
-km}\)</span> di luar batas Kota Padang, serta nama atraksi fiktif tanpa
-wujud fisik</td>
+<td>Entitas nyata terbukti
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>30</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">&gt;30\text{ km}</annotation></semantics></math>
+di luar batas Kota Padang, serta nama atraksi fiktif tanpa wujud
+fisik</td>
 <td style="text-align: center;">Dihimpun Sep–Okt 2026</td>
 <td>Set kontrol negatif untuk mendeteksi &amp; mengaudit halusinasi Tipe
 I/II pada baseline serta mengukur Honest Rejection Rate (HRR)</td>
@@ -3351,8 +3327,8 @@ rupiah”</em></td>
 <td style="text-align: center;"><code>within_radius</code></td>
 <td>GPS Pengguna (<code>-0.958, 100.354</code>)</td>
 <td style="text-align: center;">25 km</td>
-<td style="text-align: center;"><span class="math inline">\(\le
-\text{Rp}10.000\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mtext mathvariant="normal">Rp</mtext><mn>10.000</mn></mrow><annotation encoding="application/x-tex">\le \text{Rp}10.000</annotation></semantics></math></td>
 <td style="text-align: center;">-</td>
 <td>Pasir Jambak, Lubuk Paraku, Sarasah Gadut, Bukit Nobita, Museum
 Adityawarman, dll.</td>
@@ -3400,33 +3376,38 @@ salju</em>)</td>
 menerapkan pemisahan metodologis yang tegas antara kumpulan data
 pengembangan dan pengujian: 1. <strong>Pemisahan Kumpulan Data
 (Development Set vs. Frozen Benchmark Test Set):</strong> Kumpulan data
-perancangan awal (<em>Prompt-Tuning &amp; Development Set</em>, <span
-class="math inline">\(N=20\)</span> skenario eksploratif) digunakan
-secara ketat hanya pada fase rekayasa prompt dan penyusunan skema
-antarmuka. Setelah arsitektur dibekukan (<em>architecture freeze</em>),
-evaluasi empiris akhir Lapisan A–D dijalankan secara mandiri pada
-<strong>40 Skenario Percakapan Benchmark Terstandarisasi (<em>Frozen
-Benchmark Test Set</em>)</strong> yang tidak pernah dilibatkan dalam
-tuning bobot atau prompt LLM (<em>zero data leakage</em>). 2.
-<strong>Protokol Evaluasi dan Kesepakatan Antar-Anotator
-(Inter-Annotator Agreement):</strong> Nilai acuan kebenaran (<em>ground
-truth annotation</em>) pada seluruh 40 skenario ditinjau dan divalidasi
-secara independen oleh dua orang anotator ahli (Anotator 1: Peneliti
-Rekayasa Perangkat Lunak dan Sistem Geospasial; Anotator 2: Pakar Domain
-Linguistik dan Manajemen Destinasi Wisata). Pengukuran tingkat
-kesepakatan antar-anotator terhadap 19 atribut CSIR dan ekspektasi hasil
-kueri dihitung menggunakan formula <em>Cohen’s Kappa</em>: <span
-class="math display">\[\kappa = \frac{P_o - P_e}{1 - P_e}\]</span> Di
-mana <span class="math inline">\(P_o\)</span> adalah proporsi
-kesepakatan teramati (<span class="math inline">\(97,25\%\)</span>) dan
-<span class="math inline">\(P_e\)</span> adalah probabilitas kesepakatan
-kebetulan acak (<span class="math inline">\(54,12\%\)</span>). Hasil
-perhitungan menghasilkan nilai <strong>Cohen’s Kappa <span
-class="math inline">\(\kappa = 0,94\)</span></strong>, yang
-mengindikasikan tingkat kesepakatan hampir sempurna (<em>near-perfect
-inter-annotator agreement</em>). Seluruh perbedaan tipis diselesaikan
-melalui protokol rekonsiliasi formal (<em>adjudication protocol</em>)
-hingga tercapai konsensus 100%.</p>
+perancangan awal (<em>Prompt-Tuning &amp; Development Set</em>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">N=20</annotation></semantics></math>
+skenario eksploratif) digunakan secara ketat hanya pada fase rekayasa
+prompt dan penyusunan skema antarmuka. Setelah arsitektur dibekukan
+(<em>architecture freeze</em>), evaluasi empiris akhir Lapisan A–D
+dijalankan secara mandiri pada <strong>40 Skenario Percakapan Benchmark
+Terstandarisasi (<em>Frozen Benchmark Test Set</em>)</strong> yang tidak
+pernah dilibatkan dalam tuning bobot atau prompt LLM (<em>zero data
+leakage</em>). 2. <strong>Protokol Evaluasi dan Kesepakatan
+Antar-Anotator (Inter-Annotator Agreement):</strong> Nilai acuan
+kebenaran (<em>ground truth annotation</em>) pada seluruh 40 skenario
+ditinjau dan divalidasi secara independen oleh dua orang anotator ahli
+(Anotator 1: Peneliti Rekayasa Perangkat Lunak dan Sistem Geospasial;
+Anotator 2: Pakar Domain Linguistik dan Manajemen Destinasi Wisata).
+Pengukuran tingkat kesepakatan antar-anotator terhadap 19 atribut CSIR
+dan ekspektasi hasil kueri dihitung menggunakan formula <em>Cohen’s
+Kappa</em>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi><mo>=</mo><mfrac><mrow><msub><mi>P</mi><mi>o</mi></msub><mo>−</mo><msub><mi>P</mi><mi>e</mi></msub></mrow><mrow><mn>1</mn><mo>−</mo><msub><mi>P</mi><mi>e</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\kappa = \frac{P_o - P_e}{1 - P_e}</annotation></semantics></math>
+Di mana
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>o</mi></msub><annotation encoding="application/x-tex">P_o</annotation></semantics></math>
+adalah proporsi kesepakatan teramati
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>97</mn><mo>,</mo><mn>25</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">97,25\%</annotation></semantics></math>)
+dan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>e</mi></msub><annotation encoding="application/x-tex">P_e</annotation></semantics></math>
+adalah probabilitas kesepakatan kebetulan acak
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>54</mn><mo>,</mo><mn>12</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">54,12\%</annotation></semantics></math>).
+Hasil perhitungan menghasilkan nilai <strong>Cohen’s Kappa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>94</mn></mrow><annotation encoding="application/x-tex">\kappa = 0,94</annotation></semantics></math></strong>,
+yang mengindikasikan tingkat kesepakatan hampir sempurna
+(<em>near-perfect inter-annotator agreement</em>). Seluruh perbedaan
+tipis diselesaikan melalui protokol rekonsiliasi formal
+(<em>adjudication protocol</em>) hingga tercapai konsensus 100%.</p>
 <p>Di samping 40 skenario utama, arsitektur sistem diuji secara ketat
 terhadap sepuluh ragam variasi bahasa alami ekstrem, kasus batas
 spasial, serangan injeksi, dan anomali operasional sebagaimana dirangkum
@@ -3538,9 +3519,9 @@ fallback pesan ramah pengguna.</td>
 </tr>
 <tr class="even">
 <td><strong>10. Konsistensi Multi-Turn</strong></td>
-<td>Turn 1: <em>“Cari pantai”</em> <span
-class="math inline">\(\to\)</span> Turn 2: <em>“yang tiketnya di bawah
-15 ribu”</em></td>
+<td>Turn 1: <em>“Cari pantai”</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+Turn 2: <em>“yang tiketnya di bawah 15 ribu”</em></td>
 <td>State manager menggabungkan CSIR: <code>category = Pantai</code>
 dipertahankan, <code>max_price = 15000</code> diakumulasi.</td>
 <td>Mengembalikan Pantai Air Manis &amp; Pantai Nirwana tanpa lupa
@@ -3557,21 +3538,22 @@ Compliance: 100,00%)</h4>
 evaluasi pada Lapisan C dipisahkan secara tegas antara skenario yang
 memang menguji komputasi predikat spasial murni dan skenario percakapan
 non-spasial (<em>chit-chat</em>): 1. <strong>Pure Spatial Predicate
-Correctness (<span class="math inline">\(N = 36\)</span> skenario
-spasial murni):</strong> Mencapai <strong>100,00% (36/36
+Correctness
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>36</mn></mrow><annotation encoding="application/x-tex">N = 36</annotation></semantics></math>
+skenario spasial murni):</strong> Mencapai <strong>100,00% (36/36
 skenario)</strong>. Evaluator empiris
 (<code>RisetEvaluasi::evaluateSpatialPredicate</code>) memverifikasi
 kepatuhan matematis terhadap acuan kebenaran (<em>ground truth</em>): -
 <strong>Predikat Radius (<code>within_radius</code>):</strong>
-Memverifikasi bahwa setiap POI yang dikembalikan memenuhi <span
-class="math inline">\(d(\text{POI}, \text{ref}) \le R + 0,1\text{
-km}\)</span> menggunakan jarak sferikal <code>ST_Distance_Sphere</code>.
-- <strong>Predikat Urutan Terdekat (<code>nearest</code>):</strong>
+Memverifikasi bahwa setiap POI yang dikembalikan memenuhi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POI</mtext><mo>,</mo><mtext mathvariant="normal">ref</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><mi>R</mi><mo>+</mo><mn>0</mn><mo>,</mo><mn>1</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">d(\text{POI}, \text{ref}) \le R + 0,1\text{ km}</annotation></semantics></math>
+menggunakan jarak sferikal <code>ST_Distance_Sphere</code>. -
+<strong>Predikat Urutan Terdekat (<code>nearest</code>):</strong>
 Memverifikasi bahwa destinasi teratas merupakan nilai argmin jarak
-(<span class="math inline">\(\text{POI}_1 = \arg\min_{\text{POI}}
-d(\text{POI}, \text{ref})\)</span>) dan urutan jarak tersusun monotonik
-naik (<span class="math inline">\(d_1 \le d_2 \le \dots \le
-d_k\)</span>). - <strong>Predikat Wilayah Administratif
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">POI</mtext><mn>1</mn></msub><mo>=</mo><mo>arg</mo><msub><mo>min</mo><mtext mathvariant="normal">POI</mtext></msub><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POI</mtext><mo>,</mo><mtext mathvariant="normal">ref</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{POI}_1 = \arg\min_{\text{POI}} d(\text{POI}, \text{ref})</annotation></semantics></math>)
+dan urutan jarak tersusun monotonik naik
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>≤</mo><msub><mi>d</mi><mn>2</mn></msub><mo>≤</mo><mi>…</mi><mo>≤</mo><msub><mi>d</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">d_1 \le d_2 \le \dots \le d_k</annotation></semantics></math>).
+- <strong>Predikat Wilayah Administratif
 (<code>within_admin_area</code>):</strong> Memverifikasi kecocokan
 entitas kecamatan target pada atribut alamat objek wisata yang
 dikembalikan (<code>POI.admin_area == expected_admin_area</code>). -
@@ -3585,8 +3567,9 @@ masuk (<code>harga_tiket == 0</code> untuk tiket gratis, dan
 <strong>Predikat Penolakan Out-of-Scope:</strong> Memverifikasi kueri di
 luar lingkup menghasilkan tepat 0 destinasi
 (<code>count(places) === 0</code>). 2. <strong>Conversational Chit-Chat
-Handling Accuracy (<span class="math inline">\(N = 2\)</span> skenario
-dialog non-spasial):</strong> Mencapai <strong>100,00% (2/2
+Handling Accuracy
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">N = 2</annotation></semantics></math>
+skenario dialog non-spasial):</strong> Mencapai <strong>100,00% (2/2
 skenario)</strong>. - <strong>Kasus #38 (Chit-chat - Terima
 Kasih):</strong> Ditangani secara dialogis dengan tepat tanpa eksekusi
 kueri destinasi. - <strong>Kasus #37 (Chit-chat - Sapaan):</strong>
@@ -3594,10 +3577,11 @@ Masukan <em>“Halo selamat pagi min”</em>, ditangani secara dialogis
 dengan respons santun pemandu wisata dan mematuhi ekspektasi hasil
 kosong (<code>expect_empty = true</code>,
 <code>count(places) === 0</code>) tanpa mengeksekusi kueri destinasi
-sembarangan. 3. <strong>Overall Scenario Execution Compliance (<span
-class="math inline">\(N = 40\)</span> seluruh skenario):</strong>
-Menggabungkan seluruh skenario menghasilkan tingkat kepatuhan eksekusi
-sebesar <strong>100,00% (40/40 skenario)</strong>.</p>
+sembarangan. 3. <strong>Overall Scenario Execution Compliance
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">N = 40</annotation></semantics></math>
+seluruh skenario):</strong> Menggabungkan seluruh skenario menghasilkan
+tingkat kepatuhan eksekusi sebesar <strong>100,00% (40/40
+skenario)</strong>.</p>
 <p>Seluruh 36 skenario spasial terbukti 100% valid dan dapat
 direproduksi secara otonom melalui
 <code>php benchmark/proposed/evaluator.php</code>.</p>
@@ -3614,25 +3598,24 @@ interpretasi, penelitian ini secara tegas membedakan dua tingkatan
 evaluasi verifier: 1. <strong>Verifier Correctness (Akurasi Verifikasi
 Algoritmik):</strong> Mengukur apakah seluruh klaim faktual yang
 diidentifikasi dan diekstraksi oleh aturan validator deterministik
-(<span class="math inline">\(\mathcal{C}_{\text{verifiable}}\)</span>)
-pada empat kategori terdefinisi (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
-\mathcal{C}_{\text{temporal}}\)</span>) dinilai secara tepat terhadap
-himpunan fakta basis data relasional <span
-class="math inline">\(F\)</span>. Pada tingkatan ini, sistem membuktikan
-kinerja <strong>100,00% (270/270 klaim didukung secara eksak)</strong>
-tanpa false-positive verification. 2. <strong>Verifier Coverage (Cakupan
-Ranah Verifikasi):</strong> Mengakui secara jujur bahwa lingkup aturan
-validator deterministik sengaja dibatasi pada atribut data terstruktur
-yang memiliki sumber kebenaran (<em>ground truth</em>) pasti dalam skema
-basis data relasional. Terhadap klaim kualitatif atau informasi di luar
-skema (<em>out-of-schema claims</em>, misalnya kondisi keselamatan
-ombak, suasana subjektif, atau fasilitas tambahan yang tidak
-dimodelkan), perlindungan ditegakkan secara preventif melalui <em>Strict
-Grounding Contract</em> pada instruksi generator NLG yang mengunci
-sintesis teks semata-mata pada data fakta yang disediakan, didukung oleh
-pengujian unit <code>testOutOfSchemaInfoInjectionIsHandled</code> serta
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{verifiable}}</annotation></semantics></math>)
+pada empat kategori terdefinisi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>)
+dinilai secara tepat terhadap himpunan fakta basis data relasional
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>.
+Pada tingkatan ini, sistem membuktikan kinerja <strong>100,00% (270/270
+klaim didukung secara eksak)</strong> tanpa false-positive verification.
+2. <strong>Verifier Coverage (Cakupan Ranah Verifikasi):</strong>
+Mengakui secara jujur bahwa lingkup aturan validator deterministik
+sengaja dibatasi pada atribut data terstruktur yang memiliki sumber
+kebenaran (<em>ground truth</em>) pasti dalam skema basis data
+relasional. Terhadap klaim kualitatif atau informasi di luar skema
+(<em>out-of-schema claims</em>, misalnya kondisi keselamatan ombak,
+suasana subjektif, atau fasilitas tambahan yang tidak dimodelkan),
+perlindungan ditegakkan secara preventif melalui <em>Strict Grounding
+Contract</em> pada instruksi generator NLG yang mengunci sintesis teks
+semata-mata pada data fakta yang disediakan, didukung oleh pengujian
+unit <code>testOutOfSchemaInfoInjectionIsHandled</code> serta
 perlindungan <em>fail-closed fallback</em>.</p>
 <p>Dengan demikian, angka fidelity 100% diposisikan secara objektif
 sebagai bukti akurasi verifikasi (<em>verifier correctness</em>) pada
@@ -3673,11 +3656,9 @@ Penegakan Integritas GroundingValidator</strong></p>
 data relasional SQL</td>
 <td><em>“Objek wisata <strong>Pantai Air Manis</strong> berjarak 7.8 km
 dengan tiket Rp10.000 dan tidak buka 24 jam.”</em></td>
-<td>Pola terdeteksi pada 4 sub-dimensi (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{price}},
-\mathcal{C}_{\text{temporal}}\)</span>); fakta terkonfirmasi pada
-database.</td>
+<td>Pola terdeteksi pada 4 sub-dimensi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>);
+fakta terkonfirmasi pada database.</td>
 <td style="text-align: center;"><strong>LULUS (Grounded)</strong></td>
 </tr>
 <tr class="even">
@@ -3702,12 +3683,13 @@ Fail-Closed)</strong></td>
 teks</td>
 <td><em>“Pilihan utama adalah <strong>Pantai Padang</strong> (berjarak
 sekitar 2,0 km).”</em> (Data eksak kalkulasi SQL: 1,5 km).</td>
-<td>Ditoleransi jika selisih numerik <span class="math inline">\(\le \pm
-0,6\text{ km}\)</span> (<span class="math inline">\(|2,0 - 1,5| =
-0,5\text{ km} \le 0,6\text{ km}\)</span>). Jika deviasi melebihi
-toleransi, ditolak.</td>
-<td style="text-align: center;"><strong>KONDISIONAL (Toleransi <span
-class="math inline">\(\le 0,6\)</span> km)</strong></td>
+<td>Ditoleransi jika selisih numerik
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mo>±</mo><mn>0</mn><mo>,</mo><mn>6</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\le \pm 0,6\text{ km}</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mn>2</mn><mo>,</mo><mn>0</mn><mo>−</mo><mn>1</mn><mo>,</mo><mn>5</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo>=</mo><mn>0</mn><mo>,</mo><mn>5</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow><mo>≤</mo><mn>0</mn><mo>,</mo><mn>6</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">|2,0 - 1,5| = 0,5\text{ km} \le 0,6\text{ km}</annotation></semantics></math>).
+Jika deviasi melebihi toleransi, ditolak.</td>
+<td style="text-align: center;"><strong>KONDISIONAL (Toleransi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>0</mn><mo>,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">\le 0,6</annotation></semantics></math>
+km)</strong></td>
 </tr>
 <tr class="even">
 <td><strong>4. Klaim di Luar Skema (<em>Unverifiable /
@@ -3795,21 +3777,22 @@ Diloloskan</strong></td>
 </tbody>
 </table>
 <p>Metrik diagnostik kuantitatif yang diperoleh: - <strong>Akurasi
-Diagnostik:</strong> <span class="math inline">\(\frac{10 + 10}{20} =
-\mathbf{100,00\%}\)</span> - <strong>Presisi
-(<em>Precision</em>):</strong> <span class="math inline">\(\frac{10}{10
-+ 0} = \mathbf{100,00\%}\)</span> - <strong>Sensitivitas
-(<em>Recall</em>):</strong> <span class="math inline">\(\frac{10}{10 +
-0} = \mathbf{100,00\%}\)</span> - <strong>Spesifisitas
-(<em>Specificity</em>):</strong> <span
-class="math inline">\(\frac{10}{10 + 0} = \mathbf{100,00\%}\)</span> -
-<strong>Skor F1 (<em>F1-Score</em>):</strong> <span
-class="math inline">\(\mathbf{100,00\%}\)</span> - <strong>False
-Positive Rate (FPR):</strong> <span
-class="math inline">\(\mathbf{0,00\%}\)</span> (Nol halusinasi yang
-lolos ke pengguna) - <strong>False Negative Rate (FNR):</strong> <span
-class="math inline">\(\mathbf{0,00\%}\)</span> (Nol respons benar yang
-ditolak keliru)</p>
+Diagnostik:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>10</mn><mo>+</mo><mn>10</mn></mrow><mn>20</mn></mfrac><mo>=</mo><mrow><mn>𝟏𝟎𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{10 + 10}{20} = \mathbf{100,00\%}</annotation></semantics></math>
+- <strong>Presisi (<em>Precision</em>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>10</mn><mrow><mn>10</mn><mo>+</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mrow><mn>𝟏𝟎𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{10}{10 + 0} = \mathbf{100,00\%}</annotation></semantics></math>
+- <strong>Sensitivitas (<em>Recall</em>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>10</mn><mrow><mn>10</mn><mo>+</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mrow><mn>𝟏𝟎𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{10}{10 + 0} = \mathbf{100,00\%}</annotation></semantics></math>
+- <strong>Spesifisitas (<em>Specificity</em>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>10</mn><mrow><mn>10</mn><mo>+</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mrow><mn>𝟏𝟎𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{10}{10 + 0} = \mathbf{100,00\%}</annotation></semantics></math>
+- <strong>Skor F1 (<em>F1-Score</em>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>𝟏𝟎𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow><annotation encoding="application/x-tex">\mathbf{100,00\%}</annotation></semantics></math>
+- <strong>False Positive Rate (FPR):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow><annotation encoding="application/x-tex">\mathbf{0,00\%}</annotation></semantics></math>
+(Nol halusinasi yang lolos ke pengguna) - <strong>False Negative Rate
+(FNR):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>𝟎</mn><mo mathvariant="bold">,</mo><mn>𝟎𝟎</mn><mi mathvariant="bold">%</mi></mrow><annotation encoding="application/x-tex">\mathbf{0,00\%}</annotation></semantics></math>
+(Nol respons benar yang ditolak keliru)</p>
 <p>Hasil diagnostik ini mengonfirmasi bahwa arsitektur verifikasi
 multi-lapisan dengan penegakan <em>fail-closed fallback</em> secara
 andal mencegah halusinasi LLM menembus antarmuka pengguna pada batasan
@@ -3850,13 +3833,17 @@ kembali dokumen teks POI berbasis kemiripan kosinus vektor
 <em>embedding</em>. * <strong>Baseline D (DTExplorer - Afnarius dkk.,
 2026) [2]:</strong> Sistem Web GIS sadar-skala skala desa berbasis
 manipulasi antarmuka formulir WIMP dan kueri SQL statis. *
-<strong>Proposed Architecture:</strong> LLM <span
-class="math inline">\(\rightarrow\)</span> SIR <span
-class="math inline">\(\rightarrow\)</span> SIR Validator <span
-class="math inline">\(\rightarrow\)</span> Deterministic Spatial
-Compiler <span class="math inline">\(\rightarrow\)</span> MySQL 8.0
-<code>ST_Distance_Sphere</code> <span
-class="math inline">\(\rightarrow\)</span> Grounded NLG.</p>
+<strong>Proposed Architecture:</strong> LLM
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+SIR
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+SIR Validator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Deterministic Spatial Compiler
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+MySQL 8.0 <code>ST_Distance_Sphere</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+Grounded NLG.</p>
 <p>Tabel 5 memaparkan perbandingan arsitektural dan operasional:</p>
 <p><strong>Tabel 5. Matriks Perbandingan Sistem yang Diusulkan terhadap
 Multi-Baseline dan Silsilah DTExplorer</strong></p>
@@ -3928,7 +3915,8 @@ data relasional</td>
 </tr>
 <tr class="even">
 <td><strong>Entity Fabrication Rate</strong></td>
-<td>Sangat Tinggi (<span class="math inline">\(&gt; 30\%\)</span>)</td>
+<td>Sangat Tinggi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>30</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">&gt; 30\%</annotation></semantics></math>)</td>
 <td>Sedang (dapat memanggil entitas fiktif jika query salah)</td>
 <td>Rendah hingga Sedang</td>
 <td>0,00% (Basis data statis)</td>
@@ -4062,8 +4050,7 @@ Alami</strong></td>
 <td style="text-align: center;">N/A (Tanpa AI)</td>
 <td style="text-align: center;">N/A (Tanpa AI)</td>
 <td style="text-align: center;"><strong>Algorithmic Grounding Validator
-(<span class="math inline">\(\forall e \in E, e \in
-F\)</span>)</strong></td>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mi>E</mi><mo>,</mo><mi>e</mi><mo>∈</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\forall e \in E, e \in F</annotation></semantics></math>)</strong></td>
 </tr>
 <tr class="even">
 <td><strong>Pengujian Latensi Milidetik</strong></td>
@@ -4095,11 +4082,10 @@ transparan dua rezim eksekusi: <strong>Mode Live API
 (<code>--mock</code> / default)</strong> di mana seluruh pemrosesan
 invarian dan eksekusi kueri SQL dijalankan secara nyata pada basis data
 MySQL 8.0 <code>geo_db</code> lokal guna menjamin <em>bit-exact offline
-reproducibility</em>. Seluruh rekaman mentah 120 uji (<span
-class="math inline">\(40 \text{ skenario} \times 3 \text{
-replikasi}\)</span>) disimpan dalam berkas
-<code>raw_evaluations.json</code> pada masing-masing direktori
-benchmark:</p>
+reproducibility</em>. Seluruh rekaman mentah 120 uji
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> skenario</mtext></mrow><mo>×</mo><mn>3</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> replikasi</mtext></mrow></mrow><annotation encoding="application/x-tex">40 \text{ skenario} \times 3 \text{ replikasi}</annotation></semantics></math>)
+disimpan dalam berkas <code>raw_evaluations.json</code> pada
+masing-masing direktori benchmark:</p>
 <p><strong>Tabel 5a. Spesifikasi Protokol Eksperimen Komparasi
 Multi-Baseline Terstandarisasi</strong></p>
 <table style="width:100%;">
@@ -4132,15 +4118,15 @@ Multi-Baseline Terstandarisasi</strong></p>
 </tr>
 <tr class="even">
 <td><strong>Parameter Inferensi</strong></td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
 <td>N/A (Deterministik WIMP)</td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
 </tr>
 <tr class="odd">
 <td><strong>Kumpulan Data Skenario</strong></td>
@@ -4152,15 +4138,15 @@ max_tokens=300</td>
 </tr>
 <tr class="even">
 <td><strong>Replikasi Pengujian</strong></td>
-<td>3 kali per skenario (<span
-class="math inline">\(N=120\)</span>)</td>
-<td>3 kali per skenario (<span
-class="math inline">\(N=120\)</span>)</td>
-<td>3 kali per skenario (<span
-class="math inline">\(N=120\)</span>)</td>
+<td>3 kali per skenario
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
+<td>3 kali per skenario
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
+<td>3 kali per skenario
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
 <td>1 kali (Deterministik statis)</td>
-<td>3 kali per skenario (<span
-class="math inline">\(N=120\)</span>)</td>
+<td>3 kali per skenario
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
 </tr>
 <tr class="odd">
 <td><strong>Format Prompt / Masukan</strong></td>
@@ -4169,9 +4155,9 @@ class="math inline">\(N=120\)</span>)</td>
 <code>kategori</code></td>
 <td>Retrieval Prompt dengan konteks top-5 potongan teks chunk POI</td>
 <td>Pemilihan manual menu formulir &amp; slider radius</td>
-<td>Two-Stage Sandboxed Prompts: (1) NL <span
-class="math inline">\(\to\)</span> 19-Attr CSIR JSON Schema, (2)
-Grounded NLG Prompt</td>
+<td>Two-Stage Sandboxed Prompts: (1) NL
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+19-Attr CSIR JSON Schema, (2) Grounded NLG Prompt</td>
 </tr>
 <tr class="even">
 <td><strong>Mesin Basis Data Target</strong></td>
@@ -4189,8 +4175,10 @@ terkompilasi)</td>
 <td>Penangkapan galat native DBMS (<code>mysqli-&gt;error</code>)</td>
 <td>Evaluasi cosine distance &amp; halusinasi</td>
 <td>Galat kueri statis</td>
-<td>6-D Invariant Validator <span class="math inline">\(\to\)</span>
-Compiler <span class="math inline">\(\to\)</span>
+<td>6-D Invariant Validator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+Compiler
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>ST_Distance_Sphere</code></td>
 </tr>
 <tr class="even">
@@ -4207,8 +4195,8 @@ Compiler <span class="math inline">\(\to\)</span>
 <td><code>benchmark/baseline_text2sql/raw_evaluations.json</code></td>
 <td>Log internal evaluasi RAG</td>
 <td>Log interaksi pengguna</td>
-<td><code>benchmark/proposed/raw_evaluations.json</code> (<span
-class="math inline">\(N=120\)</span>)</td>
+<td><code>benchmark/proposed/raw_evaluations.json</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
 </tr>
 </tbody>
 </table>
@@ -4218,20 +4206,20 @@ Unconstrained LLM</em>), Tabel 5b merinci daftar keluaran halusinasi
 model, klasifikasi taksonomi kegagalan, lokasi aktual, jarak riil dari
 Kota Padang, serta skenario pengujian pemicu. Evaluasi Baseline A
 dijalankan menggunakan model DeepSeek-V3 (<code>deepseek-chat</code>,
-<span class="math inline">\(T=0.0\)</span>, top_p=1.0, 3 kali replikasi
-independen per skenario, total <span
-class="math inline">\(N=120\)</span> pengujian) dengan <em>system
-prompt</em> tanpa basis data: <em>“Anda adalah asisten pariwisata Kota
-Padang. Jawablah pertanyaan pengguna berikut dengan memberikan
-rekomendasi tempat wisata yang relevan beserta lokasi, perkiraan jarak,
-jam buka, dan harga tiket masuk: [USER QUERY]”</em>. Kriteria penilaian
-<em>fabricated</em> ditetapkan terhadap kumpulan data referensi resmi 22
-POI Kota Padang: (1) <strong>Tipe I (Halusinasi Luar
-Yurisdiksi):</strong> Entitas wisata nyata tetapi berada di luar
-yurisdiksi administratif Kota Padang (&gt;30 km hingga &gt;140 km) yang
-secara keliru diklaim berada di Kota Padang; dan (2) <strong>Tipe II
-(Entitas Murni Fiktif):</strong> Objek wisata fiktif yang tidak memiliki
-eksistensi fisik di dunia nyata.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, 3 kali replikasi independen per skenario, total
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>
+pengujian) dengan <em>system prompt</em> tanpa basis data: <em>“Anda
+adalah asisten pariwisata Kota Padang. Jawablah pertanyaan pengguna
+berikut dengan memberikan rekomendasi tempat wisata yang relevan beserta
+lokasi, perkiraan jarak, jam buka, dan harga tiket masuk: [USER
+QUERY]”</em>. Kriteria penilaian <em>fabricated</em> ditetapkan terhadap
+kumpulan data referensi resmi 22 POI Kota Padang: (1) <strong>Tipe I
+(Halusinasi Luar Yurisdiksi):</strong> Entitas wisata nyata tetapi
+berada di luar yurisdiksi administratif Kota Padang (&gt;30 km hingga
+&gt;140 km) yang secara keliru diklaim berada di Kota Padang; dan (2)
+<strong>Tipe II (Entitas Murni Fiktif):</strong> Objek wisata fiktif
+yang tidak memiliki eksistensi fisik di dunia nyata.</p>
 <p><strong>Tabel 5b. Bukti dan Taksonomi 14 Entitas Wisata Palsu
 (Fabricated POIs) pada Baseline A (Direct Unconstrained
 LLM)</strong></p>
@@ -4459,9 +4447,10 @@ menghasilkan tingkat kegagalan kueri hingga 32,50% akibat halusinasi
 nama kolom dan sintaks operator trigonometri. 3. Arsitektur penuh
 (<em>Konfigurasi D</em>) mencapai sinergi optimal dengan memitigasi
 halusinasi entitas terfabrikasi di bawah kondisi pengujian benchmark,
-menghasilkan <em>Entity Fabrication Rate</em> <span
-class="math inline">\(0,00\%\)</span> (tidak ditemukan satupun POI
-fiktif pada 40 skenario yang dievaluasi).</p>
+menghasilkan <em>Entity Fabrication Rate</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">0,00\%</annotation></semantics></math>
+(tidak ditemukan satupun POI fiktif pada 40 skenario yang
+dievaluasi).</p>
 <p>Guna mengukur kontribusi masing-masing lapisan secara saintifik,
 pengujian ablasi dipisahkan secara tegas ke dalam dua kelompok evaluasi
 independen: (1) evaluasi invarian validator 6-dimensi murni pada
@@ -4563,8 +4552,8 @@ Invariant</em></td>
 <tbody>
 <tr class="odd">
 <td><strong>Spatial Fallback Policy</strong></td>
-<td>Dynamic Radius Expansion (<span class="math inline">\(10\text{ km}
-\to 25\text{ km}\)</span>)</td>
+<td>Dynamic Radius Expansion
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow><mo>→</mo><mn>25</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">10\text{ km} \to 25\text{ km}</annotation></semantics></math>)</td>
 <td>62,50% Zero-Result Drop Rate (Pengguna frustrasi tanpa
 alternatif)</td>
 <td><strong>100,00% Transparansi Ruang</strong> (Otomatis memperluas
@@ -4574,13 +4563,14 @@ entitas</td>
 </tr>
 <tr class="even">
 <td><strong>Claim-Level Grounding Validator</strong></td>
-<td>Algorithmic Grounding Engine (<span class="math inline">\(GF =
-\frac{C_{\text{supported}}}{C_{\text{verifiable}}}\)</span>)</td>
+<td>Algorithmic Grounding Engine
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>F</mi><mo>=</mo><mfrac><msub><mi>C</mi><mtext mathvariant="normal">supported</mtext></msub><msub><mi>C</mi><mtext mathvariant="normal">verifiable</mtext></msub></mfrac></mrow><annotation encoding="application/x-tex">GF = \frac{C_{\text{supported}}}{C_{\text{verifiable}}}</annotation></semantics></math>)</td>
 <td>15,00% Deviasi Klaim Atribut (Penyimpangan harga &amp; jarak
 tersembunyi)</td>
 <td><strong>100,00% Grounding Fidelity &amp; 0,00% Fabricated
-POIs</strong> (Verifikasi harga, jam, jarak <span
-class="math inline">\(\pm 0,6\)</span> km, entitas)</td>
+POIs</strong> (Verifikasi harga, jam, jarak
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mn>0</mn><mo>,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">\pm 0,6</annotation></semantics></math>
+km, entitas)</td>
 <td>Memverifikasi integritas seluruh klaim kuantitatif sebelum
 ditransmisikan ke peramban</td>
 </tr>
@@ -4609,8 +4599,9 @@ Dinonaktifkan</strong></p>
 <tr class="header">
 <th>Konfigurasi Eksperimen</th>
 <th>Status Komponen yang Dinonaktifkan</th>
-<th style="text-align: center;">Kasus Gagal (<span
-class="math inline">\(N\)</span> Deviasi)</th>
+<th style="text-align: center;">Kasus Gagal
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+Deviasi)</th>
 <th>Contoh Riil Insiden Kegagalan yang Teramati</th>
 <th style="text-align: center;">Beban Latensi (<em>Overhead</em>)</th>
 <th style="text-align: center;">Tingkat Penolakan Keliru (<em>False
@@ -4903,9 +4894,9 @@ Skenario uji meniru alur perencanaan realistis: - <strong>Turn
 (Ujaran eliptik tanpa menyebut ulang ‘pantai’). - <strong>Turn
 3:</strong> <em>“Yang buka sekarang”</em> (Filter jam operasional saat
 ini).</p>
-<p>Tabel 7e menyajikan rekam jejak formal akumulasi status CSIR (<span
-class="math inline">\(CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta
-CSIR_{t+1})\)</span>) dan hasil kueri deterministik:</p>
+<p>Tabel 7e menyajikan rekam jejak formal akumulasi status CSIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mtext mathvariant="normal">Merge</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta CSIR_{t+1})</annotation></semantics></math>)
+dan hasil kueri deterministik:</p>
 <p><strong>Tabel 7e. Rekam Jejak Evaluasi Multi-Turn State Tracking (3
 Putaran Dialog Beruntun)</strong></p>
 <table>
@@ -4931,16 +4922,16 @@ Putaran Dialog Beruntun)</strong></p>
 <td><em>“Yang buka sekarang”</em></td>
 </tr>
 <tr class="even">
-<td><strong>Vektor Delta (<span class="math inline">\(\Delta
-CSIR\)</span>)</strong></td>
+<td><strong>Vektor Delta
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">\Delta CSIR</annotation></semantics></math>)</strong></td>
 <td><code>category='Pantai'</code>,
 <code>spatial_operator='nearest'</code>, <code>origin='gps'</code></td>
 <td><code>max_price=15000</code></td>
 <td><code>open_now=true</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Status Akumulasi (<span
-class="math inline">\(CSIR_t\)</span>)</strong></td>
+<td><strong>Status Akumulasi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">CSIR_t</annotation></semantics></math>)</strong></td>
 <td><code>category='Pantai'</code>, <code>origin='gps'</code>,
 <code>lat=-0.9587</code>, <code>lng=100.3541</code></td>
 <td><code>category='Pantai'</code>, <code>origin='gps'</code>,
@@ -4967,8 +4958,8 @@ class="math inline">\(CSIR_t\)</span>)</strong></td>
 <td><strong>Hasil Rekomendasi Destinasi</strong></td>
 <td>5 Destinasi (Pantai Padang, Pantai Air Manis, Pantai Nirwana, Pantai
 Pasir Jambak, Pantai Caroline)</td>
-<td>5 Destinasi (Seluruh 5 pantai di Padang bertiket <span
-class="math inline">\(\le \text{Rp}15.000\)</span>)</td>
+<td>5 Destinasi (Seluruh 5 pantai di Padang bertiket
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mtext mathvariant="normal">Rp</mtext><mn>15.000</mn></mrow><annotation encoding="application/x-tex">\le \text{Rp}15.000</annotation></semantics></math>)</td>
 <td>4 Destinasi (Menyaring destinasi yang tutup, menyisakan pantai
 berstatus buka)</td>
 </tr>
@@ -4995,14 +4986,17 @@ id="profil-latensi-5-tahap-dan-uji-skalabilitas-kueri-spasial-masif">6.4
 Profil Latensi 5-Tahap dan Uji Skalabilitas Kueri Spasial Masif</h3>
 <p>Pengukuran waktu respons komputasi diukur secara cermat per lapisan
 selama 40 iterasi pengujian <em>benchmark</em> dengan protokol 3 kali
-replikasi independen (<span class="math inline">\(N = 120\)</span>
+replikasi independen
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N = 120</annotation></semantics></math>
 pengujian). Metodologi evaluasi membedakan mode <code>--mock</code>
 untuk validasi logika deterministik lokal dan mode <code>--live</code>
-untuk inferensi nyata via DeepSeek API (<span
-class="math inline">\(T=0.0\)</span>, JSON mode). Rincian statistik
-latensi 5-tahap dipaparkan pada Tabel 8:</p>
+untuk inferensi nyata via DeepSeek API
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+JSON mode). Rincian statistik latensi 5-tahap dipaparkan pada Tabel
+8:</p>
 <p><strong>Tabel 8. Profil Statistik Latensi Waktu Respons per Tahap
-Komputasi (<span class="math inline">\(N = 120\)</span>
+Komputasi
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N = 120</annotation></semantics></math>
 Pengujian)</strong></p>
 <table style="width:100%;">
 <colgroup>
@@ -5139,18 +5133,21 @@ arsitektural yang disengaja demi mengisolasi LLM dari manipulasi basis
 data langsung (<em>Cognitive Air-Gap</em>) dan memastikan narasi akhir
 terikat 100% pada fakta SQL (<em>Grounding Fidelity</em>). Dengan
 persentil ke-95 sebesar 1.709,97 ms, total latensi dua inferensi ini
-tetap berada di bawah ambang batas operasional 2,00 detik (<span
-class="math inline">\(\le 2.000\text{ ms}\)</span>) yang diadopsi dalam
-penelitian ini, menunjukkan kelayakan teknis arsitektur untuk interaksi
-percakapan seluler nyata.</p>
+tetap berada di bawah ambang batas operasional 2,00 detik
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>2.000</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> ms</mtext></mrow></mrow><annotation encoding="application/x-tex">\le 2.000\text{ ms}</annotation></semantics></math>)
+yang diadopsi dalam penelitian ini, menunjukkan kelayakan teknis
+arsitektur untuk interaksi percakapan seluler nyata.</p>
 <p>(Scalability Stress Test) Untuk mengevaluasi ketahanan komputasi di
 luar batas 22 objek wisata kurasi Kota Padang, dilakukan pengujian beban
 (<em>stress test</em>) secara sistematis pada basis data MySQL 8.0.
-Dataset destinasi sintetis bertingkat dari <span class="math inline">\(N
-= 22\)</span> hingga <span class="math inline">\(N = 10.000\)</span>
-titik koordinat acak dalam kotak batas geografis Padang (<span
-class="math inline">\(-1.15 \le \text{lat} \le -0.80\)</span> dan <span
-class="math inline">\(100.25 \le \text{lng} \le 100.50\)</span>)
+Dataset destinasi sintetis bertingkat dari
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>22</mn></mrow><annotation encoding="application/x-tex">N = 22</annotation></semantics></math>
+hingga
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>10.000</mn></mrow><annotation encoding="application/x-tex">N = 10.000</annotation></semantics></math>
+titik koordinat acak dalam kotak batas geografis Padang
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1.15</mn><mo>≤</mo><mtext mathvariant="normal">lat</mtext><mo>≤</mo><mo>−</mo><mn>0.80</mn></mrow><annotation encoding="application/x-tex">-1.15 \le \text{lat} \le -0.80</annotation></semantics></math>
+dan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100.25</mn><mo>≤</mo><mtext mathvariant="normal">lng</mtext><mo>≤</mo><mn>100.50</mn></mrow><annotation encoding="application/x-tex">100.25 \le \text{lng} \le 100.50</annotation></semantics></math>)
 dievaluasi sebanyak 50 iterasi per tingkatan untuk menjalankan kueri
 berparameter lengkap fungsi spasial bawaan
 <code>ST_Distance_Sphere</code> (<code>radius &lt;= 20.0 km</code>,
@@ -5170,8 +5167,8 @@ Kueri Spasial MySQL 8.0</strong></p>
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Skala Titik POI (<span
-class="math inline">\(N\)</span>)</th>
+<th style="text-align: center;">Skala Titik POI
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>)</th>
 <th>Konteks Skala Geografis</th>
 <th style="text-align: center;">Rata-rata Latensi (ms)</th>
 <th style="text-align: center;">Median (ms)</th>
@@ -5238,21 +5235,22 @@ class="math inline">\(N\)</span>)</th>
 </tbody>
 </table>
 <p>Sebagaimana dibuktikan pada Tabel 9, <strong>latensi meningkat secara
-moderat pada rentang dataset sintetis yang diuji</strong> (<span
-class="math inline">\(N = 22\)</span> hingga <span
-class="math inline">\(N = 10.000\)</span> POI, dari rata-rata 0,57 ms
-menjadi 6,11 ms; p95 sebesar 10,14 ms). Dibandingkan latensi kumulatif
-dua panggilan inferensi LLM (~1.338 ms), komputasi spasial relasional
-menyerap kurang dari 1,5% dari total waktu respons bahkan pada 10.000
-destinasi. Hasil empiris ini mengindikasikan kelayakan teknis (<em>the
-results suggest technical feasibility beyond the current 22-POI
-dataset</em>) untuk penskalaan komputasi basis data di luar korpus 22
-POI saat ini. Namun demikian, penelitian ini tidak menyimpulkan kesiapan
-metropolitan instan, karena implementasi metropolitan perkotaan penuh
-memerlukan pengujian beban konkurensi multi-pengguna skala besar,
-pengindeksan spasial lanjutan dengan analisis <em>query execution
-plan</em> (EXPLAIN) terperinci, dan topologi jaringan yang lebih
-kompleks.</p>
+moderat pada rentang dataset sintetis yang diuji</strong>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>22</mn></mrow><annotation encoding="application/x-tex">N = 22</annotation></semantics></math>
+hingga
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>10.000</mn></mrow><annotation encoding="application/x-tex">N = 10.000</annotation></semantics></math>
+POI, dari rata-rata 0,57 ms menjadi 6,11 ms; p95 sebesar 10,14 ms).
+Dibandingkan latensi kumulatif dua panggilan inferensi LLM (~1.338 ms),
+komputasi spasial relasional menyerap kurang dari 1,5% dari total waktu
+respons bahkan pada 10.000 destinasi. Hasil empiris ini mengindikasikan
+kelayakan teknis (<em>the results suggest technical feasibility beyond
+the current 22-POI dataset</em>) untuk penskalaan komputasi basis data
+di luar korpus 22 POI saat ini. Namun demikian, penelitian ini tidak
+menyimpulkan kesiapan metropolitan instan, karena implementasi
+metropolitan perkotaan penuh memerlukan pengujian beban konkurensi
+multi-pengguna skala besar, pengindeksan spasial lanjutan dengan
+analisis <em>query execution plan</em> (EXPLAIN) terperinci, dan
+topologi jaringan yang lebih kompleks.</p>
 <h3
 id="evaluasi-usability-dan-efisiensi-kognitif-pengguna-sus-dan-tct">6.5
 Evaluasi Usability dan Efisiensi Kognitif Pengguna (SUS dan TCT)</h3>
@@ -5262,24 +5260,27 @@ Afnarius dkk. (2026) [2], evaluasi empiris terhadap pengalaman pengguna
 (<em>user experience</em>) dilakukan untuk mengukur reduksi beban
 kognitif dan kepuasan pengguna.</p>
 <p><strong>1. Partisipan dan Karakteristik Demografi:</strong><br />
-Pengujian melibatkan <span class="math inline">\(N = 30\)</span>
+Pengujian melibatkan
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>30</mn></mrow><annotation encoding="application/x-tex">N = 30</annotation></semantics></math>
 responden independen (16 laki-laki atau 53,33% dan 14 perempuan atau
-46,67%; rentang usia 20–38 tahun, rata-rata <span
-class="math inline">\(24,6 \pm 4,2\)</span> tahun). Responden
-merepresentasikan dua sub-populasi target: 18 mahasiswa perguruan tinggi
-di Kota Padang (generasi muda akrab teknologi) dan 12 wisatawan mandiri
-(<em>independent travelers</em>) yang sedang berkunjung ke Kota Padang
-dari luar daerah (Riau, Jambi, Sumatera Utara, dan Jakarta).</p>
+46,67%; rentang usia 20–38 tahun, rata-rata
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn><mo>,</mo><mn>6</mn><mo>±</mo><mn>4</mn><mo>,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">24,6 \pm 4,2</annotation></semantics></math>
+tahun). Responden merepresentasikan dua sub-populasi target: 18
+mahasiswa perguruan tinggi di Kota Padang (generasi muda akrab
+teknologi) dan 12 wisatawan mandiri (<em>independent travelers</em>)
+yang sedang berkunjung ke Kota Padang dari luar daerah (Riau, Jambi,
+Sumatera Utara, dan Jakarta).</p>
 <p><strong>2. Rekrutmen dan Kriteria Inklusi (<em>Recruitment &amp;
 Inclusion Criteria</em>):</strong><br />
 Rekrutmen dilakukan secara sukarela melalui pengumuman terbuka di
 lingkungan kampus dan pusat informasi pariwisata. Kriteria inklusi
-meliputi: (a) pengguna aktif ponsel cerdas dengan frekuensi harian <span
-class="math inline">\(\ge 3\)</span> jam; (b) berpengalaman menggunakan
-aplikasi peta digital (Google Maps, OpenStreetMap, Apple Maps) minimal 1
-kali dalam sebulan terakhir; (c) belum pernah melihat struktur basis
-data atau antarmuka prototipe sistem sebelumnya (<em>unbiased
-baseline</em>); dan (d) fasih berbahasa Indonesia.</p>
+meliputi: (a) pengguna aktif ponsel cerdas dengan frekuensi harian
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\ge 3</annotation></semantics></math>
+jam; (b) berpengalaman menggunakan aplikasi peta digital (Google Maps,
+OpenStreetMap, Apple Maps) minimal 1 kali dalam sebulan terakhir; (c)
+belum pernah melihat struktur basis data atau antarmuka prototipe sistem
+sebelumnya (<em>unbiased baseline</em>); dan (d) fasih berbahasa
+Indonesia.</p>
 <p><strong>3. Desain Eksperimen dan Penyeimbangan Urutan
 (<em>Within-Subjects &amp; Counterbalancing</em>):</strong><br />
 Pengujian mengadopsi desain <em>within-subjects</em> (pengukuran
@@ -5292,15 +5293,19 @@ Layer</em> yang diusulkan).<br />
 Guna memitigasi bias efek urutan (<em>order effect</em>), efek transfer
 pembelajaran (<em>learning effect</em>), dan kelelahan kognitif
 (<em>cognitive fatigue</em>), diterapkan skema <em>Latin Square
-Counterbalancing</em>: - <strong>Kelompok 1 (<span
-class="math inline">\(N = 15\)</span> responden):</strong> Menguji
-Antarmuka A (WIMP) terlebih dahulu <span
-class="math inline">\(\to\)</span> jeda istirahat 15 menit <span
-class="math inline">\(\to\)</span> menguji Antarmuka B (Chat AI). -
-<strong>Kelompok 2 (<span class="math inline">\(N = 15\)</span>
-responden):</strong> Menguji Antarmuka B (Chat AI) terlebih dahulu <span
-class="math inline">\(\to\)</span> jeda istirahat 15 menit <span
-class="math inline">\(\to\)</span> menguji Antarmuka A (WIMP).</p>
+Counterbalancing</em>: - <strong>Kelompok 1
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">N = 15</annotation></semantics></math>
+responden):</strong> Menguji Antarmuka A (WIMP) terlebih dahulu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+jeda istirahat 15 menit
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+menguji Antarmuka B (Chat AI). - <strong>Kelompok 2
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">N = 15</annotation></semantics></math>
+responden):</strong> Menguji Antarmuka B (Chat AI) terlebih dahulu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+jeda istirahat 15 menit
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+menguji Antarmuka A (WIMP).</p>
 <p><strong>4. Skenario Tugas Terstandarisasi (<em>Standardized
 Tasks</em>):</strong><br />
 Responden diuji untuk menyelesaikan tiga tugas perencanaan perjalanan: *
@@ -5309,8 +5314,9 @@ wisata pantai di Kota Padang. * <strong>Tugas 2 (Kueri Kedekatan
 Spasial):</strong> Menemukan kuliner khas Minangkabau dalam radius 5 km
 dari lokasi saat ini. * <strong>Tugas 3 (Perencanaan Multi-Kriteria
 Kompleks):</strong> Menemukan destinasi alam dengan tiket gratis (Rp0)
-atau <span class="math inline">\(\le \text{Rp15.000}\)</span> yang
-sedang beroperasi buka saat ini dalam radius 10 km.</p>
+atau
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mtext mathvariant="normal">Rp15.000</mtext></mrow><annotation encoding="application/x-tex">\le \text{Rp15.000}</annotation></semantics></math>
+yang sedang beroperasi buka saat ini dalam radius 10 km.</p>
 <p><strong>5. Pengukuran Waktu Penyelesaian Tugas (<em>TCT
 Measurement</em>):</strong><br />
 Waktu penyelesaian tugas (<em>Task Completion Time</em> / TCT) diukur
@@ -5398,34 +5404,38 @@ SUS):</strong><br />
 Setelah menyelesaikan seluruh tugas, responden mengisi kuesioner baku
 <em>System Usability Scale</em> (Brooke, 1996) yang terdiri atas 10
 butir pertanyaan skala Likert 5-poin. Skor komposit SUS dihitung
-menggunakan formula standar: <span class="math display">\[\text{Skor
-Item Ganjil } (X_i) = R_i - 1 \quad (\text{untuk } i \in \{1, 3, 5, 7,
-9\})\]</span> <span class="math display">\[\text{Skor Item Genap } (Y_j)
-= 5 - R_j \quad (\text{untuk } j \in \{2, 4, 6, 8, 10\})\]</span> <span
-class="math display">\[\text{Skor Komposit SUS} = 2.5 \times \left(
-\sum_{i} X_i + \sum_{j} Y_j \right)\]</span> Sistem yang diusulkan
-meraih skor rata-rata SUS sebesar <strong>84,25 ± 6,80</strong> (median
-= 85,00; rentang skor minimum 72,50 hingga maksimum 97,50). Berdasarkan
-kriteria evaluasi Bangor, Kortum, dan Miller (2008, 2009), skor 84,25
-berada pada peringkat persentil <span class="math inline">\(&gt;
-96\%\)</span>, Grade “A”, dengan predikat <em>“Excellent”</em>.</p>
+menggunakan formula standar:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Skor Item Ganjil </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>R</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mtext mathvariant="normal">untuk </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>7</mn><mo>,</mo><mn>9</mn><mo stretchy="false" form="postfix">}</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Skor Item Ganjil } (X_i) = R_i - 1 \quad (\text{untuk } i \in \{1, 3, 5, 7, 9\})</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Skor Item Genap </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>5</mn><mo>−</mo><msub><mi>R</mi><mi>j</mi></msub><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mtext mathvariant="normal">untuk </mtext><mspace width="0.333em"></mspace></mrow><mi>j</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>6</mn><mo>,</mo><mn>8</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">}</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Skor Item Genap } (Y_j) = 5 - R_j \quad (\text{untuk } j \in \{2, 4, 6, 8, 10\})</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Skor Komposit SUS</mtext><mo>=</mo><mn>2.5</mn><mo>×</mo><mrow><mo stretchy="true" form="prefix">(</mo><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>X</mi><mi>i</mi></msub><mo>+</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>Y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Skor Komposit SUS} = 2.5 \times \left( \sum_{i} X_i + \sum_{j} Y_j \right)</annotation></semantics></math>
+Sistem yang diusulkan meraih skor rata-rata SUS sebesar <strong>84,25 ±
+6,80</strong> (median = 85,00; rentang skor minimum 72,50 hingga
+maksimum 97,50). Berdasarkan kriteria evaluasi Bangor, Kortum, dan
+Miller (2008, 2009), skor 84,25 berada pada peringkat persentil
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>96</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">&gt; 96\%</annotation></semantics></math>,
+Grade “A”, dengan predikat <em>“Excellent”</em>.</p>
 <p><strong>7. Uji Signifikansi Statistik Inferensial:</strong><br />
 - Uji normalitas selisih TCT menggunakan <em>Shapiro-Wilk test</em>
-menghasilkan nilai <span class="math inline">\(W = 0,968\)</span> (<span
-class="math inline">\(p = 0,482 &gt; 0,05\)</span>), mengonfirmasi bahwa
-data selisih berdistribusi normal. - Uji beda parametrik
-<em>paired-samples t-test</em> menunjukkan bahwa reduksi durasi waktu
-penyelesaian tugas antara WIMP (<span class="math inline">\(37,11 \pm
-5,73\)</span> s) dan Chat AI (<span class="math inline">\(6,52 \pm
-1,14\)</span> s) terbukti signifikan secara statistik: <span
-class="math inline">\(t(29) = 28,42\)</span>, <span
-class="math inline">\(p &lt; 0,001\)</span>. Ukuran efek diukur
-menggunakan <em>Cohen’s d</em> sebesar <strong>5,19</strong> (kategori
-efek luar biasa besar / <em>huge effect size</em>). - Uji non-parametrik
-<em>Wilcoxon signed-rank test</em> memperkuat temuan ini dengan nilai
-<span class="math inline">\(Z = -4,78\)</span> (<span
-class="math inline">\(p &lt; 0,001\)</span>), menegaskan konsistensi
-keunggulan efisiensi antarmuka percakapan pada seluruh responden.</p>
+menghasilkan nilai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>968</mn></mrow><annotation encoding="application/x-tex">W = 0,968</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>482</mn><mo>&gt;</mo><mn>0</mn><mo>,</mo><mn>05</mn></mrow><annotation encoding="application/x-tex">p = 0,482 &gt; 0,05</annotation></semantics></math>),
+mengonfirmasi bahwa data selisih berdistribusi normal. - Uji beda
+parametrik <em>paired-samples t-test</em> menunjukkan bahwa reduksi
+durasi waktu penyelesaian tugas antara WIMP
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>37</mn><mo>,</mo><mn>11</mn><mo>±</mo><mn>5</mn><mo>,</mo><mn>73</mn></mrow><annotation encoding="application/x-tex">37,11 \pm 5,73</annotation></semantics></math>
+s) dan Chat AI
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mo>,</mo><mn>52</mn><mo>±</mo><mn>1</mn><mo>,</mo><mn>14</mn></mrow><annotation encoding="application/x-tex">6,52 \pm 1,14</annotation></semantics></math>
+s) terbukti signifikan secara statistik:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>29</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>28</mn><mo>,</mo><mn>42</mn></mrow><annotation encoding="application/x-tex">t(29) = 28,42</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>&lt;</mo><mn>0</mn><mo>,</mo><mn>001</mn></mrow><annotation encoding="application/x-tex">p &lt; 0,001</annotation></semantics></math>.
+Ukuran efek diukur menggunakan <em>Cohen’s d</em> sebesar
+<strong>5,19</strong> (kategori efek luar biasa besar / <em>huge effect
+size</em>). - Uji non-parametrik <em>Wilcoxon signed-rank test</em>
+memperkuat temuan ini dengan nilai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>=</mo><mo>−</mo><mn>4</mn><mo>,</mo><mn>78</mn></mrow><annotation encoding="application/x-tex">Z = -4,78</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>&lt;</mo><mn>0</mn><mo>,</mo><mn>001</mn></mrow><annotation encoding="application/x-tex">p &lt; 0,001</annotation></semantics></math>),
+menegaskan konsistensi keunggulan efisiensi antarmuka percakapan pada
+seluruh responden.</p>
 <p><strong>8. Kelaikan Etik Penelitian (<em>Research Ethics
 Clearance</em>):</strong><br />
 Protokol eksperimen evaluasi usability telah melalui telaah dan
@@ -5660,9 +5670,10 @@ gratis Rp0 sebagai himpunan bagian pagu Rp10.000.</td>
 <td><strong>B. Dialek Lokal Minang</strong></td>
 <td><code>MIN-01</code>: <em>Pantai nan rancak dakek siko</em></td>
 <td><em>“Pantai nan rancak dakek siko”</em></td>
-<td>Pemetaan kolokial Minang: <code>rancak</code> <span
-class="math inline">\(\to\)</span> <code>sort = terbaik</code>,
-<code>dakek siko</code> <span class="math inline">\(\to\)</span>
+<td>Pemetaan kolokial Minang: <code>rancak</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>sort = terbaik</code>, <code>dakek siko</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>spatial_operator = nearest</code>, koordinat pengguna.</td>
 <td style="text-align: center;"><strong>LULUS (100%
 Presisi)</strong></td>
@@ -5671,8 +5682,9 @@ Presisi)</strong></td>
 <td></td>
 <td><code>MIN-02</code>: <em>Tampek makan lamak</em></td>
 <td><em>“Tampek makan lamak yang dakek”</em></td>
-<td>Pemetaan kolokial Minang: <code>tampek makan lamak</code> <span
-class="math inline">\(\to\)</span> <code>category = Kuliner</code>,
+<td>Pemetaan kolokial Minang: <code>tampek makan lamak</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>category = Kuliner</code>,
 <code>spatial_operator = nearest</code>.</td>
 <td style="text-align: center;"><strong>LULUS (100%
 Presisi)</strong></td>
@@ -5681,9 +5693,10 @@ Presisi)</strong></td>
 <td></td>
 <td><code>MIN-03</code>: <em>Aia tajun free</em></td>
 <td><em>“Aia tajun free yang dakek dari siko”</em></td>
-<td>Pemetaan kolokial Minang: <code>aia tajun</code> <span
-class="math inline">\(\to\)</span> <code>category = Alam</code>,
-<code>free</code> <span class="math inline">\(\to\)</span>
+<td>Pemetaan kolokial Minang: <code>aia tajun</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>category = Alam</code>, <code>free</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>is_free = true</code>,
 <code>spatial_operator = nearest</code>.</td>
 <td style="text-align: center;"><strong>LULUS (100%
@@ -5693,9 +5706,10 @@ Presisi)</strong></td>
 <td></td>
 <td><code>MIN-04</code>: <em>Pulau snorkeling nan rancak</em></td>
 <td><em>“Pulau untuak snorkeling nan rancak”</em></td>
-<td>Pemetaan kolokial Minang: <code>pulau</code> <span
-class="math inline">\(\to\)</span> <code>category = Pulau</code>,
-<code>rancak</code> <span class="math inline">\(\to\)</span>
+<td>Pemetaan kolokial Minang: <code>pulau</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>category = Pulau</code>, <code>rancak</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>sort = terbaik</code>.</td>
 <td style="text-align: center;"><strong>LULUS (100%
 Presisi)</strong></td>
@@ -6196,8 +6210,8 @@ B: Spesifikasi Kontrak Sistem Lengkap untuk Perangkaian Narasi
 Ter-Grounding (Grounded NLG Contract)</h3>
 <p>Berikut adalah teks <em>system prompt</em> lengkap yang diinjeksikan
 pada Lapisan 5 (<em>Grounded Response Layer</em>) bersama himpunan fakta
-(<span class="math inline">\(F\)</span>) hasil eksekusi kueri basis data
-relasional:</p>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>)
+hasil eksekusi kueri basis data relasional:</p>
 <pre><code>Kamu adalah asisten cerdas Web GIS Pariwisata Kota Padang.
 Tugasmu adalah menjawab pertanyaan pengguna HANYA berdasarkan daftar data fakta resmi JSON terlampir.
 

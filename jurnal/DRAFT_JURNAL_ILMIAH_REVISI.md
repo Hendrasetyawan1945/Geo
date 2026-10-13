@@ -401,7 +401,7 @@ Evaluasi kinerja sistem diuji secara empiris menggunakan **40 skenario percakapa
 | | *Operational & Cost Constraint Match* | **100,00% (40/40)** | ≥ 95,00% | Memenuhi Standar |
 | **Level 3: Grounding Verification**| *Entity Fabrication Rate* | **0,00% (0/40)** | 0,00% | Sempurna (*0 POI Palsu Teramati*) |
 | | *Unsupported Claim Rate* | **0,00% (0/40)** | ≤ 2,50% | Sempurna (*Strict Contract*) |
-| | *Claim-Level Grounding Fidelity (GF)* | **100,00% (304/304 klaim)** | ≥ 97,50% | Sempurna (*4 Kategori Terverifikasi*) |
+| | *Claim-Level Grounding Fidelity (GF)* | **100,00% (270/270 klaim)** | ≥ 97,50% | Sempurna (*4 Kategori Terverifikasi*) |
 | | *Scenario Grounding Pass Rate* | **100,00% (40/40 skenario)** | ≥ 95,00% | Sempurna |
 | | *Honest Rejection Rate* | **100,00% (2/2)** | 100,00% | Sempurna (*0 Pelanggaran Grounding Teramati*) |
 

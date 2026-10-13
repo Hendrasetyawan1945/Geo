@@ -320,6 +320,15 @@ li {
 .math {
     font-family: "Cambria Math", "Times New Roman", serif;
 }
+math {
+    font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", "Times New Roman", serif;
+    font-size: 1.05em;
+}
+math[display="block"] {
+    display: block;
+    text-align: center;
+    margin: 1em 0;
+}
 """
 
 def convert_md_to_pdf(md_filename, pdf_filename, is_journal=False):
@@ -329,12 +338,12 @@ def convert_md_to_pdf(md_filename, pdf_filename, is_journal=False):
 
     print(f"[*] Processing {md_filename} -> {pdf_filename}...")
 
-    # Step 1: Pandoc MD to HTML
+    # Step 1: Pandoc MD to HTML with native MathML rendering (eliminates raw unrendered LaTeX)
     cmd_pandoc = [
         "pandoc",
         md_path,
         "-s",
-        "--mathjax",
+        "--mathml",
         "--metadata", "title=",
         "-o", html_path
     ]

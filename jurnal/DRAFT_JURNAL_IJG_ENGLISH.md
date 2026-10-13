@@ -860,7 +860,7 @@ An empirical ablation study was conducted to isolate the contribution of each la
 | **A: Direct LLM (NL → Answer)** | Partial | None | 0.00% | 35.00% | 42.50% |
 | **B: LLM-to-SQL (NL → SQL → DB → Answer)** | 72.50% | Injection-Prone | 67.50% | 82.50% | 15.00% |
 | **C: SIR without Validator (NL → SIR → SQL → DB → NLG)** | 100.00% | Partial | 90.00% | 95.00% | 2.50% |
-| **D: Proposed Full Architecture (SIR + Validator + Compiler + Grounding)** | **92.50% (Field: 99.25%)** | **Enforced (Safety Invariant)** | **100.00% (Overall: 100.00%)** | **100.00% (304/304 claims)** | **0.00% (0 Fabricated POIs)** |
+| **D: Proposed Full Architecture (SIR + Validator + Compiler + Grounding)** | **100.00% (Field: 100.00%)** | **Enforced (Safety Invariant)** | **100.00% (Overall: 100.00%)** | **100.00% (270/270 claims)** | **0.00% (0 Fabricated POIs)** |
 
 The ablation results confirm that:
 1. Removing the validation layer (*Configuration C*) reduces spatial predicate correctness to 90.00% because out-of-bound parameters leak into query execution.
@@ -886,7 +886,7 @@ To rigorously measure individual layer contributions, the ablation analysis isol
 | System Handling Policy | Module / Pipeline Component | Performance Without Policy | Performance With Active Policy | Impact on Usability & System Reliability |
 |---|---|---|---|---|
 | **Spatial Fallback Policy** | Dynamic Radius Expansion ($10\text{ km} \to 25\text{ km}$) | 62.50% Zero-Result Drop Rate (User deadlock with zero alternatives) | **100.00% Spatial Transparency** (Automatically expands search scope if too narrow) | Resolves conversational deadlocks while observing zero fabricated entities across evaluated scenarios |
-| **Claim-Level Grounding Validator** | Algorithmic Grounding Engine ($GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}$) | 15.00% Attribute Claim Deviation (Hidden price & spatial distance errors) | **100.00% Grounding Fidelity (304/304 claims) & 0.00% Fabricated POIs** (Verifies price, hours, distance, and entity names) | Validates quantitative factual correctness before payload dispatch to browser client |
+| **Claim-Level Grounding Validator** | Algorithmic Grounding Engine ($GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}$) | 15.00% Attribute Claim Deviation (Hidden price & spatial distance errors) | **100.00% Grounding Fidelity (270/270 claims) & 0.00% Fabricated POIs** (Verifies price, hours, distance, and entity names) | Validates quantitative factual correctness before payload dispatch to browser client |
 
 To provide scientific transparency through rigorous pairwise comparisons and isolate specific real-world failure manifestations, Table 7c details the pairwise breakdown of the complete system against ablation variants and baselines, documenting failure counts, observed incident exemplars, latency overheads, and false rejection consequences.
 

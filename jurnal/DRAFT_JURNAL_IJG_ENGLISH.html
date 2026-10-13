@@ -226,9 +226,6 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="/usr/share/javascript/mathjax/MathJax.js"
-  type="text/javascript"></script>
 <style>
 
 @page {
@@ -544,6 +541,15 @@ li {
 .math {
     font-family: "Cambria Math", "Times New Roman", serif;
 }
+math {
+    font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", "Times New Roman", serif;
+    font-size: 1.05em;
+}
+math[display="block"] {
+    display: block;
+    text-align: center;
+    margin: 1em 0;
+}
 
 </style>
 </head>
@@ -578,25 +584,25 @@ spatial-temporal predicates. Expanding upon the research lineage of
 <strong>Reliability-Controlled Conversational Spatial Information
 System</strong> governed by an architectural framework of <strong>Dual
 Control Boundaries</strong>: (1) a <strong>Semantic Control
-Boundary</strong> (<span class="math inline">\(\text{LLM} \to \text{SIR}
-\to \text{6D SirValidator} \to \text{CSIR} \to \text{deterministic
-spatial query compiler}\)</span>) enforcing the <em>No Intent
-Alteration</em> principle (rejecting negative distances or illegal
-operators with <code>isValid = false</code> and execution policy
+Boundary</strong>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">LLM</mtext><mo>→</mo><mtext mathvariant="normal">SIR</mtext><mo>→</mo><mtext mathvariant="normal">6D SirValidator</mtext><mo>→</mo><mtext mathvariant="normal">CSIR</mtext><mo>→</mo><mtext mathvariant="normal">deterministic spatial query compiler</mtext></mrow><annotation encoding="application/x-tex">\text{LLM} \to \text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to \text{deterministic spatial query compiler}</annotation></semantics></math>)
+enforcing the <em>No Intent Alteration</em> principle (rejecting
+negative distances or illegal operators with
+<code>isValid = false</code> and execution policy
 <code>clarify_user</code> rather than silent mutation) and safety
 invariants (<code>!isValid || isOutOfScope</code> aborts SQL
 compilation), preventing invalid, out-of-scope, or mutated semantic
 intent from reaching spatial execution; and (2) an <strong>Evidence
-Control Boundary</strong> (<span class="math inline">\(\text{SQL
-database facts } (F) \to \text{grounded NLG} \to \text{claim-level
-grounding validator}\)</span>) that anchors all factual truth to a
-relational MySQL 8.0 database via native <code>ST_Distance_Sphere</code>
-spherical spatial computations and OSRM road navigation, subsequently
-verifying generated narratives through an algorithmic claim-level
-grounding validator with a fail-closed fallback policy, auditing factual
-claim concordance across the four defined closed-world schema dimensions
-before narrative presentation to the user. Empirical 4-layer evaluation
-across 40 standardized benchmark query scenarios on 22 curated tourism
+Control Boundary</strong>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">SQL database facts </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mtext mathvariant="normal">grounded NLG</mtext><mo>→</mo><mtext mathvariant="normal">claim-level grounding validator</mtext></mrow><annotation encoding="application/x-tex">\text{SQL database facts } (F) \to \text{grounded NLG} \to \text{claim-level grounding validator}</annotation></semantics></math>)
+that anchors all factual truth to a relational MySQL 8.0 database via
+native <code>ST_Distance_Sphere</code> spherical spatial computations
+and OSRM road navigation, subsequently verifying generated narratives
+through an algorithmic claim-level grounding validator with a
+fail-closed fallback policy, auditing factual claim concordance across
+the four defined closed-world schema dimensions before narrative
+presentation to the user. Empirical 4-layer evaluation across 40
+standardized benchmark query scenarios on 22 curated tourism
 destinations in Padang City, complemented by an automated test suite of
 <strong>56 automated unit, integration, and adversarial tests (240
 assertions, 100% pass)</strong>, demonstrated a Pure Intent Pre-Fallback
@@ -741,14 +747,12 @@ validated CSIR objects into secure, parameterized SQL via the native
 relational database as the sole source of spatial truth. 5.
 <strong>Algorithmic Claim-Level Grounding Validator &amp; Empirical
 Evaluation Framework:</strong> A formal post-generation verification
-firewall verifying all factual claims across 4 sub-dimensions (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
-\mathcal{C}_{\text{temporal}}\)</span>), demonstrating 100.00% Grounding
-Fidelity with zero fabricated POIs observed across 40 evaluated
-benchmark scenarios, supported by an automated test suite of 56 unit,
-integration, and adversarial tests (240 assertions, 100% pass) and
-multi-baseline ablation studies.</p>
+firewall verifying all factual claims across 4 sub-dimensions
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>),
+demonstrating 100.00% Grounding Fidelity with zero fabricated POIs
+observed across 40 evaluated benchmark scenarios, supported by an
+automated test suite of 56 unit, integration, and adversarial tests (240
+assertions, 100% pass) and multi-baseline ablation studies.</p>
 <hr />
 <hr />
 <h2 id="related-work">2. RELATED WORK</h2>
@@ -798,15 +802,16 @@ document chunks effectively mitigates unsupported text generation [30].
 However, in urban geospatial environments governed by multi-criteria
 constraints (such as spherical distance radii, budgetary limits, and
 circadian opening schedules), vector RAG fundamentally fails. Vector
-embeddings cannot evaluate exact mathematical inequalities (<span
-class="math inline">\(d \le 10\text{ km}\)</span>, <span
-class="math inline">\(\text{price} \le 15,000\)</span>). Furthermore,
-post-generation hallucination mitigation relying on secondary LLM judges
-(<em>LLM-as-a-judge</em>) introduces additional stochastic noise and
-excessive latency overhead. This research introduces a deterministic,
-rule-based algorithmic verification firewall (<em>Claim-Level Grounding
-Validator</em>) that mathematically audits every generated factual claim
-against database tuples without secondary generative models.</p>
+embeddings cannot evaluate exact mathematical inequalities
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>≤</mo><mn>10</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">d \le 10\text{ km}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">price</mtext><mo>≤</mo><mn>15</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">\text{price} \le 15,000</annotation></semantics></math>).
+Furthermore, post-generation hallucination mitigation relying on
+secondary LLM judges (<em>LLM-as-a-judge</em>) introduces additional
+stochastic noise and excessive latency overhead. This research
+introduces a deterministic, rule-based algorithmic verification firewall
+(<em>Claim-Level Grounding Validator</em>) that mathematically audits
+every generated factual claim against database tuples without secondary
+generative models.</p>
 <h3 id="constraint-based-spatial-recommendation-systems">2.4
 Constraint-Based Spatial Recommendation Systems</h3>
 <p>Within the taxonomy of tourism retrieval and decision support systems
@@ -839,10 +844,11 @@ travelers without requiring computationally heavy analytical
 optimization models. However, <em>DTExplorer</em> relied on a
 conventional WIMP (<em>Windows, Icons, Menus, Pointer</em>) interface
 utilizing HTML dropdowns and radius sliders, employed a planar Euclidean
-approximation (<span class="math inline">\(\text{ST\_Distance} \times
-111.32\)</span>), and explicitly identified the need for future research
-in conversational interfaces, multi-criteria temporal/budgetary
-filtering, and millisecond-level technical performance benchmarking. 2.
+approximation
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">ST_Distance</mtext><mo>×</mo><mn>111.32</mn></mrow><annotation encoding="application/x-tex">\text{ST\_Distance} \times 111.32</annotation></semantics></math>),
+and explicitly identified the need for future research in conversational
+interfaces, multi-criteria temporal/budgetary filtering, and
+millisecond-level technical performance benchmarking. 2.
 <strong>Kustomrut (Afnarius et al.):</strong> Advanced user-controlled
 spatial itinerary customization, enabling tourists to plan travel
 sequences interactively via Google Directions API. 3. <strong>Present
@@ -850,29 +856,24 @@ Study (Reliability-Controlled Conversational Spatial Information
 System):</strong> Directly elevates and expands this paradigm into
 reliable, city-scale AI-mediated spatial querying across Padang City
 (694.96 km²). This research trajectory represents a progressive
-scientific lineage: <span class="math display">\[\text{DTExplorer [WIMP
-Spatial Exploration]} \longrightarrow \text{Kustomrut [User-Controlled
-Itinerary]} \longrightarrow \text{Conversational Web GIS
-[Natural-Language Spatial Intent]} \longrightarrow
-\text{Reliability-Controlled Dual Boundaries}\]</span></p>
+scientific lineage:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">DTExplorer [WIMP Spatial Exploration]</mtext><mo>→</mo><mtext mathvariant="normal">Kustomrut [User-Controlled Itinerary]</mtext><mo>→</mo><mtext mathvariant="normal">Conversational Web GIS [Natural-Language Spatial Intent]</mtext><mo>→</mo><mtext mathvariant="normal">Reliability-Controlled Dual Boundaries</mtext></mrow><annotation encoding="application/x-tex">\text{DTExplorer [WIMP Spatial Exploration]} \longrightarrow \text{Kustomrut [User-Controlled Itinerary]} \longrightarrow \text{Conversational Web GIS [Natural-Language Spatial Intent]} \longrightarrow \text{Reliability-Controlled Dual Boundaries}</annotation></semantics></math></p>
 <p>The scientific novelty of this work <strong>does not lie in merely
 superimposing a chatbot interface onto a digital map</strong>, but
 rather in a fundamental <strong>interaction and control paradigm
 shift</strong>: establishing a <strong>Reliability-Controlled
 Conversational Spatial Information System</strong> governed by two
 explicit architectural control mechanisms: - <strong>Semantic Control
-Boundary:</strong> <span class="math inline">\(\text{LLM} \to \text{SIR}
-\to \text{6D SirValidator} \to \text{CSIR} \to \text{Deterministic
-Spatial Query Compiler}\)</span>. Its objective is to prevent invalid,
-out-of-scope, or silently mutated semantic intent from ever reaching the
-spatial database execution engine, enforcing the <em>No Intent
-Alteration</em> principle and safety invariants. - <strong>Evidence
-Control Boundary:</strong> <span class="math inline">\(\text{SQL Facts }
-(F) \to \text{Grounded NLG} \to \text{Claim-Level Grounding Validator}
-\to \text{Fail-Closed Fallback}\)</span>. Its objective is to prevent
-ungrounded or fabricated factual claims from reaching the final user
-response, verifying every factual claim against the underlying database
-result set.</p>
+Boundary:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">LLM</mtext><mo>→</mo><mtext mathvariant="normal">SIR</mtext><mo>→</mo><mtext mathvariant="normal">6D SirValidator</mtext><mo>→</mo><mtext mathvariant="normal">CSIR</mtext><mo>→</mo><mtext mathvariant="normal">Deterministic Spatial Query Compiler</mtext></mrow><annotation encoding="application/x-tex">\text{LLM} \to \text{SIR} \to \text{6D SirValidator} \to \text{CSIR} \to \text{Deterministic Spatial Query Compiler}</annotation></semantics></math>.
+Its objective is to prevent invalid, out-of-scope, or silently mutated
+semantic intent from ever reaching the spatial database execution
+engine, enforcing the <em>No Intent Alteration</em> principle and safety
+invariants. - <strong>Evidence Control Boundary:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">SQL Facts </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mtext mathvariant="normal">Grounded NLG</mtext><mo>→</mo><mtext mathvariant="normal">Claim-Level Grounding Validator</mtext><mo>→</mo><mtext mathvariant="normal">Fail-Closed Fallback</mtext></mrow><annotation encoding="application/x-tex">\text{SQL Facts } (F) \to \text{Grounded NLG} \to \text{Claim-Level Grounding Validator} \to \text{Fail-Closed Fallback}</annotation></semantics></math>.
+Its objective is to prevent ungrounded or fabricated factual claims from
+reaching the final user response, verifying every factual claim against
+the underlying database result set.</p>
 <p>Within the taxonomy of information retrieval and decision support
 systems, the proposed system is formally characterized as a
 <strong>constraint-based conversational spatial recommendation / spatial
@@ -946,13 +947,9 @@ Boundaries</strong>:</p>
                 (Leaflet.js + OSRM Route)</code></pre>
 <p>The system operates across two discrete, mathematically and
 algorithmically formalized control boundaries: 1. <strong>The Semantic
-Control Boundary (<span
-class="math inline">\(\mathcal{B}_{\text{semantic}}\)</span>):</strong>
-<span class="math display">\[\mathcal{B}_{\text{semantic}}:
-\text{LLM}(NL) \longrightarrow \mathcal{S}_{\text{raw}}
-\xrightarrow[\text{No Intent
-Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}}
-\xrightarrow{\text{Compiler}} \text{SQL}_{\text{parameterized}}\]</span>
+Control Boundary
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℬ</mi><mtext mathvariant="normal">semantic</mtext></msub><annotation encoding="application/x-tex">\mathcal{B}_{\text{semantic}}</annotation></semantics></math>):</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℬ</mi><mtext mathvariant="normal">semantic</mtext></msub><mo>:</mo><mtext mathvariant="normal">LLM</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mi>L</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><munderover><mo>→</mo><mtext mathvariant="normal">No Intent Alteration</mtext><msub><mtext mathvariant="normal">SirValidator</mtext><mtext mathvariant="normal">6-D</mtext></msub></munderover><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><mover><mo>→</mo><mtext mathvariant="normal">Compiler</mtext></mover><msub><mtext mathvariant="normal">SQL</mtext><mtext mathvariant="normal">parameterized</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{B}_{\text{semantic}}: \text{LLM}(NL) \longrightarrow \mathcal{S}_{\text{raw}} \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}_{\text{parameterized}}</annotation></semantics></math>
 This boundary isolates the non-deterministic, probabilistic language
 model from relational database operations. User utterances are parsed
 into an intermediate, typed Spatial Intent Representation (SIR). The
@@ -964,69 +961,62 @@ the validator refuses silent mutation, returning a structured
 clarification demand. Invariant violations
 (<code>!isValid || isOutOfScope</code>) halt query compilation,
 guaranteeing that unverified or mutated intent never penetrates the
-database engine. 2. <strong>The Evidence Control Boundary (<span
-class="math inline">\(\mathcal{B}_{\text{evidence}}\)</span>):</strong>
-<span class="math display">\[\mathcal{B}_{\text{evidence}}: F
-\longrightarrow \text{Grounded NLG}
-\xrightarrow[\text{Fail-Closed}]{\text{Claim-Level Validator}}
-\text{Response}_{\text{verified}}\]</span> This boundary governs the
-natural language synthesis of final user responses. The deterministic
-spatial engine (MySQL 8.0 <code>ST_Distance_Sphere</code>) executes
-parameterized SQL queries, yielding an immutable relational fact set
-<span class="math inline">\(F\)</span>. Grounded NLG is constrained by a
-strict system prompt contract prohibiting ungrounded inferences.
-Subsequently, an <em>Algorithmic Claim-Level Grounding Validator</em>
-audits the synthesized response across 4 distinct sub-dimensions (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
-\mathcal{C}_{\text{temporal}}\)</span>). If any ungrounded claim is
-detected (<span class="math inline">\(\exists c \notin F\)</span>), a
-deterministic fail-closed fallback is triggered, ensuring zero
+database engine. 2. <strong>The Evidence Control Boundary
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℬ</mi><mtext mathvariant="normal">evidence</mtext></msub><annotation encoding="application/x-tex">\mathcal{B}_{\text{evidence}}</annotation></semantics></math>):</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℬ</mi><mtext mathvariant="normal">evidence</mtext></msub><mo>:</mo><mi>F</mi><mo>→</mo><mtext mathvariant="normal">Grounded NLG</mtext><munderover><mo>→</mo><mtext mathvariant="normal">Fail-Closed</mtext><mtext mathvariant="normal">Claim-Level Validator</mtext></munderover><msub><mtext mathvariant="normal">Response</mtext><mtext mathvariant="normal">verified</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{B}_{\text{evidence}}: F \longrightarrow \text{Grounded NLG} \xrightarrow[\text{Fail-Closed}]{\text{Claim-Level Validator}} \text{Response}_{\text{verified}}</annotation></semantics></math>
+This boundary governs the natural language synthesis of final user
+responses. The deterministic spatial engine (MySQL 8.0
+<code>ST_Distance_Sphere</code>) executes parameterized SQL queries,
+yielding an immutable relational fact set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>.
+Grounded NLG is constrained by a strict system prompt contract
+prohibiting ungrounded inferences. Subsequently, an <em>Algorithmic
+Claim-Level Grounding Validator</em> audits the synthesized response
+across 4 distinct sub-dimensions
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>).
+If any ungrounded claim is detected
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∃</mo><mi>c</mi><mo>∉</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\exists c \notin F</annotation></semantics></math>),
+a deterministic fail-closed fallback is triggered, ensuring zero
 ungrounded or fabricated claims reach the user.</p>
 <p>To guarantee spatial data integrity, this research enforces a strict
-architectural boundary: <span class="math display">\[\boxed{\text{LLM
-interprets natural-language semantics; Spatial DBMS computes
-deterministic spatial relations.}}\]</span> The generative language
-model possesses zero direct authority over the relational database. It
-is prohibited from generating raw SQL syntax, altering table or column
-definitions, or calculating distances internally. The LLM functions
-purely as an intermediate semantic parser.</p>
+architectural boundary:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mtext mathvariant="normal">LLM interprets natural-language semantics; Spatial DBMS computes deterministic spatial relations.</mtext></menclose><annotation encoding="application/x-tex">\boxed{\text{LLM interprets natural-language semantics; Spatial DBMS computes deterministic spatial relations.}}</annotation></semantics></math>
+The generative language model possesses zero direct authority over the
+relational database. It is prohibited from generating raw SQL syntax,
+altering table or column definitions, or calculating distances
+internally. The LLM functions purely as an intermediate semantic
+parser.</p>
 <h3 id="the-tripartite-correctness-framework">2.1.1 The Tripartite
 Correctness Framework</h3>
 <p>To establish rigorous scientific validation for conversational
 spatial systems, this research formalizes system correctness into three
 orthogonal, sequential dimensions: 1. <strong>Semantic Correctness
-(<span
-class="math inline">\(\mathcal{C}_{\text{semantic}}\)</span>):</strong>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">semantic</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{semantic}}</annotation></semantics></math>):</strong>
 Evaluates whether the LLM faithfully interprets the user’s
-natural-language utterance (<span class="math inline">\(NL\)</span>)
-into the typed canonical representation (<span
-class="math inline">\(CSIR\)</span>) without slot omissions or
-hallucinated constraints: <span
-class="math display">\[\mathcal{C}_{\text{semantic}}: NL \longrightarrow
-CSIR\]</span> 2. <strong>Spatial Execution Correctness (<span
-class="math inline">\(\mathcal{C}_{\text{spatial}}\)</span>):</strong>
+natural-language utterance
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">NL</annotation></semantics></math>)
+into the typed canonical representation
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">CSIR</annotation></semantics></math>)
+without slot omissions or hallucinated constraints:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">semantic</mtext></msub><mo>:</mo><mi>N</mi><mi>L</mi><mo>→</mo><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{semantic}}: NL \longrightarrow CSIR</annotation></semantics></math>
+2. <strong>Spatial Execution Correctness
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{spatial}}</annotation></semantics></math>):</strong>
 Evaluates whether the deterministic compiler and database engine
-transform the validated <span class="math inline">\(CSIR\)</span> into
-exact, mathematically sound spatial predicates executing natively on
-relational geometries: <span
-class="math display">\[\mathcal{C}_{\text{spatial}}: CSIR
-\longrightarrow \text{SQL} \longrightarrow \text{Spatial Result Set }
-(F)\]</span> 3. <strong>Grounding Correctness (<span
-class="math inline">\(\mathcal{C}_{\text{grounding}}\)</span>):</strong>
+transform the validated
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">CSIR</annotation></semantics></math>
+into exact, mathematically sound spatial predicates executing natively
+on relational geometries:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>:</mo><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi><mo>→</mo><mtext mathvariant="normal">SQL</mtext><mo>→</mo><mrow><mtext mathvariant="normal">Spatial Result Set </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{spatial}}: CSIR \longrightarrow \text{SQL} \longrightarrow \text{Spatial Result Set } (F)</annotation></semantics></math>
+3. <strong>Grounding Correctness
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">grounding</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{grounding}}</annotation></semantics></math>):</strong>
 Evaluates whether the synthesized natural-language response strictly
-asserts only verifiable facts present in the database result set <span
-class="math inline">\(F\)</span>, preventing ungrounded post-generation
-entity or attribute fabrication: <span
-class="math display">\[\mathcal{C}_{\text{grounding}}: F \longrightarrow
-\text{Grounded Narrative Response}\]</span></p>
+asserts only verifiable facts present in the database result set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>,
+preventing ungrounded post-generation entity or attribute fabrication:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">grounding</mtext></msub><mo>:</mo><mi>F</mi><mo>→</mo><mtext mathvariant="normal">Grounded Narrative Response</mtext></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{grounding}}: F \longrightarrow \text{Grounded Narrative Response}</annotation></semantics></math></p>
 <p>This sequence forms the foundational scientific backbone of the
-proposed architecture: <span class="math display">\[\boxed{NL
-\xrightarrow[\text{Interpretation}]{\text{Cognitive}} CSIR
-\xrightarrow[\text{Compilation}]{\text{Deterministic}} \text{SQL}
-\xrightarrow[\text{Evaluation}]{\text{Spatial DBMS}} \text{Spatial
-Result } (F) \xrightarrow[\text{Validator}]{\text{Algorithmic
-Grounding}} \text{Grounded Response}}\]</span></p>
+proposed architecture:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mrow><mi>N</mi><mi>L</mi><munderover><mo>→</mo><mtext mathvariant="normal">Interpretation</mtext><mtext mathvariant="normal">Cognitive</mtext></munderover><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi><munderover><mo>→</mo><mtext mathvariant="normal">Compilation</mtext><mtext mathvariant="normal">Deterministic</mtext></munderover><mtext mathvariant="normal">SQL</mtext><munderover><mo>→</mo><mtext mathvariant="normal">Evaluation</mtext><mtext mathvariant="normal">Spatial DBMS</mtext></munderover><mrow><mtext mathvariant="normal">Spatial Result </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><munderover><mo>→</mo><mtext mathvariant="normal">Validator</mtext><mtext mathvariant="normal">Algorithmic Grounding</mtext></munderover><mtext mathvariant="normal">Grounded Response</mtext></mrow></menclose><annotation encoding="application/x-tex">\boxed{NL \xrightarrow[\text{Interpretation}]{\text{Cognitive}} CSIR \xrightarrow[\text{Compilation}]{\text{Deterministic}} \text{SQL} \xrightarrow[\text{Evaluation}]{\text{Spatial DBMS}} \text{Spatial Result } (F) \xrightarrow[\text{Validator}]{\text{Algorithmic Grounding}} \text{Grounded Response}}</annotation></semantics></math></p>
 <h3
 id="formalization-of-spatial-intent-conceptual-unification-of-raw-sir-17-attributes-vs.-validated-csir-19-attributes">3.2
 Formalization of Spatial Intent: Conceptual Unification of Raw SIR (17
@@ -1038,41 +1028,34 @@ retrieval literature, this study formally unifies the concepts of
 <strong>Canonical Spatial Intent Representation (CSIR)</strong> within a
 comprehensive <em>Intent Transformation Lifecycle</em>:</p>
 <ol type="1">
-<li><strong>Spatial Intent Representation (SIR / <span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>):</strong>
+<li><strong>Spatial Intent Representation (SIR /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>):</strong>
 Represents the overarching nomenclature and the initial unvalidated
 semantic output generated by the LLM in Layer 2. In this stage, it
-exists as a <strong>Raw SIR (<span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>)</strong> flat
-JSON document produced via probabilistic cognitive inference. At this
-raw stage, values are not yet guaranteed (e.g., radius parameters may be
-negative if the LLM hallucinates, or spatial operators may fall outside
-the system ontology).</li>
-<li><strong>Canonical Spatial Intent Representation (CSIR / <span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>):</strong>
+exists as a <strong>Raw SIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>)</strong>
+flat JSON document produced via probabilistic cognitive inference. At
+this raw stage, values are not yet guaranteed (e.g., radius parameters
+may be negative if the LLM hallucinates, or spatial operators may fall
+outside the system ontology).</li>
+<li><strong>Canonical Spatial Intent Representation (CSIR /
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>):</strong>
 Represents the canonical, strictly-typed intermediate representation
 that has passed rigorous deterministic validation and boundary
 enforcement by the 6-Dimensional <em>SIR Validator</em> in Layer 3. Only
 representations satisfying all spatial ontologies, WGS84 geographical
 coordinate bounds, and database safety invariants achieve the
-<strong>Validated CSIR (<span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>)</strong>
+<strong>Validated CSIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>)</strong>
 status and are permitted to undergo compilation into parameterized
 SQL.</li>
 </ol>
 <p>The formal mathematical transformation between Raw SIR and Validated
-CSIR is expressed as: <span
-class="math display">\[\mathcal{S}_{\text{raw}} =
-\text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}})
-\xrightarrow[\text{No Intent
-Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}}
-\xrightarrow{\text{Compiler}} \text{SQL}\]</span></p>
+CSIR is expressed as:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><mo>=</mo><mtext mathvariant="normal">LLM</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Prompt</mtext><mtext mathvariant="normal">SIR</mtext></msub><mo>,</mo><msub><mtext mathvariant="normal">Query</mtext><mtext mathvariant="normal">user</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow><munderover><mo>→</mo><mtext mathvariant="normal">No Intent Alteration</mtext><msub><mtext mathvariant="normal">SirValidator</mtext><mtext mathvariant="normal">6-D</mtext></msub></munderover><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><mover><mo>→</mo><mtext mathvariant="normal">Compiler</mtext></mover><mtext mathvariant="normal">SQL</mtext></mrow><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}} = \text{LLM}(\text{Prompt}_{\text{SIR}}, \text{Query}_{\text{user}}) \xrightarrow[\text{No Intent Alteration}]{\text{SirValidator}_{\text{6-D}}} \mathcal{S}_{\text{csir}} \xrightarrow{\text{Compiler}} \text{SQL}</annotation></semantics></math></p>
 <p>The CSIR schema formally partitions the user’s spatial intent into
-four orthogonal, strictly-typed sub-domains: <span
-class="math display">\[\mathcal{S}_{\text{csir}} = \langle
-\mathcal{P}_{\text{intent}}, \mathcal{P}_{\text{spatial}},
-\mathcal{P}_{\text{operational}}, \mathcal{P}_{\text{control}}
-\rangle\]</span></p>
+four orthogonal, strictly-typed sub-domains:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">intent</mtext></msub><mo>,</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">operational</mtext></msub><mo>,</mo><msub><mi>𝒫</mi><mtext mathvariant="normal">control</mtext></msub><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}} = \langle \mathcal{P}_{\text{intent}}, \mathcal{P}_{\text{spatial}}, \mathcal{P}_{\text{operational}}, \mathcal{P}_{\text{control}} \rangle</annotation></semantics></math></p>
 <p>Table 2 specifies the formal typing and allowable value domains for
 the 19-attribute CSIR schema across these four orthogonal
 partitions:</p>
@@ -1098,7 +1081,7 @@ Attributes)</strong></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\mathcal{P}_{\text{intent}}\)</span>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">intent</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{intent}}</annotation></semantics></math>
 (Intent Semantics, 5 Attributes)</td>
 <td><code>intent</code></td>
 <td><em>Enum</em></td>
@@ -1137,7 +1120,7 @@ Attributes)</strong></p>
 <td>Key descriptive phrase (e.g., “white sand”, “waterfall”)</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\mathcal{P}_{\text{spatial}}\)</span>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">spatial</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{spatial}}</annotation></semantics></math>
 (Spatial Constraints, 8 Attributes)</td>
 <td><code>spatial_operator</code></td>
 <td><em>Enum</em></td>
@@ -1166,23 +1149,23 @@ Attributes)</strong></p>
 <td><code>latitude</code></td>
 <td><em>Float</em> / <em>Null</em></td>
 <td>Spatial reference latitude</td>
-<td>Decimal degrees <span class="math inline">\(-90.0 \le \text{lat} \le
-90.0\)</span></td>
+<td>Decimal degrees
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>90.0</mn><mo>≤</mo><mtext mathvariant="normal">lat</mtext><mo>≤</mo><mn>90.0</mn></mrow><annotation encoding="application/x-tex">-90.0 \le \text{lat} \le 90.0</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>longitude</code></td>
 <td><em>Float</em> / <em>Null</em></td>
 <td>Spatial reference longitude</td>
-<td>Decimal degrees <span class="math inline">\(-180.0 \le \text{lng}
-\le 180.0\)</span></td>
+<td>Decimal degrees
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>180.0</mn><mo>≤</mo><mtext mathvariant="normal">lng</mtext><mo>≤</mo><mn>180.0</mn></mrow><annotation encoding="application/x-tex">-180.0 \le \text{lng} \le 180.0</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><code>radius</code></td>
 <td><em>Float</em> / <em>Null</em></td>
-<td>Distance threshold value (<span class="math inline">\(\ge
-0\)</span>)</td>
+<td>Distance threshold value
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\ge 0</annotation></semantics></math>)</td>
 <td>Positive real number in km (default: 20.0 km)</td>
 </tr>
 <tr class="even">
@@ -1200,8 +1183,7 @@ Attributes)</strong></p>
 <td>Valid administrative string (e.g., “Bungus”, “Padang Barat”)</td>
 </tr>
 <tr class="even">
-<td><span
-class="math inline">\(\mathcal{P}_{\text{operational}}\)</span>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">operational</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{operational}}</annotation></semantics></math>
 (Operational Constraints, 5 Attributes)</td>
 <td><code>is_free</code></td>
 <td><em>Boolean</em></td>
@@ -1238,7 +1220,7 @@ class="math inline">\(\mathcal{P}_{\text{operational}}\)</span>
 <code>terbaik</code>, <code>null</code></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\mathcal{P}_{\text{control}}\)</span>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒫</mi><mtext mathvariant="normal">control</mtext></msub><annotation encoding="application/x-tex">\mathcal{P}_{\text{control}}</annotation></semantics></math>
 (Control Metadata &amp; Invariant, 1 CSIR Attribute)</td>
 <td><code>is_out_of_scope</code></td>
 <td><em>Boolean</em></td>
@@ -1277,27 +1259,28 @@ Responsibilities</em> between probabilistic semantic extraction and
 deterministic geospatial anchoring to eliminate coordinate
 hallucinations: 1. <strong>Pure Semantic Slots (Extracted by Layer 2 LLM
 - Raw SIR, 17 Slots):</strong> The LLM parses 17 linguistic parameters
-(<span class="math inline">\(I, E, C, T_n, K, O_s, R_t, R_e, r, u_d, A,
-F, P_{\max}, O_{\text{now}}, O_{24}, S, B_{\text{out}}\)</span>). The
-LLM is <strong>strictly prohibited from synthesizing numeric GPS
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>,</mo><mi>E</mi><mo>,</mo><mi>C</mi><mo>,</mo><msub><mi>T</mi><mi>n</mi></msub><mo>,</mo><mi>K</mi><mo>,</mo><msub><mi>O</mi><mi>s</mi></msub><mo>,</mo><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><msub><mi>R</mi><mi>e</mi></msub><mo>,</mo><mi>r</mi><mo>,</mo><msub><mi>u</mi><mi>d</mi></msub><mo>,</mo><mi>A</mi><mo>,</mo><mi>F</mi><mo>,</mo><msub><mi>P</mi><mo>max</mo></msub><mo>,</mo><msub><mi>O</mi><mtext mathvariant="normal">now</mtext></msub><mo>,</mo><msub><mi>O</mi><mn>24</mn></msub><mo>,</mo><mi>S</mi><mo>,</mo><msub><mi>B</mi><mtext mathvariant="normal">out</mtext></msub></mrow><annotation encoding="application/x-tex">I, E, C, T_n, K, O_s, R_t, R_e, r, u_d, A, F, P_{\max}, O_{\text{now}}, O_{24}, S, B_{\text{out}}</annotation></semantics></math>).
+The LLM is <strong>strictly prohibited from synthesizing numeric GPS
 coordinates</strong>. 2. <strong>Deterministic Geospatial Context
 (Injected from Client / Resolver, 2 Attributes):</strong> Numeric
 <code>latitude</code> and <code>longitude</code> are deterministically
-anchored from verified sources: - When <span class="math inline">\(R_t =
-\text{&#39;gps&#39;}\)</span>, coordinates are acquired directly from
-the browser’s standard W3C Geolocation API
-(<code>navigator.geolocation</code>). - When <span
-class="math inline">\(R_t = \text{&#39;city_center&#39;}\)</span>, the
-system injects official Padang municipal center coordinates (<span
-class="math inline">\(-0.9471, 100.4174\)</span>). - When <span
-class="math inline">\(R_t = \text{&#39;poi&#39;}\)</span>, a
-deterministic database geocoding resolver retrieves the verified
-coordinates of <span class="math inline">\(R_e\)</span> from the
-<code>wisata</code> table. 3. <strong>Unified 19-Attribute Canonical
-CSIR:</strong> Merging the 17 raw semantic slots with the 2 client
-coordinate anchors produces the complete <strong>19-attribute CSIR
-DTO</strong> prior to invariant evaluation by <code>SirValidator</code>
-and compilation into SQL.</p>
+anchored from verified sources: - When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>t</mi></msub><mo>=</mo><mtext mathvariant="normal">’gps’</mtext></mrow><annotation encoding="application/x-tex">R_t = \text{&#39;gps&#39;}</annotation></semantics></math>,
+coordinates are acquired directly from the browser’s standard W3C
+Geolocation API (<code>navigator.geolocation</code>). - When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>t</mi></msub><mo>=</mo><mtext mathvariant="normal">’city_center’</mtext></mrow><annotation encoding="application/x-tex">R_t = \text{&#39;city_center&#39;}</annotation></semantics></math>,
+the system injects official Padang municipal center coordinates
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>0.9471</mn><mo>,</mo><mn>100.4174</mn></mrow><annotation encoding="application/x-tex">-0.9471, 100.4174</annotation></semantics></math>).
+- When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>t</mi></msub><mo>=</mo><mtext mathvariant="normal">’poi’</mtext></mrow><annotation encoding="application/x-tex">R_t = \text{&#39;poi&#39;}</annotation></semantics></math>,
+a deterministic database geocoding resolver retrieves the verified
+coordinates of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>e</mi></msub><annotation encoding="application/x-tex">R_e</annotation></semantics></math>
+from the <code>wisata</code> table. 3. <strong>Unified 19-Attribute
+Canonical CSIR:</strong> Merging the 17 raw semantic slots with the 2
+client coordinate anchors produces the complete <strong>19-attribute
+CSIR DTO</strong> prior to invariant evaluation by
+<code>SirValidator</code> and compilation into SQL.</p>
 <h3 id="multi-turn-conversational-state-tracking-model">2.3.2 Multi-Turn
 Conversational State Tracking Model</h3>
 <p>In real-world conversational GIS, travelers rarely articulate all
@@ -1305,29 +1288,31 @@ decision parameters in a single utterance; interaction is inherently
 sequential and exploratory. To preserve conversational continuity
 without re-parsing from scratch or corrupting previously established
 constraints, the architecture formalizes a <strong>Conversational State
-Tracking Model</strong>: <span class="math display">\[CSIR_{t+1} =
-\text{Merge}(CSIR_t, \Delta CSIR_{t+1})\]</span></p>
-<p>Where: - <span class="math inline">\(CSIR_t\)</span> represents the
-active state vector at turn <span class="math inline">\(t\)</span>. -
-<span class="math inline">\(\Delta CSIR_{t+1}\)</span> is the
-differential intent vector extracted by the LLM from the user’s latest
-follow-up utterance conditioned on the recent dialogue history <span
-class="math inline">\(\mathcal{H}_t = \{(u_1, a_1), \dots, (u_t,
-a_t)\}\)</span>. - <span
-class="math inline">\(\text{Merge}(\cdot)\)</span> is a deterministic
-state transition function: <span
-class="math display">\[\text{Merge}(CSIR_t, \Delta CSIR)_{k} =
-\begin{cases} \Delta CSIR_k, &amp; \text{if } \Delta CSIR_k \neq
-\text{null} \land \Delta CSIR_k \neq \text{default} \\ CSIR_{t, k},
-&amp; \text{otherwise} \end{cases}\]</span></p>
+Tracking Model</strong>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mtext mathvariant="normal">Merge</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta CSIR_{t+1})</annotation></semantics></math></p>
+<p>Where: -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">CSIR_t</annotation></semantics></math>
+represents the active state vector at turn
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\Delta CSIR_{t+1}</annotation></semantics></math>
+is the differential intent vector extracted by the LLM from the user’s
+latest follow-up utterance conditioned on the recent dialogue history
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℋ</mi><mi>t</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>u</mi><mn>1</mn></msub><mo>,</mo><msub><mi>a</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>…</mi><mo>,</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>u</mi><mi>t</mi></msub><mo>,</mo><msub><mi>a</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathcal{H}_t = \{(u_1, a_1), \dots, (u_t, a_t)\}</annotation></semantics></math>.
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Merge</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Merge}(\cdot)</annotation></semantics></math>
+is a deterministic state transition function:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Merge</mtext><msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>k</mi></msub><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>k</mi></msub><mo>≠</mo><mtext mathvariant="normal">null</mtext><mo>∧</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>k</mi></msub><mo>≠</mo><mtext mathvariant="normal">default</mtext></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>,</mo><mi>k</mi></mrow></msub><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\text{Merge}(CSIR_t, \Delta CSIR)_{k} = \begin{cases} \Delta CSIR_k, &amp; \text{if } \Delta CSIR_k \neq \text{null} \land \Delta CSIR_k \neq \text{default} \\ CSIR_{t, k}, &amp; \text{otherwise} \end{cases}</annotation></semantics></math></p>
 <p>For example, when a tourist first inquires <em>“Find beaches near
-me”</em> (<span class="math inline">\(t=1 \implies \text{category} =
-\text{&#39;Pantai&#39;}, \text{operator} =
-\text{&#39;nearest&#39;}\)</span>), and subsequently adds <em>“Only free
-admission ones”</em> (<span class="math inline">\(t=2\)</span>), <span
-class="math inline">\(\Delta CSIR_{t=2}\)</span> specifies <span
-class="math inline">\(\{\text{is\_free} = \text{true}, \text{max\_price}
-= 0\}\)</span>. The <span class="math inline">\(\text{Merge}\)</span>
+me”</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>1</mn><mo>⟹</mo><mtext mathvariant="normal">category</mtext><mo>=</mo><mtext mathvariant="normal">’Pantai’</mtext><mo>,</mo><mtext mathvariant="normal">operator</mtext><mo>=</mo><mtext mathvariant="normal">’nearest’</mtext></mrow><annotation encoding="application/x-tex">t=1 \implies \text{category} = \text{&#39;Pantai&#39;}, \text{operator} = \text{&#39;nearest&#39;}</annotation></semantics></math>),
+and subsequently adds <em>“Only free admission ones”</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">t=2</annotation></semantics></math>),
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\Delta CSIR_{t=2}</annotation></semantics></math>
+specifies
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">is_free</mtext><mo>=</mo><mtext mathvariant="normal">true</mtext><mo>,</mo><mtext mathvariant="normal">max_price</mtext><mo>=</mo><mn>0</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{\text{is\_free} = \text{true}, \text{max\_price} = 0\}</annotation></semantics></math>.
+The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">Merge</mtext><annotation encoding="application/x-tex">\text{Merge}</annotation></semantics></math>
 operator preserves the coastal category and GPS coordinates while
 updating the budgetary constraint, preventing the system from resetting
 context or hallucinating unrelated destinations.</p>
@@ -1404,30 +1389,33 @@ strictly to the defined CSIR schema allowlist. * <strong>Type Validation
 &amp; Normalization:</strong> Sanitizes string inputs, strips potential
 XSS/HTML tags, and normalizes string numerals into integer or float
 primitives. * <strong>Domain &amp; Range Validation (No Intent
-Alteration):</strong> Enforces non-negative numerical boundaries (<span
-class="math inline">\(distance &gt; 0\)</span>, <span
-class="math inline">\(max\_price \ge 0\)</span>). Crucially, under the
-<strong>No Intent Alteration Principle</strong>, invalid inputs (such as
-negative distances <span class="math inline">\(distance \le 0\)</span>
-or distances exceeding the maximum operational urban boundary <span
-class="math inline">\(distance &gt; 50\text{ km}\)</span>) are
-<strong>never silently mutated</strong> (e.g., via <code>abs()</code> or
-arbitrary truncation). Instead, the validator marks
-<code>isValid = false</code>, records an explicit error, and sets
+Alteration):</strong> Enforces non-negative numerical boundaries
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">distance &gt; 0</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>_</mi><mi>p</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">max\_price \ge 0</annotation></semantics></math>).
+Crucially, under the <strong>No Intent Alteration Principle</strong>,
+invalid inputs (such as negative distances
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo>≤</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">distance \le 0</annotation></semantics></math>
+or distances exceeding the maximum operational urban boundary
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo>&gt;</mo><mn>50</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">distance &gt; 50\text{ km}</annotation></semantics></math>)
+are <strong>never silently mutated</strong> (e.g., via
+<code>abs()</code> or arbitrary truncation). Instead, the validator
+marks <code>isValid = false</code>, records an explicit error, and sets
 <code>executionPolicy = 'clarify_user'</code>. * <strong>Operator
 Validation:</strong> Asserts that the spatial operator matches allowable
 ontology tokens (<code>nearest</code>, <code>within_radius</code>,
 <code>within_admin_area</code>, <code>none</code>). Unrecognized
 operators are rejected with <code>isValid = false</code> rather than
 silently defaulted. * <strong>Constraint Consistency Checking:</strong>
-Evaluates operational constraint validity (<span
-class="math inline">\(max\_price \ge 0\)</span>). Crucially, the
-co-occurrence of <span class="math inline">\(is\_free = true\)</span>
-and <span class="math inline">\(max\_price &gt; 0\)</span> is formalized
-not as a contradiction, but as a set inclusion relation (<span
-class="math inline">\(\{x \mid x.price = 0\} \subseteq \{x \mid x.price
-\le P\}\)</span>), representing an inclusive budget query with priority
-given to zero-cost destinations.</p>
+Evaluates operational constraint validity
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>_</mi><mi>p</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">max\_price \ge 0</annotation></semantics></math>).
+Crucially, the co-occurrence of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mi>s</mi><mi>_</mi><mi>f</mi><mi>r</mi><mi>e</mi><mi>e</mi><mo>=</mo><mi>t</mi><mi>r</mi><mi>u</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">is\_free = true</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>_</mi><mi>p</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">max\_price &gt; 0</annotation></semantics></math>
+is formalized not as a contradiction, but as a set inclusion relation
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>∣</mo><mi>x</mi><mi>.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo>=</mo><mn>0</mn><mo stretchy="false" form="postfix">}</mo><mo>⊆</mo><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>∣</mo><mi>x</mi><mi>.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo>≤</mo><mi>P</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{x \mid x.price = 0\} \subseteq \{x \mid x.price \le P\}</annotation></semantics></math>),
+representing an inclusive budget query with priority given to zero-cost
+destinations.</p>
 <p><strong>Algorithm 1: Six-Dimensional SIR Validation with No Intent
 Alteration</strong></p>
 <pre class="text"><code>Input: Raw SIR object extracted by LLM
@@ -1477,11 +1465,9 @@ evaluating distance iteratively in the application layer, the system
 delegates all spatial proximity evaluation to MySQL 8.0’s <strong>native
 spatial function <code>ST_Distance_Sphere</code></strong>, which
 calculates great-circle / spherical distance on a spherical Earth model
-using the mean radius (<span class="math inline">\(R = 6,370,986\text{
-m}\)</span>): <span class="math display">\[d_{\text{spatial}} =
-\frac{\text{ST\_Distance\_Sphere}(\text{POINT}(\text{lng}_1,
-\text{lat}_1), \text{POINT}(\text{lng}_2, \text{lat}_2))}{1000.0} \quad
-(\text{km})\]</span></p>
+using the mean radius
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mn>6</mn><mo>,</mo><mn>370</mn><mo>,</mo><mn>986</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> m</mtext></mrow></mrow><annotation encoding="application/x-tex">R = 6,370,986\text{ m}</annotation></semantics></math>):
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>=</mo><mfrac><mrow><mtext mathvariant="normal">ST_Distance_Sphere</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">lng</mtext><mn>1</mn></msub><mo>,</mo><msub><mtext mathvariant="normal">lat</mtext><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">lng</mtext><mn>2</mn></msub><mo>,</mo><msub><mtext mathvariant="normal">lat</mtext><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mn>1000.0</mn></mfrac><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">km</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d_{\text{spatial}} = \frac{\text{ST\_Distance\_Sphere}(\text{POINT}(\text{lng}_1, \text{lat}_1), \text{POINT}(\text{lng}_2, \text{lat}_2))}{1000.0} \quad (\text{km})</annotation></semantics></math></p>
 <p>This architectural choice provides three decisive advantages over
 manual trigonometric formulas:</p>
 <ul>
@@ -1493,7 +1479,8 @@ trigonometric functions (<code>SIN</code>, <code>COS</code>,
 <li><strong>Floating-Point Stability:</strong> Manual formulas utilizing
 <code>ACOS</code> frequently suffer from domain errors
 (<code>NaN</code>) when binary floating-point rounding causes argument
-values to slightly exceed <span class="math inline">\(1.0\)</span>.
+values to slightly exceed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1.0</mn><annotation encoding="application/x-tex">1.0</annotation></semantics></math>.
 <code>ST_Distance_Sphere</code> natively handles boundary clipping and
 antipodal coordinates.</li>
 <li><strong>OGC Geospatial Compatibility:</strong> Coordinates are
@@ -1507,38 +1494,31 @@ query evaluation time.</li>
 For client-side cartographic visualization on Leaflet.js,
 origin-destination coordinates query the <em>Open Source Routing
 Machine</em> (OSRM) [9] running <em>Contraction Hierarchies</em> (CH) on
-OpenStreetMap (OSM) data [8]: <span
-class="math display">\[\mathcal{G}_{\text{road}} = (V, E, W), \quad
-\text{Route}_{\text{opt}} = \arg\min_{p \in \mathcal{P}(P_1, P_2)}
-\sum_{e \in p} W(e)\]</span> This generates precise street polylines and
-realistic vehicular travel duration estimates.</p></li>
+OpenStreetMap (OSM) data [8]:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒢</mi><mtext mathvariant="normal">road</mtext></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo>,</mo><mi>W</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><msub><mtext mathvariant="normal">Route</mtext><mtext mathvariant="normal">opt</mtext></msub><mo>=</mo><mo>arg</mo><munder><mo>min</mo><mrow><mi>p</mi><mo>∈</mo><mi>𝒫</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>P</mi><mn>1</mn></msub><mo>,</mo><msub><mi>P</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></munder><munder><mo>∑</mo><mrow><mi>e</mi><mo>∈</mo><mi>p</mi></mrow></munder><mi>W</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>e</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{G}_{\text{road}} = (V, E, W), \quad \text{Route}_{\text{opt}} = \arg\min_{p \in \mathcal{P}(P_1, P_2)} \sum_{e \in p} W(e)</annotation></semantics></math>
+This generates precise street polylines and realistic vehicular travel
+duration estimates.</p></li>
 </ol>
 <p>The validated CSIR object is transformed into a parameterized SQL
 statement with parameter binding. The compiler strictly enforces
 compile-time <strong>Safety Invariants</strong>: 1. <strong>Execution
-Invariant:</strong> <span class="math display">\[\text{Safety Invariant:
-} \neg \text{CSIR.isValid} \lor \text{CSIR.is\_out\_of\_scope} \implies
-\text{Result} = \emptyset \quad (\text{Abort execution with 0 DB
-overhead})\]</span> 2. <strong>Radial Boundary Invariant:</strong> When
+Invariant:</strong>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Safety Invariant: </mtext><mspace width="0.333em"></mspace></mrow><mo>¬</mo><mtext mathvariant="normal">CSIR.isValid</mtext><mo>∨</mo><mtext mathvariant="normal">CSIR.is_out_of_scope</mtext><mo>⟹</mo><mtext mathvariant="normal">Result</mtext><mo>=</mo><mi>∅</mi><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Abort execution with 0 DB overhead</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Safety Invariant: } \neg \text{CSIR.isValid} \lor \text{CSIR.is\_out\_of\_scope} \implies \text{Result} = \emptyset \quad (\text{Abort execution with 0 DB overhead})</annotation></semantics></math>
+2. <strong>Radial Boundary Invariant:</strong> When
 <code>spatial_operator = 'within_radius'</code>, the distance threshold
 is strictly embedded into the relational <code>WHERE</code> clause:
-<span
-class="math display">\[\text{ST\_Distance\_Sphere}(\text{POINT}(\text{wisata.lng},
-\text{wisata.lat}), \text{POINT}(:lng, :lat)) / 1000.0 \le
-:radius\]</span> guaranteeing that radial filtering operates
-deterministically rather than relying on proximity sorting alone (<span
-class="math inline">\(\text{nearest } k \neq \text{within } r\text{
-km}\)</span>). 3. <strong>Midnight-Crossover Temporal
-Invariant:</strong> To correctly evaluate operating status across venues
-operating past midnight (e.g., night culinary stalls open from 22:00 to
-02:00 WIB), the temporal predicate implements a piecewise circular
-logic: <span class="math display">\[\text{OpenPredicate}(t) =
-\begin{cases}
-   t \ge \text{jam\_buka} \land t \le \text{jam\_tutup}, &amp; \text{if
-} \text{jam\_buka} \le \text{jam\_tutup} \\
-   t \ge \text{jam\_buka} \lor t \le \text{jam\_tutup}, &amp; \text{if }
-\text{jam\_buka} &gt; \text{jam\_tutup}
-   \end{cases}\]</span></p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">ST_Distance_Sphere</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">wisata.lng</mtext><mo>,</mo><mtext mathvariant="normal">wisata.lat</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mtext mathvariant="normal">POINT</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mo>:</mo><mi>l</mi><mi>n</mi><mi>g</mi><mo>,</mo><mo>:</mo><mi>l</mi><mi>a</mi><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>1000.0</mn><mo>≤</mo><mo>:</mo><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>u</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">\text{ST\_Distance\_Sphere}(\text{POINT}(\text{wisata.lng}, \text{wisata.lat}), \text{POINT}(:lng, :lat)) / 1000.0 \le :radius</annotation></semantics></math>
+guaranteeing that radial filtering operates deterministically rather
+than relying on proximity sorting alone
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">nearest </mtext><mspace width="0.333em"></mspace></mrow><mi>k</mi><mo>≠</mo><mrow><mtext mathvariant="normal">within </mtext><mspace width="0.333em"></mspace></mrow><mi>r</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\text{nearest } k \neq \text{within } r\text{ km}</annotation></semantics></math>).
+3. <strong>Midnight-Crossover Temporal Invariant:</strong> To correctly
+evaluate operating status across venues operating past midnight (e.g.,
+night culinary stalls open from 22:00 to 02:00 WIB), the temporal
+predicate implements a piecewise circular logic:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">OpenPredicate</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>t</mi><mo>≥</mo><mtext mathvariant="normal">jam_buka</mtext><mo>∧</mo><mi>t</mi><mo>≤</mo><mtext mathvariant="normal">jam_tutup</mtext><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mtext mathvariant="normal">jam_buka</mtext><mo>≤</mo><mtext mathvariant="normal">jam_tutup</mtext></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mi>t</mi><mo>≥</mo><mtext mathvariant="normal">jam_buka</mtext><mo>∨</mo><mi>t</mi><mo>≤</mo><mtext mathvariant="normal">jam_tutup</mtext><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mtext mathvariant="normal">jam_buka</mtext><mo>&gt;</mo><mtext mathvariant="normal">jam_tutup</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\text{OpenPredicate}(t) = \begin{cases} 
+   t \ge \text{jam\_buka} \land t \le \text{jam\_tutup}, &amp; \text{if } \text{jam\_buka} \le \text{jam\_tutup} \\ 
+   t \ge \text{jam\_buka} \lor t \le \text{jam\_tutup}, &amp; \text{if } \text{jam\_buka} &gt; \text{jam\_tutup} 
+   \end{cases}</annotation></semantics></math></p>
 <p>Table 2b formalizes the systematic compiler rules mapping validated
 CSIR attributes directly into deterministic, parameterized MySQL 8.0
 spatial SQL predicates.</p>
@@ -1573,8 +1553,8 @@ to Parameterized SQL Predicates in MySQL 8.0</strong></p>
 <td><code>operator = 'within_radius'</code></td>
 <td><code>RadialSearchRule</code></td>
 <td><code>HAVING jarak_km &lt;= ?</code></td>
-<td style="text-align: center;"><code>DOUBLE</code> (<span
-class="math inline">\(d \le 50.0\text{ km}\)</span>)</td>
+<td style="text-align: center;"><code>DOUBLE</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>≤</mo><mn>50.0</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">d \le 50.0\text{ km}</annotation></semantics></math>)</td>
 <td>Great-circle distance boundary enforcement</td>
 </tr>
 <tr class="odd">
@@ -1589,8 +1569,8 @@ class="math inline">\(d \le 50.0\text{ km}\)</span>)</td>
 <td><code>max_price != null</code></td>
 <td><code>PriceCeilingRule</code></td>
 <td><code>AND wisata.harga_tiket &lt;= ?</code></td>
-<td style="text-align: center;"><code>INTEGER</code> (<span
-class="math inline">\(P \ge 0\)</span>)</td>
+<td style="text-align: center;"><code>INTEGER</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P \ge 0</annotation></semantics></math>)</td>
 <td>Budget ceiling enforcement</td>
 </tr>
 <tr class="odd">
@@ -1634,24 +1614,25 @@ server time)</td>
 <tr class="even">
 <td><code>is_out_of_scope = true</code></td>
 <td><code>AirGapAbortionRule</code></td>
-<td><span class="math inline">\(\emptyset\)</span> <em>(Zero SQL
-Execution)</em></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∅</mi><annotation encoding="application/x-tex">\emptyset</annotation></semantics></math>
+<em>(Zero SQL Execution)</em></td>
 <td style="text-align: center;">None</td>
 <td><em>Safety Invariant</em>: immediate database query abortion</td>
 </tr>
 </tbody>
 </table>
-<p>where <span class="math inline">\(t =
-\text{CURRENT\_TIME}()\)</span>. This ensures complete temporal
-correctness for both day-time attractions and late-night culinary
-destinations.</p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mtext mathvariant="normal">CURRENT_TIME</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">t = \text{CURRENT\_TIME}()</annotation></semantics></math>.
+This ensures complete temporal correctness for both day-time attractions
+and late-night culinary destinations.</p>
 <h3
 id="strict-grounding-contract-and-algorithmic-grounding-validator">3.6
 Strict Grounding Contract and Algorithmic Grounding Validator</h3>
 <p>During response generation, the LLM is governed by explicit
 operational rules (<em>Strict Grounding Contract</em>): *
 <strong>MUST:</strong> Mention only retrieved POI entities present in
-the database result set (<span class="math inline">\(F\)</span>);
+the database result set
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>);
 preserve factual attributes (ticket prices, schedules, calculated
 distances) without unilateral rounding; honor empty result sets with
 honest fallback notices; and strictly uphold the <strong>Honest
@@ -1680,56 +1661,55 @@ municipal bounds).</p>
 <h4 id="mathematical-formalization-of-grounding-fidelity">3.5.1
 Mathematical Formalization of Grounding Fidelity</h4>
 <p>To provide mathematical rigor rather than heuristic claims, Grounding
-Fidelity (<span class="math inline">\(GF\)</span>) and Hallucination
-Rate (<span class="math inline">\(HR\)</span>) are formalized across all
-verifiable factual propositions: <span class="math display">\[GF =
-\frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|},
-\quad HR =
-\frac{|\mathcal{C}_{\text{unsupported}}|}{|\mathcal{C}_{\text{verifiable}}|}
-= 1 - GF\]</span></p>
-<p>Where: - <span
-class="math inline">\(\mathcal{C}_{\text{verifiable}}\)</span> is the
-set of all factual claims generated in the response (destinations, fees,
-distances, operating schedules). - <span
-class="math inline">\(\mathcal{C}_{\text{supported}} \subseteq
-\mathcal{C}_{\text{verifiable}}\)</span> represents claims whose
-veracity is directly confirmed by tuples in the database result set
-<span class="math inline">\(F\)</span>. - <span
-class="math inline">\(\mathcal{C}_{\text{unsupported}} =
-\mathcal{C}_{\text{verifiable}} \setminus
-\mathcal{C}_{\text{supported}}\)</span> represents ungrounded or
-fabricated assertions.</p>
+Fidelity
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">GF</annotation></semantics></math>)
+and Hallucination Rate
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">HR</annotation></semantics></math>)
+are formalized across all verifiable factual propositions:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>F</mi><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">supported</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>H</mi><mi>R</mi><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">unsupported</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac><mo>=</mo><mn>1</mn><mo>−</mo><mi>G</mi><mi>F</mi></mrow><annotation encoding="application/x-tex">GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}, \quad HR = \frac{|\mathcal{C}_{\text{unsupported}}|}{|\mathcal{C}_{\text{verifiable}}|} = 1 - GF</annotation></semantics></math></p>
+<p>Where: -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{verifiable}}</annotation></semantics></math>
+is the set of all factual claims generated in the response
+(destinations, fees, distances, operating schedules). -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">supported</mtext></msub><mo>⊆</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{supported}} \subseteq \mathcal{C}_{\text{verifiable}}</annotation></semantics></math>
+represents claims whose veracity is directly confirmed by tuples in the
+database result set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>.
+-
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">unsupported</mtext></msub><mo>=</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><mo>\</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">supported</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{unsupported}} = \mathcal{C}_{\text{verifiable}} \setminus \mathcal{C}_{\text{supported}}</annotation></semantics></math>
+represents ungrounded or fabricated assertions.</p>
 <p>Grounding Fidelity is evaluated across four orthogonal
-sub-dimensions: 1. <strong>Entity Grounding (<span
-class="math inline">\(GF_{\text{entity}}\)</span>):</strong> <span
-class="math inline">\(\forall e \in \text{Entities}(\text{Response}), e
-\in \text{Entities}(F)\)</span>. 2. <strong>Attribute Grounding (<span
-class="math inline">\(GF_{\text{attr}}\)</span>):</strong> Verifies that
-admission fees match relational tuples without numerical distortion:
-<span class="math inline">\(\forall p \in \text{Response},
-\text{Price}(p) = \text{Price}_{\text{SQL}}(p)\)</span>. 3.
-<strong>Spatial Grounding (<span
-class="math inline">\(GF_{\text{spatial}}\)</span>):</strong> Verifies
-that stated radial distances match computed native
+sub-dimensions: 1. <strong>Entity Grounding
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">entity</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{entity}}</annotation></semantics></math>):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Response</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entities}(\text{Response}), e \in \text{Entities}(F)</annotation></semantics></math>.
+2. <strong>Attribute Grounding
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">attr</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{attr}}</annotation></semantics></math>):</strong>
+Verifies that admission fees match relational tuples without numerical
+distortion:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>p</mi><mo>∈</mo><mtext mathvariant="normal">Response</mtext><mo>,</mo><mtext mathvariant="normal">Price</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mtext mathvariant="normal">Price</mtext><mtext mathvariant="normal">SQL</mtext></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall p \in \text{Response}, \text{Price}(p) = \text{Price}_{\text{SQL}}(p)</annotation></semantics></math>.
+3. <strong>Spatial Grounding
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">spatial</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{spatial}}</annotation></semantics></math>):</strong>
+Verifies that stated radial distances match computed native
 <code>ST_Distance_Sphere</code> spherical distances within
-floating-point tolerance <span class="math inline">\(\epsilon =
-0.05\text{ km}\)</span>. 4. <strong>Temporal Grounding (<span
-class="math inline">\(GF_{\text{temp}}\)</span>):</strong> Verifies that
-claims regarding active operational status correspond exactly to
-evaluated circadian predicates.</p>
+floating-point tolerance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mo>=</mo><mn>0.05</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\epsilon = 0.05\text{ km}</annotation></semantics></math>.
+4. <strong>Temporal Grounding
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><msub><mi>F</mi><mtext mathvariant="normal">temp</mtext></msub></mrow><annotation encoding="application/x-tex">GF_{\text{temp}}</annotation></semantics></math>):</strong>
+Verifies that claims regarding active operational status correspond
+exactly to evaluated circadian predicates.</p>
 <h4 id="post-generation-algorithmic-validator">3.5.2 Post-Generation
 Algorithmic Validator</h4>
 <p>The architecture introduces an algorithmic firewall independent of
-the generative model: <span class="math display">\[\forall e \in
-\text{Entities}(\text{Response}_{\text{LLM}}), \quad e \in
-\text{Entities}(\text{Facts}_{\text{SQL}})\]</span> If the generated
-narrative introduces any named entity outside the validated SQL result
-set <span class="math inline">\(F\)</span>, the validator immediately
-intercepts the response, discards the ungrounded text, and serves a
-deterministic fallback template constructed directly from the verified
-database tuples. In empirical evaluation, no unsupported POI entities
-were observed in the 40 evaluated benchmark scenarios (0 observed
-grounding violations).</p>
+the generative model:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Response</mtext><mtext mathvariant="normal">LLM</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mtext mathvariant="normal">Facts</mtext><mtext mathvariant="normal">SQL</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entities}(\text{Response}_{\text{LLM}}), \quad e \in \text{Entities}(\text{Facts}_{\text{SQL}})</annotation></semantics></math>
+If the generated narrative introduces any named entity outside the
+validated SQL result set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>,
+the validator immediately intercepts the response, discards the
+ungrounded text, and serves a deterministic fallback template
+constructed directly from the verified database tuples. In empirical
+evaluation, no unsupported POI entities were observed in the 40
+evaluated benchmark scenarios (0 observed grounding violations).</p>
 <p><img src="images/figure4_concrete_execution_trace.png" /></p>
 <p class="caption"><em>Figure 4. Concrete End-to-End System Execution Trace: From
 Colloquial Utterance to Grounded Response and Interactive
@@ -1806,11 +1786,11 @@ with MySQL 8.0’s native C++ kernel function
 <code>ST_Distance_Sphere</code>, executing great-circle spherical
 distance calculations deterministically. * <strong>Algorithmic
 Post-Generation Grounding (Layer 5):</strong> Layer 5 introduces an
-independent algorithmic validator enforcing <span
-class="math inline">\(\forall e \in \text{Entities}(\text{Response}), e
-\in F\)</span>, guaranteeing a <span
-class="math inline">\(0.00\%\)</span> Entity Fabrication Rate before
-data reaches the client.</p>
+independent algorithmic validator enforcing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">Response</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>e</mi><mo>∈</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entities}(\text{Response}), e \in F</annotation></semantics></math>,
+guaranteeing a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">0.00\%</annotation></semantics></math>
+Entity Fabrication Rate before data reaches the client.</p>
 <h3
 id="operational-framework-of-semantic-controlled-exploratory-spatial-interaction">3.1.1
 Operational Framework of Semantic-Controlled Exploratory Spatial
@@ -1992,8 +1972,8 @@ Appendix A) restricting the model strictly to JSON parsing without query
 synthesis permissions.</p>
 <h5 id="grounded-nlg-system-prompt">2. Grounded NLG System Prompt</h5>
 <p>Layer 5 enforces the strict grounding contract (Listing 2 / Appendix
-B) binding text generation strictly to returned database facts <span
-class="math inline">\(F\)</span>.</p>
+B) binding text generation strictly to returned database facts
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>.</p>
 <h5 id="user-input-situational-context">3. User Input &amp; Situational
 Context</h5>
 <ul>
@@ -2002,11 +1982,12 @@ from my current location that are open right now with tickets under 15k
 IDR”</em></li>
 <li><strong>Client Context:</strong> GPS WGS84 coordinates:
 <code>Lat: -0.9471, Lng: 100.3541</code> (Central Padang); Server
-Timestamp: <code>14:30:00 WIB</code> (Afternoon); Turn index: <span
-class="math inline">\(t=1\)</span>.</li>
+Timestamp: <code>14:30:00 WIB</code> (Afternoon); Turn index:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t=1</annotation></semantics></math>.</li>
 </ul>
 <h5 id="raw-sir-output-from-llm-mathcals_textraw">4. Raw SIR Output from
-LLM (<span class="math inline">\(\mathcal{S}_{\text{raw}}\)</span>)</h5>
+LLM
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>)</h5>
 <p>The model emits a raw, unvalidated flat JSON document
 (<code>temperature: 0.0</code>):</p>
 <div class="sourceCode" id="cb3"><pre
@@ -2030,26 +2011,26 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <h5
 id="deterministic-validation-report-validated-csir-mathcals_textcsir">5.
-Deterministic Validation Report &amp; Validated CSIR (<span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>)</h5>
-<p>The 6-Dimensional <code>SirValidator</code> evaluates <span
-class="math inline">\(\mathcal{S}_{\text{raw}}\)</span> under the <em>No
-Intent Alteration</em> doctrine: * <strong>Dim 1 (Schema &amp;
-Type):</strong> Passed (Valid types, XSS-sanitized). * <strong>Dim 2
-(Spatial Domain):</strong> Passed (<code>radius = 10.0 &gt; 0</code> and
-<span class="math inline">\(\le 50.0\text{ km}\)</span>). * <strong>Dim
-3 (Operator Validity):</strong> Passed (<code>within_radius</code>
-belongs to spatial ontology). * <strong>Dim 4 (Reference
-Bounds):</strong> Passed (<code>-0.9471, 100.3541</code> lies within
-WGS84 Padang envelope). * <strong>Dim 5 (Price Consistency):</strong>
-Passed (<code>max_price = 15000 &gt;= 0</code>, non-contradictory). *
-<strong>Dim 6 (Domain Scope):</strong> Passed
+Deterministic Validation Report &amp; Validated CSIR
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>)</h5>
+<p>The 6-Dimensional <code>SirValidator</code> evaluates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">raw</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{raw}}</annotation></semantics></math>
+under the <em>No Intent Alteration</em> doctrine: * <strong>Dim 1
+(Schema &amp; Type):</strong> Passed (Valid types, XSS-sanitized). *
+<strong>Dim 2 (Spatial Domain):</strong> Passed
+(<code>radius = 10.0 &gt; 0</code> and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>50.0</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\le 50.0\text{ km}</annotation></semantics></math>).
+* <strong>Dim 3 (Operator Validity):</strong> Passed
+(<code>within_radius</code> belongs to spatial ontology). * <strong>Dim
+4 (Reference Bounds):</strong> Passed (<code>-0.9471, 100.3541</code>
+lies within WGS84 Padang envelope). * <strong>Dim 5 (Price
+Consistency):</strong> Passed (<code>max_price = 15000 &gt;= 0</code>,
+non-contradictory). * <strong>Dim 6 (Domain Scope):</strong> Passed
 (<code>category = 'Pantai'</code> official, zero out-of-scope lexemes).
 * <strong>Validation Report:</strong> <code>isValid: true</code>,
 <code>violations: []</code>,
 <code>executionPolicy: "execute_sql"</code>. * <strong>Validated CSIR
-(<span
-class="math inline">\(\mathcal{S}_{\text{csir}}\)</span>):</strong>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒮</mi><mtext mathvariant="normal">csir</mtext></msub><annotation encoding="application/x-tex">\mathcal{S}_{\text{csir}}</annotation></semantics></math>):</strong>
 Stored in session memory as a canonical 4-partition DTO ready for
 spatial compilation.</p>
 <h5 id="compiled-parameterized-mysql-8.0-spatial-sql-statement">6.
@@ -2084,10 +2065,11 @@ class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#c
 <code>:open_now = true</code>, <code>:current_time = '14:30:00'</code>,
 <code>:limit_k = 10</code>).</em></p>
 <h5 id="database-execution-output-verified-fact-table-f">7. Database
-Execution Output (Verified Fact Table <span
-class="math inline">\(F\)</span>)</h5>
+Execution Output (Verified Fact Table
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>)</h5>
 <p>Spatial query execution on MySQL 8.0 yields 4 verified relational
-tuples (<span class="math inline">\(1.21\text{ ms}\)</span>):</p>
+tuples
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.21</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> ms</mtext></mrow></mrow><annotation encoding="application/x-tex">1.21\text{ ms}</annotation></semantics></math>):</p>
 <table>
 <colgroup>
 <col style="width: 12%" />
@@ -2106,8 +2088,8 @@ tuples (<span class="math inline">\(1.21\text{ ms}\)</span>):</p>
 <th style="text-align: center;">Admission Fee</th>
 <th style="text-align: center;">Opening Hours</th>
 <th style="text-align: center;">Rating</th>
-<th style="text-align: center;">Spherical Distance (<span
-class="math inline">\(d\)</span>)</th>
+<th style="text-align: center;">Spherical Distance
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>)</th>
 </tr>
 </thead>
 <tbody>
@@ -2152,11 +2134,11 @@ class="math inline">\(d\)</span>)</th>
 <h5 id="final-grounded-conversational-narrative-response">8. Final
 Grounded Conversational Narrative Response</h5>
 <p>The generative model synthesizes the grounded narrative and is
-strictly verified by <code>GroundingValidator</code> (<span
-class="math inline">\(\forall e \in \text{Entities}, e \in F \implies GF
-= 100.00\%\)</span>): &gt; <em>“Here are the recommended beach
-destinations within 10 km from your location that are open right now and
-budget-friendly (admission <span class="math inline">\(\le\)</span>
+strictly verified by <code>GroundingValidator</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mtext mathvariant="normal">Entities</mtext><mo>,</mo><mi>e</mi><mo>∈</mo><mi>F</mi><mo>⟹</mo><mi>G</mi><mi>F</mi><mo>=</mo><mn>100.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\forall e \in \text{Entities}, e \in F \implies GF = 100.00\%</annotation></semantics></math>):
+&gt; <em>“Here are the recommended beach destinations within 10 km from
+your location that are open right now and budget-friendly (admission
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\le</annotation></semantics></math>
 Rp15,000):</em><br />
 &gt; 1. <strong>Pantai Padang (Taplau)</strong> — Located 0.40 km away.
 Free admission (Rp0), open until 22:00 WIB. Perfect spot for sunset
@@ -2200,15 +2182,17 @@ waypoints.</li>
 <li><strong>Validation Criteria &amp; Acquisition Date:</strong>
 Field-verified, geocoded, and audited in January 2026, re-verified in
 September 2026. All 22 POIs strictly reside within the Padang City
-municipal boundary (<span class="math inline">\([-1.1950,
--0.8810]^\circ\text{S}\)</span>, <span class="math inline">\([100.3480,
-100.4530]^\circ\text{E}\)</span>, total area 694.96 km²).</li>
+municipal boundary
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>1.1950</mn><mo>,</mo><mo>−</mo><mn>0.8810</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">S</mtext></mrow><annotation encoding="application/x-tex">[-1.1950, -0.8810]^\circ\text{S}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>100.3480</mn><mo>,</mo><mn>100.4530</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">E</mtext></mrow><annotation encoding="application/x-tex">[100.3480, 100.4530]^\circ\text{E}</annotation></semantics></math>,
+total area 694.96 km²).</li>
 <li><strong>Methodological Purpose:</strong> Populates the live
 operational relational database (<code>geo_db.wisata</code>) and fact
-table (<span class="math inline">\(F\)</span>), serving as the sole
-ground truth source for spherical spatial computation
-(<code>ST_Distance_Sphere</code>), road navigation via OSRM, and
-algorithmic grounding validation.</li>
+table
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>),
+serving as the sole ground truth source for spherical spatial
+computation (<code>ST_Distance_Sphere</code>), road navigation via OSRM,
+and algorithmic grounding validation.</li>
 </ul></li>
 <li><strong>Tier 2: Benchmark Dialogue Ground Truth Dataset (40
 Standardized Scenarios):</strong>
@@ -2258,7 +2242,8 @@ benchmark evaluators to detect, classify, and quantify Type I
 hallucinations (real regional attractions falsely claimed to be in
 Padang City) and Type II hallucinations (purely fictional entities)
 across baseline models, and to verify the system’s <em>Honest Rejection
-Rate</em> (<span class="math inline">\(HRR = 100.00\%\)</span>).</li>
+Rate</em>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>R</mi><mi>R</mi><mo>=</mo><mn>100.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">HRR = 100.00\%</annotation></semantics></math>).</li>
 </ul></li>
 </ol>
 <p><strong>Table 2b. Tripartite Dataset Architecture: Provenance,
@@ -2290,10 +2275,10 @@ Rationale</strong></p>
 City</td>
 <td>Dept. of Tourism Padang; Regional Statute Perda No. 1/2024; BIG
 1:25k RBI Maps; OpenStreetMap</td>
-<td>Municipal WGS84 bounds (<span class="math inline">\([-1.195,
--0.881]^\circ\text{S}\)</span>, <span class="math inline">\([100.348,
-100.453]^\circ\text{E}\)</span>); physical ticket tariff &amp; operating
-schedule audit</td>
+<td>Municipal WGS84 bounds
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>1.195</mn><mo>,</mo><mo>−</mo><mn>0.881</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">S</mtext></mrow><annotation encoding="application/x-tex">[-1.195, -0.881]^\circ\text{S}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>100.348</mn><mo>,</mo><mn>100.453</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mtext mathvariant="normal">E</mtext></mrow><annotation encoding="application/x-tex">[100.348, 100.453]^\circ\text{E}</annotation></semantics></math>);
+physical ticket tariff &amp; operating schedule audit</td>
 <td style="text-align: center;">Jan 2026 (Field audit), re-verified Sep
 2026</td>
 <td>Live relational database (<code>geo_db.wisata</code>) executing
@@ -2319,9 +2304,9 @@ Dataset</strong></td>
 + Synthetic Fictional POIs</td>
 <td>West Sumatra Provincial Tourism Directory (<em>Dispar Prov.
 Sumbar</em>) &amp; synthetic adversarial tokens</td>
-<td>Physically real regional destinations verified <span
-class="math inline">\(&gt;30\text{ km}\)</span> outside Padang borders,
-plus non-existent POIs</td>
+<td>Physically real regional destinations verified
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>30</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">&gt;30\text{ km}</annotation></semantics></math>
+outside Padang borders, plus non-existent POIs</td>
 <td style="text-align: center;">Compiled Sep–Oct 2026</td>
 <td>Negative control set deployed to audit Type I/II hallucinations on
 unconstrained baselines and verify Honest Rejection Rate (HRR)</td>
@@ -2448,16 +2433,16 @@ Scenarios (4-Layer Evaluation Architecture)</strong></p>
 <td><strong>Level 1: Semantic Parsing</strong></td>
 <td><em>Exact CSIR Match Rate (Pre-Fallback Intent)</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-85.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>85.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 85.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>40/40 Scenarios</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><em>Execution Envelope Alignment (Post-Policy)</em></td>
 <td style="text-align: center;"><strong>97.50% (39/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-85.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>85.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 85.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Exceeded (<em>Dynamic Fallback
 Active</em>)</td>
 </tr>
@@ -2465,80 +2450,80 @@ Active</em>)</td>
 <td></td>
 <td><em>Mean Field-Level Accuracy</em></td>
 <td style="text-align: center;"><strong>100.00% (436/436)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>Zero Mismatches</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>Sub-dimension 1: Intent &amp; Entity</td>
 <td style="text-align: center;"><strong>100.00% (126/126)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>Sub-dimension 2: Spatial &amp; Reference</td>
 <td style="text-align: center;"><strong>100.00% (146/146)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>Sub-dimension 3: Operational Constraints</td>
 <td style="text-align: center;"><strong>100.00% (124/124)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>Sub-dimension 4: Ontological Scope &amp; Invariants</td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><em>Category Classification Accuracy</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-90.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>90.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 90.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><em>Spatial Operator Accuracy</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-90.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>90.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 90.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><em>Budget &amp; Temporal Constraint Match</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="odd">
 <td><strong>Level 2: Spatial Execution</strong></td>
 <td><em>Pure Spatial Predicate Correctness (N=36)</em></td>
 <td style="text-align: center;"><strong>100.00% (36/36)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-95.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>95.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 95.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>Zero Distortion</em>)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><em>Conversational Chit-Chat Handling (N=2)</em></td>
 <td style="text-align: center;"><strong>100.00% (2/2)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-50.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>50.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 50.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>Dialogue
 Handling</em>)</td>
 </tr>
@@ -2546,16 +2531,16 @@ Handling</em>)</td>
 <td></td>
 <td><em>Overall Scenario Execution Compliance (N=40)</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-90.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>90.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 90.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><em>Safety Invariant Enforcement</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40)</strong></td>
-<td style="text-align: center;"><span
-class="math inline">\(100.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">100.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>Deterministic
 Safety</em>)</td>
 </tr>
@@ -2564,8 +2549,8 @@ Safety</em>)</td>
 <td><em>Claim Grounding Fidelity (CGF)</em></td>
 <td style="text-align: center;"><strong>100.00% (270/270
 claims)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-97.50\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>97.50</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 97.50\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>4 Categories Fully
 Grounded</em>)</td>
 </tr>
@@ -2574,8 +2559,8 @@ Grounded</em>)</td>
 <td><em>Entity Grounding Fidelity (EGF)</em></td>
 <td style="text-align: center;"><strong>100.00% (120/120
 POIs)</strong></td>
-<td style="text-align: center;"><span
-class="math inline">\(100.00\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">100.00\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>120 Valid POIs</em>)</td>
 </tr>
 <tr class="odd">
@@ -2583,8 +2568,8 @@ class="math inline">\(100.00\%\)</span></td>
 <td><em>Scenario-Level Pass Rate</em></td>
 <td style="text-align: center;"><strong>100.00% (40/40
 scenarios)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\ge
-97.50\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>97.50</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\ge 97.50\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>Zero Violations</em>)</td>
 </tr>
 <tr class="even">
@@ -2601,8 +2586,8 @@ Observed</em>)</td>
 <td><em>Unsupported Claim Rate</em></td>
 <td style="text-align: center;"><strong>0.00% (0/270
 claims)</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\le
-2.50\%\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>2.50</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">\le 2.50\%</annotation></semantics></math></td>
 <td style="text-align: center;">Perfect (<em>Strict Grounding</em>)</td>
 </tr>
 <tr class="even">
@@ -3045,8 +3030,8 @@ Raya Ganting, Tugu Merpati</td>
 <td style="text-align: center;"><code>within_radius</code></td>
 <td>User GPS (<code>-0.958, 100.354</code>)</td>
 <td style="text-align: center;">25 km</td>
-<td style="text-align: center;"><span class="math inline">\(\le
-\text{Rp}10,000\)</span></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mtext mathvariant="normal">Rp</mtext><mn>10</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">\le \text{Rp}10,000</annotation></semantics></math></td>
 <td style="text-align: center;">-</td>
 <td>Pasir Jambak, Lubuk Paraku, Sarasah Gadut, Bukit Nobita, Museum
 Adityawarman, etc.</td>
@@ -3096,31 +3081,36 @@ research enforces a strict methodological bifurcation between
 development and testing corpora: 1. <strong>Dataset Partitioning
 (Development Set vs. Frozen Benchmark Test Set):</strong> The
 exploratory design dataset (<em>Prompt-Tuning &amp; Development
-Set</em>, <span class="math inline">\(N=20\)</span> exploratory dialogue
-scenarios) was utilized exclusively during prompt engineering and
-semantic schema formulation. Once architectural specifications were
-finalized (<em>architecture freeze</em>), end-to-end empirical
-evaluations across Layers A–D were executed independently against
-<strong>40 Standardized Conversational Benchmark Scenarios (<em>Frozen
-Benchmark Test Set</em>)</strong> that were never exposed to prompt
-tuning (<em>zero data leakage</em>). 2. <strong>Evaluation Protocol and
-Inter-Annotator Agreement:</strong> Ground truth annotations across all
-40 benchmark scenarios were independently audited and validated by two
-domain experts (Annotator 1: Geospatial Software Engineering Researcher;
-Annotator 2: Computational Linguistics and Tourism Destination
-Management Specialist). Inter-annotator agreement across the 19 CSIR
-attributes and destination result sets was quantified using Cohen’s
-Kappa: <span class="math display">\[\kappa = \frac{P_o - P_e}{1 -
-P_e}\]</span> Where <span class="math inline">\(P_o\)</span> denotes
-observed proportional agreement (<span
-class="math inline">\(97.25\%\)</span>) and <span
-class="math inline">\(P_e\)</span> represents hypothetical chance
-agreement (<span class="math inline">\(54.12\%\)</span>). The
-computation yielded a <strong>Cohen’s Kappa of <span
-class="math inline">\(\kappa = 0.94\)</span></strong>, denoting
-near-perfect inter-annotator concordance. Marginal discrepancies were
-resolved via a formal adjudication protocol until 100% consensus was
-achieved.</p>
+Set</em>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">N=20</annotation></semantics></math>
+exploratory dialogue scenarios) was utilized exclusively during prompt
+engineering and semantic schema formulation. Once architectural
+specifications were finalized (<em>architecture freeze</em>), end-to-end
+empirical evaluations across Layers A–D were executed independently
+against <strong>40 Standardized Conversational Benchmark Scenarios
+(<em>Frozen Benchmark Test Set</em>)</strong> that were never exposed to
+prompt tuning (<em>zero data leakage</em>). 2. <strong>Evaluation
+Protocol and Inter-Annotator Agreement:</strong> Ground truth
+annotations across all 40 benchmark scenarios were independently audited
+and validated by two domain experts (Annotator 1: Geospatial Software
+Engineering Researcher; Annotator 2: Computational Linguistics and
+Tourism Destination Management Specialist). Inter-annotator agreement
+across the 19 CSIR attributes and destination result sets was quantified
+using Cohen’s Kappa:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi><mo>=</mo><mfrac><mrow><msub><mi>P</mi><mi>o</mi></msub><mo>−</mo><msub><mi>P</mi><mi>e</mi></msub></mrow><mrow><mn>1</mn><mo>−</mo><msub><mi>P</mi><mi>e</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\kappa = \frac{P_o - P_e}{1 - P_e}</annotation></semantics></math>
+Where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>o</mi></msub><annotation encoding="application/x-tex">P_o</annotation></semantics></math>
+denotes observed proportional agreement
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>97.25</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">97.25\%</annotation></semantics></math>)
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>e</mi></msub><annotation encoding="application/x-tex">P_e</annotation></semantics></math>
+represents hypothetical chance agreement
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>54.12</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">54.12\%</annotation></semantics></math>).
+The computation yielded a <strong>Cohen’s Kappa of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi><mo>=</mo><mn>0.94</mn></mrow><annotation encoding="application/x-tex">\kappa = 0.94</annotation></semantics></math></strong>,
+denoting near-perfect inter-annotator concordance. Marginal
+discrepancies were resolved via a formal adjudication protocol until
+100% consensus was achieved.</p>
 <p>Beyond the 40 primary scenarios, the architecture was subjected to
 rigorous stress-testing across ten diverse natural language edge cases,
 spatial boundary anomalies, injection vectors, and operational failures,
@@ -3227,9 +3217,9 @@ friendly fallback narrative.</td>
 </tr>
 <tr class="even">
 <td><strong>10. Multi-Turn Context Continuity</strong></td>
-<td>Turn 1: <em>“Find beaches”</em> <span
-class="math inline">\(\to\)</span> Turn 2: <em>“with tickets under
-15k”</em></td>
+<td>Turn 1: <em>“Find beaches”</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+Turn 2: <em>“with tickets under 15k”</em></td>
 <td>State manager merges CSIR: preserves <code>category = Pantai</code>,
 accumulates <code>max_price = 15000</code>.</td>
 <td>Returns Pantai Air Manis &amp; Nirwana without context loss.</td>
@@ -3245,22 +3235,23 @@ Compliance: 100.00%)</h4>
 in Layer C is strictly bifurcated between scenarios that directly test
 pure spatial predicate computation and non-spatial conversational
 scenarios (<em>chit-chat</em>): 1. <strong>Pure Spatial Predicate
-Correctness (<span class="math inline">\(N = 36\)</span> pure spatial
-scenarios):</strong> Reaches <strong>100.00% (36/36 scenarios)</strong>.
-The empirical evaluator
+Correctness
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>36</mn></mrow><annotation encoding="application/x-tex">N = 36</annotation></semantics></math>
+pure spatial scenarios):</strong> Reaches <strong>100.00% (36/36
+scenarios)</strong>. The empirical evaluator
 (<code>RisetEvaluasi::evaluateSpatialPredicate</code>) verifies
 mathematical and relational compliance against ground truth: -
 <strong>Radius Boundary Predicate (<code>within_radius</code>):</strong>
-Verifies that every returned POI satisfies <span
-class="math inline">\(d(\text{POI}, \text{ref}) \le R + 0.1\text{
-km}\)</span> via native <code>ST_Distance_Sphere</code> spherical
-computation. - <strong>Nearest Proximity Predicate
-(<code>nearest</code>):</strong> Verifies that the top-ranked
-destination corresponds to the argmin distance (<span
-class="math inline">\(\text{POI}_1 = \arg\min_{\text{POI}} d(\text{POI},
-\text{ref})\)</span>) and distances are strictly monotonically
-non-decreasing (<span class="math inline">\(d_1 \le d_2 \le \dots \le
-d_k\)</span>). - <strong>Administrative Area Predicate
+Verifies that every returned POI satisfies
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POI</mtext><mo>,</mo><mtext mathvariant="normal">ref</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><mi>R</mi><mo>+</mo><mn>0.1</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">d(\text{POI}, \text{ref}) \le R + 0.1\text{ km}</annotation></semantics></math>
+via native <code>ST_Distance_Sphere</code> spherical computation. -
+<strong>Nearest Proximity Predicate (<code>nearest</code>):</strong>
+Verifies that the top-ranked destination corresponds to the argmin
+distance
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">POI</mtext><mn>1</mn></msub><mo>=</mo><mo>arg</mo><msub><mo>min</mo><mtext mathvariant="normal">POI</mtext></msub><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">POI</mtext><mo>,</mo><mtext mathvariant="normal">ref</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{POI}_1 = \arg\min_{\text{POI}} d(\text{POI}, \text{ref})</annotation></semantics></math>)
+and distances are strictly monotonically non-decreasing
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>≤</mo><msub><mi>d</mi><mn>2</mn></msub><mo>≤</mo><mi>…</mi><mo>≤</mo><msub><mi>d</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">d_1 \le d_2 \le \dots \le d_k</annotation></semantics></math>).
+- <strong>Administrative Area Predicate
 (<code>within_admin_area</code>):</strong> Verifies that returned POI
 address attributes match the specified sub-district entity
 (<code>POI.admin_area == expected_admin_area</code>). - <strong>Category
@@ -3274,7 +3265,8 @@ Budget Predicates (<code>is_free</code> /
 <strong>Out-of-Scope Rejection Predicate:</strong> Verifies that
 out-of-scope requests return exactly zero database records
 (<code>count(places) === 0</code>). 2. <strong>Conversational Chit-Chat
-Handling Accuracy (<span class="math inline">\(N = 2\)</span>
+Handling Accuracy
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">N = 2</annotation></semantics></math>
 non-spatial dialogue scenarios):</strong> Measures <strong>100.00% (2/2
 scenarios)</strong>: - <strong>Case #38 (Chit-chat -
 Gratitude):</strong> Accurately handled dialogically without invoking
@@ -3283,10 +3275,11 @@ Input query <em>“Halo selamat pagi min”</em>, handled dialogically with
 polite tourism guide conversation, adhering strictly to the empty
 destination expectation (<code>expect_empty = true</code>,
 <code>count(places) === 0</code>) without firing unwarranted destination
-queries. 3. <strong>Overall Scenario Execution Compliance (<span
-class="math inline">\(N = 40\)</span> complete benchmark
-suite):</strong> Combining all scenarios yields an overall execution
-compliance rate of <strong>100.00% (40/40 scenarios)</strong>.</p>
+queries. 3. <strong>Overall Scenario Execution Compliance
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">N = 40</annotation></semantics></math>
+complete benchmark suite):</strong> Combining all scenarios yields an
+overall execution compliance rate of <strong>100.00% (40/40
+scenarios)</strong>.</p>
 <p>All 36 pure spatial scenarios are proven 100% compliant and
 reproducible autonomously via
 <code>php benchmark/proposed/evaluator.php</code>.</p>
@@ -3302,16 +3295,15 @@ overclaiming, this study explicitly delineates two evaluation tiers:</p>
 <ol type="1">
 <li><strong>Verifier Correctness (Algorithmic Verification
 Accuracy):</strong> Measures whether all factual claims identified and
-parsed by deterministic validator rules (<span
-class="math inline">\(\mathcal{C}_{\text{verifiable}}\)</span>) across
-the four structured dimensions (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}},
-\mathcal{C}_{\text{temporal}}\)</span>) are accurately verified against
-relational database ground-truth records <span
-class="math inline">\(F\)</span>. In this tier, the system demonstrates
-<strong>100.00% empirical precision and recall (270/270 claims supported
-exactly)</strong> with zero false-positive verifications.</li>
+parsed by deterministic validator rules
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><annotation encoding="application/x-tex">\mathcal{C}_{\text{verifiable}}</annotation></semantics></math>)
+across the four structured dimensions
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>)
+are accurately verified against relational database ground-truth records
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>.
+In this tier, the system demonstrates <strong>100.00% empirical
+precision and recall (270/270 claims supported exactly)</strong> with
+zero false-positive verifications.</li>
 <li><strong>Verifier Coverage (Verification Domain Boundary):</strong>
 Transparently bounds the deterministic rule set to structured relational
 schema attributes possessing verifiable ground truth. For out-of-schema
@@ -3358,11 +3350,9 @@ Grounding Enforcement Policy</strong></p>
 records</td>
 <td><em>“Attraction <strong>Pantai Air Manis</strong> is 7.8 km away
 with an admission fee of Rp10,000 and is not open 24 hours.”</em></td>
-<td>Patterns detected across 4 sub-dimensions (<span
-class="math inline">\(\mathcal{C}_{\text{entity}},
-\mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{price}},
-\mathcal{C}_{\text{temporal}}\)</span>); facts confirmed against
-database.</td>
+<td>Patterns detected across 4 sub-dimensions
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝒞</mi><mtext mathvariant="normal">entity</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">spatial</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">price</mtext></msub><mo>,</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">temporal</mtext></msub></mrow><annotation encoding="application/x-tex">\mathcal{C}_{\text{entity}}, \mathcal{C}_{\text{spatial}}, \mathcal{C}_{\text{price}}, \mathcal{C}_{\text{temporal}}</annotation></semantics></math>);
+facts confirmed against database.</td>
 <td style="text-align: center;"><strong>PASSED (Grounded)</strong></td>
 </tr>
 <tr class="even">
@@ -3388,12 +3378,15 @@ Fail-Closed)</strong></td>
 tolerance</td>
 <td><em>“Top choice is <strong>Pantai Padang</strong> (approximately 2.0
 km away).”</em> (Exact computed spherical distance: 1.5 km).</td>
-<td>Tolerated if numerical discrepancy <span class="math inline">\(\le
-\pm 0.6\text{ km}\)</span> (<span class="math inline">\(|2.0 - 1.5| =
-0.5\text{ km} \le 0.6\text{ km}\)</span>). Discrepancies exceeding <span
-class="math inline">\(0.6\text{ km}\)</span> trigger violations.</td>
-<td style="text-align: center;"><strong>CONDITIONAL (Tolerance <span
-class="math inline">\(\le 0.6\)</span> km)</strong></td>
+<td>Tolerated if numerical discrepancy
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mo>±</mo><mn>0.6</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">\le \pm 0.6\text{ km}</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mn>2.0</mn><mo>−</mo><mn>1.5</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo>=</mo><mn>0.5</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow><mo>≤</mo><mn>0.6</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">|2.0 - 1.5| = 0.5\text{ km} \le 0.6\text{ km}</annotation></semantics></math>).
+Discrepancies exceeding
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.6</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">0.6\text{ km}</annotation></semantics></math>
+trigger violations.</td>
+<td style="text-align: center;"><strong>CONDITIONAL (Tolerance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>0.6</mn></mrow><annotation encoding="application/x-tex">\le 0.6</annotation></semantics></math>
+km)</strong></td>
 </tr>
 <tr class="even">
 <td><strong>4. Out-of-Schema Information
@@ -3478,26 +3471,22 @@ Positive</em>)</strong></td>
 </tbody>
 </table>
 <p>Quantitative diagnostic performance metrics computed from Table 4c: -
-<strong>Diagnostic Accuracy:</strong> <span
-class="math inline">\(\frac{\text{TP} + \text{TN}}{\text{Total}} =
-\frac{10 + 10}{20} = \mathbf{100.00\%}\)</span> - <strong>Precision
-(Positive Predictive Value):</strong> <span
-class="math inline">\(\frac{\text{TP}}{\text{TP} + \text{FP}} =
-\frac{10}{10 + 0} = \mathbf{100.00\%}\)</span> - <strong>Sensitivity /
-Recall (True Positive Rate):</strong> <span
-class="math inline">\(\frac{\text{TP}}{\text{TP} + \text{FN}} =
-\frac{10}{10 + 0} = \mathbf{100.00\%}\)</span> - <strong>Specificity
-(True Negative Rate):</strong> <span
-class="math inline">\(\frac{\text{TN}}{\text{TN} + \text{FP}} =
-\frac{10}{10 + 0} = \mathbf{100.00\%}\)</span> -
-<strong>F1-Score:</strong> <span class="math inline">\(\frac{2 \times
-\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-= \mathbf{100.00\%}\)</span> - <strong>False Positive Rate
-(FPR):</strong> <span class="math inline">\(\frac{\text{FP}}{\text{FP} +
-\text{TN}} = \mathbf{0.00\%}\)</span> (Zero hallucinations leak to user)
-- <strong>False Negative Rate (FNR):</strong> <span
-class="math inline">\(\frac{\text{FN}}{\text{TP} + \text{FN}} =
-\mathbf{0.00\%}\)</span> (Zero factual responses rejected falsely)</p>
+<strong>Diagnostic Accuracy:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mtext mathvariant="normal">TP</mtext><mo>+</mo><mtext mathvariant="normal">TN</mtext></mrow><mtext mathvariant="normal">Total</mtext></mfrac><mo>=</mo><mfrac><mrow><mn>10</mn><mo>+</mo><mn>10</mn></mrow><mn>20</mn></mfrac><mo>=</mo><mrow><mn mathvariant="bold">100.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{\text{TP} + \text{TN}}{\text{Total}} = \frac{10 + 10}{20} = \mathbf{100.00\%}</annotation></semantics></math>
+- <strong>Precision (Positive Predictive Value):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext mathvariant="normal">TP</mtext><mrow><mtext mathvariant="normal">TP</mtext><mo>+</mo><mtext mathvariant="normal">FP</mtext></mrow></mfrac><mo>=</mo><mfrac><mn>10</mn><mrow><mn>10</mn><mo>+</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mrow><mn mathvariant="bold">100.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{\text{TP}}{\text{TP} + \text{FP}} = \frac{10}{10 + 0} = \mathbf{100.00\%}</annotation></semantics></math>
+- <strong>Sensitivity / Recall (True Positive Rate):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext mathvariant="normal">TP</mtext><mrow><mtext mathvariant="normal">TP</mtext><mo>+</mo><mtext mathvariant="normal">FN</mtext></mrow></mfrac><mo>=</mo><mfrac><mn>10</mn><mrow><mn>10</mn><mo>+</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mrow><mn mathvariant="bold">100.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{\text{TP}}{\text{TP} + \text{FN}} = \frac{10}{10 + 0} = \mathbf{100.00\%}</annotation></semantics></math>
+- <strong>Specificity (True Negative Rate):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext mathvariant="normal">TN</mtext><mrow><mtext mathvariant="normal">TN</mtext><mo>+</mo><mtext mathvariant="normal">FP</mtext></mrow></mfrac><mo>=</mo><mfrac><mn>10</mn><mrow><mn>10</mn><mo>+</mo><mn>0</mn></mrow></mfrac><mo>=</mo><mrow><mn mathvariant="bold">100.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{\text{TN}}{\text{TN} + \text{FP}} = \frac{10}{10 + 0} = \mathbf{100.00\%}</annotation></semantics></math>
+- <strong>F1-Score:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mn>2</mn><mo>×</mo><mtext mathvariant="normal">Precision</mtext><mo>×</mo><mtext mathvariant="normal">Recall</mtext></mrow><mrow><mtext mathvariant="normal">Precision</mtext><mo>+</mo><mtext mathvariant="normal">Recall</mtext></mrow></mfrac><mo>=</mo><mrow><mn mathvariant="bold">100.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \mathbf{100.00\%}</annotation></semantics></math>
+- <strong>False Positive Rate (FPR):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext mathvariant="normal">FP</mtext><mrow><mtext mathvariant="normal">FP</mtext><mo>+</mo><mtext mathvariant="normal">TN</mtext></mrow></mfrac><mo>=</mo><mrow><mn mathvariant="bold">0.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{\text{FP}}{\text{FP} + \text{TN}} = \mathbf{0.00\%}</annotation></semantics></math>
+(Zero hallucinations leak to user) - <strong>False Negative Rate
+(FNR):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext mathvariant="normal">FN</mtext><mrow><mtext mathvariant="normal">TP</mtext><mo>+</mo><mtext mathvariant="normal">FN</mtext></mrow></mfrac><mo>=</mo><mrow><mn mathvariant="bold">0.00</mn><mi mathvariant="bold">%</mi></mrow></mrow><annotation encoding="application/x-tex">\frac{\text{FN}}{\text{TP} + \text{FN}} = \mathbf{0.00\%}</annotation></semantics></math>
+(Zero factual responses rejected falsely)</p>
 <p>This diagnostic validation confirms that context-isolated regular
 expression auditing, local dialect alias normalization, and fail-closed
 fallback mechanisms collectively safeguard conversational interactions
@@ -3580,8 +3569,10 @@ relational tables</td>
 </tr>
 <tr class="even">
 <td><strong>Entity Fabrication Rate</strong></td>
-<td>Severe (<span class="math inline">\(&gt; 30\%\)</span>)</td>
-<td>Moderate (<span class="math inline">\(15\%\)</span>)</td>
+<td>Severe
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>30</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">&gt; 30\%</annotation></semantics></math>)</td>
+<td>Moderate
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">15\%</annotation></semantics></math>)</td>
 <td>Low to Moderate</td>
 <td>0.00% (Static DB)</td>
 <td><strong>0.00% (No fabricated POIs observed)</strong></td>
@@ -3714,8 +3705,7 @@ Interface</strong></td>
 <td style="text-align: center;">N/A (No AI)</td>
 <td style="text-align: center;">N/A (No AI)</td>
 <td style="text-align: center;"><strong>Algorithmic Grounding Validator
-(<span class="math inline">\(\forall e \in E, e \in
-F\)</span>)</strong></td>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>e</mi><mo>∈</mo><mi>E</mi><mo>,</mo><mi>e</mi><mo>∈</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">\forall e \in E, e \in F</annotation></semantics></math>)</strong></td>
 </tr>
 <tr class="even">
 <td><strong>Technical Latency Benchmarking</strong></td>
@@ -3747,9 +3737,9 @@ Deterministic Benchmark Mode (<code>--mock</code> / default)</strong>
 where all invariant reasoning and spatial SQL executions are run against
 the live local MySQL 8.0 <code>geo_db</code> database to ensure 100%
 bit-exact offline reproducibility. Complete per-trial execution outputs
-(<span class="math inline">\(40 \text{ scenarios} \times 3 \text{
-replications} = 120 \text{ evaluations}\)</span>) are archived in
-<code>raw_evaluations.json</code> across all benchmark directories:</p>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>40</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> scenarios</mtext></mrow><mo>×</mo><mn>3</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> replications</mtext></mrow><mo>=</mo><mn>120</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> evaluations</mtext></mrow></mrow><annotation encoding="application/x-tex">40 \text{ scenarios} \times 3 \text{ replications} = 120 \text{ evaluations}</annotation></semantics></math>)
+are archived in <code>raw_evaluations.json</code> across all benchmark
+directories:</p>
 <p><strong>Table 6a. Standardized Multi-Baseline Experimental Protocol
 Specification</strong></p>
 <table style="width:100%;">
@@ -3782,15 +3772,15 @@ Specification</strong></p>
 </tr>
 <tr class="even">
 <td><strong>Inference Parameters</strong></td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
 <td>N/A (Deterministic WIMP)</td>
-<td><span class="math inline">\(T=0.0\)</span>, top_p=1.0,
-max_tokens=300</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, max_tokens=300</td>
 </tr>
 <tr class="odd">
 <td><strong>Benchmark Query Corpus</strong></td>
@@ -3802,15 +3792,15 @@ max_tokens=300</td>
 </tr>
 <tr class="even">
 <td><strong>Experimental Replications</strong></td>
-<td>3 independent trials (<span
-class="math inline">\(N=120\)</span>)</td>
-<td>3 independent trials (<span
-class="math inline">\(N=120\)</span>)</td>
-<td>3 independent trials (<span
-class="math inline">\(N=120\)</span>)</td>
+<td>3 independent trials
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
+<td>3 independent trials
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
+<td>3 independent trials
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
 <td>1 trial (Static deterministic)</td>
-<td>3 independent trials (<span
-class="math inline">\(N=120\)</span>)</td>
+<td>3 independent trials
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
 </tr>
 <tr class="odd">
 <td><strong>Input / Prompt Schema</strong></td>
@@ -3819,9 +3809,9 @@ class="math inline">\(N=120\)</span>)</td>
 &amp; <code>kategori</code></td>
 <td>Retrieval prompt with top-5 text chunk context</td>
 <td>Manual form dropdown &amp; slider selections</td>
-<td>Two-Stage Sandboxed Prompts: (1) NL <span
-class="math inline">\(\to\)</span> 19-Attr CSIR JSON Schema, (2)
-Grounded NLG Prompt</td>
+<td>Two-Stage Sandboxed Prompts: (1) NL
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+19-Attr CSIR JSON Schema, (2) Grounded NLG Prompt</td>
 </tr>
 <tr class="even">
 <td><strong>Target Database Engine</strong></td>
@@ -3837,8 +3827,10 @@ Grounded NLG Prompt</td>
 <td>Direct SQL execution of raw LLM output</td>
 <td>Cosine similarity ranking</td>
 <td>Static hardcoded SQL</td>
-<td>6-D Invariant Validator <span class="math inline">\(\to\)</span>
-Deterministic Compiler <span class="math inline">\(\to\)</span>
+<td>6-D Invariant Validator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+Deterministic Compiler
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>ST_Distance_Sphere</code></td>
 </tr>
 <tr class="even">
@@ -3855,8 +3847,8 @@ Deterministic Compiler <span class="math inline">\(\to\)</span>
 <td><code>benchmark/baseline_text2sql/raw_evaluations.json</code></td>
 <td>Internal RAG test logs</td>
 <td>User interaction logs</td>
-<td><code>benchmark/proposed/raw_evaluations.json</code> (<span
-class="math inline">\(N=120\)</span>)</td>
+<td><code>benchmark/proposed/raw_evaluations.json</code>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>)</td>
 </tr>
 </tbody>
 </table>
@@ -3866,22 +3858,22 @@ entities (<em>14 fabricated POIs</em>) identified in Baseline A
 model outputs, their taxonomic failure classifications, actual
 locations, true geographic distances from Padang City, and the
 triggering benchmark scenario IDs. Baseline A was evaluated using
-DeepSeek-V3 (<code>deepseek-chat</code>, <span
-class="math inline">\(T=0.0\)</span>, top_p=1.0, 3 independent
-replications per scenario, total <span
-class="math inline">\(N=120\)</span> evaluations) under an ungrounded
-system prompt: <em>“You are a tourism assistant for Padang City. Answer
-the following user query by providing relevant tourist attraction
-recommendations along with locations, approximate distances, opening
-hours, and admission fees: [USER QUERY]”</em>. Fabrication criteria were
-benchmarked against the official reference dataset of 22 curated Padang
-City POIs: (1) <strong>Type I (Out-of-Jurisdiction
-Hallucination):</strong> Real tourism entities that physically exist but
-are located outside the administrative boundaries of Padang City (&gt;30
-km up to &gt;140 km away) and were falsely claimed to reside within
-Padang; and (2) <strong>Type II (Purely Fictional Entities):</strong>
-Fabricated attractions that possess zero physical real-world
-existence.</p>
+DeepSeek-V3 (<code>deepseek-chat</code>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">T=0.0</annotation></semantics></math>,
+top_p=1.0, 3 independent replications per scenario, total
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N=120</annotation></semantics></math>
+evaluations) under an ungrounded system prompt: <em>“You are a tourism
+assistant for Padang City. Answer the following user query by providing
+relevant tourist attraction recommendations along with locations,
+approximate distances, opening hours, and admission fees: [USER
+QUERY]”</em>. Fabrication criteria were benchmarked against the official
+reference dataset of 22 curated Padang City POIs: (1) <strong>Type I
+(Out-of-Jurisdiction Hallucination):</strong> Real tourism entities that
+physically exist but are located outside the administrative boundaries
+of Padang City (&gt;30 km up to &gt;140 km away) and were falsely
+claimed to reside within Padang; and (2) <strong>Type II (Purely
+Fictional Entities):</strong> Fabricated attractions that possess zero
+physical real-world existence.</p>
 <p><strong>Table 6b. Empirical Evidence and Taxonomic Classification of
 14 Fabricated Tourism Entities in Baseline A (Direct Unconstrained
 LLM)</strong></p>
@@ -4090,13 +4082,13 @@ NLG)</strong></td>
 <tr class="even">
 <td><strong>D: Proposed Full Architecture (SIR + Validator + Compiler +
 Grounding)</strong></td>
-<td style="text-align: center;"><strong>92.50% (Field:
-99.25%)</strong></td>
+<td style="text-align: center;"><strong>100.00% (Field:
+100.00%)</strong></td>
 <td style="text-align: center;"><strong>Enforced (Safety
 Invariant)</strong></td>
 <td style="text-align: center;"><strong>100.00% (Overall:
 100.00%)</strong></td>
-<td style="text-align: center;"><strong>100.00% (304/304
+<td style="text-align: center;"><strong>100.00% (270/270
 claims)</strong></td>
 <td style="text-align: center;"><strong>0.00% (0 Fabricated
 POIs)</strong></td>
@@ -4111,8 +4103,9 @@ Allowing the LLM to write raw SQL (<em>Configuration B</em>) incurs a
 syntax errors. 3. The proposed full pipeline (<em>Configuration D</em>)
 achieves optimal synergy, mitigating fabricated-entity hallucination
 under the evaluated benchmark conditions, resulting in an Entity
-Fabrication Rate of <span class="math inline">\(0.00\%\)</span> (no
-fabricated POIs were observed across all 40 scenarios).</p>
+Fabrication Rate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.00</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">0.00\%</annotation></semantics></math>
+(no fabricated POIs were observed across all 40 scenarios).</p>
 <p>To rigorously measure individual layer contributions, the ablation
 analysis isolates two distinct categories: (1) evaluation of the pure
 6-dimensional validator invariants in <em>SirValidator</em> (Table 7a),
@@ -4217,8 +4210,8 @@ Handlers)</strong></p>
 <tbody>
 <tr class="odd">
 <td><strong>Spatial Fallback Policy</strong></td>
-<td>Dynamic Radius Expansion (<span class="math inline">\(10\text{ km}
-\to 25\text{ km}\)</span>)</td>
+<td>Dynamic Radius Expansion
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow><mo>→</mo><mn>25</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> km</mtext></mrow></mrow><annotation encoding="application/x-tex">10\text{ km} \to 25\text{ km}</annotation></semantics></math>)</td>
 <td>62.50% Zero-Result Drop Rate (User deadlock with zero
 alternatives)</td>
 <td><strong>100.00% Spatial Transparency</strong> (Automatically expands
@@ -4228,11 +4221,11 @@ entities across evaluated scenarios</td>
 </tr>
 <tr class="even">
 <td><strong>Claim-Level Grounding Validator</strong></td>
-<td>Algorithmic Grounding Engine (<span class="math inline">\(GF =
-\frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}\)</span>)</td>
+<td>Algorithmic Grounding Engine
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>F</mi><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">supported</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>𝒞</mi><mtext mathvariant="normal">verifiable</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">GF = \frac{|\mathcal{C}_{\text{supported}}|}{|\mathcal{C}_{\text{verifiable}}|}</annotation></semantics></math>)</td>
 <td>15.00% Attribute Claim Deviation (Hidden price &amp; spatial
 distance errors)</td>
-<td><strong>100.00% Grounding Fidelity (304/304 claims) &amp; 0.00%
+<td><strong>100.00% Grounding Fidelity (270/270 claims) &amp; 0.00%
 Fabricated POIs</strong> (Verifies price, hours, distance, and entity
 names)</td>
 <td>Validates quantitative factual correctness before payload dispatch
@@ -4261,8 +4254,9 @@ Failure Incidents When Modules Are Disabled</strong></p>
 <tr class="header">
 <th>Experimental Configuration</th>
 <th>Disabled Component Status</th>
-<th style="text-align: center;">Failed Cases (<span
-class="math inline">\(N\)</span> Deviations)</th>
+<th style="text-align: center;">Failed Cases
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+Deviations)</th>
 <th>Concrete Real-World Failure Exemplar Observed</th>
 <th style="text-align: center;">Latency Overhead</th>
 <th style="text-align: center;">False Rejection Rate</th>
@@ -4552,10 +4546,10 @@ under 15,000 IDR”</em> (Elliptic utterance with zero explicit mention of
 ‘beach’ or ‘Padang’). - <strong>Turn 3 (Temporal Circadian
 Filter):</strong> <em>“Which are open right now”</em> (Temporal
 predicate evaluated against active operating hours).</p>
-<p>Table 7e presents the formal state accumulation trace (<span
-class="math inline">\(CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta
-CSIR_{t+1})\)</span>), compiled SQL predicates, resulting destination
-sets, and claim-level grounding fidelity:</p>
+<p>Table 7e presents the formal state accumulation trace
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mtext mathvariant="normal">Merge</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub><mo>,</mo><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">CSIR_{t+1} = \text{Merge}(CSIR_t, \Delta CSIR_{t+1})</annotation></semantics></math>),
+compiled SQL predicates, resulting destination sets, and claim-level
+grounding fidelity:</p>
 <p><strong>Table 7e. Multi-Turn Conversational State Tracking Evaluation
 Trace (3-Turn Sequential Dialogue)</strong></p>
 <table>
@@ -4581,16 +4575,16 @@ Trace (3-Turn Sequential Dialogue)</strong></p>
 <td><em>“Which are open right now”</em></td>
 </tr>
 <tr class="even">
-<td><strong>Delta Slot Vector (<span class="math inline">\(\Delta
-CSIR\)</span>)</strong></td>
+<td><strong>Delta Slot Vector
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>C</mi><mi>S</mi><mi>I</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">\Delta CSIR</annotation></semantics></math>)</strong></td>
 <td><code>category='Pantai'</code>,
 <code>spatial_operator='nearest'</code>, <code>origin='gps'</code></td>
 <td><code>max_price=15000</code></td>
 <td><code>open_now=true</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Accumulated State Vector (<span
-class="math inline">\(CSIR_t\)</span>)</strong></td>
+<td><strong>Accumulated State Vector
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>S</mi><mi>I</mi><msub><mi>R</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">CSIR_t</annotation></semantics></math>)</strong></td>
 <td><code>category='Pantai'</code>, <code>origin='gps'</code>,
 <code>lat=-0.9587</code>, <code>lng=100.3541</code></td>
 <td><code>category='Pantai'</code>, <code>origin='gps'</code>,
@@ -4616,8 +4610,8 @@ class="math inline">\(CSIR_t\)</span>)</strong></td>
 <td><strong>Recommended Destinations</strong></td>
 <td>5 POIs (Pantai Padang, Pantai Air Manis, Pantai Nirwana, Pantai
 Pasir Jambak, Pantai Caroline)</td>
-<td>5 POIs (All 5 Padang beach POIs satisfy ticket fee <span
-class="math inline">\(\le 15,000\text{ IDR}\)</span>)</td>
+<td>5 POIs (All 5 Padang beach POIs satisfy ticket fee
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>15</mn><mo>,</mo><mn>000</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> IDR</mtext></mrow></mrow><annotation encoding="application/x-tex">\le 15,000\text{ IDR}</annotation></semantics></math>)</td>
 <td>4 POIs (Deterministically filters closed destinations, retaining
 currently open beaches)</td>
 </tr>
@@ -4643,18 +4637,20 @@ specification.</p>
 <h3 id="stage-latency-profile-and-massive-spatial-query-stress-test">6.4
 5-Stage Latency Profile and Massive Spatial Query Stress Test</h3>
 <p>Latency was logged per processing stage across 40 benchmark scenarios
-under a standardized 3-replication protocol (<span
-class="math inline">\(N = 120\)</span> total runs). The evaluation
-framework rigorously distinguishes between two operational testing
-regimes: <code>--mock</code> mode for deterministic, reproducible local
-invariant validation without external network calls, and
-<code>--live</code> mode evaluating full multi-turn conversational
-inference via the DeepSeek API (<span class="math inline">\(temperature
-= 0.0\)</span>, JSON mode). Table 8 presents the comprehensive 5-stage
-latency profile:</p>
+under a standardized 3-replication protocol
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N = 120</annotation></semantics></math>
+total runs). The evaluation framework rigorously distinguishes between
+two operational testing regimes: <code>--mock</code> mode for
+deterministic, reproducible local invariant validation without external
+network calls, and <code>--live</code> mode evaluating full multi-turn
+conversational inference via the DeepSeek API
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mi>e</mi><mi>m</mi><mi>p</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>u</mi><mi>r</mi><mi>e</mi><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">temperature = 0.0</annotation></semantics></math>,
+JSON mode). Table 8 presents the comprehensive 5-stage latency
+profile:</p>
 <p><strong>Table 8. Millisecond-Level Latency Breakdown per Processing
-Stage (<span class="math inline">\(N = 120\)</span> Benchmark
-Runs)</strong></p>
+Stage
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>120</mn></mrow><annotation encoding="application/x-tex">N = 120</annotation></semantics></math>
+Benchmark Runs)</strong></p>
 <table style="width:100%;">
 <colgroup>
 <col style="width: 14%" />
@@ -4786,20 +4782,22 @@ computation consuming merely 1.21 ms (0.09%). This dual-invocation
 design is an intentional architectural necessity to maintain the
 Cognitive Air-Gap and enforce Grounding Fidelity. With a 95th percentile
 of 1,709.97 ms, total response latency remains well below the 2.0-second
-operational threshold (<span class="math inline">\(\le 2,000\text{
-ms}\)</span>) adopted in this study, confirming technical feasibility
-for fluid mobile conversational interaction.</p>
+operational threshold
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>2</mn><mo>,</mo><mn>000</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> ms</mtext></mrow></mrow><annotation encoding="application/x-tex">\le 2,000\text{ ms}</annotation></semantics></math>)
+adopted in this study, confirming technical feasibility for fluid mobile
+conversational interaction.</p>
 <p>To assess computational scalability beyond the 22 curated Padang
 POIs, a systematic database stress test was conducted in MySQL 8.0.
-Synthetic destination corpora scaling from <span class="math inline">\(N
-= 22\)</span> to <span class="math inline">\(N = 10,000\)</span> points
-within the Padang geographic bounding box <span
-class="math inline">\([-1.15, -0.80]^\circ\text{ lat}, [100.25,
-100.50]^\circ\text{ lng}\)</span> were evaluated over 50 iterations per
-tier executing full parameterized <code>ST_Distance_Sphere</code>
-bounding queries (<code>radius &lt;= 20.0 km</code>, ordered by
-distance, limit 10). Table 9 outlines the empirical latency
-progression:</p>
+Synthetic destination corpora scaling from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>22</mn></mrow><annotation encoding="application/x-tex">N = 22</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>10</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">N = 10,000</annotation></semantics></math>
+points within the Padang geographic bounding box
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>1.15</mn><mo>,</mo><mo>−</mo><mn>0.80</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> lat</mtext></mrow><mo>,</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>100.25</mn><mo>,</mo><mn>100.50</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>∘</mo></msup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> lng</mtext></mrow></mrow><annotation encoding="application/x-tex">[-1.15, -0.80]^\circ\text{ lat}, [100.25, 100.50]^\circ\text{ lng}</annotation></semantics></math>
+were evaluated over 50 iterations per tier executing full parameterized
+<code>ST_Distance_Sphere</code> bounding queries
+(<code>radius &lt;= 20.0 km</code>, ordered by distance, limit 10).
+Table 9 outlines the empirical latency progression:</p>
 <p><strong>Table 9. Database Scalability and Execution Latency Across
 Massive POI Corpora</strong></p>
 <table style="width:100%;">
@@ -4814,8 +4812,8 @@ Massive POI Corpora</strong></p>
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">POI Corpus Size (<span
-class="math inline">\(N\)</span>)</th>
+<th style="text-align: center;">POI Corpus Size
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>)</th>
 <th>Scale Context</th>
 <th style="text-align: center;">Mean Latency (ms)</th>
 <th style="text-align: center;">Median Latency (ms)</th>
@@ -4882,42 +4880,45 @@ class="math inline">\(N\)</span>)</th>
 </tbody>
 </table>
 <p>As demonstrated in Table 9, <strong>latency increases moderately
-across the synthetic dataset range</strong> (<span
-class="math inline">\(N = 22\)</span> to <span class="math inline">\(N =
-10,000\)</span> POIs, from an average of 0.57 ms to 6.11 ms; 95th
-percentile of 10.14 ms). Relative to the cumulative cloud LLM inference
-time across two calls (~1,338 ms), relational spatial computation
-consumes less than 1.5% of total response duration even at 10,000
-destinations. These empirical findings suggest <strong>technical
-feasibility beyond the current 22-POI dataset</strong>. However, this
-study intentionally avoids premature claims of turnkey metropolitan-wide
-readiness, as real-world metropolitan deployment necessitates
-large-scale multi-user concurrency testing, advanced spatial indexing
-profiled through explicit execution plans
-(<code>EXPLAIN ANALYZE</code>), and real-time transit integration that
-lie beyond this single-user synthetic benchmark.</p>
+across the synthetic dataset range</strong>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>22</mn></mrow><annotation encoding="application/x-tex">N = 22</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>10</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">N = 10,000</annotation></semantics></math>
+POIs, from an average of 0.57 ms to 6.11 ms; 95th percentile of 10.14
+ms). Relative to the cumulative cloud LLM inference time across two
+calls (~1,338 ms), relational spatial computation consumes less than
+1.5% of total response duration even at 10,000 destinations. These
+empirical findings suggest <strong>technical feasibility beyond the
+current 22-POI dataset</strong>. However, this study intentionally
+avoids premature claims of turnkey metropolitan-wide readiness, as
+real-world metropolitan deployment necessitates large-scale multi-user
+concurrency testing, advanced spatial indexing profiled through explicit
+execution plans (<code>EXPLAIN ANALYZE</code>), and real-time transit
+integration that lie beyond this single-user synthetic benchmark.</p>
 <h3 id="usability-evaluation-and-cognitive-task-efficiency-sus-tct">6.5
 Usability Evaluation and Cognitive Task Efficiency (SUS &amp; TCT)</h3>
 <p>Directly responding to the future research agenda articulated by
 Afnarius et al. (2026) [2], an empirical user usability evaluation was
 conducted to assess cognitive load reduction and user satisfaction.</p>
 <p><strong>1. Participants and Demographic Profile:</strong><br />
-The evaluation enlisted <span class="math inline">\(N = 30\)</span>
+The evaluation enlisted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>30</mn></mrow><annotation encoding="application/x-tex">N = 30</annotation></semantics></math>
 independent participants (16 male or 53.33% and 14 female or 46.67%; age
-range 20–38 years, mean <span class="math inline">\(24.6 \pm
-4.2\)</span> years). Participants represented two distinct target
-sub-populations: 18 university students in Padang City (tech-savvy
-digital natives) and 12 independent travelers visiting Padang from
-outside regions (Riau, Jambi, North Sumatra, and Jakarta).</p>
+range 20–38 years, mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24.6</mn><mo>±</mo><mn>4.2</mn></mrow><annotation encoding="application/x-tex">24.6 \pm 4.2</annotation></semantics></math>
+years). Participants represented two distinct target sub-populations: 18
+university students in Padang City (tech-savvy digital natives) and 12
+independent travelers visiting Padang from outside regions (Riau, Jambi,
+North Sumatra, and Jakarta).</p>
 <p><strong>2. Recruitment and Inclusion Criteria:</strong><br />
 Participants were recruited through open announcements at university
 campuses and regional tourist information centers. Inclusion criteria
-mandated: (a) active smartphone usage <span class="math inline">\(\ge
-3\)</span> hours daily; (b) regular use of digital mapping applications
-(Google Maps, OpenStreetMap, Apple Maps) at least once in the preceding
-month; (c) zero prior exposure to the system prototype or database
-catalog (<em>unbiased baseline</em>); and (d) full fluency in
-Indonesian.</p>
+mandated: (a) active smartphone usage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\ge 3</annotation></semantics></math>
+hours daily; (b) regular use of digital mapping applications (Google
+Maps, OpenStreetMap, Apple Maps) at least once in the preceding month;
+(c) zero prior exposure to the system prototype or database catalog
+(<em>unbiased baseline</em>); and (d) full fluency in Indonesian.</p>
 <p><strong>3. Experimental Design and Counterbalancing (Within-Subjects
 Latin Square):</strong><br />
 A repeated-measures <em>within-subjects</em> experimental design was
@@ -4928,14 +4929,19 @@ Interface B (Conversational Web GIS driven by the proposed Structured
 Semantic Control Layer).<br />
 To mitigate order effects, learning transfer bias, and cognitive
 fatigue, a balanced two-group <em>Latin Square Counterbalancing</em>
-protocol was enforced: - <strong>Group 1 (<span class="math inline">\(N
-= 15\)</span> participants):</strong> Evaluated Interface A (WIMP) first
-<span class="math inline">\(\to\)</span> 15-minute rest interval <span
-class="math inline">\(\to\)</span> evaluated Interface B (Chat AI). -
-<strong>Group 2 (<span class="math inline">\(N = 15\)</span>
-participants):</strong> Evaluated Interface B (Chat AI) first <span
-class="math inline">\(\to\)</span> 15-minute rest interval <span
-class="math inline">\(\to\)</span> evaluated Interface A (WIMP).</p>
+protocol was enforced: - <strong>Group 1
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">N = 15</annotation></semantics></math>
+participants):</strong> Evaluated Interface A (WIMP) first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+15-minute rest interval
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+evaluated Interface B (Chat AI). - <strong>Group 2
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">N = 15</annotation></semantics></math>
+participants):</strong> Evaluated Interface B (Chat AI) first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+15-minute rest interval
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+evaluated Interface A (WIMP).</p>
 <p><strong>4. Standardized Experimental Tasks:</strong><br />
 Participants were instructed to execute three standardized travel
 planning tasks: * <strong>Task 1 (Categorical Discovery):</strong>
@@ -4943,9 +4949,9 @@ Discover all beach destinations in Padang City. * <strong>Task 2
 (Spatial Proximity Query):</strong> Find Minangkabau culinary
 destinations located within 5 km from current coordinates. *
 <strong>Task 3 (Multi-Constraint Complex Planning):</strong> Identify
-nature destinations with free admission (Rp0) or tickets <span
-class="math inline">\(\le \text{Rp15,000}\)</span> that are actively
-open right now within 10 km.</p>
+nature destinations with free admission (Rp0) or tickets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mtext mathvariant="normal">Rp15,000</mtext></mrow><annotation encoding="application/x-tex">\le \text{Rp15,000}</annotation></semantics></math>
+that are actively open right now within 10 km.</p>
 <p><strong>5. Task Completion Time (TCT) Measurement:</strong><br />
 Task Completion Time (TCT) was measured objectively in seconds via
 screen recording paired with a calibrated digital stopwatch. Timing
@@ -5030,37 +5036,40 @@ Scoring:</strong><br />
 Following completion of all tasks, participants administered Brooke’s
 standardized 10-item <strong>System Usability Scale (SUS)</strong> [15]
 questionnaire using a 5-point Likert scale. Composite SUS scores were
-computed using the standard scoring formula: <span
-class="math display">\[\text{Odd Item Contribution } (X_i) = R_i - 1
-\quad (\text{for } i \in \{1, 3, 5, 7, 9\})\]</span> <span
-class="math display">\[\text{Even Item Contribution } (Y_j) = 5 - R_j
-\quad (\text{for } j \in \{2, 4, 6, 8, 10\})\]</span> <span
-class="math display">\[\text{SUS Composite Score} = 2.5 \times \left(
-\sum_{i} X_i + \sum_{j} Y_j \right)\]</span> The proposed system
-attained an aggregate mean SUS score of <strong>84.25 ± 6.80</strong>
-(median = 85.00; score range 72.50 to 97.50). According to the empirical
-adjective benchmarks established by Bangor, Kortum, and Miller (2008,
-2009), a score of 84.25 resides at a percentile rank <span
-class="math inline">\(&gt; 96\%\)</span>, Grade “A”, and corresponds to
-an <em>“Excellent”</em> rating.</p>
+computed using the standard scoring formula:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Odd Item Contribution </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>R</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mtext mathvariant="normal">for </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>7</mn><mo>,</mo><mn>9</mn><mo stretchy="false" form="postfix">}</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Odd Item Contribution } (X_i) = R_i - 1 \quad (\text{for } i \in \{1, 3, 5, 7, 9\})</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Even Item Contribution </mtext><mspace width="0.333em"></mspace></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>5</mn><mo>−</mo><msub><mi>R</mi><mi>j</mi></msub><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mtext mathvariant="normal">for </mtext><mspace width="0.333em"></mspace></mrow><mi>j</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>6</mn><mo>,</mo><mn>8</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">}</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Even Item Contribution } (Y_j) = 5 - R_j \quad (\text{for } j \in \{2, 4, 6, 8, 10\})</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">SUS Composite Score</mtext><mo>=</mo><mn>2.5</mn><mo>×</mo><mrow><mo stretchy="true" form="prefix">(</mo><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>X</mi><mi>i</mi></msub><mo>+</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>Y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{SUS Composite Score} = 2.5 \times \left( \sum_{i} X_i + \sum_{j} Y_j \right)</annotation></semantics></math>
+The proposed system attained an aggregate mean SUS score of
+<strong>84.25 ± 6.80</strong> (median = 85.00; score range 72.50 to
+97.50). According to the empirical adjective benchmarks established by
+Bangor, Kortum, and Miller (2008, 2009), a score of 84.25 resides at a
+percentile rank
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>96</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">&gt; 96\%</annotation></semantics></math>,
+Grade “A”, and corresponds to an <em>“Excellent”</em> rating.</p>
 <p><strong>7. Inferential Statistical Significance
 Testing:</strong><br />
 - A normality test conducted on TCT difference values using the
-<em>Shapiro-Wilk test</em> yielded <span class="math inline">\(W =
-0.968\)</span> (<span class="math inline">\(p = 0.482 &gt;
-0.05\)</span>), confirming normal distribution of differences. - A
-parametric <em>paired-samples t-test</em> confirmed that the reduction
-in task completion time between WIMP (<span class="math inline">\(37.11
-\pm 5.73\)</span> s) and Conversational AI (<span
-class="math inline">\(6.52 \pm 1.14\)</span> s) is statistically
-significant: <span class="math inline">\(t(29) = 28.42\)</span>, <span
-class="math inline">\(p &lt; 0.001\)</span>. The standardized effect
-size measured by <em>Cohen’s d</em> reached <strong>5.19</strong>
-(categorized as a huge effect size). - A non-parametric <em>Wilcoxon
-signed-rank test</em> corroborated this finding with <span
-class="math inline">\(Z = -4.78\)</span> (<span class="math inline">\(p
-&lt; 0.001\)</span>), establishing the uniform cognitive superiority of
-the conversational interface across all participants.</p>
+<em>Shapiro-Wilk test</em> yielded
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>0.968</mn></mrow><annotation encoding="application/x-tex">W = 0.968</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.482</mn><mo>&gt;</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">p = 0.482 &gt; 0.05</annotation></semantics></math>),
+confirming normal distribution of differences. - A parametric
+<em>paired-samples t-test</em> confirmed that the reduction in task
+completion time between WIMP
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>37.11</mn><mo>±</mo><mn>5.73</mn></mrow><annotation encoding="application/x-tex">37.11 \pm 5.73</annotation></semantics></math>
+s) and Conversational AI
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6.52</mn><mo>±</mo><mn>1.14</mn></mrow><annotation encoding="application/x-tex">6.52 \pm 1.14</annotation></semantics></math>
+s) is statistically significant:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>29</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>28.42</mn></mrow><annotation encoding="application/x-tex">t(29) = 28.42</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>&lt;</mo><mn>0.001</mn></mrow><annotation encoding="application/x-tex">p &lt; 0.001</annotation></semantics></math>.
+The standardized effect size measured by <em>Cohen’s d</em> reached
+<strong>5.19</strong> (categorized as a huge effect size). - A
+non-parametric <em>Wilcoxon signed-rank test</em> corroborated this
+finding with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>=</mo><mo>−</mo><mn>4.78</mn></mrow><annotation encoding="application/x-tex">Z = -4.78</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>&lt;</mo><mn>0.001</mn></mrow><annotation encoding="application/x-tex">p &lt; 0.001</annotation></semantics></math>),
+establishing the uniform cognitive superiority of the conversational
+interface across all participants.</p>
 <p><strong>8. Research Ethics Clearance:</strong><br />
 The experimental usability evaluation protocol was reviewed and granted
 formal ethics approval by the Research Ethics Committee of LPPM
@@ -5266,8 +5275,8 @@ Mutation)</strong></td>
 <td><code>is_free = true</code> combined simultaneously with
 <code>max_price = 10000</code></td>
 <td>Dimension 5 constraint harmonizer resolves logical tension:
-prioritizes Rp0 admission as a valid subset of <span
-class="math inline">\(\le \text{Rp}10,000\)</span>.</td>
+prioritizes Rp0 admission as a valid subset of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mtext mathvariant="normal">Rp</mtext><mn>10</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">\le \text{Rp}10,000</annotation></semantics></math>.</td>
 <td style="text-align: center;"><strong>PASSED
 (Consistent)</strong></td>
 </tr>
@@ -5275,9 +5284,10 @@ class="math inline">\(\le \text{Rp}10,000\)</span>.</td>
 <td><strong>B. Minang Dialect</strong></td>
 <td><code>MIN-01</code>: <em>Pantai nan rancak dakek siko</em></td>
 <td><em>“Pantai nan rancak dakek siko”</em></td>
-<td>Indigenous lexicon parsing: <code>rancak</code> <span
-class="math inline">\(\to\)</span> <code>sort = terbaik</code>,
-<code>dakek siko</code> <span class="math inline">\(\to\)</span>
+<td>Indigenous lexicon parsing: <code>rancak</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>sort = terbaik</code>, <code>dakek siko</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>spatial_operator = nearest</code>, user GPS anchor.</td>
 <td style="text-align: center;"><strong>PASSED (100%
 Precision)</strong></td>
@@ -5286,8 +5296,9 @@ Precision)</strong></td>
 <td></td>
 <td><code>MIN-02</code>: <em>Tampek makan lamak</em></td>
 <td><em>“Tampek makan lamak yang dakek”</em></td>
-<td>Indigenous lexicon parsing: <code>tampek makan lamak</code> <span
-class="math inline">\(\to\)</span> <code>category = Kuliner</code>,
+<td>Indigenous lexicon parsing: <code>tampek makan lamak</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>category = Kuliner</code>,
 <code>spatial_operator = nearest</code>.</td>
 <td style="text-align: center;"><strong>PASSED (100%
 Precision)</strong></td>
@@ -5296,9 +5307,10 @@ Precision)</strong></td>
 <td></td>
 <td><code>MIN-03</code>: <em>Aia tajun free</em></td>
 <td><em>“Aia tajun free yang dakek dari siko”</em></td>
-<td>Indigenous lexicon parsing: <code>aia tajun</code> <span
-class="math inline">\(\to\)</span> <code>category = Alam</code>,
-<code>free</code> <span class="math inline">\(\to\)</span>
+<td>Indigenous lexicon parsing: <code>aia tajun</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>category = Alam</code>, <code>free</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>is_free = true</code>,
 <code>spatial_operator = nearest</code>.</td>
 <td style="text-align: center;"><strong>PASSED (100%
@@ -5308,9 +5320,10 @@ Precision)</strong></td>
 <td></td>
 <td><code>MIN-04</code>: <em>Pulau snorkeling nan rancak</em></td>
 <td><em>“Pulau untuak snorkeling nan rancak”</em></td>
-<td>Indigenous lexicon parsing: <code>pulau</code> <span
-class="math inline">\(\to\)</span> <code>category = Pulau</code>,
-<code>rancak</code> <span class="math inline">\(\to\)</span>
+<td>Indigenous lexicon parsing: <code>pulau</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+<code>category = Pulau</code>, <code>rancak</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
 <code>sort = terbaik</code>.</td>
 <td style="text-align: center;"><strong>PASSED (100%
 Precision)</strong></td>
@@ -5382,9 +5395,10 @@ binary logic immune to generative stochasticity. 3.
 The algorithmic <em>Claim-Level Grounding Validator</em> ensures that
 the generative model cannot introduce fictitious attributes. Any entity
 mention, pricing assertion, or spatial claim absent from the verified
-relational fact set <span class="math inline">\(F\)</span> triggers
-deterministic filtering or fallback suppression before reaching the
-user.</p>
+relational fact set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+triggers deterministic filtering or fallback suppression before reaching
+the user.</p>
 <h3 id="latency-trade-offs-and-computational-efficiency">7.2 Latency
 Trade-offs and Computational Efficiency</h3>
 <p>Introducing structured semantic validation and post-generation
