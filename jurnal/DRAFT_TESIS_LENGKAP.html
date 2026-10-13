@@ -991,11 +991,12 @@ variasi kategori, filter harga, batasan operasional jam buka, resolusi
 entitas fuzzy, kueri luar wilayah, dan uji batas negatif
 (<em>out-of-scope negative boundary test</em>).</li>
 <li><strong>Fase 5: Pengujian Otomatis, Evaluasi Multi-Baseline, dan
-Analisis Latensi:</strong> Menjalankan pengujian otomatis PHPUnit (17
-unit/feature tests), komparasi multi-baseline (<em>Direct
-Text-to-SQL</em>, <em>Unconstrained LLM</em>, dan <em>Proposed
-System</em>), uji ablasi validator, serta profiling latensi per
-milidetik.</li>
+Analisis Latensi:</strong> Menjalankan rangkaian pengujian otomatis
+PHPUnit menyeluruh sebanyak 56 pengujian dengan 240 assertions (terdiri
+atas 45 pengujian unit/integrasi standar dan 11 pengujian adversarial
+dialek Minang), komparasi multi-baseline (<em>Direct Text-to-SQL</em>,
+<em>Unconstrained LLM</em>, dan <em>Proposed System</em>), uji ablasi
+validator (1.080 pengujian), serta profiling latensi per milidetik.</li>
 </ol>
 <h3
 id="landasan-pendekatan-kerangka-batas-kendali-ganda-the-dual-control-boundaries-framework-dan-arsitektur-5-lapis">2.2
@@ -8253,7 +8254,7 @@ isValid=false</em>)</td>
 <td><code>spatial_recommendation</code></td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;"><code>within_radius</code></td>
-<td>Titik Pusat Kota (<code>-0.9556, 100.3606</code>)</td>
+<td>Titik Pusat Kota (<code>-0.9471, 100.4174</code>)</td>
 <td style="text-align: center;">50 km (Maksimum)</td>
 <td style="text-align: center;">-</td>
 <td style="text-align: center;">-</td>
